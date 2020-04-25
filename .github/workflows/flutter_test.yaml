@@ -20,8 +20,8 @@ jobs:
           channel: 'beta'
       - run: flutter pub get
       - run: flutter config --enable-web
-      - run: flutter test --no-test-assets # --coverage --coverage-path=~/coverage/lcov.info
-      # - uses: codecov/codecov-action@v1
-      #   with:
-      #     token: ${{secrets.CODECOV_TOKEN}}
-      #     file: ~/coverage/lcov.info
+      - run: flutter test --no-test-assets --coverage --coverage-path=~/coverage/lcov.info
+      - uses: codecov/codecov-action@v1
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}
+          file: ~/coverage/lcov.info
