@@ -1,2 +1,2 @@
 # HumanLifeGameGenerator
-すぐ遊べる、Web 版人生ゲーム。マス目の作成も可能。
+Play now Human Life Game on Web. You can also create original map.
