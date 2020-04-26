@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:HumanLifeGameGenerator/human_life_game_app.dart';
+import 'package:HumanLifeGame/human_life_game_app.dart';
 
 void main() {
   testWidgets('dummy text', (tester) async {
