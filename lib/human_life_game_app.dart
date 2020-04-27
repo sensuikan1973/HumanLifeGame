@@ -1,3 +1,4 @@
+import 'package:HumanLifeGame/domain/play_room/play_room.dart';
 import 'package:flutter/material.dart';
 
 class HumanLifeGameApp extends StatelessWidget {
@@ -8,6 +9,6 @@ class HumanLifeGameApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: const Text('foo'),
+        home: PlayRoom(),
       );
 }
