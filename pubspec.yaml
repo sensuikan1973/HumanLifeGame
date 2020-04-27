@@ -24,7 +24,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  intl_translation: ^0.17.9
+  intl_translation: 0.17.9
 
 flutter:
   uses-material-design: true

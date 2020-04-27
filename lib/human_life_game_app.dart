@@ -12,8 +12,8 @@ class HumanLifeGameApp extends StatelessWidget {
         supportedLocales: const [
           Locale('en', 'US'),
           Locale('ja', 'JP'),
-        ], // TODO: いつか Locale(‘en’, ‘US’) もサポートする
-        locale: const Locale('ja'),
+        ],
+        locale: const Locale('en'),
         title: 'Human Life Game',
         theme: ThemeData(
           primarySwatch: Colors.blue,

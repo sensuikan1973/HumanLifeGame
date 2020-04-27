@@ -5,6 +5,7 @@ import 'package:HumanLifeGame/human_life_game_app.dart';
 void main() {
   testWidgets('player action test', (tester) async {
     await tester.pumpWidget(HumanLifeGameApp());
+    await tester.pump();
     expect(find.byType(PlayerAction), findsOneWidget);
     expect(find.text('Start'), findsOneWidget);
   });
