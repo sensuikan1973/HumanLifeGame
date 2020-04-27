@@ -5,7 +5,7 @@ analyzer:
 
   # ref: https://github.com/dart-lang/sdk/issues/25551
   exclude:
-    - lib/l10n/**
+    - lib/i18n/**.dart
 
 linter:
   rules:

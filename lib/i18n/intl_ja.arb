@@ -1,0 +1,10 @@
+{
+  "@@locale": "ja",
+  "@@last_modified": "2020-04-28T02:24:36.940218",
+  "start": "スタート",
+  "@start": {
+    "description": "スタートボタン用のテキスト",
+    "type": "text",
+    "placeholders": {}
+  }
+}

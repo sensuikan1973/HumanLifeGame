@@ -1,3 +1,4 @@
+import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:flutter/material.dart';
 
 class PlayerAction extends StatelessWidget {
@@ -10,9 +11,9 @@ class PlayerAction extends StatelessWidget {
             color: Colors.blue,
             textColor: Colors.white,
             onPressed: () {},
-            child: const Text(
-              'Start',
-              style: TextStyle(fontSize: 20),
+            child: Text(
+              I18n.of(context).start,
+              style: const TextStyle(fontSize: 20),
             ),
           ),
         ),
