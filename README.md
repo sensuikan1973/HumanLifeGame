@@ -20,3 +20,25 @@ Play now Human Life Game on Web. You can also create original map.
 See: https://github.com/dart-lang/dartdoc/pull/2175
 FLUTTER_ROOT=~/development/flutter dartdoc --output doc/api && open doc/api/index.html
 ```
+
+## i18n対応
+1. i18n/i18n.dartに英語で文言を追加
+
+2. arbファイルの生成
+```sh
+./lib/i18n/create_arb.sh
+```
+3. i18n/intl_ja.arbに日本語で文言を追加し、i18n/intl_en.arbにi18n/intl_messages.arbをコピーする。
+
+4. 作成したarbファイルにlocaleを追加する
+```
+# intl_en.arb
+"@@locale": "en",
+# intl_ja.arb
+"@@locale": "ja",
+```
+
+5. classファイルの生成
+./lib/i18n/create_message_class.sh
+
+6. I18n.of(context).hogeで呼び出す
