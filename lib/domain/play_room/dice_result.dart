@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 // ダイスを降った結果
-class Dice extends StatelessWidget {
+class DiceResult extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) => const SizedBox(
         width: 100,
         height: 100,
-        child: const Text('2'),
+        child: Text('2'),
       );
 }
