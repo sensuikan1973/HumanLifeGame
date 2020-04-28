@@ -11,7 +11,7 @@ class HumanInfo extends StatelessWidget {
       const Text('human 4'),
     ];
 
-    return Container(
+    return SizedBox(
         width: 100,
         height: 100,
         child: Column(
