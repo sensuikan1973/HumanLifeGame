@@ -9,4 +9,13 @@ void main() {
     expect(find.byType(PlayerAction), findsOneWidget);
     expect(find.text('Start'), findsOneWidget);
   });
+  testWidgets('human info test', (tester) async {
+    await tester.pumpWidget(HumanLifeGameApp());
+    await tester.pump();
+    expect(find.byType(PlayerAction), findsOneWidget);
+    expect(find.text('human 1'), findsOneWidget);
+    expect(find.text('human 2'), findsOneWidget);
+    expect(find.text('human 3'), findsOneWidget);
+    expect(find.text('human 4'), findsOneWidget);
+  });
 }
