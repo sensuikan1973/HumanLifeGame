@@ -12,27 +12,34 @@
 
 Play now Human Life Game on Web. You can also create original map.
 
-## [Setup](https://flutter.dev/web)
+## Development
 
-## Document
+### Setup
+
+See: https://flutter.dev/docs/get-started/web
+
+### i18n
+
+1. add English text to `i18n/i18n.dart`
+2. create arb files
+
+```sh
+./lib/i18n/create_arb.sh
+```
+
+3. copy `i18n/intl_messages.arb` to `i18n/intl_en.arb`
+4. add Japanese text to `i18n/intl_ja.arb`
+5. create dart classes
+
+```sh
+./lib/i18n/create_message_class.sh
+```
+
+6. you can call `I18n.of(context).hoge`
+
+### Document
 
 ```sh
 See: https://github.com/dart-lang/dartdoc/pull/2175
 FLUTTER_ROOT=~/development/flutter dartdoc --output doc/api && open doc/api/index.html
 ```
-
-## i18n対応
-1. i18n/i18n.dartに英語で文言を追加
-
-2. arbファイルの生成
-```sh
-./lib/i18n/create_arb.sh
-```
-3. i18n/intl_ja.arbに日本語で文言を追加し、i18n/intl_en.arbにi18n/intl_messages.arbをコピーする。
-
-4. classファイルの生成
-```sh
-./lib/i18n/create_message_class.sh
-```
-
-5. I18n.of(context).hogeで呼び出す

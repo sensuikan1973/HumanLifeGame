@@ -1,6 +1,7 @@
 import 'package:HumanLifeGame/domain/play_room/play_room.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'i18n/i18n_delegate.dart';
 
@@ -10,11 +11,11 @@ class HumanLifeGameApp extends StatelessWidget {
         onGenerateTitle: (context) => I18n.of(context).appTitle,
         localizationsDelegates: const [
           I18nDelegate(),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: const [
-          Locale('en', 'US'),
-          Locale('ja', 'JP'),
-        ],
+        supportedLocales: const [Locale('en', 'US'), Locale('ja', 'JP')],
         locale: const Locale('en'),
         theme: ThemeData(
           primarySwatch: Colors.blue,
