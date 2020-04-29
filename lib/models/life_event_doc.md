@@ -25,7 +25,7 @@ LifeEvent {
 }
 ```
 
-## stock 1 つにつき、money +5000
+### stock 1 つにつき、money +5000
 
 ```js
 LifeEvent {
@@ -44,7 +44,7 @@ LifeEvent {
 }
 ```
 
-## サイコロをふり、出目 × 5000 の money を獲得
+### サイコロをふり、出目 × 5000 の money を獲得
 
 ```js
 LifeEvent {
@@ -62,7 +62,7 @@ LifeEvent {
 }
 ```
 
-## 火災保険があれば money +5000
+### 火災保険があれば money +5000
 
 ```js
 LifeEvent {
@@ -81,7 +81,7 @@ LifeEvent {
 }
 ```
 
-## 配偶者がいれば、子供(男 1 女 2)が生まれる
+### 配偶者がいれば、子供(男 1 女 2)が生まれる
 
 ```js
 LifeEvent {
@@ -97,7 +97,7 @@ LifeEvent {
             {
                 key: 'girl',
                 type: childGirl,
-                rate: 1,
+                rate: 2,
             }
         ] ,
         requiredOneOfLifeItem: [spouse],
@@ -105,7 +105,7 @@ LifeEvent {
 }
 ```
 
-## 配偶者がいれば、money +5000, stock +2000
+### 配偶者がいれば、money +5000, stock +2000
 
 ```js
 LifeEvent {
@@ -129,7 +129,7 @@ LifeEvent {
 }
 ```
 
-## 歌手に転職
+### 歌手に転職
 
 単に gainLifeItem。
 職は 1 つのみとするため、job を上書くことになる(=転職)。
@@ -150,7 +150,7 @@ LifeEvent {
 }
 ```
 
-## stock 1 枚を 4000 円で購入する
+### stock 1 枚を 4000 円で購入する
 
 ```js
 LifeEvent {
@@ -175,7 +175,7 @@ LifeEvent {
 }
 ```
 
-## money 5000 円払い、サイコロの出目 × 2000 円もらえるカジノに挑戦できる
+### money 5000 円払い、サイコロの出目 × 2000 円もらえるカジノに挑戦できる
 
 ```js
 LifeEvent {
@@ -200,7 +200,7 @@ LifeEvent {
 }
 ```
 
-## 火災保険が無ければ house を失う
+### 火災保険が無ければ house を失う
 
 ```js
 LifeEvent {
@@ -219,12 +219,12 @@ LifeEvent {
 }
 ```
 
-## 株券が 50 枚以下なら money +5000
+### 株券が 50 枚以下なら money +5000
 
 以下、以上、未満、超過 はまだ対応してない。
 要検討
 
-## 分岐路で、進みたい方向を選ぶ
+### 分岐路で、進みたい方向を選ぶ
 
 ```js
 LifeEvent {
@@ -239,7 +239,7 @@ LifeEvent {
 }
 ```
 
-## 分岐路で、サイコロの出目に応じて進む方向が決まる
+### 分岐路で、サイコロの出目に応じて進む方向が決まる
 
 ```js
 LifeEvent {
@@ -260,7 +260,7 @@ LifeEvent {
 }
 ```
 
-## 分岐路で、特定のアイテムの存否に応じて進む方向が決まる
+### 分岐路で、特定のアイテムの存否に応じて進む方向が決まる
 
 ```js
 LifeEvent {

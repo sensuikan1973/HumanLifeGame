@@ -17,8 +17,9 @@ enum LifeEventTarget {
   // 特定の他の human を対象に取る LifeEvent は当分サポートしない
 }
 
-// LifeItem の amount の「以上,以下,未満,超過」を条件とする Event はサポートしてない
 enum LifeEventType {
+  // NOTE: LifeItem の amount の「以上,以下,未満,超過」を条件とする Event はサポートしてない
+
   /// 進行方向を選択する
   selectDirection,
 
