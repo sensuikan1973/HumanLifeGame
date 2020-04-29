@@ -1,55 +1,68 @@
 import 'package:HumanLifeGame/models/life_item.dart';
 
 class LifeEvent {
-  LifeEvent(this.type, this.description, this.target, this.params);
+  LifeEventTarget target;
+  LifeEventType type;
 
-  final LifeEventTarget target;
-  final LifeEventType type;
-  final LifeEventParams params;
+  // NOTE:
+  // LifeEventType ごとに異なる内容が格納される。
+  // そのため type に応じて params['foo'] と参照することになる。
+  // Serialize して型付きで扱えるようにするのも要検討。(See: https://flutter.dev/docs/development/data-and-backend/json)
+  Map<String, dynamic> params;
 
-  final String description;
+  String description;
 }
 
 enum LifeEventTarget {
-  myself, // LifeEvent を引き起こした張本人のみ
-  all, // 全員
+  myself, // LifeEvent を引き起こした張本人の human のみ
+  all, // 全 human
+  // 特定の他の human を対象に取る LifeEvent は当分サポートしない
 }
 
+// LifeItem の amount の「以上,以下,未満,超過」を条件とする Event はサポートしてない
 enum LifeEventType {
-  gainMoney,
-  loseMoney,
+  /// 進行方向を選択する
+  selectDirection,
+
+  /// サイコロの出目に基づいて、進行方向を決定する
+  selectDirectionPerDiceRoll,
+
+  /// 特定の LifeItem の数に基づいて、進行方向を決定する
+  selectDirectionPerLifeItem,
+
+  /// 単に LifeItem を獲得する
   gainLifeItem,
+
+  /// LifeItemA の数に基づいて、LifeItemB を獲得する
+  gainLifeItemPerOtherLifeItem,
+
+  /// サイコロの出目に基づいて、LifeItem を獲得する
+  gainLifeItemPerDiceRoll,
+
+  /// LifeItemA が存在すれば、LifeItemB を獲得する
+  gainLifeItemIfExistOtherLifeItem,
+
+  /// LifeItemA が存在しなければ、LifeItemB を獲得する
+  gainLifeItemIfNotExistOtherLifeItem,
+
+  /// LifeItemA と LifeItemB を交換する
+  exchangeLifeItems,
+
+  /// サイコロの出目に基づいて、LifeItemA と LifeItemB を交換する
+  exchangeLifeItemsWithDiceRoll,
+
+  /// 単に LifeItem を失う
   loseLifeItem,
-}
 
-class GainMoneyParams with LifeEventParams {
-  // 確定した絶対数を指定したい場合に指定する。
-  int amount;
+  /// サイコロの出目に基づいて、LifeItem を失う
+  loseLifeItemPerDiceRoll,
 
-  // NOTE: 以下は、所有している LifeItem に応じて gainMoney したい場合に指定する。
-  int amountPerItem; // Item 一個あたりに gain する量。
-  LifeItem targetLifeItem;
-}
+  /// LifeItemA の数に基づいて、LifeItemB を失う
+  loseLifeItemPerOtherLifeItem,
 
-class LoseMoneyParams with LifeEventParams {
-  // 確定した絶対数を指定したい場合に指定する。
-  int amount;
+  /// LifeItemA が存在すれば、LifeItemB を失う
+  loseLifeItemIfExistOtherLifeItem,
 
-  // NOTE: 以下は、所有している LifeItem に応じて loseMoney したい場合に指定する。
-  int amountPerItem; // Item 一個あたりに lose する量。
-  LifeItem targetLifeItem;
-}
-
-class GainLifeItemParams with LifeEventParams {
-  // 確定した絶対数を指定したい場合に指定する。
-  int amount;
-
-  // NOTE: 以下は、所有している LifeItem に応じて gainMoney したい場合に指定する。
-  int amountPerItem; // Item 一個あたりに gain する量。
-  LifeItem targetLifeItem;
-}
-
-mixin LifeEventParams {
-  // NOTE: 以下は、サイコロの出目を使って結果を変えたい場合に指定する。
-  int amountPerDiceRoll;
+  /// LifeItemA が存在しなければ、LifeItemB を失う
+  loseLifeItemIfNotExistOtherLifeItem,
 }
