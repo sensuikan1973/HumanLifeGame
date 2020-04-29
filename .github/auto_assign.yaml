@@ -1,0 +1,3 @@
+addReviewers: false
+
+addAssignees: author # See: https://github.com/marketplace/actions/auto-assign-action#assign-author-as-assignee
