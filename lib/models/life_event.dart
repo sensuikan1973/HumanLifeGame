@@ -1,5 +1,3 @@
-import 'package:HumanLifeGame/models/life_item.dart';
-
 class LifeEvent {
   LifeEventTarget target;
   LifeEventType type;
