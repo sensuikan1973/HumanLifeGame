@@ -16,6 +16,12 @@ class I18n {
 
   final String localeName;
 
+  String get appTitle => Intl.message(
+        'Human Life Game',
+        name: 'appTitle',
+        locale: localeName,
+      );
+
   String get start => Intl.message(
         'Start',
         name: 'start',

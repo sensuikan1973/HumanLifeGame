@@ -1,5 +1,10 @@
 {
-  "@@last_modified": "2020-04-28T04:26:41.924512",
+  "@@last_modified": "2020-04-29T01:18:13.468879",
+  "appTitle": "Human Life Game",
+  "@appTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
   "start": "Start",
   "@start": {
     "description": "Text for start button.",
