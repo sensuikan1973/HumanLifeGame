@@ -8,7 +8,7 @@ void main() {
     testWidgets("show 'start' text", (tester) async {
       await tester.pumpWidget(_PlayerAction());
       await tester.pump();
-      expect(find.text('Start'), findsOneWidget);
+      expect(find.text('Roll the dice'), findsOneWidget);
     });
   });
 }

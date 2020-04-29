@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 /// PlayRoom Locale Text
 extension PlayRoom on I18n {
   String get rollDice => Intl.message(
-        'roll the dice',
+        'Roll the dice',
         name: 'rollDice',
         locale: localeName,
       );
