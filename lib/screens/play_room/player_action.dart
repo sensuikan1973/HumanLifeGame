@@ -12,7 +12,7 @@ class PlayerAction extends StatelessWidget {
             textColor: Colors.white,
             onPressed: () {},
             child: Text(
-              I18n.of(context).start,
+              I18n.of(context).rollDice,
               style: const TextStyle(fontSize: 20),
             ),
           ),
