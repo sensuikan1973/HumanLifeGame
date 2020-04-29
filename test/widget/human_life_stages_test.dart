@@ -1,27 +1,25 @@
-import 'package:HumanLifeGame/domain/play_room/dice_result.dart';
 import 'package:HumanLifeGame/domain/play_room/human_life_stages.dart';
-import 'package:HumanLifeGame/domain/play_room/play_room.dart';
-import 'package:HumanLifeGame/domain/play_room/player_action.dart';
 import 'package:HumanLifeGame/i18n/i18n_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('PlayRoom', () {
-    testWidgets('show PlayerAction, DiceResult and HumanInfo', (tester) async {
-      await tester.pumpWidget(_PlayRoom());
+  group('HumanLifeStages', () {
+    testWidgets("show 'user id' text", (tester) async {
+      await tester.pumpWidget(_HumanLifeStages());
       await tester.pump();
-      expect(find.byType(PlayerAction), findsOneWidget);
-      expect(find.byType(DiceResult), findsOneWidget);
-      expect(find.byType(HumanLifeStages), findsOneWidget);
+      expect(find.text('human 1'), findsOneWidget);
+      expect(find.text('human 2'), findsOneWidget);
+      expect(find.text('human 3'), findsOneWidget);
+      expect(find.text('human 4'), findsOneWidget);
     });
   });
 }
 
-class _PlayRoom extends StatelessWidget {
+class _HumanLifeStages extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: 'Test App For PlayRoom',
+        title: 'Test App For HumanLifeStages',
         localizationsDelegates: const [I18nDelegate()],
         supportedLocales: const [Locale('en', 'US')],
         locale: const Locale('en'),
@@ -29,6 +27,6 @@ class _PlayRoom extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: PlayRoom(),
+        home: HumanLifeStages(),
       );
 }
