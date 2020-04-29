@@ -2,7 +2,7 @@ name: PR_Auto_Assign
 
 on:
   pull_request:
-    types: [opened]
+    types: [opened, ready_for_review]
 
 jobs:
   add-assignees:
