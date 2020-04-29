@@ -9,7 +9,7 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
-  flutter: 1.17.0-3.2.pre # See: https://flutter.dev/docs/development/tools/sdk/releases
+  flutter: 1.17.0-3.3.pre # See: https://flutter.dev/docs/development/tools/sdk/releases
 
 dependencies:
   flutter:
