@@ -1,22 +1,27 @@
+import 'package:HumanLifeGame/domain/play_room/dice_result.dart';
+import 'package:HumanLifeGame/domain/play_room/human_info.dart';
+import 'package:HumanLifeGame/domain/play_room/play_room.dart';
 import 'package:HumanLifeGame/domain/play_room/player_action.dart';
 import 'package:HumanLifeGame/i18n/i18n_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('PlayerAction', () {
-    testWidgets("show 'start' text", (tester) async {
-      await tester.pumpWidget(_PlayerAction());
+  group('PlayRoom', () {
+    testWidgets('show PlayerAction, DiceResult and HumanInfo', (tester) async {
+      await tester.pumpWidget(_PlayRoom());
       await tester.pump();
-      expect(find.text('Start'), findsOneWidget);
+      expect(find.byType(PlayerAction), findsOneWidget);
+      expect(find.byType(DiceResult), findsOneWidget);
+      expect(find.byType(HumanInfo), findsOneWidget);
     });
   });
 }
 
-class _PlayerAction extends StatelessWidget {
+class _PlayRoom extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: 'Test App For PlayerAction',
+        title: 'Test App For PlayRoom',
         localizationsDelegates: const [I18nDelegate()],
         supportedLocales: const [Locale('en', 'US')],
         locale: const Locale('en'),
@@ -24,6 +29,6 @@ class _PlayerAction extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: PlayerAction(),
+        home: PlayRoom(),
       );
 }

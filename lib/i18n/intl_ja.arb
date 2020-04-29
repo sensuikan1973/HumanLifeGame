@@ -1,6 +1,11 @@
 {
   "@@locale": "ja",
-  "@@last_modified": "2020-04-28T02:24:36.940218",
+  "@@last_modified": "2020-04-29T01:18:13.468879",
+  "appTitle": "人生すごろく",
+  "@appTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
   "start": "スタート",
   "@start": {
     "description": "スタートボタン用のテキスト",
