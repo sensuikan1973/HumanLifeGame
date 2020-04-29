@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// プレイヤーの状況を表示
+/// Humanの状況を表示
 class HumanLifeStages extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SizedBox(
