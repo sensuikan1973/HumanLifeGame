@@ -8,4 +8,8 @@ class HumanLifeStageModel {
   Human human;
   List<LifeItem> lifeItems;
   List<LifeEvent> lifeEventRecord;
+
+  // HumanLife 上の位置
+  int placeX;
+  int placeY;
 }
