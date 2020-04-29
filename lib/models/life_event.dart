@@ -2,6 +2,8 @@ class LifeEvent {
   LifeEventTarget target;
   LifeEventType type;
 
+  bool isForced; // 強制実行か選択実行か
+
   // NOTE:
   // LifeEventType ごとに異なる内容が格納される。
   // そのため type に応じて params['foo'] と参照することになる。
