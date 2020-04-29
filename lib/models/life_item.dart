@@ -18,9 +18,9 @@ enum LifeItemType {
   spouse, // 配偶者
   house, // 家
   money, // 金
-  child, // 子供
-  insurance, // 保険
+  childGirl, // 子供(女の子)
+  childBoy, // 子供(男の子)
+  fireInsurance, // 火災保険
+  lifeInsurance, // 生命保険
   coffee, // 消費することで1回休みになる。
-  curse, // 呪い。所有してると特定のタイミングで罰をくらうモノ。仕様は要検討。
-  blessing, // 祝福。所有してると特定のタイミングで恩恵を得るモノ。仕様は要検討。
 }
