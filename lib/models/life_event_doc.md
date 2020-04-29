@@ -2,7 +2,8 @@
 
 HumanLife における Event。
 
-ユーザによる HumanLife 作成時は、運営が定義した LifeEvent 一覧から選んで、マスにペタペタしていくイメージ。
+ユーザによる HumanLife 作成時は、運営が定義した LifeEvent 一覧から選んで、マスにペタペタしていくイメージ。  
+ペタペタしつつ、一部の params (rate とか)を選択できるようにしておけば十分でしょう。
 
 ## Examples
 
@@ -90,7 +91,7 @@ LifeEvent {
 ```js
 LifeEvent {
     target: myself,
-    type: gainLifeItemRequiredOtherLifeItem,
+    type: gainLifeItemIfExistOtherLifeItem,
     isForced: true,
     params: {
         targets: [
@@ -115,7 +116,7 @@ LifeEvent {
 ```js
 LifeEvent {
     target: myself,
-    type: gainLifeItemPerOtherLifeItem,
+    type: gainLifeItemIfExistOtherLifeItem,
     isForced: true,
     params: {
         targets: [
