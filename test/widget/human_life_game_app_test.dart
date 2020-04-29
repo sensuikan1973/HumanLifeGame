@@ -1,4 +1,4 @@
-import 'package:HumanLifeGame/domain/play_room/play_room.dart';
+import 'package:HumanLifeGame/screens/play_room/play_room.dart';
 import 'package:HumanLifeGame/human_life_game_app.dart';
 import 'package:flutter_test/flutter_test.dart';
 
