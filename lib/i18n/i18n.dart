@@ -2,6 +2,9 @@ import 'package:HumanLifeGame/i18n/messages_all.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+export 'extensions/i18n_common.dart';
+export 'extensions/i18n_play_room.dart';
+
 class I18n {
   I18n(this.localeName);
 
@@ -15,17 +18,4 @@ class I18n {
   static I18n of(BuildContext context) => Localizations.of<I18n>(context, I18n);
 
   final String localeName;
-
-  String get appTitle => Intl.message(
-        'Human Life Game',
-        name: 'appTitle',
-        locale: localeName,
-      );
-
-  String get start => Intl.message(
-        'Start',
-        name: 'start',
-        desc: 'Text for start button.',
-        locale: localeName,
-      );
 }

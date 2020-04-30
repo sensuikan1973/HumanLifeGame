@@ -20,7 +20,7 @@ See: https://flutter.dev/docs/get-started/web
 
 ### i18n
 
-1. add English text to `i18n/i18n.dart`
+1. add English text to `i18n/extensions/*.dart`
 2. create arb files
 
 ```sh

@@ -16,7 +16,7 @@ class PlayerAction extends StatelessWidget {
               Provider.of<PlayerActionModel>(context, listen: false).rollDice();
             },
             child: Text(
-              I18n.of(context).start,
+              I18n.of(context).rollDice,
               style: const TextStyle(fontSize: 20),
             ),
           ),
