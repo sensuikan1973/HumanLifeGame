@@ -15,7 +15,8 @@ void main() {
       expect(find.byType(DiceResult), findsOneWidget);
       expect(find.byType(HumanLifeStages), findsOneWidget);
     });
-    testWidgets('', (tester) async {
+    testWidgets('random value(1 <= value <= 6) shuld be displayed in dice_result when start button is tapped',
+        (tester) async {
       const testKey = Key('dice-result-text');
 
       await tester.pumpWidget(_PlayRoom());
