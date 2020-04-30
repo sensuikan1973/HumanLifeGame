@@ -9,9 +9,9 @@ class DiceResult extends StatelessWidget {
         width: 100,
         height: 100,
         child: Consumer<PlayerActionModel>(
-          builder: (context, playerAction, child) => Text(
-            '${playerAction.dice.toString()}',
-            key: const Key('dice-result-text'),
+          builder: (context, model, child) => Text(
+            '${model.dice.toString()}',
+            key: const Key('diceResultText'),
           ),
         ),
       );

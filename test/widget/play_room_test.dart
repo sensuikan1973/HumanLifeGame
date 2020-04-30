@@ -17,8 +17,8 @@ void main() {
     });
     testWidgets('random value(1 <= value <= 6) should be displayed in disc_result when start button is tapped',
         (tester) async {
-      const diceResultText = Key('dice-result-text');
-      const rollDiceButton = Key('player-action-dice-roll-button');
+      const diceResultText = Key('diceResultText');
+      const rollDiceButton = Key('playerActionDiceRollButton');
       await tester.pumpWidget(_PlayRoom());
       await tester.pump();
 

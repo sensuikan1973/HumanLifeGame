@@ -4,9 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('PlayerActionModel', () {
     test("Dice value shuld be '1 <= value <= 6')", () {
-      final playerActionModel = PlayerActionModel()..rollDice();
+      final model = PlayerActionModel()..rollDice();
 
-      expect(playerActionModel.dice, inInclusiveRange(1, 6));
+      expect(model.dice, inInclusiveRange(1, 6));
     });
   });
 }
