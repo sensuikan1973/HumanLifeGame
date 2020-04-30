@@ -1,5 +1,7 @@
 import 'package:HumanLifeGame/i18n/i18n.dart';
+import 'package:HumanLifeGame/models/player_action.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PlayerAction extends StatelessWidget {
   @override
@@ -10,7 +12,9 @@ class PlayerAction extends StatelessWidget {
           child: FlatButton(
             color: Colors.blue,
             textColor: Colors.white,
-            onPressed: () {},
+            onPressed: () {
+              Provider.of<PlayerActionModel>(context, listen: false).rollDice();
+            },
             child: Text(
               I18n.of(context).start,
               style: const TextStyle(fontSize: 20),

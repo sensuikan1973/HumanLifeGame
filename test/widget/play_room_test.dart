@@ -15,6 +15,17 @@ void main() {
       expect(find.byType(DiceResult), findsOneWidget);
       expect(find.byType(HumanLifeStages), findsOneWidget);
     });
+    testWidgets('', (tester) async {
+      const testKey = Key('dice-result-text');
+
+      await tester.pumpWidget(_PlayRoom());
+      await tester.pump();
+
+      await tester.tap(find.text('Start'));
+      await tester.pump();
+      final text = find.byKey(testKey).evaluate().first.widget as Text;
+      expect(num.parse(text.data), inInclusiveRange(1, 6));
+    });
   });
 }
 
