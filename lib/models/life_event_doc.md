@@ -106,7 +106,7 @@ LifeEvent {
                 rate: 2,
             }
         ] ,
-        requiredOneOfLifeItem: [spouse],
+        existOneOfLifeItem: [spouse],
     }
 }
 ```
@@ -131,7 +131,7 @@ LifeEvent {
                 rate: 2000,
             }
         ],
-        requiredOneOfLifeItem: [spouse],
+        existOneOfLifeItem: [spouse],
     }
 }
 ```
