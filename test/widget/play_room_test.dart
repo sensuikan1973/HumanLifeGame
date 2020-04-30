@@ -15,8 +15,7 @@ void main() {
       expect(find.byType(DiceResult), findsOneWidget);
       expect(find.byType(HumanLifeStages), findsOneWidget);
     });
-    testWidgets('random value(1 <= value <= 6) shuld be displayed in dice_result when start button is tapped',
-        (tester) async {
+    testWidgets("show 'dice-result-text' Text when start button is tapped", (tester) async {
       const testKey = Key('dice-result-text');
 
       await tester.pumpWidget(_PlayRoom());
@@ -24,8 +23,8 @@ void main() {
 
       await tester.tap(find.text('Start'));
       await tester.pump();
-      final text = find.byKey(testKey).evaluate().first.widget as Text;
-      expect(num.parse(text.data), inInclusiveRange(1, 6));
+
+      expect(find.byKey(testKey), findsOneWidget);
     });
   });
 }
