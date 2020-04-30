@@ -10,6 +10,7 @@ class PlayerAction extends StatelessWidget {
           width: 100,
           height: 100,
           child: FlatButton(
+            key: const Key('player-action-dice-roll-button'),
             color: Colors.blue,
             textColor: Colors.white,
             onPressed: () {

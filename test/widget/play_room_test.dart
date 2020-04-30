@@ -17,14 +17,14 @@ void main() {
     });
     testWidgets('random value(1 <= value <= 6) should be displayed in disc_result when start button is tapped',
         (tester) async {
-      const testKey = Key('dice-result-text');
-
+      const diceResultText = Key('dice-result-text');
+      const rollDiceButton = Key('player-action-dice-roll-button');
       await tester.pumpWidget(_PlayRoom());
       await tester.pump();
 
-      await tester.tap(find.text('Start'));
+      await tester.tap(find.byKey(rollDiceButton));
       await tester.pump();
-      final text = find.byKey(testKey).evaluate().first.widget as Text;
+      final text = find.byKey(diceResultText).evaluate().first.widget as Text;
       expect(num.parse(text.data), inInclusiveRange(1, 6));
     });
   });
