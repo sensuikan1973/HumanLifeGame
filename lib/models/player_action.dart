@@ -9,9 +9,8 @@ class PlayerActionModel extends ChangeNotifier {
 
   int get dice => _dice;
 
-  Random rand = Random();
-
   void rollDice() {
+    final rand = Random();
     _dice = rand.nextInt(maxDiceNumber) + 1;
     notifyListeners();
   }
