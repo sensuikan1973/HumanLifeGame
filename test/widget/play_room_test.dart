@@ -1,3 +1,4 @@
+import 'package:HumanLifeGame/models/player_action.dart';
 import 'package:HumanLifeGame/screens/play_room/dice_result.dart';
 import 'package:HumanLifeGame/screens/play_room/human_life_stages.dart';
 import 'package:HumanLifeGame/screens/play_room/play_room.dart';
@@ -14,6 +15,19 @@ void main() {
       expect(find.byType(PlayerAction), findsOneWidget);
       expect(find.byType(DiceResult), findsOneWidget);
       expect(find.byType(HumanLifeStages), findsOneWidget);
+    });
+    testWidgets('random value(1 <= value <= 6) should be displayed in disc_result when start button is tapped',
+        (tester) async {
+      const diceResultText = Key('diceResultText');
+      const rollDiceButton = Key('playerActionDiceRollButton');
+      await tester.pumpWidget(_PlayRoom());
+      await tester.pump();
+
+      await tester.tap(find.byKey(rollDiceButton));
+      await tester.pump();
+      final text = find.byKey(diceResultText).evaluate().first.widget as Text;
+      final model = PlayerActionModel();
+      expect(num.parse(text.data), inInclusiveRange(1, model.maxDiceNumber));
     });
   });
 }
