@@ -9,8 +9,8 @@
 /// }
 /// ```
 /// {@end-tool}
-class LifeItem {
-  LifeItem(this.key, this.type);
+class LifeItemModel {
+  LifeItemModel(this.key, this.type);
 
   final String key;
   final LifeItemType type;
@@ -20,7 +20,7 @@ class LifeItem {
   int get hashCode => key.hashCode;
 
   @override
-  bool operator ==(Object other) => other is LifeItem && other.key == key;
+  bool operator ==(Object other) => other is LifeItemModel && other.key == key;
 }
 
 // 効果を持つアイテムを定義したい場合、都度追加する。

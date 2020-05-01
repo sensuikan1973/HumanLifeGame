@@ -1,3 +1,3 @@
-class Announcement {
+class AnnouncementModel {
   String message;
 }

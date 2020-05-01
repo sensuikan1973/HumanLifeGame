@@ -1,8 +1,8 @@
 import 'package:HumanLifeGame/models/user.dart';
 
-class Human {
-  Human(this.id, this.name);
-  Human.fromUser(User user)
+class HumanModel {
+  HumanModel(this.id, this.name);
+  HumanModel.fromUserModel(UserModel user)
       : id = user.id,
         name = user.name;
 
@@ -13,5 +13,5 @@ class Human {
   int get hashCode => id.hashCode;
 
   @override
-  bool operator ==(Object other) => other is Human && other.id == id;
+  bool operator ==(Object other) => other is HumanModel && other.id == id;
 }

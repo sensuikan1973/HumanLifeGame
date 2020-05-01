@@ -5,9 +5,9 @@ import 'package:HumanLifeGame/models/life_item.dart';
 class HumanLifeStageModel {
   HumanLifeStageModel(this.human);
 
-  Human human;
-  List<LifeItem> lifeItems;
-  List<LifeEvent> lifeEventRecord;
+  HumanModel human;
+  List<LifeItemModel> lifeItems;
+  List<LifeEventModel> lifeEventRecord;
 
   // HumanLife 上の位置
   int placeX;
