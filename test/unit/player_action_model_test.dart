@@ -6,7 +6,7 @@ void main() {
     test("Dice value shuld be '1 <= value <= 6')", () {
       final model = PlayerActionModel()..rollDice();
 
-      expect(model.dice, inInclusiveRange(1, 6));
+      expect(model.dice, inInclusiveRange(1, model.maxDiceNumber));
     });
   });
 }

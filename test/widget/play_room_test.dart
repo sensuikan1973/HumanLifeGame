@@ -1,3 +1,4 @@
+import 'package:HumanLifeGame/models/player_action.dart';
 import 'package:HumanLifeGame/screens/play_room/dice_result.dart';
 import 'package:HumanLifeGame/screens/play_room/human_life_stages.dart';
 import 'package:HumanLifeGame/screens/play_room/play_room.dart';
@@ -25,7 +26,8 @@ void main() {
       await tester.tap(find.byKey(rollDiceButton));
       await tester.pump();
       final text = find.byKey(diceResultText).evaluate().first.widget as Text;
-      expect(num.parse(text.data), inInclusiveRange(1, 6));
+      final model = PlayerActionModel();
+      expect(num.parse(text.data), inInclusiveRange(1, model.maxDiceNumber));
     });
   });
 }
