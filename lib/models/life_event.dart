@@ -1,4 +1,4 @@
-class LifeEvent {
+class LifeEventModel {
   LifeEventTarget target;
   LifeEventType type;
 

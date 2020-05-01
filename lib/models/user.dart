@@ -1,5 +1,5 @@
-class User {
-  User(this.id, this.name, this.createdAt, this.updatedAt);
+class UserModel {
+  UserModel(this.id, this.name, this.createdAt, this.updatedAt);
 
   final String id;
   final String name;
@@ -10,5 +10,5 @@ class User {
   int get hashCode => id.hashCode;
 
   @override
-  bool operator ==(Object other) => other is User && other.id == id;
+  bool operator ==(Object other) => other is UserModel && other.id == id;
 }
