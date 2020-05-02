@@ -1,17 +1,16 @@
-import 'dart:math';
-
+import 'package:HumanLifeGame/api/dice.dart';
 import 'package:flutter/foundation.dart';
 
 class PlayerActionModel extends ChangeNotifier {
-  @visibleForTesting
-  static const int maxDiceNumber = 6;
-  int _dice = 0;
+  PlayerActionModel(this._dice);
 
-  int get dice => _dice;
+  final Dice _dice;
+
+  int _roll = 0; // 出目
+  int get roll => _roll;
 
   void rollDice() {
-    final rand = Random();
-    _dice = rand.nextInt(maxDiceNumber) + 1;
+    _roll = _dice.roll();
     notifyListeners();
   }
 }
