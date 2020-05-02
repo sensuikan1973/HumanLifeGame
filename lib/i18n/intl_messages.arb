@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-05-02T20:37:22.838463",
+  "@@last_modified": "2020-05-02T23:04:12.613061",
   "appTitle": "Human Life Game",
   "@appTitle": {
     "type": "text",
@@ -7,6 +7,11 @@
   },
   "rollDice": "Roll the dice",
   "@rollDice": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lifeEventRecordesText": "Reserved area:lifeEventRecords",
+  "@lifeEventRecordesText": {
     "type": "text",
     "placeholders": {}
   }

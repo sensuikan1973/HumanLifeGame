@@ -8,4 +8,9 @@ extension PlayRoom on I18n {
         name: 'rollDice',
         locale: localeName,
       );
+  String get lifeEventRecordesText => Intl.message(
+        'Reserved area:lifeEventRecords',
+        name: 'lifeEventRecordesText',
+        locale: localeName,
+      );
 }
