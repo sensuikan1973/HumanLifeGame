@@ -9,7 +9,7 @@ class DiceResult extends StatelessWidget {
         width: 100,
         height: 100,
         child: Text(
-          Provider.of<PlayerActionModel>(context).dice.toString(),
+          Provider.of<PlayerActionModel>(context).roll.toString(),
           key: const Key('diceResultText'),
         ),
       );
