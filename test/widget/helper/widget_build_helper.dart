@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
-Widget testableApp({@required Widget home, String localeName = 'en'}) => MultiProvider(
+Widget testableApp({@required Widget home, Locale locale = const Locale('en', 'US')}) => MultiProvider(
       providers: [
         Provider(create: (context) => Router()),
       ],
@@ -21,7 +21,7 @@ Widget testableApp({@required Widget home, String localeName = 'en'}) => MultiPr
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [Locale('en', 'US'), Locale('ja', 'JP')],
-          locale: Locale(localeName),
+          locale: locale,
           theme: ThemeData(
             primarySwatch: Colors.blue,
             visualDensity: VisualDensity.adaptivePlatformDensity,
