@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('LifeRoad', () {
-    testWidgets("show 'LifeStep'", (tester) async {
+    testWidgets('show LifeStep', (tester) async {
       await tester.pumpWidget(_LifeRoad());
       await tester.pump();
       expect(find.byType(LifeStep), findsOneWidget);
