@@ -9,7 +9,10 @@ class Announcement extends StatelessWidget {
         height: 50,
         child: Selector<PlayRoomModel, String>(
           selector: (context, model) => model.announcement.message,
-          builder: (context, message, child) => Text(message),
+          builder: (context, message, child) => Text(
+            message,
+            key: const Key('announcementMessageText'),
+          ),
         ),
       );
 }

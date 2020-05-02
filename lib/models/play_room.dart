@@ -11,7 +11,7 @@ class PlayRoomModel extends ChangeNotifier {
   PlayerActionModel get playerAction => _playerAction;
   set playerAction(PlayerActionModel playerAction) {
     _playerAction = playerAction;
-    announcement.message = '${playerAction.dice} が出ました';
+    announcement.message = 'result: ${playerAction.dice}';
     notifyListeners();
   }
 
