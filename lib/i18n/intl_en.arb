@@ -1,14 +1,13 @@
 {
   "@@locale": "en",
-  "@@last_modified": "2020-04-29T01:18:13.468879",
+   "@@last_modified": "2020-05-02T20:37:22.838463",
   "appTitle": "Human Life Game",
   "@appTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "start": "Start",
-  "@start": {
-    "description": "Text for start button.",
+  "rollDice": "Roll the dice",
+  "@rollDice": {
     "type": "text",
     "placeholders": {}
   }

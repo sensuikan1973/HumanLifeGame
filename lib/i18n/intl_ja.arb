@@ -6,9 +6,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "start": "スタート",
-  "@start": {
-    "description": "スタートボタン用のテキスト",
+  "rollDice": "サイコロを振る",
+  "@rollDice": {
     "type": "text",
     "placeholders": {}
   }
