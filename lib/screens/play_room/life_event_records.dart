@@ -6,7 +6,8 @@ class LifeEventRecordes extends StatelessWidget {
         width: 400,
         height: 100,
         child: Text(
-          'Human 1が２マス進みました。',
+          'Reserved area:lifeEventRecords',
+          key: Key('lifeEventRecordsText'),
         ),
       );
 }
