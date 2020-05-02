@@ -8,13 +8,15 @@ import 'package:flutter/foundation.dart';
 
 class PlayRoomModel extends ChangeNotifier {
   PlayerActionModel _playerAction;
-
   PlayerActionModel get playerAction => _playerAction;
-
   set playerAction(PlayerActionModel playerAction) {
     _playerAction = playerAction;
+    announcement.message = 'result: ${playerAction.dice}';
     notifyListeners();
   }
+
+  final _announcement = AnnouncementModel();
+  AnnouncementModel get announcement => _announcement;
 
   String roomTitle;
 
@@ -32,6 +34,4 @@ class PlayRoomModel extends ChangeNotifier {
 
   // 全参加者の LifeEvent 履歴
   List<LifeEventModel> everyLifeEventRecords;
-
-  AnnouncementModel announcement;
 }
