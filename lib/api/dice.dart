@@ -15,5 +15,5 @@ class Dice {
   final int max;
 
   /// サイコロを振る
-  int roll() => min + Random().nextInt(max - min);
+  int roll() => min + Random().nextInt(max - min + 1);
 }
