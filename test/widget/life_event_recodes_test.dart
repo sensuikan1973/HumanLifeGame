@@ -6,7 +6,7 @@ import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
   const locale = Locale('en', 'US');
-  group('LifeRoad', () {
+  group('LifeEventRecords', () {
     testWidgets("show 'lifeEventRecords'Text", (tester) async {
       const lifeEventRecodesText = Key('lifeEventRecordsText');
       await tester.pumpWidget(testableApp(locale: locale, home: LifeEventRecordes()));
