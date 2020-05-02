@@ -1,3 +1,3 @@
 class AnnouncementModel {
-  String message;
+  String message = '';
 }
