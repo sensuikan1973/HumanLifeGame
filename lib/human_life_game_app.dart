@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
+import 'api/dice.dart';
 import 'i18n/i18n_delegate.dart';
 
 class HumanLifeGameApp extends StatelessWidget {
@@ -11,6 +12,7 @@ class HumanLifeGameApp extends StatelessWidget {
   Widget build(BuildContext context) => MultiProvider(
         providers: [
           Provider(create: (context) => Router()),
+          Provider(create: (context) => const Dice()),
         ],
         child: Consumer<Router>(
           builder: (_, router, __) => MaterialApp(

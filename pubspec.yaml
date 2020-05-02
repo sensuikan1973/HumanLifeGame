@@ -24,6 +24,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mockito: 4.1.1
   intl_translation: 0.17.9
 
 flutter:
