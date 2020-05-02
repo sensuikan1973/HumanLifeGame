@@ -5,8 +5,8 @@ class LifeRoad extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Align(
         child: SizedBox(
-          width: 990,
-          height: 590,
+          width: 490,
+          height: 390,
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: Colors.white,

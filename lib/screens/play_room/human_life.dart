@@ -5,8 +5,8 @@ class HumanLife extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Align(
         child: SizedBox(
-          width: 1000,
-          height: 600,
+          width: 500,
+          height: 400,
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: Colors.blue,
