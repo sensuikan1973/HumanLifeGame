@@ -1,29 +1,19 @@
+import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/screens/play_room/player_action.dart';
-import 'package:HumanLifeGame/i18n/i18n_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-void main() {
+import 'helper/widget_build_helper.dart';
+
+Future<void> main() async {
+  const locale = Locale('en', 'US');
+  final i18n = await I18n.load(locale);
+
   group('PlayerAction', () {
-    testWidgets("show 'start' text", (tester) async {
-      await tester.pumpWidget(_PlayerAction());
+    testWidgets("show 'Roll the Dice' text", (tester) async {
+      await tester.pumpWidget(testableApp(locale: locale, home: PlayerAction()));
       await tester.pump();
-      expect(find.text('Roll the dice'), findsOneWidget);
+      expect(find.text(i18n.rollDice), findsOneWidget);
     });
   });
-}
-
-class _PlayerAction extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) => MaterialApp(
-        title: 'Test App For PlayerAction',
-        localizationsDelegates: const [I18nDelegate()],
-        supportedLocales: const [Locale('en', 'US')],
-        locale: const Locale('en'),
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: PlayerAction(),
-      );
 }
