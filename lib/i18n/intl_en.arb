@@ -10,5 +10,10 @@
   "@rollDice": {
     "type": "text",
     "placeholders": {}
+  },
+  "lifeEventRecordesText": "Reserved area:lifeEventRecords",
+  "@lifeEventRecordesText": {
+    "type": "text",
+    "placeholders": {}
   }
 }

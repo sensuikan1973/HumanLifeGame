@@ -10,5 +10,10 @@
   "@rollDice": {
     "type": "text",
     "placeholders": {}
+  },
+  "lifeEventRecordesText": "予約領域:lifeEventRecords",
+  "@lifeEventRecordesText": {
+    "type": "text",
+    "placeholders": {}
   }
 }
