@@ -6,7 +6,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "rollDice": "サイコロそ振る",
+  "rollDice": "サイコロを振る",
   "@rollDice": {
     "type": "text",
     "placeholders": {}
