@@ -1,4 +1,4 @@
-import 'package:HumanLifeGame/screens/play_room/life_step.dart';
+import 'package:HumanLifeGame/screens/common/life_step.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
