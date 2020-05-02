@@ -1,6 +1,5 @@
 {
   "@@locale": "en",
-   "@@last_modified": "2020-05-02T20:37:22.838463",
   "appTitle": "Human Life Game",
   "@appTitle": {
     "type": "text",
@@ -15,5 +14,12 @@
   "@lifeEventRecordesText": {
     "type": "text",
     "placeholders": {}
+  },
+  "rollAnnouncement": "XXX rolled the dice. result: {roll}",
+  "@rollAnnouncement": {
+    "type": "text",
+    "placeholders": {
+      "roll": {}
+    }
   }
 }
