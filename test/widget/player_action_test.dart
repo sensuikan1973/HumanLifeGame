@@ -1,3 +1,4 @@
+import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/screens/play_room/player_action.dart';
 import 'package:HumanLifeGame/i18n/i18n_delegate.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,7 @@ void main() {
     testWidgets("show 'start' text", (tester) async {
       await tester.pumpWidget(_PlayerAction());
       await tester.pump();
-      expect(find.text('Roll the dice'), findsOneWidget);
+      expect(find.text(I18n('ja').rollDice), findsOneWidget);
     });
   });
 }
