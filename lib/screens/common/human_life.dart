@@ -1,4 +1,4 @@
-import 'package:HumanLifeGame/screens/play_room/life_road.dart';
+import 'package:HumanLifeGame/screens/common/life_road.dart';
 import 'package:flutter/material.dart';
 
 class HumanLife extends StatelessWidget {

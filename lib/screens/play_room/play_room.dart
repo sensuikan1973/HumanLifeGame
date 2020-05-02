@@ -1,7 +1,7 @@
 import 'package:HumanLifeGame/api/dice.dart';
 import 'package:HumanLifeGame/models/play_room.dart';
 import 'package:HumanLifeGame/models/player_action.dart';
-import 'package:HumanLifeGame/screens/play_room/human_life.dart';
+import 'package:HumanLifeGame/screens/common/human_life.dart';
 import 'package:HumanLifeGame/screens/play_room/announcement.dart';
 import 'package:HumanLifeGame/screens/play_room/human_life_stages.dart';
 import 'package:HumanLifeGame/screens/play_room/dice_result.dart';
