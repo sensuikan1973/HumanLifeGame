@@ -1,22 +1,23 @@
 import 'package:HumanLifeGame/i18n/i18n_delegate.dart';
+import 'package:HumanLifeGame/screens/play_room/life_road.dart';
 import 'package:HumanLifeGame/screens/play_room/life_step.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('LifeStep', () {
-    testWidgets('show DecoratedBox', (tester) async {
-      await tester.pumpWidget(_LifeStep());
+  group('LifeRoad', () {
+    testWidgets("show 'LifeStep'", (tester) async {
+      await tester.pumpWidget(_LifeRoad());
       await tester.pump();
-      expect(find.byType(DecoratedBox), findsOneWidget);
+      expect(find.byType(LifeStep), findsOneWidget);
     });
   });
 }
 
-class _LifeStep extends StatelessWidget {
+class _LifeRoad extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: 'Test App For LifeStep',
+        title: 'Test App For LifeRoad',
         localizationsDelegates: const [I18nDelegate()],
         supportedLocales: const [Locale('en', 'US')],
         locale: const Locale('en'),
@@ -24,6 +25,6 @@ class _LifeStep extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: LifeStep(),
+        home: LifeRoad(),
       );
 }
