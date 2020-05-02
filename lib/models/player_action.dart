@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 
 class PlayerActionModel extends ChangeNotifier {
   @visibleForTesting
-  final int maxDiceNumber = 6;
+  static const int maxDiceNumber = 6;
   int _dice = 0;
 
   int get dice => _dice;

@@ -1,6 +1,7 @@
 import 'package:HumanLifeGame/models/play_room.dart';
 import 'package:HumanLifeGame/models/player_action.dart';
 import 'package:HumanLifeGame/screens/play_room/human_life.dart';
+import 'package:HumanLifeGame/screens/play_room/announcement.dart';
 import 'package:HumanLifeGame/screens/play_room/human_life_stages.dart';
 import 'package:HumanLifeGame/screens/play_room/dice_result.dart';
 import 'package:HumanLifeGame/screens/play_room/player_action.dart';
@@ -26,6 +27,7 @@ class PlayRoom extends StatelessWidget {
         children: <Widget>[
           Column(
             children: <Widget>[
+              Announcement(),
               HumanLife(),
             ],
           ),
