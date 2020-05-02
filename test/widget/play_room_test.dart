@@ -1,6 +1,7 @@
 import 'package:HumanLifeGame/models/player_action.dart';
 import 'package:HumanLifeGame/screens/play_room/announcement.dart';
 import 'package:HumanLifeGame/screens/play_room/dice_result.dart';
+import 'package:HumanLifeGame/screens/play_room/human_life.dart';
 import 'package:HumanLifeGame/screens/play_room/human_life_stages.dart';
 import 'package:HumanLifeGame/screens/play_room/play_room.dart';
 import 'package:HumanLifeGame/screens/play_room/player_action.dart';
@@ -18,6 +19,7 @@ void main() {
       expect(find.byType(DiceResult), findsOneWidget);
       expect(find.byType(HumanLifeStages), findsOneWidget);
       expect(find.byType(Announcement), findsOneWidget);
+      expect(find.byType(HumanLife), findsOneWidget);
     });
 
     testWidgets('random value(1 <= value <= 6) should be displayed when dice is rolled', (tester) async {
