@@ -1,3 +1,4 @@
+import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/models/announcement.dart';
 import 'package:HumanLifeGame/models/human.dart';
 import 'package:HumanLifeGame/models/human_life.dart';
@@ -7,11 +8,15 @@ import 'package:HumanLifeGame/screens/play_room/human_life_stages.dart';
 import 'package:flutter/foundation.dart';
 
 class PlayRoomModel extends ChangeNotifier {
+  PlayRoomModel(this._i18n);
+
+  final I18n _i18n;
+
   PlayerActionModel _playerAction;
   PlayerActionModel get playerAction => _playerAction;
   set playerAction(PlayerActionModel playerAction) {
     _playerAction = playerAction;
-    announcement.message = 'result: ${playerAction.roll}';
+    announcement.message = _i18n.rollAnnouncement(playerAction.roll);
     notifyListeners();
   }
 

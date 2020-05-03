@@ -1,4 +1,5 @@
 import 'package:HumanLifeGame/api/dice.dart';
+import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/models/play_room.dart';
 import 'package:HumanLifeGame/models/player_action.dart';
 import 'package:HumanLifeGame/screens/common/human_life.dart';
@@ -19,7 +20,7 @@ class PlayRoom extends StatelessWidget {
               create: (context) => PlayerActionModel(Provider.of<Dice>(context, listen: false)),
             ),
             ChangeNotifierProxyProvider<PlayerActionModel, PlayRoomModel>(
-              create: (context) => PlayRoomModel(),
+              create: (_) => PlayRoomModel(I18n.of(context)),
               update: (context, playerAction, playRoom) => playRoom..playerAction = playerAction,
             )
           ],
