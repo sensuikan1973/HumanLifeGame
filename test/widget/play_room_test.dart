@@ -1,4 +1,5 @@
 import 'package:HumanLifeGame/api/dice.dart';
+import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/screens/common/human_life.dart';
 import 'package:HumanLifeGame/screens/play_room/announcement.dart';
 import 'package:HumanLifeGame/screens/play_room/dice_result.dart';
@@ -13,11 +14,14 @@ import 'package:provider/provider.dart';
 import '../mocks/mocks.dart';
 import 'helper/widget_build_helper.dart';
 
-void main() {
+Future<void> main() async {
+  const locale = Locale('en', 'US');
+  final i18n = await I18n.load(locale);
+
   group('PlayRoom', () {
     testWidgets('show some widgets', (tester) async {
       await tester.pumpWidget(
-        Provider(create: (context) => const Dice(), child: testableApp(home: PlayRoom())),
+        Provider<Dice>(create: (context) => const Dice(), child: testableApp(home: PlayRoom())),
       );
       await tester.pump();
       expect(find.byType(PlayerAction), findsOneWidget);
@@ -50,7 +54,7 @@ void main() {
 
       await tester.tap(find.byKey(const Key('playerActionDiceRollButton')));
       await tester.pump();
-      expect(find.text('result: 5'), findsOneWidget);
+      expect(find.text(i18n.rollAnnouncement(5)), findsOneWidget);
     });
   });
 }

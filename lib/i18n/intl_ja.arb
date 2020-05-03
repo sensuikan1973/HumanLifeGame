@@ -1,6 +1,5 @@
 {
   "@@locale": "ja",
-  "@@last_modified": "2020-04-29T01:18:13.468879",
   "appTitle": "人生すごろく",
   "@appTitle": {
     "type": "text",
@@ -15,5 +14,12 @@
   "@lifeEventRecordesText": {
     "type": "text",
     "placeholders": {}
+  },
+  "rollAnnouncement": "〇〇がサイコロを振りました。\n 出目: {roll}",
+  "@rollAnnouncement": {
+    "type": "text",
+    "placeholders": {
+      "roll": {}
+    }
   }
 }
