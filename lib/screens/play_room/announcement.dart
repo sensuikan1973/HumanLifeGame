@@ -1,4 +1,4 @@
-import 'package:HumanLifeGame/models/play_room.dart';
+import 'package:HumanLifeGame/models/play_room/play_room.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,12 +1,12 @@
 import 'package:HumanLifeGame/i18n/i18n.dart';
-import 'package:HumanLifeGame/models/announcement.dart';
-import 'package:HumanLifeGame/models/human.dart';
-import 'package:HumanLifeGame/models/human_life.dart';
-import 'package:HumanLifeGame/models/life_event.dart';
-import 'package:HumanLifeGame/models/life_road.dart';
-import 'package:HumanLifeGame/models/life_stage.dart';
-import 'package:HumanLifeGame/models/player_action.dart';
-import 'package:HumanLifeGame/models/user.dart';
+import 'package:HumanLifeGame/models/common/human.dart';
+import 'package:HumanLifeGame/models/common/human_life.dart';
+import 'package:HumanLifeGame/models/common/life_event.dart';
+import 'package:HumanLifeGame/models/common/life_road.dart';
+import 'package:HumanLifeGame/models/common/user.dart';
+import 'package:HumanLifeGame/models/play_room/announcement.dart';
+import 'package:HumanLifeGame/models/play_room/life_stage.dart';
+import 'package:HumanLifeGame/models/play_room/player_action.dart';
 import 'package:flutter/foundation.dart';
 
 class PlayRoomModel extends ChangeNotifier {
