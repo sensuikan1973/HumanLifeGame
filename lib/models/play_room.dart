@@ -4,9 +4,9 @@ import 'package:HumanLifeGame/models/human.dart';
 import 'package:HumanLifeGame/models/human_life.dart';
 import 'package:HumanLifeGame/models/life_event.dart';
 import 'package:HumanLifeGame/models/life_road.dart';
+import 'package:HumanLifeGame/models/life_stage.dart';
 import 'package:HumanLifeGame/models/player_action.dart';
 import 'package:HumanLifeGame/models/user.dart';
-import 'package:HumanLifeGame/screens/play_room/human_life_stages.dart';
 import 'package:flutter/foundation.dart';
 
 class PlayRoomModel extends ChangeNotifier {
@@ -39,7 +39,7 @@ class PlayRoomModel extends ChangeNotifier {
   List<HumanModel> humans;
 
   // 参加者のそれぞれの人生の進捗
-  List<HumanLifeStages> humanLifeStages;
+  List<LifeStageModel> lifeStages;
 
   // 手番の人
   HumanModel currentPlayer;

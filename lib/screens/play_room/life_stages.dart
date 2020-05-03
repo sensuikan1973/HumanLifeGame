@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// Humanの状況を表示
-class HumanLifeStages extends StatelessWidget {
+class LifeStages extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SizedBox(
         width: 100,

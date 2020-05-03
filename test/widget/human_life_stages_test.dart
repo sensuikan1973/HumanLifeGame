@@ -1,4 +1,4 @@
-import 'package:HumanLifeGame/screens/play_room/human_life_stages.dart';
+import 'package:HumanLifeGame/screens/play_room/life_stages.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'helper/widget_build_helper.dart';
@@ -6,7 +6,7 @@ import 'helper/widget_build_helper.dart';
 void main() {
   group('HumanLifeStages', () {
     testWidgets("show 'user id' text", (tester) async {
-      await tester.pumpWidget(testableApp(home: HumanLifeStages()));
+      await tester.pumpWidget(testableApp(home: LifeStages()));
       await tester.pump();
       expect(find.text('human 1'), findsOneWidget);
       expect(find.text('human 2'), findsOneWidget);
