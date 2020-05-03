@@ -4,5 +4,5 @@ import 'package:HumanLifeGame/models/user.dart';
 class HumanLifeModel {
   String title;
   UserModel author;
-  LifeRoad lifeRoad;
+  LifeRoadModel lifeRoad;
 }
