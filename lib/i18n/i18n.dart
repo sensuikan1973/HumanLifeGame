@@ -8,11 +8,12 @@ export 'extensions/i18n_play_room.dart';
 class I18n {
   I18n(this.localeName);
 
-  static Future<I18n> load(Locale locale) {
+  static Future<I18n> load(Locale locale) async {
     final name = locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
-
-    return initializeMessages(localeName).then((_) => I18n(localeName));
+    Intl.defaultLocale = localeName;
+    await initializeMessages(localeName);
+    return I18n(localeName);
   }
 
   static I18n of(BuildContext context) => Localizations.of<I18n>(context, I18n);
