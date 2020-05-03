@@ -11,7 +11,7 @@ Future<void> main() async {
     testWidgets('show LifeStep', (tester) async {
       await tester.pumpWidget(testableApp(locale: locale, home: LifeRoad()));
       await tester.pump();
-      expect(find.byType(LifeStep), findsOneWidget);
+      expect(find.byType(LifeStep), findsNWidgets(100));
     });
   });
 }

@@ -11,7 +11,19 @@ class LifeRoad extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
             ),
-            child: LifeStep(),
+            child: Table(
+              children: List.generate(
+                10,
+                (yAxisIndex) => TableRow(
+                  children: List.generate(
+                    10,
+                    (xAxisIndex) => TableCell(
+                      child: LifeStep(),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ),
         ),
       );
