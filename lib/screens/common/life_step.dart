@@ -1,4 +1,4 @@
-import 'package:HumanLifeGame/models/life_event.dart';
+import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:flutter/material.dart';
 
 class LifeStep extends StatelessWidget {

@@ -1,5 +1,5 @@
-import 'package:HumanLifeGame/models/life_event.dart';
-import 'package:HumanLifeGame/models/life_step.dart';
+import 'package:HumanLifeGame/models/common/life_event.dart';
+import 'package:HumanLifeGame/models/common/life_step.dart';
 import 'package:flutter/foundation.dart';
 
 class LifeRoadModel {

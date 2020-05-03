@@ -1,4 +1,4 @@
-import 'package:HumanLifeGame/models/life_road.dart';
+import 'package:HumanLifeGame/models/common/life_road.dart';
 import 'package:HumanLifeGame/screens/common/life_step.dart';
 import 'package:flutter/material.dart';
 
