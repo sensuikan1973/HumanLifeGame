@@ -1,6 +1,9 @@
+import 'package:HumanLifeGame/models/life_step.dart';
 import 'package:flutter/material.dart';
 
 class LifeStep extends StatelessWidget {
+  const LifeStep(this.model);
+  final LifeStepModel model;
   @override
   Widget build(BuildContext context) => Align(
         child: SizedBox(
@@ -10,7 +13,7 @@ class LifeStep extends StatelessWidget {
             padding: const EdgeInsets.all(2),
             child: DecoratedBox(
               decoration: BoxDecoration(
-                color: Colors.grey,
+                color: model == null ? Colors.white : Colors.grey,
               ),
             ),
           ),
