@@ -1,32 +1,9 @@
 import 'package:HumanLifeGame/models/life_road.dart';
-import 'package:HumanLifeGame/models/life_step.dart';
 import 'package:HumanLifeGame/models/user.dart';
 
 class HumanLifeModel {
-  HumanLifeModel(this.title, this.author, this.lifeRoad);
-  HumanLifeModel.dummy() {
-    title = 'dummyTytle';
-    lifeRoad = _setDummyLifeRoad;
-  }
-
+  HumanLifeModel({this.title, this.author, this.lifeRoad});
   String title;
   UserModel author;
   LifeRoadModel lifeRoad;
-
-  LifeRoadModel get _setDummyLifeRoad {
-    LifeRoadModel dummy;
-    List<List<LifeStepModel>> lifeStepsOnBoard;
-    LifeStepModel lifeStep;
-
-    lifeStepsOnBoard = List.generate(
-      10,
-      (index) => List.generate(
-        10,
-        (index) => null,
-      ),
-    );
-    lifeStepsOnBoard[5][5] = lifeStep;
-    dummy.lifeStepsOnBoard = lifeStepsOnBoard;
-    return dummy;
-  }
 }

@@ -1,3 +1,6 @@
+import 'package:HumanLifeGame/infra/human_life_repository.dart';
+import 'package:HumanLifeGame/infra/infra.dart';
+import 'package:HumanLifeGame/infra/play_room_repository.dart';
 import 'package:HumanLifeGame/router.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +16,7 @@ class HumanLifeGameApp extends StatelessWidget {
         providers: [
           Provider(create: (context) => Router()),
           Provider(create: (context) => const Dice()),
+          Provider(create: (context) => Infra(HumanLifeRepository(), PlayRoomRepository()))
         ],
         child: Consumer<Router>(
           builder: (_, router, __) => MaterialApp(
