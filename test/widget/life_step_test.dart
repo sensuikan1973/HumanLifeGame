@@ -1,3 +1,4 @@
+import 'package:HumanLifeGame/models/life_step.dart';
 import 'package:HumanLifeGame/screens/common/life_step.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -8,7 +9,8 @@ Future<void> main() async {
   const locale = Locale('en', 'US');
   group('LifeStep', () {
     testWidgets('show DecoratedBox', (tester) async {
-      await tester.pumpWidget(testableApp(locale: locale, home: LifeStep()));
+      final model = LifeStepModel(null, null, null, null, null, isStart: false, isGoal: false);
+      await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model)));
       await tester.pump();
       expect(find.byType(DecoratedBox), findsOneWidget);
     });
