@@ -9,7 +9,15 @@ Future<void> main() async {
   const locale = Locale('en', 'US');
   group('LifeStep', () {
     testWidgets('show DecoratedBox', (tester) async {
-      final model = LifeStepModel(null, null, null, null, null, isStart: false, isGoal: false);
+      final model = LifeStepModel(
+        lifeEvent: null,
+        right: null,
+        left: null,
+        up: null,
+        down: null,
+        isStart: null,
+        isGoal: null,
+      );
       await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model)));
       await tester.pump();
       expect(find.byType(DecoratedBox), findsOneWidget);

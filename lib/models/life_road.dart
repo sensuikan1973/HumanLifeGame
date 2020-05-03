@@ -4,7 +4,15 @@ import 'package:flutter/foundation.dart';
 class LifeRoadModel {
   // FIXME: いつか消す
   LifeRoadModel.dummy() {
-    final lifeStep = LifeStepModel(null, null, null, null, null, isStart: false, isGoal: false);
+    final lifeStep = LifeStepModel(
+      lifeEvent: null,
+      right: null,
+      left: null,
+      up: null,
+      down: null,
+      isStart: null,
+      isGoal: null,
+    );
     lifeStepsOnBoard = List.generate(
       10,
       (index) => List.generate(
