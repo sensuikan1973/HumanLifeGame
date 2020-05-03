@@ -1,5 +1,7 @@
+import 'package:HumanLifeGame/models/play_room/play_room.dart';
 import 'package:HumanLifeGame/screens/common/life_road.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PlayView extends StatelessWidget {
   @override
@@ -11,7 +13,7 @@ class PlayView extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.blue,
             ),
-            child: LifeRoad(),
+            child: LifeRoad(Provider.of<PlayRoomModel>(context, listen: false).humanLife.lifeRoad),
           ),
         ),
       );

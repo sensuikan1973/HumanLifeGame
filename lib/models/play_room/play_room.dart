@@ -18,7 +18,7 @@ class PlayRoomModel extends ChangeNotifier {
   // 歩む対象となる人生
   final HumanLifeModel humanLife = HumanLifeModel(
     title: 'dummy HumanLife',
-    author: UserModel('dummyUseUd', 'dummyUser', DateTime.now(), DateTime.now()),
+    author: UserModel('dummyUserId', 'dummyUser', DateTime.now(), DateTime.now()),
     lifeRoad: LifeRoadModel.dummy(),
   );
 

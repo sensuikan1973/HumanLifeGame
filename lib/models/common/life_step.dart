@@ -2,12 +2,12 @@ import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:flutter/foundation.dart';
 
 class LifeStepModel {
-  LifeStepModel(
-    this.lifeEvent,
-    this.right,
-    this.left,
-    this.up,
-    this.down, {
+  LifeStepModel({
+    @required this.lifeEvent,
+    @required this.right,
+    @required this.left,
+    @required this.up,
+    @required this.down,
     @required this.isStart,
     @required this.isGoal,
   });
