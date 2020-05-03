@@ -8,7 +8,7 @@ class HumanLifeRepository {
         HumanLifeModel(
           title: 'dummy HumanLife',
           author: UserModel('dummyUseUd', 'dummyUser', DateTime.now(), DateTime.now()),
-          lifeRoad: LifeRoadModel(),
+          lifeRoad: LifeRoadModel.dummy(),
         ),
       );
 }

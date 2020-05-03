@@ -2,7 +2,10 @@ import 'package:HumanLifeGame/models/life_step.dart';
 import 'package:flutter/foundation.dart';
 
 class LifeRoadModel {
-  LifeRoadModel();
+  // FIXME: いつか消す
+  LifeRoadModel.dummy() {
+    // TODO: lifeStepsOnBoard に LifeStep をいくつか雑に入れておく
+  }
 
   @visibleForTesting
   static const int width = 10;
