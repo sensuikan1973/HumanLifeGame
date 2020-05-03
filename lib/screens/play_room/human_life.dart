@@ -1,7 +1,7 @@
 import 'package:HumanLifeGame/screens/common/life_road.dart';
 import 'package:flutter/material.dart';
 
-class HumanLife extends StatelessWidget {
+class PlayView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Align(
         child: SizedBox(

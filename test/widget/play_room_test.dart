@@ -1,9 +1,9 @@
 import 'package:HumanLifeGame/api/dice.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
-import 'package:HumanLifeGame/screens/common/human_life.dart';
 import 'package:HumanLifeGame/screens/play_room/announcement.dart';
 import 'package:HumanLifeGame/screens/play_room/dice_result.dart';
-import 'package:HumanLifeGame/screens/play_room/human_life_stages.dart';
+import 'package:HumanLifeGame/screens/play_room/human_life.dart';
+import 'package:HumanLifeGame/screens/play_room/life_stages.dart';
 import 'package:HumanLifeGame/screens/play_room/play_room.dart';
 import 'package:HumanLifeGame/screens/play_room/player_action.dart';
 import 'package:flutter/material.dart';
@@ -26,9 +26,9 @@ Future<void> main() async {
       await tester.pump();
       expect(find.byType(PlayerAction), findsOneWidget);
       expect(find.byType(DiceResult), findsOneWidget);
-      expect(find.byType(HumanLifeStages), findsOneWidget);
+      expect(find.byType(LifeStages), findsOneWidget);
       expect(find.byType(Announcement), findsOneWidget);
-      expect(find.byType(HumanLife), findsOneWidget);
+      expect(find.byType(PlayView), findsOneWidget);
     });
 
     testWidgets('random value(1 <= value <= 6) should be displayed when dice is rolled', (tester) async {
