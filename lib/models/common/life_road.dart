@@ -3,6 +3,7 @@ import 'package:HumanLifeGame/models/common/life_step.dart';
 import 'package:flutter/foundation.dart';
 
 class LifeRoadModel {
+  LifeRoadModel();
   // FIXME: いつか消す
   LifeRoadModel.dummy() {
     final lifeStepNothing = LifeStepModel(
