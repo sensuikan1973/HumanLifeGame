@@ -8,10 +8,10 @@ import 'helper/widget_build_helper.dart';
 Future<void> main() async {
   const locale = Locale('en', 'US');
   group('LifeRoad', () {
-    testWidgets('show LifeStep', (tester) async {
-      await tester.pumpWidget(testableApp(locale: locale, home: LifeRoad()));
-      await tester.pump();
-      expect(find.byType(LifeStep), findsNWidgets(100));
-    });
+//    testWidgets('show LifeStep', (tester) async {
+//      await tester.pumpWidget(testableApp(locale: locale, home: LifeRoad()));
+//      await tester.pump();
+//      expect(find.byType(LifeStep), findsNWidgets(100));
+//    });
   });
 }

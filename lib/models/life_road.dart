@@ -1,11 +1,21 @@
+import 'package:HumanLifeGame/models/life_event.dart';
 import 'package:HumanLifeGame/models/life_step.dart';
 import 'package:flutter/foundation.dart';
 
 class LifeRoadModel {
   // FIXME: いつか消す
   LifeRoadModel.dummy() {
+    final lifeStepNothing = LifeStepModel(
+      lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.nothing),
+      right: null,
+      left: null,
+      up: null,
+      down: null,
+      isStart: null,
+      isGoal: null,
+    );
     final lifeStep = LifeStepModel(
-      lifeEvent: null,
+      lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem),
       right: null,
       left: null,
       up: null,
@@ -17,7 +27,7 @@ class LifeRoadModel {
       10,
       (index) => List.generate(
         10,
-        (index) => null,
+        (index) => lifeStepNothing,
       ),
     );
     for (var index = 3; index <= 8; index++) {
