@@ -21,27 +21,3 @@ Future<void> main() async {
     });
   });
 }
-
-Widget lifeRoad() => MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => PlayRoomModel(I18n.of(context)),
-        ),
-      ],
-      child: MaterialApp(
-        onGenerateTitle: (context) => I18n.of(context).appTitle,
-        localizationsDelegates: const [
-          I18nDelegate(),
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [Locale('en', 'US'), Locale('ja', 'JP')],
-        locale: const Locale('en', 'US'),
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: LifeRoad(),
-      ),
-    );
