@@ -22,6 +22,9 @@ enum LifeEventTarget {
 enum LifeEventType {
   // NOTE: LifeItem の amount の「以上,以下,未満,超過」を条件とする Event はサポートしてない
 
+  /// 何も起きない
+  nothing,
+
   /// 進行方向を選択する
   selectDirection,
 
