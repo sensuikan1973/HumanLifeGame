@@ -3,7 +3,9 @@ import 'package:HumanLifeGame/models/announcement.dart';
 import 'package:HumanLifeGame/models/human.dart';
 import 'package:HumanLifeGame/models/human_life.dart';
 import 'package:HumanLifeGame/models/life_event.dart';
+import 'package:HumanLifeGame/models/life_road.dart';
 import 'package:HumanLifeGame/models/player_action.dart';
+import 'package:HumanLifeGame/models/user.dart';
 import 'package:HumanLifeGame/screens/play_room/human_life_stages.dart';
 import 'package:flutter/foundation.dart';
 
@@ -11,6 +13,14 @@ class PlayRoomModel extends ChangeNotifier {
   PlayRoomModel(this._i18n);
 
   final I18n _i18n;
+
+  // FIXME: 仮でダミーデータを最初から入れてるだけ
+  // 歩む対象となる人生
+  final HumanLifeModel humanLife = HumanLifeModel(
+    title: 'dummy HumanLife',
+    author: UserModel('dummyUseUd', 'dummyUser', DateTime.now(), DateTime.now()),
+    lifeRoad: LifeRoadModel.dummy(),
+  );
 
   PlayerActionModel _playerAction;
   PlayerActionModel get playerAction => _playerAction;
@@ -27,9 +37,6 @@ class PlayRoomModel extends ChangeNotifier {
 
   // 参加する人
   List<HumanModel> humans;
-
-  // 歩む対象となる人生
-  HumanLifeModel humanLife;
 
   // 参加者のそれぞれの人生の進捗
   List<HumanLifeStages> humanLifeStages;
