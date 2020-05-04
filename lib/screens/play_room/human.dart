@@ -5,11 +5,11 @@ class Human extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-        width: 15,
-        height: 15,
+        width: 20,
+        height: 20,
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color: Colors.yellow[50],
+            color: Colors.red[100],
             borderRadius: BorderRadius.circular(10),
           ),
         ),
