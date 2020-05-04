@@ -1,3 +1,4 @@
+import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_road.dart';
 import 'package:HumanLifeGame/models/common/life_step.dart';
@@ -19,23 +20,28 @@ class LifeStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (model.isStart == true) return _squareWithHuman();
+    if (model.isStart == true) return _squareWithHuman(context);
 
-    return SizedBox(
-      width: width / LifeRoadModel.width,
-      height: height / LifeRoadModel.height,
-      child: Padding(
-        padding: const EdgeInsets.all(2),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: model.lifeEvent.type == LifeEventType.nothing ? nothing : exist,
+    return Stack(
+      children: <Widget>[
+        SizedBox(
+          width: width / LifeRoadModel.width,
+          height: height / LifeRoadModel.height,
+          child: Padding(
+            padding: const EdgeInsets.all(2),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: model.lifeEvent.type == LifeEventType.nothing ? nothing : exist,
+              ),
+            ),
           ),
         ),
-      ),
+        Text(I18n.of(context).lifeStepEventType(model.lifeEvent.type)),
+      ],
     );
   }
 
-  Widget _squareWithHuman() => Stack(
+  Widget _squareWithHuman(BuildContext context) => Stack(
         children: <Widget>[
           SizedBox(
             width: width / LifeRoadModel.width,
@@ -49,6 +55,7 @@ class LifeStep extends StatelessWidget {
               ),
             ),
           ),
+          Text(I18n.of(context).lifeStepEventType(model.lifeEvent.type)),
           const Positioned(
             top: 0,
             left: 0,
