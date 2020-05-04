@@ -5,6 +5,13 @@
     "type": "text",
     "placeholders": {}
   },
+  "lifeStepEventType": "{type,select, nothing{}start{Start}goal{Goal}gainLifeItem{Gain Item :}}",
+  "@lifeStepEventType": {
+    "type": "text",
+    "placeholders": {
+      "type": {}
+    }
+  },
   "rollDice": "Roll the dice",
   "@rollDice": {
     "type": "text",

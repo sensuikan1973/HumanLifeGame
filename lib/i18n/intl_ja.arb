@@ -5,6 +5,13 @@
     "type": "text",
     "placeholders": {}
   },
+  "lifeStepEventType": "{type,select, nothing{}start{スタート}goal{ゴール}gainLifeItem{アイテムを獲得 :}}",
+  "@lifeStepEventType": {
+    "type": "text",
+    "placeholders": {
+      "type": {}
+    }
+  },
   "rollDice": "サイコロを振る",
   "@rollDice": {
     "type": "text",
