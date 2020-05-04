@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 
 class LifeStepModel {
   LifeStepModel({
+    @required this.id,
     @required this.lifeEvent,
     @required this.right,
     @required this.left,
@@ -11,6 +12,8 @@ class LifeStepModel {
     @required this.isStart,
     @required this.isGoal,
   });
+
+  final int id;
 
   final LifeEventModel lifeEvent;
 

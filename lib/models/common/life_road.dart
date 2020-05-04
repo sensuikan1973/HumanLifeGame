@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_step.dart';
 
@@ -10,6 +12,7 @@ class LifeRoadModel {
     final targetRow = lifeStepsOnBoard.first
       // Start
       ..first = LifeStepModel(
+        id: 0,
         lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.start),
         right: null,
         left: null,
@@ -20,6 +23,7 @@ class LifeRoadModel {
       )
       // Goal
       ..last = LifeStepModel(
+        id: 1,
         lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.goal),
         right: null,
         left: null,
@@ -33,6 +37,7 @@ class LifeRoadModel {
         1,
         width - 1,
         LifeStepModel(
+          id: 2 + Random().nextInt(100), // FIXME: テキトー
           lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem),
           right: null,
           left: null,
@@ -58,6 +63,7 @@ class LifeRoadModel {
     (index) => List.filled(
       height,
       LifeStepModel(
+        id: -1, // FIXME: 無意味な値を入れとく。どうせ代入して更新するから。
         lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.nothing),
         right: null,
         left: null,
