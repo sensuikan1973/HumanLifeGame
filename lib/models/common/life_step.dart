@@ -17,8 +17,8 @@ class LifeStepModel {
   final bool isStart;
   final bool isGoal;
 
-  final LifeStepModel up;
-  final LifeStepModel down;
-  final LifeStepModel right;
-  final LifeStepModel left;
+  LifeStepModel up;
+  LifeStepModel down;
+  LifeStepModel right;
+  LifeStepModel left;
 }
