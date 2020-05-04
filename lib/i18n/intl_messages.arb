@@ -10,8 +10,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "lifeEventRecordesText": "Reserved area:lifeEventRecords",
-  "@lifeEventRecordesText": {
+  "lifeEventRecordsText": "Reserved area:lifeEventRecords",
+  "@lifeEventRecordsText": {
     "type": "text",
     "placeholders": {}
   },

@@ -10,8 +10,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "lifeEventRecordesText": "予約領域:lifeEventRecords",
-  "@lifeEventRecordesText": {
+  "lifeEventRecordsText": "予約領域:lifeEventRecords",
+  "@lifeEventRecordsText": {
     "type": "text",
     "placeholders": {}
   },

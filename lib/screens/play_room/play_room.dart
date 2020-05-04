@@ -4,9 +4,9 @@ import 'package:HumanLifeGame/models/play_room/play_room.dart';
 import 'package:HumanLifeGame/models/play_room/player_action.dart';
 import 'package:HumanLifeGame/screens/play_room/announcement.dart';
 import 'package:HumanLifeGame/screens/play_room/dice_result.dart';
-import 'package:HumanLifeGame/screens/play_room/play_view.dart';
 import 'package:HumanLifeGame/screens/play_room/life_event_records.dart';
 import 'package:HumanLifeGame/screens/play_room/life_stages.dart';
+import 'package:HumanLifeGame/screens/play_room/play_view.dart';
 import 'package:HumanLifeGame/screens/play_room/player_action.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +33,7 @@ class PlayRoom extends StatelessWidget {
           Column(
             children: <Widget>[
               Announcement(),
-              LifeEventRecordes(),
+              LifeEventRecords(),
               PlayView(),
             ],
           ),
