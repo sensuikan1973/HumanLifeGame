@@ -27,7 +27,6 @@ class LifeStepModel {
 
   LifeStepModel getNext(int num) {
     var current = this;
-    var destination = this;
     var count = 0;
     while (current != null && count < num) {
       // FIXME: 分岐が無いことを前提にしている。分岐があるとバグる。
@@ -37,11 +36,11 @@ class LifeStepModel {
         current.right,
         current.left,
       ].firstWhere((el) => el != null, orElse: () => null);
+      if (next == null) break;
       current = next;
-      if (next != null) destination = next;
       count++;
     }
-    return destination;
+    return current;
   }
 
   @override
