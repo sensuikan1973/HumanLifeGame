@@ -31,7 +31,7 @@ class LifeRoadModel {
       // それ以外
       ..fillRange(
         1,
-        width - 2,
+        width - 1,
         LifeStepModel(
           lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem),
           right: null,
