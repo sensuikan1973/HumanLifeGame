@@ -1,5 +1,3 @@
-import 'package:HumanLifeGame/i18n/i18n.dart';
-
 class LifeEventModel {
   LifeEventModel(this.target, this.type);
 
