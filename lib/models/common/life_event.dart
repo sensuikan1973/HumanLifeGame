@@ -15,69 +15,6 @@ class LifeEventModel {
   Map<String, dynamic> params;
 
   String description;
-
-  String buildEventMessage(I18n i18n) {
-    var message = '';
-
-    switch (type) {
-      case LifeEventType.nothing:
-        // TODO: Handle this case.
-        break;
-      case LifeEventType.start:
-        message = i18n.lifeStepStartText;
-        break;
-      case LifeEventType.goal:
-        message = i18n.lifeStepGoalText;
-        break;
-      case LifeEventType.selectDirection:
-        // TODO: Handle this case.
-        break;
-      case LifeEventType.selectDirectionPerDiceRoll:
-        // TODO: Handle this case.
-        break;
-      case LifeEventType.selectDirectionPerLifeItem:
-        // TODO: Handle this case.
-        break;
-      case LifeEventType.gainLifeItemPerOtherLifeItem:
-        // TODO: Handle this case.
-        break;
-      case LifeEventType.gainLifeItemPerDiceRoll:
-        // TODO: Handle this case.
-        break;
-      case LifeEventType.gainLifeItemIfExistOtherLifeItem:
-        // TODO: Handle this case.
-        break;
-      case LifeEventType.gainLifeItemIfNotExistOtherLifeItem:
-        // TODO: Handle this case.
-        break;
-      case LifeEventType.exchangeLifeItems:
-        // TODO: Handle this case.
-        break;
-      case LifeEventType.exchangeLifeItemsWithDiceRoll:
-        // TODO: Handle this case.
-        break;
-      case LifeEventType.loseLifeItem:
-        // TODO: Handle this case.
-        break;
-      case LifeEventType.loseLifeItemPerDiceRoll:
-        // TODO: Handle this case.
-        break;
-      case LifeEventType.loseLifeItemPerOtherLifeItem:
-        // TODO: Handle this case.
-        break;
-      case LifeEventType.loseLifeItemIfExistOtherLifeItem:
-        // TODO: Handle this case.
-        break;
-      case LifeEventType.loseLifeItemIfNotExistOtherLifeItem:
-        // TODO: Handle this case.
-        break;
-      case LifeEventType.gainLifeItem:
-        message += i18n.lifeStepGainItemText;
-        break;
-    }
-
-    return message;
-  }
 }
 
 enum LifeEventTarget {

@@ -5,20 +5,12 @@
     "type": "text",
     "placeholders": {}
   },
-  "lifeStepStartText": "Start",
-  "@lifeStepStartText": {
+  "lifeStepEventType": "{type,select, nothing{}start{Start}goal{Goal}gainLifeItem{Gain Item :}}",
+  "@lifeStepEventType": {
     "type": "text",
-    "placeholders": {}
-  },
-  "lifeStepGoalText": "Goal",
-  "@lifeStepGoalText": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "lifeStepGainItemText": "Gain Item :",
-  "@lifeStepGainItemText": {
-    "type": "text",
-    "placeholders": {}
+    "placeholders": {
+      "type": {}
+    }
   },
   "rollDice": "Roll the dice",
   "@rollDice": {

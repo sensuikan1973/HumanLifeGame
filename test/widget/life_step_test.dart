@@ -81,7 +81,7 @@ Future<void> main() async {
       await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
       await tester.pump();
 
-      expect(find.text(i18n.lifeStepStartText), findsOneWidget);
+      expect(find.text(i18n.lifeStepEventType(model.lifeEvent.type)), findsOneWidget);
     });
 
     testWidgets("show 'Goal' text", (tester) async {
@@ -99,7 +99,7 @@ Future<void> main() async {
       await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
       await tester.pump();
 
-      expect(find.text(i18n.lifeStepGoalText), findsOneWidget);
+      expect(find.text(i18n.lifeStepEventType(model.lifeEvent.type)), findsOneWidget);
     });
 
     testWidgets("show 'Gain Item :' text", (tester) async {
@@ -117,7 +117,7 @@ Future<void> main() async {
       await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
       await tester.pump();
 
-      expect(find.text(i18n.lifeStepGainItemText), findsOneWidget);
+      expect(find.text(i18n.lifeStepEventType(model.lifeEvent.type)), findsOneWidget);
     });
   });
 }

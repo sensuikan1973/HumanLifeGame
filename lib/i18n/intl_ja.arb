@@ -6,20 +6,12 @@
     "type": "text",
     "placeholders": {}
   },
-  "lifeStepStartText": "スタート",
-  "@lifeStepStartText": {
+  "lifeStepEventType": "{type,select, nothing{}start{スタート}goal{ゴール}gainLifeItem{アイテムを獲得 :}}",
+  "@lifeStepEventType": {
     "type": "text",
-    "placeholders": {}
-  },
-  "lifeStepGoalText": "ゴール",
-  "@lifeStepGoalText": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "lifeStepGainItemText": "アイテムを獲得 :",
-  "@lifeStepGainItemText": {
-    "type": "text",
-    "placeholders": {}
+    "placeholders": {
+      "type": {}
+    }
   },
   "rollDice": "サイコロを振る",
   "@rollDice": {

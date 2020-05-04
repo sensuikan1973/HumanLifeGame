@@ -19,16 +19,21 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ja';
 
-  static m0(name, roll) => "${name} がサイコロを振りました. 結果: ${roll}";
+  static m0(type) => "${Intl.select(type, {
+        'nothing': '',
+        'start': 'スタート',
+        'goal': 'ゴール',
+        'gainLifeItem': 'アイテムを獲得 :',
+      })}";
+
+  static m1(name, roll) => "${name} がサイコロを振りました. 結果: ${roll}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function>{
         "appTitle": MessageLookupByLibrary.simpleMessage("人生すごろく"),
         "lifeEventRecordsText": MessageLookupByLibrary.simpleMessage("予約領域:lifeEventRecords"),
-        "lifeStepGainItemText": MessageLookupByLibrary.simpleMessage("アイテムを獲得 :"),
-        "lifeStepGoalText": MessageLookupByLibrary.simpleMessage("ゴール"),
-        "lifeStepStartText": MessageLookupByLibrary.simpleMessage("スタート"),
-        "rollAnnouncement": m0,
+        "lifeStepEventType": m0,
+        "rollAnnouncement": m1,
         "rollDice": MessageLookupByLibrary.simpleMessage("サイコロを振る")
       };
 }

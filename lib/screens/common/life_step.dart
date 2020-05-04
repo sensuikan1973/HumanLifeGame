@@ -36,7 +36,7 @@ class LifeStep extends StatelessWidget {
             ),
           ),
         ),
-        Text(model.lifeEvent.buildEventMessage(I18n.of(context))),
+        Text(I18n.of(context).lifeStepEventType(model.lifeEvent.type)),
       ],
     );
   }
@@ -55,7 +55,7 @@ class LifeStep extends StatelessWidget {
               ),
             ),
           ),
-          Text(model.lifeEvent.buildEventMessage(I18n.of(context))),
+          Text(I18n.of(context).lifeStepEventType(model.lifeEvent.type)),
           const Positioned(
             top: 0,
             left: 0,

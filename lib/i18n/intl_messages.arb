@@ -1,24 +1,16 @@
 {
-  "@@last_modified": "2020-05-05T03:49:49.959946",
+  "@@last_modified": "2020-05-05T04:59:15.671340",
   "appTitle": "Human Life Game",
   "@appTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "lifeStepStartText": "Start",
-  "@lifeStepStartText": {
+  "lifeStepEventType": "{type,select, nothing{}start{Start}goal{Goal}gainLifeItem{Gain Item :}}",
+  "@lifeStepEventType": {
     "type": "text",
-    "placeholders": {}
-  },
-  "lifeStepGoalText": "Goal",
-  "@lifeStepGoalText": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "lifeStepGainItemText": "Gain Item :",
-  "@lifeStepGainItemText": {
-    "type": "text",
-    "placeholders": {}
+    "placeholders": {
+      "type": {}
+    }
   },
   "rollDice": "Roll the dice",
   "@rollDice": {
