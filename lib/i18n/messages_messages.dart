@@ -22,10 +22,10 @@ class MessageLookup extends MessageLookupByLibrary {
   static m0(roll) => "result: ${roll}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static _notInlinedMessages(_) => <String, Function> {
-    "appTitle" : MessageLookupByLibrary.simpleMessage("Human Life Game"),
-    "lifeEventRecordsText" : MessageLookupByLibrary.simpleMessage("Reserved area:lifeEventRecords"),
-    "rollAnnouncement" : m0,
-    "rollDice" : MessageLookupByLibrary.simpleMessage("Roll the dice")
-  };
+  static _notInlinedMessages(_) => <String, Function>{
+        "appTitle": MessageLookupByLibrary.simpleMessage("Human Life Game"),
+        "lifeEventRecordsText": MessageLookupByLibrary.simpleMessage("Reserved area:lifeEventRecords"),
+        "rollAnnouncement": m0,
+        "rollDice": MessageLookupByLibrary.simpleMessage("Roll the dice")
+      };
 }
