@@ -7,17 +7,21 @@ class LifeRoad extends StatelessWidget {
   final LifeRoadModel lifeRoadModel;
   @override
   Widget build(BuildContext context) => SizedBox(
-        width: 490,
-        height: 390,
-        child: Table(
-          children: List.generate(
-            10,
-            (yAxisIndex) => TableRow(
-              children: List.generate(
-                10,
-                (xAxisIndex) => TableCell(
-                  child: LifeStep(
-                    lifeRoadModel.lifeStepsOnBoard[yAxisIndex][xAxisIndex].lifeEvent,
+        width: 1050,
+        height: 700,
+        child: LayoutBuilder(
+          builder: (context, constraints) => Table(
+            children: List.generate(
+              LifeRoadModel.width,
+              (yAxisIndex) => TableRow(
+                children: List.generate(
+                  LifeRoadModel.height,
+                  (xAxisIndex) => TableCell(
+                    child: LifeStep(
+                      lifeRoadModel.lifeStepsOnBoard[yAxisIndex][xAxisIndex].lifeEvent,
+                      constraints.maxWidth,
+                      constraints.maxHeight,
+                    ),
                   ),
                 ),
               ),

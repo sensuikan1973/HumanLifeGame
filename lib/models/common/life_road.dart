@@ -1,6 +1,5 @@
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_step.dart';
-import 'package:flutter/foundation.dart';
 
 class LifeRoadModel {
   LifeRoadModel();
@@ -50,11 +49,9 @@ class LifeRoadModel {
     }
   }
 
-  @visibleForTesting
-  static const int width = 10;
+  static const int width = 7;
 
-  @visibleForTesting
-  static const int height = 10;
+  static const int height = 7;
 
   List<List<LifeStepModel>> lifeStepsOnBoard = List.generate(
     width,
