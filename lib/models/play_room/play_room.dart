@@ -30,9 +30,14 @@ class PlayRoomModel extends ChangeNotifier {
     if (_currentPlayer != null) {
       // Announcement の更新
       announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, playerAction.roll);
-      // FIXME: 仮で即ターン交代してる
-      final currentPlayerIndex = humans.indexOf(_currentPlayer);
-      _currentPlayer = humans[(currentPlayerIndex + 1) % humans.length];
+
+      // TODO: 現在の手番の human の LifeStage を取得する
+      // TODO: その LifeStage から LifeStep を取得する
+      // TODO: その LifeStep から move(playerAction.roll) する
+      // TODO: 到着した LifeStep を LifeStage に代入する
+
+      // FIXME: 即ターン交代してるけど、あくまで仮
+      changeToNextTurn();
     } else {
       _currentPlayer = humans.first;
     }
@@ -61,4 +66,10 @@ class PlayRoomModel extends ChangeNotifier {
 
   // 全参加者の LifeEvent 履歴
   List<LifeEventModel> everyLifeEventRecords;
+
+  // 次のターンに変える
+  void changeToNextTurn() {
+    final currentPlayerIndex = humans.indexOf(_currentPlayer);
+    _currentPlayer = humans[(currentPlayerIndex + 1) % humans.length];
+  }
 }
