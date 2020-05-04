@@ -25,7 +25,7 @@ class LifeStepModel {
   LifeStepModel right;
   LifeStepModel left;
 
-  LifeStepModel move(int num) {
+  LifeStepModel getNext(int num) {
     var current = this;
     var destination = this;
     var count = 0;
