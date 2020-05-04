@@ -7,12 +7,13 @@ import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
   const locale = Locale('en', 'US');
+
   group('LifeStep', () {
     testWidgets('show DecoratedBox', (tester) async {
       final model = LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem);
       await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model)));
       await tester.pump();
-      expect(find.byType(DecoratedBox), findsOneWidget);
+      expect(find.byType(DecoratedBox), findsNWidgets(2));
     });
   });
 }
