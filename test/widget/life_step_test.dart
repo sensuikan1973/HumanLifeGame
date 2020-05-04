@@ -68,6 +68,7 @@ Future<void> main() async {
 
     testWidgets("show 'Start' text", (tester) async {
       final model = LifeStepModel(
+        id: 0,
         lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.start),
         right: null,
         left: null,
@@ -85,6 +86,7 @@ Future<void> main() async {
 
     testWidgets("show 'Goal' text", (tester) async {
       final model = LifeStepModel(
+        id: 0,
         lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.goal),
         right: null,
         left: null,
@@ -102,6 +104,7 @@ Future<void> main() async {
 
     testWidgets("show 'Gain Item :' text", (tester) async {
       final model = LifeStepModel(
+        id: 0,
         lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem),
         right: null,
         left: null,
