@@ -20,7 +20,7 @@ Future<void> main() async {
                 widget is DecoratedBox &&
                 widget.decoration ==
                     BoxDecoration(
-                      color: Colors.cyan[50],
+                      color: LifeStep.exist,
                     ),
           ),
           findsOneWidget);
@@ -37,7 +37,7 @@ Future<void> main() async {
                 widget is DecoratedBox &&
                 widget.decoration ==
                     BoxDecoration(
-                      color: Colors.amber[50],
+                      color: LifeStep.nothing,
                     ),
           ),
           findsOneWidget);

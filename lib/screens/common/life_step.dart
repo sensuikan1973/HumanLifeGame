@@ -8,7 +8,10 @@ class LifeStep extends StatelessWidget {
   final LifeEventModel model;
   final double width;
   final double height;
-
+  @visibleForTesting
+  static Color nothing = Colors.amber[50];
+  @visibleForTesting
+  static Color exist = Colors.cyan[50];
   @override
   Widget build(BuildContext context) => Stack(
         children: <Widget>[
@@ -19,7 +22,7 @@ class LifeStep extends StatelessWidget {
               padding: const EdgeInsets.all(2),
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: model.type == LifeEventType.nothing ? Colors.amber[50] : Colors.cyan[50],
+                  color: model.type == LifeEventType.nothing ? nothing : exist,
                 ),
               ),
             ),

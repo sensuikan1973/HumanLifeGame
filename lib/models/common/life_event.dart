@@ -1,5 +1,5 @@
 class LifeEventModel {
-  LifeEventModel(this.target, this.type, {this.description});
+  LifeEventModel(this.target, this.type);
   LifeEventTarget target;
   LifeEventType type;
 
