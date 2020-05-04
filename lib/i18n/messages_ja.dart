@@ -19,7 +19,7 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ja';
 
-  static m0(roll) => "〇〇がサイコロを振りました。\n 出目: ${roll}";
+  static m0(name, roll) => "${name} がサイコロを振りました. 結果: ${roll}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function>{

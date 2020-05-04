@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-05-03T01:26:42.485651",
+  "@@last_modified": "2020-05-04T19:44:57.319499",
   "appTitle": "Human Life Game",
   "@appTitle": {
     "type": "text",
@@ -15,10 +15,11 @@
     "type": "text",
     "placeholders": {}
   },
-  "rollAnnouncement": "result: {roll}",
+  "rollAnnouncement": "{name} rolled the dice. result: {roll}",
   "@rollAnnouncement": {
     "type": "text",
     "placeholders": {
+      "name": {},
       "roll": {}
     }
   }

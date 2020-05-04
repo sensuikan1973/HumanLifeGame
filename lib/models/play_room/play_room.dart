@@ -26,7 +26,17 @@ class PlayRoomModel extends ChangeNotifier {
   PlayerActionModel get playerAction => _playerAction;
   set playerAction(PlayerActionModel playerAction) {
     _playerAction = playerAction;
-    announcement.message = _i18n.rollAnnouncement(playerAction.roll);
+
+    if (_currentPlayer != null) {
+      // Announcement の更新
+      announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, playerAction.roll);
+      // FIXME: 仮で即ターン交代してる
+      final currentPlayerIndex = humans.indexOf(_currentPlayer);
+      _currentPlayer = currentPlayerIndex == humans.length - 1 ? humans.first : humans[currentPlayerIndex + 1];
+    } else {
+      _currentPlayer = humans.first;
+    }
+
     notifyListeners();
   }
 
@@ -44,7 +54,7 @@ class PlayRoomModel extends ChangeNotifier {
 
   // FIXME: 仮でダミーデータの一人を常に返す
   // 手番の人
-  HumanModel get currentPlayer => humans.first;
+  HumanModel _currentPlayer;
 
   // 参加者のそれぞれの人生の進捗
   List<LifeStageModel> lifeStages;
