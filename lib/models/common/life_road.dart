@@ -45,4 +45,13 @@ class LifeRoadModel {
   static const int height = 7;
 
   List<List<LifeStepModel>> lifeStepsOnBoard;
+
+  LifeStepModel get start {
+    for (final list in lifeStepsOnBoard) {
+      for (final lifeStep in list) {
+        if (lifeStep.isStart) return lifeStep;
+      }
+    }
+    return null; // TODO: エラーでいい
+  }
 }
