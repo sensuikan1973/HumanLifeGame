@@ -22,18 +22,7 @@ class LifeStep extends StatelessWidget {
     if (model.isStart == true) {
       return Stack(
         children: <Widget>[
-          SizedBox(
-            width: width / LifeRoadModel.width,
-            height: height / LifeRoadModel.height,
-            child: Padding(
-              padding: const EdgeInsets.all(2),
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: model.lifeEvent.type == LifeEventType.nothing ? nothing : exist,
-                ),
-              ),
-            ),
-          ),
+          lifeStep(),
           const Positioned(
             top: 0,
             left: 0,
@@ -47,7 +36,11 @@ class LifeStep extends StatelessWidget {
         ],
       );
     } else {
-      return SizedBox(
+      return lifeStep();
+    }
+  }
+
+  Widget lifeStep() => SizedBox(
         width: width / LifeRoadModel.width,
         height: height / LifeRoadModel.height,
         child: Padding(
@@ -59,6 +52,4 @@ class LifeStep extends StatelessWidget {
           ),
         ),
       );
-    }
-  }
 }
