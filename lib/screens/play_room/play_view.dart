@@ -7,8 +7,8 @@ class PlayView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Align(
         child: SizedBox(
-          width: 500,
-          height: 400,
+          width: 1050,
+          height: 700,
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: Colors.white,
