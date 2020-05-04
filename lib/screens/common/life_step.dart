@@ -5,13 +5,17 @@ import 'package:flutter/material.dart';
 
 class LifeStep extends StatelessWidget {
   const LifeStep(this.model, this.width, this.height);
+
   final LifeEventModel model;
   final double width;
   final double height;
+
   @visibleForTesting
   static Color nothing = Colors.amber[50];
+
   @visibleForTesting
   static Color exist = Colors.cyan[50];
+
   @override
   Widget build(BuildContext context) => Stack(
         children: <Widget>[
