@@ -9,8 +9,8 @@ class LifeStep extends StatelessWidget {
   Widget build(BuildContext context) => Stack(
         children: <Widget>[
           SizedBox(
-            width: 1000 / 7,
-            height: 690 / 7,
+            width: 1050 / 7,
+            height: 700 / 7,
             child: Padding(
               padding: const EdgeInsets.all(2),
               child: DecoratedBox(

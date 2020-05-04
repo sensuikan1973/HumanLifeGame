@@ -5,15 +5,18 @@ import 'package:provider/provider.dart';
 
 class PlayView extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => SizedBox(
-        width: 1050,
-        height: 700,
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: Colors.red,
-          ),
-          child: Align(
-            child: LifeRoad(Provider.of<PlayRoomModel>(context, listen: false).humanLife.lifeRoad),
+  Widget build(BuildContext context) => Align(
+        child: SizedBox(
+          width: 1050,
+          height: 700,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.blue),
+            ),
+            child: Center(
+              child: LifeRoad(Provider.of<PlayRoomModel>(context, listen: false).humanLife.lifeRoad),
+            ),
           ),
         ),
       );

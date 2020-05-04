@@ -36,13 +36,18 @@ class PlayRoomModel extends ChangeNotifier {
   String roomTitle;
 
   // 参加する人
-  List<HumanModel> humans;
+  // 順番付け済み
+  List<HumanModel> humans = [
+    HumanModel('human_1_id', 'human_1_name'),
+    HumanModel('human_2_id', 'human_2_name'),
+  ];
+
+  // FIXME: 仮でダミーデータの一人を常に返す
+  // 手番の人
+  HumanModel get currentPlayer => humans.first;
 
   // 参加者のそれぞれの人生の進捗
   List<LifeStageModel> lifeStages;
-
-  // 手番の人
-  HumanModel currentPlayer;
 
   // 全参加者の LifeEvent 履歴
   List<LifeEventModel> everyLifeEventRecords;
