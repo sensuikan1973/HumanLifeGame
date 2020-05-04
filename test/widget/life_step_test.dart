@@ -13,6 +13,7 @@ Future<void> main() async {
   group('LifeStep', () {
     testWidgets('show DecoratedBox with Colors.cyan[50]', (tester) async {
       final model = LifeStepModel(
+        id: 0,
         lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem),
         right: null,
         left: null,
@@ -40,6 +41,7 @@ Future<void> main() async {
 
     testWidgets('show DecoratedBox with Colors.amber[50]', (tester) async {
       final model = LifeStepModel(
+        id: 0,
         lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.nothing),
         right: null,
         left: null,

@@ -7,45 +7,36 @@ class LifeRoadModel {
   // FIXME: いつか消す
   // 一番下の列一直線の仮データ
   LifeRoadModel.dummy() {
-    final targetRow = lifeStepsOnBoard.first
-      // Start
-      ..first = LifeStepModel(
-        lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.start),
-        right: null,
-        left: null,
-        up: null,
-        down: null,
-        isStart: true,
-        isGoal: false,
-      )
-      // Goal
-      ..last = LifeStepModel(
-        lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.goal),
-        right: null,
-        left: null,
-        up: null,
-        down: null,
-        isStart: false,
-        isGoal: true,
-      )
-      // それ以外
-      ..fillRange(
-        1,
-        width - 1,
-        LifeStepModel(
-          lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem),
-          right: null,
-          left: null,
-          up: null,
-          down: null,
-          isStart: null,
-          isGoal: null,
-        ),
-      );
+    lifeStepsOnBoard = List.generate(
+      width,
+      (y) => List.generate(
+        height,
+        (x) {
+          final isStart = x == 0 && y == 0;
+          final isGoal = x == width - 1 && y == 0;
+          final eventType = () {
+            if (isStart) return LifeEventType.start;
+            if (isGoal) return LifeEventType.goal;
+            if (y == 0) return LifeEventType.gainLifeItem;
+            return LifeEventType.nothing;
+          }();
+          return LifeStepModel(
+            id: (x + 1) * (y + 1), // 一意になるようにしたいだけ。仮。
+            lifeEvent: LifeEventModel(LifeEventTarget.myself, eventType),
+            right: null,
+            left: null,
+            up: null,
+            down: null,
+            isStart: isStart,
+            isGoal: isGoal,
+          );
+        },
+      ),
+    );
     // 連結情報を更新する
-    for (var i = 0; i < targetRow.length; ++i) {
-      if (targetRow[i] == targetRow.last) continue;
-      targetRow[i].right = targetRow[i + 1];
+    for (var i = 0; i < lifeStepsOnBoard.first.length; ++i) {
+      if (lifeStepsOnBoard.first[i] == lifeStepsOnBoard.first.last) continue;
+      lifeStepsOnBoard.first[i].right = lifeStepsOnBoard.first[i + 1];
     }
   }
 
@@ -53,19 +44,5 @@ class LifeRoadModel {
 
   static const int height = 7;
 
-  List<List<LifeStepModel>> lifeStepsOnBoard = List.generate(
-    width,
-    (index) => List.filled(
-      height,
-      LifeStepModel(
-        lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.nothing),
-        right: null,
-        left: null,
-        up: null,
-        down: null,
-        isStart: false,
-        isGoal: false,
-      ),
-    ),
-  );
+  List<List<LifeStepModel>> lifeStepsOnBoard;
 }
