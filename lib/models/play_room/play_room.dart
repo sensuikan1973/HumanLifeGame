@@ -36,17 +36,10 @@ class PlayRoomModel extends ChangeNotifier {
     if (_currentPlayer != null) {
       // Announcement の更新
       announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, playerAction.roll);
-
-      // 現在の手番の human の LifeStage を取得する
-      final targetLifeStageIndex = lifeStages.indexWhere((lifeStage) => lifeStage.human == _currentPlayer);
-      final lifeStage = lifeStages[targetLifeStageIndex];
-      // 現在の LifeStep から出目の数だけ進んだ LifeStep を取得する
-      final destination = lifeStage.lifeStepModel.getNext(playerAction.roll);
-      // 進み先の LifeStep を LifeStage に代入する
-      lifeStages[targetLifeStageIndex].lifeStepModel = destination;
-
+      // 人生を進める
+      _moveLifeStep();
       // FIXME: 即ターン交代してるけど、あくまで仮
-      changeToNextTurn();
+      _changeToNextTurn();
     } else {
       _currentPlayer = humans.first;
     }
@@ -81,8 +74,18 @@ class PlayRoomModel extends ChangeNotifier {
   List<LifeEventModel> everyLifeEventRecords;
 
   // 次のターンに変える
-  void changeToNextTurn() {
+  void _changeToNextTurn() {
     final currentPlayerIndex = humans.indexOf(_currentPlayer);
     _currentPlayer = humans[(currentPlayerIndex + 1) % humans.length];
+  }
+
+  void _moveLifeStep() {
+    // 現在の手番の human の LifeStage を取得する
+    final targetLifeStageIndex = lifeStages.indexWhere((lifeStage) => lifeStage.human == _currentPlayer);
+    final lifeStage = lifeStages[targetLifeStageIndex];
+    // 現在の LifeStep から出目の数だけ進んだ LifeStep を取得する
+    final destination = lifeStage.lifeStepModel.getNext(playerAction.roll);
+    // 進み先の LifeStep を LifeStage に代入する
+    lifeStages[targetLifeStageIndex].lifeStepModel = destination;
   }
 }
