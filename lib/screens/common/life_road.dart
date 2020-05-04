@@ -6,13 +6,13 @@ class LifeRoad extends StatelessWidget {
   const LifeRoad(this.lifeRoadModel);
   final LifeRoadModel lifeRoadModel;
   @override
-  Widget build(BuildContext context) => Align(
+  Widget build(BuildContext context) => Center(
         child: SizedBox(
-          width: 1050,
-          height: 700,
+          width: 1000,
+          height: 690,
           child: DecoratedBox(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Colors.blue,
             ),
             child: Table(
               children: List.generate(
