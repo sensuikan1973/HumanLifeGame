@@ -13,10 +13,10 @@ extension I18nPlayRoom on I18n {
         name: 'lifeEventRecordsText',
         locale: localeName,
       );
-  String rollAnnouncement(int roll) => Intl.message(
-        'result: $roll',
+  String rollAnnouncement(String name, int roll) => Intl.message(
+        '$name rolled the dice. result: $roll',
         name: 'rollAnnouncement',
-        args: [roll],
+        args: [name, roll],
         locale: localeName,
       );
 }
