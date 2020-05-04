@@ -10,7 +10,7 @@ class LifeRoadModel {
     final targetRow = lifeStepsOnBoard.first
       // Start
       ..first = LifeStepModel(
-        lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.nothing),
+        lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.start),
         right: null,
         left: null,
         up: null,
@@ -20,7 +20,7 @@ class LifeRoadModel {
       )
       // Goal
       ..last = LifeStepModel(
-        lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.nothing),
+        lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.goal),
         right: null,
         left: null,
         up: null,
