@@ -72,6 +72,11 @@ class PlayRoomModel extends ChangeNotifier {
   // 参加者のそれぞれの人生の進捗
   List<LifeStageModel> lifeStages = [];
 
+  // それぞれの位置情報
+  Map<String, Position> get positionsByHumanId => {
+        for (final lifeStage in lifeStages) lifeStage.human.id: humanLife.lifeRoad.getPosition(lifeStage.lifeStepModel),
+      };
+
   // 全参加者の LifeEvent 履歴
   List<LifeEventModel> everyLifeEventRecords;
 
