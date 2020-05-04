@@ -32,7 +32,7 @@ class PlayRoomModel extends ChangeNotifier {
       announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, playerAction.roll);
       // FIXME: 仮で即ターン交代してる
       final currentPlayerIndex = humans.indexOf(_currentPlayer);
-_currentPlayer = humans[ (currentPlayerIndex + 1) % humans.length ]
+      _currentPlayer = humans[(currentPlayerIndex + 1) % humans.length];
     } else {
       _currentPlayer = humans.first;
     }
