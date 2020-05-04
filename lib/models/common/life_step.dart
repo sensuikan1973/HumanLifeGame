@@ -24,4 +24,29 @@ class LifeStepModel {
   LifeStepModel down;
   LifeStepModel right;
   LifeStepModel left;
+
+  LifeStepModel move(int num) {
+    var current = this;
+    var destination = this;
+    var count = 0;
+    while (current != null && count < num) {
+      // FIXME: 分岐が無いことを前提にしている。分岐があるとバグる。
+      final next = [
+        current.up,
+        current.down,
+        current.right,
+        current.left,
+      ].firstWhere((el) => el != null, orElse: () => null);
+      current = next;
+      if (next != null) destination = next;
+      count++;
+    }
+    return destination;
+  }
+
+  @override
+  int get hashCode => id.hashCode;
+
+  @override
+  bool operator ==(Object other) => other is LifeStepModel && other.id == id;
 }
