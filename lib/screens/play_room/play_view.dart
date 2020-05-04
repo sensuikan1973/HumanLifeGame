@@ -11,9 +11,12 @@ class PlayView extends StatelessWidget {
           height: 400,
           child: DecoratedBox(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.white,
+              border: Border.all(color: Colors.blue),
             ),
-            child: LifeRoad(Provider.of<PlayRoomModel>(context, listen: false).humanLife.lifeRoad),
+            child: Center(
+              child: LifeRoad(Provider.of<PlayRoomModel>(context, listen: false).humanLife.lifeRoad),
+            ),
           ),
         ),
       );
