@@ -12,6 +12,72 @@ class LifeEventModel {
   Map<String, dynamic> params;
 
   String description;
+
+  String buildEventMessage() {
+    var message = '';
+
+    if (target == LifeEventTarget.all) {
+      message = '皆が';
+    }
+    switch (type) {
+      case LifeEventType.nothing:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.start:
+        message = 'スタート';
+        break;
+      case LifeEventType.goal:
+        message = 'ゴール';
+        break;
+      case LifeEventType.selectDirection:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.selectDirectionPerDiceRoll:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.selectDirectionPerLifeItem:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.gainLifeItemPerOtherLifeItem:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.gainLifeItemPerDiceRoll:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.gainLifeItemIfExistOtherLifeItem:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.gainLifeItemIfNotExistOtherLifeItem:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.exchangeLifeItems:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.exchangeLifeItemsWithDiceRoll:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.loseLifeItem:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.loseLifeItemPerDiceRoll:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.loseLifeItemPerOtherLifeItem:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.loseLifeItemIfExistOtherLifeItem:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.loseLifeItemIfNotExistOtherLifeItem:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.gainLifeItem:
+        message += 'XXXを獲得する。';
+        break;
+    }
+
+    return message;
+  }
 }
 
 enum LifeEventTarget {

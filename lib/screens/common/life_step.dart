@@ -21,17 +21,22 @@ class LifeStep extends StatelessWidget {
   Widget build(BuildContext context) {
     if (model.isStart == true) return _squareWithHuman();
 
-    return SizedBox(
-      width: width / LifeRoadModel.width,
-      height: height / LifeRoadModel.height,
-      child: Padding(
-        padding: const EdgeInsets.all(2),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: model.lifeEvent.type == LifeEventType.nothing ? nothing : exist,
+    return Stack(
+      children: <Widget>[
+        SizedBox(
+          width: width / LifeRoadModel.width,
+          height: height / LifeRoadModel.height,
+          child: Padding(
+            padding: const EdgeInsets.all(2),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: model.lifeEvent.type == LifeEventType.nothing ? nothing : exist,
+              ),
+            ),
           ),
         ),
-      ),
+        Text(model.lifeEvent.buildEventMessage()),
+      ],
     );
   }
 
@@ -49,6 +54,7 @@ class LifeStep extends StatelessWidget {
               ),
             ),
           ),
+          Text(model.lifeEvent.buildEventMessage()),
           const Positioned(
             top: 0,
             left: 0,
