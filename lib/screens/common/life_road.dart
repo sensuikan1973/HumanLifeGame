@@ -16,10 +16,10 @@ class LifeRoad extends StatelessWidget {
             ),
             child: Table(
               children: List.generate(
-                10,
+                7,
                 (yAxisIndex) => TableRow(
                   children: List.generate(
-                    10,
+                    7,
                     (xAxisIndex) => TableCell(
                       child: LifeStep(
                         lifeRoadModel.lifeStepsOnBoard[yAxisIndex][xAxisIndex].lifeEvent,

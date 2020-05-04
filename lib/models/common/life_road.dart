@@ -6,41 +6,59 @@ class LifeRoadModel {
   LifeRoadModel();
   // FIXME: いつか消す
   LifeRoadModel.dummy() {
-    final lifeStepNothing = LifeStepModel(
+    final empty = LifeStepModel(
       lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.nothing),
       right: null,
       left: null,
       up: null,
       down: null,
-      isStart: null,
-      isGoal: null,
+      isStart: false,
+      isGoal: false,
     );
-    final lifeStep = LifeStepModel(
+    final lstep = LifeStepModel(
       lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem),
       right: null,
       left: null,
       up: null,
       down: null,
-      isStart: null,
-      isGoal: null,
+      isStart: false,
+      isGoal: false,
     );
-    lifeStepsOnBoard = List.generate(
-      10,
-      (index) => List.generate(
-        10,
-        (index) => lifeStepNothing,
-      ),
+
+    final start = LifeStepModel(
+      lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem),
+      right: null,
+      left: null,
+      up: null,
+      down: null,
+      isStart: true,
+      isGoal: false,
     );
-    for (var index = 3; index <= 8; index++) {
-      lifeStepsOnBoard[index][4] = lifeStep;
-    }
+    final goalp = LifeStepModel(
+      lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem),
+      right: null,
+      left: null,
+      up: null,
+      down: null,
+      isStart: false,
+      isGoal: true,
+    );
+    lifeStepsOnBoard = [
+      [empty, goalp, lstep, lstep, lstep, empty, empty],
+      [empty, empty, empty, empty, lstep, empty, empty],
+      [empty, empty, empty, empty, lstep, lstep, lstep],
+      [empty, empty, empty, empty, lstep, empty, lstep],
+      [empty, empty, empty, empty, lstep, empty, lstep],
+      [empty, start, lstep, lstep, lstep, lstep, lstep],
+      [empty, empty, empty, empty, empty, empty, empty],
+    ];
   }
 
   @visibleForTesting
-  static const int width = 10;
+  static const int width = 7;
 
   @visibleForTesting
-  static const int height = 10;
+  static const int height = 7;
 
   List<List<LifeStepModel>> lifeStepsOnBoard = List.generate(width, (index) => List.generate(height, (index) => null));
 }
