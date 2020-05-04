@@ -2,9 +2,9 @@ import 'package:HumanLifeGame/api/dice.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/screens/play_room/announcement.dart';
 import 'package:HumanLifeGame/screens/play_room/dice_result.dart';
-import 'package:HumanLifeGame/screens/play_room/play_view.dart';
 import 'package:HumanLifeGame/screens/play_room/life_stages.dart';
 import 'package:HumanLifeGame/screens/play_room/play_room.dart';
+import 'package:HumanLifeGame/screens/play_room/play_view.dart';
 import 'package:HumanLifeGame/screens/play_room/player_action.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -53,15 +53,26 @@ Future<void> main() async {
 
     testWidgets('show Announcement message when dice is rolled', (tester) async {
       final dice = MockDice();
-      when(dice.roll()).thenReturn(5);
+      const roll = 5;
+      when(dice.roll()).thenReturn(roll);
       await tester.pumpWidget(
         Provider<Dice>(create: (context) => dice, child: testableApp(home: PlayRoom())),
       );
       await tester.pump();
 
-      await tester.tap(find.byKey(const Key('playerActionDiceRollButton')));
+      // FIXME: humans が内部で仮定義されているので、human name はあくまで仮
+      final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
+      await tester.tap(rollDiceButton);
       await tester.pump();
-      expect(find.text(i18n.rollAnnouncement(5)), findsOneWidget);
+      expect(find.text(i18n.rollAnnouncement('human_1_name', roll)), findsOneWidget);
+
+      await tester.tap(rollDiceButton);
+      await tester.pump();
+      expect(find.text(i18n.rollAnnouncement('human_2_name', roll)), findsOneWidget);
+
+      await tester.tap(rollDiceButton);
+      await tester.pump();
+      expect(find.text(i18n.rollAnnouncement('human_1_name', roll)), findsOneWidget);
     });
   });
 }

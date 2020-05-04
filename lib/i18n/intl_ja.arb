@@ -15,10 +15,11 @@
     "type": "text",
     "placeholders": {}
   },
-  "rollAnnouncement": "〇〇がサイコロを振りました。\n 出目: {roll}",
+  "rollAnnouncement": "{name} がサイコロを振りました. 結果: {roll}",
   "@rollAnnouncement": {
     "type": "text",
     "placeholders": {
+      "name": {},
       "roll": {}
     }
   }
