@@ -9,11 +9,38 @@ Future<void> main() async {
   const locale = Locale('en', 'US');
 
   group('LifeStep', () {
-    testWidgets('show DecoratedBox', (tester) async {
+    testWidgets('show DecoratedBox with Colors.cyan[50]', (tester) async {
       final model = LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem);
       await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
       await tester.pump();
-      expect(find.byType(DecoratedBox), findsNWidgets(2));
+
+      expect(
+          find.byWidgetPredicate(
+            (widget) =>
+                widget is DecoratedBox &&
+                widget.decoration ==
+                    BoxDecoration(
+                      color: Colors.cyan[50],
+                    ),
+          ),
+          findsOneWidget);
+    });
+
+    testWidgets('show DecoratedBox with Colors.amber[50]', (tester) async {
+      final model = LifeEventModel(LifeEventTarget.myself, LifeEventType.nothing);
+      await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
+      await tester.pump();
+
+      expect(
+          find.byWidgetPredicate(
+            (widget) =>
+                widget is DecoratedBox &&
+                widget.decoration ==
+                    BoxDecoration(
+                      color: Colors.amber[50],
+                    ),
+          ),
+          findsOneWidget);
     });
   });
 }
