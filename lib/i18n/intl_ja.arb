@@ -1,7 +1,23 @@
 {
+  
   "@@locale": "ja",
   "appTitle": "人生すごろく",
   "@appTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lifeStepStartText": "スタート",
+  "@lifeStepStartText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lifeStepGoalText": "ゴール",
+  "@lifeStepGoalText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lifeStepGainItemText": "アイテムを獲得 :",
+  "@lifeStepGainItemText": {
     "type": "text",
     "placeholders": {}
   },

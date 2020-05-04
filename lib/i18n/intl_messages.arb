@@ -1,7 +1,22 @@
 {
-  "@@last_modified": "2020-05-04T19:44:57.319499",
+  "@@last_modified": "2020-05-05T03:49:49.959946",
   "appTitle": "Human Life Game",
   "@appTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lifeStepStartText": "Start",
+  "@lifeStepStartText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lifeStepGoalText": "Goal",
+  "@lifeStepGoalText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lifeStepGainItemText": "Gain Item :",
+  "@lifeStepGainItemText": {
     "type": "text",
     "placeholders": {}
   },

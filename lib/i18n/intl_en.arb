@@ -5,6 +5,21 @@
     "type": "text",
     "placeholders": {}
   },
+  "lifeStepStartText": "Start",
+  "@lifeStepStartText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lifeStepGoalText": "Goal",
+  "@lifeStepGoalText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lifeStepGainItemText": "Gain Item :",
+  "@lifeStepGainItemText": {
+    "type": "text",
+    "placeholders": {}
+  },
   "rollDice": "Roll the dice",
   "@rollDice": {
     "type": "text",

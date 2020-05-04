@@ -1,3 +1,4 @@
+import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_road.dart';
 import 'package:HumanLifeGame/models/common/life_step.dart';
@@ -19,7 +20,7 @@ class LifeStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (model.isStart == true) return _squareWithHuman();
+    if (model.isStart == true) return _squareWithHuman(context);
 
     return Stack(
       children: <Widget>[
@@ -35,12 +36,12 @@ class LifeStep extends StatelessWidget {
             ),
           ),
         ),
-        Text(model.lifeEvent.buildEventMessage()),
+        Text(model.lifeEvent.buildEventMessage(I18n.of(context))),
       ],
     );
   }
 
-  Widget _squareWithHuman() => Stack(
+  Widget _squareWithHuman(BuildContext context) => Stack(
         children: <Widget>[
           SizedBox(
             width: width / LifeRoadModel.width,
@@ -54,7 +55,7 @@ class LifeStep extends StatelessWidget {
               ),
             ),
           ),
-          Text(model.lifeEvent.buildEventMessage()),
+          Text(model.lifeEvent.buildEventMessage(I18n.of(context))),
           const Positioned(
             top: 0,
             left: 0,

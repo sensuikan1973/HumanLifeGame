@@ -1,5 +1,8 @@
+import 'package:HumanLifeGame/i18n/i18n.dart';
+
 class LifeEventModel {
   LifeEventModel(this.target, this.type);
+
   LifeEventTarget target;
   LifeEventType type;
 
@@ -13,21 +16,18 @@ class LifeEventModel {
 
   String description;
 
-  String buildEventMessage() {
+  String buildEventMessage(I18n i18n) {
     var message = '';
 
-    if (target == LifeEventTarget.all) {
-      message = '皆が';
-    }
     switch (type) {
       case LifeEventType.nothing:
         // TODO: Handle this case.
         break;
       case LifeEventType.start:
-        message = 'スタート';
+        message = i18n.lifeStepStartText;
         break;
       case LifeEventType.goal:
-        message = 'ゴール';
+        message = i18n.lifeStepGoalText;
         break;
       case LifeEventType.selectDirection:
         // TODO: Handle this case.
@@ -72,7 +72,7 @@ class LifeEventModel {
         // TODO: Handle this case.
         break;
       case LifeEventType.gainLifeItem:
-        message += 'XXXを獲得する。';
+        message += i18n.lifeStepGainItemText;
         break;
     }
 
