@@ -1,16 +1,20 @@
 import 'package:HumanLifeGame/models/common/life_event.dart';
+import 'package:HumanLifeGame/models/common/life_road.dart';
 import 'package:HumanLifeGame/screens/play_room/human.dart';
 import 'package:flutter/material.dart';
 
 class LifeStep extends StatelessWidget {
-  const LifeStep(this.model);
+  const LifeStep(this.model, this.width, this.height);
   final LifeEventModel model;
+  final double width;
+  final double height;
+
   @override
   Widget build(BuildContext context) => Stack(
         children: <Widget>[
           SizedBox(
-            width: 1050 / 7,
-            height: 700 / 7,
+            width: width / LifeRoadModel.width,
+            height: height / LifeRoadModel.height,
             child: Padding(
               padding: const EdgeInsets.all(2),
               child: DecoratedBox(

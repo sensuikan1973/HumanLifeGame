@@ -13,7 +13,7 @@ Future<void> main() async {
     testWidgets('show LifeStep', (tester) async {
       await tester.pumpWidget(testableApp(locale: locale, home: LifeRoad(lifeRoadModel)));
       await tester.pump();
-      expect(find.byType(LifeStep), findsNWidgets(49));
+      expect(find.byType(LifeStep), findsNWidgets(LifeRoadModel.width * LifeRoadModel.height));
     });
   });
 }

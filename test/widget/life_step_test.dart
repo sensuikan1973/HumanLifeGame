@@ -11,7 +11,7 @@ Future<void> main() async {
   group('LifeStep', () {
     testWidgets('show DecoratedBox', (tester) async {
       final model = LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem);
-      await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model)));
+      await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
       await tester.pump();
       expect(find.byType(DecoratedBox), findsNWidgets(2));
     });
