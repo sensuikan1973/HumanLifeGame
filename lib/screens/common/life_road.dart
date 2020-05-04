@@ -18,7 +18,7 @@ class LifeRoad extends StatelessWidget {
                   LifeRoadModel.height,
                   (xAxisIndex) => TableCell(
                     child: LifeStep(
-                      lifeRoadModel.lifeStepsOnBoard[yAxisIndex][xAxisIndex].lifeEvent,
+                      lifeRoadModel.lifeStepsOnBoard[yAxisIndex][xAxisIndex],
                       constraints.maxWidth,
                       constraints.maxHeight,
                     ),

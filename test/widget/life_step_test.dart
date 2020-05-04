@@ -1,4 +1,5 @@
 import 'package:HumanLifeGame/models/common/life_event.dart';
+import 'package:HumanLifeGame/models/common/life_step.dart';
 import 'package:HumanLifeGame/screens/common/life_step.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -10,7 +11,17 @@ Future<void> main() async {
 
   group('LifeStep', () {
     testWidgets('show DecoratedBox with Colors.cyan[50]', (tester) async {
-      final model = LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem);
+      final model = LifeStepModel(
+        lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem),
+        right: null,
+        left: null,
+        up: null,
+        down: null,
+        isStart: false,
+        isGoal: false,
+      );
+
+      LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem);
       await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
       await tester.pump();
 
@@ -27,7 +38,16 @@ Future<void> main() async {
     });
 
     testWidgets('show DecoratedBox with Colors.amber[50]', (tester) async {
-      final model = LifeEventModel(LifeEventTarget.myself, LifeEventType.nothing);
+      final model = LifeStepModel(
+        lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.nothing),
+        right: null,
+        left: null,
+        up: null,
+        down: null,
+        isStart: false,
+        isGoal: false,
+      );
+
       await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
       await tester.pump();
 
