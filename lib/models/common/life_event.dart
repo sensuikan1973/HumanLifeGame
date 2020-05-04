@@ -26,6 +26,12 @@ enum LifeEventType {
   /// 何も起きない
   nothing,
 
+  /// 人生の始まり
+  start,
+
+  /// 人生のゴール
+  goal,
+
   /// 進行方向を選択する
   selectDirection,
 
