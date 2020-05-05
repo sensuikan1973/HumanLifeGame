@@ -47,7 +47,7 @@ class LifeRoadModel {
   LifeStepModel get start {
     for (final list in lifeStepsOnBoard) {
       for (final lifeStep in list) {
-        if (lifeStep.lifeEvent.isStart) return lifeStep;
+        if (lifeStep.isStart) return lifeStep;
       }
     }
     return null; // TODO: エラーでいい

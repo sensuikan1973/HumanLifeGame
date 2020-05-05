@@ -13,9 +13,6 @@ class LifeEventModel {
   Map<String, dynamic> params;
 
   String description;
-
-  bool get isStart => type == LifeEventType.start;
-  bool get isGoal => type == LifeEventType.goal;
 }
 
 enum LifeEventTarget {
