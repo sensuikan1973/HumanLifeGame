@@ -9,7 +9,7 @@ import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
   const locale = Locale('en', 'US');
-  final i18n = await I18n.load(locale);
+
   testWidgets('show DecoratedBox with Colors.cyan[50]', (tester) async {
     final model = LifeStepModel(
       id: 0,
