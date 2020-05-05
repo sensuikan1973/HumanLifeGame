@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../models/common/life_road.dart';
-import '../../models/common/life_step.dart';
 import '../play_room/human.dart';
 import 'life_step.dart';
 
@@ -30,23 +29,6 @@ class LifeRoad extends StatelessWidget {
     return list;
   }
 
-  Widget _lifeStep(
-    LifeStepModel model, {
-    @required double width,
-    @required double height,
-    @required int x,
-    @required int y,
-  }) =>
-      Semantics(
-        label: '($x,$y)',
-        child: LifeStep(
-          _lifeRoadModel.lifeStepsOnBoard[y][x],
-          width,
-          height,
-          humans: _putTargetHumans(x, y),
-        ),
-      );
-
   @override
   Widget build(BuildContext context) => SizedBox(
         width: 1050,
@@ -59,12 +41,11 @@ class LifeRoad extends StatelessWidget {
                 children: List.generate(
                   LifeRoadModel.height,
                   (x) => TableCell(
-                    child: _lifeStep(
+                    child: LifeStep(
                       _lifeRoadModel.lifeStepsOnBoard[y][x],
-                      width: constraints.maxWidth,
-                      height: constraints.maxHeight,
-                      x: x,
-                      y: y,
+                      constraints.maxWidth,
+                      constraints.maxHeight,
+                      humans: _putTargetHumans(x, y),
                     ),
                   ),
                 ),
