@@ -61,18 +61,18 @@ Future<void> main() async {
         findsOneWidget);
   });
 
-  await testWidget(LifeEventTarget.myself, LifeEventType.start);
+  await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.start);
 
-  await testWidget(LifeEventTarget.myself, LifeEventType.goal);
+  await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.goal);
 
-  await testWidget(LifeEventTarget.myself, LifeEventType.selectDirection);
+  await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.selectDirection);
 
-  await testWidget(LifeEventTarget.myself, LifeEventType.gainLifeItem);
+  await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.gainLifeItem);
 
-  await testWidget(LifeEventTarget.myself, LifeEventType.loseLifeItem);
+  await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.loseLifeItem);
 }
 
-Future<void> testWidget(LifeEventTarget target, LifeEventType type) async {
+Future<void> checkLifeEventI18n(LifeEventTarget target, LifeEventType type) async {
   const locale = Locale('en', 'US');
   final i18n = await I18n.load(locale);
   testWidgets('show text for target:$target, type:$type', (tester) async {
