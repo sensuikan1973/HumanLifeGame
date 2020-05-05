@@ -26,7 +26,7 @@ class LifeStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (model.lifeEvent.isStart == true) return _squareWithHuman(context);
+    if (model.lifeEvent.isStart) return _squareWithHuman(context);
 
     return Stack(
       children: <Widget>[
