@@ -10,7 +10,13 @@ import 'package:HumanLifeGame/models/play_room/player_action.dart';
 import 'package:flutter/foundation.dart';
 
 class PlayRoomModel extends ChangeNotifier {
-  PlayRoomModel(this._i18n);
+  PlayRoomModel(this._i18n) {
+    // FIXME: 全部ダミーデータ
+    for (final human in humans) {
+      final lifeStage = LifeStageModel(human)..lifeStepModel = humanLife.lifeRoad.start;
+      lifeStages.add(lifeStage);
+    }
+  }
 
   final I18n _i18n;
 
@@ -30,14 +36,10 @@ class PlayRoomModel extends ChangeNotifier {
     if (_currentPlayer != null) {
       // Announcement の更新
       announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, playerAction.roll);
-
-      // TODO: 現在の手番の human の LifeStage を取得する
-      // TODO: その LifeStage から LifeStep を取得する
-      // TODO: その LifeStep から move(playerAction.roll) する
-      // TODO: 到着した LifeStep を LifeStage に代入する
-
+      // 人生を進める
+      _moveLifeStep();
       // FIXME: 即ターン交代してるけど、あくまで仮
-      changeToNextTurn();
+      _changeToNextTurn();
     } else {
       _currentPlayer = humans.first;
     }
@@ -50,26 +52,40 @@ class PlayRoomModel extends ChangeNotifier {
 
   String roomTitle;
 
-  // 参加する人
-  // 順番付け済み
+  // 参加する人。ターン順。
+  // FIXME: 仮のダミーデータに過ぎない
   List<HumanModel> humans = [
     HumanModel('human_1_id', 'human_1_name'),
     HumanModel('human_2_id', 'human_2_name'),
   ];
 
-  // FIXME: 仮でダミーデータの一人を常に返す
   // 手番の人
   HumanModel _currentPlayer;
 
   // 参加者のそれぞれの人生の進捗
-  List<LifeStageModel> lifeStages;
+  List<LifeStageModel> lifeStages = [];
+
+  // それぞれの位置情報
+  Map<String, Position> get positionsByHumanId => {
+        for (final lifeStage in lifeStages) lifeStage.human.id: humanLife.lifeRoad.getPosition(lifeStage.lifeStepModel),
+      };
 
   // 全参加者の LifeEvent 履歴
   List<LifeEventModel> everyLifeEventRecords;
 
   // 次のターンに変える
-  void changeToNextTurn() {
+  void _changeToNextTurn() {
     final currentPlayerIndex = humans.indexOf(_currentPlayer);
     _currentPlayer = humans[(currentPlayerIndex + 1) % humans.length];
+  }
+
+  void _moveLifeStep() {
+    // 現在の手番の human の LifeStage を取得する
+    final targetLifeStageIndex = lifeStages.indexWhere((lifeStage) => lifeStage.human == _currentPlayer);
+    final lifeStage = lifeStages[targetLifeStageIndex];
+    // 現在の LifeStep から出目の数だけ進んだ LifeStep を取得する
+    final destination = lifeStage.lifeStepModel.getNext(playerAction.roll);
+    // 進み先の LifeStep を LifeStage に代入する
+    lifeStages[targetLifeStageIndex].lifeStepModel = destination;
   }
 }

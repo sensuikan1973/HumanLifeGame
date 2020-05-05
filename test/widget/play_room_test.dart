@@ -18,9 +18,7 @@ Future<void> main() async {
   const locale = Locale('en', 'US');
   final i18n = await I18n.load(locale);
   // Desktopの標準サイズ 1440x1024に設定
-  const windowWidth = 1440.0;
-  const windowHeight = 1024.0;
-  const size = Size(windowWidth, windowHeight);
+  const size = Size(1440, 1024);
   setUp(() {
     // See: https://github.com/flutter/flutter/issues/12994#issuecomment-397321431
     WidgetsBinding.instance.renderView.configuration = TestViewConfiguration(size: size);
