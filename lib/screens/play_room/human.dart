@@ -7,6 +7,8 @@ class Human extends StatelessWidget {
 
   final HumanModel _humanModel;
 
+  String get humanId => _humanModel.id;
+
   @override
   Widget build(BuildContext context) => SizedBox(
         width: 20,
@@ -16,7 +18,7 @@ class Human extends StatelessWidget {
             color: Colors.red[100],
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Text(_humanModel.name),
+          child: Text(_humanModel.name), // FIXME: テキトー
         ),
       );
 }

@@ -4,18 +4,22 @@ import '../../i18n/i18n.dart';
 import '../../models/common/life_event.dart';
 import '../../models/common/life_road.dart';
 import '../../models/common/life_step.dart';
+import '../play_room/human.dart';
 
 class LifeStep extends StatelessWidget {
-  const LifeStep(
-    this.model,
-    this.width,
-    this.height, {
+  LifeStep(
+    this._model,
+    this._width,
+    this._height, {
+    List<Human> humans,
     Key key,
-  }) : super(key: key);
+  })  : _humans = humans ?? [],
+        super(key: key);
 
-  final LifeStepModel model;
-  final double width;
-  final double height;
+  final LifeStepModel _model;
+  final double _width;
+  final double _height;
+  final List<Human> _humans;
 
   @visibleForTesting
   static Color nothing = Colors.amber[50];
@@ -27,18 +31,19 @@ class LifeStep extends StatelessWidget {
   Widget build(BuildContext context) => Stack(
         children: <Widget>[
           SizedBox(
-            width: width / LifeRoadModel.width,
-            height: height / LifeRoadModel.height,
+            width: _width / LifeRoadModel.width,
+            height: _height / LifeRoadModel.height,
             child: Padding(
               padding: const EdgeInsets.all(2),
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: model.lifeEvent.type == LifeEventType.nothing ? nothing : exist,
+                  color: _model.lifeEvent.type == LifeEventType.nothing ? nothing : exist,
                 ),
               ),
             ),
           ),
-          Text(I18n.of(context).lifeStepEventType(model.lifeEvent.type)),
+          Row(children: _humans), // FIXME: とりあえず適当に表示してるだけ
+          Text(I18n.of(context).lifeStepEventType(_model.lifeEvent.type)),
         ],
       );
 }
