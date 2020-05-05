@@ -1,4 +1,4 @@
-import 'package:HumanLifeGame/models/common/user.dart';
+import 'user.dart';
 
 class HumanModel {
   HumanModel(this.id, this.name);

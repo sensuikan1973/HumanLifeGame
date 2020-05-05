@@ -1,5 +1,6 @@
-import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:flutter/foundation.dart';
+
+import 'life_event.dart';
 
 class LifeStepModel {
   LifeStepModel({

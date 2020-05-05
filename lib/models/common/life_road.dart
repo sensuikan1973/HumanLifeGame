@@ -1,5 +1,5 @@
-import 'package:HumanLifeGame/models/common/life_event.dart';
-import 'package:HumanLifeGame/models/common/life_step.dart';
+import 'life_event.dart';
+import 'life_step.dart';
 
 class LifeRoadModel {
   LifeRoadModel();

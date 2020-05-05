@@ -1,5 +1,6 @@
-import 'package:HumanLifeGame/api/dice.dart';
 import 'package:flutter/foundation.dart';
+
+import '../../api/dice.dart';
 
 class PlayerActionModel extends ChangeNotifier {
   PlayerActionModel(this._dice);

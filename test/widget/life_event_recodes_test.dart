@@ -10,7 +10,7 @@ Future<void> main() async {
   final i18n = await I18n.load(locale);
   group('LifeEventRecords', () {
     testWidgets("show 'lifeEventRecords'Text", (tester) async {
-      await tester.pumpWidget(testableApp(locale: locale, home: LifeEventRecords()));
+      await tester.pumpWidget(testableApp(locale: locale, home: const LifeEventRecords()));
       await tester.pump();
 
       expect(find.text(i18n.lifeEventRecordsText), findsOneWidget);

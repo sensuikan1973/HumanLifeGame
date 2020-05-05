@@ -1,6 +1,7 @@
-import 'package:HumanLifeGame/i18n/i18n.dart';
-import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:intl/intl.dart';
+
+import '../../models/common/life_event.dart';
+import '../i18n.dart';
 
 /// Common Locale Text
 extension I18nCommon on I18n {

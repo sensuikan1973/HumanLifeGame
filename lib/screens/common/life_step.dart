@@ -1,12 +1,18 @@
-import 'package:HumanLifeGame/i18n/i18n.dart';
-import 'package:HumanLifeGame/models/common/life_event.dart';
-import 'package:HumanLifeGame/models/common/life_road.dart';
-import 'package:HumanLifeGame/models/common/life_step.dart';
-import 'package:HumanLifeGame/screens/play_room/human.dart';
 import 'package:flutter/material.dart';
 
+import '../../i18n/i18n.dart';
+import '../../models/common/life_event.dart';
+import '../../models/common/life_road.dart';
+import '../../models/common/life_step.dart';
+import '../play_room/human.dart';
+
 class LifeStep extends StatelessWidget {
-  const LifeStep(this.model, this.width, this.height);
+  const LifeStep(
+    this.model,
+    this.width,
+    this.height, {
+    Key key,
+  }) : super(key: key);
 
   final LifeStepModel model;
   final double width;

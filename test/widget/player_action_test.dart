@@ -11,7 +11,7 @@ Future<void> main() async {
 
   group('PlayerAction', () {
     testWidgets("show 'Roll the Dice' text", (tester) async {
-      await tester.pumpWidget(testableApp(locale: locale, home: PlayerAction()));
+      await tester.pumpWidget(testableApp(locale: locale, home: const PlayerAction()));
       await tester.pump();
       expect(find.text(i18n.rollDice), findsOneWidget);
     });
