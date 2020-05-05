@@ -27,8 +27,6 @@ class LifeRoadModel {
             left: null,
             up: null,
             down: null,
-            isStart: isStart,
-            isGoal: isGoal,
           );
         },
       ),
@@ -49,7 +47,7 @@ class LifeRoadModel {
   LifeStepModel get start {
     for (final list in lifeStepsOnBoard) {
       for (final lifeStep in list) {
-        if (lifeStep.isStart) return lifeStep;
+        if (lifeStep.lifeEvent.isStart) return lifeStep;
       }
     }
     return null; // TODO: エラーでいい
