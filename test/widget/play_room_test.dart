@@ -23,54 +23,52 @@ Future<void> main() async {
     // See: https://github.com/flutter/flutter/issues/12994#issuecomment-397321431
     WidgetsBinding.instance.renderView.configuration = TestViewConfiguration(size: size);
   });
-  group('PlayRoom', () {
-    testWidgets('show some widgets', (tester) async {
-      await tester.pumpWidget(
-        Provider<Dice>(create: (context) => const Dice(), child: testableApp(home: const PlayRoom())),
-      );
-      await tester.pump();
-      expect(find.byType(PlayerAction), findsOneWidget);
-      expect(find.byType(DiceResult), findsOneWidget);
-      expect(find.byType(LifeStages), findsOneWidget);
-      expect(find.byType(Announcement), findsOneWidget);
-      expect(find.byType(PlayView), findsOneWidget);
-    });
+  testWidgets('show some widgets', (tester) async {
+    await tester.pumpWidget(
+      Provider<Dice>(create: (context) => const Dice(), child: testableApp(home: const PlayRoom())),
+    );
+    await tester.pump();
+    expect(find.byType(PlayerAction), findsOneWidget);
+    expect(find.byType(DiceResult), findsOneWidget);
+    expect(find.byType(LifeStages), findsOneWidget);
+    expect(find.byType(Announcement), findsOneWidget);
+    expect(find.byType(PlayView), findsOneWidget);
+  });
 
-    testWidgets('random value(1 <= value <= 6) should be displayed when dice is rolled', (tester) async {
-      final dice = MockDice();
-      when(dice.roll()).thenReturn(5);
-      await tester.pumpWidget(
-        Provider<Dice>(create: (context) => dice, child: testableApp(home: const PlayRoom())),
-      );
-      await tester.pump();
+  testWidgets('random value(1 <= value <= 6) should be displayed when dice is rolled', (tester) async {
+    final dice = MockDice();
+    when(dice.roll()).thenReturn(5);
+    await tester.pumpWidget(
+      Provider<Dice>(create: (context) => dice, child: testableApp(home: const PlayRoom())),
+    );
+    await tester.pump();
 
-      await tester.tap(find.byKey(const Key('playerActionDiceRollButton')));
-      await tester.pump();
-      expect(find.text('5'), findsOneWidget);
-    });
+    await tester.tap(find.byKey(const Key('playerActionDiceRollButton')));
+    await tester.pump();
+    expect(find.text('5'), findsOneWidget);
+  });
 
-    testWidgets('show Announcement message when dice is rolled', (tester) async {
-      final dice = MockDice();
-      const roll = 5;
-      when(dice.roll()).thenReturn(roll);
-      await tester.pumpWidget(
-        Provider<Dice>(create: (context) => dice, child: testableApp(home: const PlayRoom())),
-      );
-      await tester.pump();
+  testWidgets('show Announcement message when dice is rolled', (tester) async {
+    final dice = MockDice();
+    const roll = 5;
+    when(dice.roll()).thenReturn(roll);
+    await tester.pumpWidget(
+      Provider<Dice>(create: (context) => dice, child: testableApp(home: const PlayRoom())),
+    );
+    await tester.pump();
 
-      // FIXME: humans が内部で仮定義されているので、human name はあくまで仮
-      final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
-      await tester.tap(rollDiceButton);
-      await tester.pump();
-      expect(find.text(i18n.rollAnnouncement('human_1_name', roll)), findsOneWidget);
+    // FIXME: humans が内部で仮定義されているので、human name はあくまで仮
+    final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
+    await tester.tap(rollDiceButton);
+    await tester.pump();
+    expect(find.text(i18n.rollAnnouncement('human_1_name', roll)), findsOneWidget);
 
-      await tester.tap(rollDiceButton);
-      await tester.pump();
-      expect(find.text(i18n.rollAnnouncement('human_2_name', roll)), findsOneWidget);
+    await tester.tap(rollDiceButton);
+    await tester.pump();
+    expect(find.text(i18n.rollAnnouncement('human_2_name', roll)), findsOneWidget);
 
-      await tester.tap(rollDiceButton);
-      await tester.pump();
-      expect(find.text(i18n.rollAnnouncement('human_1_name', roll)), findsOneWidget);
-    });
+    await tester.tap(rollDiceButton);
+    await tester.pump();
+    expect(find.text(i18n.rollAnnouncement('human_1_name', roll)), findsOneWidget);
   });
 }

@@ -9,11 +9,9 @@ Future<void> main() async {
   const locale = Locale('en', 'US');
   final i18n = await I18n.load(locale);
 
-  group('PlayerAction', () {
-    testWidgets("show 'Roll the Dice' text", (tester) async {
-      await tester.pumpWidget(testableApp(locale: locale, home: const PlayerAction()));
-      await tester.pump();
-      expect(find.text(i18n.rollDice), findsOneWidget);
-    });
+  testWidgets("show 'Roll the Dice' text", (tester) async {
+    await tester.pumpWidget(testableApp(locale: locale, home: const PlayerAction()));
+    await tester.pump();
+    expect(find.text(i18n.rollDice), findsOneWidget);
   });
 }

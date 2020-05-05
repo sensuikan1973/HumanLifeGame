@@ -12,11 +12,9 @@ void main() {
     // See: https://github.com/flutter/flutter/issues/12994#issuecomment-397321431
     WidgetsBinding.instance.renderView.configuration = TestViewConfiguration(size: size);
   });
-  group('HumanLifeGameApp', () {
-    testWidgets('show PlayRoom', (tester) async {
-      await tester.pumpWidget(const HumanLifeGameApp());
-      await tester.pump();
-      expect(find.byType(PlayRoom), findsOneWidget);
-    });
+  testWidgets('show PlayRoom', (tester) async {
+    await tester.pumpWidget(const HumanLifeGameApp());
+    await tester.pump();
+    expect(find.byType(PlayRoom), findsOneWidget);
   });
 }
