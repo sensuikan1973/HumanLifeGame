@@ -48,7 +48,7 @@ class LifeStep extends StatelessWidget {
               top: i == 0 || i == 1 ? 0 : null,
               bottom: i == 2 || i == 3 ? 0 : null,
               left: i == 0 || i == 3 ? 0 : null,
-              right: i == 1 || i == 3 ? 0 : null,
+              right: i == 1 || i == 2 ? 0 : null,
               child: _humans[i],
             ),
           Text(I18n.of(context).lifeStepEventType(_model.lifeEvent.type)),

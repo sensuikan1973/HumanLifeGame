@@ -21,6 +21,9 @@ class LifeStepModel {
   LifeStepModel right;
   LifeStepModel left;
 
+  bool get isStart => lifeEvent.type == LifeEventType.start;
+  bool get isGoal => lifeEvent.type == LifeEventType.goal;
+
   LifeStepModel getNext(int num) {
     var current = this;
     var count = 0;
