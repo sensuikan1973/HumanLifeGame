@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PlayerAction extends StatelessWidget {
+  const PlayerAction({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => Center(
         child: Container(

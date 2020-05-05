@@ -5,6 +5,6 @@ class Router {
   final String initialRoute = '/';
 
   final Map<String, WidgetBuilder> routes = {
-    '/': (context) => PlayRoom(),
+    '/': (context) => const PlayRoom(),
   };
 }

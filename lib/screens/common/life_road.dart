@@ -3,8 +3,10 @@ import 'package:HumanLifeGame/screens/common/life_step.dart';
 import 'package:flutter/material.dart';
 
 class LifeRoad extends StatelessWidget {
-  const LifeRoad(this.lifeRoadModel);
+  const LifeRoad(this.lifeRoadModel, {Key key}) : super(key: key);
+
   final LifeRoadModel lifeRoadModel;
+
   @override
   Widget build(BuildContext context) => SizedBox(
         width: 1050,

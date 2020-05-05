@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 /// Humanの状況を表示
 class LifeStages extends StatelessWidget {
+  const LifeStages({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => SizedBox(
         width: 100,

@@ -11,6 +11,8 @@ import 'api/dice.dart';
 import 'i18n/i18n_delegate.dart';
 
 class HumanLifeGameApp extends StatelessWidget {
+  const HumanLifeGameApp({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => MultiProvider(
         providers: [

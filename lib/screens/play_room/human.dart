@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Human extends StatelessWidget {
-  const Human();
+  const Human({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => SizedBox(

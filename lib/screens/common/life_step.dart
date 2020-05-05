@@ -6,7 +6,12 @@ import 'package:HumanLifeGame/screens/play_room/human.dart';
 import 'package:flutter/material.dart';
 
 class LifeStep extends StatelessWidget {
-  const LifeStep(this.model, this.width, this.height);
+  const LifeStep(
+    this.model,
+    this.width,
+    this.height, {
+    Key key,
+  }) : super(key: key);
 
   final LifeStepModel model;
   final double width;

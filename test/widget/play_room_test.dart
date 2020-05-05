@@ -26,7 +26,7 @@ Future<void> main() async {
   group('PlayRoom', () {
     testWidgets('show some widgets', (tester) async {
       await tester.pumpWidget(
-        Provider<Dice>(create: (context) => const Dice(), child: testableApp(home: PlayRoom())),
+        Provider<Dice>(create: (context) => const Dice(), child: testableApp(home: const PlayRoom())),
       );
       await tester.pump();
       expect(find.byType(PlayerAction), findsOneWidget);
@@ -40,7 +40,7 @@ Future<void> main() async {
       final dice = MockDice();
       when(dice.roll()).thenReturn(5);
       await tester.pumpWidget(
-        Provider<Dice>(create: (context) => dice, child: testableApp(home: PlayRoom())),
+        Provider<Dice>(create: (context) => dice, child: testableApp(home: const PlayRoom())),
       );
       await tester.pump();
 
@@ -54,7 +54,7 @@ Future<void> main() async {
       const roll = 5;
       when(dice.roll()).thenReturn(roll);
       await tester.pumpWidget(
-        Provider<Dice>(create: (context) => dice, child: testableApp(home: PlayRoom())),
+        Provider<Dice>(create: (context) => dice, child: testableApp(home: const PlayRoom())),
       );
       await tester.pump();
 

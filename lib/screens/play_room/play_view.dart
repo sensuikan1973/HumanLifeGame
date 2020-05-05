@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PlayView extends StatelessWidget {
+  const PlayView({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => Align(
         child: SizedBox(

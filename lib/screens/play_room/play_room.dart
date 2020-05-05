@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PlayRoom extends StatelessWidget {
+  const PlayRoom({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => Scaffold(
         body: MultiProvider(
@@ -31,14 +33,14 @@ class PlayRoom extends StatelessWidget {
   Row _layout(BuildContext context) => Row(
         children: <Widget>[
           Column(
-            children: <Widget>[
+            children: const <Widget>[
               Announcement(),
               LifeEventRecords(),
               PlayView(),
             ],
           ),
           Column(
-            children: <Widget>[
+            children: const <Widget>[
               LifeStages(),
               DiceResult(),
               PlayerAction(),
