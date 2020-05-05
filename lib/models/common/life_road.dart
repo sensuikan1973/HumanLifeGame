@@ -17,11 +17,14 @@ class LifeRoadModel {
           final eventType = () {
             if (isStart) return LifeEventType.start;
             if (isGoal) return LifeEventType.goal;
+            if (y == 0 && x == 2) return LifeEventType.selectDirection;
+            if (y == 2 && x >= 2 && x <= 5) return LifeEventType.gainLifeItem;
+            if (y == 1 && (x == 2 || x == 5)) return LifeEventType.gainLifeItem;
             if (y == 0) return LifeEventType.gainLifeItem;
             return LifeEventType.nothing;
           }();
           return LifeStepModel(
-            id: (x + 1) * (y + 1), // 一意になるようにしたいだけ。仮。
+            id: x + (y * width), // 一意になるようにしたいだけ。仮。
             lifeEvent: LifeEventModel(LifeEventTarget.myself, eventType),
             right: null,
             left: null,
@@ -32,10 +35,12 @@ class LifeRoadModel {
       ),
     );
     // 連結情報を更新する
-    for (var i = 0; i < lifeStepsOnBoard.first.length; ++i) {
-      if (lifeStepsOnBoard.first[i] == lifeStepsOnBoard.first.last) continue;
-      lifeStepsOnBoard.first[i].right = lifeStepsOnBoard.first[i + 1];
-    }
+    //for (var i = 0; i < lifeStepsOnBoard.first.length; ++i) {
+    //  if (lifeStepsOnBoard.first[i] == lifeStepsOnBoard.first.last) continue;
+    //  lifeStepsOnBoard.first[i].right = lifeStepsOnBoard.first[i + 1];
+    //}
+    //print(start.lifeEvent.type);
+    setDirectionsForLifeStepsOnBoard(start);
   }
 
   static const int width = 7;
@@ -56,15 +61,126 @@ class LifeRoadModel {
   Position getPosition(LifeStepModel lifeStep) {
     for (var y = 0; y < lifeStepsOnBoard.length; ++y) {
       for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
-        if (lifeStepsOnBoard[x][y] == lifeStep) return Position(x, y);
+        if (lifeStepsOnBoard[y][x] == lifeStep) return Position(y, x);
       }
     }
     return null;
   }
+
+  void setDirectionsForLifeStepsOnBoard(LifeStepModel currentLifeStep) {
+    final pos = getPosition(currentLifeStep);
+    LifeStepModel upLifeStep;
+    LifeStepModel downLifeStep;
+    LifeStepModel rightLifeStep;
+    LifeStepModel leftLifeStep;
+    print('currentpos x:${pos.x},y:${pos.y}');
+    var isUpUnchecked = false;
+    var isDownUnchecked = false;
+    var isRightUnchecked = false;
+    var isLeftUnchecked = false;
+    var numOfUncheckedLifeStep = 0;
+    var isBranchEvent = false;
+
+    // isGoalなら探索終了
+    if (currentLifeStep.lifeEvent.isGoal) return;
+    // 現在のLifeStepの上下左右に未探索のLifeStepが存在するか
+    // 上方をチェック
+    if (pos.y != 0) {
+      upLifeStep = lifeStepsOnBoard[pos.y - 1][pos.x];
+      if (isUpUnchecked = _isUncheckedLifeStep(upLifeStep)) numOfUncheckedLifeStep++;
+    }
+    // 下方をチェック
+    if (pos.y != height - 1) {
+      downLifeStep = lifeStepsOnBoard[pos.y + 1][pos.x];
+      if (isDownUnchecked = _isUncheckedLifeStep(downLifeStep)) numOfUncheckedLifeStep++;
+    }
+    // 右方をチェック
+    if (pos.x != width - 1) {
+      rightLifeStep = lifeStepsOnBoard[pos.y][pos.x + 1];
+      if (isRightUnchecked = _isUncheckedLifeStep(rightLifeStep)) numOfUncheckedLifeStep++;
+    }
+    // 左方をチェック
+    if (pos.x != 0) {
+      leftLifeStep = lifeStepsOnBoard[pos.y][pos.x - 1];
+      if (isLeftUnchecked = _isUncheckedLifeStep(leftLifeStep)) numOfUncheckedLifeStep++;
+    }
+    // 現在のLifeStepが分岐するEventかチェック
+    isBranchEvent = (currentLifeStep.lifeEvent.type == LifeEventType.selectDirection) ||
+        (currentLifeStep.lifeEvent.type == LifeEventType.selectDirectionPerDiceRoll) ||
+        (currentLifeStep.lifeEvent.type == LifeEventType.selectDirectionPerLifeItem);
+    //print('isBranch:$isBranchEvent\nisUpUnchecked:$isUpUnchecked\nisDownUnchecked:$isDownUnchecked\nisRightUnchecked:$isRightUnchecked\nisLeftUnchecked:$isLeftUnchecked');
+    //print('numOfUncheckedLifeStep:$numOfUncheckedLifeStep');
+    // 分岐するEventの場合のフロー
+    if (isBranchEvent) {
+      if (numOfUncheckedLifeStep > 1) {
+        if (isUpUnchecked) {
+          lifeStepsOnBoard[pos.y][pos.x].up = upLifeStep;
+          print('error');
+          setDirectionsForLifeStepsOnBoard(upLifeStep);
+        }
+        if (isDownUnchecked) {
+          lifeStepsOnBoard[pos.y][pos.x].down = downLifeStep;
+          print('branch-down:${downLifeStep.id}');
+          setDirectionsForLifeStepsOnBoard(downLifeStep);
+        }
+        if (isRightUnchecked) {
+          lifeStepsOnBoard[pos.y][pos.x].right = rightLifeStep;
+          print('branch-right:${rightLifeStep.id}');
+          setDirectionsForLifeStepsOnBoard(rightLifeStep);
+        }
+        if (isLeftUnchecked) {
+          lifeStepsOnBoard[pos.y][pos.x].left = leftLifeStep;
+          print('error');
+          setDirectionsForLifeStepsOnBoard(leftLifeStep);
+        }
+      } else {
+        // エラー（もしくは離小島にジャンプ）
+      }
+    } else {
+      if (numOfUncheckedLifeStep == 1) {
+        // 次のLifeStepと紐付けし、次のLifeStepから探索を開始
+        if (isUpUnchecked) {
+          lifeStepsOnBoard[pos.y][pos.x].up = upLifeStep;
+          print('up:${upLifeStep.id}');
+          setDirectionsForLifeStepsOnBoard(upLifeStep);
+        } else if (isDownUnchecked) {
+          lifeStepsOnBoard[pos.y][pos.x].down = downLifeStep;
+          print('down:${downLifeStep.id}');
+          setDirectionsForLifeStepsOnBoard(downLifeStep);
+        } else if (isRightUnchecked) {
+          lifeStepsOnBoard[pos.y][pos.x].right = rightLifeStep;
+          print('right:${rightLifeStep.id}');
+          setDirectionsForLifeStepsOnBoard(rightLifeStep);
+        } else if (isLeftUnchecked) {
+          lifeStepsOnBoard[pos.y][pos.x].left = leftLifeStep;
+          print('error');
+          setDirectionsForLifeStepsOnBoard(leftLifeStep);
+        } else {
+          print('error');
+          // 例外
+        }
+      } else if (numOfUncheckedLifeStep > 1) {
+        // 合流のため、探索終了
+        // TODO: LifeStepが４つボックス状にくっついてたらどうする
+        return;
+      } else {
+        // 例外（もしくは離小島にジャンプ）
+      }
+    }
+  }
+
+  bool _isUncheckedLifeStep(LifeStepModel lifeStep) {
+    if (lifeStep.lifeEvent.type != LifeEventType.nothing) {
+      if (lifeStep.up == null && lifeStep.down == null && lifeStep.right == null && lifeStep.left == null) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
 class Position {
-  const Position(this.x, this.y);
+  const Position(this.y, this.x);
   final int x;
   final int y;
 }
