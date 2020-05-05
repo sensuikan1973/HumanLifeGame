@@ -35,11 +35,6 @@ class LifeRoadModel {
       ),
     );
     // 連結情報を更新する
-    //for (var i = 0; i < lifeStepsOnBoard.first.length; ++i) {
-    //  if (lifeStepsOnBoard.first[i] == lifeStepsOnBoard.first.last) continue;
-    //  lifeStepsOnBoard.first[i].right = lifeStepsOnBoard.first[i + 1];
-    //}
-    //print(start.lifeEvent.type);
     setDirectionsForLifeStepsOnBoard(start);
   }
 
@@ -61,7 +56,7 @@ class LifeRoadModel {
   Position getPosition(LifeStepModel lifeStep) {
     for (var y = 0; y < lifeStepsOnBoard.length; ++y) {
       for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
-        if (lifeStepsOnBoard[y][x] == lifeStep) return Position(y, x);
+        if (lifeStepsOnBoard[y][x] == lifeStep) return Position(x, y);
       }
     }
     return null;
@@ -73,11 +68,12 @@ class LifeRoadModel {
     LifeStepModel downLifeStep;
     LifeStepModel rightLifeStep;
     LifeStepModel leftLifeStep;
-    print('currentpos x:${pos.x},y:${pos.y}');
+
     var isUpUnchecked = false;
     var isDownUnchecked = false;
     var isRightUnchecked = false;
     var isLeftUnchecked = false;
+
     var numOfUncheckedLifeStep = 0;
     var isBranchEvent = false;
 
@@ -108,29 +104,24 @@ class LifeRoadModel {
     isBranchEvent = (currentLifeStep.lifeEvent.type == LifeEventType.selectDirection) ||
         (currentLifeStep.lifeEvent.type == LifeEventType.selectDirectionPerDiceRoll) ||
         (currentLifeStep.lifeEvent.type == LifeEventType.selectDirectionPerLifeItem);
-    //print('isBranch:$isBranchEvent\nisUpUnchecked:$isUpUnchecked\nisDownUnchecked:$isDownUnchecked\nisRightUnchecked:$isRightUnchecked\nisLeftUnchecked:$isLeftUnchecked');
-    //print('numOfUncheckedLifeStep:$numOfUncheckedLifeStep');
+
     // 分岐するEventの場合のフロー
     if (isBranchEvent) {
       if (numOfUncheckedLifeStep > 1) {
         if (isUpUnchecked) {
           lifeStepsOnBoard[pos.y][pos.x].up = upLifeStep;
-          print('error');
           setDirectionsForLifeStepsOnBoard(upLifeStep);
         }
         if (isDownUnchecked) {
           lifeStepsOnBoard[pos.y][pos.x].down = downLifeStep;
-          print('branch-down:${downLifeStep.id}');
           setDirectionsForLifeStepsOnBoard(downLifeStep);
         }
         if (isRightUnchecked) {
           lifeStepsOnBoard[pos.y][pos.x].right = rightLifeStep;
-          print('branch-right:${rightLifeStep.id}');
           setDirectionsForLifeStepsOnBoard(rightLifeStep);
         }
         if (isLeftUnchecked) {
           lifeStepsOnBoard[pos.y][pos.x].left = leftLifeStep;
-          print('error');
           setDirectionsForLifeStepsOnBoard(leftLifeStep);
         }
       } else {
@@ -141,22 +132,17 @@ class LifeRoadModel {
         // 次のLifeStepと紐付けし、次のLifeStepから探索を開始
         if (isUpUnchecked) {
           lifeStepsOnBoard[pos.y][pos.x].up = upLifeStep;
-          print('up:${upLifeStep.id}');
           setDirectionsForLifeStepsOnBoard(upLifeStep);
         } else if (isDownUnchecked) {
           lifeStepsOnBoard[pos.y][pos.x].down = downLifeStep;
-          print('down:${downLifeStep.id}');
           setDirectionsForLifeStepsOnBoard(downLifeStep);
         } else if (isRightUnchecked) {
           lifeStepsOnBoard[pos.y][pos.x].right = rightLifeStep;
-          print('right:${rightLifeStep.id}');
           setDirectionsForLifeStepsOnBoard(rightLifeStep);
         } else if (isLeftUnchecked) {
           lifeStepsOnBoard[pos.y][pos.x].left = leftLifeStep;
-          print('error');
           setDirectionsForLifeStepsOnBoard(leftLifeStep);
         } else {
-          print('error');
           // 例外
         }
       } else if (numOfUncheckedLifeStep > 1) {
@@ -180,7 +166,7 @@ class LifeRoadModel {
 }
 
 class Position {
-  const Position(this.y, this.x);
+  const Position(this.x, this.y);
   final int x;
   final int y;
 }
