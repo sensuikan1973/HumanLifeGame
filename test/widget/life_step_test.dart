@@ -9,7 +9,7 @@ import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
   const locale = Locale('en', 'US');
-  final i18n = await I18n.load(locale);
+
   testWidgets('show DecoratedBox with Colors.cyan[50]', (tester) async {
     final model = LifeStepModel(
       id: 0,
@@ -61,74 +61,24 @@ Future<void> main() async {
         findsOneWidget);
   });
 
-  testWidgets("show 'Start' text", (tester) async {
+  await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.start);
+
+  await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.goal);
+
+  await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.selectDirection);
+
+  await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.gainLifeItem);
+
+  await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.loseLifeItem);
+}
+
+Future<void> checkLifeEventI18n(LifeEventTarget target, LifeEventType type) async {
+  const locale = Locale('en', 'US');
+  final i18n = await I18n.load(locale);
+  testWidgets('show text for target:$target, type:$type', (tester) async {
     final model = LifeStepModel(
       id: 0,
-      lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.start),
-      right: null,
-      left: null,
-      up: null,
-      down: null,
-    );
-
-    await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
-    await tester.pump();
-
-    expect(find.text(i18n.lifeStepEventType(model.lifeEvent.type)), findsOneWidget);
-  });
-
-  testWidgets("show 'Goal' text", (tester) async {
-    final model = LifeStepModel(
-      id: 0,
-      lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.goal),
-      right: null,
-      left: null,
-      up: null,
-      down: null,
-    );
-
-    await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
-    await tester.pump();
-
-    expect(find.text(i18n.lifeStepEventType(model.lifeEvent.type)), findsOneWidget);
-  });
-
-  testWidgets("show 'Select Direction' text", (tester) async {
-    final model = LifeStepModel(
-      id: 0,
-      lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.selectDirection),
-      right: null,
-      left: null,
-      up: null,
-      down: null,
-    );
-
-    await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
-    await tester.pump();
-
-    expect(find.text(i18n.lifeStepEventType(model.lifeEvent.type)), findsOneWidget);
-  });
-
-  testWidgets("show 'Gain Item :' text", (tester) async {
-    final model = LifeStepModel(
-      id: 0,
-      lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem),
-      right: null,
-      left: null,
-      up: null,
-      down: null,
-    );
-
-    await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
-    await tester.pump();
-
-    expect(find.text(i18n.lifeStepEventType(model.lifeEvent.type)), findsOneWidget);
-  });
-
-  testWidgets("show 'Lose Item :' text", (tester) async {
-    final model = LifeStepModel(
-      id: 0,
-      lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.loseLifeItem),
+      lifeEvent: LifeEventModel(target, type),
       right: null,
       left: null,
       up: null,
