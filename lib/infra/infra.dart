@@ -1,5 +1,5 @@
-import 'package:HumanLifeGame/infra/human_life_repository.dart';
-import 'package:HumanLifeGame/infra/play_room_repository.dart';
+import 'human_life_repository.dart';
+import 'play_room_repository.dart';
 
 class Infra {
   Infra(

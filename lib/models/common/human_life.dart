@@ -1,5 +1,5 @@
-import 'package:HumanLifeGame/models/common/life_road.dart';
-import 'package:HumanLifeGame/models/common/user.dart';
+import 'life_road.dart';
+import 'user.dart';
 
 class HumanLifeModel {
   HumanLifeModel({this.title, this.author, this.lifeRoad});

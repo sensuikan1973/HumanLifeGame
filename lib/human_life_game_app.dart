@@ -1,14 +1,14 @@
-import 'package:HumanLifeGame/i18n/i18n.dart';
-import 'package:HumanLifeGame/infra/human_life_repository.dart';
-import 'package:HumanLifeGame/infra/infra.dart';
-import 'package:HumanLifeGame/infra/play_room_repository.dart';
-import 'package:HumanLifeGame/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'api/dice.dart';
+import 'i18n/i18n.dart';
 import 'i18n/i18n_delegate.dart';
+import 'infra/human_life_repository.dart';
+import 'infra/infra.dart';
+import 'infra/play_room_repository.dart';
+import 'router.dart';
 
 class HumanLifeGameApp extends StatelessWidget {
   const HumanLifeGameApp({Key key}) : super(key: key);

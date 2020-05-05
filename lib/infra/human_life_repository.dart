@@ -1,6 +1,6 @@
-import 'package:HumanLifeGame/models/common/human_life.dart';
-import 'package:HumanLifeGame/models/common/life_road.dart';
-import 'package:HumanLifeGame/models/common/user.dart';
+import '../models/common/human_life.dart';
+import '../models/common/life_road.dart';
+import '../models/common/user.dart';
 
 class HumanLifeRepository {
   // 実際には外部 API からの fetch になるので、当然返り値は Future になる

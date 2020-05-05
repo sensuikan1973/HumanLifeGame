@@ -1,7 +1,8 @@
-import 'package:HumanLifeGame/models/play_room/play_room.dart';
-import 'package:HumanLifeGame/screens/common/life_road.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../models/play_room/play_room.dart';
+import '../common/life_road.dart';
 
 class PlayView extends StatelessWidget {
   const PlayView({Key key}) : super(key: key);

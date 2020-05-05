@@ -1,5 +1,6 @@
-import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:intl/intl.dart';
+
+import '../i18n.dart';
 
 /// PlayRoom Locale Text
 extension I18nPlayRoom on I18n {

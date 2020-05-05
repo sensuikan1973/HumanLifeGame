@@ -1,6 +1,7 @@
-import 'package:HumanLifeGame/i18n/messages_all.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import 'messages_all.dart';
 
 export 'extensions/i18n_common.dart';
 export 'extensions/i18n_play_room.dart';

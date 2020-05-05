@@ -1,5 +1,6 @@
-import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:flutter/material.dart';
+
+import '../../i18n/i18n.dart';
 
 class LifeEventRecords extends StatelessWidget {
   const LifeEventRecords({Key key}) : super(key: key);
