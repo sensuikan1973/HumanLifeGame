@@ -10,16 +10,11 @@ class LifeStepModel {
     @required this.left,
     @required this.up,
     @required this.down,
-    @required this.isStart,
-    @required this.isGoal,
   });
 
   final int id;
 
   final LifeEventModel lifeEvent;
-
-  final bool isStart;
-  final bool isGoal;
 
   LifeStepModel up;
   LifeStepModel down;

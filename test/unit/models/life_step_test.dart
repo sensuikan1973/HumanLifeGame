@@ -14,14 +14,13 @@ void main() {
         return LifeEventType.nothing;
       }();
       return LifeStepModel(
-          id: index,
-          lifeEvent: LifeEventModel(LifeEventTarget.myself, eventType),
-          right: null,
-          left: null,
-          up: null,
-          down: null,
-          isStart: isStart,
-          isGoal: isGoal);
+        id: index,
+        lifeEvent: LifeEventModel(LifeEventTarget.myself, eventType),
+        right: null,
+        left: null,
+        up: null,
+        down: null,
+      );
     },
   );
 

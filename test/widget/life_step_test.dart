@@ -18,8 +18,6 @@ Future<void> main() async {
       left: null,
       up: null,
       down: null,
-      isStart: false,
-      isGoal: false,
     );
 
     LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem);
@@ -46,8 +44,6 @@ Future<void> main() async {
       left: null,
       up: null,
       down: null,
-      isStart: false,
-      isGoal: false,
     );
 
     await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
@@ -73,8 +69,6 @@ Future<void> main() async {
       left: null,
       up: null,
       down: null,
-      isStart: true,
-      isGoal: false,
     );
 
     await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
@@ -91,8 +85,6 @@ Future<void> main() async {
       left: null,
       up: null,
       down: null,
-      isStart: false,
-      isGoal: true,
     );
 
     await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
@@ -109,8 +101,6 @@ Future<void> main() async {
       left: null,
       up: null,
       down: null,
-      isStart: false,
-      isGoal: false,
     );
 
     await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
@@ -127,8 +117,6 @@ Future<void> main() async {
       left: null,
       up: null,
       down: null,
-      isStart: false,
-      isGoal: false,
     );
 
     await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
@@ -145,8 +133,6 @@ Future<void> main() async {
       left: null,
       up: null,
       down: null,
-      isStart: false,
-      isGoal: false,
     );
 
     await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
