@@ -1,11 +1,11 @@
 {
-  "@@last_modified": "2020-05-05T04:59:15.671340",
+  "@@last_modified": "2020-05-05T18:00:53.216798",
   "appTitle": "Human Life Game",
   "@appTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "lifeStepEventType": "{type,select, nothing{}start{Start}goal{Goal}gainLifeItem{Gain Item :}}",
+  "lifeStepEventType": "{type,select, nothing{}start{Start}goal{Goal}selectDirection{Select Direction}gainLifeItem{Gain Item :}loseLifeItem{Lose Item :}}",
   "@lifeStepEventType": {
     "type": "text",
     "placeholders": {

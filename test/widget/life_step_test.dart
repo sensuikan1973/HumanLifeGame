@@ -101,10 +101,46 @@ Future<void> main() async {
     expect(find.text(i18n.lifeStepEventType(model.lifeEvent.type)), findsOneWidget);
   });
 
+  testWidgets("show 'Select Direction' text", (tester) async {
+    final model = LifeStepModel(
+      id: 0,
+      lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.selectDirection),
+      right: null,
+      left: null,
+      up: null,
+      down: null,
+      isStart: false,
+      isGoal: false,
+    );
+
+    await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
+    await tester.pump();
+
+    expect(find.text(i18n.lifeStepEventType(model.lifeEvent.type)), findsOneWidget);
+  });
+
   testWidgets("show 'Gain Item :' text", (tester) async {
     final model = LifeStepModel(
       id: 0,
       lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem),
+      right: null,
+      left: null,
+      up: null,
+      down: null,
+      isStart: false,
+      isGoal: false,
+    );
+
+    await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
+    await tester.pump();
+
+    expect(find.text(i18n.lifeStepEventType(model.lifeEvent.type)), findsOneWidget);
+  });
+
+  testWidgets("show 'Lose Item :' text", (tester) async {
+    final model = LifeStepModel(
+      id: 0,
+      lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.loseLifeItem),
       right: null,
       left: null,
       up: null,
