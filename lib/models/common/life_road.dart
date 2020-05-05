@@ -56,7 +56,7 @@ class LifeRoadModel {
   Position getPosition(LifeStepModel lifeStep) {
     for (var y = 0; y < lifeStepsOnBoard.length; ++y) {
       for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
-        if (lifeStepsOnBoard[x][y] == lifeStep) return Position(x, y);
+        if (lifeStepsOnBoard[y][x] == lifeStep) return Position(y, x);
       }
     }
     return null;
@@ -64,7 +64,7 @@ class LifeRoadModel {
 }
 
 class Position {
-  const Position(this.x, this.y);
-  final int x;
+  const Position(this.y, this.x);
   final int y;
+  final int x;
 }
