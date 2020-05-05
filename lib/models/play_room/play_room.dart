@@ -11,9 +11,14 @@ import 'life_stage.dart';
 import 'player_action.dart';
 
 class PlayRoomModel extends ChangeNotifier {
-  PlayRoomModel(this._i18n) {
+  PlayRoomModel(this._i18n, {List<HumanModel> humans})
+      : _humans = humans ??
+            [
+              HumanModel('human_1_id', 'human_1_name'),
+              HumanModel('human_2_id', 'human_2_name'),
+            ] {
     // FIXME: 全部ダミーデータ
-    for (final human in humans) {
+    for (final human in _humans) {
       final lifeStage = LifeStageModel(human)..lifeStepModel = humanLife.lifeRoad.start;
       lifeStages.add(lifeStage);
     }
@@ -42,7 +47,7 @@ class PlayRoomModel extends ChangeNotifier {
       // FIXME: 即ターン交代してるけど、あくまで仮
       _changeToNextTurn();
     } else {
-      _currentPlayer = humans.first;
+      _currentPlayer = _humans.first;
     }
 
     notifyListeners();
@@ -55,10 +60,8 @@ class PlayRoomModel extends ChangeNotifier {
 
   // 参加する人。ターン順。
   // FIXME: 仮のダミーデータに過ぎない
-  List<HumanModel> humans = [
-    HumanModel('human_1_id', 'human_1_name'),
-    HumanModel('human_2_id', 'human_2_name'),
-  ];
+  final List<HumanModel> _humans;
+  List<HumanModel> get humans => _humans;
 
   // 手番の人
   HumanModel _currentPlayer;
@@ -76,8 +79,8 @@ class PlayRoomModel extends ChangeNotifier {
 
   // 次のターンに変える
   void _changeToNextTurn() {
-    final currentPlayerIndex = humans.indexOf(_currentPlayer);
-    _currentPlayer = humans[(currentPlayerIndex + 1) % humans.length];
+    final currentPlayerIndex = _humans.indexOf(_currentPlayer);
+    _currentPlayer = _humans[(currentPlayerIndex + 1) % _humans.length];
   }
 
   void _moveLifeStep() {

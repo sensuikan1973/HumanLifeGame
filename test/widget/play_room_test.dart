@@ -17,12 +17,13 @@ import 'helper/widget_build_helper.dart';
 Future<void> main() async {
   const locale = Locale('en', 'US');
   final i18n = await I18n.load(locale);
-  // Desktopの標準サイズ 1440x1024に設定
-  const size = Size(1440, 1024);
+
   setUp(() {
     // See: https://github.com/flutter/flutter/issues/12994#issuecomment-397321431
-    WidgetsBinding.instance.renderView.configuration = TestViewConfiguration(size: size);
+    // Desktopの標準サイズ 1440x1024に設定
+    WidgetsBinding.instance.renderView.configuration = TestViewConfiguration(size: const Size(1440, 1024));
   });
+
   testWidgets('show some widgets', (tester) async {
     await tester.pumpWidget(
       Provider<Dice>(create: (context) => const Dice(), child: testableApp(home: const PlayRoom())),
@@ -57,7 +58,7 @@ Future<void> main() async {
     );
     await tester.pump();
 
-    // FIXME: humans が内部で仮定義されているので、human name はあくまで仮
+    // FIXME: humans が内部で仮定義されているので、human name などはあくまで仮のテストに過ぎない
     final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
     await tester.tap(rollDiceButton);
     await tester.pump();

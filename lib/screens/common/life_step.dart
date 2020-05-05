@@ -7,16 +7,19 @@ import '../../models/common/life_step.dart';
 import '../play_room/human.dart';
 
 class LifeStep extends StatelessWidget {
-  const LifeStep(
-    this.model,
-    this.width,
-    this.height, {
+  LifeStep(
+    this._model,
+    this._width,
+    this._height, {
+    List<Human> humans,
     Key key,
-  }) : super(key: key);
+  })  : _humans = humans ?? [],
+        super(key: key);
 
-  final LifeStepModel model;
-  final double width;
-  final double height;
+  final LifeStepModel _model;
+  final double _width;
+  final double _height;
+  final List<Human> _humans;
 
   @visibleForTesting
   static Color nothing = Colors.amber[50];
@@ -25,53 +28,30 @@ class LifeStep extends StatelessWidget {
   static Color exist = Colors.cyan[50];
 
   @override
-  Widget build(BuildContext context) {
-    if (model.lifeEvent.isStart) return _squareWithHuman(context);
-
-    return Stack(
-      children: <Widget>[
-        SizedBox(
-          width: width / LifeRoadModel.width,
-          height: height / LifeRoadModel.height,
-          child: Padding(
-            padding: const EdgeInsets.all(2),
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: model.lifeEvent.type == LifeEventType.nothing ? nothing : exist,
-              ),
-            ),
-          ),
-        ),
-        Text(I18n.of(context).lifeStepEventType(model.lifeEvent.type)),
-      ],
-    );
-  }
-
-  Widget _squareWithHuman(BuildContext context) => Stack(
+  Widget build(BuildContext context) => Stack(
         children: <Widget>[
           SizedBox(
-            width: width / LifeRoadModel.width,
-            height: height / LifeRoadModel.height,
+            width: _width / LifeRoadModel.width,
+            height: _height / LifeRoadModel.height,
             child: Padding(
               padding: const EdgeInsets.all(2),
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: model.lifeEvent.type == LifeEventType.nothing ? nothing : exist,
+                  color: _model.lifeEvent.type == LifeEventType.nothing ? nothing : exist,
                 ),
               ),
             ),
           ),
-          Text(I18n.of(context).lifeStepEventType(model.lifeEvent.type)),
-          const Positioned(
-            top: 0,
-            left: 0,
-            child: Human(),
-          ),
-          const Positioned(
-            bottom: 0,
-            left: 0,
-            child: Human(),
-          ),
+          for (var i = 0; i < _humans.length; ++i)
+            // FIXME: 雑に四隅に配置してる
+            Positioned(
+              top: i == 0 || i == 1 ? 0 : null,
+              bottom: i == 2 || i == 3 ? 0 : null,
+              left: i == 0 || i == 3 ? 0 : null,
+              right: i == 1 || i == 3 ? 0 : null,
+              child: _humans[i],
+            ),
+          Text(I18n.of(context).lifeStepEventType(_model.lifeEvent.type)),
         ],
       );
 }
