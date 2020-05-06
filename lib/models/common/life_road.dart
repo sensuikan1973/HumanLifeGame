@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'life_event.dart';
 import 'life_step.dart';
 
@@ -17,9 +19,6 @@ class LifeRoadModel {
           final eventType = () {
             if (isStart) return LifeEventType.start;
             if (isGoal) return LifeEventType.goal;
-            if (y == 0 && x == 2) return LifeEventType.selectDirection;
-            if (y == 2 && x >= 2 && x <= 5) return LifeEventType.gainLifeItem;
-            if (y == 1 && (x == 2 || x == 5)) return LifeEventType.gainLifeItem;
             if (y == 0) return LifeEventType.gainLifeItem;
             return LifeEventType.nothing;
           }();
@@ -68,7 +67,6 @@ class LifeRoadModel {
     LifeStepModel downLifeStep;
     LifeStepModel rightLifeStep;
     LifeStepModel leftLifeStep;
-
     var isUpUnchecked = false;
     var isDownUnchecked = false;
     var isRightUnchecked = false;
