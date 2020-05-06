@@ -10,6 +10,9 @@ class PlayerActionModel extends ChangeNotifier {
   int _roll = 0; // 出目
   int get roll => _roll;
 
+  // 一度も振られていない
+  bool get notRolled => _roll == 0;
+
   void rollDice() {
     _roll = _dice.roll();
     notifyListeners();
