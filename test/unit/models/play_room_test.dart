@@ -1,6 +1,8 @@
 import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/models/common/human.dart';
+import 'package:HumanLifeGame/models/common/human_life.dart';
 import 'package:HumanLifeGame/models/common/life_road.dart';
+import 'package:HumanLifeGame/models/common/user.dart';
 import 'package:HumanLifeGame/models/play_room/play_room.dart';
 import 'package:HumanLifeGame/models/play_room/player_action.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -10,11 +12,19 @@ import '../../mocks/mocks.dart';
 
 void main() {
   test('Humans move', () {
+    final humanLife = HumanLifeModel(
+      title: 'dummy HumanLife',
+      author: UserModel('dummyUserId', 'dummyUser', DateTime.now(), DateTime.now()),
+      lifeRoad: LifeRoadModel.dummy(), // FIXME: 今はこれでいいけど、LifeRoadModel.dummy はいつか消すので要修正
+    );
     final human1 = HumanModel('h1', 'foo');
     final human2 = HumanModel('h2', 'bar');
 
-    // FIXME: 中身はダミーデータなので、仮に過ぎない
-    final playRoomModel = PlayRoomModel(I18n('en'), orderedHumans: [human1, human2]);
+    final playRoomModel = PlayRoomModel(
+      I18n('en'),
+      humanLife: humanLife,
+      orderedHumans: [human1, human2],
+    );
 
     // 5しか出ないサイコロをセットする
     final dice = MockDice();
