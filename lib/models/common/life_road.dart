@@ -97,9 +97,12 @@ class LifeRoadModel {
       if (isLeftUnchecked = _isUncheckedLifeStep(leftLifeStep)) numOfUncheckedLifeStep++;
     }
     // 現在のLifeStepが分岐するEventかチェック
-    isBranchEvent = (currentLifeStep.lifeEvent.type == LifeEventType.selectDirection) ||
-        (currentLifeStep.lifeEvent.type == LifeEventType.selectDirectionPerDiceRoll) ||
-        (currentLifeStep.lifeEvent.type == LifeEventType.selectDirectionPerLifeItem);
+
+    isBranchEvent = [
+      LifeEventType.selectDirection,
+      LifeEventType.selectDirectionPerDiceRoll,
+      LifeEventType.selectDirectionPerLifeItem,
+    ].contains(currentLifeStep.lifeEvent.type);
 
     // 分岐するEventの場合のフロー
     if (isBranchEvent) {
@@ -152,12 +155,8 @@ class LifeRoadModel {
   }
 
   bool _isUncheckedLifeStep(LifeStepModel lifeStep) {
-    if (lifeStep.lifeEvent.type != LifeEventType.nothing) {
-      if (lifeStep.up == null && lifeStep.down == null && lifeStep.right == null && lifeStep.left == null) {
-        return true;
-      }
-    }
-    return false;
+    if (lifeStep.lifeEvent.type == LifeEventType.nothing) return false;
+    return [lifeStep.up, lifeStep.down, lifeStep.right, lifeStep.left].every((el) => el == null);
   }
 }
 
