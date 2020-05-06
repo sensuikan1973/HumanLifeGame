@@ -55,6 +55,8 @@ class PlayRoomModel extends ChangeNotifier {
     announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, playerAction.roll);
     // 人生を進める
     _moveLifeStep();
+    // TODO: LifeEvent 処理
+
     // 全員がゴールに到着しているかどうかを確認
     _allHumansArrivedAtGoal = lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
     // FIXME: 即ターン交代してるけど、あくまで仮
