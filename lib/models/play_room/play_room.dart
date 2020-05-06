@@ -49,7 +49,7 @@ class PlayRoomModel extends ChangeNotifier {
     _playerAction = playerAction;
 
     // まだサイコロが振られてない時は何もしない
-    if (playerAction.roll == 0) return;
+    if (playerAction.notRolled) return;
 
     // Announcement の更新
     announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, playerAction.roll);
