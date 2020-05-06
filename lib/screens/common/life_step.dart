@@ -42,16 +42,13 @@ class LifeStep extends StatelessWidget {
               ),
             ),
           ),
-          for (var i = 0; i < _humans.length; ++i)
-            // FIXME: 雑に四隅に配置してる
-            Positioned(
-              top: i == 0 || i == 1 ? 0 : null,
-              bottom: i == 2 || i == 3 ? 0 : null,
-              left: i == 0 || i == 3 ? 0 : null,
-              right: i == 1 || i == 2 ? 0 : null,
-              child: _humans[i],
-            ),
           Text(I18n.of(context).lifeStepEventType(_model.lifeEvent.type)),
+          Positioned.fill(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(children: _humans),
+            ),
+          ),
         ],
       );
 }

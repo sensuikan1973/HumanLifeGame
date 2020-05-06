@@ -14,7 +14,7 @@ void main() {
     final human2 = HumanModel('h2', 'bar');
 
     // FIXME: 中身はダミーデータなので、仮に過ぎない
-    final playRoomModel = PlayRoomModel(I18n('en'), humans: [human1, human2]);
+    final playRoomModel = PlayRoomModel(I18n('en'), orderedHumans: [human1, human2]);
 
     // 5しか出ないサイコロをセットする
     final dice = MockDice();
@@ -23,7 +23,7 @@ void main() {
     playRoomModel.playerAction = PlayerActionModel(dice)..rollDice();
 
     // 初期位置
-    for (final human in playRoomModel.humans) {
+    for (final human in playRoomModel.orderedHumans) {
       final position = playRoomModel.positionsByHumanId[human.id];
       expect(position.x, 0);
       expect(position.y, 0);
