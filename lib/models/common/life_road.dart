@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import 'life_event.dart';
 import 'life_step.dart';
 
@@ -23,7 +21,7 @@ class LifeRoadModel {
             return LifeEventType.nothing;
           }();
           return LifeStepModel(
-            id: x + (y * width), // 一意になるようにしたいだけ。仮。
+            id: x + (y * width),
             lifeEvent: LifeEventModel(LifeEventTarget.myself, eventType),
             right: null,
             left: null,
