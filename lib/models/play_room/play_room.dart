@@ -37,7 +37,6 @@ class PlayRoomModel extends ChangeNotifier {
 
   final I18n _i18n;
 
-  // FIXME: 仮でダミーデータを最初から入れてるだけ
   // 歩む対象となる人生
   final HumanLifeModel _humanLife;
   HumanLifeModel get humanLife => _humanLife;
