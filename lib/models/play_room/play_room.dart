@@ -61,7 +61,6 @@ class PlayRoomModel extends ChangeNotifier {
   String roomTitle;
 
   // 参加する人。ターン順。
-  // FIXME: 仮のダミーデータに過ぎない
   final List<HumanModel> _orderedHumans;
   List<HumanModel> get orderedHumans => _orderedHumans;
 
