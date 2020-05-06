@@ -22,7 +22,7 @@ class LifeRoadModel {
           }();
           return LifeStepModel(
             id: x + (y * width),
-            lifeEvent: LifeEventModel(LifeEventTarget.myself, eventType),
+            lifeEvent: LifeEventModel(LifeEventTarget.myself, eventType, params: <String, dynamic>{}),
             right: null,
             left: null,
             up: null,

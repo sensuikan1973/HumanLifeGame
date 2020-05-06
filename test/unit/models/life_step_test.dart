@@ -15,7 +15,7 @@ void main() {
       }();
       return LifeStepModel(
         id: index,
-        lifeEvent: LifeEventModel(LifeEventTarget.myself, eventType),
+        lifeEvent: LifeEventModel(LifeEventTarget.myself, eventType, params: <String, dynamic>{}),
         right: null,
         left: null,
         up: null,

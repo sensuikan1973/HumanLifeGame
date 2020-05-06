@@ -5,11 +5,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final start = LifeEventModel(LifeEventTarget.myself, LifeEventType.start);
-  final goals = LifeEventModel(LifeEventTarget.myself, LifeEventType.goal);
-  final gains = LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem);
-  final direc = LifeEventModel(LifeEventTarget.myself, LifeEventType.selectDirection);
-  final blank = LifeEventModel(LifeEventTarget.myself, LifeEventType.nothing);
+  final start = LifeEventModel(LifeEventTarget.myself, LifeEventType.start, params: <String, dynamic>{});
+  final goals = LifeEventModel(LifeEventTarget.myself, LifeEventType.goal, params: <String, dynamic>{});
+  final gains = LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem, params: <String, dynamic>{});
+  final direc = LifeEventModel(LifeEventTarget.myself, LifeEventType.selectDirection, params: <String, dynamic>{});
+  final blank = LifeEventModel(LifeEventTarget.myself, LifeEventType.nothing, params: <String, dynamic>{});
 
   final epBlank = ExactryPointer(up: false, down: false, right: false, left: false);
   final epUp = ExactryPointer(up: true, down: false, right: false, left: false);
