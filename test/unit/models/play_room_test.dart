@@ -44,7 +44,7 @@ void main() {
     expect(playRoomModel.allHumansArrivedAtGoal, false);
 
     // human2 がサイコロを振って進む
-    playRoomModel.playerAction = playRoomModel.playerAction;
+    playRoomModel.playerAction = playRoomModel.playerAction; // 再代入により setter を発火させる
     expect(playRoomModel.positionsByHumanId[human2.id].x, roll);
     expect(playRoomModel.allHumansArrivedAtGoal, false);
 
