@@ -33,6 +33,8 @@ class PlayRoomModel extends ChangeNotifier {
       final lifeStage = LifeStageModel(human)..lifeStepModel = _humanLife.lifeRoad.start;
       lifeStages.add(lifeStage);
     }
+    // 一番手の set
+    _currentPlayer = _orderedHumans.first;
   }
 
   final I18n _i18n;
@@ -46,16 +48,17 @@ class PlayRoomModel extends ChangeNotifier {
   set playerAction(PlayerActionModel playerAction) {
     _playerAction = playerAction;
 
-    if (_currentPlayer != null) {
-      // Announcement の更新
-      announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, playerAction.roll);
-      // 人生を進める
-      _moveLifeStep();
-      // FIXME: 即ターン交代してるけど、あくまで仮
-      _changeToNextTurn();
-    } else {
-      _currentPlayer = _orderedHumans.first;
-    }
+    // まだサイコロが振られてない時は何もしない
+    if (playerAction.roll == 0) return;
+
+    // Announcement の更新
+    announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, playerAction.roll);
+    // 人生を進める
+    _moveLifeStep();
+    // 全員がゴールに到着しているかどうかを確認
+    _allHumansArrivedAtGoal = lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
+    // FIXME: 即ターン交代してるけど、あくまで仮
+    _changeToNextTurn();
 
     notifyListeners();
   }
@@ -83,6 +86,9 @@ class PlayRoomModel extends ChangeNotifier {
 
   // 全参加者の LifeEvent 履歴
   List<LifeEventModel> everyLifeEventRecords;
+
+  bool _allHumansArrivedAtGoal = false;
+  bool get allHumansArrivedAtGoal => _allHumansArrivedAtGoal;
 
   // 次のターンに変える
   void _changeToNextTurn() {

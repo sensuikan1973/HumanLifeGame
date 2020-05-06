@@ -26,12 +26,6 @@ void main() {
       orderedHumans: [human1, human2],
     );
 
-    // 5しか出ないサイコロをセットする
-    final dice = MockDice();
-    const roll = 5;
-    when(dice.roll()).thenReturn(roll);
-    playRoomModel.playerAction = PlayerActionModel(dice)..rollDice();
-
     // 初期位置
     for (final human in playRoomModel.orderedHumans) {
       final position = playRoomModel.positionsByHumanId[human.id];
@@ -39,20 +33,29 @@ void main() {
       expect(position.y, 0);
     }
 
+    // 5しか出ないサイコロをセットする
+    final dice = MockDice();
+    const roll = 5;
+    when(dice.roll()).thenReturn(roll);
+    playRoomModel.playerAction = PlayerActionModel(dice)..rollDice();
+
     // human1 がサイコロを振って進む
-    playRoomModel.playerAction = playRoomModel.playerAction; // この再代入がサイコロを振ったことを意味する
     expect(playRoomModel.positionsByHumanId[human1.id].x, roll);
+    expect(playRoomModel.allHumansArrivedAtGoal, false);
 
     // human2 がサイコロを振って進む
     playRoomModel.playerAction = playRoomModel.playerAction;
     expect(playRoomModel.positionsByHumanId[human2.id].x, roll);
+    expect(playRoomModel.allHumansArrivedAtGoal, false);
 
     // human1 がサイコロを振って進む
     playRoomModel.playerAction = playRoomModel.playerAction;
     expect(playRoomModel.positionsByHumanId[human1.id].x, LifeRoadModel.width - 1);
+    expect(playRoomModel.allHumansArrivedAtGoal, false);
 
     // human2 がサイコロを振って進む
     playRoomModel.playerAction = playRoomModel.playerAction;
     expect(playRoomModel.positionsByHumanId[human2.id].x, LifeRoadModel.width - 1);
+    expect(playRoomModel.allHumansArrivedAtGoal, true);
   });
 }
