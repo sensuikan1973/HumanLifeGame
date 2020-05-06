@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
 import 'life_event.dart';
 import 'life_step.dart';
 
@@ -35,6 +38,7 @@ class LifeRoadModel {
     );
     // 連結情報を更新する
     setDirectionsForLifeStepsOnBoard(start);
+    debugPrintPointerList();
   }
 
   static const int width = 7;
@@ -162,45 +166,47 @@ class LifeRoadModel {
   }
 
   void debugPrintPointerList() {
-    stdout.write('\n');
+    String message;
+    final messageBuffer = StringBuffer(message);
     for (var y = 0; y < lifeStepsOnBoard.length; ++y) {
       for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
-        stdout.write('type:${lifeStepsOnBoard[y][x].lifeEvent.type.index}   ');
+        messageBuffer.write('type:${lifeStepsOnBoard[y][x].lifeEvent.type.index}   ');
       }
-      stdout.write('\n');
+      messageBuffer.writeln();
       for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
         if (lifeStepsOnBoard[y][x].up != null) {
-          stdout.write('up:exist ');
+          messageBuffer.write('up:exist ');
         } else {
-          stdout.write('up:null  ');
+          messageBuffer.write('up:null  ');
         }
       }
-      stdout.write('\n');
+      messageBuffer.writeln();
       for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
         if (lifeStepsOnBoard[y][x].down != null) {
-          stdout.write('dn:exist ');
+          messageBuffer.write('dn:exist ');
         } else {
-          stdout.write('dn:null  ');
+          messageBuffer.write('dn:null  ');
         }
       }
-      stdout.write('\n');
+      messageBuffer.writeln();
       for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
         if (lifeStepsOnBoard[y][x].right != null) {
-          stdout.write('rl:exist ');
+          messageBuffer.write('rl:exist ');
         } else {
-          stdout.write('rl:null  ');
+          messageBuffer.write('rl:null  ');
         }
       }
-      stdout.write('\n');
+      messageBuffer.writeln();
       for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
         if (lifeStepsOnBoard[y][x].left != null) {
-          stdout.write('lt:exist ');
+          messageBuffer.write('lt:exist ');
         } else {
-          stdout.write('lt:null  ');
+          messageBuffer.write('lt:null  ');
         }
       }
-      stdout.write('\n\n');
+      messageBuffer.writeln();
     }
+    DiagnosticsNode.message(messageBuffer.toString());
   }
 }
 

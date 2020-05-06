@@ -36,7 +36,8 @@ void main() {
 
     final model = LifeRoadModel()
       ..lifeStepsOnBoard = lifeStepList
-      ..setDirectionsForLifeStepsOnBoard(lifeStepList[0][0]);
+      ..setDirectionsForLifeStepsOnBoard(lifeStepList[0][0])
+      ..debugPrintPointerList();
     final blank = ExactryPointer(up: false, down: false, right: false, left: false);
     final right = ExactryPointer(up: false, down: false, right: true, left: false);
     final up = ExactryPointer(up: true, down: false, right: false, left: false);
