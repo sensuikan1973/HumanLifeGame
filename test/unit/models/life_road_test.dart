@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_road.dart';
 import 'package:HumanLifeGame/models/common/life_step.dart';
@@ -41,7 +39,6 @@ void main() {
     final model = LifeRoadModel()
       ..lifeStepsOnBoard = lifeStepList
       ..setDirectionsForLifeStepsOnBoard(lifeStepList[0][0]);
-
     final blank = ExactryPointer(up: false, down: false, right: false, left: false);
     final right = ExactryPointer(up: false, down: false, right: true, left: false);
     final up = ExactryPointer(up: true, down: false, right: false, left: false);
@@ -83,46 +80,4 @@ class ExactryPointer {
   final bool down;
   final bool right;
   final bool left;
-}
-
-void debugPrint(LifeRoadModel model) {
-  stdout.write('\n');
-  for (var y = 0; y < model.lifeStepsOnBoard.length; ++y) {
-    for (var x = 0; x < model.lifeStepsOnBoard[y].length; ++x) {
-      stdout.write('type:${model.lifeStepsOnBoard[y][x].lifeEvent.type.index}   ');
-    }
-    stdout.write('\n');
-    for (var x = 0; x < model.lifeStepsOnBoard[y].length; ++x) {
-      if (model.lifeStepsOnBoard[y][x].up != null) {
-        stdout.write('up:exist ');
-      } else {
-        stdout.write('up:null  ');
-      }
-    }
-    stdout.write('\n');
-    for (var x = 0; x < model.lifeStepsOnBoard[y].length; ++x) {
-      if (model.lifeStepsOnBoard[y][x].down != null) {
-        stdout.write('dn:exist ');
-      } else {
-        stdout.write('dn:null  ');
-      }
-    }
-    stdout.write('\n');
-    for (var x = 0; x < model.lifeStepsOnBoard[y].length; ++x) {
-      if (model.lifeStepsOnBoard[y][x].right != null) {
-        stdout.write('rl:exist ');
-      } else {
-        stdout.write('rl:null  ');
-      }
-    }
-    stdout.write('\n');
-    for (var x = 0; x < model.lifeStepsOnBoard[y].length; ++x) {
-      if (model.lifeStepsOnBoard[y][x].left != null) {
-        stdout.write('lt:exist ');
-      } else {
-        stdout.write('lt:null  ');
-      }
-    }
-    stdout.write('\n\n');
-  }
 }

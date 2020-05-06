@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'life_event.dart';
 import 'life_step.dart';
 
@@ -157,6 +159,48 @@ class LifeRoadModel {
   bool _isUncheckedLifeStep(LifeStepModel lifeStep) {
     if (lifeStep.lifeEvent.type == LifeEventType.nothing) return false;
     return [lifeStep.up, lifeStep.down, lifeStep.right, lifeStep.left].every((el) => el == null);
+  }
+
+  void debugPrintPointerList() {
+    stdout.write('\n');
+    for (var y = 0; y < lifeStepsOnBoard.length; ++y) {
+      for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
+        stdout.write('type:${lifeStepsOnBoard[y][x].lifeEvent.type.index}   ');
+      }
+      stdout.write('\n');
+      for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
+        if (lifeStepsOnBoard[y][x].up != null) {
+          stdout.write('up:exist ');
+        } else {
+          stdout.write('up:null  ');
+        }
+      }
+      stdout.write('\n');
+      for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
+        if (lifeStepsOnBoard[y][x].down != null) {
+          stdout.write('dn:exist ');
+        } else {
+          stdout.write('dn:null  ');
+        }
+      }
+      stdout.write('\n');
+      for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
+        if (lifeStepsOnBoard[y][x].right != null) {
+          stdout.write('rl:exist ');
+        } else {
+          stdout.write('rl:null  ');
+        }
+      }
+      stdout.write('\n');
+      for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
+        if (lifeStepsOnBoard[y][x].left != null) {
+          stdout.write('lt:exist ');
+        } else {
+          stdout.write('lt:null  ');
+        }
+      }
+      stdout.write('\n\n');
+    }
   }
 }
 
