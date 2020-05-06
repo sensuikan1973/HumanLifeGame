@@ -5,35 +5,33 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  final start = LifeEventModel(LifeEventTarget.myself, LifeEventType.start);
+  final goals = LifeEventModel(LifeEventTarget.myself, LifeEventType.goal);
+  final gains = LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem);
+  final direc = LifeEventModel(LifeEventTarget.myself, LifeEventType.selectDirection);
+  final blank = LifeEventModel(LifeEventTarget.myself, LifeEventType.nothing);
+  final data = [
+    [start, direc, gains, gains, gains, gains, goals],
+    [blank, gains, blank, blank, blank, gains, blank],
+    [blank, gains, gains, gains, gains, gains, blank],
+    [blank, blank, blank, blank, blank, blank, blank],
+    [blank, blank, blank, blank, blank, blank, blank],
+    [blank, blank, blank, blank, blank, blank, blank],
+    [blank, blank, blank, blank, blank, blank, blank],
+  ];
   test('setDirectionsForLifeStepsOnBoard', () {
     final lifeStepList = List.generate(
         LifeRoadModel.height,
         (y) => List.generate(
               LifeRoadModel.width,
-              (x) {
-                final start = LifeEventModel(LifeEventTarget.myself, LifeEventType.start);
-                final goals = LifeEventModel(LifeEventTarget.myself, LifeEventType.goal);
-                final gains = LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem);
-                final direc = LifeEventModel(LifeEventTarget.myself, LifeEventType.selectDirection);
-                final blank = LifeEventModel(LifeEventTarget.myself, LifeEventType.nothing);
-                final data = [
-                  [start, direc, gains, gains, gains, gains, goals],
-                  [blank, gains, blank, blank, blank, gains, blank],
-                  [blank, gains, gains, gains, gains, gains, blank],
-                  [blank, blank, blank, blank, blank, blank, blank],
-                  [blank, blank, blank, blank, blank, blank, blank],
-                  [blank, blank, blank, blank, blank, blank, blank],
-                  [blank, blank, blank, blank, blank, blank, blank],
-                ];
-                return LifeStepModel(
-                  id: x + (y * LifeRoadModel.width),
-                  lifeEvent: data[y][x],
-                  right: null,
-                  left: null,
-                  up: null,
-                  down: null,
-                );
-              },
+              (x) => LifeStepModel(
+                id: x + (y * LifeRoadModel.width),
+                lifeEvent: data[y][x],
+                right: null,
+                left: null,
+                up: null,
+                down: null,
+              ),
             ));
 
     final model = LifeRoadModel()
