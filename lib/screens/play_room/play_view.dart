@@ -24,7 +24,13 @@ class PlayView extends StatelessWidget {
         child: Center(
           child: LifeRoad(
             playRoomModel.humanLife.lifeRoad,
-            humans: playRoomModel.humans.map((humanModel) => Human(humanModel)).toList(),
+            humans: [
+              for (var i = 0; i < playRoomModel.orderedHumans.length; ++i)
+                Human(
+                  playRoomModel.orderedHumans[i],
+                  [Colors.red, Colors.blue, Colors.green, Colors.yellow][i],
+                ),
+            ],
             positionsByHumanId: playRoomModel.positionsByHumanId,
           ),
         ),
