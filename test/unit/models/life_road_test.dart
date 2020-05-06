@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_road.dart';
 import 'package:HumanLifeGame/models/common/life_step.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -18,13 +19,13 @@ void main() {
                 final direc = LifeEventModel(LifeEventTarget.myself, LifeEventType.selectDirection);
                 final blank = LifeEventModel(LifeEventTarget.myself, LifeEventType.nothing);
                 final data = [
-                  [start, gains, direc, gains, gains, gains, goals],
-                  [blank, blank, gains, blank, blank, gains, blank],
-                  [blank, blank, gains, gains, gains, gains, blank],
+                  [start, direc, gains, gains, gains, gains, goals],
+                  [blank, gains, blank, blank, blank, gains, blank],
+                  [blank, gains, gains, gains, gains, gains, blank],
                   [blank, blank, blank, blank, blank, blank, blank],
                   [blank, blank, blank, blank, blank, blank, blank],
                   [blank, blank, blank, blank, blank, blank, blank],
-                  [blank, blank, blank, blank, blank, blank, blank]
+                  [blank, blank, blank, blank, blank, blank, blank],
                 ];
                 return LifeStepModel(
                   id: x + (y * LifeRoadModel.width), // 一意になるようにしたいだけ。仮。
@@ -41,44 +42,87 @@ void main() {
       ..lifeStepsOnBoard = lifeStepList
       ..setDirectionsForLifeStepsOnBoard(lifeStepList[0][0]);
 
-    stdout.write('\n');
-    for (var y = 0; y < model.lifeStepsOnBoard.length; ++y) {
-      for (var x = 0; x < model.lifeStepsOnBoard[y].length; ++x) {
-        stdout.write('type:${model.lifeStepsOnBoard[y][x].lifeEvent.type.index}   ');
+    final blank = ExactryPointer(up: false, down: false, right: false, left: false);
+    final right = ExactryPointer(up: false, down: false, right: true, left: false);
+    final up = ExactryPointer(up: true, down: false, right: false, left: false);
+    final down = ExactryPointer(up: false, down: true, right: false, left: false);
+    final brRD = ExactryPointer(up: false, down: true, right: true, left: false);
+    final exactryPointerList = [
+      [right, brRD, right, right, right, right, blank],
+      [blank, down, blank, blank, blank, up, blank],
+      [blank, right, right, right, right, up, blank],
+      [blank, blank, blank, blank, blank, blank, blank],
+      [blank, blank, blank, blank, blank, blank, blank],
+      [blank, blank, blank, blank, blank, blank, blank],
+      [blank, blank, blank, blank, blank, blank, blank],
+    ];
+
+    for (var y = 0; y < LifeRoadModel.height; ++y) {
+      for (var x = 0; x < LifeRoadModel.width; ++x) {
+        final up = model.lifeStepsOnBoard[y][x].up != null;
+        expect(up, exactryPointerList[y][x].up);
+        final down = model.lifeStepsOnBoard[y][x].down != null;
+        expect(down, exactryPointerList[y][x].down);
+        final right = model.lifeStepsOnBoard[y][x].right != null;
+        expect(right, exactryPointerList[y][x].right);
+        final left = model.lifeStepsOnBoard[y][x].left != null;
+        expect(left, exactryPointerList[y][x].left);
       }
-      stdout.write('\n');
-      for (var x = 0; x < model.lifeStepsOnBoard[y].length; ++x) {
-        if (model.lifeStepsOnBoard[y][x].up != null) {
-          stdout.write('up:exist ');
-        } else {
-          stdout.write('up:null  ');
-        }
-      }
-      stdout.write('\n');
-      for (var x = 0; x < model.lifeStepsOnBoard[y].length; ++x) {
-        if (model.lifeStepsOnBoard[y][x].down != null) {
-          stdout.write('dn:exist ');
-        } else {
-          stdout.write('dn:null  ');
-        }
-      }
-      stdout.write('\n');
-      for (var x = 0; x < model.lifeStepsOnBoard[y].length; ++x) {
-        if (model.lifeStepsOnBoard[y][x].right != null) {
-          stdout.write('rl:exist ');
-        } else {
-          stdout.write('rl:null  ');
-        }
-      }
-      stdout.write('\n');
-      for (var x = 0; x < model.lifeStepsOnBoard[y].length; ++x) {
-        if (model.lifeStepsOnBoard[y][x].left != null) {
-          stdout.write('lt:exist ');
-        } else {
-          stdout.write('lt:null  ');
-        }
-      }
-      stdout.write('\n\n');
     }
   });
+}
+
+class ExactryPointer {
+  ExactryPointer({
+    @required this.up,
+    @required this.down,
+    @required this.right,
+    @required this.left,
+  });
+  final bool up;
+  final bool down;
+  final bool right;
+  final bool left;
+}
+
+void debugPrint(LifeRoadModel model) {
+  stdout.write('\n');
+  for (var y = 0; y < model.lifeStepsOnBoard.length; ++y) {
+    for (var x = 0; x < model.lifeStepsOnBoard[y].length; ++x) {
+      stdout.write('type:${model.lifeStepsOnBoard[y][x].lifeEvent.type.index}   ');
+    }
+    stdout.write('\n');
+    for (var x = 0; x < model.lifeStepsOnBoard[y].length; ++x) {
+      if (model.lifeStepsOnBoard[y][x].up != null) {
+        stdout.write('up:exist ');
+      } else {
+        stdout.write('up:null  ');
+      }
+    }
+    stdout.write('\n');
+    for (var x = 0; x < model.lifeStepsOnBoard[y].length; ++x) {
+      if (model.lifeStepsOnBoard[y][x].down != null) {
+        stdout.write('dn:exist ');
+      } else {
+        stdout.write('dn:null  ');
+      }
+    }
+    stdout.write('\n');
+    for (var x = 0; x < model.lifeStepsOnBoard[y].length; ++x) {
+      if (model.lifeStepsOnBoard[y][x].right != null) {
+        stdout.write('rl:exist ');
+      } else {
+        stdout.write('rl:null  ');
+      }
+    }
+    stdout.write('\n');
+    for (var x = 0; x < model.lifeStepsOnBoard[y].length; ++x) {
+      if (model.lifeStepsOnBoard[y][x].left != null) {
+        stdout.write('lt:exist ');
+      } else {
+        stdout.write('lt:null  ');
+      }
+    }
+    stdout.write('\n\n');
+  }
 }
