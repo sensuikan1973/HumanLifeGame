@@ -13,15 +13,24 @@ import 'player_action.dart';
 class PlayRoomModel extends ChangeNotifier {
   PlayRoomModel(
     this._i18n, {
+    HumanLifeModel humanLife,
     List<HumanModel> orderedHumans,
-  }) : _orderedHumans = orderedHumans ??
+  })  :
+        // FIXME: 指定がない時にダミーデータを入れてるが、将来的には消す
+        _orderedHumans = orderedHumans ??
             [
               HumanModel('human_1_id', 'human_1_name'),
               HumanModel('human_2_id', 'human_2_name'),
-            ] {
-    // FIXME: 全部ダミーデータ
+            ],
+        _humanLife = humanLife ??
+            HumanLifeModel(
+              title: 'dummy HumanLife',
+              author: UserModel('dummyUserId', 'dummyUser', DateTime.now(), DateTime.now()),
+              lifeRoad: LifeRoadModel.dummy(),
+            ) {
+    // 参加者全員の位置を Start に
     for (final human in _orderedHumans) {
-      final lifeStage = LifeStageModel(human)..lifeStepModel = humanLife.lifeRoad.start;
+      final lifeStage = LifeStageModel(human)..lifeStepModel = _humanLife.lifeRoad.start;
       lifeStages.add(lifeStage);
     }
   }
@@ -30,11 +39,8 @@ class PlayRoomModel extends ChangeNotifier {
 
   // FIXME: 仮でダミーデータを最初から入れてるだけ
   // 歩む対象となる人生
-  final HumanLifeModel humanLife = HumanLifeModel(
-    title: 'dummy HumanLife',
-    author: UserModel('dummyUserId', 'dummyUser', DateTime.now(), DateTime.now()),
-    lifeRoad: LifeRoadModel.dummy(),
-  );
+  final HumanLifeModel _humanLife;
+  HumanLifeModel get humanLife => _humanLife;
 
   PlayerActionModel _playerAction;
   PlayerActionModel get playerAction => _playerAction;
@@ -72,7 +78,8 @@ class PlayRoomModel extends ChangeNotifier {
 
   // それぞれの位置情報
   Map<String, Position> get positionsByHumanId => {
-        for (final lifeStage in lifeStages) lifeStage.human.id: humanLife.lifeRoad.getPosition(lifeStage.lifeStepModel),
+        for (final lifeStage in lifeStages)
+          lifeStage.human.id: _humanLife.lifeRoad.getPosition(lifeStage.lifeStepModel),
       };
 
   // 全参加者の LifeEvent 履歴
