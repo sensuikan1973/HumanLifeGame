@@ -44,7 +44,7 @@ class LifeRoadModel {
   LifeStepModel get start {
     for (final list in lifeStepsOnBoard) {
       for (final lifeStep in list) {
-        if (lifeStep.lifeEvent.isStart) return lifeStep;
+        if (lifeStep.isStart) return lifeStep;
       }
     }
     return null; // TODO: エラーでいい
@@ -53,7 +53,7 @@ class LifeRoadModel {
   Position getPosition(LifeStepModel lifeStep) {
     for (var y = 0; y < lifeStepsOnBoard.length; ++y) {
       for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
-        if (lifeStepsOnBoard[y][x] == lifeStep) return Position(x, y);
+        if (lifeStepsOnBoard[y][x] == lifeStep) return Position(y, x);
       }
     }
     return null;
@@ -74,7 +74,7 @@ class LifeRoadModel {
     var isBranchEvent = false;
 
     // isGoalなら探索終了
-    if (currentLifeStep.lifeEvent.isGoal) return;
+    if (currentLifeStep.isGoal) return;
     // 現在のLifeStepの上下左右に未探索のLifeStepが存在するか
     // 上方をチェック
     if (pos.y != 0) {
@@ -161,7 +161,7 @@ class LifeRoadModel {
 }
 
 class Position {
-  const Position(this.x, this.y);
-  final int x;
+  const Position(this.y, this.x);
   final int y;
+  final int x;
 }
