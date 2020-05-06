@@ -28,7 +28,7 @@ void main() {
                   [blank, blank, blank, blank, blank, blank, blank],
                 ];
                 return LifeStepModel(
-                  id: x + (y * LifeRoadModel.width), // 一意になるようにしたいだけ。仮。
+                  id: x + (y * LifeRoadModel.width),
                   lifeEvent: data[y][x],
                   right: null,
                   left: null,
