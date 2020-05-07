@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'life_event.dart';
 import 'life_step.dart';
 
@@ -162,45 +160,46 @@ class LifeRoadModel {
   }
 
   void debugPrintPointerList() {
-    stdout.write('\n');
+    final messageBuffer = StringBuffer('');
     for (var y = 0; y < lifeStepsOnBoard.length; ++y) {
       for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
-        stdout.write('type:${lifeStepsOnBoard[y][x].lifeEvent.type.index}   ');
+        messageBuffer.write('type:${lifeStepsOnBoard[y][x].lifeEvent.type.index}   ');
       }
-      stdout.write('\n');
+      messageBuffer.writeln();
       for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
         if (lifeStepsOnBoard[y][x].up != null) {
-          stdout.write('up:exist ');
+          messageBuffer.write('up:exist ');
         } else {
-          stdout.write('up:null  ');
+          messageBuffer.write('up:null  ');
         }
       }
-      stdout.write('\n');
+      messageBuffer.writeln();
       for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
         if (lifeStepsOnBoard[y][x].down != null) {
-          stdout.write('dn:exist ');
+          messageBuffer.write('dn:exist ');
         } else {
-          stdout.write('dn:null  ');
+          messageBuffer.write('dn:null  ');
         }
       }
-      stdout.write('\n');
+      messageBuffer.writeln();
       for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
         if (lifeStepsOnBoard[y][x].right != null) {
-          stdout.write('rl:exist ');
+          messageBuffer.write('rl:exist ');
         } else {
-          stdout.write('rl:null  ');
+          messageBuffer.write('rl:null  ');
         }
       }
-      stdout.write('\n');
+      messageBuffer.writeln();
       for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
         if (lifeStepsOnBoard[y][x].left != null) {
-          stdout.write('lt:exist ');
+          messageBuffer.write('lt:exist ');
         } else {
-          stdout.write('lt:null  ');
+          messageBuffer.write('lt:null  ');
         }
       }
-      stdout.write('\n\n');
+      messageBuffer.writeln();
     }
+    print(messageBuffer.toString());
   }
 }
 
