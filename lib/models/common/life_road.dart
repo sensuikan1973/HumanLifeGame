@@ -17,7 +17,7 @@ class LifeRoadModel {
           final eventType = () {
             if (isStart) return LifeEventType.start;
             if (isGoal) return LifeEventType.goal;
-            if (y == 0) return LifeEventType.gainLifeItem;
+            if (y == 0) return LifeEventType.gainLifeItems;
             return LifeEventType.nothing;
           }();
           return LifeStepModel(
