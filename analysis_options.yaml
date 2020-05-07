@@ -7,6 +7,7 @@ analyzer:
   # See: https://github.com/dart-lang/sdk/issues/34098
   exclude:
     - lib/i18n/**
+    - lib/models/common/life_road.dart
 
 linter:
   # See: https://dart-lang.github.io/linter/lints/
