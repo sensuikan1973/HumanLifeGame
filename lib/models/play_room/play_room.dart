@@ -76,6 +76,7 @@ class PlayRoomModel extends ChangeNotifier {
 
   // 手番の人
   HumanModel _currentPlayer;
+  HumanModel get currentPlayer => _currentPlayer;
 
   // 参加者のそれぞれの人生の進捗
   List<LifeStageModel> lifeStages = [];
