@@ -164,8 +164,7 @@ class LifeRoadModel {
   }
 
   void debugPrintPointerList() {
-    String message;
-    final messageBuffer = StringBuffer(message);
+    final messageBuffer = StringBuffer('');
     for (var y = 0; y < lifeStepsOnBoard.length; ++y) {
       for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
         messageBuffer.write('type:${lifeStepsOnBoard[y][x].lifeEvent.type.index}   ');
@@ -204,7 +203,7 @@ class LifeRoadModel {
       }
       messageBuffer.writeln();
     }
-    DiagnosticsNode.message(messageBuffer.toString());
+    DiagnosticsNode.message(messageBuffer.toString()).toString();
   }
 }
 
