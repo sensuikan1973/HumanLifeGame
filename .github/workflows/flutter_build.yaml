@@ -19,7 +19,6 @@ jobs:
         with:
           channel: 'beta'
       - run: flutter channel beta
-      - run: flutter upgrade
       - run: flutter config --enable-web
       - run: flutter pub get
       - run: flutter build web
