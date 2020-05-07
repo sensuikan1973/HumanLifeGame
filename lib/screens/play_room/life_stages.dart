@@ -23,14 +23,9 @@ class LifeStages extends StatelessWidget {
         Row(
           children: [
             SizedBox(
-              width: 20,
-              height: 20,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: (_currentPlayer == lifeStage.human) ? Colors.black : Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
+              width: 15,
+              height: 15,
+              child: (_currentPlayer == lifeStage.human) ? dot() : null,
             ),
             Text(lifeStage.human.name),
           ],
@@ -41,4 +36,11 @@ class LifeStages extends StatelessWidget {
       children: _humanNames,
     );
   }
+
+  DecoratedBox dot() => DecoratedBox(
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(10),
+        ),
+      );
 }
