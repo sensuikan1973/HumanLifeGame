@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
 import 'life_event.dart';
 import 'life_step.dart';
@@ -36,7 +35,6 @@ class LifeRoadModel {
     );
     // 連結情報を更新する
     setDirectionsForLifeStepsOnBoard(start);
-    debugPrintPointerList();
   }
 
   static const int width = 7;
@@ -163,7 +161,7 @@ class LifeRoadModel {
     return [lifeStep.up, lifeStep.down, lifeStep.right, lifeStep.left].every((el) => el == null);
   }
 
-  void debugPrintPointerList() {
+  String debugPrintPointerList() {
     final messageBuffer = StringBuffer('');
     for (var y = 0; y < lifeStepsOnBoard.length; ++y) {
       for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
@@ -203,7 +201,7 @@ class LifeRoadModel {
       }
       messageBuffer.writeln();
     }
-    DiagnosticsNode.message(messageBuffer.toString()).toString();
+    return DiagnosticsNode.message(messageBuffer.toString()).toString();
   }
 }
 
