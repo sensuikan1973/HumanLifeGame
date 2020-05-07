@@ -10,61 +10,153 @@ void main() {
   final gains = LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem);
   final direc = LifeEventModel(LifeEventTarget.myself, LifeEventType.selectDirection);
   final blank = LifeEventModel(LifeEventTarget.myself, LifeEventType.nothing);
-  final data = [
-    [start, direc, gains, gains, gains, gains, goals],
-    [blank, gains, blank, blank, blank, gains, blank],
-    [blank, gains, gains, gains, gains, gains, blank],
-    [blank, blank, blank, blank, blank, blank, blank],
-    [blank, blank, blank, blank, blank, blank, blank],
-    [blank, blank, blank, blank, blank, blank, blank],
-    [blank, blank, blank, blank, blank, blank, blank],
-  ];
-  test('setDirectionsForLifeStepsOnBoard', () {
-    final lifeStepList = List.generate(
-        LifeRoadModel.height,
-        (y) => List.generate(
-              LifeRoadModel.width,
-              (x) => LifeStepModel(
-                id: x + (y * LifeRoadModel.width),
-                lifeEvent: data[y][x],
-                right: null,
-                left: null,
-                up: null,
-                down: null,
-              ),
-            ));
 
-    final model = LifeRoadModel()
-      ..lifeStepsOnBoard = lifeStepList
-      ..setDirectionsForLifeStepsOnBoard(lifeStepList[0][0]);
-    final blank = ExactryPointer(up: false, down: false, right: false, left: false);
-    final right = ExactryPointer(up: false, down: false, right: true, left: false);
-    final up = ExactryPointer(up: true, down: false, right: false, left: false);
-    final down = ExactryPointer(up: false, down: true, right: false, left: false);
-    final brRD = ExactryPointer(up: false, down: true, right: true, left: false);
-    final exactryPointerList = [
-      [right, brRD, right, right, right, right, blank],
-      [blank, down, blank, blank, blank, up, blank],
-      [blank, right, right, right, right, up, blank],
-      [blank, blank, blank, blank, blank, blank, blank],
-      [blank, blank, blank, blank, blank, blank, blank],
+  final epBlank = ExactryPointer(up: false, down: false, right: false, left: false);
+  final epUp = ExactryPointer(up: true, down: false, right: false, left: false);
+  final epDown = ExactryPointer(up: false, down: true, right: false, left: false);
+  final epRight = ExactryPointer(up: false, down: false, right: true, left: false);
+  final epLeft = ExactryPointer(up: false, down: false, right: false, left: true);
+  final epBrDR = ExactryPointer(up: false, down: true, right: true, left: false);
+  final epBrDL = ExactryPointer(up: false, down: true, right: false, left: true);
+  final epBrUDR = ExactryPointer(up: true, down: true, right: true, left: false);
+
+  test('ditect a single direction ', () {
+    final testData = [
+      [start, gains, gains, gains, gains, gains, gains],
+      [blank, blank, blank, blank, blank, blank, gains],
+      [goals, blank, blank, blank, blank, blank, gains],
+      [gains, blank, blank, blank, blank, blank, gains],
+      [gains, blank, blank, blank, blank, blank, gains],
+      [gains, blank, blank, blank, blank, blank, gains],
+      [gains, gains, gains, gains, gains, gains, gains],
+    ];
+    final checkList = [
+      [epRight, epRight, epRight, epRight, epRight, epRight, epDown],
+      [epBlank, epBlank, epBlank, epBlank, epBlank, epBlank, epDown],
+      [epBlank, epBlank, epBlank, epBlank, epBlank, epBlank, epDown],
+      [epUp, epBlank, epBlank, epBlank, epBlank, epBlank, epDown],
+      [epUp, epBlank, epBlank, epBlank, epBlank, epBlank, epDown],
+      [epUp, epBlank, epBlank, epBlank, epBlank, epBlank, epDown],
+      [epUp, epLeft, epLeft, epLeft, epLeft, epLeft, epLeft],
+    ];
+    _TestExecuterForDirectionTest(testData: testData, checkList: checkList).test();
+  });
+  test('ditect a branch direction', () {
+    final testData = [
+      [start, direc, gains, gains, gains, gains, blank],
+      [blank, gains, blank, blank, blank, gains, blank],
+      [blank, gains, gains, gains, gains, gains, gains],
+      [blank, blank, blank, blank, blank, blank, gains],
+      [goals, gains, gains, gains, gains, gains, direc],
+      [blank, gains, blank, blank, blank, blank, gains],
+      [blank, gains, gains, gains, gains, gains, gains],
+    ];
+
+    final checkList = [
+      [epRight, epBrDR, epRight, epRight, epRight, epDown, epBlank],
+      [epBlank, epDown, epBlank, epBlank, epBlank, epDown, epBlank],
+      [epBlank, epRight, epRight, epRight, epRight, epRight, epDown],
+      [epBlank, epBlank, epBlank, epBlank, epBlank, epBlank, epDown],
+      [epBlank, epLeft, epLeft, epLeft, epLeft, epLeft, epBrDL],
+      [epBlank, epUp, epBlank, epBlank, epBlank, epBlank, epDown],
+      [epBlank, epUp, epLeft, epLeft, epLeft, epLeft, epLeft],
+    ];
+
+    _TestExecuterForDirectionTest(testData: testData, checkList: checkList).test();
+  });
+  test('ditect two branch direction', () {
+    final testData = [
+      [start, direc, gains, gains, gains, gains, goals],
+      [blank, gains, blank, blank, blank, gains, blank],
+      [blank, gains, direc, gains, gains, gains, blank],
+      [blank, blank, gains, blank, gains, blank, blank],
+      [blank, blank, gains, gains, gains, blank, blank],
       [blank, blank, blank, blank, blank, blank, blank],
       [blank, blank, blank, blank, blank, blank, blank],
     ];
 
+    final checkList = [
+      [epRight, epBrDR, epRight, epRight, epRight, epRight, epBlank],
+      [epBlank, epDown, epBlank, epBlank, epBlank, epUp, epBlank],
+      [epBlank, epRight, epBrDR, epRight, epRight, epUp, epBlank],
+      [epBlank, epBlank, epDown, epBlank, epUp, epBlank, epBlank],
+      [epBlank, epBlank, epRight, epRight, epUp, epBlank, epBlank],
+      [epBlank, epBlank, epBlank, epBlank, epBlank, epBlank, epBlank],
+      [epBlank, epBlank, epBlank, epBlank, epBlank, epBlank, epBlank],
+    ];
+
+    _TestExecuterForDirectionTest(testData: testData, checkList: checkList).test();
+  });
+
+  test('ditect three branch direction', () {
+    final testData = [
+      [blank, gains, gains, gains, gains, gains, blank],
+      [blank, gains, blank, blank, blank, gains, blank],
+      [blank, gains, blank, blank, blank, gains, blank],
+      [start, direc, gains, gains, gains, gains, goals],
+      [blank, gains, blank, blank, blank, gains, blank],
+      [blank, gains, blank, blank, blank, gains, blank],
+      [blank, gains, gains, gains, gains, gains, blank],
+    ];
+
+    final checkList = [
+      [epBlank, epRight, epRight, epRight, epRight, epDown, epBlank],
+      [epBlank, epUp, epBlank, epBlank, epBlank, epDown, epBlank],
+      [epBlank, epUp, epBlank, epBlank, epBlank, epDown, epBlank],
+      [epRight, epBrUDR, epRight, epRight, epRight, epRight, epBlank],
+      [epBlank, epDown, epBlank, epBlank, epBlank, epUp, epBlank],
+      [epBlank, epDown, epBlank, epBlank, epBlank, epUp, epBlank],
+      [epBlank, epRight, epRight, epRight, epRight, epUp, epBlank],
+    ];
+
+    _TestExecuterForDirectionTest(testData: testData, checkList: checkList).test();
+  });
+}
+
+class _TestExecuterForDirectionTest {
+  _TestExecuterForDirectionTest({
+    @required this.testData,
+    @required this.checkList,
+  }) {
+    lifeStepList = List.generate(
+      LifeRoadModel.height,
+      (y) => List.generate(
+        LifeRoadModel.width,
+        (x) => LifeStepModel(
+          id: x + (y * LifeRoadModel.width),
+          lifeEvent: testData[y][x],
+          right: null,
+          left: null,
+          up: null,
+          down: null,
+        ),
+      ),
+    );
+    model = LifeRoadModel()..lifeStepsOnBoard = lifeStepList;
+  }
+
+  final List<List<LifeEventModel>> testData;
+  final List<List<ExactryPointer>> checkList;
+
+  List<List<LifeStepModel>> lifeStepList;
+  LifeRoadModel model;
+
+  void test() {
+    model.setDirectionsForLifeStepsOnBoard(model.start);
+
     for (var y = 0; y < LifeRoadModel.height; ++y) {
       for (var x = 0; x < LifeRoadModel.width; ++x) {
         final up = model.lifeStepsOnBoard[y][x].up != null;
-        expect(up, exactryPointerList[y][x].up);
+        expect(up, checkList[y][x].up);
         final down = model.lifeStepsOnBoard[y][x].down != null;
-        expect(down, exactryPointerList[y][x].down);
+        expect(down, checkList[y][x].down);
         final right = model.lifeStepsOnBoard[y][x].right != null;
-        expect(right, exactryPointerList[y][x].right);
+        expect(right, checkList[y][x].right);
         final left = model.lifeStepsOnBoard[y][x].left != null;
-        expect(left, exactryPointerList[y][x].left);
+        expect(left, checkList[y][x].left);
       }
     }
-  });
+  }
 }
 
 class ExactryPointer {
