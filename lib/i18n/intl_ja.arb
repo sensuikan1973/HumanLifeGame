@@ -5,7 +5,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "lifeStepEventType": "{type,select, nothing{}start{スタート}goal{ゴール}selectDirection{方向を選択}gainLifeItem{アイテムを獲得 :}loseLifeItem{アイテムを損失 :}}",
+  "lifeStepEventType": "{type,select, nothing{}start{スタート}goal{ゴール}selectDirection{方向を選択}gainLifeItems{アイテムを獲得 :}loseLifeItems{アイテムを損失 :}}",
   "@lifeStepEventType": {
     "type": "text",
     "placeholders": {

@@ -24,8 +24,8 @@ class MessageLookup extends MessageLookupByLibrary {
         'start': 'Start',
         'goal': 'Goal',
         'selectDirection': 'Select Direction',
-        'gainLifeItem': 'Gain Item :',
-        'loseLifeItem': 'Lose Item :',
+        'gainLifeItems': 'Gain Item :',
+        'loseLifeItems': 'Lose Item :',
       })}";
 
   static m1(name, roll) => "${name} rolled the dice. result: ${roll}";

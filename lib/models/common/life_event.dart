@@ -50,19 +50,19 @@ enum LifeEventType {
   selectDirectionPerLifeItem,
 
   /// 単に LifeItem を獲得する
-  gainLifeItem,
+  gainLifeItems,
 
   /// LifeItemA の数に基づいて、LifeItemB を獲得する
-  gainLifeItemPerOtherLifeItem,
+  gainLifeItemsPerOtherLifeItem,
 
   /// サイコロの出目に基づいて、LifeItem を獲得する
-  gainLifeItemPerDiceRoll,
+  gainLifeItemsPerDiceRoll,
 
   /// LifeItemA が存在すれば、LifeItemB を獲得する
-  gainLifeItemIfExistOtherLifeItem,
+  gainLifeItemsIfExistOtherLifeItem,
 
   /// LifeItemA が存在しなければ、LifeItemB を獲得する
-  gainLifeItemIfNotExistOtherLifeItem,
+  gainLifeItemsIfNotExistOtherLifeItem,
 
   /// LifeItemA と LifeItemB を交換する
   exchangeLifeItems,
@@ -71,17 +71,17 @@ enum LifeEventType {
   exchangeLifeItemsWithDiceRoll,
 
   /// 単に LifeItem を失う
-  loseLifeItem,
+  loseLifeItems,
 
   /// サイコロの出目に基づいて、LifeItem を失う
-  loseLifeItemPerDiceRoll,
+  loseLifeItemsPerDiceRoll,
 
   /// LifeItemA の数に基づいて、LifeItemB を失う
-  loseLifeItemPerOtherLifeItem,
+  loseLifeItemsPerOtherLifeItem,
 
   /// LifeItemA が存在すれば、LifeItemB を失う
-  loseLifeItemIfExistOtherLifeItem,
+  loseLifeItemsIfExistOtherLifeItem,
 
   /// LifeItemA が存在しなければ、LifeItemB を失う
-  loseLifeItemIfNotExistOtherLifeItem,
+  loseLifeItemsIfNotExistOtherLifeItem,
 }
