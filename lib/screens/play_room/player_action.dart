@@ -16,9 +16,7 @@ class PlayerAction extends StatelessWidget {
             key: const Key('playerActionDiceRollButton'),
             color: Colors.blue,
             textColor: Colors.white,
-            onPressed: () {
-              Provider.of<PlayerActionModel>(context, listen: false).rollDice();
-            },
+            onPressed: () => context.read<PlayerActionModel>().rollDice(),
             child: Text(
               I18n.of(context).rollDice,
               style: const TextStyle(fontSize: 20),
