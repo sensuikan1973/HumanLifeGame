@@ -13,9 +13,7 @@ class PlayView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // この変更は listenable にしておき、Human の位置更新を下位に伝える
-    final playRoomModel = Provider.of<PlayRoomModel>(context, listen: true);
-
+    final playRoomModel = context.watch<PlayRoomModel>();
     return SizedBox(
       width: 1050,
       height: 700,

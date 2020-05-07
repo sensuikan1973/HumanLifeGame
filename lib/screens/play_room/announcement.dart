@@ -7,15 +7,15 @@ class Announcement extends StatelessWidget {
   const Announcement({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-        width: 400,
-        height: 50,
-        child: Selector<PlayRoomModel, String>(
-          selector: (context, model) => model.announcement.message,
-          builder: (context, message, child) => Text(
-            message,
-            key: const Key('announcementMessageText'),
-          ),
-        ),
-      );
+  Widget build(BuildContext context) {
+    final message = context.select<PlayRoomModel, String>((model) => model.announcement.message);
+    return SizedBox(
+      width: 400,
+      height: 50,
+      child: Text(
+        message,
+        key: const Key('announcementMessageText'),
+      ),
+    );
+  }
 }
