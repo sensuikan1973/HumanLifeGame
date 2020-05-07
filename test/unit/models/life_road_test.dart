@@ -39,7 +39,7 @@ void main() {
       [epUp, epBlank, epBlank, epBlank, epBlank, epBlank, epDown],
       [epUp, epLeft, epLeft, epLeft, epLeft, epLeft, epLeft],
     ];
-    TestFixture(testData: testData, checkList: checkList).test();
+    _TestExecuterForDirectionTest(testData: testData, checkList: checkList).test();
   });
   test('ditect a branch direction', () {
     final testData = [
@@ -62,7 +62,7 @@ void main() {
       [epBlank, epUp, epLeft, epLeft, epLeft, epLeft, epLeft],
     ];
 
-    TestFixture(testData: testData, checkList: checkList).test();
+    _TestExecuterForDirectionTest(testData: testData, checkList: checkList).test();
   });
   test('ditect two branch direction', () {
     final testData = [
@@ -85,7 +85,7 @@ void main() {
       [epBlank, epBlank, epBlank, epBlank, epBlank, epBlank, epBlank],
     ];
 
-    TestFixture(testData: testData, checkList: checkList).test();
+    _TestExecuterForDirectionTest(testData: testData, checkList: checkList).test();
   });
 
   test('ditect three branch direction', () {
@@ -109,12 +109,12 @@ void main() {
       [epBlank, epRight, epRight, epRight, epRight, epUp, epBlank],
     ];
 
-    TestFixture(testData: testData, checkList: checkList).test();
+    _TestExecuterForDirectionTest(testData: testData, checkList: checkList).test();
   });
 }
 
-class TestFixture {
-  TestFixture({
+class _TestExecuterForDirectionTest {
+  _TestExecuterForDirectionTest({
     @required this.testData,
     @required this.checkList,
   }) {
@@ -135,8 +135,8 @@ class TestFixture {
     model = LifeRoadModel()..lifeStepsOnBoard = lifeStepList;
   }
 
-  List<List<LifeEventModel>> testData;
-  List<List<ExactryPointer>> checkList;
+  final List<List<LifeEventModel>> testData;
+  final List<List<ExactryPointer>> checkList;
 
   List<List<LifeStepModel>> lifeStepList;
   LifeRoadModel model;
