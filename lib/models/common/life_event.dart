@@ -1,5 +1,11 @@
+import 'package:flutter/foundation.dart';
+
 class LifeEventModel {
-  LifeEventModel(this.target, this.type);
+  LifeEventModel(
+    this.target,
+    this.type, {
+    @required Map<String, dynamic> params,
+  }) : _params = params;
 
   LifeEventTarget target;
   LifeEventType type;
@@ -10,7 +16,8 @@ class LifeEventModel {
   // LifeEventType ごとに異なる内容が格納される。
   // そのため type に応じて params['foo'] と参照することになる。
   // Serialize して型付きで扱えるようにするのも要検討。(See: https://flutter.dev/docs/development/data-and-backend/json)
-  Map<String, dynamic> params;
+  final Map<String, dynamic> _params;
+  Map<String, dynamic> get params => _params;
 
   String description;
 }

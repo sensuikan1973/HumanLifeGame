@@ -49,12 +49,14 @@ class PlayRoomModel extends ChangeNotifier {
     _playerAction = playerAction;
 
     // まだサイコロが振られてない時は何もしない
-    if (playerAction.notRolled) return;
+    if (playerAction.neverRolled) return;
 
     // Announcement の更新
     announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, playerAction.roll);
     // 人生を進める
     _moveLifeStep();
+    // TODO: LifeEvent 処理
+
     // 全員がゴールに到着しているかどうかを確認
     _allHumansArrivedAtGoal = lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
     // FIXME: 即ターン交代してるけど、あくまで仮
@@ -77,6 +79,8 @@ class PlayRoomModel extends ChangeNotifier {
 
   // 参加者のそれぞれの人生の進捗
   List<LifeStageModel> lifeStages = [];
+  int get _currentPlayerLifeStageIndex => lifeStages.indexWhere((lifeStage) => lifeStage.human == _currentPlayer);
+  LifeStageModel get _currentPlayerLifeStage => lifeStages[_currentPlayerLifeStageIndex];
 
   // それぞれの位置情報
   Map<String, Position> get positionsByHumanId => {
@@ -97,12 +101,9 @@ class PlayRoomModel extends ChangeNotifier {
   }
 
   void _moveLifeStep() {
-    // 現在の手番の human の LifeStage を取得する
-    final targetLifeStageIndex = lifeStages.indexWhere((lifeStage) => lifeStage.human == _currentPlayer);
-    final lifeStage = lifeStages[targetLifeStageIndex];
     // 現在の LifeStep から出目の数だけ進んだ LifeStep を取得する
-    final destination = lifeStage.lifeStepModel.getNext(playerAction.roll);
+    final destination = _currentPlayerLifeStage.lifeStepModel.getNext(playerAction.roll);
     // 進み先の LifeStep を LifeStage に代入する
-    lifeStages[targetLifeStageIndex].lifeStepModel = destination;
+    lifeStages[_currentPlayerLifeStageIndex].lifeStepModel = destination;
   }
 }
