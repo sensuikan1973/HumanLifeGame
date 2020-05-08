@@ -20,7 +20,6 @@ Future<void> main() async {
       down: null,
     );
 
-    LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItems, params: <String, dynamic>{});
     await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
     await tester.pump();
 

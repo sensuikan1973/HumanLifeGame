@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../models/common/human.dart';
+import '../../models/play_room/life_stage.dart';
+import '../../models/play_room/play_room.dart';
 
 /// Humanの状況を表示
 class LifeStages extends StatelessWidget {
@@ -6,20 +11,32 @@ class LifeStages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-        width: 100,
-        height: 100,
-        child: _userId(context),
+        width: 300,
+        height: 500,
+        child: _lifeStages(context),
       );
 
-  Column _userId(BuildContext context) {
-    final userId = <Widget>[
-      const Text('human 1'),
-      const Text('human 2'),
-      const Text('human 3'),
-      const Text('human 4'),
+  Column _lifeStages(BuildContext context) {
+    final lifeStages = context.select<PlayRoomModel, List<LifeStageModel>>((model) => model.lifeStages);
+    final currentPlayer = context.select<PlayRoomModel, HumanModel>((model) => model.currentPlayer);
+    final humanNames = <Widget>[
+      for (final lifeStage in lifeStages)
+        Row(
+          children: [
+            SizedBox(
+              width: 15,
+              height: 15,
+              child: (currentPlayer == lifeStage.human) ? dot() : null,
+            ),
+            Text(lifeStage.human.name),
+          ],
+        ),
     ];
+
     return Column(
-      children: userId,
+      children: humanNames,
     );
   }
+
+  ColoredBox dot() => ColoredBox(color: Colors.black);
 }

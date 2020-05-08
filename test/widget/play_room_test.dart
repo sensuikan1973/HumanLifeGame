@@ -72,4 +72,14 @@ Future<void> main() async {
     await tester.pump();
     expect(find.text(i18n.rollAnnouncement('human_1_name', roll)), findsOneWidget);
   });
+
+  testWidgets('show user name in human life stages', (tester) async {
+    await tester.pumpWidget(
+      Provider<Dice>(create: (context) => const Dice(), child: testableApp(home: const PlayRoom())),
+    );
+    await tester.pump();
+    // FIXME: humans が内部で仮定義されているので、human name などはあくまで仮のテストに過ぎない
+    expect(find.text('human_1_name'), findsOneWidget);
+    expect(find.text('human_2_name'), findsOneWidget);
+  });
 }
