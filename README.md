@@ -18,7 +18,12 @@ Play now Human Life Game on Web. You can also create original map.
 
 See: https://flutter.dev/docs/get-started/web
 
-### i18n
+### [Code Generate](https://pub.dev/packages/freezed)
+```sh
+flutter packages pub run build_runner build
+```
+
+### [i18n](https://flutter.dev/docs/development/accessibility-and-localization/internationalization)
 
 1. add English text to `i18n/extensions/*.dart`
 2. create arb files
@@ -37,9 +42,9 @@ See: https://flutter.dev/docs/get-started/web
 
 6. you can call `I18n.of(context).hoge`
 
-### Document
+### [Document](https://github.com/dart-lang/dartdoc)
 
 ```sh
-See: https://github.com/dart-lang/dartdoc/pull/2175
+# See: https://github.com/dart-lang/dartdoc/pull/2175
 FLUTTER_ROOT=~/development/flutter dartdoc --output doc/api && open doc/api/index.html
 ```
