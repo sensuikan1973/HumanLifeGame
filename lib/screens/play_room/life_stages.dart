@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/play_room/play_room.dart';
-import 'human.dart';
 
 /// Humanの状況を表示
 class LifeStages extends StatelessWidget {

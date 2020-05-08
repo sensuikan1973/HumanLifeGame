@@ -1,5 +1,6 @@
 import 'package:HumanLifeGame/api/dice.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
+import 'package:HumanLifeGame/models/play_room/play_room.dart';
 import 'package:HumanLifeGame/screens/play_room/announcement.dart';
 import 'package:HumanLifeGame/screens/play_room/dice_result.dart';
 import 'package:HumanLifeGame/screens/play_room/life_stages.dart';
@@ -71,5 +72,15 @@ Future<void> main() async {
     await tester.tap(rollDiceButton);
     await tester.pump();
     expect(find.text(i18n.rollAnnouncement('human_1_name', roll)), findsOneWidget);
+  });
+
+  testWidgets('show user name in human life stages', (tester) async {
+    await tester.pumpWidget(
+      Provider<Dice>(create: (context) => const Dice(), child: testableApp(home: const PlayRoom())),
+    );
+    await tester.pump();
+
+    expect(find.text('human_1_name'), findsOneWidget);
+    expect(find.text('human_2_name'), findsOneWidget);
   });
 }
