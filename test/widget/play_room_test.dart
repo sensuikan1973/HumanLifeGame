@@ -78,7 +78,7 @@ Future<void> main() async {
       Provider<Dice>(create: (context) => const Dice(), child: testableApp(home: const PlayRoom())),
     );
     await tester.pump();
-
+    // FIXME: humans が内部で仮定義されているので、human name などはあくまで仮のテストに過ぎない
     expect(find.text('human_1_name'), findsOneWidget);
     expect(find.text('human_2_name'), findsOneWidget);
   });
