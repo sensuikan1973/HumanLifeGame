@@ -24,8 +24,8 @@ class MessageLookup extends MessageLookupByLibrary {
         'start': 'スタート',
         'goal': 'ゴール',
         'selectDirection': '方向を選択',
-        'gainLifeItem': 'アイテムを獲得 :',
-        'loseLifeItem': 'アイテムを損失 :',
+        'gainLifeItems': 'アイテムを獲得 :',
+        'loseLifeItems': 'アイテムを損失 :',
       })}";
 
   static m1(name, roll) => "${name} がサイコロを振りました. 結果: ${roll}";

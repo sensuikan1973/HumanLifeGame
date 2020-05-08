@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   final start = LifeEventModel(LifeEventTarget.myself, LifeEventType.start, params: <String, dynamic>{});
   final goals = LifeEventModel(LifeEventTarget.myself, LifeEventType.goal, params: <String, dynamic>{});
-  final gains = LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem, params: <String, dynamic>{});
+  final gains = LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItems, params: <String, dynamic>{});
   final direc = LifeEventModel(LifeEventTarget.myself, LifeEventType.selectDirection, params: <String, dynamic>{});
   final blank = LifeEventModel(LifeEventTarget.myself, LifeEventType.nothing, params: <String, dynamic>{});
 

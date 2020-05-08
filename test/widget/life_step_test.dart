@@ -13,14 +13,14 @@ Future<void> main() async {
   testWidgets('show DecoratedBox with Colors.cyan[50]', (tester) async {
     final model = LifeStepModel(
       id: 0,
-      lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem, params: <String, dynamic>{}),
+      lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItems, params: <String, dynamic>{}),
       right: null,
       left: null,
       up: null,
       down: null,
     );
 
-    LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItem, params: <String, dynamic>{});
+    LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItems, params: <String, dynamic>{});
     await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
     await tester.pump();
 
@@ -67,9 +67,9 @@ Future<void> main() async {
 
   await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.selectDirection);
 
-  await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.gainLifeItem);
+  await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.gainLifeItems);
 
-  await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.loseLifeItem);
+  await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.loseLifeItems);
 }
 
 Future<void> checkLifeEventI18n(LifeEventTarget target, LifeEventType type) async {
