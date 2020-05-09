@@ -18,5 +18,8 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: 'beta'
+      - run: flutter channel beta # tomporary command. Error at:https://github.com/sensuikan1973/HumanLifeGame/pull/84/checks?check_run_id=658340037#step:4:38
+      - run: flutter upgrade # tomporary command
+      - run: flutter config --enable-web
       - run: flutter pub get
       - run: flutter analyze
