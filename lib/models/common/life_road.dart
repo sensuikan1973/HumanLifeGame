@@ -166,7 +166,7 @@ class LifeRoadModel {
     return [lifeStep.up, lifeStep.down, lifeStep.right, lifeStep.left].every((el) => el == null);
   }
 
-  void debugPrintPointerList() {
+  String debugMessage() {
     final messageBuffer = StringBuffer('');
     for (var y = 0; y < lifeStepsOnBoard.length; ++y) {
       for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
@@ -206,8 +206,7 @@ class LifeRoadModel {
       }
       messageBuffer.writeln();
     }
-    // ignore: avoid_print
-    print(messageBuffer.toString());
+    return messageBuffer.toString();
   }
 }
 
