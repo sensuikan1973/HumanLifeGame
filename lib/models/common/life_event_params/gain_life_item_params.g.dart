@@ -6,25 +6,19 @@ part of 'gain_life_item_params.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_GainLifeItemParams _$_$_GainLifeItemParamsFromJson(
-    Map<String, dynamic> json) {
+_$_GainLifeItemParams _$_$_GainLifeItemParamsFromJson(Map<String, dynamic> json) {
   return _$_GainLifeItemParams(
     targetItems: (json['targetItems'] as List)
-        ?.map((e) => e == null
-            ? null
-            : GainLifeItemTarget.fromJson(e as Map<String, dynamic>))
+        ?.map((e) => e == null ? null : GainLifeItemTarget.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   );
 }
 
-Map<String, dynamic> _$_$_GainLifeItemParamsToJson(
-        _$_GainLifeItemParams instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$_$_GainLifeItemParamsToJson(_$_GainLifeItemParams instance) => <String, dynamic>{
       'targetItems': instance.targetItems,
     };
 
-_$_GainLifeItemTarget _$_$_GainLifeItemTargetFromJson(
-    Map<String, dynamic> json) {
+_$_GainLifeItemTarget _$_$_GainLifeItemTargetFromJson(Map<String, dynamic> json) {
   return _$_GainLifeItemTarget(
     key: json['key'] as String,
     type: _$enumDecodeNullable(_$LifeItemTypeEnumMap, json['type']),
@@ -32,9 +26,7 @@ _$_GainLifeItemTarget _$_$_GainLifeItemTargetFromJson(
   );
 }
 
-Map<String, dynamic> _$_$_GainLifeItemTargetToJson(
-        _$_GainLifeItemTarget instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$_$_GainLifeItemTargetToJson(_$_GainLifeItemTarget instance) => <String, dynamic>{
       'key': instance.key,
       'type': _$LifeItemTypeEnumMap[instance.type],
       'amount': instance.amount,
@@ -50,9 +42,7 @@ T _$enumDecode<T>(
         '${enumValues.values.join(', ')}');
   }
 
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
+  final value = enumValues.entries.singleWhere((e) => e.value == source, orElse: () => null)?.key;
 
   if (value == null && unknownValue == null) {
     throw ArgumentError('`$source` is not one of the supported values: '

@@ -33,14 +33,12 @@ mixin _$GainLifeItemParams {
 }
 
 abstract class $GainLifeItemParamsCopyWith<$Res> {
-  factory $GainLifeItemParamsCopyWith(
-          GainLifeItemParams value, $Res Function(GainLifeItemParams) then) =
+  factory $GainLifeItemParamsCopyWith(GainLifeItemParams value, $Res Function(GainLifeItemParams) then) =
       _$GainLifeItemParamsCopyWithImpl<$Res>;
   $Res call({List<GainLifeItemTarget> targetItems});
 }
 
-class _$GainLifeItemParamsCopyWithImpl<$Res>
-    implements $GainLifeItemParamsCopyWith<$Res> {
+class _$GainLifeItemParamsCopyWithImpl<$Res> implements $GainLifeItemParamsCopyWith<$Res> {
   _$GainLifeItemParamsCopyWithImpl(this._value, this._then);
 
   final GainLifeItemParams _value;
@@ -52,27 +50,21 @@ class _$GainLifeItemParamsCopyWithImpl<$Res>
     Object targetItems = freezed,
   }) {
     return _then(_value.copyWith(
-      targetItems: targetItems == freezed
-          ? _value.targetItems
-          : targetItems as List<GainLifeItemTarget>,
+      targetItems: targetItems == freezed ? _value.targetItems : targetItems as List<GainLifeItemTarget>,
     ));
   }
 }
 
-abstract class _$GainLifeItemParamsCopyWith<$Res>
-    implements $GainLifeItemParamsCopyWith<$Res> {
-  factory _$GainLifeItemParamsCopyWith(
-          _GainLifeItemParams value, $Res Function(_GainLifeItemParams) then) =
+abstract class _$GainLifeItemParamsCopyWith<$Res> implements $GainLifeItemParamsCopyWith<$Res> {
+  factory _$GainLifeItemParamsCopyWith(_GainLifeItemParams value, $Res Function(_GainLifeItemParams) then) =
       __$GainLifeItemParamsCopyWithImpl<$Res>;
   @override
   $Res call({List<GainLifeItemTarget> targetItems});
 }
 
-class __$GainLifeItemParamsCopyWithImpl<$Res>
-    extends _$GainLifeItemParamsCopyWithImpl<$Res>
+class __$GainLifeItemParamsCopyWithImpl<$Res> extends _$GainLifeItemParamsCopyWithImpl<$Res>
     implements _$GainLifeItemParamsCopyWith<$Res> {
-  __$GainLifeItemParamsCopyWithImpl(
-      _GainLifeItemParams _value, $Res Function(_GainLifeItemParams) _then)
+  __$GainLifeItemParamsCopyWithImpl(_GainLifeItemParams _value, $Res Function(_GainLifeItemParams) _then)
       : super(_value, (v) => _then(v as _GainLifeItemParams));
 
   @override
@@ -83,21 +75,16 @@ class __$GainLifeItemParamsCopyWithImpl<$Res>
     Object targetItems = freezed,
   }) {
     return _then(_GainLifeItemParams(
-      targetItems: targetItems == freezed
-          ? _value.targetItems
-          : targetItems as List<GainLifeItemTarget>,
+      targetItems: targetItems == freezed ? _value.targetItems : targetItems as List<GainLifeItemTarget>,
     ));
   }
 }
 
 @JsonSerializable()
-class _$_GainLifeItemParams
-    with DiagnosticableTreeMixin
-    implements _GainLifeItemParams {
+class _$_GainLifeItemParams with DiagnosticableTreeMixin implements _GainLifeItemParams {
   const _$_GainLifeItemParams({this.targetItems});
 
-  factory _$_GainLifeItemParams.fromJson(Map<String, dynamic> json) =>
-      _$_$_GainLifeItemParamsFromJson(json);
+  factory _$_GainLifeItemParams.fromJson(Map<String, dynamic> json) => _$_$_GainLifeItemParamsFromJson(json);
 
   @override
   final List<GainLifeItemTarget> targetItems;
@@ -120,13 +107,11 @@ class _$_GainLifeItemParams
     return identical(this, other) ||
         (other is _GainLifeItemParams &&
             (identical(other.targetItems, targetItems) ||
-                const DeepCollectionEquality()
-                    .equals(other.targetItems, targetItems)));
+                const DeepCollectionEquality().equals(other.targetItems, targetItems)));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(targetItems);
+  int get hashCode => runtimeType.hashCode ^ const DeepCollectionEquality().hash(targetItems);
 
   @override
   _$GainLifeItemParamsCopyWith<_GainLifeItemParams> get copyWith =>
@@ -139,11 +124,9 @@ class _$_GainLifeItemParams
 }
 
 abstract class _GainLifeItemParams implements GainLifeItemParams {
-  const factory _GainLifeItemParams({List<GainLifeItemTarget> targetItems}) =
-      _$_GainLifeItemParams;
+  const factory _GainLifeItemParams({List<GainLifeItemTarget> targetItems}) = _$_GainLifeItemParams;
 
-  factory _GainLifeItemParams.fromJson(Map<String, dynamic> json) =
-      _$_GainLifeItemParams.fromJson;
+  factory _GainLifeItemParams.fromJson(Map<String, dynamic> json) = _$_GainLifeItemParams.fromJson;
 
   @override
   List<GainLifeItemTarget> get targetItems;
@@ -180,14 +163,12 @@ mixin _$GainLifeItemTarget {
 }
 
 abstract class $GainLifeItemTargetCopyWith<$Res> {
-  factory $GainLifeItemTargetCopyWith(
-          GainLifeItemTarget value, $Res Function(GainLifeItemTarget) then) =
+  factory $GainLifeItemTargetCopyWith(GainLifeItemTarget value, $Res Function(GainLifeItemTarget) then) =
       _$GainLifeItemTargetCopyWithImpl<$Res>;
   $Res call({String key, LifeItemType type, int amount});
 }
 
-class _$GainLifeItemTargetCopyWithImpl<$Res>
-    implements $GainLifeItemTargetCopyWith<$Res> {
+class _$GainLifeItemTargetCopyWithImpl<$Res> implements $GainLifeItemTargetCopyWith<$Res> {
   _$GainLifeItemTargetCopyWithImpl(this._value, this._then);
 
   final GainLifeItemTarget _value;
@@ -208,20 +189,16 @@ class _$GainLifeItemTargetCopyWithImpl<$Res>
   }
 }
 
-abstract class _$GainLifeItemTargetCopyWith<$Res>
-    implements $GainLifeItemTargetCopyWith<$Res> {
-  factory _$GainLifeItemTargetCopyWith(
-          _GainLifeItemTarget value, $Res Function(_GainLifeItemTarget) then) =
+abstract class _$GainLifeItemTargetCopyWith<$Res> implements $GainLifeItemTargetCopyWith<$Res> {
+  factory _$GainLifeItemTargetCopyWith(_GainLifeItemTarget value, $Res Function(_GainLifeItemTarget) then) =
       __$GainLifeItemTargetCopyWithImpl<$Res>;
   @override
   $Res call({String key, LifeItemType type, int amount});
 }
 
-class __$GainLifeItemTargetCopyWithImpl<$Res>
-    extends _$GainLifeItemTargetCopyWithImpl<$Res>
+class __$GainLifeItemTargetCopyWithImpl<$Res> extends _$GainLifeItemTargetCopyWithImpl<$Res>
     implements _$GainLifeItemTargetCopyWith<$Res> {
-  __$GainLifeItemTargetCopyWithImpl(
-      _GainLifeItemTarget _value, $Res Function(_GainLifeItemTarget) _then)
+  __$GainLifeItemTargetCopyWithImpl(_GainLifeItemTarget _value, $Res Function(_GainLifeItemTarget) _then)
       : super(_value, (v) => _then(v as _GainLifeItemTarget));
 
   @override
@@ -242,13 +219,10 @@ class __$GainLifeItemTargetCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
-class _$_GainLifeItemTarget
-    with DiagnosticableTreeMixin
-    implements _GainLifeItemTarget {
+class _$_GainLifeItemTarget with DiagnosticableTreeMixin implements _GainLifeItemTarget {
   const _$_GainLifeItemTarget({this.key, this.type, this.amount});
 
-  factory _$_GainLifeItemTarget.fromJson(Map<String, dynamic> json) =>
-      _$_$_GainLifeItemTargetFromJson(json);
+  factory _$_GainLifeItemTarget.fromJson(Map<String, dynamic> json) => _$_$_GainLifeItemTargetFromJson(json);
 
   @override
   final String key;
@@ -276,12 +250,9 @@ class _$_GainLifeItemTarget
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _GainLifeItemTarget &&
-            (identical(other.key, key) ||
-                const DeepCollectionEquality().equals(other.key, key)) &&
-            (identical(other.type, type) ||
-                const DeepCollectionEquality().equals(other.type, type)) &&
-            (identical(other.amount, amount) ||
-                const DeepCollectionEquality().equals(other.amount, amount)));
+            (identical(other.key, key) || const DeepCollectionEquality().equals(other.key, key)) &&
+            (identical(other.type, type) || const DeepCollectionEquality().equals(other.type, type)) &&
+            (identical(other.amount, amount) || const DeepCollectionEquality().equals(other.amount, amount)));
   }
 
   @override
@@ -302,11 +273,9 @@ class _$_GainLifeItemTarget
 }
 
 abstract class _GainLifeItemTarget implements GainLifeItemTarget {
-  const factory _GainLifeItemTarget(
-      {String key, LifeItemType type, int amount}) = _$_GainLifeItemTarget;
+  const factory _GainLifeItemTarget({String key, LifeItemType type, int amount}) = _$_GainLifeItemTarget;
 
-  factory _GainLifeItemTarget.fromJson(Map<String, dynamic> json) =
-      _$_GainLifeItemTarget.fromJson;
+  factory _GainLifeItemTarget.fromJson(Map<String, dynamic> json) = _$_GainLifeItemTarget.fromJson;
 
   @override
   String get key;
