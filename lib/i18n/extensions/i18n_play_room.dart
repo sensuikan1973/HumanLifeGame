@@ -20,4 +20,14 @@ extension I18nPlayRoom on I18n {
         args: [name, roll],
         locale: localeName,
       );
+  String get playerActionYes => Intl.message(
+        'YES',
+        name: 'playerActionYes',
+        locale: localeName,
+      );
+  String get playerActionNo => Intl.message(
+        'NO',
+        name: 'playerActionNo',
+        locale: localeName,
+      );
 }

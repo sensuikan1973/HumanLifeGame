@@ -29,5 +29,15 @@
       "name": {},
       "roll": {}
     }
+  },
+  "playerActionYes": "はい",
+  "@playerActionYes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "playerActionNo": "いいえ",
+  "@playerActionNo": {
+    "type": "text",
+    "placeholders": {}
   }
 }

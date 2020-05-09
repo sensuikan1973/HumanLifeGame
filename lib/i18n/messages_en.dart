@@ -35,6 +35,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "appTitle": MessageLookupByLibrary.simpleMessage("Human Life Game"),
         "lifeEventRecordsText": MessageLookupByLibrary.simpleMessage("Reserved area:lifeEventRecords"),
         "lifeStepEventType": m0,
+        "playerActionNo": MessageLookupByLibrary.simpleMessage("NO"),
+        "playerActionYes": MessageLookupByLibrary.simpleMessage("YES"),
         "rollAnnouncement": m1,
         "rollDice": MessageLookupByLibrary.simpleMessage("Roll the dice")
       };
