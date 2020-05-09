@@ -19,8 +19,7 @@ LifeEvent {
             {
                 key: 'money',
                 type: money,
-                // amount の計算に使うが、この場合は掛け合わせる数値は存在しないので、そのまま amount を意味する
-                rate: 3000,
+                amount: 3000,
             }
         ]
     }
@@ -78,7 +77,7 @@ LifeEvent {
             {
                 key: 'money',
                 type: money,
-                rate: 5000,
+                amount: 5000,
             }
         ]
         existOneOfLifeItem: [fireInsurance],
@@ -98,12 +97,12 @@ LifeEvent {
             {
                 key: 'boy',
                 type: childBoy,
-                rate: 1,
+                amount: 1,
             },
             {
                 key: 'girl',
                 type: childGirl,
-                rate: 2,
+                amount: 2,
             }
         ] ,
         existOneOfLifeItem: [spouse],
@@ -123,12 +122,12 @@ LifeEvent {
             {
                 key: 'money',
                 type: money,
-                rate: 5000,
+                amount: 5000,
             },
             {
                 key: 'stock',
                 type: stock,
-                rate: 2000,
+                amount: 2000,
             }
         ],
         existOneOfLifeItem: [spouse],
@@ -151,7 +150,7 @@ LifeEvent {
             {
                 key: 'singer',
                 type: job,
-                rate: 1,
+                amount: 1,
             }
         ]
     }
@@ -170,14 +169,14 @@ LifeEvent {
             {
                 key: 'stock',
                 type: stock,
-                rate: 1,
+                amount: 1,
             }
         ],
         bases: [
             {
                 key: 'money',
                 type: money,
-                rate: 4000,
+                amount: 4000,
             }
         ]
     }
@@ -203,7 +202,7 @@ LifeEvent {
             {
                 key: 'money',
                 type: money,
-                rate: 5000,
+                amount: 5000,
             }
         ]
     }
@@ -222,7 +221,7 @@ LifeEvent {
             {
                 key: 'house',
                 type: house,
-                rate: 1,
+                amount: 1,
             }
         ],
         notExistOneOfLifeItem: [fireInsurance],
