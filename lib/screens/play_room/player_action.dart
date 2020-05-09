@@ -20,7 +20,7 @@ class PlayerAction extends StatelessWidget {
                 indent: 5,
                 endIndent: 5,
               ),
-              _twoChoiceButton(context),
+              _yesNoButton(context),
               const Divider(
                 thickness: 1,
                 indent: 5,
@@ -84,7 +84,7 @@ class PlayerAction extends StatelessWidget {
           ),
         ],
       );
-  Row _twoChoiceButton(BuildContext context) => Row(
+  Row _yesNoButton(BuildContext context) => Row(
         children: <Widget>[
           const Spacer(),
           IconButton(
