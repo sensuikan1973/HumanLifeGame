@@ -24,9 +24,10 @@ class LifeStages extends StatelessWidget {
         Row(
           children: [
             SizedBox(
-              width: 15,
-              height: 15,
-              child: (currentPlayer == lifeStage.human) ? dot() : null,
+              key: const Key('lifeStagesSizedBox'),
+              width: 30,
+              height: 30,
+              child: (currentPlayer == lifeStage.human) ? currentPlayerSelector() : null,
             ),
             Text(lifeStage.human.name),
           ],
@@ -38,5 +39,6 @@ class LifeStages extends StatelessWidget {
     );
   }
 
-  ColoredBox dot() => ColoredBox(color: Colors.black);
+  Icon currentPlayerSelector() =>
+      Icon(Icons.chevron_right, key: const Key('lifeStagesCurrentPlayerSelector'), color: Colors.pink);
 }

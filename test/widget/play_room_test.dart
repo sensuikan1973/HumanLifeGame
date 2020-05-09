@@ -82,4 +82,34 @@ Future<void> main() async {
     expect(find.text('human_1_name'), findsOneWidget);
     expect(find.text('human_2_name'), findsOneWidget);
   });
+
+  testWidgets('show currentPlayerSelector Icon in human life stages', (tester) async {
+    final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
+    await tester.pumpWidget(
+      Provider<Dice>(create: (context) => const Dice(), child: testableApp(home: const PlayRoom())),
+    );
+    await tester.pump();
+    // FIXME: humans が内部で仮定義されているので、human name などはあくまで仮のテストに過ぎない
+    expect(
+        find.byWidgetPredicate((widget) =>
+            widget is Row &&
+            widget.children ==
+                [
+                  SizedBox(
+                    key: const Key('lifeStagesSizedBox'),
+                    child: Icon(
+                      Icons.chevron_right,
+                      key: const Key('lifeStagesCurrentPlayerSelector'),
+                      color: Colors.pink,
+                    ),
+                  ),
+                  //const Text('human_2_name'),
+                ]),
+        findsOneWidget);
+
+    expect(find.byWidgetPredicate((widget) => widget is Icon && widget.icon == Icons.chevron_right), findsOneWidget);
+    await tester.tap(rollDiceButton);
+    await tester.pump();
+    expect(find.byWidgetPredicate((widget) => widget is Icon && widget.icon == Icons.chevron_right), findsOneWidget);
+  });
 }
