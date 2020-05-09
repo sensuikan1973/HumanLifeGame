@@ -199,6 +199,7 @@ class LifeRoadModel {
       }
       messageBuffer.writeln();
     }
+    // ignore: avoid_print
     print(messageBuffer.toString());
   }
 }
