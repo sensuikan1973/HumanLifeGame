@@ -14,25 +14,26 @@ class PlayView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final playRoomModel = context.watch<PlayRoomModel>();
-    return SizedBox(
-      width: 1050,
-      height: 700,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.blue),
-        ),
-        child: Center(
-          child: LifeRoad(
-            playRoomModel.humanLife.lifeRoad,
-            humans: [
-              for (var i = 0; i < playRoomModel.orderedHumans.length; ++i)
-                Human(
-                  playRoomModel.orderedHumans[i],
-                  _orderedColors[i],
-                ),
-            ],
-            positionsByHumanId: playRoomModel.positionsByHumanId,
+    return Card(
+      child: SizedBox(
+        width: 1050,
+        height: 750,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
+          child: Center(
+            child: LifeRoad(
+              playRoomModel.humanLife.lifeRoad,
+              humans: [
+                for (var i = 0; i < playRoomModel.orderedHumans.length; ++i)
+                  Human(
+                    playRoomModel.orderedHumans[i],
+                    _orderedColors[i],
+                  ),
+              ],
+              positionsByHumanId: playRoomModel.positionsByHumanId,
+            ),
           ),
         ),
       ),

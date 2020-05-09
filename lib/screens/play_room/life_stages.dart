@@ -10,10 +10,12 @@ class LifeStages extends StatelessWidget {
   const LifeStages({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-        width: 300,
-        height: 500,
-        child: _lifeStages(context),
+  Widget build(BuildContext context) => Card(
+        child: SizedBox(
+          width: 300,
+          height: 500,
+          child: _lifeStages(context),
+        ),
       );
 
   Column _lifeStages(BuildContext context) {
@@ -24,7 +26,6 @@ class LifeStages extends StatelessWidget {
         Row(
           children: [
             SizedBox(
-              key: const Key('lifeStagesSizedBox'),
               width: 30,
               height: 30,
               child: (currentPlayer == lifeStage.human) ? currentPlayerSelector() : null,
@@ -39,6 +40,5 @@ class LifeStages extends StatelessWidget {
     );
   }
 
-  Icon currentPlayerSelector() =>
-      Icon(Icons.chevron_right, key: const Key('lifeStagesCurrentPlayerSelector'), color: Colors.pink);
+  Icon currentPlayerSelector() => Icon(Icons.chevron_right, color: Colors.pink);
 }
