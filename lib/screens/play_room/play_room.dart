@@ -20,7 +20,7 @@ class PlayRoom extends StatelessWidget {
         body: MultiProvider(
           providers: [
             ChangeNotifierProvider(
-              create: (context) => PlayerActionModel(Provider.of<Dice>(context, listen: false)),
+              create: (_) => PlayerActionModel(context.read<Dice>()),
             ),
             ChangeNotifierProxyProvider<PlayerActionModel, PlayRoomModel>(
               create: (_) => PlayRoomModel(I18n.of(context)),

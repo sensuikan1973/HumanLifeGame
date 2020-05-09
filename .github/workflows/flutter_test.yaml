@@ -26,6 +26,7 @@ jobs:
 
       - run: flutter pub get
       - run: flutter config --enable-web
+      - run: flutter packages pub run build_runner build
       - run: flutter test --no-test-assets --coverage --coverage-path=~/coverage/lcov.info
       - uses: codecov/codecov-action@v1
         with:
