@@ -8,15 +8,17 @@ class PlayerAction extends StatelessWidget {
   const PlayerAction({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Container(
-        width: 300,
-        height: 300,
-        child: Column(
-          children: <Widget>[
-            _directionSelectButton(context),
-            _twoChoiceButton(context),
-            _rollDiceButton(context),
-          ],
+  Widget build(BuildContext context) => Card(
+        child: Container(
+          width: 300,
+          height: 300,
+          child: Column(
+            children: <Widget>[
+              _directionSelectButton(context),
+              _twoChoiceButton(context),
+              _rollDiceButton(context),
+            ],
+          ),
         ),
       );
 
@@ -35,23 +37,38 @@ class PlayerAction extends StatelessWidget {
           Row(
             children: <Widget>[
               const Spacer(),
-              IconButton(icon: Icon(Icons.arrow_upward), onPressed: null),
+              IconButton(
+                  key: const Key('playerActionDilectionSelectUpButton'),
+                  icon: Icon(Icons.arrow_upward),
+                  onPressed: null),
               const Spacer(),
             ],
           ),
           Row(
             children: <Widget>[
               const Spacer(),
-              IconButton(icon: Icon(Icons.arrow_back), onPressed: null),
+              IconButton(
+                key: const Key('playerActionDilectionSelectLeftButton'),
+                icon: Icon(Icons.arrow_back),
+                onPressed: null,
+              ),
               const Spacer(),
-              IconButton(icon: Icon(Icons.arrow_forward), onPressed: null),
+              IconButton(
+                key: const Key('playerActionDilectionSelectRightButton'),
+                icon: Icon(Icons.arrow_forward),
+                onPressed: null,
+              ),
               const Spacer(),
             ],
           ),
           Row(
             children: <Widget>[
               const Spacer(),
-              IconButton(icon: Icon(Icons.arrow_downward), onPressed: null),
+              IconButton(
+                key: const Key('playerActionDilectionSelectDownButton'),
+                icon: Icon(Icons.arrow_downward),
+                onPressed: null,
+              ),
               const Spacer(),
             ],
           ),
@@ -60,9 +77,17 @@ class PlayerAction extends StatelessWidget {
   Row _twoChoiceButton(BuildContext context) => Row(
         children: <Widget>[
           const Spacer(),
-          IconButton(icon: Icon(Icons.close), onPressed: null),
+          IconButton(
+            key: const Key('playerActiontwoChoiceNoButton'),
+            icon: Icon(Icons.close),
+            onPressed: null,
+          ),
           const Spacer(),
-          IconButton(icon: Icon(Icons.radio_button_unchecked), onPressed: null),
+          IconButton(
+            key: const Key('playerActiontwoChoiceYesButton'),
+            icon: Icon(Icons.radio_button_unchecked),
+            onPressed: null,
+          ),
           const Spacer(),
         ],
       );

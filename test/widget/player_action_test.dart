@@ -14,4 +14,54 @@ Future<void> main() async {
     await tester.pump();
     expect(find.text(i18n.rollDice), findsOneWidget);
   });
+
+  testWidgets('show two-Choice Button', (tester) async {
+    await tester.pumpWidget(testableApp(locale: locale, home: const PlayerAction()));
+    await tester.pump();
+    expect(
+      find.byWidgetPredicate(
+        (widget) => widget is IconButton && widget.key == const Key('playerActiontwoChoiceNoButton'),
+      ),
+      findsOneWidget,
+    );
+
+    expect(
+      find.byWidgetPredicate(
+        (widget) => widget is IconButton && widget.key == const Key('playerActiontwoChoiceYesButton'),
+      ),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('show Direction Select Button', (tester) async {
+    await tester.pumpWidget(testableApp(locale: locale, home: const PlayerAction()));
+    await tester.pump();
+    expect(
+      find.byWidgetPredicate(
+        (widget) => widget is IconButton && widget.key == const Key('playerActionDilectionSelectUpButton'),
+      ),
+      findsOneWidget,
+    );
+
+    expect(
+      find.byWidgetPredicate(
+        (widget) => widget is IconButton && widget.key == const Key('playerActionDilectionSelectLeftButton'),
+      ),
+      findsOneWidget,
+    );
+
+    expect(
+      find.byWidgetPredicate(
+        (widget) => widget is IconButton && widget.key == const Key('playerActionDilectionSelectRightButton'),
+      ),
+      findsOneWidget,
+    );
+
+    expect(
+      find.byWidgetPredicate(
+        (widget) => widget is IconButton && widget.key == const Key('playerActionDilectionSelectDownButton'),
+      ),
+      findsOneWidget,
+    );
+  });
 }
