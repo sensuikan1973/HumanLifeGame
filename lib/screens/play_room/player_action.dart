@@ -47,22 +47,17 @@ class PlayerAction extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              IconButton(
-                  key: const Key('playerActionDilectionSelectUpButton'),
-                  icon: Icon(Icons.arrow_upward),
-                  onPressed: null),
+              IconButton(icon: Icon(Icons.arrow_upward), onPressed: null),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               IconButton(
-                key: const Key('playerActionDilectionSelectLeftButton'),
                 icon: Icon(Icons.arrow_back),
                 onPressed: null,
               ),
               IconButton(
-                key: const Key('playerActionDilectionSelectRightButton'),
                 icon: Icon(Icons.arrow_forward),
                 onPressed: null,
               ),
@@ -72,7 +67,6 @@ class PlayerAction extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               IconButton(
-                key: const Key('playerActionDilectionSelectDownButton'),
                 icon: Icon(Icons.arrow_downward),
                 onPressed: null,
               ),
@@ -84,12 +78,10 @@ class PlayerAction extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           IconButton(
-            key: const Key('playerActiontwoChoiceNoButton'),
             icon: Icon(Icons.close),
             onPressed: null,
           ),
           IconButton(
-            key: const Key('playerActiontwoChoiceYesButton'),
             icon: Icon(Icons.radio_button_unchecked),
             onPressed: null,
           ),
