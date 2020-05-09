@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import 'life_event.dart';
+import 'life_event_params/life_event_params.dart';
 
 class LifeStepModel {
   LifeStepModel({
@@ -23,6 +24,7 @@ class LifeStepModel {
 
   bool get isStart => lifeEvent.type == LifeEventType.start;
   bool get isGoal => lifeEvent.type == LifeEventType.goal;
+  bool get isBranch => lifeEvent.isBranch;
 
   LifeStepModel getNext(int num) {
     var current = this;

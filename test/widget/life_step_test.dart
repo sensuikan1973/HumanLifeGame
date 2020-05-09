@@ -1,5 +1,8 @@
 import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/models/common/life_event.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/life_event_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dart';
 import 'package:HumanLifeGame/models/common/life_step.dart';
 import 'package:HumanLifeGame/screens/common/life_step.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +16,7 @@ Future<void> main() async {
   testWidgets('show DecoratedBox with Colors.cyan[50]', (tester) async {
     final model = LifeStepModel(
       id: 0,
-      lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItems, params: <String, dynamic>{}),
+      lifeEvent: LifeEventModel(LifeEventTarget.myself, const GainLifeItemsParams(targetItems: [])),
       right: null,
       left: null,
       up: null,
@@ -38,7 +41,7 @@ Future<void> main() async {
   testWidgets('show DecoratedBox with Colors.amber[50]', (tester) async {
     final model = LifeStepModel(
       id: 0,
-      lifeEvent: LifeEventModel(LifeEventTarget.myself, LifeEventType.nothing, params: <String, dynamic>{}),
+      lifeEvent: LifeEventModel(LifeEventTarget.myself, const NothingParams()),
       right: null,
       left: null,
       up: null,
@@ -77,7 +80,7 @@ Future<void> checkLifeEventI18n(LifeEventTarget target, LifeEventType type) asyn
   testWidgets('show text for target:$target, type:$type', (tester) async {
     final model = LifeStepModel(
       id: 0,
-      lifeEvent: LifeEventModel(target, type, params: <String, dynamic>{}),
+      lifeEvent: LifeEventModel(target, const NothingParams()),
       right: null,
       left: null,
       up: null,
