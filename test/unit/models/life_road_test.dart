@@ -153,7 +153,7 @@ void main() {
         'dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  \n'
         'rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  \n'
         'lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n';
-    expect(model.debugPrintPointerList(), text);
+    expect(model.debugMessage(), text);
   });
 }
 
