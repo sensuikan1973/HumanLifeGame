@@ -3,7 +3,7 @@
 HumanLife における Event。
 
 ユーザによる HumanLife 作成時は、運営が定義した LifeEvent 一覧から選んで、マスにペタペタしていくイメージ。  
-ペタペタしつつ、一部の params (rate とか)を選択できるようにしておけば十分でしょう。
+ペタペタしつつ、一部の params (amount とか)を選択できるようにしておけば十分でしょう。
 
 ## Examples
 
@@ -38,7 +38,7 @@ LifeEvent {
             {
                 key: 'money',
                 type: money,
-                rate: 5000,
+                amount: 5000,
             }
         ]
         perLifeItem: stock,
@@ -58,7 +58,7 @@ LifeEvent {
             {
                 key: 'money',
                 type: money,
-                rate: 5000,
+                amount: 5000,
             }
         ]
     }
@@ -195,7 +195,7 @@ LifeEvent {
             {
                 key: 'money',
                 type: money,
-                rate: 2000,
+                amount: 2000,
             }
         ],
         bases: [
