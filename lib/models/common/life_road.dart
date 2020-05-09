@@ -1,4 +1,8 @@
 import 'life_event.dart';
+import 'life_event_params/gain_life_items_params.dart';
+import 'life_event_params/goal_params.dart';
+import 'life_event_params/nothing_params.dart';
+import 'life_event_params/start_params.dart';
 import 'life_step.dart';
 
 class LifeRoadModel {
@@ -14,15 +18,15 @@ class LifeRoadModel {
         (x) {
           final isStart = x == 0 && y == 0;
           final isGoal = x == width - 1 && y == 0;
-          final eventType = () {
-            if (isStart) return LifeEventType.start;
-            if (isGoal) return LifeEventType.goal;
-            if (y == 0) return LifeEventType.gainLifeItems;
-            return LifeEventType.nothing;
+          final params = () {
+            if (isStart) return const StartParams();
+            if (isGoal) return const GoalParams();
+            if (y == 0) return const GainLifeItemsParams(targetItems: []);
+            return const NothingParams();
           }();
           return LifeStepModel(
             id: x + (y * width),
-            lifeEvent: LifeEventModel(LifeEventTarget.myself, eventType, params: <String, dynamic>{}),
+            lifeEvent: LifeEventModel(LifeEventTarget.myself, params),
             right: null,
             left: null,
             up: null,

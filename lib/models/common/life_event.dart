@@ -1,25 +1,17 @@
-import 'package:flutter/foundation.dart';
+import 'life_event_params/life_event_params.dart';
 
-class LifeEventModel {
+class LifeEventModel<T extends LifeEventParams> {
   LifeEventModel(
     this.target,
-    this.type, {
-    @required Map<String, dynamic> params,
-  }) : _params = params;
+    this.params,
+  );
 
+  final T params;
   LifeEventTarget target;
-  LifeEventType type;
-
   bool isForced; // 強制実行か選択実行か
-
-  // NOTE:
-  // LifeEventType ごとに異なる内容が格納される。
-  // そのため type に応じて params['foo'] と参照することになる。
-  // Serialize して型付きで扱えるようにするのも要検討。(See: https://flutter.dev/docs/development/data-and-backend/json)
-  final Map<String, dynamic> _params;
-  Map<String, dynamic> get params => _params;
-
   String description;
+
+  LifeEventType get type => params.type;
 }
 
 enum LifeEventTarget {

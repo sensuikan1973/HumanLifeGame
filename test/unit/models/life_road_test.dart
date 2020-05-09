@@ -1,15 +1,20 @@
 import 'package:HumanLifeGame/models/common/life_event.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/select_direction_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
 import 'package:HumanLifeGame/models/common/life_road.dart';
 import 'package:HumanLifeGame/models/common/life_step.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final start = LifeEventModel(LifeEventTarget.myself, LifeEventType.start, params: <String, dynamic>{});
-  final goals = LifeEventModel(LifeEventTarget.myself, LifeEventType.goal, params: <String, dynamic>{});
-  final gains = LifeEventModel(LifeEventTarget.myself, LifeEventType.gainLifeItems, params: <String, dynamic>{});
-  final direc = LifeEventModel(LifeEventTarget.myself, LifeEventType.selectDirection, params: <String, dynamic>{});
-  final blank = LifeEventModel(LifeEventTarget.myself, LifeEventType.nothing, params: <String, dynamic>{});
+  final start = LifeEventModel(LifeEventTarget.myself, const StartParams());
+  final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams());
+  final gains = LifeEventModel(LifeEventTarget.myself, const GainLifeItemsParams(targetItems: []));
+  final direc = LifeEventModel(LifeEventTarget.myself, const SelectDirectionParams());
+  final blank = LifeEventModel(LifeEventTarget.myself, const NothingParams());
 
   final epBlank = ExactryPointer(up: false, down: false, right: false, left: false);
   final epUp = ExactryPointer(up: true, down: false, right: false, left: false);

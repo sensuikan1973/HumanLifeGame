@@ -1,4 +1,7 @@
 import 'package:HumanLifeGame/models/common/life_event.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
 import 'package:HumanLifeGame/models/common/life_step.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -8,14 +11,14 @@ void main() {
     (index) {
       final isStart = index == 0;
       final isGoal = index == 4;
-      final eventType = () {
-        if (isStart) return LifeEventType.start;
-        if (isGoal) return LifeEventType.goal;
-        return LifeEventType.nothing;
+      final params = () {
+        if (isStart) return const StartParams();
+        if (isGoal) return const GoalParams();
+        return const NothingParams();
       }();
       return LifeStepModel(
         id: index,
-        lifeEvent: LifeEventModel(LifeEventTarget.myself, eventType, params: <String, dynamic>{}),
+        lifeEvent: LifeEventModel(LifeEventTarget.myself, params),
         right: null,
         left: null,
         up: null,
