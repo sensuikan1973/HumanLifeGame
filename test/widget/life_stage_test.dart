@@ -19,7 +19,7 @@ Future<void> main() async {
       home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const LifeStages()),
     ));
     await tester.pump();
-    expect(find.text('0'), findsNWidgets(2));
+    expect(find.text('0'), findsNWidgets(playRoomModel.lifeStages.length));
   });
 
   testWidgets('show variable total moneys', (tester) async {
@@ -32,7 +32,7 @@ Future<void> main() async {
       home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const LifeStages()),
     ));
     await tester.pump();
-    expect(find.text('200'), findsNWidgets(2));
+    expect(find.text('200'), findsNWidgets(playRoomModel.lifeStages.length));
   });
 
   testWidgets('show current player', (tester) async {
@@ -44,7 +44,7 @@ Future<void> main() async {
     await tester.pump();
     final currentPlayerSelector = find.byIcon(Icons.chevron_right);
     final row = tester.element(currentPlayerSelector).findAncestorWidgetOfExactType<Row>();
-    final human1Name = find.text('human_1_name');
-    expect(row.children, contains(human1Name.evaluate().first.widget));
+    final currentPlayerNameText = find.text(playRoomModel.currentPlayer.name);
+    expect(row.children, contains(currentPlayerNameText.evaluate().first.widget));
   });
 }
