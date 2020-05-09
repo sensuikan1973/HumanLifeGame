@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../i18n/i18n.dart';
-import '../../models/common/life_event.dart';
+import '../../models/common/life_event_params/life_event_params.dart';
 import '../../models/common/life_road.dart';
 import '../../models/common/life_step.dart';
 import '../play_room/human.dart';

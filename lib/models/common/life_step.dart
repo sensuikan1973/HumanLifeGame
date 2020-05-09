@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import 'life_event.dart';
+import 'life_event_params/life_event_params.dart';
 
 class LifeStepModel {
   LifeStepModel({

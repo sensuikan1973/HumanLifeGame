@@ -1,6 +1,7 @@
 import 'life_event.dart';
 import 'life_event_params/gain_life_items_params.dart';
 import 'life_event_params/goal_params.dart';
+import 'life_event_params/life_event_params.dart';
 import 'life_event_params/nothing_params.dart';
 import 'life_event_params/start_params.dart';
 import 'life_step.dart';

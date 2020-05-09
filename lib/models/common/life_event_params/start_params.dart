@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../life_event.dart';
 import 'life_event_params.dart';
 
 part 'start_params.freezed.dart';
