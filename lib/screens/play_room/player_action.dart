@@ -13,7 +13,7 @@ class PlayerAction extends StatelessWidget {
         height: 300,
         child: Column(
           children: <Widget>[
-            _directionSelectButtons(context),
+            _directionSelectButton(context),
             _twoChoiceButton(context),
             _rollDiceButton(context),
           ],
@@ -30,7 +30,7 @@ class PlayerAction extends StatelessWidget {
           style: const TextStyle(fontSize: 20),
         ),
       );
-  Column _directionSelectButtons(BuildContext context) => Column(
+  Column _directionSelectButton(BuildContext context) => Column(
         children: <Widget>[
           Row(
             children: <Widget>[
