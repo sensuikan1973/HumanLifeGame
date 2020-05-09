@@ -18,50 +18,16 @@ Future<void> main() async {
   testWidgets('show two-Choice Button', (tester) async {
     await tester.pumpWidget(testableApp(locale: locale, home: const PlayerAction()));
     await tester.pump();
-    expect(
-      find.byWidgetPredicate(
-        (widget) => widget is IconButton && widget.key == const Key('playerActiontwoChoiceNoButton'),
-      ),
-      findsOneWidget,
-    );
-
-    expect(
-      find.byWidgetPredicate(
-        (widget) => widget is IconButton && widget.key == const Key('playerActiontwoChoiceYesButton'),
-      ),
-      findsOneWidget,
-    );
+    expect(find.byIcon(Icons.close), findsOneWidget);
+    expect(find.byIcon(Icons.radio_button_unchecked), findsOneWidget);
   });
 
   testWidgets('show Direction Select Button', (tester) async {
     await tester.pumpWidget(testableApp(locale: locale, home: const PlayerAction()));
     await tester.pump();
-    expect(
-      find.byWidgetPredicate(
-        (widget) => widget is IconButton && widget.key == const Key('playerActionDilectionSelectUpButton'),
-      ),
-      findsOneWidget,
-    );
-
-    expect(
-      find.byWidgetPredicate(
-        (widget) => widget is IconButton && widget.key == const Key('playerActionDilectionSelectLeftButton'),
-      ),
-      findsOneWidget,
-    );
-
-    expect(
-      find.byWidgetPredicate(
-        (widget) => widget is IconButton && widget.key == const Key('playerActionDilectionSelectRightButton'),
-      ),
-      findsOneWidget,
-    );
-
-    expect(
-      find.byWidgetPredicate(
-        (widget) => widget is IconButton && widget.key == const Key('playerActionDilectionSelectDownButton'),
-      ),
-      findsOneWidget,
-    );
+    expect(find.byIcon(Icons.arrow_upward), findsOneWidget);
+    expect(find.byIcon(Icons.arrow_back), findsOneWidget);
+    expect(find.byIcon(Icons.arrow_forward), findsOneWidget);
+    expect(find.byIcon(Icons.arrow_downward), findsOneWidget);
   });
 }
