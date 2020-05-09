@@ -15,7 +15,17 @@ class PlayerAction extends StatelessWidget {
           child: Column(
             children: <Widget>[
               _directionSelectButton(context),
+              const Divider(
+                thickness: 1,
+                indent: 5,
+                endIndent: 5,
+              ),
               _twoChoiceButton(context),
+              const Divider(
+                thickness: 1,
+                indent: 5,
+                endIndent: 5,
+              ),
               _rollDiceButton(context),
             ],
           ),
