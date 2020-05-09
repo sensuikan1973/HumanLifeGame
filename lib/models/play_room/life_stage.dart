@@ -7,7 +7,14 @@ class LifeStageModel {
   LifeStageModel(this.human);
 
   HumanModel human;
-  List<LifeItemModel> lifeItems;
-  List<LifeEventModel> lifeEventRecord;
+  List<LifeItemModel> lifeItems = [];
+  List<LifeEventModel> lifeEventRecord = [];
   LifeStepModel lifeStepModel;
+
+  int get totalMoney => lifeItems.isEmpty
+      ? 0
+      : lifeItems
+          .where((item) => item.type == LifeItemType.money)
+          .map((money) => money.amount)
+          .reduce((val, el) => val + el);
 }

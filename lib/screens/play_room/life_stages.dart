@@ -31,6 +31,8 @@ class LifeStages extends StatelessWidget {
               child: (currentPlayer == lifeStage.human) ? currentPlayerSelector() : null,
             ),
             Text(lifeStage.human.name),
+            const Text(', money: '), // FIXME: 仮テキスト
+            Text(lifeStage.totalMoney.toString()),
           ],
         ),
     ];

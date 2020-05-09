@@ -1,3 +1,6 @@
+import 'package:HumanLifeGame/models/common/life_event_params/target_life_item_params.dart';
+import 'package:HumanLifeGame/models/common/life_item.dart';
+
 import 'life_event.dart';
 import 'life_event_params/gain_life_items_params.dart';
 import 'life_event_params/goal_params.dart';
@@ -22,7 +25,15 @@ class LifeRoadModel {
           final params = () {
             if (isStart) return const StartParams();
             if (isGoal) return const GoalParams();
-            if (y == 0) return const GainLifeItemsParams(targetItems: []);
+            if (y == 0) {
+              return const GainLifeItemsParams(targetItems: [
+                TargetLifeItemParams(
+                  key: 'money',
+                  type: LifeItemType.money,
+                  amount: 1000,
+                )
+              ]);
+            }
             return const NothingParams();
           }();
           return LifeStepModel(

@@ -1,3 +1,4 @@
+import 'package:HumanLifeGame/models/common/life_event_executor.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../i18n/i18n.dart';
@@ -38,6 +39,7 @@ class PlayRoomModel extends ChangeNotifier {
   }
 
   final I18n _i18n;
+  final _lifeEventExecutor = LifeEventExecutor();
 
   // 歩む対象となる人生
   final HumanLifeModel _humanLife;
@@ -55,7 +57,12 @@ class PlayRoomModel extends ChangeNotifier {
     announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, playerAction.roll);
     // 人生を進める
     _moveLifeStep();
-    // TODO: LifeEvent 処理
+
+    // LifeEvent 処理
+    lifeStages[_currentPlayerLifeStageIndex] = _lifeEventExecutor.executeEvent(
+      _currentPlayerLifeStage.lifeStepModel.lifeEvent,
+      _currentPlayerLifeStage,
+    );
 
     // 全員がゴールに到着しているかどうかを確認
     _allHumansArrivedAtGoal = lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
@@ -80,6 +87,7 @@ class PlayRoomModel extends ChangeNotifier {
 
   // 参加者のそれぞれの人生の進捗
   List<LifeStageModel> lifeStages = [];
+
   int get _currentPlayerLifeStageIndex => lifeStages.indexWhere((lifeStage) => lifeStage.human == _currentPlayer);
   LifeStageModel get _currentPlayerLifeStage => lifeStages[_currentPlayerLifeStageIndex];
 
