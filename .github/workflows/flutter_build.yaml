@@ -18,8 +18,12 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: 'beta'
-      - run: flutter channel beta # tomporary command. Error at:https://github.com/sensuikan1973/HumanLifeGame/runs/652208459?check_suite_focus=true#step:7:7
-      - run: flutter upgrade # tomporary command
+      # See: https://github.com/subosito/flutter-action/issues/39
+      #     でもなんかなおってないぽなので、channel + upgrade を入れている
+      # FIXME: いつか消す
+      - run: flutter channel beta
+      - run: flutter upgrade
+
       - run: flutter config --enable-web
       - run: flutter pub get
       - run: flutter build web
