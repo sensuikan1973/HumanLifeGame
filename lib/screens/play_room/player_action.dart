@@ -45,41 +45,37 @@ class PlayerAction extends StatelessWidget {
   Column _directionSelectButton(BuildContext context) => Column(
         children: <Widget>[
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              const Spacer(),
               IconButton(
                   key: const Key('playerActionDilectionSelectUpButton'),
                   icon: Icon(Icons.arrow_upward),
                   onPressed: null),
-              const Spacer(),
             ],
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              const Spacer(),
               IconButton(
                 key: const Key('playerActionDilectionSelectLeftButton'),
                 icon: Icon(Icons.arrow_back),
                 onPressed: null,
               ),
-              const Spacer(),
               IconButton(
                 key: const Key('playerActionDilectionSelectRightButton'),
                 icon: Icon(Icons.arrow_forward),
                 onPressed: null,
               ),
-              const Spacer(),
             ],
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              const Spacer(),
               IconButton(
                 key: const Key('playerActionDilectionSelectDownButton'),
                 icon: Icon(Icons.arrow_downward),
                 onPressed: null,
               ),
-              const Spacer(),
             ],
           ),
         ],
