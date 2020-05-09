@@ -1,10 +1,10 @@
-import 'package:HumanLifeGame/models/common/life_event_executor.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../i18n/i18n.dart';
 import '../common/human.dart';
 import '../common/human_life.dart';
 import '../common/life_event.dart';
+import '../common/life_event_executor.dart';
 import '../common/life_road.dart';
 import '../common/user.dart';
 import 'announcement.dart';
