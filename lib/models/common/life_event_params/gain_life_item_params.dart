@@ -13,7 +13,7 @@ abstract class GainLifeItemParams with _$GainLifeItemParams {
   factory GainLifeItemParams.fromJson(Map<String, dynamic> json) => _$GainLifeItemParamsFromJson(json);
 }
 
-@freezed // See: https://github.com/rrousselGit/freezed/issues/100
+@freezed
 abstract class GainLifeItemTarget with _$GainLifeItemTarget {
   const factory GainLifeItemTarget({String key, LifeItemType type, int amount}) = _GainLifeItemTarget;
 
