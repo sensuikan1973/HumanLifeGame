@@ -10,7 +10,7 @@
 /// ```
 /// {@end-tool}
 class LifeItemModel {
-  LifeItemModel(this.key, this.type);
+  LifeItemModel(this.key, this.type, this.amount);
 
   final String key;
   final LifeItemType type;

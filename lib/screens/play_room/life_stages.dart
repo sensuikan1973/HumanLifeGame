@@ -12,7 +12,7 @@ class LifeStages extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Card(
         child: SizedBox(
-          width: 300,
+          width: 330,
           height: 500,
           child: _lifeStages(context),
         ),
@@ -31,6 +31,8 @@ class LifeStages extends StatelessWidget {
               child: (currentPlayer == lifeStage.human) ? currentPlayerSelector() : null,
             ),
             Text(lifeStage.human.name),
+            const Text(', 💵: '), // FIXME: 仮テキスト
+            Text(lifeStage.totalMoney.toString()),
           ],
         ),
     ];

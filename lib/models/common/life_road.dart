@@ -4,6 +4,8 @@ import 'life_event_params/goal_params.dart';
 import 'life_event_params/life_event_params.dart';
 import 'life_event_params/nothing_params.dart';
 import 'life_event_params/start_params.dart';
+import 'life_event_params/target_life_item_params.dart';
+import 'life_item.dart';
 import 'life_step.dart';
 
 class LifeRoadModel {
@@ -22,7 +24,15 @@ class LifeRoadModel {
           final params = () {
             if (isStart) return const StartParams();
             if (isGoal) return const GoalParams();
-            if (y == 0) return const GainLifeItemsParams(targetItems: []);
+            if (y == 0) {
+              return const GainLifeItemsParams(targetItems: [
+                TargetLifeItemParams(
+                  key: 'money',
+                  type: LifeItemType.money,
+                  amount: 1000,
+                )
+              ]);
+            }
             return const NothingParams();
           }();
           return LifeStepModel(
