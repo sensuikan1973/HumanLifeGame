@@ -25,4 +25,5 @@ jobs:
       - run: flutter upgrade
 
       - run: flutter pub get
+      - run: flutter packages pub run build_runner build
       - run: flutter analyze
