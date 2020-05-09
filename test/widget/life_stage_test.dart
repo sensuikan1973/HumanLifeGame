@@ -45,6 +45,6 @@ Future<void> main() async {
     final currentPlayerSelector = find.byIcon(Icons.chevron_right);
     final row = tester.element(currentPlayerSelector).findAncestorWidgetOfExactType<Row>();
     final human1Name = find.text('human_1_name');
-    expect(row.children.contains(human1Name.evaluate().first.widget), true);
+    expect(row.children, contains(human1Name.evaluate().first.widget));
   });
 }
