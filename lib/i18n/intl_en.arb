@@ -29,5 +29,15 @@
       "name": {},
       "roll": {}
     }
+  },
+  "playerActionYes": "YES",
+  "@playerActionYes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "playerActionNo": "NO",
+  "@playerActionNo": {
+    "type": "text",
+    "placeholders": {}
   }
 }

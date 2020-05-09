@@ -18,8 +18,8 @@ Future<void> main() async {
   testWidgets('show two-Choice Button', (tester) async {
     await tester.pumpWidget(testableApp(locale: locale, home: const PlayerAction()));
     await tester.pump();
-    expect(find.byIcon(Icons.close), findsOneWidget);
-    expect(find.byIcon(Icons.radio_button_unchecked), findsOneWidget);
+    expect(find.text(i18n.playerActionYes), findsOneWidget);
+    expect(find.text(i18n.playerActionNo), findsOneWidget);
   });
 
   testWidgets('show Direction Select Button', (tester) async {

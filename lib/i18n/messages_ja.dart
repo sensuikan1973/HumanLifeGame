@@ -35,6 +35,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "appTitle": MessageLookupByLibrary.simpleMessage("人生すごろく"),
         "lifeEventRecordsText": MessageLookupByLibrary.simpleMessage("予約領域:lifeEventRecords"),
         "lifeStepEventType": m0,
+        "playerActionNo": MessageLookupByLibrary.simpleMessage("いいえ"),
+        "playerActionYes": MessageLookupByLibrary.simpleMessage("はい"),
         "rollAnnouncement": m1,
         "rollDice": MessageLookupByLibrary.simpleMessage("サイコロを振る")
       };

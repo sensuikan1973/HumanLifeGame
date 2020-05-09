@@ -77,13 +77,19 @@ class PlayerAction extends StatelessWidget {
   Row _yesNoButton(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          IconButton(
-            icon: Icon(Icons.close),
+          FlatButton(
             onPressed: null,
+            child: Text(
+              I18n.of(context).playerActionYes,
+              style: const TextStyle(fontSize: 20),
+            ),
           ),
-          IconButton(
-            icon: Icon(Icons.radio_button_unchecked),
+          FlatButton(
             onPressed: null,
+            child: Text(
+              I18n.of(context).playerActionNo,
+              style: const TextStyle(fontSize: 20),
+            ),
           ),
         ],
       );
