@@ -81,20 +81,18 @@ class PlayerAction extends StatelessWidget {
         ],
       );
   Row _yesNoButton(BuildContext context) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          const Spacer(),
           IconButton(
             key: const Key('playerActiontwoChoiceNoButton'),
             icon: Icon(Icons.close),
             onPressed: null,
           ),
-          const Spacer(),
           IconButton(
             key: const Key('playerActiontwoChoiceYesButton'),
             icon: Icon(Icons.radio_button_unchecked),
             onPressed: null,
           ),
-          const Spacer(),
         ],
       );
 }
