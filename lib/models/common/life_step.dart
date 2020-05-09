@@ -24,6 +24,7 @@ class LifeStepModel {
 
   bool get isStart => lifeEvent.type == LifeEventType.start;
   bool get isGoal => lifeEvent.type == LifeEventType.goal;
+  bool get isBranch => lifeEvent.isBranch;
 
   LifeStepModel getNext(int num) {
     var current = this;

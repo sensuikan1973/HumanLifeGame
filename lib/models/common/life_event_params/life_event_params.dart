@@ -2,6 +2,12 @@ abstract class LifeEventParams {
   const LifeEventParams();
 
   LifeEventType get type;
+
+  bool get isBranch => [
+        LifeEventType.selectDirection,
+        LifeEventType.selectDirectionPerDiceRoll,
+        LifeEventType.selectDirectionPerLifeItem,
+      ].contains(type);
 }
 
 enum LifeEventType {
