@@ -8,12 +8,14 @@ class DiceResult extends StatelessWidget {
   const DiceResult({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-        width: 100,
-        height: 100,
-        child: Text(
-          Provider.of<PlayerActionModel>(context).roll.toString(),
-          key: const Key('diceResultText'),
+  Widget build(BuildContext context) => Card(
+        child: SizedBox(
+          width: 300,
+          height: 100,
+          child: Text(
+            Provider.of<PlayerActionModel>(context).roll.toString(),
+            key: const Key('diceResultText'),
+          ),
         ),
       );
 }

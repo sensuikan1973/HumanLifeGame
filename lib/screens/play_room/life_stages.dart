@@ -10,10 +10,12 @@ class LifeStages extends StatelessWidget {
   const LifeStages({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-        width: 300,
-        height: 500,
-        child: _lifeStages(context),
+  Widget build(BuildContext context) => Card(
+        child: SizedBox(
+          width: 300,
+          height: 500,
+          child: _lifeStages(context),
+        ),
       );
 
   Column _lifeStages(BuildContext context) {

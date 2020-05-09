@@ -9,12 +9,14 @@ class Announcement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final message = context.select<PlayRoomModel, String>((model) => model.announcement.message);
-    return SizedBox(
-      width: 400,
-      height: 50,
-      child: Text(
-        message,
-        key: const Key('announcementMessageText'),
+    return Card(
+      child: SizedBox(
+        width: 1050,
+        height: 50,
+        child: Text(
+          message,
+          key: const Key('announcementMessageText'),
+        ),
       ),
     );
   }
