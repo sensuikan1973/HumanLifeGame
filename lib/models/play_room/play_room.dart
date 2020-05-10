@@ -16,13 +16,8 @@ class PlayRoomModel extends ChangeNotifier {
     this._i18n, {
     HumanLifeModel humanLife,
     List<HumanModel> orderedHumans,
-  })  :
+  })  : _orderedHumans = orderedHumans,
         // FIXME: 指定がない時にダミーデータを入れてるが、将来的には消す
-        _orderedHumans = orderedHumans ??
-            [
-              HumanModel('human_1_id', 'human_1_name'),
-              HumanModel('human_2_id', 'human_2_name'),
-            ],
         _humanLife = humanLife ??
             HumanLifeModel(
               title: 'dummy HumanLife',

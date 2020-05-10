@@ -1,4 +1,5 @@
 import 'package:HumanLifeGame/i18n/i18n.dart';
+import 'package:HumanLifeGame/models/common/human.dart';
 import 'package:HumanLifeGame/models/common/life_item.dart';
 import 'package:HumanLifeGame/models/play_room/play_room.dart';
 import 'package:HumanLifeGame/screens/play_room/life_stages.dart';
@@ -11,9 +12,10 @@ import 'helper/widget_build_helper.dart';
 Future<void> main() async {
   const locale = Locale('en', 'US');
   final i18n = await I18n.load(locale);
+  final orderedHumans = [HumanModel('h1', 'foo'), HumanModel('h2', 'bar')];
 
   testWidgets('show initial total moneys', (tester) async {
-    final playRoomModel = PlayRoomModel(i18n);
+    final playRoomModel = PlayRoomModel(i18n, orderedHumans: orderedHumans);
     await tester.pumpWidget(testableApp(
       locale: locale,
       home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const LifeStages()),
@@ -23,7 +25,7 @@ Future<void> main() async {
   });
 
   testWidgets('show variable total moneys', (tester) async {
-    final playRoomModel = PlayRoomModel(i18n);
+    final playRoomModel = PlayRoomModel(i18n, orderedHumans: orderedHumans);
     for (final lifeStage in playRoomModel.lifeStages) {
       lifeStage.lifeItems.add(LifeItemModel('key', LifeItemType.money, 200));
     }
@@ -36,7 +38,7 @@ Future<void> main() async {
   });
 
   testWidgets('show current player', (tester) async {
-    final playRoomModel = PlayRoomModel(i18n);
+    final playRoomModel = PlayRoomModel(i18n, orderedHumans: orderedHumans);
     await tester.pumpWidget(testableApp(
       locale: locale,
       home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const LifeStages()),
