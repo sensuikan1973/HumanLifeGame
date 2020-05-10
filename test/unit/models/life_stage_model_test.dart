@@ -12,7 +12,7 @@ void main() {
       LifeItemModel('money', LifeItemType.money, 100),
       LifeItemModel('coffee', LifeItemType.coffee, 1),
     ];
-    final lifeStageModel = LifeStageModel(HumanModel('human_1', 'foo'))..lifeItems = items;
+    final lifeStageModel = LifeStageModel(HumanModel(id: 'human_1', name: 'foo'))..lifeItems = items;
     expect(lifeStageModel.totalMoney, 600);
   });
 }

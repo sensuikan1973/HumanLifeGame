@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
+
 import 'user.dart';
 
 class HumanModel {
-  HumanModel(this.id, this.name);
+  HumanModel({@required this.id, @required this.name});
   HumanModel.fromUserModel(UserModel user)
       : id = user.id,
         name = user.name;

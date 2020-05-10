@@ -23,7 +23,7 @@ import 'helper/widget_build_helper.dart';
 Future<void> main() async {
   const locale = Locale('en', 'US');
   final i18n = await I18n.load(locale);
-  final orderedHumans = [HumanModel('h1', 'foo'), HumanModel('h2', 'bar')];
+  final orderedHumans = [HumanModel(id: 'h1', name: 'foo'), HumanModel(id: 'h2', name: 'bar')];
   final humanLife = HumanLifeModel(
     title: 'hello',
     author: UserModel('user', 'hoge', DateTime.now(), DateTime.now()),

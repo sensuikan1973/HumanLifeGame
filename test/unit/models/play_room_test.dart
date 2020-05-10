@@ -17,8 +17,8 @@ void main() {
       author: UserModel('dummyUserId', 'dummyUser', DateTime.now(), DateTime.now()),
       lifeRoad: LifeRoadModel.dummy(), // FIXME: 今はこれでいいけど、LifeRoadModel.dummy はいつか消すので要修正
     );
-    final human1 = HumanModel('h1', 'foo');
-    final human2 = HumanModel('h2', 'bar');
+    final human1 = HumanModel(id: 'h1', name: 'foo');
+    final human2 = HumanModel(id: 'h2', name: 'bar');
 
     final playRoomModel = PlayRoomModel(
       I18n('en'),
