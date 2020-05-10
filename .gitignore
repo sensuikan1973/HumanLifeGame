@@ -34,6 +34,9 @@
 *.g.dart
 *.freezed.dart
 
+# Firebase
+.firebase
+
 # Web related
 lib/generated_plugin_registrant.dart
 
