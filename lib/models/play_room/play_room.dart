@@ -6,7 +6,6 @@ import '../common/human_life.dart';
 import '../common/life_event.dart';
 import '../common/life_event_executor.dart';
 import '../common/life_road.dart';
-import '../common/user.dart';
 import 'announcement.dart';
 import 'life_stage.dart';
 import 'player_action.dart';
@@ -17,13 +16,7 @@ class PlayRoomModel extends ChangeNotifier {
     HumanLifeModel humanLife,
     List<HumanModel> orderedHumans,
   })  : _orderedHumans = orderedHumans,
-        // FIXME: 指定がない時にダミーデータを入れてるが、将来的には消す
-        _humanLife = humanLife ??
-            HumanLifeModel(
-              title: 'dummy HumanLife',
-              author: UserModel('dummyUserId', 'dummyUser', DateTime.now(), DateTime.now()),
-              lifeRoad: LifeRoadModel.dummy(),
-            ) {
+        _humanLife = humanLife {
     // 参加者全員の位置を Start に
     for (final human in _orderedHumans) {
       final lifeStage = LifeStageModel(human)..lifeStepModel = _humanLife.lifeRoad.start;
