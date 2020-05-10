@@ -18,6 +18,11 @@ Play now Human Life Game on Web. You can also create original map.
 
 See: https://flutter.dev/docs/get-started/web
 
+### Local Hosting
+```sh
+firebase serve --only hosting
+```
+
 ### [Code Generate](https://pub.dev/packages/freezed)
 ```sh
 flutter packages pub run build_runner build
