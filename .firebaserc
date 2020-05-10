@@ -1,6 +1,6 @@
 {
   "projects": {
     "default": "human-life-game-dev",
-    "dev": "human-life-game-dev",
+    "dev": "human-life-game-dev"
   }
 }
