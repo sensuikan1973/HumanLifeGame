@@ -26,7 +26,7 @@ Future<void> main() async {
   final orderedHumans = [HumanModel(id: 'h1', name: 'foo'), HumanModel(id: 'h2', name: 'bar')];
   final humanLife = HumanLifeModel(
     title: 'hello',
-    author: UserModel('user', 'hoge', DateTime.now(), DateTime.now()),
+    author: UserModel(id: 'user', name: 'hoge'),
     lifeRoad: LifeRoadModel.dummy(),
   );
 

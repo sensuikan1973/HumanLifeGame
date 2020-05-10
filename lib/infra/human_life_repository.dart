@@ -7,7 +7,7 @@ class HumanLifeRepository {
   Future<HumanLifeModel> fetchDummyHumanLife() => Future.value(
         HumanLifeModel(
           title: 'dummy HumanLife',
-          author: UserModel('dummyUseUd', 'dummyUser', DateTime.now(), DateTime.now()),
+          author: UserModel(id: 'dummyUseUd', name: 'dummyUser'),
           lifeRoad: LifeRoadModel.dummy(),
         ),
       );
