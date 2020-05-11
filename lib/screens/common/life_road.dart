@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../models/common/life_road.dart';
-import '../play_room/human.dart';
+import 'human.dart';
 import 'life_step.dart';
 
 class LifeRoad extends StatelessWidget {

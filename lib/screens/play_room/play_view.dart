@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/play_room/play_room.dart';
+import '../common/human.dart';
 import '../common/life_road.dart';
-import 'human.dart';
 
 class PlayView extends StatelessWidget {
   const PlayView({Key key}) : super(key: key);
