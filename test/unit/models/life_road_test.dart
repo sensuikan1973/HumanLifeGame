@@ -26,7 +26,7 @@ void main() {
   final epBrUDR = _Pointer(up: true, down: true, right: true, left: false);
 
   test('ditect a single direction ', () {
-    final testData = [
+    final lifeEvents = [
       [start, gains, gains, gains, gains, gains, gains],
       [blank, blank, blank, blank, blank, blank, gains],
       [goals, blank, blank, blank, blank, blank, gains],
@@ -44,11 +44,11 @@ void main() {
       [epUp, epBlank, epBlank, epBlank, epBlank, epBlank, epDown],
       [epUp, epLeft, epLeft, epLeft, epLeft, epLeft, epLeft],
     ];
-    _DirectionChecker(lifeEvents: testData, expectedPointers: expectedPointers).execute();
+    _DirectionChecker(lifeEvents: lifeEvents, expectedPointers: expectedPointers).execute();
   });
 
   test('ditect a branch direction', () {
-    final testData = [
+    final lifeEvents = [
       [start, direc, gains, gains, gains, gains, blank],
       [blank, gains, blank, blank, blank, gains, blank],
       [blank, gains, gains, gains, gains, gains, gains],
@@ -68,11 +68,11 @@ void main() {
       [epBlank, epUp, epLeft, epLeft, epLeft, epLeft, epLeft],
     ];
 
-    _DirectionChecker(lifeEvents: testData, expectedPointers: expectedPointers).execute();
+    _DirectionChecker(lifeEvents: lifeEvents, expectedPointers: expectedPointers).execute();
   });
 
   test('ditect two branch direction', () {
-    final testData = [
+    final lifeEvents = [
       [start, direc, gains, gains, gains, gains, goals],
       [blank, gains, blank, blank, blank, gains, blank],
       [blank, gains, direc, gains, gains, gains, blank],
@@ -92,11 +92,11 @@ void main() {
       [epBlank, epBlank, epBlank, epBlank, epBlank, epBlank, epBlank],
     ];
 
-    _DirectionChecker(lifeEvents: testData, expectedPointers: expectedPointers).execute();
+    _DirectionChecker(lifeEvents: lifeEvents, expectedPointers: expectedPointers).execute();
   });
 
   test('ditect three branch direction', () {
-    final testData = [
+    final lifeEvents = [
       [blank, gains, gains, gains, gains, gains, blank],
       [blank, gains, blank, blank, blank, gains, blank],
       [blank, gains, blank, blank, blank, gains, blank],
@@ -116,7 +116,7 @@ void main() {
       [epBlank, epRight, epRight, epRight, epRight, epUp, epBlank],
     ];
 
-    _DirectionChecker(lifeEvents: testData, expectedPointers: expectedPointers).execute();
+    _DirectionChecker(lifeEvents: lifeEvents, expectedPointers: expectedPointers).execute();
   });
 
   test('debugMessage', () {
