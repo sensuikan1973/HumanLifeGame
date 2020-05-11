@@ -162,7 +162,7 @@ void main() {
 
 class _TestExecutorForDirectionTest {
   _TestExecutorForDirectionTest({
-    @required this.lifeEvents,
+    @required List<List<LifeEventModel>> lifeEvents,
     @required this.expectedPointers,
   }) {
     final lifeStepsOnBoard = List.generate(
@@ -182,7 +182,6 @@ class _TestExecutorForDirectionTest {
     model = LifeRoadModel(lifeStepsOnBoard: lifeStepsOnBoard);
   }
 
-  final List<List<LifeEventModel>> lifeEvents;
   final List<List<_Pointer>> expectedPointers;
 
   List<List<LifeStepModel>> lifeStepList;
