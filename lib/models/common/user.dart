@@ -1,5 +1,13 @@
+import 'package:flutter/foundation.dart';
+
 class UserModel {
-  UserModel(this.id, this.name, this.createdAt, this.updatedAt);
+  UserModel({
+    @required this.id,
+    @required this.name,
+    DateTime createdAt,
+    DateTime updatedAt,
+  })  : createdAt = createdAt ?? DateTime.now(),
+        updatedAt = updatedAt ?? DateTime.now();
 
   final String id;
   final String name;

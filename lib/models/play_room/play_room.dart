@@ -6,7 +6,6 @@ import '../common/human_life.dart';
 import '../common/life_event.dart';
 import '../common/life_event_executor.dart';
 import '../common/life_road.dart';
-import '../common/user.dart';
 import 'announcement.dart';
 import 'life_stage.dart';
 import 'player_action.dart';
@@ -14,36 +13,26 @@ import 'player_action.dart';
 class PlayRoomModel extends ChangeNotifier {
   PlayRoomModel(
     this._i18n, {
-    HumanLifeModel humanLife,
-    List<HumanModel> orderedHumans,
-  })  :
-        // FIXME: 指定がない時にダミーデータを入れてるが、将来的には消す
-        _orderedHumans = orderedHumans ??
-            [
-              HumanModel('human_1_id', 'human_1_name'),
-              HumanModel('human_2_id', 'human_2_name'),
-            ],
-        _humanLife = humanLife ??
-            HumanLifeModel(
-              title: 'dummy HumanLife',
-              author: UserModel('dummyUserId', 'dummyUser', DateTime.now(), DateTime.now()),
-              lifeRoad: LifeRoadModel.dummy(),
-            ) {
+    this.humanLife,
+    this.orderedHumans,
+  }) {
     // 参加者全員の位置を Start に
-    for (final human in _orderedHumans) {
-      final lifeStage = LifeStageModel(human)..lifeStepModel = _humanLife.lifeRoad.start;
+    for (final human in orderedHumans) {
+      final lifeStage = LifeStageModel(human)..lifeStepModel = humanLife.lifeRoad.start;
       lifeStages.add(lifeStage);
     }
     // 一番手の set
-    _currentPlayer = _orderedHumans.first;
+    _currentPlayer = orderedHumans.first;
   }
 
   final I18n _i18n;
   final _lifeEventExecutor = LifeEventExecutor();
 
   // 歩む対象となる人生
-  final HumanLifeModel _humanLife;
-  HumanLifeModel get humanLife => _humanLife;
+  final HumanLifeModel humanLife;
+
+  // 参加する人。ターン順。
+  final List<HumanModel> orderedHumans;
 
   PlayerActionModel _playerAction;
   PlayerActionModel get playerAction => _playerAction;
@@ -77,10 +66,6 @@ class PlayRoomModel extends ChangeNotifier {
 
   String roomTitle;
 
-  // 参加する人。ターン順。
-  final List<HumanModel> _orderedHumans;
-  List<HumanModel> get orderedHumans => _orderedHumans;
-
   // 手番の人
   HumanModel _currentPlayer;
   HumanModel get currentPlayer => _currentPlayer;
@@ -93,8 +78,7 @@ class PlayRoomModel extends ChangeNotifier {
 
   // それぞれの位置情報
   Map<String, Position> get positionsByHumanId => {
-        for (final lifeStage in lifeStages)
-          lifeStage.human.id: _humanLife.lifeRoad.getPosition(lifeStage.lifeStepModel),
+        for (final lifeStage in lifeStages) lifeStage.human.id: humanLife.lifeRoad.getPosition(lifeStage.lifeStepModel),
       };
 
   // 全参加者の LifeEvent 履歴
@@ -105,8 +89,8 @@ class PlayRoomModel extends ChangeNotifier {
 
   // 次のターンに変える
   void _changeToNextTurn() {
-    final currentPlayerIndex = _orderedHumans.indexOf(_currentPlayer);
-    _currentPlayer = _orderedHumans[(currentPlayerIndex + 1) % _orderedHumans.length];
+    final currentPlayerIndex = orderedHumans.indexOf(_currentPlayer);
+    _currentPlayer = orderedHumans[(currentPlayerIndex + 1) % orderedHumans.length];
   }
 
   void _moveLifeStep() {

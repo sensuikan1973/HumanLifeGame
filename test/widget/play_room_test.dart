@@ -1,5 +1,11 @@
 import 'package:HumanLifeGame/api/dice.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
+import 'package:HumanLifeGame/models/common/human.dart';
+import 'package:HumanLifeGame/models/common/human_life.dart';
+import 'package:HumanLifeGame/models/common/life_road.dart';
+import 'package:HumanLifeGame/models/common/user.dart';
+import 'package:HumanLifeGame/models/play_room/play_room.dart';
+import 'package:HumanLifeGame/models/play_room/player_action.dart';
 import 'package:HumanLifeGame/screens/play_room/announcement.dart';
 import 'package:HumanLifeGame/screens/play_room/dice_result.dart';
 import 'package:HumanLifeGame/screens/play_room/life_stages.dart';
@@ -17,6 +23,12 @@ import 'helper/widget_build_helper.dart';
 Future<void> main() async {
   const locale = Locale('en', 'US');
   final i18n = await I18n.load(locale);
+  final orderedHumans = [HumanModel(id: 'h1', name: 'foo'), HumanModel(id: 'h2', name: 'bar')];
+  final humanLife = HumanLifeModel(
+    title: 'hello',
+    author: UserModel(id: 'user', name: 'hoge'),
+    lifeRoad: LifeRoadModel.dummy(),
+  );
 
   setUp(() {
     // See: https://github.com/flutter/flutter/issues/12994#issuecomment-397321431
@@ -25,9 +37,8 @@ Future<void> main() async {
   });
 
   testWidgets('show some widgets', (tester) async {
-    await tester.pumpWidget(
-      Provider<Dice>(create: (context) => const Dice(), child: testableApp(home: const PlayRoom())),
-    );
+    final playRoomModel = PlayRoomModel(i18n, humanLife: humanLife, orderedHumans: orderedHumans);
+    await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel));
     await tester.pump();
     expect(find.byType(PlayerAction), findsOneWidget);
     expect(find.byType(DiceResult), findsOneWidget);
@@ -39,9 +50,8 @@ Future<void> main() async {
   testWidgets('random value(1 <= value <= 6) should be displayed when dice is rolled', (tester) async {
     final dice = MockDice();
     when(dice.roll()).thenReturn(5);
-    await tester.pumpWidget(
-      Provider<Dice>(create: (context) => dice, child: testableApp(home: const PlayRoom())),
-    );
+    final playRoomModel = PlayRoomModel(i18n, humanLife: humanLife, orderedHumans: orderedHumans);
+    await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
     await tester.tap(find.byKey(const Key('playerActionDiceRollButton')));
@@ -53,33 +63,54 @@ Future<void> main() async {
     final dice = MockDice();
     const roll = 5;
     when(dice.roll()).thenReturn(roll);
-    await tester.pumpWidget(
-      Provider<Dice>(create: (context) => dice, child: testableApp(home: const PlayRoom())),
-    );
+    final playRoomModel = PlayRoomModel(i18n, humanLife: humanLife, orderedHumans: orderedHumans);
+    await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
-    // FIXME: humans が内部で仮定義されているので、human name などはあくまで仮のテストに過ぎない
     final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
     await tester.tap(rollDiceButton);
     await tester.pump();
-    expect(find.text(i18n.rollAnnouncement('human_1_name', roll)), findsOneWidget);
+    expect(find.text(i18n.rollAnnouncement(orderedHumans.first.name, roll)), findsOneWidget);
 
     await tester.tap(rollDiceButton);
     await tester.pump();
-    expect(find.text(i18n.rollAnnouncement('human_2_name', roll)), findsOneWidget);
+    expect(find.text(i18n.rollAnnouncement(orderedHumans[1].name, roll)), findsOneWidget);
 
     await tester.tap(rollDiceButton);
     await tester.pump();
-    expect(find.text(i18n.rollAnnouncement('human_1_name', roll)), findsOneWidget);
+    expect(find.text(i18n.rollAnnouncement(orderedHumans.first.name, roll)), findsOneWidget);
   });
 
   testWidgets('show user name in human life stages', (tester) async {
-    await tester.pumpWidget(
-      Provider<Dice>(create: (context) => const Dice(), child: testableApp(home: const PlayRoom())),
-    );
+    final playRoomModel = PlayRoomModel(i18n, humanLife: humanLife, orderedHumans: orderedHumans);
+    await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel));
     await tester.pump();
-    // FIXME: humans が内部で仮定義されているので、human name などはあくまで仮のテストに過ぎない
-    expect(find.text('human_1_name'), findsOneWidget);
-    expect(find.text('human_2_name'), findsOneWidget);
+    for (final human in orderedHumans) {
+      expect(find.text(human.name), findsOneWidget);
+    }
   });
+}
+
+class _TestablePlayRoom extends StatelessWidget {
+  const _TestablePlayRoom(this.dice, this.playRoomModel);
+
+  final Dice dice;
+  final PlayRoomModel playRoomModel;
+
+  @override
+  Widget build(BuildContext context) => testableApp(
+        home: MultiProvider(
+          providers: [
+            Provider<Dice>(create: (context) => dice),
+            ChangeNotifierProvider<PlayerActionModel>(
+              create: (context) => PlayerActionModel(context.read<Dice>()),
+            ),
+            ChangeNotifierProxyProvider<PlayerActionModel, PlayRoomModel>(
+              create: (context) => playRoomModel,
+              update: (context, playerAction, playRoom) => playRoom..playerAction = playerAction,
+            )
+          ],
+          child: const PlayRoom(),
+        ),
+      );
 }
