@@ -164,39 +164,36 @@ class _TestExecutorForDirectionTest {
   _TestExecutorForDirectionTest({
     @required List<List<LifeEventModel>> lifeEvents,
     @required this.expectedPointers,
-  }) {
-    final lifeStepsOnBoard = List.generate(
-      LifeRoadModel.height,
-      (y) => List.generate(
-        LifeRoadModel.width,
-        (x) => LifeStepModel(
-          id: x + (y * LifeRoadModel.width),
-          lifeEvent: lifeEvents[y][x],
-          right: null,
-          left: null,
-          up: null,
-          down: null,
-        ),
-      ),
-    );
-    model = LifeRoadModel(lifeStepsOnBoard: lifeStepsOnBoard);
-  }
+  }) : _model = LifeRoadModel(
+          lifeStepsOnBoard: List.generate(
+            LifeRoadModel.height,
+            (y) => List.generate(
+              LifeRoadModel.width,
+              (x) => LifeStepModel(
+                id: x + (y * LifeRoadModel.width),
+                lifeEvent: lifeEvents[y][x],
+                right: null,
+                left: null,
+                up: null,
+                down: null,
+              ),
+            ),
+          ),
+        );
 
   final List<List<_Pointer>> expectedPointers;
-
-  List<List<LifeStepModel>> lifeStepList;
-  LifeRoadModel model;
+  final LifeRoadModel _model;
 
   void test() {
     for (var y = 0; y < LifeRoadModel.height; ++y) {
       for (var x = 0; x < LifeRoadModel.width; ++x) {
-        final up = model.lifeStepsOnBoard[y][x].up != null;
+        final up = _model.lifeStepsOnBoard[y][x].up != null;
         expect(up, expectedPointers[y][x].up);
-        final down = model.lifeStepsOnBoard[y][x].down != null;
+        final down = _model.lifeStepsOnBoard[y][x].down != null;
         expect(down, expectedPointers[y][x].down);
-        final right = model.lifeStepsOnBoard[y][x].right != null;
+        final right = _model.lifeStepsOnBoard[y][x].right != null;
         expect(right, expectedPointers[y][x].right);
-        final left = model.lifeStepsOnBoard[y][x].left != null;
+        final left = _model.lifeStepsOnBoard[y][x].left != null;
         expect(left, expectedPointers[y][x].left);
       }
     }
