@@ -44,7 +44,7 @@ void main() {
       [epUp, epBlank, epBlank, epBlank, epBlank, epBlank, epDown],
       [epUp, epLeft, epLeft, epLeft, epLeft, epLeft, epLeft],
     ];
-    _DirectionChecker(lifeEvents: testData, expectedPointers: expectedPointers).expectPointers();
+    _DirectionChecker(lifeEvents: testData, expectedPointers: expectedPointers).execute();
   });
 
   test('ditect a branch direction', () {
@@ -68,7 +68,7 @@ void main() {
       [epBlank, epUp, epLeft, epLeft, epLeft, epLeft, epLeft],
     ];
 
-    _DirectionChecker(lifeEvents: testData, expectedPointers: expectedPointers).expectPointers();
+    _DirectionChecker(lifeEvents: testData, expectedPointers: expectedPointers).execute();
   });
 
   test('ditect two branch direction', () {
@@ -92,7 +92,7 @@ void main() {
       [epBlank, epBlank, epBlank, epBlank, epBlank, epBlank, epBlank],
     ];
 
-    _DirectionChecker(lifeEvents: testData, expectedPointers: expectedPointers).expectPointers();
+    _DirectionChecker(lifeEvents: testData, expectedPointers: expectedPointers).execute();
   });
 
   test('ditect three branch direction', () {
@@ -116,7 +116,7 @@ void main() {
       [epBlank, epRight, epRight, epRight, epRight, epUp, epBlank],
     ];
 
-    _DirectionChecker(lifeEvents: testData, expectedPointers: expectedPointers).expectPointers();
+    _DirectionChecker(lifeEvents: testData, expectedPointers: expectedPointers).execute();
   });
 
   test('debugMessage', () {
@@ -186,7 +186,7 @@ class _DirectionChecker {
   final List<List<_Pointer>> _expectedPointers;
   final LifeRoadModel _model;
 
-  void expectPointers() {
+  void execute() {
     for (var y = 0; y < LifeRoadModel.height; ++y) {
       for (var x = 0; x < LifeRoadModel.width; ++x) {
         final hasUp = _model.lifeStepsOnBoard[y][x].up != null;
