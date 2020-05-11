@@ -1,0 +1,45 @@
+name: Flutter_Web_Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  flutter_build_web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'beta'
+      - name: Workaround for https://github.com/subosito/flutter-action/issues/39
+        run: flutter channel beta && flutter upgrade
+      - run: flutter config --enable-web
+      - run: flutter pub get
+      - run: flutter packages pub run build_runner build
+      - run: flutter build web
+      - uses: actions/upload-artifact@master
+        with:
+          name: build/web
+          path: build/web
+
+  firebase_hosting_deploy:
+    needs: flutter_build_web
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@master
+        with:
+          name: build/web
+      - uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting -P dev
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_DEV_TOKEN }}

@@ -4,7 +4,7 @@
 [![Figma](https://img.shields.io/badge/Figma-a260bf.svg)](https://www.figma.com/file/nXa9iPmXYOHOA77GvjBLdj/HumanLifeGameGenarator)  
 ![Flutter Format](https://github.com/sensuikan1973/HumanLifeGame/workflows/Flutter_Format/badge.svg)
 ![Flutter_Analyzer](https://github.com/sensuikan1973/HumanLifeGame/workflows/Flutter_Analyzer/badge.svg)
-![Flutter_Build_Web](https://github.com/sensuikan1973/HumanLifeGame/workflows/Flutter_Build_Web/badge.svg)
+![Flutter_Web_Deploy](https://github.com/sensuikan1973/HumanLifeGame/workflows/Flutter_Web_Deploy/badge.svg)
 ![Flutter Test](https://github.com/sensuikan1973/HumanLifeGame/workflows/Flutter_Test/badge.svg)  
 [![Codecov](https://codecov.io/gh/sensuikan1973/HumanLifeGame/branch/master/graph/badge.svg)](https://codecov.io/gh/sensuikan1973/HumanLifeGame)
 
@@ -17,6 +17,11 @@ Play now Human Life Game on Web. You can also create original map.
 ### Setup
 
 See: https://flutter.dev/docs/get-started/web
+
+### Local Hosting
+```sh
+firebase serve --only hosting
+```
 
 ### [Code Generate](https://pub.dev/packages/freezed)
 ```sh

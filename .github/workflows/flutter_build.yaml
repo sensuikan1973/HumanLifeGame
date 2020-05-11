@@ -3,9 +3,6 @@ name: Flutter_Build_Web
 on:
   pull_request:
     types: [opened, synchronize]
-  push:
-    branches:
-      - master
 
 jobs:
   flutter_build_web:
@@ -18,12 +15,8 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: 'beta'
-      # See: https://github.com/subosito/flutter-action/issues/39
-      #     でもなんかなおってないぽなので、channel + upgrade を入れている
-      # FIXME: いつか消す
-      - run: flutter channel beta
-      - run: flutter upgrade
-
+      - name: Workaround for https://github.com/subosito/flutter-action/issues/39
+        run: flutter channel beta && flutter upgrade
       - run: flutter config --enable-web
       - run: flutter pub get
       - run: flutter packages pub run build_runner build
