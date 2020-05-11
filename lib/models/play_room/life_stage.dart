@@ -6,7 +6,7 @@ import '../common/life_step.dart';
 class LifeStageModel {
   LifeStageModel(this.human);
 
-  HumanModel human;
+  final HumanModel human;
   List<LifeItemModel> lifeItems = [];
   List<LifeEventModel> lifeEventRecord = [];
   LifeStepModel lifeStepModel;

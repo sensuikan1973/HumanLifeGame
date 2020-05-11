@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 
 import '../../i18n/i18n.dart';
+import '../../services/life_event_service.dart';
 import '../common/human.dart';
 import '../common/human_life.dart';
 import '../common/life_event.dart';
-import '../common/life_event_executor.dart';
 import '../common/life_road.dart';
 import 'announcement.dart';
 import 'life_stage.dart';
@@ -26,7 +26,7 @@ class PlayRoomModel extends ChangeNotifier {
   }
 
   final I18n _i18n;
-  final _lifeEventExecutor = LifeEventExecutor();
+  final _lifeEventService = const LifeEventService();
 
   // 歩む対象となる人生
   final HumanLifeModel humanLife;
@@ -48,7 +48,7 @@ class PlayRoomModel extends ChangeNotifier {
     _moveLifeStep();
 
     // LifeEvent 処理
-    lifeStages[_currentPlayerLifeStageIndex] = _lifeEventExecutor.executeEvent(
+    lifeStages[_currentPlayerLifeStageIndex] = _lifeEventService.executeEvent(
       _currentPlayerLifeStage.lifeStepModel.lifeEvent,
       _currentPlayerLifeStage,
     );
