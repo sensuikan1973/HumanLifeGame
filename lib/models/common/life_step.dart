@@ -14,7 +14,6 @@ class LifeStepModel {
   });
 
   final int id;
-
   final LifeEventModel lifeEvent;
 
   LifeStepModel up;
