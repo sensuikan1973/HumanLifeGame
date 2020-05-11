@@ -44,8 +44,9 @@ void main() {
       [epUp, epBlank, epBlank, epBlank, epBlank, epBlank, epDown],
       [epUp, epLeft, epLeft, epLeft, epLeft, epLeft, epLeft],
     ];
-    _TestExecutorForDirectionTest(testData: testData, checkList: checkList).test();
+    _TestExecutorForDirectionTest(lifeEvents: testData, expectedPointers: checkList).test();
   });
+
   test('ditect a branch direction', () {
     final testData = [
       [start, direc, gains, gains, gains, gains, blank],
@@ -67,8 +68,9 @@ void main() {
       [epBlank, epUp, epLeft, epLeft, epLeft, epLeft, epLeft],
     ];
 
-    _TestExecutorForDirectionTest(testData: testData, checkList: checkList).test();
+    _TestExecutorForDirectionTest(lifeEvents: testData, expectedPointers: checkList).test();
   });
+
   test('ditect two branch direction', () {
     final testData = [
       [start, direc, gains, gains, gains, gains, goals],
@@ -90,7 +92,7 @@ void main() {
       [epBlank, epBlank, epBlank, epBlank, epBlank, epBlank, epBlank],
     ];
 
-    _TestExecutorForDirectionTest(testData: testData, checkList: checkList).test();
+    _TestExecutorForDirectionTest(lifeEvents: testData, expectedPointers: checkList).test();
   });
 
   test('ditect three branch direction', () {
@@ -114,9 +116,10 @@ void main() {
       [epBlank, epRight, epRight, epRight, epRight, epUp, epBlank],
     ];
 
-    _TestExecutorForDirectionTest(testData: testData, checkList: checkList).test();
+    _TestExecutorForDirectionTest(lifeEvents: testData, expectedPointers: checkList).test();
   });
-  test('print debugPrintPointerList', () {
+
+  test('debugMessage', () {
     final model = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createDummyLifeStepsOnBoard());
     const text = 'type:1   type:6   type:6   type:6   type:6   type:6   type:2   \n'
         'up:null  up:null  up:null  up:null  up:null  up:null  up:null  \n'
@@ -159,8 +162,8 @@ void main() {
 
 class _TestExecutorForDirectionTest {
   _TestExecutorForDirectionTest({
-    @required this.testData,
-    @required this.checkList,
+    @required this.lifeEvents,
+    @required this.expectedPointers,
   }) {
     final lifeStepsOnBoard = List.generate(
       LifeRoadModel.height,
@@ -168,7 +171,7 @@ class _TestExecutorForDirectionTest {
         LifeRoadModel.width,
         (x) => LifeStepModel(
           id: x + (y * LifeRoadModel.width),
-          lifeEvent: testData[y][x],
+          lifeEvent: lifeEvents[y][x],
           right: null,
           left: null,
           up: null,
@@ -179,8 +182,8 @@ class _TestExecutorForDirectionTest {
     model = LifeRoadModel(lifeStepsOnBoard: lifeStepsOnBoard);
   }
 
-  final List<List<LifeEventModel>> testData;
-  final List<List<_Pointer>> checkList;
+  final List<List<LifeEventModel>> lifeEvents;
+  final List<List<_Pointer>> expectedPointers;
 
   List<List<LifeStepModel>> lifeStepList;
   LifeRoadModel model;
@@ -189,13 +192,13 @@ class _TestExecutorForDirectionTest {
     for (var y = 0; y < LifeRoadModel.height; ++y) {
       for (var x = 0; x < LifeRoadModel.width; ++x) {
         final up = model.lifeStepsOnBoard[y][x].up != null;
-        expect(up, checkList[y][x].up);
+        expect(up, expectedPointers[y][x].up);
         final down = model.lifeStepsOnBoard[y][x].down != null;
-        expect(down, checkList[y][x].down);
+        expect(down, expectedPointers[y][x].down);
         final right = model.lifeStepsOnBoard[y][x].right != null;
-        expect(right, checkList[y][x].right);
+        expect(right, expectedPointers[y][x].right);
         final left = model.lifeStepsOnBoard[y][x].left != null;
-        expect(left, checkList[y][x].left);
+        expect(left, expectedPointers[y][x].left);
       }
     }
   }
