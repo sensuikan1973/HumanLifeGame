@@ -24,12 +24,12 @@ class Router {
               create: (_) => PlayRoomModel(
                 I18n.of(context),
                 // FIXME: Repository から取ってくる
-                orderedHumans: [HumanModel(id: '123', name: 'hoge'), HumanModel(id: '456', name: 'fuga')],
-                humanLife: HumanLifeModel(
+                HumanLifeModel(
                   title: 'dummy HumanLife',
                   author: UserModel(id: '123', name: 'dummyUser'),
-                  lifeRoad: LifeRoadModel.dummy(),
+                  lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createDummyLifeStepsOnBoard()),
                 ),
+                orderedHumans: [HumanModel(id: '123', name: 'hoge'), HumanModel(id: '456', name: 'fuga')],
               ),
               update: (context, playerAction, playRoom) => playRoom..playerAction = playerAction,
             )
