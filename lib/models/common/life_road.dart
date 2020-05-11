@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import 'life_event.dart';
 import 'life_event_params/gain_life_items_params.dart';
 import 'life_event_params/goal_params.dart';
@@ -9,49 +11,49 @@ import 'life_item.dart';
 import 'life_step.dart';
 
 class LifeRoadModel {
-  LifeRoadModel();
-
-  // FIXME: いつか消す
-  // 一番下の列一直線の仮データ
-  LifeRoadModel.dummy() {
-    lifeStepsOnBoard = List.generate(
-      width,
-      (y) => List.generate(
-        height,
-        (x) {
-          final isStart = x == 0 && y == 0;
-          final isGoal = x == width - 1 && y == 0;
-          final params = () {
-            if (isStart) return const StartParams();
-            if (isGoal) return const GoalParams();
-            if (y == 0) {
-              return const GainLifeItemsParams(targetItems: [
-                TargetLifeItemParams(
-                  key: 'money',
-                  type: LifeItemType.money,
-                  amount: 1000,
-                )
-              ]);
-            }
-            return const NothingParams();
-          }();
-          return LifeStepModel(
-            id: x + (y * width),
-            lifeEvent: LifeEventModel(LifeEventTarget.myself, params),
-            right: null,
-            left: null,
-            up: null,
-            down: null,
-          );
-        },
-      ),
-    );
-    // 連結情報を更新する
+  LifeRoadModel({
+    @required this.lifeStepsOnBoard,
+  })  : assert(lifeStepsOnBoard.first.length == height),
+        assert(lifeStepsOnBoard.any((row) => row.length == width)) {
     setDirectionsForLifeStepsOnBoard(start);
   }
 
-  static const int width = 7;
+  // FIXME: いつか消す
+  // 一直線の仮データ
+  static List<List<LifeStepModel>> createDummyLifeStepsOnBoard() => List.generate(
+        width,
+        (y) => List.generate(
+          height,
+          (x) {
+            final isStart = x == 0 && y == 0;
+            final isGoal = x == width - 1 && y == 0;
+            final params = () {
+              if (isStart) return const StartParams();
+              if (isGoal) return const GoalParams();
+              if (y == 0) {
+                return const GainLifeItemsParams(targetItems: [
+                  TargetLifeItemParams(
+                    key: 'money',
+                    type: LifeItemType.money,
+                    amount: 1000,
+                  )
+                ]);
+              }
+              return const NothingParams();
+            }();
+            return LifeStepModel(
+              id: x + (y * width),
+              lifeEvent: LifeEventModel(LifeEventTarget.myself, params),
+              right: null,
+              left: null,
+              up: null,
+              down: null,
+            );
+          },
+        ),
+      );
 
+  static const int width = 7;
   static const int height = 7;
 
   List<List<LifeStepModel>> lifeStepsOnBoard;

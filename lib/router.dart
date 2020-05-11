@@ -27,7 +27,7 @@ class Router {
                 HumanLifeModel(
                   title: 'dummy HumanLife',
                   author: UserModel(id: '123', name: 'dummyUser'),
-                  lifeRoad: LifeRoadModel.dummy(),
+                  lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createDummyLifeStepsOnBoard()),
                 ),
                 orderedHumans: [HumanModel(id: '123', name: 'hoge'), HumanModel(id: '456', name: 'fuga')],
               ),

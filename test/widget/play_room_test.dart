@@ -27,7 +27,7 @@ Future<void> main() async {
   final humanLife = HumanLifeModel(
     title: 'hello',
     author: UserModel(id: 'user', name: 'hoge'),
-    lifeRoad: LifeRoadModel.dummy(),
+    lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createDummyLifeStepsOnBoard()),
   );
 
   setUp(() {

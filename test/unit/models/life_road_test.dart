@@ -117,7 +117,7 @@ void main() {
     _TestExecuterForDirectionTest(testData: testData, checkList: checkList).test();
   });
   test('print debugPrintPointerList', () {
-    final model = LifeRoadModel.dummy();
+    final model = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createDummyLifeStepsOnBoard());
     const text = 'type:1   type:6   type:6   type:6   type:6   type:6   type:2   \n'
         'up:null  up:null  up:null  up:null  up:null  up:null  up:null  \n'
         'dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  \n'
@@ -162,7 +162,7 @@ class _TestExecuterForDirectionTest {
     @required this.testData,
     @required this.checkList,
   }) {
-    lifeStepList = List.generate(
+    final lifeStepsOnBoard = List.generate(
       LifeRoadModel.height,
       (y) => List.generate(
         LifeRoadModel.width,
@@ -176,7 +176,7 @@ class _TestExecuterForDirectionTest {
         ),
       ),
     );
-    model = LifeRoadModel()..lifeStepsOnBoard = lifeStepList;
+    model = LifeRoadModel(lifeStepsOnBoard: lifeStepsOnBoard);
   }
 
   final List<List<LifeEventModel>> testData;
