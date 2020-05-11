@@ -35,7 +35,7 @@ void main() {
       [gains, blank, blank, blank, blank, blank, gains],
       [gains, gains, gains, gains, gains, gains, gains],
     ];
-    final checkList = [
+    final expectedPointers = [
       [epRight, epRight, epRight, epRight, epRight, epRight, epDown],
       [epBlank, epBlank, epBlank, epBlank, epBlank, epBlank, epDown],
       [epBlank, epBlank, epBlank, epBlank, epBlank, epBlank, epDown],
@@ -44,7 +44,7 @@ void main() {
       [epUp, epBlank, epBlank, epBlank, epBlank, epBlank, epDown],
       [epUp, epLeft, epLeft, epLeft, epLeft, epLeft, epLeft],
     ];
-    _DirectionChecker(lifeEvents: testData, expectedPointers: checkList).expectPointers();
+    _DirectionChecker(lifeEvents: testData, expectedPointers: expectedPointers).expectPointers();
   });
 
   test('ditect a branch direction', () {
@@ -58,7 +58,7 @@ void main() {
       [blank, gains, gains, gains, gains, gains, gains],
     ];
 
-    final checkList = [
+    final expectedPointers = [
       [epRight, epBrDR, epRight, epRight, epRight, epDown, epBlank],
       [epBlank, epDown, epBlank, epBlank, epBlank, epDown, epBlank],
       [epBlank, epRight, epRight, epRight, epRight, epRight, epDown],
@@ -68,7 +68,7 @@ void main() {
       [epBlank, epUp, epLeft, epLeft, epLeft, epLeft, epLeft],
     ];
 
-    _DirectionChecker(lifeEvents: testData, expectedPointers: checkList).expectPointers();
+    _DirectionChecker(lifeEvents: testData, expectedPointers: expectedPointers).expectPointers();
   });
 
   test('ditect two branch direction', () {
@@ -82,7 +82,7 @@ void main() {
       [blank, blank, blank, blank, blank, blank, blank],
     ];
 
-    final checkList = [
+    final expectedPointers = [
       [epRight, epBrDR, epRight, epRight, epRight, epRight, epBlank],
       [epBlank, epDown, epBlank, epBlank, epBlank, epUp, epBlank],
       [epBlank, epRight, epBrDR, epRight, epRight, epUp, epBlank],
@@ -92,7 +92,7 @@ void main() {
       [epBlank, epBlank, epBlank, epBlank, epBlank, epBlank, epBlank],
     ];
 
-    _DirectionChecker(lifeEvents: testData, expectedPointers: checkList).expectPointers();
+    _DirectionChecker(lifeEvents: testData, expectedPointers: expectedPointers).expectPointers();
   });
 
   test('ditect three branch direction', () {
@@ -106,7 +106,7 @@ void main() {
       [blank, gains, gains, gains, gains, gains, blank],
     ];
 
-    final checkList = [
+    final expectedPointers = [
       [epBlank, epRight, epRight, epRight, epRight, epDown, epBlank],
       [epBlank, epUp, epBlank, epBlank, epBlank, epDown, epBlank],
       [epBlank, epUp, epBlank, epBlank, epBlank, epDown, epBlank],
@@ -116,7 +116,7 @@ void main() {
       [epBlank, epRight, epRight, epRight, epRight, epUp, epBlank],
     ];
 
-    _DirectionChecker(lifeEvents: testData, expectedPointers: checkList).expectPointers();
+    _DirectionChecker(lifeEvents: testData, expectedPointers: expectedPointers).expectPointers();
   });
 
   test('debugMessage', () {
@@ -164,8 +164,9 @@ lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n''';
 class _DirectionChecker {
   _DirectionChecker({
     @required List<List<LifeEventModel>> lifeEvents,
-    @required this.expectedPointers,
-  }) : _model = LifeRoadModel(
+    @required List<List<_Pointer>> expectedPointers,
+  })  : _expectedPointers = expectedPointers,
+        _model = LifeRoadModel(
           lifeStepsOnBoard: List.generate(
             LifeRoadModel.height,
             (y) => List.generate(
@@ -182,20 +183,20 @@ class _DirectionChecker {
           ),
         );
 
-  final List<List<_Pointer>> expectedPointers;
+  final List<List<_Pointer>> _expectedPointers;
   final LifeRoadModel _model;
 
   void expectPointers() {
     for (var y = 0; y < LifeRoadModel.height; ++y) {
       for (var x = 0; x < LifeRoadModel.width; ++x) {
         final hasUp = _model.lifeStepsOnBoard[y][x].up != null;
-        expect(hasUp, expectedPointers[y][x].up);
+        expect(hasUp, _expectedPointers[y][x].up);
         final hasDown = _model.lifeStepsOnBoard[y][x].down != null;
-        expect(hasDown, expectedPointers[y][x].down);
+        expect(hasDown, _expectedPointers[y][x].down);
         final hasRight = _model.lifeStepsOnBoard[y][x].right != null;
-        expect(hasRight, expectedPointers[y][x].right);
+        expect(hasRight, _expectedPointers[y][x].right);
         final hasLeft = _model.lifeStepsOnBoard[y][x].left != null;
-        expect(hasLeft, expectedPointers[y][x].left);
+        expect(hasLeft, _expectedPointers[y][x].left);
       }
     }
   }
