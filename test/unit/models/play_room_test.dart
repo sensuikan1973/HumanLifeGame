@@ -22,7 +22,7 @@ void main() {
 
     final playRoomModel = PlayRoomModel(
       I18n('en'),
-      humanLife: humanLife,
+      humanLife,
       orderedHumans: [human1, human2],
     );
 
