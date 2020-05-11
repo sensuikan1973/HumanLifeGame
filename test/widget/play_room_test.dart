@@ -90,13 +90,6 @@ Future<void> main() async {
     }
   });
 
-  testWidgets("show 'Roll the Dice' text", (tester) async {
-    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
-    await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel));
-    await tester.pump();
-    expect(find.text(i18n.rollDice), findsOneWidget);
-  });
-
   testWidgets('disabled Roll the Dice button', (tester) async {
     final dice = MockDice();
     const roll = 5;
@@ -104,25 +97,11 @@ Future<void> main() async {
     final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
-    expect(find.text(i18n.rollDice), findsOneWidget);
-  });
 
-  testWidgets('show Yes/No Button', (tester) async {
-    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
-    await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel));
+    final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
+    await tester.tap(rollDiceButton);
     await tester.pump();
-    expect(find.text(i18n.playerActionYes), findsOneWidget);
-    expect(find.text(i18n.playerActionNo), findsOneWidget);
-  });
-
-  testWidgets('show Direction Select Button', (tester) async {
-    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
-    await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel));
-    await tester.pump();
-    expect(find.byIcon(Icons.arrow_upward), findsOneWidget);
-    expect(find.byIcon(Icons.arrow_back), findsOneWidget);
-    expect(find.byIcon(Icons.arrow_forward), findsOneWidget);
-    expect(find.byIcon(Icons.arrow_downward), findsOneWidget);
+    //expect(find.byElementPredicate((widget) => widget is rollDiceButton && widget));
   });
 }
 
