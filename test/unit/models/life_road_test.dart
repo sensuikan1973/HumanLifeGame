@@ -187,14 +187,14 @@ class _TestExecutorForDirectionTest {
   void expectPointers() {
     for (var y = 0; y < LifeRoadModel.height; ++y) {
       for (var x = 0; x < LifeRoadModel.width; ++x) {
-        final up = _model.lifeStepsOnBoard[y][x].up != null;
-        expect(up, expectedPointers[y][x].up);
-        final down = _model.lifeStepsOnBoard[y][x].down != null;
-        expect(down, expectedPointers[y][x].down);
-        final right = _model.lifeStepsOnBoard[y][x].right != null;
-        expect(right, expectedPointers[y][x].right);
-        final left = _model.lifeStepsOnBoard[y][x].left != null;
-        expect(left, expectedPointers[y][x].left);
+        final hasUp = _model.lifeStepsOnBoard[y][x].up != null;
+        expect(hasUp, expectedPointers[y][x].up);
+        final hasDown = _model.lifeStepsOnBoard[y][x].down != null;
+        expect(hasDown, expectedPointers[y][x].down);
+        final hasRight = _model.lifeStepsOnBoard[y][x].right != null;
+        expect(hasRight, expectedPointers[y][x].right);
+        final hasLeft = _model.lifeStepsOnBoard[y][x].left != null;
+        expect(hasLeft, expectedPointers[y][x].left);
       }
     }
   }
