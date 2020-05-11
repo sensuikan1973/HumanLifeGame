@@ -186,8 +186,6 @@ class _TestExecutorForDirectionTest {
   LifeRoadModel model;
 
   void test() {
-    model.setDirectionsForLifeStepsOnBoard(model.start);
-
     for (var y = 0; y < LifeRoadModel.height; ++y) {
       for (var x = 0; x < LifeRoadModel.width; ++x) {
         final up = model.lifeStepsOnBoard[y][x].up != null;
