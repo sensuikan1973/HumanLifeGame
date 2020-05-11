@@ -121,7 +121,7 @@ void main() {
 
   test('debugMessage', () {
     final model = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createDummyLifeStepsOnBoard());
-    const text = '''
+    const expectedMessage = '''
 type:1   type:6   type:6   type:6   type:6   type:6   type:2   
 up:null  up:null  up:null  up:null  up:null  up:null  up:null  
 dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
@@ -157,7 +157,7 @@ up:null  up:null  up:null  up:null  up:null  up:null  up:null
 dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
 rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
 lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n''';
-    expect(model.debugMessage(), text);
+    expect(model.debugMessage(), expectedMessage);
   });
 }
 
