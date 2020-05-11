@@ -19,11 +19,11 @@ Future<void> main() async {
   final humanLife = HumanLifeModel(
     title: 'dummy HumanLife',
     author: UserModel(id: 'dummyUserId', name: 'dummyUser'),
-    lifeRoad: LifeRoadModel.dummy(),
+    lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createDummyLifeStepsOnBoard()),
   );
 
   testWidgets('show initial total moneys', (tester) async {
-    final playRoomModel = PlayRoomModel(i18n, orderedHumans: orderedHumans, humanLife: humanLife);
+    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
     await tester.pumpWidget(testableApp(
       locale: locale,
       home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const LifeStages()),
@@ -33,7 +33,7 @@ Future<void> main() async {
   });
 
   testWidgets('show variable total moneys', (tester) async {
-    final playRoomModel = PlayRoomModel(i18n, orderedHumans: orderedHumans, humanLife: humanLife);
+    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
     for (final lifeStage in playRoomModel.lifeStages) {
       lifeStage.lifeItems.add(LifeItemModel('key', LifeItemType.money, 200));
     }
@@ -46,7 +46,7 @@ Future<void> main() async {
   });
 
   testWidgets('show current player', (tester) async {
-    final playRoomModel = PlayRoomModel(i18n, orderedHumans: orderedHumans, humanLife: humanLife);
+    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
     await tester.pumpWidget(testableApp(
       locale: locale,
       home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const LifeStages()),

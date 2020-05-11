@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import 'life_event.dart';
 import 'life_event_params/gain_life_items_params.dart';
 import 'life_event_params/goal_params.dart';
@@ -9,49 +11,49 @@ import 'life_item.dart';
 import 'life_step.dart';
 
 class LifeRoadModel {
-  LifeRoadModel();
-
-  // FIXME: いつか消す
-  // 一番下の列一直線の仮データ
-  LifeRoadModel.dummy() {
-    lifeStepsOnBoard = List.generate(
-      width,
-      (y) => List.generate(
-        height,
-        (x) {
-          final isStart = x == 0 && y == 0;
-          final isGoal = x == width - 1 && y == 0;
-          final params = () {
-            if (isStart) return const StartParams();
-            if (isGoal) return const GoalParams();
-            if (y == 0) {
-              return const GainLifeItemsParams(targetItems: [
-                TargetLifeItemParams(
-                  key: 'money',
-                  type: LifeItemType.money,
-                  amount: 1000,
-                )
-              ]);
-            }
-            return const NothingParams();
-          }();
-          return LifeStepModel(
-            id: x + (y * width),
-            lifeEvent: LifeEventModel(LifeEventTarget.myself, params),
-            right: null,
-            left: null,
-            up: null,
-            down: null,
-          );
-        },
-      ),
-    );
-    // 連結情報を更新する
-    setDirectionsForLifeStepsOnBoard(start);
+  LifeRoadModel({
+    @required this.lifeStepsOnBoard,
+  })  : assert(lifeStepsOnBoard.first.length == height),
+        assert(lifeStepsOnBoard.any((row) => row.length == width)) {
+    _initDirections(start);
   }
 
-  static const int width = 7;
+  // FIXME: いつか消す
+  // 一直線の仮データ
+  static List<List<LifeStepModel>> createDummyLifeStepsOnBoard() => List.generate(
+        width,
+        (y) => List.generate(
+          height,
+          (x) {
+            final isStart = x == 0 && y == 0;
+            final isGoal = x == width - 1 && y == 0;
+            final params = () {
+              if (isStart) return const StartParams();
+              if (isGoal) return const GoalParams();
+              if (y == 0) {
+                return const GainLifeItemsParams(targetItems: [
+                  TargetLifeItemParams(
+                    key: 'money',
+                    type: LifeItemType.money,
+                    amount: 1000,
+                  )
+                ]);
+              }
+              return const NothingParams();
+            }();
+            return LifeStepModel(
+              id: x + (y * width),
+              lifeEvent: LifeEventModel(LifeEventTarget.myself, params),
+              right: null,
+              left: null,
+              up: null,
+              down: null,
+            );
+          },
+        ),
+      );
 
+  static const int width = 7;
   static const int height = 7;
 
   List<List<LifeStepModel>> lifeStepsOnBoard;
@@ -74,7 +76,9 @@ class LifeRoadModel {
     return null;
   }
 
-  void setDirectionsForLifeStepsOnBoard(LifeStepModel currentLifeStep) {
+  void _initDirections(LifeStepModel currentLifeStep) {
+    if (currentLifeStep.isGoal) return;
+
     final pos = getPosition(currentLifeStep);
     LifeStepModel upLifeStep;
     LifeStepModel downLifeStep;
@@ -84,11 +88,8 @@ class LifeRoadModel {
     var isDownUnchecked = false;
     var isRightUnchecked = false;
     var isLeftUnchecked = false;
-
     var numOfUncheckedLifeStep = 0;
 
-    // isGoalなら探索終了
-    if (currentLifeStep.isGoal) return;
     // 現在のLifeStepの上下左右に未探索のLifeStepが存在するか
     // 上方をチェック
     if (pos.y != 0) {
@@ -116,19 +117,19 @@ class LifeRoadModel {
       if (numOfUncheckedLifeStep > 1) {
         if (isUpUnchecked) {
           lifeStepsOnBoard[pos.y][pos.x].up = upLifeStep;
-          setDirectionsForLifeStepsOnBoard(upLifeStep);
+          _initDirections(upLifeStep);
         }
         if (isDownUnchecked) {
           lifeStepsOnBoard[pos.y][pos.x].down = downLifeStep;
-          setDirectionsForLifeStepsOnBoard(downLifeStep);
+          _initDirections(downLifeStep);
         }
         if (isRightUnchecked) {
           lifeStepsOnBoard[pos.y][pos.x].right = rightLifeStep;
-          setDirectionsForLifeStepsOnBoard(rightLifeStep);
+          _initDirections(rightLifeStep);
         }
         if (isLeftUnchecked) {
           lifeStepsOnBoard[pos.y][pos.x].left = leftLifeStep;
-          setDirectionsForLifeStepsOnBoard(leftLifeStep);
+          _initDirections(leftLifeStep);
         }
       } else {
         // エラー（もしくは離小島にジャンプ）
@@ -138,16 +139,16 @@ class LifeRoadModel {
         // 次のLifeStepと紐付けし、次のLifeStepから探索を開始
         if (isUpUnchecked) {
           lifeStepsOnBoard[pos.y][pos.x].up = upLifeStep;
-          setDirectionsForLifeStepsOnBoard(upLifeStep);
+          _initDirections(upLifeStep);
         } else if (isDownUnchecked) {
           lifeStepsOnBoard[pos.y][pos.x].down = downLifeStep;
-          setDirectionsForLifeStepsOnBoard(downLifeStep);
+          _initDirections(downLifeStep);
         } else if (isRightUnchecked) {
           lifeStepsOnBoard[pos.y][pos.x].right = rightLifeStep;
-          setDirectionsForLifeStepsOnBoard(rightLifeStep);
+          _initDirections(rightLifeStep);
         } else if (isLeftUnchecked) {
           lifeStepsOnBoard[pos.y][pos.x].left = leftLifeStep;
-          setDirectionsForLifeStepsOnBoard(leftLifeStep);
+          _initDirections(leftLifeStep);
         } else {
           // 例外
         }

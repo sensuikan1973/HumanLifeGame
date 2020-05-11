@@ -15,14 +15,14 @@ void main() {
     final humanLife = HumanLifeModel(
       title: 'dummy HumanLife',
       author: UserModel(id: 'dummyUserId', name: 'dummyUser'),
-      lifeRoad: LifeRoadModel.dummy(), // FIXME: 今はこれでいいけど、LifeRoadModel.dummy はいつか消すので要修正
+      lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createDummyLifeStepsOnBoard()),
     );
     final human1 = HumanModel(id: 'h1', name: 'foo');
     final human2 = HumanModel(id: 'h2', name: 'bar');
 
     final playRoomModel = PlayRoomModel(
       I18n('en'),
-      humanLife: humanLife,
+      humanLife,
       orderedHumans: [human1, human2],
     );
 

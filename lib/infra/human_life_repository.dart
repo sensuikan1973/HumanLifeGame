@@ -8,7 +8,7 @@ class HumanLifeRepository {
         HumanLifeModel(
           title: 'dummy HumanLife',
           author: UserModel(id: 'dummyUseUd', name: 'dummyUser'),
-          lifeRoad: LifeRoadModel.dummy(),
+          lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createDummyLifeStepsOnBoard()),
         ),
       );
 }

@@ -27,7 +27,7 @@ Future<void> main() async {
   final humanLife = HumanLifeModel(
     title: 'hello',
     author: UserModel(id: 'user', name: 'hoge'),
-    lifeRoad: LifeRoadModel.dummy(),
+    lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createDummyLifeStepsOnBoard()),
   );
 
   setUp(() {
@@ -37,7 +37,7 @@ Future<void> main() async {
   });
 
   testWidgets('show some widgets', (tester) async {
-    final playRoomModel = PlayRoomModel(i18n, humanLife: humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
     await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel));
     await tester.pump();
     expect(find.byType(PlayerAction), findsOneWidget);
@@ -50,7 +50,7 @@ Future<void> main() async {
   testWidgets('random value(1 <= value <= 6) should be displayed when dice is rolled', (tester) async {
     final dice = MockDice();
     when(dice.roll()).thenReturn(5);
-    final playRoomModel = PlayRoomModel(i18n, humanLife: humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
@@ -63,7 +63,7 @@ Future<void> main() async {
     final dice = MockDice();
     const roll = 5;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomModel(i18n, humanLife: humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
@@ -82,7 +82,7 @@ Future<void> main() async {
   });
 
   testWidgets('show user name in human life stages', (tester) async {
-    final playRoomModel = PlayRoomModel(i18n, humanLife: humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
     await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel));
     await tester.pump();
     for (final human in orderedHumans) {

@@ -12,9 +12,9 @@ import 'player_action.dart';
 
 class PlayRoomModel extends ChangeNotifier {
   PlayRoomModel(
-    this._i18n, {
-    this.humanLife,
-    this.orderedHumans,
+    this._i18n,
+    this.humanLife, {
+    @required this.orderedHumans,
   }) {
     // 参加者全員の位置を Start に
     for (final human in orderedHumans) {

@@ -16,17 +16,17 @@ void main() {
   final direc = LifeEventModel(LifeEventTarget.myself, const SelectDirectionParams());
   final blank = LifeEventModel(LifeEventTarget.myself, const NothingParams());
 
-  final epBlank = ExactryPointer(up: false, down: false, right: false, left: false);
-  final epUp = ExactryPointer(up: true, down: false, right: false, left: false);
-  final epDown = ExactryPointer(up: false, down: true, right: false, left: false);
-  final epRight = ExactryPointer(up: false, down: false, right: true, left: false);
-  final epLeft = ExactryPointer(up: false, down: false, right: false, left: true);
-  final epBrDR = ExactryPointer(up: false, down: true, right: true, left: false);
-  final epBrDL = ExactryPointer(up: false, down: true, right: false, left: true);
-  final epBrUDR = ExactryPointer(up: true, down: true, right: true, left: false);
+  final epBlank = _Pointer(up: false, down: false, right: false, left: false);
+  final epUp = _Pointer(up: true, down: false, right: false, left: false);
+  final epDown = _Pointer(up: false, down: true, right: false, left: false);
+  final epRight = _Pointer(up: false, down: false, right: true, left: false);
+  final epLeft = _Pointer(up: false, down: false, right: false, left: true);
+  final epBrDR = _Pointer(up: false, down: true, right: true, left: false);
+  final epBrDL = _Pointer(up: false, down: true, right: false, left: true);
+  final epBrUDR = _Pointer(up: true, down: true, right: true, left: false);
 
   test('ditect a single direction ', () {
-    final testData = [
+    final lifeEvents = [
       [start, gains, gains, gains, gains, gains, gains],
       [blank, blank, blank, blank, blank, blank, gains],
       [goals, blank, blank, blank, blank, blank, gains],
@@ -35,7 +35,7 @@ void main() {
       [gains, blank, blank, blank, blank, blank, gains],
       [gains, gains, gains, gains, gains, gains, gains],
     ];
-    final checkList = [
+    final expectedPointers = [
       [epRight, epRight, epRight, epRight, epRight, epRight, epDown],
       [epBlank, epBlank, epBlank, epBlank, epBlank, epBlank, epDown],
       [epBlank, epBlank, epBlank, epBlank, epBlank, epBlank, epDown],
@@ -44,10 +44,11 @@ void main() {
       [epUp, epBlank, epBlank, epBlank, epBlank, epBlank, epDown],
       [epUp, epLeft, epLeft, epLeft, epLeft, epLeft, epLeft],
     ];
-    _TestExecuterForDirectionTest(testData: testData, checkList: checkList).test();
+    _DirectionChecker(lifeEvents: lifeEvents, expectedPointers: expectedPointers).execute();
   });
+
   test('ditect a branch direction', () {
-    final testData = [
+    final lifeEvents = [
       [start, direc, gains, gains, gains, gains, blank],
       [blank, gains, blank, blank, blank, gains, blank],
       [blank, gains, gains, gains, gains, gains, gains],
@@ -57,7 +58,7 @@ void main() {
       [blank, gains, gains, gains, gains, gains, gains],
     ];
 
-    final checkList = [
+    final expectedPointers = [
       [epRight, epBrDR, epRight, epRight, epRight, epDown, epBlank],
       [epBlank, epDown, epBlank, epBlank, epBlank, epDown, epBlank],
       [epBlank, epRight, epRight, epRight, epRight, epRight, epDown],
@@ -67,10 +68,11 @@ void main() {
       [epBlank, epUp, epLeft, epLeft, epLeft, epLeft, epLeft],
     ];
 
-    _TestExecuterForDirectionTest(testData: testData, checkList: checkList).test();
+    _DirectionChecker(lifeEvents: lifeEvents, expectedPointers: expectedPointers).execute();
   });
+
   test('ditect two branch direction', () {
-    final testData = [
+    final lifeEvents = [
       [start, direc, gains, gains, gains, gains, goals],
       [blank, gains, blank, blank, blank, gains, blank],
       [blank, gains, direc, gains, gains, gains, blank],
@@ -80,7 +82,7 @@ void main() {
       [blank, blank, blank, blank, blank, blank, blank],
     ];
 
-    final checkList = [
+    final expectedPointers = [
       [epRight, epBrDR, epRight, epRight, epRight, epRight, epBlank],
       [epBlank, epDown, epBlank, epBlank, epBlank, epUp, epBlank],
       [epBlank, epRight, epBrDR, epRight, epRight, epUp, epBlank],
@@ -90,11 +92,11 @@ void main() {
       [epBlank, epBlank, epBlank, epBlank, epBlank, epBlank, epBlank],
     ];
 
-    _TestExecuterForDirectionTest(testData: testData, checkList: checkList).test();
+    _DirectionChecker(lifeEvents: lifeEvents, expectedPointers: expectedPointers).execute();
   });
 
   test('ditect three branch direction', () {
-    final testData = [
+    final lifeEvents = [
       [blank, gains, gains, gains, gains, gains, blank],
       [blank, gains, blank, blank, blank, gains, blank],
       [blank, gains, blank, blank, blank, gains, blank],
@@ -104,7 +106,7 @@ void main() {
       [blank, gains, gains, gains, gains, gains, blank],
     ];
 
-    final checkList = [
+    final expectedPointers = [
       [epBlank, epRight, epRight, epRight, epRight, epDown, epBlank],
       [epBlank, epUp, epBlank, epBlank, epBlank, epDown, epBlank],
       [epBlank, epUp, epBlank, epBlank, epBlank, epDown, epBlank],
@@ -114,97 +116,94 @@ void main() {
       [epBlank, epRight, epRight, epRight, epRight, epUp, epBlank],
     ];
 
-    _TestExecuterForDirectionTest(testData: testData, checkList: checkList).test();
+    _DirectionChecker(lifeEvents: lifeEvents, expectedPointers: expectedPointers).execute();
   });
-  test('print debugPrintPointerList', () {
-    final model = LifeRoadModel.dummy();
-    const text = 'type:1   type:6   type:6   type:6   type:6   type:6   type:2   \n'
-        'up:null  up:null  up:null  up:null  up:null  up:null  up:null  \n'
-        'dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  \n'
-        'rl:exist rl:exist rl:exist rl:exist rl:exist rl:exist rl:null  \n'
-        'lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n'
-        'type:0   type:0   type:0   type:0   type:0   type:0   type:0   \n'
-        'up:null  up:null  up:null  up:null  up:null  up:null  up:null  \n'
-        'dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  \n'
-        'rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  \n'
-        'lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n'
-        'type:0   type:0   type:0   type:0   type:0   type:0   type:0   \n'
-        'up:null  up:null  up:null  up:null  up:null  up:null  up:null  \n'
-        'dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  \n'
-        'rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  \n'
-        'lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n'
-        'type:0   type:0   type:0   type:0   type:0   type:0   type:0   \n'
-        'up:null  up:null  up:null  up:null  up:null  up:null  up:null  \n'
-        'dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  \n'
-        'rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  \n'
-        'lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n'
-        'type:0   type:0   type:0   type:0   type:0   type:0   type:0   \n'
-        'up:null  up:null  up:null  up:null  up:null  up:null  up:null  \n'
-        'dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  \n'
-        'rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  \n'
-        'lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n'
-        'type:0   type:0   type:0   type:0   type:0   type:0   type:0   \n'
-        'up:null  up:null  up:null  up:null  up:null  up:null  up:null  \n'
-        'dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  \n'
-        'rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  \n'
-        'lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n'
-        'type:0   type:0   type:0   type:0   type:0   type:0   type:0   \n'
-        'up:null  up:null  up:null  up:null  up:null  up:null  up:null  \n'
-        'dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  \n'
-        'rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  \n'
-        'lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n';
-    expect(model.debugMessage(), text);
+
+  test('debugMessage', () {
+    final model = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createDummyLifeStepsOnBoard());
+    const expectedMessage = '''
+type:1   type:6   type:6   type:6   type:6   type:6   type:2   
+up:null  up:null  up:null  up:null  up:null  up:null  up:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
+rl:exist rl:exist rl:exist rl:exist rl:exist rl:exist rl:null  
+lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
+type:0   type:0   type:0   type:0   type:0   type:0   type:0   
+up:null  up:null  up:null  up:null  up:null  up:null  up:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
+rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
+lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
+type:0   type:0   type:0   type:0   type:0   type:0   type:0   
+up:null  up:null  up:null  up:null  up:null  up:null  up:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
+rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
+lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
+type:0   type:0   type:0   type:0   type:0   type:0   type:0   
+up:null  up:null  up:null  up:null  up:null  up:null  up:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
+rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
+lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
+type:0   type:0   type:0   type:0   type:0   type:0   type:0   
+up:null  up:null  up:null  up:null  up:null  up:null  up:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
+rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
+lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
+type:0   type:0   type:0   type:0   type:0   type:0   type:0   
+up:null  up:null  up:null  up:null  up:null  up:null  up:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
+rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
+lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
+type:0   type:0   type:0   type:0   type:0   type:0   type:0   
+up:null  up:null  up:null  up:null  up:null  up:null  up:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
+rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
+lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n''';
+    expect(model.debugMessage(), expectedMessage);
   });
 }
 
-class _TestExecuterForDirectionTest {
-  _TestExecuterForDirectionTest({
-    @required this.testData,
-    @required this.checkList,
-  }) {
-    lifeStepList = List.generate(
-      LifeRoadModel.height,
-      (y) => List.generate(
-        LifeRoadModel.width,
-        (x) => LifeStepModel(
-          id: x + (y * LifeRoadModel.width),
-          lifeEvent: testData[y][x],
-          right: null,
-          left: null,
-          up: null,
-          down: null,
-        ),
-      ),
-    );
-    model = LifeRoadModel()..lifeStepsOnBoard = lifeStepList;
-  }
+class _DirectionChecker {
+  _DirectionChecker({
+    @required List<List<LifeEventModel>> lifeEvents,
+    @required List<List<_Pointer>> expectedPointers,
+  })  : _expectedPointers = expectedPointers,
+        _model = LifeRoadModel(
+          lifeStepsOnBoard: List.generate(
+            LifeRoadModel.height,
+            (y) => List.generate(
+              LifeRoadModel.width,
+              (x) => LifeStepModel(
+                id: x + (y * LifeRoadModel.width),
+                lifeEvent: lifeEvents[y][x],
+                right: null,
+                left: null,
+                up: null,
+                down: null,
+              ),
+            ),
+          ),
+        );
 
-  final List<List<LifeEventModel>> testData;
-  final List<List<ExactryPointer>> checkList;
+  final List<List<_Pointer>> _expectedPointers;
+  final LifeRoadModel _model;
 
-  List<List<LifeStepModel>> lifeStepList;
-  LifeRoadModel model;
-
-  void test() {
-    model.setDirectionsForLifeStepsOnBoard(model.start);
-
+  void execute() {
     for (var y = 0; y < LifeRoadModel.height; ++y) {
       for (var x = 0; x < LifeRoadModel.width; ++x) {
-        final up = model.lifeStepsOnBoard[y][x].up != null;
-        expect(up, checkList[y][x].up);
-        final down = model.lifeStepsOnBoard[y][x].down != null;
-        expect(down, checkList[y][x].down);
-        final right = model.lifeStepsOnBoard[y][x].right != null;
-        expect(right, checkList[y][x].right);
-        final left = model.lifeStepsOnBoard[y][x].left != null;
-        expect(left, checkList[y][x].left);
+        final hasUp = _model.lifeStepsOnBoard[y][x].up != null;
+        expect(hasUp, _expectedPointers[y][x].up);
+        final hasDown = _model.lifeStepsOnBoard[y][x].down != null;
+        expect(hasDown, _expectedPointers[y][x].down);
+        final hasRight = _model.lifeStepsOnBoard[y][x].right != null;
+        expect(hasRight, _expectedPointers[y][x].right);
+        final hasLeft = _model.lifeStepsOnBoard[y][x].left != null;
+        expect(hasLeft, _expectedPointers[y][x].left);
       }
     }
   }
 }
 
-class ExactryPointer {
-  ExactryPointer({
+class _Pointer {
+  _Pointer({
     @required this.up,
     @required this.down,
     @required this.right,
