@@ -16,14 +16,14 @@ void main() {
   final direc = LifeEventModel(LifeEventTarget.myself, const SelectDirectionParams());
   final blank = LifeEventModel(LifeEventTarget.myself, const NothingParams());
 
-  final epBlank = ExactryPointer(up: false, down: false, right: false, left: false);
-  final epUp = ExactryPointer(up: true, down: false, right: false, left: false);
-  final epDown = ExactryPointer(up: false, down: true, right: false, left: false);
-  final epRight = ExactryPointer(up: false, down: false, right: true, left: false);
-  final epLeft = ExactryPointer(up: false, down: false, right: false, left: true);
-  final epBrDR = ExactryPointer(up: false, down: true, right: true, left: false);
-  final epBrDL = ExactryPointer(up: false, down: true, right: false, left: true);
-  final epBrUDR = ExactryPointer(up: true, down: true, right: true, left: false);
+  final epBlank = _Pointer(up: false, down: false, right: false, left: false);
+  final epUp = _Pointer(up: true, down: false, right: false, left: false);
+  final epDown = _Pointer(up: false, down: true, right: false, left: false);
+  final epRight = _Pointer(up: false, down: false, right: true, left: false);
+  final epLeft = _Pointer(up: false, down: false, right: false, left: true);
+  final epBrDR = _Pointer(up: false, down: true, right: true, left: false);
+  final epBrDL = _Pointer(up: false, down: true, right: false, left: true);
+  final epBrUDR = _Pointer(up: true, down: true, right: true, left: false);
 
   test('ditect a single direction ', () {
     final testData = [
@@ -44,7 +44,7 @@ void main() {
       [epUp, epBlank, epBlank, epBlank, epBlank, epBlank, epDown],
       [epUp, epLeft, epLeft, epLeft, epLeft, epLeft, epLeft],
     ];
-    _TestExecuterForDirectionTest(testData: testData, checkList: checkList).test();
+    _TestExecutorForDirectionTest(testData: testData, checkList: checkList).test();
   });
   test('ditect a branch direction', () {
     final testData = [
@@ -67,7 +67,7 @@ void main() {
       [epBlank, epUp, epLeft, epLeft, epLeft, epLeft, epLeft],
     ];
 
-    _TestExecuterForDirectionTest(testData: testData, checkList: checkList).test();
+    _TestExecutorForDirectionTest(testData: testData, checkList: checkList).test();
   });
   test('ditect two branch direction', () {
     final testData = [
@@ -90,7 +90,7 @@ void main() {
       [epBlank, epBlank, epBlank, epBlank, epBlank, epBlank, epBlank],
     ];
 
-    _TestExecuterForDirectionTest(testData: testData, checkList: checkList).test();
+    _TestExecutorForDirectionTest(testData: testData, checkList: checkList).test();
   });
 
   test('ditect three branch direction', () {
@@ -114,7 +114,7 @@ void main() {
       [epBlank, epRight, epRight, epRight, epRight, epUp, epBlank],
     ];
 
-    _TestExecuterForDirectionTest(testData: testData, checkList: checkList).test();
+    _TestExecutorForDirectionTest(testData: testData, checkList: checkList).test();
   });
   test('print debugPrintPointerList', () {
     final model = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createDummyLifeStepsOnBoard());
@@ -157,8 +157,8 @@ void main() {
   });
 }
 
-class _TestExecuterForDirectionTest {
-  _TestExecuterForDirectionTest({
+class _TestExecutorForDirectionTest {
+  _TestExecutorForDirectionTest({
     @required this.testData,
     @required this.checkList,
   }) {
@@ -180,7 +180,7 @@ class _TestExecuterForDirectionTest {
   }
 
   final List<List<LifeEventModel>> testData;
-  final List<List<ExactryPointer>> checkList;
+  final List<List<_Pointer>> checkList;
 
   List<List<LifeStepModel>> lifeStepList;
   LifeRoadModel model;
@@ -203,8 +203,8 @@ class _TestExecuterForDirectionTest {
   }
 }
 
-class ExactryPointer {
-  ExactryPointer({
+class _Pointer {
+  _Pointer({
     @required this.up,
     @required this.down,
     @required this.right,
