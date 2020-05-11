@@ -121,41 +121,42 @@ void main() {
 
   test('debugMessage', () {
     final model = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createDummyLifeStepsOnBoard());
-    const text = 'type:1   type:6   type:6   type:6   type:6   type:6   type:2   \n'
-        'up:null  up:null  up:null  up:null  up:null  up:null  up:null  \n'
-        'dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  \n'
-        'rl:exist rl:exist rl:exist rl:exist rl:exist rl:exist rl:null  \n'
-        'lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n'
-        'type:0   type:0   type:0   type:0   type:0   type:0   type:0   \n'
-        'up:null  up:null  up:null  up:null  up:null  up:null  up:null  \n'
-        'dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  \n'
-        'rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  \n'
-        'lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n'
-        'type:0   type:0   type:0   type:0   type:0   type:0   type:0   \n'
-        'up:null  up:null  up:null  up:null  up:null  up:null  up:null  \n'
-        'dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  \n'
-        'rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  \n'
-        'lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n'
-        'type:0   type:0   type:0   type:0   type:0   type:0   type:0   \n'
-        'up:null  up:null  up:null  up:null  up:null  up:null  up:null  \n'
-        'dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  \n'
-        'rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  \n'
-        'lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n'
-        'type:0   type:0   type:0   type:0   type:0   type:0   type:0   \n'
-        'up:null  up:null  up:null  up:null  up:null  up:null  up:null  \n'
-        'dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  \n'
-        'rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  \n'
-        'lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n'
-        'type:0   type:0   type:0   type:0   type:0   type:0   type:0   \n'
-        'up:null  up:null  up:null  up:null  up:null  up:null  up:null  \n'
-        'dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  \n'
-        'rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  \n'
-        'lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n'
-        'type:0   type:0   type:0   type:0   type:0   type:0   type:0   \n'
-        'up:null  up:null  up:null  up:null  up:null  up:null  up:null  \n'
-        'dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  \n'
-        'rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  \n'
-        'lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n';
+    const text = '''
+type:1   type:6   type:6   type:6   type:6   type:6   type:2   
+up:null  up:null  up:null  up:null  up:null  up:null  up:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
+rl:exist rl:exist rl:exist rl:exist rl:exist rl:exist rl:null  
+lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
+type:0   type:0   type:0   type:0   type:0   type:0   type:0   
+up:null  up:null  up:null  up:null  up:null  up:null  up:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
+rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
+lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
+type:0   type:0   type:0   type:0   type:0   type:0   type:0   
+up:null  up:null  up:null  up:null  up:null  up:null  up:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
+rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
+lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
+type:0   type:0   type:0   type:0   type:0   type:0   type:0   
+up:null  up:null  up:null  up:null  up:null  up:null  up:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
+rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
+lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
+type:0   type:0   type:0   type:0   type:0   type:0   type:0   
+up:null  up:null  up:null  up:null  up:null  up:null  up:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
+rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
+lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
+type:0   type:0   type:0   type:0   type:0   type:0   type:0   
+up:null  up:null  up:null  up:null  up:null  up:null  up:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
+rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
+lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
+type:0   type:0   type:0   type:0   type:0   type:0   type:0   
+up:null  up:null  up:null  up:null  up:null  up:null  up:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
+rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
+lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n''';
     expect(model.debugMessage(), text);
   });
 }
