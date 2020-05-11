@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/models/common/human.dart';
 import 'package:HumanLifeGame/models/common/human_life.dart';

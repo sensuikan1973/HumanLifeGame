@@ -90,18 +90,33 @@ Future<void> main() async {
     }
   });
 
-  testWidgets('disabled Roll the Dice button', (tester) async {
+  testWidgets('roll-the-dice button shuld be disabled when all Humans arrived at goal', (tester) async {
     final dice = MockDice();
-    const roll = 5;
+    const roll = 6;
     when(dice.roll()).thenReturn(roll);
     final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
     final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
+
     await tester.tap(rollDiceButton);
     await tester.pump();
-    //expect(find.byElementPredicate((widget) => widget is rollDiceButton && widget));
+    expect(
+        find.byWidgetPredicate(
+          (widget) =>
+              widget is FlatButton && widget.key == const Key('playerActionDiceRollButton') && widget.onPressed != null,
+        ),
+        findsOneWidget);
+    await tester.tap(rollDiceButton);
+    await tester.pump();
+
+    expect(
+        find.byWidgetPredicate(
+          (widget) =>
+              widget is FlatButton && widget.key == const Key('playerActionDiceRollButton') && widget.onPressed == null,
+        ),
+        findsOneWidget);
   });
 }
 

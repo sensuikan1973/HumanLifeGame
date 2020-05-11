@@ -33,20 +33,18 @@ class PlayerAction extends StatelessWidget {
         ),
       );
 
-  FlatButton _rollDiceButton(BuildContext context) {
-    return FlatButton(
-      key: const Key('playerActionDiceRollButton'),
-      color: Colors.blue,
-      textColor: Colors.white,
-      onPressed: context.watch<PlayRoomModel>().allHumansArrivedAtGoal
-          ? null
-          : () => context.read<PlayerActionModel>().rollDice(),
-      child: Text(
-        I18n.of(context).rollDice,
-        style: const TextStyle(fontSize: 20),
-      ),
-    );
-  }
+  FlatButton _rollDiceButton(BuildContext context) => FlatButton(
+        key: const Key('playerActionDiceRollButton'),
+        color: Colors.blue,
+        textColor: Colors.white,
+        onPressed: context.watch<PlayRoomModel>().allHumansArrivedAtGoal
+            ? null
+            : () => context.read<PlayerActionModel>().rollDice(),
+        child: Text(
+          I18n.of(context).rollDice,
+          style: const TextStyle(fontSize: 20),
+        ),
+      );
 
   Column _directionSelectButton(BuildContext context) => Column(
         children: <Widget>[
