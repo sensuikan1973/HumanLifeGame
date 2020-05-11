@@ -24,7 +24,7 @@ jobs:
       - run: flutter build web
       - uses: actions/upload-artifact@master
         with:
-          name: build/web
+          name: human_life_game_web
           path: build/web
 
   firebase_hosting_deploy:
@@ -37,7 +37,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/download-artifact@master
         with:
-          name: build/web
+          name: human_life_game_web
       - uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting -P dev
