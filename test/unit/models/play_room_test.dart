@@ -41,21 +41,21 @@ void main() {
 
     // human1 がサイコロを振って進む
     expect(playRoomModel.positionsByHumanId[human1.id].x, roll);
-    expect(playRoomModel.allHumansReachTheGoal, false);
+    expect(playRoomModel.allHumansReachedTheGoal, false);
 
     // human2 がサイコロを振って進む
     playRoomModel.playerAction = playRoomModel.playerAction; // 再代入により setter を発火させる
     expect(playRoomModel.positionsByHumanId[human2.id].x, roll);
-    expect(playRoomModel.allHumansReachTheGoal, false);
+    expect(playRoomModel.allHumansReachedTheGoal, false);
 
     // human1 がサイコロを振って進む
     playRoomModel.playerAction = playRoomModel.playerAction;
     expect(playRoomModel.positionsByHumanId[human1.id].x, LifeRoadModel.width - 1);
-    expect(playRoomModel.allHumansReachTheGoal, false);
+    expect(playRoomModel.allHumansReachedTheGoal, false);
 
     // human2 がサイコロを振って進む
     playRoomModel.playerAction = playRoomModel.playerAction;
     expect(playRoomModel.positionsByHumanId[human2.id].x, LifeRoadModel.width - 1);
-    expect(playRoomModel.allHumansReachTheGoal, true);
+    expect(playRoomModel.allHumansReachedTheGoal, true);
   });
 }

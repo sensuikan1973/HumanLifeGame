@@ -90,7 +90,7 @@ Future<void> main() async {
     }
   });
 
-  testWidgets('roll-the-dice button shuld be disabled when all Humans arrived at goal', (tester) async {
+  testWidgets('roll-the-dice button shuld be disabled when all Humans reached the goal', (tester) async {
     final dice = MockDice();
     const roll = 6;
     when(dice.roll()).thenReturn(roll);
@@ -102,22 +102,11 @@ Future<void> main() async {
 
     await tester.tap(rollDiceButton);
     await tester.pump();
+    expect(tester.widget<FlatButton>(rollDiceButton).enabled, true);
 
-    expect(
-        find.byWidgetPredicate(
-          (widget) =>
-              widget is FlatButton && widget == tester.element(rollDiceButton).widget && widget.onPressed != null,
-        ),
-        findsOneWidget);
     await tester.tap(rollDiceButton);
     await tester.pump();
-
-    expect(
-        find.byWidgetPredicate(
-          (widget) =>
-              widget is FlatButton && widget == tester.element(rollDiceButton).widget && widget.onPressed == null,
-        ),
-        findsOneWidget);
+    expect(tester.widget<FlatButton>(rollDiceButton).enabled, false);
   });
 }
 
