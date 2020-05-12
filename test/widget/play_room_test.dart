@@ -102,10 +102,11 @@ Future<void> main() async {
 
     await tester.tap(rollDiceButton);
     await tester.pump();
+
     expect(
         find.byWidgetPredicate(
           (widget) =>
-              widget is FlatButton && widget.key == const Key('playerActionDiceRollButton') && widget.onPressed != null,
+              widget is FlatButton && widget == tester.element(rollDiceButton).widget && widget.onPressed != null,
         ),
         findsOneWidget);
     await tester.tap(rollDiceButton);
@@ -114,7 +115,7 @@ Future<void> main() async {
     expect(
         find.byWidgetPredicate(
           (widget) =>
-              widget is FlatButton && widget.key == const Key('playerActionDiceRollButton') && widget.onPressed == null,
+              widget is FlatButton && widget == tester.element(rollDiceButton).widget && widget.onPressed == null,
         ),
         findsOneWidget);
   });
