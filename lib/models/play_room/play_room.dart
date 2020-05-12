@@ -54,7 +54,7 @@ class PlayRoomModel extends ChangeNotifier {
     );
 
     // 全員がゴールに到着しているかどうかを確認
-    _allHumansArrivedAtGoal = lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
+    _allHumansReachedTheGoal = lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
     // FIXME: 即ターン交代してるけど、あくまで仮
     _changeToNextTurn();
 
@@ -84,8 +84,8 @@ class PlayRoomModel extends ChangeNotifier {
   // 全参加者の LifeEvent 履歴
   List<LifeEventModel> everyLifeEventRecords;
 
-  bool _allHumansArrivedAtGoal = false;
-  bool get allHumansArrivedAtGoal => _allHumansArrivedAtGoal;
+  bool _allHumansReachedTheGoal = false;
+  bool get allHumansReachedTheGoal => _allHumansReachedTheGoal;
 
   // 次のターンに変える
   void _changeToNextTurn() {

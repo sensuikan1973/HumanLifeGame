@@ -89,6 +89,25 @@ Future<void> main() async {
       expect(find.text(human.name), findsOneWidget);
     }
   });
+
+  testWidgets('roll-the-dice button shuld be disabled when all Humans reached the goal', (tester) async {
+    final dice = MockDice();
+    const roll = 6;
+    when(dice.roll()).thenReturn(roll);
+    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
+    await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
+    await tester.pump();
+
+    final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
+
+    await tester.tap(rollDiceButton);
+    await tester.pump();
+    expect(tester.widget<FlatButton>(rollDiceButton).enabled, true);
+
+    await tester.tap(rollDiceButton);
+    await tester.pump();
+    expect(tester.widget<FlatButton>(rollDiceButton).enabled, false);
+  });
 }
 
 class _TestablePlayRoom extends StatelessWidget {

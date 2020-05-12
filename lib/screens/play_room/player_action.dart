@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../i18n/i18n.dart';
+import '../../models/play_room/play_room.dart';
 import '../../models/play_room/player_action.dart';
 
 class PlayerAction extends StatelessWidget {
@@ -36,12 +37,15 @@ class PlayerAction extends StatelessWidget {
         key: const Key('playerActionDiceRollButton'),
         color: Colors.blue,
         textColor: Colors.white,
-        onPressed: () => context.read<PlayerActionModel>().rollDice(),
+        onPressed: context.select<PlayRoomModel, bool>((model) => model.allHumansReachedTheGoal)
+            ? null
+            : () => context.read<PlayerActionModel>().rollDice(),
         child: Text(
           I18n.of(context).rollDice,
           style: const TextStyle(fontSize: 20),
         ),
       );
+
   Column _directionSelectButton(BuildContext context) => Column(
         children: <Widget>[
           Row(
