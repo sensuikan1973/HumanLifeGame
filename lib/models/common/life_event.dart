@@ -12,6 +12,7 @@ class LifeEventModel<T extends LifeEventParams> {
 
   LifeEventType get type => params.type;
   bool get isBranch => params.isBranch;
+  bool get mustStop => params.mustStop;
 }
 
 enum LifeEventTarget {
