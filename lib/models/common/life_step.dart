@@ -26,12 +26,11 @@ class LifeStepModel {
   bool get isBranch => lifeEvent.isBranch;
   bool get mustStop => lifeEvent.mustStop;
 
-  DestinationWithMovedStepCount getNextUntilForceStopStep(int num) {
+  DestinationWithMovedStepCount getNextUntilMustStopStep(int num) {
     var current = this;
     var count = 0;
     while (current != null && count < num) {
-      // TODO: 実装
-      // if (current == 強制ストップ) return xxx;
+      if (current.mustStop) break;
 
       final next = [
         current.up,

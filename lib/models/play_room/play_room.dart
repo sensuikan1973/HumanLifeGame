@@ -96,7 +96,7 @@ class PlayRoomModel extends ChangeNotifier {
   void _moveLifeStep() {
     // 現在の LifeStep から出目の数だけ進んだ LifeStep を取得する
     final destinationWithMovedStepCount =
-        _currentPlayerLifeStage.lifeStepModel.getNextUntilForceStopStep(playerAction.roll);
+        _currentPlayerLifeStage.lifeStepModel.getNextUntilMustStopStep(playerAction.roll);
     // 進み先の LifeStep を LifeStage に代入する
     lifeStages[_currentPlayerLifeStageIndex].lifeStepModel = destinationWithMovedStepCount.destination;
   }

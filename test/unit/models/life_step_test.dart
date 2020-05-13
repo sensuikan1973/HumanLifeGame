@@ -33,10 +33,10 @@ void main() {
       if (lifeStepList[i] == lifeStepList.last) continue;
       lifeStepList[i].up = lifeStepList[i + 1];
     }
-    expect(lifeStepList.first.getNextUntilForceStopStep(0).destination.id, 0);
-    expect(lifeStepList.first.getNextUntilForceStopStep(3).destination.id, 3);
-    expect(lifeStepList.first.getNextUntilForceStopStep(4).destination.id, 4);
-    expect(lifeStepList.first.getNextUntilForceStopStep(5).destination.id, 4);
-    expect(lifeStepList.first.getNextUntilForceStopStep(100).destination.id, 4);
+    expect(lifeStepList.first.getNextUntilMustStopStep(0).destination.id, 0);
+    expect(lifeStepList.first.getNextUntilMustStopStep(3).destination.id, 3);
+    expect(lifeStepList.first.getNextUntilMustStopStep(4).destination.id, 4);
+    expect(lifeStepList.first.getNextUntilMustStopStep(5).destination.id, 4);
+    expect(lifeStepList.first.getNextUntilMustStopStep(100).destination.id, 4);
   });
 }
