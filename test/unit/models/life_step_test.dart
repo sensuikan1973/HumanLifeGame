@@ -1,42 +1,86 @@
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/select_direction_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
 import 'package:HumanLifeGame/models/common/life_step.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final lifeStepList = List.generate(
-    5,
-    (index) {
-      final isStart = index == 0;
-      final isGoal = index == 4;
-      final params = () {
-        if (isStart) return const StartParams();
-        if (isGoal) return const GoalParams();
-        return const NothingParams();
-      }();
-      return LifeStepModel(
-        id: index,
-        lifeEvent: LifeEventModel(LifeEventTarget.myself, params),
-        right: null,
-        left: null,
-        up: null,
-        down: null,
-      );
-    },
-  );
+  group('getNextUntilMustStopStep', () {
+    group('up only', () {
+      const lifeEventParams = [
+        StartParams(),
+        NothingParams(),
+        NothingParams(),
+        NothingParams(),
+        GoalParams(),
+      ];
+      final lifeStepsOnBoard = [
+        for (var i = 0; i < lifeEventParams.length; ++i)
+          LifeStepModel(
+            id: i,
+            lifeEvent: LifeEventModel(LifeEventTarget.myself, lifeEventParams[i]),
+          )
+      ];
+      // 全て up 方向に進めるものとする
+      for (var i = 0; i < lifeStepsOnBoard.length; ++i) {
+        if (lifeStepsOnBoard[i] == lifeStepsOnBoard.last) continue;
+        lifeStepsOnBoard[i].up = lifeStepsOnBoard[i + 1];
+      }
 
-  test('move up straight', () {
-    // 全て up 方向に進めるものとする
-    for (var i = 0; i < lifeStepList.length; ++i) {
-      if (lifeStepList[i] == lifeStepList.last) continue;
-      lifeStepList[i].up = lifeStepList[i + 1];
-    }
-    expect(lifeStepList.first.getNextUntilMustStopStep(0).destination.id, 0);
-    expect(lifeStepList.first.getNextUntilMustStopStep(3).destination.id, 3);
-    expect(lifeStepList.first.getNextUntilMustStopStep(4).destination.id, 4);
-    expect(lifeStepList.first.getNextUntilMustStopStep(5).destination.id, 4);
-    expect(lifeStepList.first.getNextUntilMustStopStep(100).destination.id, 4);
+      test('move up straight', () {
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(0).destination.id, 0);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(0).movedCount, 0);
+
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(3).destination.id, 3);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(3).movedCount, 3);
+
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(4).destination.id, 4);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(4).movedCount, 4);
+
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(5).destination.id, 4);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(5).movedCount, 4);
+
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(100).destination.id, 4);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(100).movedCount, 4);
+      });
+    });
+
+    group('with direction', () {
+      const lifeEventParams = [
+        StartParams(),
+        NothingParams(),
+        NothingParams(),
+        SelectDirectionParams(),
+        GoalParams(),
+      ];
+      final lifeStepsOnBoard = [
+        for (var i = 0; i < lifeEventParams.length; ++i)
+          LifeStepModel(
+            id: i,
+            lifeEvent: LifeEventModel(LifeEventTarget.myself, lifeEventParams[i]),
+          )
+      ];
+      // 全て up 方向に進めるものとする
+      // NOTE: ここでは LifeEvent の type が重要なので、direction は雑に up のみ入れており、分岐のセットはしてない
+      for (var i = 0; i < lifeStepsOnBoard.length; ++i) {
+        if (lifeStepsOnBoard[i] == lifeStepsOnBoard.last) continue;
+        lifeStepsOnBoard[i].up = lifeStepsOnBoard[i + 1];
+      }
+
+      test('move until direction', () {
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(3).destination.id, 3);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(3).movedCount, 3);
+
+        // 途中に SelectDirection があるから、強制ストップ
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(4).destination.id, 3);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(4).movedCount, 3);
+
+        // SelectDirection から進もうとしても、そこ自体が強制ストップ Event だから先に進めない
+        expect(lifeStepsOnBoard[3].getNextUntilMustStopStep(4).destination.id, 3);
+        expect(lifeStepsOnBoard[3].getNextUntilMustStopStep(4).movedCount, 0);
+      });
+    });
   });
 }

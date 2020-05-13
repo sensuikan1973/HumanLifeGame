@@ -7,10 +7,10 @@ class LifeStepModel {
   LifeStepModel({
     @required this.id,
     @required this.lifeEvent,
-    @required this.right,
-    @required this.left,
-    @required this.up,
-    @required this.down,
+    this.right,
+    this.left,
+    this.up,
+    this.down,
   });
 
   final int id;
