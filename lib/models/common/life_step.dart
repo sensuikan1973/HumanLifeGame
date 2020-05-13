@@ -25,11 +25,13 @@ class LifeStepModel {
   bool get isGoal => lifeEvent.type == LifeEventType.goal;
   bool get isBranch => lifeEvent.isBranch;
 
-  LifeStepModel getNext(int num) {
+  DestinationWithMovedStepCount getNextUntilForceStopStep(int num) {
     var current = this;
     var count = 0;
     while (current != null && count < num) {
-      // FIXME: 分岐が無いことを前提にしている。分岐があるとバグる。
+      // TODO: 実装
+      // if (current == 強制ストップ) return xxx;
+
       final next = [
         current.up,
         current.down,
@@ -40,7 +42,7 @@ class LifeStepModel {
       current = next;
       count++;
     }
-    return current;
+    return DestinationWithMovedStepCount(wantToMoveCount: num, movedCount: count, destination: current);
   }
 
   @override
@@ -48,4 +50,21 @@ class LifeStepModel {
 
   @override
   bool operator ==(Object other) => other is LifeStepModel && other.id == id;
+}
+
+class DestinationWithMovedStepCount {
+  const DestinationWithMovedStepCount({
+    this.wantToMoveCount,
+    this.movedCount,
+    this.destination,
+  });
+
+  /// 進もうとした数
+  final int wantToMoveCount;
+
+  /// 実際に進んだ数
+  final int movedCount;
+
+  /// 進んだ結果到着した lifeStep
+  final LifeStepModel destination;
 }

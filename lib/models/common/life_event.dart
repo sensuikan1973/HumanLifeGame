@@ -8,7 +8,6 @@ class LifeEventModel<T extends LifeEventParams> {
 
   final T params;
   LifeEventTarget target;
-  bool isForced; // 強制実行か選択実行か
   String description;
 
   LifeEventType get type => params.type;
