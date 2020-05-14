@@ -39,5 +39,10 @@
   "@playerActionNo": {
     "type": "text",
     "placeholders": {}
+  },
+  "resultAnnouncementDialogMessage": "結果発表 ！！",
+  "@resultAnnouncementDialogMessage": {
+    "type": "text",
+    "placeholders": {}
   }
 }

@@ -108,6 +108,23 @@ Future<void> main() async {
     await tester.pump();
     expect(tester.widget<FlatButton>(rollDiceButton).enabled, false);
   });
+
+  testWidgets('show result dialog', (tester) async {
+    final dice = MockDice();
+    const roll = 6;
+    when(dice.roll()).thenReturn(roll);
+    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
+    await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
+    await tester.pump();
+
+    final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
+    await tester.tap(rollDiceButton);
+    await tester.pump();
+
+    await tester.tap(rollDiceButton);
+    await tester.pumpAndSettle();
+    expect(find.text(i18n.resultAnnouncementDialogMessage), findsOneWidget);
+  });
 }
 
 class _TestablePlayRoom extends StatelessWidget {
