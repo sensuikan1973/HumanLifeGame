@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../i18n/i18n.dart';
+import '../../models/common/life_step.dart';
 import '../../models/play_room/play_room.dart';
 import '../../models/play_room/player_action.dart';
 
@@ -50,29 +51,32 @@ class PlayerAction extends StatelessWidget {
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const <Widget>[
-              IconButton(icon: Icon(Icons.arrow_upward), onPressed: null),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const <Widget>[
+            children: <Widget>[
               IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: null,
-              ),
-              IconButton(
-                icon: Icon(Icons.arrow_forward),
-                onPressed: null,
+                icon: const Icon(Icons.arrow_upward),
+                onPressed: () => context.read<PlayerActionModel>().direction = Direction.up,
               ),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const <Widget>[
+            children: <Widget>[
               IconButton(
-                icon: Icon(Icons.arrow_downward),
-                onPressed: null,
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () => context.read<PlayerActionModel>().direction = Direction.left,
+              ),
+              IconButton(
+                icon: const Icon(Icons.arrow_forward),
+                onPressed: () => context.read<PlayerActionModel>().direction = Direction.right,
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.arrow_downward),
+                onPressed: () => context.read<PlayerActionModel>().direction = Direction.down,
               ),
             ],
           ),
