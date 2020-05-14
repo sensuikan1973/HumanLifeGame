@@ -14,20 +14,27 @@ class PlayRoom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _allHumansReachedTheGoal = context.select<PlayRoomModel, bool>((model) => model.allHumansReachedTheGoal);
-    if (_allHumansReachedTheGoal) {
+    final allHumansReachedTheGoal = context.select<PlayRoomModel, bool>((model) => model.allHumansReachedTheGoal);
+
+    if (allHumansReachedTheGoal) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
+        final lifeStages = context.read<PlayRoomModel>().lifeStages;
+        final humanNames = <Widget>[
+          for (final lifeStage in lifeStages)
+            Row(
+              children: [
+                Text(lifeStage.human.name),
+                const Text(', 💵: '), // FIXME: 仮テキスト
+                Text(lifeStage.totalMoney.toString()),
+              ],
+            ),
+        ];
         showDialog<void>(
             context: context,
             builder: (context) {
-              return const SimpleDialog(
-                title: Text('ok'),
-                children: <Widget>[
-                  Text('Human 1'),
-                  Text('Human 1'),
-                  Text('Human 1'),
-                  Text('Human 1'),
-                ],
+              return SimpleDialog(
+                title: const Text('Result announcement'),
+                children: humanNames,
               );
             });
         return;
