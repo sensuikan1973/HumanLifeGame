@@ -46,7 +46,7 @@ class PlayRoom extends StatelessWidget {
 
   void _showResult(BuildContext context) {
     final lifeStages = context.read<PlayRoomModel>().lifeStages;
-    final humanNames = <Widget>[
+    final result = <Widget>[
       for (final lifeStage in lifeStages)
         Row(
           children: [
@@ -60,7 +60,7 @@ class PlayRoom extends StatelessWidget {
         context: context,
         builder: (context) => SimpleDialog(
               title: Text(I18n.of(context).resultAnnouncementDialogMessage),
-              children: humanNames,
+              children: result,
             ));
     return;
   }
