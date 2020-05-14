@@ -28,10 +28,10 @@ class PlayRoomModel extends ChangeNotifier {
   final I18n _i18n;
   final _lifeEventService = const LifeEventService();
 
-  // 歩む対象となる人生
+  /// 歩む対象となる人生
   final HumanLifeModel humanLife;
 
-  // 参加する人。ターン順。
+  /// 参加する人。ターン順。
   final List<HumanModel> orderedHumans;
 
   PlayerActionModel _playerAction;
@@ -61,31 +61,33 @@ class PlayRoomModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  final _announcement = AnnouncementModel();
+  /// お知らせ
   AnnouncementModel get announcement => _announcement;
+  final _announcement = AnnouncementModel();
 
+  /// 部屋のタイトル名
   String roomTitle;
 
-  // 手番の人
-  HumanModel _currentPlayer;
+  /// 現在手番の人
   HumanModel get currentPlayer => _currentPlayer;
-
-  // 参加者のそれぞれの人生の進捗
-  List<LifeStageModel> lifeStages = [];
-
+  HumanModel _currentPlayer;
   int get _currentPlayerLifeStageIndex => lifeStages.indexWhere((lifeStage) => lifeStage.human == _currentPlayer);
   LifeStageModel get _currentPlayerLifeStage => lifeStages[_currentPlayerLifeStageIndex];
 
-  // それぞれの位置情報
+  /// 参加者のそれぞれの人生の進捗
+  List<LifeStageModel> lifeStages = [];
+
+  /// 参加者それぞれの位置情報
   Map<String, Position> get positionsByHumanId => {
         for (final lifeStage in lifeStages) lifeStage.human.id: humanLife.lifeRoad.getPosition(lifeStage.lifeStepModel),
       };
 
-  // 全参加者の LifeEvent 履歴
+  /// 全参加者それぞれの LifeEvent 履歴
   List<LifeEventModel> everyLifeEventRecords;
 
-  bool _allHumansReachedTheGoal = false;
+  /// 参加者全員がゴールに到着したかどうか
   bool get allHumansReachedTheGoal => _allHumansReachedTheGoal;
+  bool _allHumansReachedTheGoal = false;
 
   // 次のターンに変える
   void _changeToNextTurn() {
