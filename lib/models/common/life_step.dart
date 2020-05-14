@@ -31,7 +31,6 @@ class LifeStepModel {
     var count = 0;
     while (current != null && count < num) {
       if (current.mustStop) break;
-
       final next = [
         current.up,
         current.down,
@@ -68,3 +67,5 @@ class DestinationWithMovedStepCount {
   /// 進んだ結果到着した lifeStep
   final LifeStepModel destination;
 }
+
+enum Direction { up, down, left, right }
