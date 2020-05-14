@@ -13,7 +13,6 @@ import 'package:HumanLifeGame/screens/play_room/play_room.dart';
 import 'package:HumanLifeGame/screens/play_room/play_view.dart';
 import 'package:HumanLifeGame/screens/play_room/player_action.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
