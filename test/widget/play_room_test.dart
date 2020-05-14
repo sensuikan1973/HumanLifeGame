@@ -13,6 +13,7 @@ import 'package:HumanLifeGame/screens/play_room/play_room.dart';
 import 'package:HumanLifeGame/screens/play_room/play_view.dart';
 import 'package:HumanLifeGame/screens/play_room/player_action.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
@@ -107,6 +108,25 @@ Future<void> main() async {
     await tester.tap(rollDiceButton);
     await tester.pump();
     expect(tester.widget<FlatButton>(rollDiceButton).enabled, false);
+  });
+
+  testWidgets('show result dialog', (tester) async {
+    final dice = MockDice();
+    const roll = 6;
+    when(dice.roll()).thenReturn(roll);
+    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
+    await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
+    await tester.pump();
+
+    final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
+    await tester.tap(rollDiceButton);
+    await tester.pump();
+
+    await tester.tap(rollDiceButton);
+    await tester.pumpAndSettle();
+
+    expect(find.descendant(of: find.byType(SimpleDialog), matching: find.text(i18n.resultAnnouncementDialogMessage)),
+        findsOneWidget);
   });
 }
 
