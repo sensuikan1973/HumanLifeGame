@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../i18n/i18n.dart';
 import '../../models/play_room/play_room.dart';
 import 'announcement.dart';
 import 'dice_result.dart';
@@ -18,26 +19,7 @@ class PlayRoom extends StatelessWidget {
 
     if (allHumansReachedTheGoal) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        final lifeStages = context.read<PlayRoomModel>().lifeStages;
-        final humanNames = <Widget>[
-          for (final lifeStage in lifeStages)
-            Row(
-              children: [
-                Text(lifeStage.human.name),
-                const Text(', 💵: '), // FIXME: 仮テキスト
-                Text(lifeStage.totalMoney.toString()),
-              ],
-            ),
-        ];
-        showDialog<void>(
-            context: context,
-            builder: (context) {
-              return SimpleDialog(
-                title: const Text('Result announcement'),
-                children: humanNames,
-              );
-            });
-        return;
+        _showResult(context);
       });
     }
     return Scaffold(
@@ -60,5 +42,26 @@ class PlayRoom extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _showResult(BuildContext context) {
+    final lifeStages = context.read<PlayRoomModel>().lifeStages;
+    final humanNames = <Widget>[
+      for (final lifeStage in lifeStages)
+        Row(
+          children: [
+            Text(lifeStage.human.name),
+            const Text(', 💵: '), // FIXME: 仮テキスト
+            Text(lifeStage.totalMoney.toString()),
+          ],
+        ),
+    ];
+    showDialog<void>(
+        context: context,
+        builder: (context) => SimpleDialog(
+              title: Text(I18n.of(context).resultAnnouncementDialogMessage),
+              children: humanNames,
+            ));
+    return;
   }
 }

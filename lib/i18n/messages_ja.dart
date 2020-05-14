@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lifeStepEventType": m0,
         "playerActionNo": MessageLookupByLibrary.simpleMessage("いいえ"),
         "playerActionYes": MessageLookupByLibrary.simpleMessage("はい"),
+        "resultAnnouncementDialogMessage": MessageLookupByLibrary.simpleMessage("結果発表 ！！"),
         "rollAnnouncement": m1,
         "rollDice": MessageLookupByLibrary.simpleMessage("サイコロを振る")
       };

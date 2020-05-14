@@ -30,4 +30,9 @@ extension I18nPlayRoom on I18n {
         name: 'playerActionNo',
         locale: localeName,
       );
+  String get resultAnnouncementDialogMessage => Intl.message(
+        'Result Announcement !!',
+        name: 'resultAnnouncementDialogMessage',
+        locale: localeName,
+      );
 }
