@@ -8,6 +8,13 @@ abstract class LifeEventParams {
         LifeEventType.selectDirectionPerDiceRoll,
         LifeEventType.selectDirectionPerLifeItem,
       ].contains(type);
+
+  /// 止まることを強制されるかどうか
+  /// 現状は、ユーザアクションを伴う分岐時のみ
+  bool get mustStop => [
+        LifeEventType.selectDirection,
+        LifeEventType.selectDirectionPerDiceRoll,
+      ].contains(type);
 }
 
 enum LifeEventType {
