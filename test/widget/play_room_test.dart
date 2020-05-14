@@ -124,9 +124,7 @@ Future<void> main() async {
 
     await tester.tap(rollDiceButton);
     await tester.pumpAndSettle();
-
-    expect(find.descendant(of: find.byType(SimpleDialog), matching: find.text(i18n.resultAnnouncementDialogMessage)),
-        findsOneWidget);
+    expect(find.text(i18n.resultAnnouncementDialogMessage), findsOneWidget);
   });
 }
 
