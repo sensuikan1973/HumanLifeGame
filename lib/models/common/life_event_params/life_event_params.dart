@@ -3,6 +3,7 @@ abstract class LifeEventParams {
 
   LifeEventType get type;
 
+  /// 分岐かどうか
   bool get isBranch => [
         LifeEventType.selectDirection,
         LifeEventType.selectDirectionPerDiceRoll,
@@ -14,6 +15,18 @@ abstract class LifeEventParams {
   bool get mustStop => [
         LifeEventType.selectDirection,
         LifeEventType.selectDirectionPerDiceRoll,
+      ].contains(type);
+
+  /// サイコロを振るアクションを求めるかどうか
+  bool get requireDiceRoll => [
+        LifeEventType.selectDirectionPerDiceRoll,
+        LifeEventType.gainLifeItemsPerDiceRoll,
+        LifeEventType.loseLifeItemsPerDiceRoll,
+      ].contains(type);
+
+  /// 方向選択のアクションを求めるかどうか
+  bool get requireToSelectDirectionManually => [
+        LifeEventType.selectDirection,
       ].contains(type);
 }
 

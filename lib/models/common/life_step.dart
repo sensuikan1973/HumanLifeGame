@@ -25,6 +25,8 @@ class LifeStepModel {
   bool get isGoal => lifeEvent.type == LifeEventType.goal;
   bool get isBranch => lifeEvent.isBranch;
   bool get mustStop => lifeEvent.mustStop;
+  bool get requireDiceRoll => lifeEvent.requireDiceRoll;
+  bool get requireToSelectDirectionManually => lifeEvent.requireToSelectDirectionManually;
 
   DestinationWithMovedStepCount getNextUntilMustStopStep(int num) {
     var current = this;
