@@ -42,5 +42,5 @@ class LifeStages extends StatelessWidget {
     );
   }
 
-  Icon currentPlayerSelector() => Icon(Icons.chevron_right, color: Colors.pink);
+  Icon currentPlayerSelector() => const Icon(Icons.chevron_right, color: Colors.pink);
 }
