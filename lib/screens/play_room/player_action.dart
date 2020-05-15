@@ -50,13 +50,13 @@ class PlayerAction extends StatelessWidget {
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
+            children: const <Widget>[
               IconButton(icon: Icon(Icons.arrow_upward), onPressed: null),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
+            children: const <Widget>[
               IconButton(
                 icon: Icon(Icons.arrow_back),
                 onPressed: null,
@@ -69,7 +69,7 @@ class PlayerAction extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
+            children: const <Widget>[
               IconButton(
                 icon: Icon(Icons.arrow_downward),
                 onPressed: null,

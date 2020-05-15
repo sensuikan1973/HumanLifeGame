@@ -19,9 +19,7 @@ class PlayView extends StatelessWidget {
         width: 1050,
         height: 750,
         child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: Colors.white,
-          ),
+          decoration: const BoxDecoration(color: Colors.white),
           child: Center(
             child: LifeRoad(
               playRoomModel.humanLife.lifeRoad,
