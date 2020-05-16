@@ -168,11 +168,11 @@ class _DirectionChecker {
   })  : _expectedPointers = expectedPointers,
         _model = LifeRoadModel(
           lifeStepsOnBoard: List.generate(
-            LifeRoadModel.height,
+            lifeEvents.length,
             (y) => List.generate(
-              LifeRoadModel.width,
+              lifeEvents[y].length,
               (x) => LifeStepModel(
-                id: x + (y * LifeRoadModel.width),
+                id: x + (y * lifeEvents[y].length),
                 lifeEvent: lifeEvents[y][x],
                 right: null,
                 left: null,
@@ -187,8 +187,8 @@ class _DirectionChecker {
   final LifeRoadModel _model;
 
   void execute() {
-    for (var y = 0; y < LifeRoadModel.height; ++y) {
-      for (var x = 0; x < LifeRoadModel.width; ++x) {
+    for (var y = 0; y < _model.height; ++y) {
+      for (var x = 0; x < _model.width; ++x) {
         final hasUp = _model.lifeStepsOnBoard[y][x].up != null;
         expect(hasUp, _expectedPointers[y][x].up);
         final hasDown = _model.lifeStepsOnBoard[y][x].down != null;

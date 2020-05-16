@@ -12,10 +12,14 @@ import 'life_step.dart';
 class LifeRoadModel {
   LifeRoadModel({
     @required this.lifeStepsOnBoard,
-  })  : assert(lifeStepsOnBoard.first.length == height),
-        assert(lifeStepsOnBoard.any((row) => row.length == width)) {
+  })  : height = lifeStepsOnBoard.length,
+        width = lifeStepsOnBoard.first.length,
+        assert(lifeStepsOnBoard.any((row) => row.length == lifeStepsOnBoard.first.length)) {
     _initDirections(start);
   }
+
+  final int width;
+  final int height;
 
   // FIXME: いつか消す
   static List<List<LifeStepModel>> createDummyLifeStepsOnBoard() {
@@ -34,11 +38,11 @@ class LifeRoadModel {
       [blank, gains, gains, gains, gains, gains, gains],
     ];
     return List.generate(
-      LifeRoadModel.height,
+      lifeEvents.length,
       (y) => List.generate(
-        LifeRoadModel.width,
+        lifeEvents[y].length,
         (x) => LifeStepModel(
-          id: x + (y * LifeRoadModel.width),
+          id: x + (y * lifeEvents[y].length),
           lifeEvent: lifeEvents[y][x],
           right: null,
           left: null,
@@ -48,9 +52,6 @@ class LifeRoadModel {
       ),
     );
   }
-
-  static const int width = 7;
-  static const int height = 7;
 
   List<List<LifeStepModel>> lifeStepsOnBoard;
 

@@ -31,11 +31,12 @@ void main() {
       [blank, blank, blank, blank, blank, blank, blank],
       [blank, blank, blank, blank, blank, blank, blank],
     ];
+    final lifeRoad = LifeRoadModel(lifeStepsOnBoard: createDummyLifeStepsOnBoard(lifeEvents));
 
     final humanLife = HumanLifeModel(
       title: 'dummy HumanLife',
       author: UserModel(id: 'dummyUserId', name: 'dummyUser'),
-      lifeRoad: LifeRoadModel(lifeStepsOnBoard: createDummyLifeStepsOnBoard(lifeEvents)),
+      lifeRoad: lifeRoad,
     );
     final human1 = HumanModel(id: 'h1', name: 'foo');
     final human2 = HumanModel(id: 'h2', name: 'bar');
@@ -70,12 +71,12 @@ void main() {
 
     // human1 がサイコロを振って進む
     playRoomModel.update(PlayerActionNotifier(dice)..rollDice());
-    expect(playRoomModel.positionsByHumanId[human1.id].x, LifeRoadModel.width - 1);
+    expect(playRoomModel.positionsByHumanId[human1.id].x, lifeRoad.width - 1);
     expect(playRoomModel.allHumansReachedTheGoal, false);
 
     // human2 がサイコロを振って進む
     playRoomModel.update(PlayerActionNotifier(dice)..rollDice());
-    expect(playRoomModel.positionsByHumanId[human2.id].x, LifeRoadModel.width - 1);
+    expect(playRoomModel.positionsByHumanId[human2.id].x, lifeRoad.width - 1);
     expect(playRoomModel.allHumansReachedTheGoal, true);
   });
 }

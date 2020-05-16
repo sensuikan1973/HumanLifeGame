@@ -6,7 +6,7 @@ import 'life_step.dart';
 
 class LifeRoad extends StatelessWidget {
   LifeRoad(
-    this._lifeRoadModel, {
+    this._model, {
     List<Human> humans,
     Map<String, Position> positionsByHumanId,
     Key key,
@@ -14,7 +14,7 @@ class LifeRoad extends StatelessWidget {
         _positionsByHumanId = positionsByHumanId ?? {},
         super(key: key);
 
-  final LifeRoadModel _lifeRoadModel;
+  final LifeRoadModel _model;
 
   final List<Human> _humans;
   final Map<String, Position> _positionsByHumanId;
@@ -36,15 +36,15 @@ class LifeRoad extends StatelessWidget {
         child: LayoutBuilder(
           builder: (context, constraints) => Table(
             children: List.generate(
-              LifeRoadModel.width,
+              _model.width,
               (y) => TableRow(
                 children: List.generate(
-                  LifeRoadModel.height,
+                  _model.height,
                   (x) => TableCell(
                     child: LifeStep(
-                      _lifeRoadModel.lifeStepsOnBoard[y][x],
-                      constraints.maxWidth,
-                      constraints.maxHeight,
+                      _model.lifeStepsOnBoard[y][x],
+                      constraints.maxWidth / _model.width,
+                      constraints.maxHeight / _model.height,
                       humans: _putTargetHumans(x, y),
                     ),
                   ),

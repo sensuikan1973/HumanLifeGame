@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../i18n/i18n.dart';
 import '../../models/common/life_event_params/life_event_params.dart';
-import '../../models/common/life_road.dart';
 import '../../models/common/life_step.dart';
 import 'human.dart';
 
@@ -31,8 +30,8 @@ class LifeStep extends StatelessWidget {
   Widget build(BuildContext context) => Stack(
         children: <Widget>[
           SizedBox(
-            width: _width / LifeRoadModel.width,
-            height: _height / LifeRoadModel.height,
+            width: _width,
+            height: _height,
             child: Padding(
               padding: const EdgeInsets.all(2),
               child: DecoratedBox(
