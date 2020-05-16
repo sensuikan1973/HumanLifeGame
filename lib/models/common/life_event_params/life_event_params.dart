@@ -17,6 +17,12 @@ abstract class LifeEventParams {
         LifeEventType.selectDirectionPerDiceRoll,
       ].contains(type);
 
+  /// 実行が選択制かどうか
+  bool get selectableForExecution => [
+        LifeEventType.exchangeLifeItems,
+        LifeEventType.exchangeLifeItemsWithDiceRoll,
+      ].contains(type);
+
   /// サイコロを振るアクションを求めるかどうか
   bool get requireDiceRoll => [
         LifeEventType.selectDirectionPerDiceRoll,
