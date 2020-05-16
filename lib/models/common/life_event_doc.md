@@ -13,7 +13,6 @@ HumanLife における Event。
 LifeEvent {
     target: all,
     type: gainLifeItem,
-    isForced: true,
     params: {
         targets: [
             {
@@ -32,7 +31,6 @@ LifeEvent {
 LifeEvent {
     target: myself,
     type: gainLifeItemPerOtherLifeItem,
-    isForced: true,
     params: {
         targets: [
             {
@@ -52,7 +50,6 @@ LifeEvent {
 LifeEvent {
     target: myself,
     type: gainLifeItemPerDiceRoll,
-    isForced: true,
     params: {
         targets: [
             {
@@ -71,7 +68,6 @@ LifeEvent {
 LifeEvent {
     target: myself,
     type: gainLifeItemIfExistOtherLifeItem,
-    isForced: true,
     params: {
         targets: [
             {
@@ -91,7 +87,6 @@ LifeEvent {
 LifeEvent {
     target: myself,
     type: gainLifeItemIfExistOtherLifeItem,
-    isForced: true,
     params: {
         targets: [
             {
@@ -116,7 +111,6 @@ LifeEvent {
 LifeEvent {
     target: myself,
     type: gainLifeItemIfExistOtherLifeItem,
-    isForced: true,
     params: {
         targets: [
             {
@@ -137,23 +131,26 @@ LifeEvent {
 
 ### 歌手に転職
 
-単に gainLifeItem。
-職は 1 つのみとするため、job を上書くことになる(=転職)。
-
 ```js
 LifeEvent {
     target: myself,
-    type: gainLifeItem,
-    isForced: false, // 転職するかどうかは選びたいよね
-    params: {
-        targets: [
-            {
-                key: 'singer',
-                type: job,
-                amount: 1,
-            }
-        ]
-    }
+        type: exchangeLifeItems,
+        params: {
+            targets: [
+                {
+                    key: 'singer',
+                    type: job,
+                    amount: 1,
+                }
+            ],
+            bases: [
+                {
+                    key: 'any', // 全職を対象とする特殊な key
+                    type: job,
+                    amount: 4000,
+                }
+            ]
+        }
 }
 ```
 
@@ -163,7 +160,6 @@ LifeEvent {
 LifeEvent {
     target: myself,
     type: exchangeLifeItems,
-    isForced: false, // お買い物は悩みたいよね
     params: {
         targets: [
             {
@@ -189,7 +185,6 @@ LifeEvent {
 LifeEvent {
     target: myself,
     type: exchangeLifeItemsWithDiceRoll,
-    isForced: false, // 博打は慎重にね
     params: {
         targets: [
             {
@@ -215,7 +210,6 @@ LifeEvent {
 LifeEvent {
     target: myself,
     type: loseLifeItemIfNotExistOtherLifeItem,
-    isForced: true,
     params: {
         targets: [
             {
@@ -240,7 +234,6 @@ LifeEvent {
 LifeEvent {
     target: myself,
     type: selectDirection,
-    isForced: true,
     params: {
         directions: [
             'up',
@@ -256,7 +249,6 @@ LifeEvent {
 LifeEvent {
     target: myself,
     type: selectDirectionPerDiceRoll,
-    isForced: true,
     params: {
         directions: [
             {
@@ -278,7 +270,6 @@ LifeEvent {
 LifeEvent {
     target: myself,
     type: selectDirectionPerLifeItem,
-    isForced: true,
     params: {
         directions: [
             {
