@@ -28,6 +28,42 @@ abstract class LifeEventParams {
   bool get requireToSelectDirectionManually => [
         LifeEventType.selectDirection,
       ].contains(type);
+
+  /// 所属する Category を取得する
+  EventCategory get category {
+    switch (type) {
+      case LifeEventType.nothing:
+      case LifeEventType.start:
+      case LifeEventType.goal:
+      case LifeEventType.selectDirection:
+      case LifeEventType.selectDirectionPerDiceRoll:
+      case LifeEventType.selectDirectionPerLifeItem:
+        return EventCategory.normal;
+        break;
+
+      case LifeEventType.gainLifeItems:
+      case LifeEventType.gainLifeItemsPerOtherLifeItem:
+      case LifeEventType.gainLifeItemsPerDiceRoll:
+      case LifeEventType.gainLifeItemsIfExistOtherLifeItem:
+      case LifeEventType.gainLifeItemsIfNotExistOtherLifeItem:
+      case LifeEventType.exchangeLifeItems:
+        return EventCategory.positive;
+        break;
+
+      case LifeEventType.loseLifeItems:
+      case LifeEventType.loseLifeItemsPerDiceRoll:
+      case LifeEventType.loseLifeItemsPerOtherLifeItem:
+      case LifeEventType.loseLifeItemsIfExistOtherLifeItem:
+      case LifeEventType.loseLifeItemsIfNotExistOtherLifeItem:
+        return EventCategory.negative;
+        break;
+
+      case LifeEventType.exchangeLifeItemsWithDiceRoll:
+        return EventCategory.challenge;
+        break;
+    }
+    return EventCategory.normal;
+  }
 }
 
 enum LifeEventType {
@@ -86,4 +122,18 @@ enum LifeEventType {
 
   /// LifeItemA が存在しなければ、LifeItemB を失う
   loseLifeItemsIfNotExistOtherLifeItem,
+}
+
+enum EventCategory {
+  /// 恩恵を受ける種類の Event を指す
+  positive,
+
+  /// 損害を受ける種類の Event を指す
+  negative,
+
+  /// 特に何の恩恵も損害も受けない種類の Event を指す
+  normal,
+
+  /// 恩恵を受けるか損害を受けるかが不定な種類の Event を指す
+  challenge,
 }

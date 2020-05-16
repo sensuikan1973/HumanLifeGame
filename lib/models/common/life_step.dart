@@ -21,6 +21,7 @@ class LifeStepModel {
   LifeStepModel right;
   LifeStepModel left;
 
+  EventCategory get category => lifeEvent.category;
   bool get isStart => lifeEvent.type == LifeEventType.start;
   bool get isGoal => lifeEvent.type == LifeEventType.goal;
   bool get isBranch => lifeEvent.isBranch;
