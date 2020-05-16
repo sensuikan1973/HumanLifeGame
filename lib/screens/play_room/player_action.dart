@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../i18n/i18n.dart';
+import '../../models/common/life_step.dart';
 import '../../models/play_room/play_room.dart';
 import '../../models/play_room/player_action.dart';
 
@@ -37,9 +38,9 @@ class PlayerAction extends StatelessWidget {
         key: const Key('playerActionDiceRollButton'),
         color: Colors.blue,
         textColor: Colors.white,
-        onPressed: context.select<PlayRoomModel, bool>((model) => model.allHumansReachedTheGoal)
+        onPressed: context.select<PlayRoomNotifier, bool>((model) => model.allHumansReachedTheGoal)
             ? null
-            : () => context.read<PlayerActionModel>().rollDice(),
+            : () => context.read<PlayerActionNotifier>().rollDice(),
         child: Text(
           I18n.of(context).rollDice,
           style: const TextStyle(fontSize: 20),
@@ -50,29 +51,32 @@ class PlayerAction extends StatelessWidget {
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const <Widget>[
-              IconButton(icon: Icon(Icons.arrow_upward), onPressed: null),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const <Widget>[
+            children: <Widget>[
               IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: null,
-              ),
-              IconButton(
-                icon: Icon(Icons.arrow_forward),
-                onPressed: null,
+                icon: const Icon(Icons.arrow_upward),
+                onPressed: () => context.read<PlayerActionNotifier>().direction = Direction.up,
               ),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const <Widget>[
+            children: <Widget>[
               IconButton(
-                icon: Icon(Icons.arrow_downward),
-                onPressed: null,
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () => context.read<PlayerActionNotifier>().direction = Direction.left,
+              ),
+              IconButton(
+                icon: const Icon(Icons.arrow_forward),
+                onPressed: () => context.read<PlayerActionNotifier>().direction = Direction.right,
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.arrow_downward),
+                onPressed: () => context.read<PlayerActionNotifier>().direction = Direction.down,
               ),
             ],
           ),

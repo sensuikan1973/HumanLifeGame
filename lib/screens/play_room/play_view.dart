@@ -13,7 +13,7 @@ class PlayView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final playRoomModel = context.watch<PlayRoomModel>();
+    final playRoomModel = context.watch<PlayRoomNotifier>();
     return Card(
       child: SizedBox(
         width: 1050,

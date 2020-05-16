@@ -15,13 +15,14 @@ class Router {
   final String initialRoute = '/';
 
   final Map<String, WidgetBuilder> routes = {
+    // FIXME: Provider で包んでるけど、実際には login page あたりから包まれて遷移することになるはず
     '/': (context) => MultiProvider(
           providers: [
             ChangeNotifierProvider(
-              create: (_) => PlayerActionModel(context.read<Dice>()),
+              create: (_) => PlayerActionNotifier(context.read<Dice>()),
             ),
-            ChangeNotifierProxyProvider<PlayerActionModel, PlayRoomModel>(
-              create: (_) => PlayRoomModel(
+            ChangeNotifierProxyProvider<PlayerActionNotifier, PlayRoomNotifier>(
+              create: (_) => PlayRoomNotifier(
                 I18n.of(context),
                 // FIXME: Repository から取ってくる
                 HumanLifeModel(
@@ -31,7 +32,8 @@ class Router {
                 ),
                 orderedHumans: [HumanModel(id: '123', name: 'hoge'), HumanModel(id: '456', name: 'fuga')],
               ),
-              update: (context, playerAction, playRoom) => playRoom..playerAction = playerAction,
+              update: (context, playerActionNotifier, playRoomNotifier) =>
+                  playRoomNotifier..update(playerActionNotifier),
             )
           ],
           child: const PlayRoom(),
