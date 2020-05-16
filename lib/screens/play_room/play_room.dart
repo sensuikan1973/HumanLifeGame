@@ -15,7 +15,7 @@ class PlayRoom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final allHumansReachedTheGoal = context.select<PlayRoomModel, bool>((model) => model.allHumansReachedTheGoal);
+    final allHumansReachedTheGoal = context.select<PlayRoomNotifier, bool>((model) => model.allHumansReachedTheGoal);
 
     if (allHumansReachedTheGoal) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -45,7 +45,7 @@ class PlayRoom extends StatelessWidget {
   }
 
   void _showResult(BuildContext context) {
-    final lifeStages = context.read<PlayRoomModel>().lifeStages;
+    final lifeStages = context.read<PlayRoomNotifier>().lifeStages;
     final result = <Widget>[
       for (final lifeStage in lifeStages)
         Row(

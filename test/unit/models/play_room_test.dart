@@ -20,7 +20,7 @@ void main() {
     final human1 = HumanModel(id: 'h1', name: 'foo');
     final human2 = HumanModel(id: 'h2', name: 'bar');
 
-    final playRoomModel = PlayRoomModel(
+    final playRoomModel = PlayRoomNotifier(
       I18n('en'),
       humanLife,
       orderedHumans: [human1, human2],
@@ -37,24 +37,24 @@ void main() {
     final dice = MockDice();
     const roll = 5;
     when(dice.roll()).thenReturn(roll);
-    playRoomModel.playerAction = PlayerActionModel(dice)..rollDice();
+    playRoomModel.update(PlayerActionNotifier(dice)..rollDice());
 
     // human1 がサイコロを振って進む
     expect(playRoomModel.positionsByHumanId[human1.id].x, roll);
     expect(playRoomModel.allHumansReachedTheGoal, false);
 
     // human2 がサイコロを振って進む
-    playRoomModel.playerAction = playRoomModel.playerAction; // 再代入により setter を発火させる
+    playRoomModel.update(PlayerActionNotifier(dice)..rollDice());
     expect(playRoomModel.positionsByHumanId[human2.id].x, roll);
     expect(playRoomModel.allHumansReachedTheGoal, false);
 
     // human1 がサイコロを振って進む
-    playRoomModel.playerAction = playRoomModel.playerAction;
+    playRoomModel.update(PlayerActionNotifier(dice)..rollDice());
     expect(playRoomModel.positionsByHumanId[human1.id].x, LifeRoadModel.width - 1);
     expect(playRoomModel.allHumansReachedTheGoal, false);
 
     // human2 がサイコロを振って進む
-    playRoomModel.playerAction = playRoomModel.playerAction;
+    playRoomModel.update(PlayerActionNotifier(dice)..rollDice());
     expect(playRoomModel.positionsByHumanId[human2.id].x, LifeRoadModel.width - 1);
     expect(playRoomModel.allHumansReachedTheGoal, true);
   });

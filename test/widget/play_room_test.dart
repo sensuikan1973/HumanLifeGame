@@ -37,7 +37,7 @@ Future<void> main() async {
   });
 
   testWidgets('show some widgets', (tester) async {
-    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
     await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel));
     await tester.pump();
     expect(find.byType(PlayerAction), findsOneWidget);
@@ -50,7 +50,7 @@ Future<void> main() async {
   testWidgets('random value(1 <= value <= 6) should be displayed when dice is rolled', (tester) async {
     final dice = MockDice();
     when(dice.roll()).thenReturn(5);
-    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
@@ -63,7 +63,7 @@ Future<void> main() async {
     final dice = MockDice();
     const roll = 5;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
@@ -82,7 +82,7 @@ Future<void> main() async {
   });
 
   testWidgets('show user name in human life stages', (tester) async {
-    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
     await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel));
     await tester.pump();
     for (final human in orderedHumans) {
@@ -94,7 +94,7 @@ Future<void> main() async {
     final dice = MockDice();
     const roll = 6;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
@@ -113,7 +113,7 @@ Future<void> main() async {
     final dice = MockDice();
     const roll = 6;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
@@ -131,19 +131,20 @@ class _TestablePlayRoom extends StatelessWidget {
   const _TestablePlayRoom(this.dice, this.playRoomModel);
 
   final Dice dice;
-  final PlayRoomModel playRoomModel;
+  final PlayRoomNotifier playRoomModel;
 
   @override
   Widget build(BuildContext context) => testableApp(
         home: MultiProvider(
           providers: [
             Provider<Dice>(create: (context) => dice),
-            ChangeNotifierProvider<PlayerActionModel>(
-              create: (context) => PlayerActionModel(context.read<Dice>()),
+            ChangeNotifierProvider<PlayerActionNotifier>(
+              create: (context) => PlayerActionNotifier(context.read<Dice>()),
             ),
-            ChangeNotifierProxyProvider<PlayerActionModel, PlayRoomModel>(
+            ChangeNotifierProxyProvider<PlayerActionNotifier, PlayRoomNotifier>(
               create: (context) => playRoomModel,
-              update: (context, playerAction, playRoom) => playRoom..playerAction = playerAction,
+              update: (context, playerActionNotifier, playRoomNotifier) =>
+                  playRoomNotifier..update(playerActionNotifier),
             )
           ],
           child: const PlayRoom(),
