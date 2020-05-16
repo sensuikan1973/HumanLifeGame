@@ -59,8 +59,7 @@ class PlayRoomNotifier extends ChangeNotifier {
   List<LifeEventModel> everyLifeEventRecords;
 
   /// 参加者全員がゴールに到着したかどうか
-  bool get allHumansReachedTheGoal => _allHumansReachedTheGoal;
-  bool _allHumansReachedTheGoal = false;
+  bool get allHumansReachedTheGoal => lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
 
   void update(PlayerActionNotifier playerActionNotifier) {
     // まだサイコロが振られてない時は何もしない
@@ -77,8 +76,6 @@ class PlayRoomNotifier extends ChangeNotifier {
       _currentPlayerLifeStage,
     );
 
-    // 全員がゴールに到着しているかどうかを確認
-    _allHumansReachedTheGoal = lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
     // FIXME: 即ターン交代してるけど、あくまで仮
     _changeToNextTurn();
 
