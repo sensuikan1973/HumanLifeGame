@@ -63,6 +63,22 @@ Future<void> main() async {
         findsOneWidget);
   });
 
+  testWidgets('show description', (tester) async {
+    final model = LifeStepModel(
+      id: 0,
+      lifeEvent: LifeEventModel(LifeEventTarget.myself, const NothingParams(), description: '３年連続皆勤賞の快挙達成！！！'),
+      right: null,
+      left: null,
+      up: null,
+      down: null,
+    );
+
+    await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
+    await tester.pump();
+
+    expect(find.text('３年連続皆勤賞の快挙達成！！！'), findsOneWidget);
+  });
+
   await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.start);
 
   await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.goal);
