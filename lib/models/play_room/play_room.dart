@@ -6,6 +6,7 @@ import '../common/human.dart';
 import '../common/human_life.dart';
 import '../common/life_event.dart';
 import '../common/life_road.dart';
+import '../common/life_step.dart';
 import 'announcement.dart';
 import 'life_stage.dart';
 import 'player_action.dart';
@@ -61,14 +62,30 @@ class PlayRoomNotifier extends ChangeNotifier {
   /// 参加者全員がゴールに到着したかどうか
   bool get allHumansReachedTheGoal => lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
 
-  void update(PlayerActionNotifier playerActionNotifier) {
-    // まだサイコロが振られてない時は何もしない
-    if (playerActionNotifier.neverRolled) return;
+  /// 現在手番の人に方向の選択を求めるかどうか
+  bool _requireSelectDirection = false;
+  bool get requireSelectDirection => _requireSelectDirection;
 
-    // Announcement の更新
+  /// 進む数の残り
+  int _remainCount = 0;
+
+  void update(PlayerActionNotifier playerActionNotifier) {
+    assert(playerActionNotifier != null);
+    if (playerActionNotifier.neverRolled || allHumansReachedTheGoal) return;
+
+    // FIXME: 状態に応じた適切なメッセージを流すように
     announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, playerActionNotifier.roll);
+
     // 人生を進める
-    _moveLifeStep(playerActionNotifier.roll);
+    final dest = _requireSelectDirection
+        ? _moveLifeStepUntilMustStop(_remainCount, firstDirection: playerActionNotifier.direction)
+        : _moveLifeStepUntilMustStop(playerActionNotifier.roll);
+    _requireSelectDirection = dest.destination.requireToSelectDirectionManually;
+    if (_requireSelectDirection) {
+      _remainCount = dest.remainCount;
+      notifyListeners();
+      return;
+    }
 
     // LifeEvent 処理
     lifeStages[_currentPlayerLifeStageIndex] = _lifeEventService.executeEvent(
@@ -76,9 +93,7 @@ class PlayRoomNotifier extends ChangeNotifier {
       _currentPlayerLifeStage,
     );
 
-    // FIXME: 即ターン交代してるけど、あくまで仮
-    _changeToNextTurn();
-
+    _changeToNextTurn(); // FIXME: 即ターン交代してるけど、あくまで仮
     notifyListeners();
   }
 
@@ -88,10 +103,12 @@ class PlayRoomNotifier extends ChangeNotifier {
     _currentPlayer = orderedHumans[(currentPlayerIndex + 1) % orderedHumans.length];
   }
 
-  void _moveLifeStep(int roll) {
+  DestinationWithMovedStepCount _moveLifeStepUntilMustStop(int roll, {Direction firstDirection}) {
     // 現在の LifeStep から指定の数だけ進んだ LifeStep を取得する
-    final destinationWithMovedStepCount = _currentPlayerLifeStage.lifeStepModel.getNextUntilMustStopStep(roll);
+    final destinationWithMovedStepCount =
+        _currentPlayerLifeStage.lifeStepModel.getNextUntilMustStopStep(roll, firstDirection: firstDirection);
     // 進み先の LifeStep を LifeStage に代入する
     lifeStages[_currentPlayerLifeStageIndex].lifeStepModel = destinationWithMovedStepCount.destination;
+    return destinationWithMovedStepCount;
   }
 }

@@ -12,6 +12,6 @@ Future<void> main() async {
   testWidgets('show LifeStep', (tester) async {
     await tester.pumpWidget(testableApp(locale: locale, home: LifeRoad(model)));
     await tester.pump();
-    expect(find.byType(LifeStep), findsNWidgets(LifeRoadModel.width * LifeRoadModel.height));
+    expect(find.byType(LifeStep), findsNWidgets(model.width * model.height));
   });
 }

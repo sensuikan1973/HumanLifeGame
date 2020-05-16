@@ -5,57 +5,53 @@ import 'life_event_params/gain_life_items_params.dart';
 import 'life_event_params/goal_params.dart';
 import 'life_event_params/life_event_params.dart';
 import 'life_event_params/nothing_params.dart';
+import 'life_event_params/select_direction_params.dart';
 import 'life_event_params/start_params.dart';
-import 'life_event_params/target_life_item_params.dart';
-import 'life_item.dart';
 import 'life_step.dart';
 
 class LifeRoadModel {
   LifeRoadModel({
     @required this.lifeStepsOnBoard,
-  })  : assert(lifeStepsOnBoard.first.length == height),
-        assert(lifeStepsOnBoard.any((row) => row.length == width)) {
+  })  : height = lifeStepsOnBoard.length,
+        width = lifeStepsOnBoard.first.length,
+        assert(lifeStepsOnBoard.every((row) => row.length == lifeStepsOnBoard.first.length)) {
     _initDirections(start);
   }
 
-  // FIXME: いつか消す
-  // 一直線の仮データ
-  static List<List<LifeStepModel>> createDummyLifeStepsOnBoard() => List.generate(
-        width,
-        (y) => List.generate(
-          height,
-          (x) {
-            final isStart = x == 0 && y == 0;
-            final isGoal = x == width - 1 && y == 0;
-            final description = isStart || isGoal || y != 0 ? '' : '３年連続皆勤賞の快挙達成！！！';
-            final params = () {
-              if (isStart) return const StartParams();
-              if (isGoal) return const GoalParams();
-              if (y == 0) {
-                return const GainLifeItemsParams(targetItems: [
-                  TargetLifeItemParams(
-                    key: 'money',
-                    type: LifeItemType.money,
-                    amount: 1000,
-                  )
-                ]);
-              }
-              return const NothingParams();
-            }();
-            return LifeStepModel(
-              id: x + (y * width),
-              lifeEvent: LifeEventModel(LifeEventTarget.myself, params, description: description),
-              right: null,
-              left: null,
-              up: null,
-              down: null,
-            );
-          },
-        ),
-      );
+  final int width;
+  final int height;
 
-  static const int width = 7;
-  static const int height = 7;
+  // FIXME: いつか消す
+  static List<List<LifeStepModel>> createDummyLifeStepsOnBoard() {
+    final start = LifeEventModel(LifeEventTarget.myself, const StartParams());
+    final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams());
+    final gains = LifeEventModel(LifeEventTarget.myself, const GainLifeItemsParams(targetItems: []));
+    final direc = LifeEventModel(LifeEventTarget.myself, const SelectDirectionParams());
+    final blank = LifeEventModel(LifeEventTarget.myself, const NothingParams());
+    final lifeEvents = [
+      [start, direc, gains, gains, gains, gains, blank],
+      [blank, gains, blank, blank, blank, gains, blank],
+      [blank, gains, gains, gains, gains, gains, gains],
+      [blank, blank, blank, blank, blank, blank, gains],
+      [goals, gains, gains, gains, gains, gains, direc],
+      [blank, gains, blank, blank, blank, blank, gains],
+      [blank, gains, gains, gains, gains, gains, gains],
+    ];
+    return List.generate(
+      lifeEvents.length,
+      (y) => List.generate(
+        lifeEvents[y].length,
+        (x) => LifeStepModel(
+          id: x + (y * lifeEvents[y].length),
+          lifeEvent: lifeEvents[y][x],
+          right: null,
+          left: null,
+          up: null,
+          down: null,
+        ),
+      ),
+    );
+  }
 
   List<List<LifeStepModel>> lifeStepsOnBoard;
 

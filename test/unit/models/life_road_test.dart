@@ -122,41 +122,41 @@ void main() {
   test('debugMessage', () {
     final model = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createDummyLifeStepsOnBoard());
     const expectedMessage = '''
-type:1   type:6   type:6   type:6   type:6   type:6   type:2   
+type:1   type:3   type:6   type:6   type:6   type:6   type:0   
 up:null  up:null  up:null  up:null  up:null  up:null  up:null  
-dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
-rl:exist rl:exist rl:exist rl:exist rl:exist rl:exist rl:null  
+dn:null  dn:exist dn:null  dn:null  dn:null  dn:exist dn:null  
+rl:exist rl:exist rl:exist rl:exist rl:exist rl:null  rl:null  
 lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
-type:0   type:0   type:0   type:0   type:0   type:0   type:0   
+type:0   type:6   type:0   type:0   type:0   type:6   type:0   
 up:null  up:null  up:null  up:null  up:null  up:null  up:null  
-dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
+dn:null  dn:exist dn:null  dn:null  dn:null  dn:exist dn:null  
 rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
 lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
-type:0   type:0   type:0   type:0   type:0   type:0   type:0   
+type:0   type:6   type:6   type:6   type:6   type:6   type:6   
 up:null  up:null  up:null  up:null  up:null  up:null  up:null  
-dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:exist 
+rl:null  rl:exist rl:exist rl:exist rl:exist rl:exist rl:null  
+lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
+type:0   type:0   type:0   type:0   type:0   type:0   type:6   
+up:null  up:null  up:null  up:null  up:null  up:null  up:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:exist 
 rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
 lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
-type:0   type:0   type:0   type:0   type:0   type:0   type:0   
+type:2   type:6   type:6   type:6   type:6   type:6   type:3   
 up:null  up:null  up:null  up:null  up:null  up:null  up:null  
-dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:exist 
+rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
+lt:null  lt:exist lt:exist lt:exist lt:exist lt:exist lt:exist 
+type:0   type:6   type:0   type:0   type:0   type:0   type:6   
+up:null  up:exist up:null  up:null  up:null  up:null  up:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:exist 
 rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
 lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
-type:0   type:0   type:0   type:0   type:0   type:0   type:0   
-up:null  up:null  up:null  up:null  up:null  up:null  up:null  
+type:0   type:6   type:6   type:6   type:6   type:6   type:6   
+up:null  up:exist up:null  up:null  up:null  up:null  up:null  
 dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
 rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
-lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
-type:0   type:0   type:0   type:0   type:0   type:0   type:0   
-up:null  up:null  up:null  up:null  up:null  up:null  up:null  
-dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
-rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
-lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
-type:0   type:0   type:0   type:0   type:0   type:0   type:0   
-up:null  up:null  up:null  up:null  up:null  up:null  up:null  
-dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
-rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
-lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n''';
+lt:null  lt:null  lt:exist lt:exist lt:exist lt:exist lt:exist \n''';
     expect(model.debugMessage(), expectedMessage);
   });
 }
@@ -168,11 +168,11 @@ class _DirectionChecker {
   })  : _expectedPointers = expectedPointers,
         _model = LifeRoadModel(
           lifeStepsOnBoard: List.generate(
-            LifeRoadModel.height,
+            lifeEvents.length,
             (y) => List.generate(
-              LifeRoadModel.width,
+              lifeEvents[y].length,
               (x) => LifeStepModel(
-                id: x + (y * LifeRoadModel.width),
+                id: x + (y * lifeEvents[y].length),
                 lifeEvent: lifeEvents[y][x],
                 right: null,
                 left: null,
@@ -187,8 +187,8 @@ class _DirectionChecker {
   final LifeRoadModel _model;
 
   void execute() {
-    for (var y = 0; y < LifeRoadModel.height; ++y) {
-      for (var x = 0; x < LifeRoadModel.width; ++x) {
+    for (var y = 0; y < _model.height; ++y) {
+      for (var x = 0; x < _model.width; ++x) {
         final hasUp = _model.lifeStepsOnBoard[y][x].up != null;
         expect(hasUp, _expectedPointers[y][x].up);
         final hasDown = _model.lifeStepsOnBoard[y][x].down != null;

@@ -29,18 +29,37 @@ class LifeStepModel {
   bool get selectableForExecution => lifeEvent.selectableForExecution;
   bool get requireDiceRoll => lifeEvent.requireDiceRoll;
   bool get requireToSelectDirectionManually => lifeEvent.requireToSelectDirectionManually;
+  LifeStepModel _getNext([Direction direction]) {
+    if (direction == null) {
+      final candidateList = [up, down, right, left].where((el) => el != null);
+      if (candidateList.length > 1) {
+        throw Exception('called _getNext without Direction arg, but candidateList($candidateList) has many');
+      }
+      return candidateList.isNotEmpty ? candidateList.first : null;
+    }
+    switch (direction) {
+      case Direction.up:
+        return up;
+      case Direction.down:
+        return down;
+      case Direction.left:
+        return left;
+      case Direction.right:
+        return right;
+    }
+    return null;
+  }
 
-  DestinationWithMovedStepCount getNextUntilMustStopStep(int num) {
+  DestinationWithMovedStepCount getNextUntilMustStopStep(int num, {Direction firstDirection}) {
     var current = this;
     var count = 0;
+    if (firstDirection != null) {
+      current = current._getNext(firstDirection);
+      count++;
+    }
     while (current != null && count < num) {
       if (current.mustStop) break;
-      final next = [
-        current.up,
-        current.down,
-        current.right,
-        current.left,
-      ].firstWhere((el) => el != null, orElse: () => null);
+      final next = current._getNext();
       if (next == null) break;
       current = next;
       count++;
@@ -70,6 +89,9 @@ class DestinationWithMovedStepCount {
 
   /// 進んだ結果到着した lifeStep
   final LifeStepModel destination;
+
+  /// 残り
+  int get remainCount => wantToMoveCount - movedCount;
 }
 
 enum Direction { up, down, left, right }
