@@ -42,7 +42,12 @@ class LifeStep extends StatelessWidget {
               ),
             ),
           ),
-          Text(I18n.of(context).lifeStepEventType(_model.lifeEvent.type)),
+          Column(
+            children: [
+              Text(_model.lifeEvent.description),
+              Text(I18n.of(context).lifeStepEventType(_model.lifeEvent.type)),
+            ],
+          ),
           Positioned.fill(
             child: Align(
               alignment: Alignment.bottomCenter,

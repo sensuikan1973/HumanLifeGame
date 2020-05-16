@@ -18,7 +18,6 @@ class LifeRoadModel {
   }
 
   // FIXME: いつか消す
-  // 一直線の仮データ
   static List<List<LifeStepModel>> createDummyLifeStepsOnBoard() {
     final start = LifeEventModel(LifeEventTarget.myself, const StartParams());
     final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams());
