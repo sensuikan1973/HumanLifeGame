@@ -36,10 +36,10 @@ class LifeRoad extends StatelessWidget {
         child: LayoutBuilder(
           builder: (context, constraints) => Table(
             children: List.generate(
-              _model.width,
+              _model.height,
               (y) => TableRow(
                 children: List.generate(
-                  _model.height,
+                  _model.width,
                   (x) => TableCell(
                     child: LifeStep(
                       _model.lifeStepsOnBoard[y][x],
