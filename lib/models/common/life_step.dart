@@ -21,6 +21,11 @@ class LifeStepModel {
   LifeStepModel right;
   LifeStepModel left;
 
+  bool get hasUp => up != null;
+  bool get hasDown => down != null;
+  bool get hasLeft => left != null;
+  bool get hasRight => right != null;
+
   EventCategory get category => lifeEvent.category;
   bool get isStart => lifeEvent.type == LifeEventType.start;
   bool get isGoal => lifeEvent.type == LifeEventType.goal;
