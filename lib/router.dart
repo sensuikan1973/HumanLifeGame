@@ -32,7 +32,8 @@ class Router {
                 ),
                 orderedHumans: [HumanModel(id: '123', name: 'hoge'), HumanModel(id: '456', name: 'fuga')],
               ),
-              update: (context, playerAction, playRoom) => playRoom..playerAction = playerAction,
+              update: (context, playerActionNotifier, playRoomNotifier) =>
+                  playRoomNotifier..update(playerActionNotifier),
             )
           ],
           child: const PlayRoom(),

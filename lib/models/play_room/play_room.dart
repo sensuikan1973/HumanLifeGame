@@ -34,33 +34,6 @@ class PlayRoomNotifier extends ChangeNotifier {
   /// 参加する人。ターン順。
   final List<HumanModel> orderedHumans;
 
-  PlayerActionNotifier _playerAction;
-  PlayerActionNotifier get playerAction => _playerAction;
-  set playerAction(PlayerActionNotifier value) {
-    _playerAction = value;
-
-    // まだサイコロが振られてない時は何もしない
-    if (value.neverRolled) return;
-
-    // Announcement の更新
-    announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, value.roll);
-    // 人生を進める
-    _moveLifeStep();
-
-    // LifeEvent 処理
-    lifeStages[_currentPlayerLifeStageIndex] = _lifeEventService.executeEvent(
-      _currentPlayerLifeStage.lifeStepModel.lifeEvent,
-      _currentPlayerLifeStage,
-    );
-
-    // 全員がゴールに到着しているかどうかを確認
-    _allHumansReachedTheGoal = lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
-    // FIXME: 即ターン交代してるけど、あくまで仮
-    _changeToNextTurn();
-
-    notifyListeners();
-  }
-
   /// お知らせ
   AnnouncementModel get announcement => _announcement;
   final _announcement = AnnouncementModel();
@@ -89,16 +62,38 @@ class PlayRoomNotifier extends ChangeNotifier {
   bool get allHumansReachedTheGoal => _allHumansReachedTheGoal;
   bool _allHumansReachedTheGoal = false;
 
+  void update(PlayerActionNotifier playerActionNotifier) {
+    // まだサイコロが振られてない時は何もしない
+    if (playerActionNotifier.neverRolled) return;
+
+    // Announcement の更新
+    announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, playerActionNotifier.roll);
+    // 人生を進める
+    _moveLifeStep(playerActionNotifier.roll);
+
+    // LifeEvent 処理
+    lifeStages[_currentPlayerLifeStageIndex] = _lifeEventService.executeEvent(
+      _currentPlayerLifeStage.lifeStepModel.lifeEvent,
+      _currentPlayerLifeStage,
+    );
+
+    // 全員がゴールに到着しているかどうかを確認
+    _allHumansReachedTheGoal = lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
+    // FIXME: 即ターン交代してるけど、あくまで仮
+    _changeToNextTurn();
+
+    notifyListeners();
+  }
+
   // 次のターンに変える
   void _changeToNextTurn() {
     final currentPlayerIndex = orderedHumans.indexOf(_currentPlayer);
     _currentPlayer = orderedHumans[(currentPlayerIndex + 1) % orderedHumans.length];
   }
 
-  void _moveLifeStep() {
-    // 現在の LifeStep から出目の数だけ進んだ LifeStep を取得する
-    final destinationWithMovedStepCount =
-        _currentPlayerLifeStage.lifeStepModel.getNextUntilMustStopStep(playerAction.roll);
+  void _moveLifeStep(int roll) {
+    // 現在の LifeStep から指定の数だけ進んだ LifeStep を取得する
+    final destinationWithMovedStepCount = _currentPlayerLifeStage.lifeStepModel.getNextUntilMustStopStep(roll);
     // 進み先の LifeStep を LifeStage に代入する
     lifeStages[_currentPlayerLifeStageIndex].lifeStepModel = destinationWithMovedStepCount.destination;
   }

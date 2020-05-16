@@ -143,7 +143,8 @@ class _TestablePlayRoom extends StatelessWidget {
             ),
             ChangeNotifierProxyProvider<PlayerActionNotifier, PlayRoomNotifier>(
               create: (context) => playRoomModel,
-              update: (context, playerAction, playRoom) => playRoom..playerAction = playerAction,
+              update: (context, playerActionNotifier, playRoomNotifier) =>
+                  playRoomNotifier..update(playerActionNotifier),
             )
           ],
           child: const PlayRoom(),
