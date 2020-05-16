@@ -27,6 +27,7 @@ class LifeRoadModel {
           (x) {
             final isStart = x == 0 && y == 0;
             final isGoal = x == width - 1 && y == 0;
+            final description = isStart || isGoal || y != 0 ? '' : '３年連続皆勤賞の快挙達成！！！';
             final params = () {
               if (isStart) return const StartParams();
               if (isGoal) return const GoalParams();
@@ -43,7 +44,7 @@ class LifeRoadModel {
             }();
             return LifeStepModel(
               id: x + (y * width),
-              lifeEvent: LifeEventModel(LifeEventTarget.myself, params),
+              lifeEvent: LifeEventModel(LifeEventTarget.myself, params, description: description),
               right: null,
               left: null,
               up: null,

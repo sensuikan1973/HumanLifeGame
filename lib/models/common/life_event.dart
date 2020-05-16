@@ -3,8 +3,9 @@ import 'life_event_params/life_event_params.dart';
 class LifeEventModel<T extends LifeEventParams> {
   LifeEventModel(
     this.target,
-    this.params,
-  );
+    this.params, {
+    this.description,
+  });
 
   final T params;
   LifeEventTarget target;
