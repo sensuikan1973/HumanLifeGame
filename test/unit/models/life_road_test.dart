@@ -122,41 +122,41 @@ void main() {
   test('debugMessage', () {
     final model = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createDummyLifeStepsOnBoard());
     const expectedMessage = '''
-type:1   type:6   type:6   type:6   type:6   type:6   type:2   
+type:1   type:3   type:6   type:6   type:6   type:6   type:0   
 up:null  up:null  up:null  up:null  up:null  up:null  up:null  
-dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
-rl:exist rl:exist rl:exist rl:exist rl:exist rl:exist rl:null  
+dn:null  dn:exist dn:null  dn:null  dn:null  dn:exist dn:null  
+rl:exist rl:exist rl:exist rl:exist rl:exist rl:null  rl:null  
 lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
-type:0   type:0   type:0   type:0   type:0   type:0   type:0   
+type:0   type:6   type:0   type:0   type:0   type:6   type:0   
 up:null  up:null  up:null  up:null  up:null  up:null  up:null  
-dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
+dn:null  dn:exist dn:null  dn:null  dn:null  dn:exist dn:null  
 rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
 lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
-type:0   type:0   type:0   type:0   type:0   type:0   type:0   
+type:0   type:6   type:6   type:6   type:6   type:6   type:6   
 up:null  up:null  up:null  up:null  up:null  up:null  up:null  
-dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:exist 
+rl:null  rl:exist rl:exist rl:exist rl:exist rl:exist rl:null  
+lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
+type:0   type:0   type:0   type:0   type:0   type:0   type:6   
+up:null  up:null  up:null  up:null  up:null  up:null  up:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:exist 
 rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
 lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
-type:0   type:0   type:0   type:0   type:0   type:0   type:0   
+type:2   type:6   type:6   type:6   type:6   type:6   type:3   
 up:null  up:null  up:null  up:null  up:null  up:null  up:null  
-dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:exist 
+rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
+lt:null  lt:exist lt:exist lt:exist lt:exist lt:exist lt:exist 
+type:0   type:6   type:0   type:0   type:0   type:0   type:6   
+up:null  up:exist up:null  up:null  up:null  up:null  up:null  
+dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:exist 
 rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
 lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
-type:0   type:0   type:0   type:0   type:0   type:0   type:0   
-up:null  up:null  up:null  up:null  up:null  up:null  up:null  
+type:0   type:6   type:6   type:6   type:6   type:6   type:6   
+up:null  up:exist up:null  up:null  up:null  up:null  up:null  
 dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
 rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
-lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
-type:0   type:0   type:0   type:0   type:0   type:0   type:0   
-up:null  up:null  up:null  up:null  up:null  up:null  up:null  
-dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
-rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
-lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
-type:0   type:0   type:0   type:0   type:0   type:0   type:0   
-up:null  up:null  up:null  up:null  up:null  up:null  up:null  
-dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
-rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
-lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  \n''';
+lt:null  lt:null  lt:exist lt:exist lt:exist lt:exist lt:exist \n''';
     expect(model.debugMessage(), expectedMessage);
   });
 }
