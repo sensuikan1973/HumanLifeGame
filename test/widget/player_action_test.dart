@@ -2,6 +2,7 @@ import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/models/common/human.dart';
 import 'package:HumanLifeGame/models/common/human_life.dart';
 import 'package:HumanLifeGame/models/common/life_event.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
@@ -23,11 +24,12 @@ Future<void> main() async {
 
   final start = LifeEventModel(LifeEventTarget.myself, const StartParams());
   final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams());
+  final gains = LifeEventModel(LifeEventTarget.myself, const GainLifeItemsParams(targetItems: []));
   final blank = LifeEventModel(LifeEventTarget.myself, const NothingParams());
 
   testWidgets("show 'Roll the Dice' text", (tester) async {
     final lifeEvents = [
-      [start, blank, goals],
+      [start, gains, goals],
       [blank, blank, blank],
       [blank, blank, blank],
     ];
