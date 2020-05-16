@@ -15,6 +15,7 @@ class Router {
   final String initialRoute = '/';
 
   final Map<String, WidgetBuilder> routes = {
+    // FIXME: Provider で包んでるけど、実際には login page あたりから包まれて遷移することになるはず
     '/': (context) => MultiProvider(
           providers: [
             ChangeNotifierProvider(
