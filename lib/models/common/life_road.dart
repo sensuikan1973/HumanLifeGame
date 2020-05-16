@@ -14,7 +14,7 @@ class LifeRoadModel {
     @required this.lifeStepsOnBoard,
   })  : height = lifeStepsOnBoard.length,
         width = lifeStepsOnBoard.first.length,
-        assert(lifeStepsOnBoard.where((row) => row.length != lifeStepsOnBoard.first.length).isEmpty) {
+        assert(lifeStepsOnBoard.every((row) => row.length == lifeStepsOnBoard.first.length)) {
     _initDirections(start);
   }
 
