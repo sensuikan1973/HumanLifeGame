@@ -57,8 +57,10 @@ abstract class LifeEventParams {
       case LifeEventType.loseLifeItemsIfNotExistOtherLifeItem:
         return EventCategory.negative;
         break;
+
       case LifeEventType.exchangeLifeItemsWithDiceRoll:
         return EventCategory.challenge;
+        break;
     }
     return EventCategory.normal;
   }
