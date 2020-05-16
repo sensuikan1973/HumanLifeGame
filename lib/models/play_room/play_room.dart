@@ -10,8 +10,8 @@ import 'announcement.dart';
 import 'life_stage.dart';
 import 'player_action.dart';
 
-class PlayRoomModel extends ChangeNotifier {
-  PlayRoomModel(
+class PlayRoomNotifier extends ChangeNotifier {
+  PlayRoomNotifier(
     this._i18n,
     this.humanLife, {
     @required this.orderedHumans,
@@ -34,16 +34,16 @@ class PlayRoomModel extends ChangeNotifier {
   /// 参加する人。ターン順。
   final List<HumanModel> orderedHumans;
 
-  PlayerActionModel _playerAction;
-  PlayerActionModel get playerAction => _playerAction;
-  set playerAction(PlayerActionModel playerAction) {
-    _playerAction = playerAction;
+  PlayerActionNotifier _playerAction;
+  PlayerActionNotifier get playerAction => _playerAction;
+  set playerAction(PlayerActionNotifier value) {
+    _playerAction = value;
 
     // まだサイコロが振られてない時は何もしない
-    if (playerAction.neverRolled) return;
+    if (value.neverRolled) return;
 
     // Announcement の更新
-    announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, playerAction.roll);
+    announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, value.roll);
     // 人生を進める
     _moveLifeStep();
 

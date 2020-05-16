@@ -38,9 +38,9 @@ class PlayerAction extends StatelessWidget {
         key: const Key('playerActionDiceRollButton'),
         color: Colors.blue,
         textColor: Colors.white,
-        onPressed: context.select<PlayRoomModel, bool>((model) => model.allHumansReachedTheGoal)
+        onPressed: context.select<PlayRoomNotifier, bool>((model) => model.allHumansReachedTheGoal)
             ? null
-            : () => context.read<PlayerActionModel>().rollDice(),
+            : () => context.read<PlayerActionNotifier>().rollDice(),
         child: Text(
           I18n.of(context).rollDice,
           style: const TextStyle(fontSize: 20),
@@ -54,7 +54,7 @@ class PlayerAction extends StatelessWidget {
             children: <Widget>[
               IconButton(
                 icon: const Icon(Icons.arrow_upward),
-                onPressed: () => context.read<PlayerActionModel>().direction = Direction.up,
+                onPressed: () => context.read<PlayerActionNotifier>().direction = Direction.up,
               ),
             ],
           ),
@@ -63,11 +63,11 @@ class PlayerAction extends StatelessWidget {
             children: <Widget>[
               IconButton(
                 icon: const Icon(Icons.arrow_back),
-                onPressed: () => context.read<PlayerActionModel>().direction = Direction.left,
+                onPressed: () => context.read<PlayerActionNotifier>().direction = Direction.left,
               ),
               IconButton(
                 icon: const Icon(Icons.arrow_forward),
-                onPressed: () => context.read<PlayerActionModel>().direction = Direction.right,
+                onPressed: () => context.read<PlayerActionNotifier>().direction = Direction.right,
               ),
             ],
           ),
@@ -76,7 +76,7 @@ class PlayerAction extends StatelessWidget {
             children: <Widget>[
               IconButton(
                 icon: const Icon(Icons.arrow_downward),
-                onPressed: () => context.read<PlayerActionModel>().direction = Direction.down,
+                onPressed: () => context.read<PlayerActionNotifier>().direction = Direction.down,
               ),
             ],
           ),

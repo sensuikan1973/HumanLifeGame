@@ -22,7 +22,7 @@ Future<void> main() async {
   );
 
   testWidgets("show 'Roll the Dice' text", (tester) async {
-    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
     await tester.pumpWidget(testableApp(
       locale: locale,
       home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const PlayerAction()),
@@ -32,7 +32,7 @@ Future<void> main() async {
   });
 
   testWidgets('show Yes/No Button', (tester) async {
-    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
     await tester.pumpWidget(testableApp(
       locale: locale,
       home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const PlayerAction()),
@@ -43,7 +43,7 @@ Future<void> main() async {
   });
 
   testWidgets('show Direction Select Button', (tester) async {
-    final playRoomModel = PlayRoomModel(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
     await tester.pumpWidget(testableApp(
       locale: locale,
       home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const PlayerAction()),

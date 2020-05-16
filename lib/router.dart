@@ -18,10 +18,10 @@ class Router {
     '/': (context) => MultiProvider(
           providers: [
             ChangeNotifierProvider(
-              create: (_) => PlayerActionModel(context.read<Dice>()),
+              create: (_) => PlayerActionNotifier(context.read<Dice>()),
             ),
-            ChangeNotifierProxyProvider<PlayerActionModel, PlayRoomModel>(
-              create: (_) => PlayRoomModel(
+            ChangeNotifierProxyProvider<PlayerActionNotifier, PlayRoomNotifier>(
+              create: (_) => PlayRoomNotifier(
                 I18n.of(context),
                 // FIXME: Repository から取ってくる
                 HumanLifeModel(

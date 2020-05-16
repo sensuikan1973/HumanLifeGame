@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 import '../../api/dice.dart';
 import '../common/life_step.dart';
 
-class PlayerActionModel extends ChangeNotifier {
-  PlayerActionModel(this._dice);
+class PlayerActionNotifier extends ChangeNotifier {
+  PlayerActionNotifier(this._dice);
 
   final Dice _dice;
 
