@@ -4,7 +4,7 @@ class LifeEventModel<T extends LifeEventParams> {
   LifeEventModel(
     this.target,
     this.params, {
-    this.description,
+    this.description = ' ',
   });
 
   final T params;

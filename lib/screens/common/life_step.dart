@@ -44,7 +44,7 @@ class LifeStep extends StatelessWidget {
           ),
           Column(
             children: [
-              if (_model.lifeEvent.description != null) Text(_model.lifeEvent.description),
+              Text(_model.lifeEvent.description),
               Text(I18n.of(context).lifeStepEventType(_model.lifeEvent.type)),
             ],
           ),
