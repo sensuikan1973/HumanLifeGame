@@ -11,8 +11,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
-  const locale = Locale('en', 'US');
-
   testWidgets('show DecoratedBox with Colors.cyan[50]', (tester) async {
     final model = LifeStepModel(
       id: 0,
@@ -22,7 +20,7 @@ Future<void> main() async {
       ),
     );
 
-    await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
+    await tester.pumpWidget(testableApp(home: LifeStep(model, 1050, 700)));
     await tester.pump();
 
     expect(
@@ -42,7 +40,7 @@ Future<void> main() async {
       down: null,
     );
 
-    await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
+    await tester.pumpWidget(testableApp(home: LifeStep(model, 1050, 700)));
     await tester.pump();
 
     expect(
@@ -62,7 +60,7 @@ Future<void> main() async {
       ),
     );
 
-    await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
+    await tester.pumpWidget(testableApp(home: LifeStep(model, 1050, 700)));
     await tester.pump();
 
     expect(find.text('３年連続皆勤賞の快挙達成！！！'), findsOneWidget);
@@ -88,7 +86,7 @@ Future<void> checkLifeEventI18n(LifeEventTarget target, LifeEventType type) asyn
       lifeEvent: LifeEventModel(target, const NothingParams()),
     );
 
-    await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
+    await tester.pumpWidget(testableApp(home: LifeStep(model, 1050, 700)));
     await tester.pump();
 
     expect(find.text(i18n.lifeStepEventType(model.lifeEvent.type)), findsOneWidget);

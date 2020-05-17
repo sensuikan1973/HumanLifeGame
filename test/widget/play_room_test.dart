@@ -26,8 +26,7 @@ import '../mocks/mocks.dart';
 import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
-  const locale = Locale('en', 'US');
-  final i18n = await I18n.load(locale);
+  final i18n = await I18n.load(const Locale('en', 'US'));
   final orderedHumans = [HumanModel(id: 'h1', name: 'foo'), HumanModel(id: 'h2', name: 'bar')];
   final start = LifeEventModel(LifeEventTarget.myself, const StartParams());
   final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams());
