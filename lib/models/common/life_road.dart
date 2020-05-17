@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'life_event.dart';
 import 'life_event_params/gain_life_items_params.dart';
 import 'life_event_params/goal_params.dart';
-import 'life_event_params/life_event_params.dart';
 import 'life_event_params/nothing_params.dart';
 import 'life_event_params/select_direction_params.dart';
 import 'life_event_params/start_params.dart';
@@ -160,7 +159,7 @@ class LifeRoadModel {
   }
 
   bool _isUncheckedLifeStep(LifeStepModel lifeStep) {
-    if (lifeStep.lifeEvent.type == LifeEventType.nothing) return false;
+    if (!lifeStep.isTargetToRoad) return false;
     return [lifeStep.up, lifeStep.down, lifeStep.right, lifeStep.left].every((el) => el == null);
   }
 
