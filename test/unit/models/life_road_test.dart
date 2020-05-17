@@ -189,14 +189,10 @@ class _DirectionChecker {
   void execute() {
     for (var y = 0; y < _model.height; ++y) {
       for (var x = 0; x < _model.width; ++x) {
-        final hasUp = _model.lifeStepsOnBoard[y][x].up != null;
-        expect(hasUp, _expectedPointers[y][x].up);
-        final hasDown = _model.lifeStepsOnBoard[y][x].down != null;
-        expect(hasDown, _expectedPointers[y][x].down);
-        final hasRight = _model.lifeStepsOnBoard[y][x].right != null;
-        expect(hasRight, _expectedPointers[y][x].right);
-        final hasLeft = _model.lifeStepsOnBoard[y][x].left != null;
-        expect(hasLeft, _expectedPointers[y][x].left);
+        expect(_model.lifeStepsOnBoard[y][x].hasUp, _expectedPointers[y][x].up);
+        expect(_model.lifeStepsOnBoard[y][x].hasDown, _expectedPointers[y][x].down);
+        expect(_model.lifeStepsOnBoard[y][x].hasRight, _expectedPointers[y][x].right);
+        expect(_model.lifeStepsOnBoard[y][x].hasLeft, _expectedPointers[y][x].left);
       }
     }
   }

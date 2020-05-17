@@ -27,6 +27,7 @@ class LifeStepModel {
   bool get hasRight => right != null;
 
   EventCategory get category => lifeEvent.category;
+  bool get isTargetToRoad => lifeEvent.type != LifeEventType.nothing;
   bool get isStart => lifeEvent.type == LifeEventType.start;
   bool get isGoal => lifeEvent.type == LifeEventType.goal;
   bool get isBranch => lifeEvent.isBranch;
@@ -34,6 +35,24 @@ class LifeStepModel {
   bool get selectableForExecution => lifeEvent.selectableForExecution;
   bool get requireDiceRoll => lifeEvent.requireDiceRoll;
   bool get requireToSelectDirectionManually => lifeEvent.requireToSelectDirectionManually;
+
+  DestinationWithMovedStepCount getNextUntilMustStopStep(int num, {Direction firstDirection}) {
+    var current = this;
+    var count = 0;
+    if (firstDirection != null) {
+      current = current._getNext(firstDirection);
+      count++;
+    }
+    while (current != null && count < num) {
+      if (current.mustStop) break;
+      final next = current._getNext();
+      if (next == null) break;
+      current = next;
+      count++;
+    }
+    return DestinationWithMovedStepCount(wantToMoveCount: num, movedCount: count, destination: current);
+  }
+
   LifeStepModel _getNext([Direction direction]) {
     if (direction == null) {
       final candidateList = [up, down, right, left].where((el) => el != null);
@@ -53,23 +72,6 @@ class LifeStepModel {
         return right;
     }
     return null;
-  }
-
-  DestinationWithMovedStepCount getNextUntilMustStopStep(int num, {Direction firstDirection}) {
-    var current = this;
-    var count = 0;
-    if (firstDirection != null) {
-      current = current._getNext(firstDirection);
-      count++;
-    }
-    while (current != null && count < num) {
-      if (current.mustStop) break;
-      final next = current._getNext();
-      if (next == null) break;
-      current = next;
-      count++;
-    }
-    return DestinationWithMovedStepCount(wantToMoveCount: num, movedCount: count, destination: current);
   }
 
   @override
