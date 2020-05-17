@@ -15,12 +15,8 @@ class PlayRoom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final allHumansReachedTheGoal = context.select<PlayRoomNotifier, bool>((model) => model.allHumansReachedTheGoal);
-
-    if (allHumansReachedTheGoal) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _showResult(context);
-      });
+    if (context.select<PlayRoomNotifier, bool>((model) => model.allHumansReachedTheGoal)) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _showResult(context));
     }
     return Scaffold(
       body: Row(
