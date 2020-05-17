@@ -34,7 +34,7 @@ class Router {
                     ),
                   ),
                 ),
-                orderedHumans: [HumanModel(id: '123', name: 'hoge'), HumanModel(id: '456', name: 'fuga')],
+                orderedHumans: [HumanModel(id: '1', name: 'hoge'), HumanModel(id: '2', name: 'fuga')],
               ),
               update: (context, playerActionNotifier, playRoomNotifier) =>
                   playRoomNotifier..update(playerActionNotifier),
