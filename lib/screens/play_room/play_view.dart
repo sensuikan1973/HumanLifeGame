@@ -12,51 +12,44 @@ class PlayView extends StatelessWidget {
   List<Color> get _orderedColors => [Colors.red, Colors.blue, Colors.green, Colors.yellow];
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 1050,
-      height: 750,
-      child: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: SizedBox(
-              width: 1050,
-              height: 750,
-              child: CustomScrollView(
-                scrollDirection: Axis.horizontal,
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: _playView(context),
-                  ),
-                ],
+  Widget build(BuildContext context) => SizedBox(
+        width: 1050,
+        height: 750,
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 750,
+                child: CustomScrollView(
+                  scrollDirection: Axis.horizontal,
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: _playView(context),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
+          ],
+        ),
+      );
 
   Card _playView(BuildContext context) {
     final playRoomModel = context.watch<PlayRoomNotifier>();
     return Card(
-      child: SizedBox(
-        width: 1050,
-        height: 750,
-        child: DecoratedBox(
-          decoration: const BoxDecoration(color: Colors.white),
-          child: Center(
-            child: LifeRoad(
-              playRoomModel.humanLife.lifeRoad,
-              humans: [
-                for (var i = 0; i < playRoomModel.orderedHumans.length; ++i)
-                  Human(
-                    playRoomModel.orderedHumans[i],
-                    _orderedColors[i],
-                  ),
-              ],
-              positionsByHumanId: playRoomModel.positionsByHumanId,
-            ),
+      child: DecoratedBox(
+        decoration: const BoxDecoration(color: Colors.white),
+        child: Center(
+          child: LifeRoad(
+            playRoomModel.humanLife.lifeRoad,
+            humans: [
+              for (var i = 0; i < playRoomModel.orderedHumans.length; ++i)
+                Human(
+                  playRoomModel.orderedHumans[i],
+                  _orderedColors[i],
+                ),
+            ],
+            positionsByHumanId: playRoomModel.positionsByHumanId,
           ),
         ),
       ),
