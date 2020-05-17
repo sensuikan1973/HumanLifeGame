@@ -124,7 +124,7 @@ void main() {
       expect(playRoomModel.currentPlayerLifeStep.hasDown, true);
       expect(playRoomModel.currentPlayerLifeStep.hasLeft, false);
       expect(playRoomModel.currentPlayerLifeStep.hasRight, true);
-      // 右を選ぶ
+      // 下を選ぶ
       playRoomModel.update(playerActionNotifier..direction = Direction.down);
       expect(playRoomModel.positionsByHumanId[human2.id].x, 1);
       expect(playRoomModel.positionsByHumanId[human2.id].y, 1);
@@ -162,7 +162,7 @@ void main() {
       expect(playRoomModel.currentPlayerLifeStep.hasDown, true);
       expect(playRoomModel.currentPlayerLifeStep.hasLeft, false);
       expect(playRoomModel.currentPlayerLifeStep.hasRight, true);
-      // 右を選ぶ
+      // 下を選ぶ
       playRoomModel.update(playerActionNotifier..direction = Direction.down);
       expect(playRoomModel.positionsByHumanId[human2.id].x, 1);
       expect(playRoomModel.positionsByHumanId[human2.id].y, 2);
