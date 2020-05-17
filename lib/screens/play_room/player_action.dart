@@ -14,23 +14,11 @@ class PlayerAction extends StatelessWidget {
         child: Container(
           width: 300,
           height: 300,
-          child: Column(
-            children: <Widget>[
+          child: <Widget>[
+            if (context.select<PlayRoomNotifier, bool>((value) => value.requireSelectDirection))
               _directionSelectButton(context),
-              const Divider(
-                thickness: 1,
-                indent: 5,
-                endIndent: 5,
-              ),
-              _yesNoButton(context),
-              const Divider(
-                thickness: 1,
-                indent: 5,
-                endIndent: 5,
-              ),
-              _rollDiceButton(context),
-            ],
-          ),
+            _rollDiceButton(context),
+          ].first, // NOTE: 常に必要な Action UI は 1つ
         ),
       );
 
@@ -49,54 +37,39 @@ class PlayerAction extends StatelessWidget {
 
   Column _directionSelectButton(BuildContext context) => Column(
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.arrow_upward),
-                onPressed: () => context.read<PlayerActionNotifier>().direction = Direction.up,
-              ),
-            ],
+          Center(
+            child: IconButton(
+              icon: const Icon(Icons.arrow_upward),
+              onPressed: context.select<PlayRoomNotifier, LifeStepModel>((value) => value.currentPlayerLifeStep).hasUp
+                  ? () => context.read<PlayerActionNotifier>().direction = Direction.up
+                  : null,
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               IconButton(
                 icon: const Icon(Icons.arrow_back),
-                onPressed: () => context.read<PlayerActionNotifier>().direction = Direction.left,
+                onPressed:
+                    context.select<PlayRoomNotifier, LifeStepModel>((value) => value.currentPlayerLifeStep).hasLeft
+                        ? () => context.read<PlayerActionNotifier>().direction = Direction.left
+                        : null,
               ),
               IconButton(
                 icon: const Icon(Icons.arrow_forward),
-                onPressed: () => context.read<PlayerActionNotifier>().direction = Direction.right,
+                onPressed:
+                    context.select<PlayRoomNotifier, LifeStepModel>((value) => value.currentPlayerLifeStep).hasRight
+                        ? () => context.read<PlayerActionNotifier>().direction = Direction.right
+                        : null,
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.arrow_downward),
-                onPressed: () => context.read<PlayerActionNotifier>().direction = Direction.down,
-              ),
-            ],
-          ),
-        ],
-      );
-  Row _yesNoButton(BuildContext context) => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          FlatButton(
-            onPressed: null,
-            child: Text(
-              I18n.of(context).playerActionYes,
-              style: const TextStyle(fontSize: 20),
-            ),
-          ),
-          FlatButton(
-            onPressed: null,
-            child: Text(
-              I18n.of(context).playerActionNo,
-              style: const TextStyle(fontSize: 20),
+          Center(
+            child: IconButton(
+              icon: const Icon(Icons.arrow_downward),
+              onPressed: context.select<PlayRoomNotifier, LifeStepModel>((value) => value.currentPlayerLifeStep).hasDown
+                  ? () => context.read<PlayerActionNotifier>().direction = Direction.down
+                  : null,
             ),
           ),
         ],

@@ -47,6 +47,7 @@ class PlayRoomNotifier extends ChangeNotifier {
   HumanModel _currentPlayer;
   int get _currentPlayerLifeStageIndex => lifeStages.indexWhere((lifeStage) => lifeStage.human == _currentPlayer);
   LifeStageModel get _currentPlayerLifeStage => lifeStages[_currentPlayerLifeStageIndex];
+  LifeStepModel get currentPlayerLifeStep => _currentPlayerLifeStage.lifeStepModel;
 
   /// 参加者のそれぞれの人生の進捗
   List<LifeStageModel> lifeStages = [];
@@ -76,16 +77,25 @@ class PlayRoomNotifier extends ChangeNotifier {
     // FIXME: 状態に応じた適切なメッセージを流すように
     announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, playerActionNotifier.roll);
 
-    // 人生を進める
+    // サイコロ振る出発地点が分岐なら
+    if (!_requireSelectDirection && currentPlayerLifeStep.requireToSelectDirectionManually) {
+      _remainCount = playerActionNotifier.roll;
+      _requireSelectDirection = true;
+      notifyListeners();
+      return;
+    }
+
     final dest = _requireSelectDirection
         ? _moveLifeStepUntilMustStop(_remainCount, firstDirection: playerActionNotifier.direction)
         : _moveLifeStepUntilMustStop(playerActionNotifier.roll);
-    _requireSelectDirection = dest.destination.requireToSelectDirectionManually;
+    // NOTE: 選択を要するところに止まっても、そこが最終地点なら選択は次のターンに後回しとする
+    _requireSelectDirection = dest.remainCount > 0 && dest.destination.requireToSelectDirectionManually;
     if (_requireSelectDirection) {
       _remainCount = dest.remainCount;
       notifyListeners();
       return;
     }
+    _remainCount = 0;
 
     // LifeEvent 処理
     lifeStages[_currentPlayerLifeStageIndex] = _lifeEventService.executeEvent(

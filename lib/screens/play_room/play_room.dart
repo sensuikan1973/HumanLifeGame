@@ -15,12 +15,8 @@ class PlayRoom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final allHumansReachedTheGoal = context.select<PlayRoomNotifier, bool>((model) => model.allHumansReachedTheGoal);
-
-    if (allHumansReachedTheGoal) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _showResult(context);
-      });
+    if (context.select<PlayRoomNotifier, bool>((model) => model.allHumansReachedTheGoal)) {
+      WidgetsBinding.instance.addPostFrameCallback((_) async => _showResult(context));
     }
     return Scaffold(
       body: Row(
@@ -44,7 +40,7 @@ class PlayRoom extends StatelessWidget {
     );
   }
 
-  void _showResult(BuildContext context) {
+  Future<void> _showResult(BuildContext context) async {
     final lifeStages = context.read<PlayRoomNotifier>().lifeStages;
     final result = <Widget>[
       for (final lifeStage in lifeStages)
@@ -56,12 +52,12 @@ class PlayRoom extends StatelessWidget {
           ],
         ),
     ];
-    showDialog<void>(
-        context: context,
-        builder: (context) => SimpleDialog(
-              title: Text(I18n.of(context).resultAnnouncementDialogMessage),
-              children: result,
-            ));
-    return;
+    await showDialog<void>(
+      context: context,
+      builder: (context) => SimpleDialog(
+        title: Text(I18n.of(context).resultAnnouncementDialogMessage),
+        children: result,
+      ),
+    );
   }
 }
