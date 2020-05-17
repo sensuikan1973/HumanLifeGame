@@ -6,10 +6,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
-  const locale = Locale('en', 'US');
-  final i18n = await I18n.load(locale);
+  final i18n = await I18n.load(const Locale('en', 'US'));
   testWidgets("show 'lifeEventRecords'Text", (tester) async {
-    await tester.pumpWidget(testableApp(locale: locale, home: const LifeEventRecords()));
+    await tester.pumpWidget(testableApp(home: const LifeEventRecords()));
     await tester.pump();
 
     expect(find.text(i18n.lifeEventRecordsText), findsOneWidget);

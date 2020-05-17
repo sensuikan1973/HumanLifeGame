@@ -5,7 +5,6 @@ import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dar
 import 'package:HumanLifeGame/models/common/life_event_params/select_direction_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
 import 'package:HumanLifeGame/models/common/life_road.dart';
-import 'package:HumanLifeGame/models/common/life_step.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -170,22 +169,7 @@ class _DirectionChecker {
     @required List<List<LifeEventModel>> lifeEvents,
     @required List<List<_Pointer>> expectedPointers,
   })  : _expectedPointers = expectedPointers,
-        _model = LifeRoadModel(
-          lifeStepsOnBoard: List.generate(
-            lifeEvents.length,
-            (y) => List.generate(
-              lifeEvents[y].length,
-              (x) => LifeStepModel(
-                id: x + (y * lifeEvents[y].length),
-                lifeEvent: lifeEvents[y][x],
-                right: null,
-                left: null,
-                up: null,
-                down: null,
-              ),
-            ),
-          ),
-        );
+        _model = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
 
   final List<List<_Pointer>> _expectedPointers;
   final LifeRoadModel _model;

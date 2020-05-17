@@ -28,10 +28,6 @@ class LifeRoadModel {
           (x) => LifeStepModel(
             id: x + (y * lifeEvents[y].length),
             lifeEvent: lifeEvents[y][x],
-            right: null,
-            left: null,
-            up: null,
-            down: null,
           ),
         ),
       );
