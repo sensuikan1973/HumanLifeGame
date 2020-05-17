@@ -8,7 +8,11 @@ import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
   const locale = Locale('en', 'US');
-  final model = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createDummyLifeStepsOnBoard());
+  final model = LifeRoadModel(
+    lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
+      LifeRoadModel.dummyLifeEvents(),
+    ),
+  );
   testWidgets('show LifeStep', (tester) async {
     await tester.pumpWidget(testableApp(locale: locale, home: LifeRoad(model)));
     await tester.pump();
