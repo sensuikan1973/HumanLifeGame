@@ -13,6 +13,31 @@ class PlayView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return SizedBox(
+      width: 1050,
+      height: 750,
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: SizedBox(
+              width: 1050,
+              height: 750,
+              child: CustomScrollView(
+                scrollDirection: Axis.horizontal,
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: _playView(context),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Card _playView(BuildContext context) {
     final playRoomModel = context.watch<PlayRoomNotifier>();
     return Card(
       child: SizedBox(
