@@ -14,7 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
-import '../helper/life_steps_on_board_helper.dart';
 import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
@@ -36,7 +35,7 @@ Future<void> main() async {
     final humanLife = HumanLifeModel(
       title: 'dummy HumanLife',
       author: UserModel(id: 'dummyUserId', name: 'dummyUser'),
-      lifeRoad: LifeRoadModel(lifeStepsOnBoard: createDummyLifeStepsOnBoard(lifeEvents)),
+      lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents)),
     );
     final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
     await tester.pumpWidget(testableApp(

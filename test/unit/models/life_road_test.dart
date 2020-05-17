@@ -120,7 +120,11 @@ void main() {
   });
 
   test('debugMessage', () {
-    final model = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createDummyLifeStepsOnBoard());
+    final model = LifeRoadModel(
+      lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
+        LifeRoadModel.dummyLifeEvents(),
+      ),
+    );
     const expectedMessage = '''
 type:1   type:3   type:6   type:6   type:6   type:6   type:0   
 up:null  up:null  up:null  up:null  up:null  up:null  up:null  

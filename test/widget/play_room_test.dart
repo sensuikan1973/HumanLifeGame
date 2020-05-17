@@ -22,7 +22,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 
-import '../helper/life_steps_on_board_helper.dart';
 import '../mocks/mocks.dart';
 import 'helper/widget_build_helper.dart';
 
@@ -46,7 +45,7 @@ Future<void> main() async {
   final humanLife = HumanLifeModel(
     title: 'hello',
     author: UserModel(id: 'user', name: 'hoge'),
-    lifeRoad: LifeRoadModel(lifeStepsOnBoard: createDummyLifeStepsOnBoard(lifeEvents)),
+    lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents)),
   );
 
   setUp(() {

@@ -15,7 +15,6 @@ import 'package:HumanLifeGame/models/play_room/player_action.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../helper/life_steps_on_board_helper.dart';
 import '../../mocks/mocks.dart';
 
 void main() {
@@ -40,7 +39,7 @@ void main() {
       [blank, blank, blank, blank, blank, blank, blank],
       [blank, blank, blank, blank, blank, blank, blank],
     ];
-    final lifeRoad = LifeRoadModel(lifeStepsOnBoard: createDummyLifeStepsOnBoard(lifeEvents));
+    final lifeRoad = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
     final humanLife = HumanLifeModel(title: 'dummy HumanLife', author: author, lifeRoad: lifeRoad);
     final playRoomModel = PlayRoomNotifier(I18n('en'), humanLife, orderedHumans: orderedHumans);
 
@@ -83,7 +82,7 @@ void main() {
       [blank, gains, gains, goals],
       [blank, blank, blank, blank],
     ];
-    final lifeRoad = LifeRoadModel(lifeStepsOnBoard: createDummyLifeStepsOnBoard(lifeEvents));
+    final lifeRoad = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
     final humanLife = HumanLifeModel(title: 'dummy HumanLife', author: author, lifeRoad: lifeRoad);
 
     test('Dice roll is 1', () {

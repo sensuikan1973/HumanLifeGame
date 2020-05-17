@@ -19,7 +19,11 @@ Future<void> main() async {
   final humanLife = HumanLifeModel(
     title: 'dummy HumanLife',
     author: UserModel(id: 'dummyUserId', name: 'dummyUser'),
-    lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createDummyLifeStepsOnBoard()),
+    lifeRoad: LifeRoadModel(
+      lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
+        LifeRoadModel.dummyLifeEvents(),
+      ),
+    ),
   );
 
   testWidgets('show initial total moneys', (tester) async {

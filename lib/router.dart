@@ -28,9 +28,13 @@ class Router {
                 HumanLifeModel(
                   title: 'dummy HumanLife',
                   author: UserModel(id: '123', name: 'dummyUser'),
-                  lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createDummyLifeStepsOnBoard()),
+                  lifeRoad: LifeRoadModel(
+                    lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
+                      LifeRoadModel.dummyLifeEvents(),
+                    ),
+                  ),
                 ),
-                orderedHumans: [HumanModel(id: '123', name: 'hoge'), HumanModel(id: '456', name: 'fuga')],
+                orderedHumans: [HumanModel(id: '1', name: 'hoge'), HumanModel(id: '2', name: 'fuga')],
               ),
               update: (context, playerActionNotifier, playRoomNotifier) =>
                   playRoomNotifier..update(playerActionNotifier),

@@ -20,14 +20,30 @@ class LifeRoadModel {
   final int width;
   final int height;
 
+  /// LifeStepsOnBoard の生成ヘルパー
+  static List<List<LifeStepModel>> createLifeStepsOnBoard(List<List<LifeEventModel>> lifeEvents) => List.generate(
+        lifeEvents.length,
+        (y) => List.generate(
+          lifeEvents[y].length,
+          (x) => LifeStepModel(
+            id: x + (y * lifeEvents[y].length),
+            lifeEvent: lifeEvents[y][x],
+            right: null,
+            left: null,
+            up: null,
+            down: null,
+          ),
+        ),
+      );
+
   // FIXME: いつか消す
-  static List<List<LifeStepModel>> createDummyLifeStepsOnBoard() {
+  static List<List<LifeEventModel>> dummyLifeEvents() {
     final start = LifeEventModel(LifeEventTarget.myself, const StartParams());
     final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams());
     final gains = LifeEventModel(LifeEventTarget.myself, const GainLifeItemsParams(targetItems: []));
     final direc = LifeEventModel(LifeEventTarget.myself, const SelectDirectionParams());
     final blank = LifeEventModel(LifeEventTarget.myself, const NothingParams());
-    final lifeEvents = [
+    return [
       [start, direc, gains, gains, gains, gains, blank],
       [blank, gains, blank, blank, blank, gains, blank],
       [blank, gains, gains, gains, gains, gains, gains],
@@ -36,20 +52,6 @@ class LifeRoadModel {
       [blank, gains, blank, blank, blank, blank, gains],
       [blank, gains, gains, gains, gains, gains, gains],
     ];
-    return List.generate(
-      lifeEvents.length,
-      (y) => List.generate(
-        lifeEvents[y].length,
-        (x) => LifeStepModel(
-          id: x + (y * lifeEvents[y].length),
-          lifeEvent: lifeEvents[y][x],
-          right: null,
-          left: null,
-          up: null,
-          down: null,
-        ),
-      ),
-    );
   }
 
   List<List<LifeStepModel>> lifeStepsOnBoard;
