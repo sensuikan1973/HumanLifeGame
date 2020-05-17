@@ -16,11 +16,10 @@ Future<void> main() async {
   testWidgets('show DecoratedBox with Colors.cyan[50]', (tester) async {
     final model = LifeStepModel(
       id: 0,
-      lifeEvent: LifeEventModel(LifeEventTarget.myself, const GainLifeItemsParams(targetItems: [])),
-      right: null,
-      left: null,
-      up: null,
-      down: null,
+      lifeEvent: LifeEventModel(
+        LifeEventTarget.myself,
+        const GainLifeItemsParams(targetItems: []),
+      ),
     );
 
     await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
@@ -28,12 +27,7 @@ Future<void> main() async {
 
     expect(
         find.byWidgetPredicate(
-          (widget) =>
-              widget is DecoratedBox &&
-              widget.decoration ==
-                  BoxDecoration(
-                    color: LifeStep.exist,
-                  ),
+          (widget) => widget is DecoratedBox && widget.decoration == BoxDecoration(color: LifeStep.exist),
         ),
         findsOneWidget);
   });
@@ -53,12 +47,7 @@ Future<void> main() async {
 
     expect(
         find.byWidgetPredicate(
-          (widget) =>
-              widget is DecoratedBox &&
-              widget.decoration ==
-                  BoxDecoration(
-                    color: LifeStep.nothing,
-                  ),
+          (widget) => widget is DecoratedBox && widget.decoration == BoxDecoration(color: LifeStep.nothing),
         ),
         findsOneWidget);
   });
@@ -66,11 +55,11 @@ Future<void> main() async {
   testWidgets('show description', (tester) async {
     final model = LifeStepModel(
       id: 0,
-      lifeEvent: LifeEventModel(LifeEventTarget.myself, const NothingParams(), description: '３年連続皆勤賞の快挙達成！！！'),
-      right: null,
-      left: null,
-      up: null,
-      down: null,
+      lifeEvent: LifeEventModel(
+        LifeEventTarget.myself,
+        const NothingParams(),
+        description: '３年連続皆勤賞の快挙達成！！！',
+      ),
     );
 
     await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
@@ -97,10 +86,6 @@ Future<void> checkLifeEventI18n(LifeEventTarget target, LifeEventType type) asyn
     final model = LifeStepModel(
       id: 0,
       lifeEvent: LifeEventModel(target, const NothingParams()),
-      right: null,
-      left: null,
-      up: null,
-      down: null,
     );
 
     await tester.pumpWidget(testableApp(locale: locale, home: LifeStep(model, 1050, 700)));
