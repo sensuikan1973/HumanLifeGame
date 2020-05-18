@@ -38,7 +38,7 @@ class PlayView extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 slivers: [
                   SliverToBoxAdapter(
-                    child: _playView(context, model, lifeRoadSize),
+                    child: _playView(model, lifeRoadSize),
                   ),
                 ],
               ),
@@ -49,7 +49,7 @@ class PlayView extends StatelessWidget {
     );
   }
 
-  Card _playView(BuildContext context, PlayRoomNotifier model, Size size) => Card(
+  Card _playView(PlayRoomNotifier model, Size size) => Card(
         child: DecoratedBox(
           decoration: const BoxDecoration(color: Colors.white),
           child: Center(
