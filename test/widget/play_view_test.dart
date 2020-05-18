@@ -39,20 +39,38 @@ Future<void> main() async {
   );
 
   testWidgets('show LifeSteps, display size = (1440, 1024)', (tester) async {
-    WidgetsBinding.instance.renderView.configuration = TestViewConfiguration(size: const Size(1440, 1024));
+    const windowWidth = 1440.0;
+    const windowHeight = 1024.0;
+    const size = Size(windowWidth, windowHeight);
+    WidgetsBinding.instance.renderView.configuration = TestViewConfiguration(size: size);
     final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
-    await tester.pumpWidget(testableApp(
-      home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const PlayView()),
-    ));
+
+    await tester.pumpWidget(
+      MediaQuery(
+        data: const MediaQueryData(size: size),
+        child: testableApp(
+          home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const PlayView()),
+        ),
+      ),
+    );
     await tester.pump();
     expect(find.byType(LifeStep), findsNWidgets(lifeEvents.length * lifeEvents.first.length));
   });
   testWidgets('show LifeSteps, display size = (1050, 750)', (tester) async {
-    WidgetsBinding.instance.renderView.configuration = TestViewConfiguration(size: const Size(1050, 750));
+    const windowWidth = 1050.0;
+    const windowHeight = 750.0;
+    const size = Size(windowWidth, windowHeight);
+    WidgetsBinding.instance.renderView.configuration = TestViewConfiguration(size: size);
     final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
-    await tester.pumpWidget(testableApp(
-      home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const PlayView()),
-    ));
+
+    await tester.pumpWidget(
+      MediaQuery(
+        data: const MediaQueryData(size: size),
+        child: testableApp(
+          home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const PlayView()),
+        ),
+      ),
+    );
     await tester.pump();
     expect(find.byType(LifeStep), findsNWidgets(lifeEvents.length * lifeEvents.first.length));
   });
