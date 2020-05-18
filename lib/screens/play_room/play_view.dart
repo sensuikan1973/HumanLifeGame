@@ -19,7 +19,7 @@ class PlayView extends StatelessWidget {
           slivers: [
             SliverToBoxAdapter(
               child: SizedBox(
-                height: 750,
+                height: 1200,
                 child: CustomScrollView(
                   scrollDirection: Axis.horizontal,
                   slivers: [

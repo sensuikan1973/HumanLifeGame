@@ -40,13 +40,16 @@ class LifeRoadModel {
     final direc = LifeEventModel(LifeEventTarget.myself, const SelectDirectionParams());
     final blank = LifeEventModel(LifeEventTarget.myself, const NothingParams());
     return [
-      [start, direc, gains, gains, gains, gains, blank],
-      [blank, gains, blank, blank, blank, gains, blank],
-      [blank, gains, gains, gains, gains, gains, gains],
-      [blank, blank, blank, blank, blank, blank, gains],
-      [goals, gains, gains, gains, gains, gains, direc],
-      [blank, gains, blank, blank, blank, blank, gains],
-      [blank, gains, gains, gains, gains, gains, gains],
+      [start, direc, gains, gains, gains, gains, blank, blank, blank, blank],
+      [blank, gains, blank, blank, blank, gains, blank, blank, blank, blank],
+      [blank, gains, gains, gains, gains, gains, gains, blank, blank, blank],
+      [blank, blank, blank, blank, blank, blank, gains, blank, blank, blank],
+      [goals, gains, gains, gains, gains, gains, direc, blank, blank, blank],
+      [blank, gains, blank, blank, blank, blank, gains, blank, blank, blank],
+      [blank, gains, gains, gains, gains, gains, gains, blank, blank, blank],
+      [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
+      [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
+      [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
     ];
   }
 

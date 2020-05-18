@@ -30,28 +30,35 @@ class LifeRoad extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-        width: 1050,
-        height: 700,
-        child: LayoutBuilder(
-          builder: (context, constraints) => Table(
+  Widget build(BuildContext context) {
+    final screen = MediaQuery.of(context).size;
+    const desktop = Size(1440, 1020);
+    final lifeStepSize = Size(
+      screen.width >= desktop.width ? 150 : 130,
+      100,
+    );
+
+    return SizedBox(
+      width: lifeStepSize.width * _model.width,
+      height: lifeStepSize.height * _model.height,
+      child: Table(
+        children: List.generate(
+          _model.height,
+          (y) => TableRow(
             children: List.generate(
-              _model.height,
-              (y) => TableRow(
-                children: List.generate(
-                  _model.width,
-                  (x) => TableCell(
-                    child: LifeStep(
-                      _model.lifeStepsOnBoard[y][x],
-                      constraints.maxWidth / _model.width,
-                      constraints.maxHeight / _model.height,
-                      humans: _putTargetHumans(x, y),
-                    ),
-                  ),
+              _model.width,
+              (x) => TableCell(
+                child: LifeStep(
+                  _model.lifeStepsOnBoard[y][x],
+                  lifeStepSize.width,
+                  lifeStepSize.height,
+                  humans: _putTargetHumans(x, y),
                 ),
               ),
             ),
           ),
         ),
-      );
+      ),
+    );
+  }
 }
