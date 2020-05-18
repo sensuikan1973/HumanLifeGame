@@ -6,10 +6,15 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [
+    "headers": [
       {
-        "source": "**",
-        "destination": "/index.html"
+        "source": "/__/firebase/init.json",
+        "headers": [
+          {
+            "key" : "Access-Control-Allow-Origin",
+            "value" : "http://localhost:8686"
+          }
+        ]
       }
     ]
   }
