@@ -15,7 +15,7 @@ class Router {
   final String initialRoute = '/';
 
   final Map<String, WidgetBuilder> routes = {
-//    '/': (context) => const SignIn(),
+//    '/': (context) => SignIn(),
     '/': (context) => MultiProvider(
           providers: [
             ChangeNotifierProvider(
