@@ -6,7 +6,9 @@ import 'life_step.dart';
 
 class LifeRoad extends StatelessWidget {
   LifeRoad(
-    this._model, {
+    this._model,
+    this._width,
+    this._height, {
     List<Human> humans,
     Map<String, Position> positionsByHumanId,
     Key key,
@@ -19,6 +21,9 @@ class LifeRoad extends StatelessWidget {
   final List<Human> _humans;
   final Map<String, Position> _positionsByHumanId;
 
+  final double _width;
+  final double _height;
+
   // LifeStep の上に載せる対象の Human を取得する
   List<Human> _putTargetHumans(int x, int y) {
     final list = <Human>[];
@@ -30,35 +35,26 @@ class LifeRoad extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final screen = MediaQuery.of(context).size;
-    const desktop = Size(1440, 1020);
-    final lifeStepSize = Size(
-      screen.width >= desktop.width ? 150 : 130,
-      100,
-    );
-
-    return SizedBox(
-      width: lifeStepSize.width * _model.width,
-      height: lifeStepSize.height * _model.height,
-      child: Table(
-        children: List.generate(
-          _model.height,
-          (y) => TableRow(
-            children: List.generate(
-              _model.width,
-              (x) => TableCell(
-                child: LifeStep(
-                  _model.lifeStepsOnBoard[y][x],
-                  lifeStepSize.width,
-                  lifeStepSize.height,
-                  humans: _putTargetHumans(x, y),
+  Widget build(BuildContext context) => SizedBox(
+        width: _width,
+        height: _height,
+        child: Table(
+          children: List.generate(
+            _model.height,
+            (y) => TableRow(
+              children: List.generate(
+                _model.width,
+                (x) => TableCell(
+                  child: LifeStep(
+                    _model.lifeStepsOnBoard[y][x],
+                    _width / _model.width,
+                    _height / _model.height,
+                    humans: _putTargetHumans(x, y),
+                  ),
                 ),
               ),
             ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }
