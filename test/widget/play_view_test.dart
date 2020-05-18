@@ -42,14 +42,13 @@ Future<void> main() async {
     const windowWidth = 1440.0;
     const windowHeight = 1024.0;
     const size = Size(windowWidth, windowHeight);
-    WidgetsBinding.instance.renderView.configuration = TestViewConfiguration(size: size);
     final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
 
     await tester.pumpWidget(
-      MediaQuery(
-        data: const MediaQueryData(size: size),
-        child: testableApp(
-          home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const PlayView()),
+      testableApp(
+        home: ChangeNotifierProvider(
+          create: (_) => playRoomModel,
+          child: const MediaQuery(data: MediaQueryData(size: size), child: PlayView()),
         ),
       ),
     );
@@ -60,14 +59,16 @@ Future<void> main() async {
     const windowWidth = 1050.0;
     const windowHeight = 750.0;
     const size = Size(windowWidth, windowHeight);
-    WidgetsBinding.instance.renderView.configuration = TestViewConfiguration(size: size);
     final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
 
     await tester.pumpWidget(
-      MediaQuery(
-        data: const MediaQueryData(size: size),
-        child: testableApp(
-          home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const PlayView()),
+      testableApp(
+        home: ChangeNotifierProvider(
+          create: (_) => playRoomModel,
+          child: const MediaQuery(
+            data: MediaQueryData(size: size),
+            child: PlayView(),
+          ),
         ),
       ),
     );
