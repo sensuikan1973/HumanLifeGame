@@ -6,9 +6,7 @@ import '../common/human.dart';
 import '../common/life_road.dart';
 
 class PlayView extends StatelessWidget {
-  const PlayView({
-    Key key,
-  }) : super(key: key);
+  const PlayView({Key key}) : super(key: key);
 
   /// 手番順に基づく色
   List<Color> get _orderedColors => [Colors.red, Colors.blue, Colors.green, Colors.yellow];
