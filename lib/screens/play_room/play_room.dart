@@ -20,11 +20,11 @@ class PlayRoom extends StatelessWidget {
       WidgetsBinding.instance.addPostFrameCallback((_) async => _showResult(context));
     }
     return Scaffold(
-      body: screen.width >= _desktop.width ? largeScreen() : middleScreen(),
+      body: screen.width >= _desktop.width ? _largeScreen() : _middleScreen(),
     );
   }
 
-  Row largeScreen() => Row(
+  Row _largeScreen() => Row(
         children: <Widget>[
           Column(
             children: const <Widget>[
@@ -54,7 +54,7 @@ class PlayRoom extends StatelessWidget {
         ],
       );
 
-  Column middleScreen() => Column(
+  Column _middleScreen() => Column(
         children: <Widget>[
           const Announcement(),
           const LifeEventRecords(),
