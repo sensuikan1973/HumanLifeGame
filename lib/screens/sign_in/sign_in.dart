@@ -8,7 +8,7 @@ class SignIn extends StatelessWidget {
   final _auth = FirebaseAuth.instance;
   final _uid = ValueNotifier<String>(' ');
 
-  Future<void> signIn() async {
+  Future<void> _signIn() async {
     var user = await _auth.currentUser();
     if (user == null) {
       final result = await _auth.signInAnonymously();
@@ -17,7 +17,7 @@ class SignIn extends StatelessWidget {
     _uid.value = user.uid;
   }
 
-  Future<void> signOut() async {
+  Future<void> _signOut() async {
     await _auth.signOut();
     final user = await _auth.currentUser();
     _uid.value = user?.uid ?? ' ';
@@ -27,7 +27,7 @@ class SignIn extends StatelessWidget {
   Widget build(BuildContext context) => Column(
         children: [
           FlatButton(
-            onPressed: signIn,
+            onPressed: _signIn,
             color: Colors.blueGrey,
             child: const Text('Sign in Anonymously'),
           ),
@@ -37,7 +37,7 @@ class SignIn extends StatelessWidget {
           ),
           const Divider(thickness: 2),
           FlatButton(
-            onPressed: signOut,
+            onPressed: _signOut,
             color: Colors.red,
             child: const Text('Sign out'),
           ),
