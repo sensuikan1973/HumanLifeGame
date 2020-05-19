@@ -12,7 +12,7 @@ import 'player_action.dart';
 
 class PlayRoom extends StatelessWidget {
   const PlayRoom({Key key}) : super(key: key);
-  Size get _desktop => const Size(1440, 1020); // FIXME: 最終的には、左側のビューと右側のビューの最小サイズをトリガとして切り替える
+  Size get _desktop => const Size(1440, 1024); // FIXME: 最終的には、左側のビューと右側のビューの最小サイズをトリガとして切り替える
   @override
   Widget build(BuildContext context) {
     final screen = MediaQuery.of(context).size;
