@@ -9,9 +9,7 @@ class DiceResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Card(
-        child: SizedBox(
-          width: 300,
-          height: 100,
+        child: Center(
           child: Text(
             context.select<PlayerActionNotifier, int>((model) => model.roll).toString(),
             key: const Key('diceResultText'),

@@ -11,11 +11,7 @@ class LifeStages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Card(
-        child: SizedBox(
-          width: 300,
-          height: 500,
-          child: _lifeStages(context),
-        ),
+        child: _lifeStages(context),
       );
 
   Column _lifeStages(BuildContext context) {

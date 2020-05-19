@@ -33,12 +33,23 @@ class PlayRoom extends StatelessWidget {
               PlayView(),
             ],
           ),
-          Column(
-            children: const <Widget>[
-              LifeStages(),
-              DiceResult(),
-              PlayerAction(),
-            ],
+          Expanded(
+            child: Column(
+              children: const <Widget>[
+                SizedBox(
+                  height: 500,
+                  child: LifeStages(),
+                ),
+                SizedBox(
+                  height: 100,
+                  child: DiceResult(),
+                ),
+                SizedBox(
+                  height: 300,
+                  child: PlayerAction(),
+                ),
+              ],
+            ),
           ),
         ],
       );
@@ -51,14 +62,32 @@ class PlayRoom extends StatelessWidget {
             children: <Widget>[
               const PlayView(),
               Positioned(
-                top: 0,
                 right: 0,
-                child: Column(
-                  children: const <Widget>[
-                    LifeStages(),
-                    DiceResult(),
-                    PlayerAction(),
-                  ],
+                child: SizedBox(
+                  height: 750,
+                  child: Column(
+                    children: const <Widget>[
+                      Expanded(
+                        flex: 2,
+                        child: SizedBox(
+                          width: 200,
+                          child: LifeStages(),
+                        ),
+                      ),
+                      Expanded(
+                        child: SizedBox(
+                          width: 200,
+                          child: DiceResult(),
+                        ),
+                      ),
+                      Expanded(
+                        child: SizedBox(
+                          width: 200,
+                          child: PlayerAction(),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
