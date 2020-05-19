@@ -12,14 +12,19 @@ import 'player_action.dart';
 
 class PlayRoom extends StatelessWidget {
   const PlayRoom({Key key}) : super(key: key);
-
+  Size get _desktop => const Size(1440, 1024); // FIXME: 最終的には、左側のビューと右側のビューの最小サイズをトリガとして切り替える
   @override
   Widget build(BuildContext context) {
+    final screen = MediaQuery.of(context).size;
     if (context.select<PlayRoomNotifier, bool>((model) => model.allHumansReachedTheGoal)) {
       WidgetsBinding.instance.addPostFrameCallback((_) async => _showResult(context));
     }
     return Scaffold(
-      body: Row(
+      body: screen.width >= _desktop.width ? _largeScreen() : _middleScreen(),
+    );
+  }
+
+  Row _largeScreen() => Row(
         children: <Widget>[
           Column(
             children: const <Widget>[
@@ -28,17 +33,67 @@ class PlayRoom extends StatelessWidget {
               PlayView(),
             ],
           ),
-          Column(
-            children: const <Widget>[
-              LifeStages(),
-              DiceResult(),
-              PlayerAction(),
+          Expanded(
+            child: Column(
+              children: const <Widget>[
+                SizedBox(
+                  height: 500,
+                  child: LifeStages(),
+                ),
+                SizedBox(
+                  height: 100,
+                  child: DiceResult(),
+                ),
+                SizedBox(
+                  height: 300,
+                  child: PlayerAction(),
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+
+  Column _middleScreen() => Column(
+        children: <Widget>[
+          const Announcement(),
+          const LifeEventRecords(),
+          Stack(
+            children: <Widget>[
+              const PlayView(),
+              Positioned(
+                right: 0,
+                child: SizedBox(
+                  height: 750,
+                  child: Column(
+                    children: const <Widget>[
+                      Expanded(
+                        flex: 2,
+                        child: SizedBox(
+                          width: 200,
+                          child: LifeStages(),
+                        ),
+                      ),
+                      Expanded(
+                        child: SizedBox(
+                          width: 200,
+                          child: DiceResult(),
+                        ),
+                      ),
+                      Expanded(
+                        child: SizedBox(
+                          width: 200,
+                          child: PlayerAction(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ],
-      ),
-    );
-  }
+      );
 
   Future<void> _showResult(BuildContext context) async {
     final lifeStages = context.read<PlayRoomNotifier>().lifeStages;

@@ -10,7 +10,7 @@ class PlayView extends StatelessWidget {
 
   /// 手番順に基づく色
   List<Color> get _orderedColors => [Colors.red, Colors.blue, Colors.green, Colors.yellow];
-  Size get _desktop => const Size(1440, 1020);
+  Size get _desktop => const Size(1440, 1024);
 
   @override
   Widget build(BuildContext context) {
