@@ -3,6 +3,8 @@ import 'package:HumanLifeGame/screens/play_room/play_room.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../mocks/auth.dart';
+
 void main() {
   // Desktopの標準サイズ 1440x1024に設定
   const windowWidth = 1440.0;
@@ -13,7 +15,7 @@ void main() {
     WidgetsBinding.instance.renderView.configuration = TestViewConfiguration(size: size);
   });
   testWidgets('show PlayRoom', (tester) async {
-    await tester.pumpWidget(const HumanLifeGameApp());
+    await tester.pumpWidget(HumanLifeGameApp.inProviders(auth: MockAuth()));
     await tester.pump();
     expect(find.byType(PlayRoom), findsOneWidget);
   });
