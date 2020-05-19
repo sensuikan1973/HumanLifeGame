@@ -11,9 +11,7 @@ class PlayerAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Card(
-        child: Container(
-          width: 300,
-          height: 300,
+        child: Center(
           child: <Widget>[
             if (context.select<PlayRoomNotifier, bool>((value) => value.requireSelectDirection))
               _directionSelectButton(context),
