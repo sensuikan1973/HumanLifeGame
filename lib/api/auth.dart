@@ -22,7 +22,7 @@ class Auth {
   }
 
   /// 現在ログインしてるユーザ
-  /// オブザーバを使うことで、非ログイン状態のハンドリングを使用しやすくする
+  /// オブザーバを使うことで、非ログイン状態のハンドリングをしやすくする
   /// See: https://firebase.google.com/docs/auth/web/manage-users
   Stream<UserModel> get currentUser => _auth.onAuthStateChanged.asyncMap(_toUserModel);
 
