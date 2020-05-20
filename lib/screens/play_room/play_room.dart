@@ -33,6 +33,7 @@ class _PlayRoomState extends State<PlayRoom> {
     final screen = MediaQuery.of(context).size;
     if (context.select<PlayRoomNotifier, bool>((model) => model.allHumansReachedTheGoal)) {
       if (!isDisplayedResult) {
+        isDisplayedResult = true;
         WidgetsBinding.instance.addPostFrameCallback((_) async => _showResult(context));
       }
     }
@@ -124,7 +125,6 @@ class _PlayRoomState extends State<PlayRoom> {
           ],
         ),
     ];
-    isDisplayedResult = true;
     await showDialog<void>(
       context: context,
       builder: (context) => SimpleDialog(
