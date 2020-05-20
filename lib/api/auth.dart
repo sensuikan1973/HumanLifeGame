@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 import '../models/common/user.dart';
 
 // FIXME: エラーハンドリングの実装
 // See: https://firebase.google.com/docs/reference/android/com/google/firebase/auth/FirebaseAuth
+@immutable
 class Auth {
   final _auth = FirebaseAuth.instance;
 
