@@ -15,10 +15,10 @@ import 'screens/sign_in/sign_in.dart';
 @immutable
 class Router {
   final String initial = '/';
-  final String signIn = '/sign_in';
+  final String signUp = '/sign_up';
 
   Map<String, WidgetBuilder> get routes => {
-        signIn: (context) => SignIn(),
+        signUp: (context) => SignUp(),
         // FIXME: PlayRoom が initial なのは今だけ
         initial: (context) => MultiProvider(
               providers: [

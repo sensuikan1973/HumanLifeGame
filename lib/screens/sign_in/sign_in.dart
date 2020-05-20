@@ -5,8 +5,8 @@ import '../../api/auth.dart';
 
 // FIXME: 仮実装
 @immutable
-class SignIn extends StatelessWidget {
-  SignIn({Key key}) : super(key: key);
+class SignUp extends StatelessWidget {
+  SignUp({Key key}) : super(key: key);
 
   final _uid = ValueNotifier<String>(' ');
 
