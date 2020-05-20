@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../api/auth.dart';
 
 // FIXME: 仮実装
+@immutable
 class SignIn extends StatelessWidget {
   SignIn({Key key}) : super(key: key);
 

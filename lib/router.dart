@@ -12,6 +12,7 @@ import 'models/play_room/player_action.dart';
 import 'screens/play_room/play_room.dart';
 import 'screens/sign_in/sign_in.dart';
 
+@immutable
 class Router {
   final String initial = '/';
   final String signIn = '/sign_in';
