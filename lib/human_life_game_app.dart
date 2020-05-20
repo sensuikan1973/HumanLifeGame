@@ -14,12 +14,12 @@ import 'router.dart';
 class HumanLifeGameApp extends StatelessWidget {
   const HumanLifeGameApp._();
 
-  static Widget inProviders({Key key, Auth auth}) => MultiProvider(
+  static Widget inProviders({Key key, Auth auth, Dice dice}) => MultiProvider(
         key: key,
         providers: [
           Provider(create: (_) => Router()),
           Provider(create: (_) => auth ?? Auth()),
-          Provider(create: (_) => const Dice()),
+          Provider(create: (_) => dice ?? const Dice()),
           Provider(create: (_) => Infra(HumanLifeRepository(), PlayRoomRepository()))
         ],
         child: const HumanLifeGameApp._(),
