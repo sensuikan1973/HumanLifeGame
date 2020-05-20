@@ -29,43 +29,43 @@ class PlayView extends StatelessWidget {
     return SizedBox(
       width: 1050,
       height: 750,
-      child: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: lifeStepSize.height * model.humanLife.lifeRoad.height,
-              child: CustomScrollView(
-                scrollDirection: Axis.horizontal,
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: _playView(model, lifeRoadSize),
-                  ),
-                ],
+      child: Card(
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: lifeStepSize.height * model.humanLife.lifeRoad.height,
+                child: CustomScrollView(
+                  scrollDirection: Axis.horizontal,
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: _playView(model, lifeRoadSize),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
-  Card _playView(PlayRoomNotifier model, Size size) => Card(
-        child: DecoratedBox(
-          decoration: const BoxDecoration(color: Colors.white),
-          child: Center(
-            child: LifeRoad(
-              model.humanLife.lifeRoad,
-              size.width,
-              size.height,
-              humans: [
-                for (var i = 0; i < model.orderedHumans.length; ++i)
-                  Human(
-                    model.orderedHumans[i],
-                    _orderedColors[i],
-                  ),
-              ],
-              positionsByHumanId: model.positionsByHumanId,
-            ),
+  DecoratedBox _playView(PlayRoomNotifier model, Size size) => DecoratedBox(
+        decoration: const BoxDecoration(color: Colors.white),
+        child: Center(
+          child: LifeRoad(
+            model.humanLife.lifeRoad,
+            size.width,
+            size.height,
+            humans: [
+              for (var i = 0; i < model.orderedHumans.length; ++i)
+                Human(
+                  model.orderedHumans[i],
+                  _orderedColors[i],
+                ),
+            ],
+            positionsByHumanId: model.positionsByHumanId,
           ),
         ),
       );
