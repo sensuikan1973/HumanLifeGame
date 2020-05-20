@@ -26,10 +26,10 @@ class PlayView extends StatelessWidget {
       lifeStepSize.height * model.humanLife.lifeRoad.height,
     );
 
-    return SizedBox(
-      width: 1050,
-      height: 750,
-      child: Card(
+    return Card(
+      child: SizedBox(
+        width: 1050,
+        height: 750,
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
