@@ -40,7 +40,7 @@ class HumanLifeGameApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        initialRoute: context.watch<Router>().initialRoute,
+        initialRoute: context.watch<Router>().initial,
         routes: context.watch<Router>().routes,
       );
 }
