@@ -11,24 +11,24 @@ class Auth {
   /// See: https://firebase.google.com/docs/auth/web/anonymous-auth
   Future<UserModel> signInAnonymously() async {
     final result = await _auth.signInAnonymously();
-    return _toUserModel(result.user);
+    return _toModel(result.user);
   }
 
   /// メールリンク認証
   /// See: https://firebase.google.com/docs/auth/web/email-link-auth
   Future<UserModel> signInWithEmailAndLink({String email, String link}) async {
     final result = await _auth.signInWithEmailAndLink(email: email, link: link);
-    return _toUserModel(result.user);
+    return _toModel(result.user);
   }
 
   /// 現在ログインしてるユーザ
   /// オブザーバを使うことで、非ログイン状態のハンドリングをしやすくする
   /// See: https://firebase.google.com/docs/auth/web/manage-users
-  Stream<UserModel> get currentUser => _auth.onAuthStateChanged.asyncMap(_toUserModel);
+  Stream<UserModel> get currentUser => _auth.onAuthStateChanged.asyncMap(_toModel);
 
   Future<void> signOut() async => _auth.signOut();
 
-  UserModel _toUserModel(FirebaseUser user) => UserModel(
+  UserModel _toModel(FirebaseUser user) => UserModel(
         id: user.uid,
         name: user.displayName,
         // TODO: 他に必要な属性が無いか検討
