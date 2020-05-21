@@ -10,15 +10,15 @@ class PlayView extends StatelessWidget {
 
   /// 手番順に基づく色
   List<Color> get _orderedColors => [Colors.red, Colors.blue, Colors.green, Colors.yellow];
-  Size get _desktop => const Size(1440, 1024);
+  Size get _desktopSize => const Size(1440, 1024);
 
   @override
   Widget build(BuildContext context) {
-    final screen = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.of(context).size;
     final model = context.watch<PlayRoomNotifier>();
 
     final lifeStepSize = Size(
-      screen.width >= _desktop.width ? 150 : 130,
+      screenSize.width >= _desktopSize.width ? 150 : 130,
       100,
     );
     final lifeRoadSize = Size(

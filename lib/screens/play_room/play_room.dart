@@ -20,16 +20,16 @@ class PlayRoom extends StatefulWidget {
 class PlayRoomState extends State<PlayRoom> {
   bool isDisplayedResult = false;
 
-  Size get _desktop => const Size(1440, 1024); // FIXME: 最終的には、左側のビューと右側のビューの最小サイズをトリガとして切り替える
-  Size get _announcement => const Size(1050, 50);
-  Size get _lifeEventRecords => const Size(1050, 50);
-  Size get _playView => const Size(1050, 750);
-  Size get _lifeStages => const Size(200, 500);
-  Size get _diceResult => const Size(200, 100);
-  Size get _playerAction => const Size(200, 300);
+  Size get _desktopSize => const Size(1440, 1024); // FIXME: 最終的には、左側のビューと右側のビューの最小サイズをトリガとして切り替える
+  Size get _announcementSize => const Size(1050, 50);
+  Size get _lifeEventRecordsSize => const Size(1050, 50);
+  Size get _playViewSize => const Size(1050, 750);
+  Size get _lifeStagesSize => const Size(200, 500);
+  Size get _diceResultSize => const Size(200, 100);
+  Size get _playerActionSize => const Size(200, 300);
   @override
   Widget build(BuildContext context) {
-    final screen = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.of(context).size;
     if (context.select<PlayRoomNotifier, bool>((model) => model.allHumansReachedTheGoal)) {
       if (!isDisplayedResult) {
         isDisplayedResult = true;
@@ -37,41 +37,43 @@ class PlayRoomState extends State<PlayRoom> {
       }
     }
     return Scaffold(
-      body: screen.width >= _desktop.width ? _largeScreen(screen) : _middleScreen(screen),
+      body: screenSize.width >= _desktopSize.width ? _largeScreen(screenSize) : _middleScreen(screenSize),
     );
   }
 
-  Row _largeScreen(Size screen) {
-    final playView = Size(
-      _playView.width,
-      screen.height < _playView.height + _announcement.height ? screen.height - _announcement.height : _playView.height,
+  Row _largeScreen(Size screenSize) {
+    final playViewSize = Size(
+      _playViewSize.width,
+      screenSize.height < _playViewSize.height + _announcementSize.height
+          ? screenSize.height - _announcementSize.height
+          : _playViewSize.height,
     );
     return Row(
       children: <Widget>[
         Column(
           children: <Widget>[
             SizedBox(
-              width: _announcement.width,
-              height: _announcement.height,
+              width: _announcementSize.width,
+              height: _announcementSize.height,
               child: const Announcement(),
             ),
-            if (screen.height > _announcement.height + _lifeEventRecords.height + _playView.height)
+            if (screenSize.height > _announcementSize.height + _lifeEventRecordsSize.height + _playViewSize.height)
               Expanded(
                 child: SizedBox(
-                  width: _lifeEventRecords.width,
+                  width: _lifeEventRecordsSize.width,
                   child: const LifeEventRecords(),
                 ),
               ),
             SizedBox(
-              width: playView.width,
-              height: playView.height,
+              width: playViewSize.width,
+              height: playViewSize.height,
               child: const PlayView(),
             ),
           ],
         ),
         Expanded(
           child: SizedBox(
-            height: screen.height,
+            height: screenSize.height,
             child: Column(
               children: const <Widget>[
                 Expanded(
@@ -98,54 +100,56 @@ class PlayRoomState extends State<PlayRoom> {
     );
   }
 
-  Column _middleScreen(Size screen) {
-    final playView = Size(
-      screen.width < _playView.width ? screen.width : _playView.width,
-      screen.height < _playView.height + _announcement.height ? screen.height - _announcement.height : _playView.height,
+  Column _middleScreen(Size screenSize) {
+    final playViewSize = Size(
+      screenSize.width < _playViewSize.width ? screenSize.width : _playViewSize.width,
+      screenSize.height < _playViewSize.height + _announcementSize.height
+          ? screenSize.height - _announcementSize.height
+          : _playViewSize.height,
     );
     return Column(
       children: <Widget>[
         SizedBox(
-          width: screen.width < _announcement.width ? screen.width : _announcement.width,
-          height: _announcement.height,
+          width: screenSize.width < _announcementSize.width ? screenSize.width : _announcementSize.width,
+          height: _announcementSize.height,
           child: const Announcement(),
         ),
-        if (screen.height > _announcement.height + _lifeEventRecords.height + _playView.height)
+        if (screenSize.height > _announcementSize.height + _lifeEventRecordsSize.height + _playViewSize.height)
           Expanded(
             child: SizedBox(
-              width: screen.width < _lifeEventRecords.width ? screen.width : _lifeEventRecords.width,
+              width: screenSize.width < _lifeEventRecordsSize.width ? screenSize.width : _lifeEventRecordsSize.width,
               child: const LifeEventRecords(),
             ),
           ),
         Stack(
           children: <Widget>[
             SizedBox(
-              width: playView.width,
-              height: playView.height,
+              width: playViewSize.width,
+              height: playViewSize.height,
               child: const PlayView(),
             ),
             Positioned(
               right: 0,
               child: SizedBox(
-                height: playView.height,
+                height: playViewSize.height,
                 child: Column(
                   children: <Widget>[
                     Expanded(
                       flex: 2,
                       child: SizedBox(
-                        width: _lifeStages.width,
+                        width: _lifeStagesSize.width,
                         child: const LifeStages(),
                       ),
                     ),
                     Expanded(
                       child: SizedBox(
-                        width: _diceResult.width,
+                        width: _diceResultSize.width,
                         child: const DiceResult(),
                       ),
                     ),
                     Expanded(
                       child: SizedBox(
-                        width: _playerAction.width,
+                        width: _playerActionSize.width,
                         child: const PlayerAction(),
                       ),
                     ),
