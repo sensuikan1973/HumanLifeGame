@@ -27,26 +27,22 @@ class PlayView extends StatelessWidget {
     );
 
     return Card(
-      child: SizedBox(
-        width: 1050,
-        height: 750,
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: lifeStepSize.height * model.humanLife.lifeRoad.height,
-                child: CustomScrollView(
-                  scrollDirection: Axis.horizontal,
-                  slivers: [
-                    SliverToBoxAdapter(
-                      child: _playView(model, lifeRoadSize),
-                    ),
-                  ],
-                ),
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: lifeStepSize.height * model.humanLife.lifeRoad.height,
+              child: CustomScrollView(
+                scrollDirection: Axis.horizontal,
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: _playView(model, lifeRoadSize),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

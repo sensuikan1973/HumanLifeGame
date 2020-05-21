@@ -13,6 +13,11 @@ import 'player_action.dart';
 class PlayRoom extends StatelessWidget {
   const PlayRoom({Key key}) : super(key: key);
   Size get _desktop => const Size(1440, 1024); // FIXME: 最終的には、左側のビューと右側のビューの最小サイズをトリガとして切り替える
+
+  Size get _announcement => const Size(1050, 50);
+  Size get _lifeEventRecords => const Size(1050, 50);
+  Size get _playView => const Size(1050, 750);
+
   @override
   Widget build(BuildContext context) {
     final screen = MediaQuery.of(context).size;
@@ -20,17 +25,31 @@ class PlayRoom extends StatelessWidget {
       WidgetsBinding.instance.addPostFrameCallback((_) async => _showResult(context));
     }
     return Scaffold(
-      body: screen.width >= _desktop.width ? _largeScreen() : _middleScreen(),
+      body: screen.width >= _desktop.width ? _largeScreen(screen) : _middleScreen(screen),
     );
   }
 
-  Row _largeScreen() => Row(
+  Row _largeScreen(Size screen) => Row(
         children: <Widget>[
           Column(
-            children: const <Widget>[
-              Announcement(),
-              LifeEventRecords(),
-              PlayView(),
+            children: <Widget>[
+              SizedBox(
+                width: _announcement.width,
+                height: _announcement.height,
+                child: const Announcement(),
+              ),
+              if (screen.height > _announcement.height + _lifeEventRecords.height + _playView.height)
+                Expanded(
+                  child: SizedBox(
+                    width: _lifeEventRecords.width,
+                    child: const LifeEventRecords(),
+                  ),
+                ),
+              SizedBox(
+                width: _playView.width,
+                height: _playView.height,
+                child: const PlayView(),
+              ),
             ],
           ),
           Expanded(
@@ -54,13 +73,27 @@ class PlayRoom extends StatelessWidget {
         ],
       );
 
-  Column _middleScreen() => Column(
+  Column _middleScreen(Size screen) => Column(
         children: <Widget>[
-          const Announcement(),
-          const LifeEventRecords(),
+          SizedBox(
+            width: screen.width < _announcement.width ? screen.width : _announcement.width,
+            height: _announcement.height,
+            child: const Announcement(),
+          ),
+          if (screen.height > _announcement.height + _lifeEventRecords.height + _playView.height)
+            Expanded(
+              child: SizedBox(
+                width: screen.width < _lifeEventRecords.width ? screen.width : _lifeEventRecords.width,
+                child: const LifeEventRecords(),
+              ),
+            ),
           Stack(
             children: <Widget>[
-              const PlayView(),
+              SizedBox(
+                width: screen.width < _playView.width ? screen.width : _playView.width,
+                height: _playView.height,
+                child: const PlayView(),
+              ),
               Positioned(
                 right: 0,
                 child: SizedBox(
