@@ -14,10 +14,10 @@ class PlayRoom extends StatefulWidget {
   const PlayRoom({Key key}) : super(key: key);
 
   @override
-  _PlayRoomState createState() => _PlayRoomState();
+  PlayRoomState createState() => PlayRoomState();
 }
 
-class _PlayRoomState extends State<PlayRoom> {
+class PlayRoomState extends State<PlayRoom> {
   bool isDisplayedResult;
 
   Size get _desktop => const Size(1440, 1024);
