@@ -142,14 +142,47 @@ Future<void> main() async {
     await tester.pumpAndSettle();
     expect(find.text(i18n.resultAnnouncementDialogMessage), findsOneWidget);
   });
+
+  testWidgets('not show dialog after rebuilt', (tester) async {
+    final dice = MockDice();
+    const roll = 6;
+    when(dice.roll()).thenReturn(roll);
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+
+    await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
+    await tester.pump();
+
+    final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
+    await tester.tap(rollDiceButton);
+    await tester.pump();
+
+    // ゲームが終了し、タイアログが表示される
+    await tester.tap(rollDiceButton);
+    await tester.pumpAndSettle();
+    expect(find.text(i18n.resultAnnouncementDialogMessage), findsOneWidget);
+
+    // 画面タップで、タイアログが消える
+    // (10, 10)は、画面上の適当な座標
+    await tester.tapAt(const Offset(10, 10));
+    await tester.pumpAndSettle();
+    expect(find.text(i18n.resultAnnouncementDialogMessage), findsNothing);
+
+    // 画面サイズを変更しリビルドされても、タイアログが再表示されない
+    const windowWidth = 1000.0;
+    const windowHeight = 1024.0;
+    const size = Size(windowWidth, windowHeight);
+    await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel, size: size));
+    await tester.pumpAndSettle();
+    expect(find.text(i18n.resultAnnouncementDialogMessage), findsNothing);
+  });
 }
 
 class _TestablePlayRoom extends StatelessWidget {
-  const _TestablePlayRoom(this.dice, this.playRoomModel);
+  const _TestablePlayRoom(this.dice, this.playRoomModel, {Size size}) : _size = size ?? const Size(1440, 1024);
 
   final Dice dice;
   final PlayRoomNotifier playRoomModel;
-
+  final Size _size;
   @override
   Widget build(BuildContext context) => testableApp(
         home: MultiProvider(
@@ -164,7 +197,7 @@ class _TestablePlayRoom extends StatelessWidget {
                   playRoomNotifier..update(playerActionNotifier),
             )
           ],
-          child: const PlayRoom(),
+          child: MediaQuery(data: MediaQueryData(size: _size), child: const PlayRoom()),
         ),
       );
 }
