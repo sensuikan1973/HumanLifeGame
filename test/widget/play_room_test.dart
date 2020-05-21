@@ -162,6 +162,7 @@ Future<void> main() async {
     expect(find.text(i18n.resultAnnouncementDialogMessage), findsOneWidget);
 
     // 画面タップで、タイアログが消える
+    // (10, 10)は、画面上の適当な座標
     await tester.tapAt(const Offset(10, 10));
     await tester.pumpAndSettle();
     expect(find.text(i18n.resultAnnouncementDialogMessage), findsNothing);
