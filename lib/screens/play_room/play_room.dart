@@ -18,15 +18,9 @@ class PlayRoom extends StatefulWidget {
 }
 
 class PlayRoomState extends State<PlayRoom> {
-  bool isDisplayedResult;
+  bool isDisplayedResult = false;
 
   Size get _desktop => const Size(1440, 1024);
-
-  @override
-  void initState() {
-    super.initState();
-    isDisplayedResult = false;
-  }
 
   @override
   Widget build(BuildContext context) {
