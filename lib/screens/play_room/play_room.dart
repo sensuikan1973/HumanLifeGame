@@ -20,14 +20,16 @@ class PlayRoom extends StatefulWidget {
 class PlayRoomState extends State<PlayRoom> {
   bool isDisplayedResult = false;
 
-  Size get _desktop => const Size(1440, 1024); // FIXME: 最終的には、左側のビューと右側のビューの最小サイズをトリガとして切り替える
-  Size get _announcement => const Size(1050, 50);
-  Size get _lifeEventRecords => const Size(1050, 50);
-  Size get _playView => const Size(1050, 750);
-
+  Size get _desktopSize => const Size(1440, 1024); // FIXME: 最終的には、左側のビューと右側のビューの最小サイズをトリガとして切り替える
+  Size get _announcementSize => const Size(1050, 50);
+  Size get _lifeEventRecordsSize => const Size(1050, 50);
+  Size get _playViewSize => const Size(1050, 750);
+  Size get _lifeStagesSize => const Size(200, 500);
+  Size get _diceResultSize => const Size(200, 100);
+  Size get _playerActionSize => const Size(200, 300);
   @override
   Widget build(BuildContext context) {
-    final screen = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.of(context).size;
     if (context.select<PlayRoomNotifier, bool>((model) => model.allHumansReachedTheGoal)) {
       if (!isDisplayedResult) {
         isDisplayedResult = true;
@@ -35,108 +37,131 @@ class PlayRoomState extends State<PlayRoom> {
       }
     }
     return Scaffold(
-      body: screen.width >= _desktop.width ? _largeScreen(screen) : _middleScreen(screen),
+      body: screenSize.width >= _desktopSize.width ? _largeScreen(screenSize) : _middleScreen(screenSize),
     );
   }
 
-  Row _largeScreen(Size screen) => Row(
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              SizedBox(
-                width: _announcement.width,
-                height: _announcement.height,
-                child: const Announcement(),
-              ),
-              if (screen.height > _announcement.height + _lifeEventRecords.height + _playView.height)
-                Expanded(
-                  child: SizedBox(
-                    width: _lifeEventRecords.width,
-                    child: const LifeEventRecords(),
-                  ),
+  Row _largeScreen(Size screenSize) {
+    final playViewSize = Size(
+      _playViewSize.width,
+      screenSize.height < _playViewSize.height + _announcementSize.height
+          ? screenSize.height - _announcementSize.height
+          : _playViewSize.height,
+    );
+    return Row(
+      children: <Widget>[
+        Column(
+          children: <Widget>[
+            SizedBox(
+              width: _announcementSize.width,
+              height: _announcementSize.height,
+              child: const Announcement(),
+            ),
+            if (screenSize.height > _announcementSize.height + _lifeEventRecordsSize.height + _playViewSize.height)
+              Expanded(
+                child: SizedBox(
+                  width: _lifeEventRecordsSize.width,
+                  child: const LifeEventRecords(),
                 ),
-              SizedBox(
-                width: _playView.width,
-                height: _playView.height,
-                child: const PlayView(),
               ),
-            ],
-          ),
-          Expanded(
+            SizedBox(
+              width: playViewSize.width,
+              height: playViewSize.height,
+              child: const PlayView(),
+            ),
+          ],
+        ),
+        Expanded(
+          child: SizedBox(
+            height: screenSize.height,
             child: Column(
               children: const <Widget>[
-                SizedBox(
-                  height: 500,
-                  child: LifeStages(),
+                Expanded(
+                  flex: 2,
+                  child: SizedBox(
+                    child: LifeStages(),
+                  ),
                 ),
-                SizedBox(
-                  height: 100,
-                  child: DiceResult(),
+                Expanded(
+                  child: SizedBox(
+                    child: DiceResult(),
+                  ),
                 ),
-                SizedBox(
-                  height: 300,
-                  child: PlayerAction(),
+                Expanded(
+                  child: SizedBox(
+                    child: PlayerAction(),
+                  ),
                 ),
               ],
             ),
           ),
-        ],
-      );
+        ),
+      ],
+    );
+  }
 
-  Column _middleScreen(Size screen) => Column(
-        children: <Widget>[
-          SizedBox(
-            width: screen.width < _announcement.width ? screen.width : _announcement.width,
-            height: _announcement.height,
-            child: const Announcement(),
-          ),
-          if (screen.height > _announcement.height + _lifeEventRecords.height + _playView.height)
-            Expanded(
-              child: SizedBox(
-                width: screen.width < _lifeEventRecords.width ? screen.width : _lifeEventRecords.width,
-                child: const LifeEventRecords(),
-              ),
+  Column _middleScreen(Size screenSize) {
+    final playViewSize = Size(
+      screenSize.width < _playViewSize.width ? screenSize.width : _playViewSize.width,
+      screenSize.height < _playViewSize.height + _announcementSize.height
+          ? screenSize.height - _announcementSize.height
+          : _playViewSize.height,
+    );
+    return Column(
+      children: <Widget>[
+        SizedBox(
+          width: screenSize.width < _announcementSize.width ? screenSize.width : _announcementSize.width,
+          height: _announcementSize.height,
+          child: const Announcement(),
+        ),
+        if (screenSize.height > _announcementSize.height + _lifeEventRecordsSize.height + _playViewSize.height)
+          Expanded(
+            child: SizedBox(
+              width: screenSize.width < _lifeEventRecordsSize.width ? screenSize.width : _lifeEventRecordsSize.width,
+              child: const LifeEventRecords(),
             ),
-          Stack(
-            children: <Widget>[
-              SizedBox(
-                width: screen.width < _playView.width ? screen.width : _playView.width,
-                height: _playView.height,
-                child: const PlayView(),
-              ),
-              Positioned(
-                right: 0,
-                child: SizedBox(
-                  height: 750,
-                  child: Column(
-                    children: const <Widget>[
-                      Expanded(
-                        flex: 2,
-                        child: SizedBox(
-                          width: 200,
-                          child: LifeStages(),
-                        ),
+          ),
+        Stack(
+          children: <Widget>[
+            SizedBox(
+              width: playViewSize.width,
+              height: playViewSize.height,
+              child: const PlayView(),
+            ),
+            Positioned(
+              right: 0,
+              child: SizedBox(
+                height: playViewSize.height,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 2,
+                      child: SizedBox(
+                        width: _lifeStagesSize.width,
+                        child: const LifeStages(),
                       ),
-                      Expanded(
-                        child: SizedBox(
-                          width: 200,
-                          child: DiceResult(),
-                        ),
+                    ),
+                    Expanded(
+                      child: SizedBox(
+                        width: _diceResultSize.width,
+                        child: const DiceResult(),
                       ),
-                      Expanded(
-                        child: SizedBox(
-                          width: 200,
-                          child: PlayerAction(),
-                        ),
+                    ),
+                    Expanded(
+                      child: SizedBox(
+                        width: _playerActionSize.width,
+                        child: const PlayerAction(),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ],
-      );
+            ),
+          ],
+        ),
+      ],
+    );
+  }
 
   Future<void> _showResult(BuildContext context) async {
     final lifeStages = context.read<PlayRoomNotifier>().lifeStages;
