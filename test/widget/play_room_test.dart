@@ -175,6 +175,40 @@ Future<void> main() async {
     await tester.pumpAndSettle();
     expect(find.text(i18n.resultAnnouncementDialogMessage), findsNothing);
   });
+  testWidgets('stack widgets when screen size is middle', (tester) async {
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+
+    // デスクトップサイズのスクリーンの場合は、stackされない
+    await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel));
+    await tester.pump();
+    var lifeStages = tester.element(find.byType(LifeStages));
+    var lifeStagesAnsester = lifeStages.findAncestorWidgetOfExactType<Stack>();
+    expect(find.byWidget(lifeStagesAnsester), findsNothing);
+    var diceResult = tester.element(find.byType(DiceResult));
+    var diceResultAnsester = diceResult.findAncestorWidgetOfExactType<Stack>();
+    expect(find.byWidget(diceResultAnsester), findsNothing);
+    var playerAction = tester.element(find.byType(PlayerAction));
+    var playerActionAnsester = playerAction.findAncestorWidgetOfExactType<Stack>();
+    expect(find.byWidget(playerActionAnsester), findsNothing);
+
+    // デスクトップサイズより小さいスクリーンの場合は、stackする
+    const windowWidth = 1000.0;
+    const windowHeight = 1024.0;
+    const size = Size(windowWidth, windowHeight);
+    await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel, size: size));
+    await tester.pump();
+    lifeStages = tester.element(find.byType(LifeStages));
+    lifeStagesAnsester = lifeStages.findAncestorWidgetOfExactType<Stack>();
+    expect(find.byWidget(lifeStagesAnsester), findsOneWidget);
+
+    diceResult = tester.element(find.byType(DiceResult));
+    diceResultAnsester = diceResult.findAncestorWidgetOfExactType<Stack>();
+    expect(find.byWidget(diceResultAnsester), findsOneWidget);
+
+    playerAction = tester.element(find.byType(PlayerAction));
+    playerActionAnsester = playerAction.findAncestorWidgetOfExactType<Stack>();
+    expect(find.byWidget(playerActionAnsester), findsOneWidget);
+  });
 }
 
 class _TestablePlayRoom extends StatelessWidget {
