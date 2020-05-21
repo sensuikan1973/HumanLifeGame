@@ -10,14 +10,26 @@ import 'life_stages.dart';
 import 'play_view.dart';
 import 'player_action.dart';
 
-class PlayRoom extends StatelessWidget {
+class PlayRoom extends StatefulWidget {
   const PlayRoom({Key key}) : super(key: key);
-  Size get _desktop => const Size(1440, 1024); // FIXME: 最終的には、左側のビューと右側のビューの最小サイズをトリガとして切り替える
+
+  @override
+  PlayRoomState createState() => PlayRoomState();
+}
+
+class PlayRoomState extends State<PlayRoom> {
+  bool isDisplayedResult = false;
+
+  Size get _desktop => const Size(1440, 1024);
+
   @override
   Widget build(BuildContext context) {
     final screen = MediaQuery.of(context).size;
     if (context.select<PlayRoomNotifier, bool>((model) => model.allHumansReachedTheGoal)) {
-      WidgetsBinding.instance.addPostFrameCallback((_) async => _showResult(context));
+      if (!isDisplayedResult) {
+        isDisplayedResult = true;
+        WidgetsBinding.instance.addPostFrameCallback((_) async => _showResult(context));
+      }
     }
     return Scaffold(
       body: screen.width >= _desktop.width ? _largeScreen() : _middleScreen(),
