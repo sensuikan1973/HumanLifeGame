@@ -26,7 +26,6 @@ class _SignInState extends State<SignIn> {
 
   Future<void> _trySignIn() async {
     final prefs = await SharedPreferences.getInstance();
-    print(p.current);
     _emailController.text = prefs.getString(_emailPrefsKey) ?? 'foo.bar@example.com';
     final currentURL = Uri.base.toString();
     if (await _auth.isSignInWithEmailLink(currentURL)) {
