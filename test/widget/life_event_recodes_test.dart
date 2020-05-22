@@ -11,6 +11,9 @@ Future<void> main() async {
     await tester.pumpWidget(testableApp(home: const LifeEventRecords()));
     await tester.pump();
 
-    expect(find.text(i18n.lifeEventRecordsText), findsOneWidget);
+    // FIXME : 仮のテキストを表示
+    for (var i = 0; i < 10; ++i) {
+      expect(find.text('$I18n.of(context).lifeEventRecordsText : $i'), findsOneWidget);
+    }
   });
 }

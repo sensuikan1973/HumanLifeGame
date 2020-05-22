@@ -7,9 +7,15 @@ class LifeEventRecords extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Card(
-        child: Text(
-          I18n.of(context).lifeEventRecordsText,
-          key: const Key('lifeEventRecordsText'),
+        child: ListView(
+          reverse: true,
+          children: [
+            // FIXME : 仮のテキストを表示
+            for (var i = 0; i < 10; ++i)
+              Text(
+                '$I18n.of(context).lifeEventRecordsText : $i',
+              ),
+          ],
         ),
       );
 }
