@@ -6,8 +6,9 @@ import 'messages_all.dart';
 export 'extensions/i18n_common.dart';
 export 'extensions/i18n_play_room.dart';
 
+@immutable
 class I18n {
-  I18n(this.localeName);
+  const I18n(this.localeName);
 
   static Future<I18n> load(Locale locale) async {
     final name = locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
