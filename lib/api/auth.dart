@@ -17,30 +17,33 @@ class Auth {
   }
 
   /// 認証リンクをメール送信
-  /// See: https://firebase.google.com/docs/auth/web/email-link-auth?hl=ja#send_an_authentication_link_to_the_users_email_address
-  Future<void> sendSignInLinkToEmail({String url}) async {
-    final user = await currentUser;
-    if (user == null || user.email.isEmpty) return;
-
+  /// See: https://firebase.google.com/docs/auth/web/email-link-auth#send_an_authentication_link_to_the_users_email_address
+  Future<void> sendSignInLinkToEmail({
+    @required String email,
+    @required String url,
+  }) async {
     // See: https://firebase.google.com/docs/auth/web/passing-state-in-email-actions
-    // NOTE: 現状 ios, android アプリは考えてない
+    // FIXME: 現状 ios, android アプリは考えてないが、必須パラメータなのでテキトーに指定してる
     await _auth.sendSignInWithEmailLink(
-      email: user.email,
+      email: email,
       url: url,
-      iOSBundleID: null,
-      handleCodeInApp: null,
-      androidMinimumVersion: null,
-      androidPackageName: null,
-      androidInstallIfNotAvailable: null,
+      handleCodeInApp: true,
+      iOSBundleID: 'human-life-game.example.com',
+      androidMinimumVersion: '24',
+      androidPackageName: 'human-life-game.example.com',
+      androidInstallIfNotAvailable: false,
     );
   }
 
-  /// メールリンク認証
+  /// メールリンク認証を行う
   /// See: https://firebase.google.com/docs/auth/web/email-link-auth
   Future<UserModel> signInWithEmailAndLink({String email, String link}) async {
     final result = await _auth.signInWithEmailAndLink(email: email, link: link);
     return _toModel(result.user);
   }
+
+  /// 認証用メールリンクの文字列であるかどうか
+  Future<bool> isSignInWithEmailLink(String str) async => _auth.isSignInWithEmailLink(str);
 
   /// 現在ログインしてるユーザのオブザーバ
   /// See: https://firebase.google.com/docs/auth/web/manage-users

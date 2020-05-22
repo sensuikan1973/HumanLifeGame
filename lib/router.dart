@@ -14,13 +14,13 @@ import 'screens/sign_in/sign_in.dart';
 
 @immutable
 class Router {
-  final String initial = '/';
-  final String signUp = '/sign_up';
+  String get initial => playRoom; // FIXME: 当然今だけ
+  final String signIn = '/sign_in';
+  final String playRoom = '/play_room';
 
   Map<String, WidgetBuilder> get routes => {
-        signUp: (context) => SignUp(),
-        // FIXME: PlayRoom が initial なのは今だけ
-        initial: (context) => MultiProvider(
+        signIn: (context) => const SignIn(),
+        playRoom: (context) => MultiProvider(
               providers: [
                 ChangeNotifierProvider(
                   create: (_) => PlayerActionNotifier(context.read<Dice>()),
