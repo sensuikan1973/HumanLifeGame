@@ -12,7 +12,7 @@ analyzer:
 
 linter:
   # See: https://dart-lang.github.io/linter/lints/
-  # See https://github.com/dart-lang/linter/issues/1068
+  # See: https://github.com/dart-lang/linter/issues/1068
   rules:
     - always_declare_return_types
 #    - always_put_control_body_on_new_line #  if() foo(); を許容したい

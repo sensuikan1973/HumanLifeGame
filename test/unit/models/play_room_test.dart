@@ -15,7 +15,7 @@ import 'package:HumanLifeGame/models/play_room/player_action.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../mocks/mocks.dart';
+import '../../mocks/dice.dart';
 
 void main() {
   final start = LifeEventModel(LifeEventTarget.myself, const StartParams());

@@ -2,7 +2,7 @@ import 'package:HumanLifeGame/api/dice.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../mocks/mocks.dart';
+import '../mocks/dice.dart';
 
 void main() {
   test('default: 1 <= roll <= 6 ', () {

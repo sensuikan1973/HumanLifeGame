@@ -22,7 +22,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 
-import '../mocks/mocks.dart';
+import '../mocks/dice.dart';
 import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
