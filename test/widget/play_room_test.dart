@@ -98,15 +98,6 @@ Future<void> main() async {
     expect(find.text(i18n.rollAnnouncement(orderedHumans.first.name, roll)), findsOneWidget);
   });
 
-  testWidgets('show user name in human life stages', (tester) async {
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
-    await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel));
-    await tester.pump();
-    for (final human in orderedHumans) {
-      expect(find.text(human.name), findsOneWidget);
-    }
-  });
-
   testWidgets('roll-the-dice button shuld be disabled when all Humans reached the goal', (tester) async {
     final dice = MockDice();
     const roll = 6;

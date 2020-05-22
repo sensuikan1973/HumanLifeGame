@@ -57,4 +57,15 @@ Future<void> main() async {
     final currentPlayerNameText = find.text(playRoomModel.currentPlayer.name);
     expect(row.children, contains(currentPlayerNameText.evaluate().first.widget));
   });
+
+  testWidgets('show user name in human life stages', (tester) async {
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+    await tester.pumpWidget(testableApp(
+      home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const LifeStages()),
+    ));
+    await tester.pump();
+    for (final human in orderedHumans) {
+      expect(find.text(human.name), findsOneWidget);
+    }
+  });
 }
