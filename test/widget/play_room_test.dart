@@ -166,6 +166,7 @@ Future<void> main() async {
     await tester.pumpAndSettle();
     expect(find.text(i18n.resultAnnouncementDialogMessage), findsNothing);
   });
+
   testWidgets('stack widgets when screen size is middle', (tester) async {
     final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
 

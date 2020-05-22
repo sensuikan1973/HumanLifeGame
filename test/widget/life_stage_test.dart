@@ -5,6 +5,7 @@ import 'package:HumanLifeGame/models/common/life_item.dart';
 import 'package:HumanLifeGame/models/common/life_road.dart';
 import 'package:HumanLifeGame/models/common/user.dart';
 import 'package:HumanLifeGame/models/play_room/play_room.dart';
+import 'package:HumanLifeGame/screens/common/human.dart';
 import 'package:HumanLifeGame/screens/play_room/life_stages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -58,7 +59,7 @@ Future<void> main() async {
     expect(row.children, contains(currentPlayerNameText.evaluate().first.widget));
   });
 
-  testWidgets('show user name in human life stages', (tester) async {
+  testWidgets('show user name', (tester) async {
     final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const LifeStages()),
@@ -67,5 +68,15 @@ Future<void> main() async {
     for (final human in orderedHumans) {
       expect(find.text(human.name), findsOneWidget);
     }
+  });
+
+  testWidgets('show humans', (tester) async {
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+    await tester.pumpWidget(testableApp(
+      home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const LifeStages()),
+    ));
+    await tester.pump();
+
+    expect(find.byType(Human), findsNWidgets(orderedHumans.length));
   });
 }
