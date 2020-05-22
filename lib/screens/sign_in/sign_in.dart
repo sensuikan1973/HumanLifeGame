@@ -35,9 +35,6 @@ class _SignInState extends State<SignIn> {
         debugPrint(e.message);
         debugPrint(e.code);
         // ignore: avoid_catching_errors
-      } on Error catch (e) {
-        // NOTE: _FirebaseErrorWrapper は Error レイヤーを catch しないと拾えない
-        debugPrint(e.toString());
       }
     }
   }
