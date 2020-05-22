@@ -10,13 +10,9 @@ class Announcement extends StatelessWidget {
   Widget build(BuildContext context) {
     final message = context.select<PlayRoomNotifier, String>((model) => model.announcement.message);
     return Card(
-      child: SizedBox(
-        width: 1050,
-        height: 50,
-        child: Text(
-          message,
-          key: const Key('announcementMessageText'),
-        ),
+      child: Text(
+        message,
+        key: const Key('announcementMessageText'),
       ),
     );
   }

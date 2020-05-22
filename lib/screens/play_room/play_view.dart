@@ -10,15 +10,15 @@ class PlayView extends StatelessWidget {
 
   /// 手番順に基づく色
   List<Color> get _orderedColors => [Colors.red, Colors.blue, Colors.green, Colors.yellow];
-  Size get _desktop => const Size(1440, 1024);
+  Size get _desktopSize => const Size(1440, 1024);
 
   @override
   Widget build(BuildContext context) {
-    final screen = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.of(context).size;
     final model = context.watch<PlayRoomNotifier>();
 
     final lifeStepSize = Size(
-      screen.width >= _desktop.width ? 150 : 130,
+      screenSize.width >= _desktopSize.width ? 150 : 130,
       100,
     );
     final lifeRoadSize = Size(
@@ -26,9 +26,7 @@ class PlayView extends StatelessWidget {
       lifeStepSize.height * model.humanLife.lifeRoad.height,
     );
 
-    return SizedBox(
-      width: 1050,
-      height: 750,
+    return Card(
       child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
@@ -49,23 +47,21 @@ class PlayView extends StatelessWidget {
     );
   }
 
-  Card _playView(PlayRoomNotifier model, Size size) => Card(
-        child: DecoratedBox(
-          decoration: const BoxDecoration(color: Colors.white),
-          child: Center(
-            child: LifeRoad(
-              model.humanLife.lifeRoad,
-              size.width,
-              size.height,
-              humans: [
-                for (var i = 0; i < model.orderedHumans.length; ++i)
-                  Human(
-                    model.orderedHumans[i],
-                    _orderedColors[i],
-                  ),
-              ],
-              positionsByHumanId: model.positionsByHumanId,
-            ),
+  DecoratedBox _playView(PlayRoomNotifier model, Size size) => DecoratedBox(
+        decoration: const BoxDecoration(color: Colors.white),
+        child: Center(
+          child: LifeRoad(
+            model.humanLife.lifeRoad,
+            size.width,
+            size.height,
+            humans: [
+              for (var i = 0; i < model.orderedHumans.length; ++i)
+                Human(
+                  model.orderedHumans[i],
+                  _orderedColors[i],
+                ),
+            ],
+            positionsByHumanId: model.positionsByHumanId,
           ),
         ),
       );
