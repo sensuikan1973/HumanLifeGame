@@ -34,7 +34,6 @@ class _SignInState extends State<SignIn> {
       } on AuthException catch (e) {
         debugPrint(e.message);
         debugPrint(e.code);
-        // ignore: avoid_catching_errors
       }
     }
   }
