@@ -21,12 +21,12 @@ class _SignInState extends State<SignIn> {
   Auth _auth;
 
   final _emailFormKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
+  final _emailController = TextEditingController()..text = 'foo.bar@example.com';
   final String _emailPrefsKey = 'email';
 
   Future<void> _trySignIn() async {
     final prefs = await SharedPreferences.getInstance();
-    _emailController.text = prefs.getString(_emailPrefsKey) ?? 'foo.bar@example.com';
+    _emailController.text = prefs.getString(_emailPrefsKey);
     final currentURL = Uri.base.toString();
     if (await _auth.isSignInWithEmailLink(currentURL)) {
       try {
