@@ -77,6 +77,19 @@ Future<void> main() async {
     ));
     await tester.pump();
 
-    expect(find.byType(Human), findsNWidgets(orderedHumans.length));
+    final _orderedColors = <Color>[Colors.red, Colors.blue, Colors.green, Colors.yellow];
+    for (var i = 0; i < orderedHumans.length; ++i) {
+      expect(
+          find.byWidgetPredicate(
+            (widget) =>
+                widget is DecoratedBox &&
+                widget.decoration ==
+                    BoxDecoration(
+                      color: _orderedColors[i],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+          ),
+          findsOneWidget);
+    }
   });
 }
