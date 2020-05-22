@@ -6,6 +6,7 @@ import '../life_item.dart';
 part 'target_life_item_params.freezed.dart';
 part 'target_life_item_params.g.dart';
 
+@immutable
 @freezed
 abstract class TargetLifeItemParams with _$TargetLifeItemParams {
   const factory TargetLifeItemParams({

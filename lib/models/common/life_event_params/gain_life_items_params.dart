@@ -7,6 +7,7 @@ import 'target_life_item_params.dart';
 part 'gain_life_items_params.freezed.dart';
 part 'gain_life_items_params.g.dart';
 
+@immutable
 @freezed
 abstract class GainLifeItemsParams extends LifeEventParams implements _$GainLifeItemsParams {
   const factory GainLifeItemsParams({@required List<TargetLifeItemParams> targetItems}) = _GainLifeItemsParams;

@@ -5,6 +5,7 @@ import 'life_event_params.dart';
 part 'select_direction_params.freezed.dart';
 part 'select_direction_params.g.dart';
 
+@immutable
 @freezed
 abstract class SelectDirectionParams extends LifeEventParams implements _$SelectDirectionParams {
   const factory SelectDirectionParams() = _SelectDirectionParams;

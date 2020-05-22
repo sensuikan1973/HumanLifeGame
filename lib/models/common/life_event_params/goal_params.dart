@@ -5,6 +5,7 @@ import 'life_event_params.dart';
 part 'goal_params.freezed.dart';
 part 'goal_params.g.dart';
 
+@immutable
 @freezed
 abstract class GoalParams extends LifeEventParams implements _$GoalParams {
   const factory GoalParams() = _GoalParams;

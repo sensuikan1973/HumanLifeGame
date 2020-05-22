@@ -5,6 +5,7 @@ import 'life_event_params.dart';
 part 'start_params.freezed.dart';
 part 'start_params.g.dart';
 
+@immutable
 @freezed
 abstract class StartParams extends LifeEventParams implements _$StartParams {
   const factory StartParams() = _StartParams;

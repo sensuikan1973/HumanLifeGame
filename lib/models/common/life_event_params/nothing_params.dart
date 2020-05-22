@@ -5,6 +5,7 @@ import 'life_event_params.dart';
 part 'nothing_params.freezed.dart';
 part 'nothing_params.g.dart';
 
+@immutable
 @freezed
 abstract class NothingParams extends LifeEventParams implements _$NothingParams {
   const factory NothingParams() = _NothingParams;
