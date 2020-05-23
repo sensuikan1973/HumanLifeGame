@@ -15,10 +15,7 @@ class LifeEventRecords extends StatelessWidget {
       child: ListView(
         reverse: true,
         children: [
-          for (var lifeEventRecode in everylifeEventRecords)
-            Text(
-              I18n.of(context).lifeStepEventType(lifeEventRecode.type),
-            ),
+          for (var lifeEventRecord in everylifeEventRecords) Text(lifeEventRecord.human.name),
         ],
       ),
     );
