@@ -4,6 +4,7 @@ class UserModel {
   UserModel({
     @required this.id,
     @required this.name,
+    this.email,
     DateTime createdAt,
     DateTime updatedAt,
   })  : createdAt = createdAt ?? DateTime.now(),
@@ -11,6 +12,7 @@ class UserModel {
 
   final String id;
   final String name;
+  final String email;
   final DateTime createdAt;
   final DateTime updatedAt;
 

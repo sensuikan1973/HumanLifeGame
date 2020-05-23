@@ -21,6 +21,7 @@ See: https://flutter.dev/docs/get-started/web
 ### [Local Hosting](https://firebase.google.com/docs/hosting/deploying)
 **You must serve hosting for Authentication**
 ```sh
+flutter build web
 firebase serve --only hosting --port=5000
 ```
 

@@ -34,10 +34,6 @@ Future<void> main() async {
     final model = LifeStepModel(
       id: 0,
       lifeEvent: LifeEventModel(LifeEventTarget.myself, const NothingParams()),
-      right: null,
-      left: null,
-      up: null,
-      down: null,
     );
 
     await tester.pumpWidget(testableApp(home: LifeStep(model, 1050, 700)));

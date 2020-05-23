@@ -6,6 +6,6 @@ Future<void> main() async {
   // ref: https://flutter.dev/docs/testing/debugging
 
   runApp(
-    const HumanLifeGameApp(),
+    HumanLifeGameApp.inProviders(),
   );
 }

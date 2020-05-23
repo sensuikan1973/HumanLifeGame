@@ -27,6 +27,7 @@ class PlayRoomState extends State<PlayRoom> {
   Size get _lifeStagesSize => const Size(200, 500);
   Size get _diceResultSize => const Size(200, 100);
   Size get _playerActionSize => const Size(200, 300);
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;

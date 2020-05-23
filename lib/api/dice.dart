@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 
+@immutable
 class Dice {
   const Dice({this.min = defaultMin, this.max = defaultMax});
 
