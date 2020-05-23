@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../i18n/i18n.dart';
 import '../../services/life_event_service.dart';
@@ -104,8 +105,10 @@ class PlayRoomNotifier extends ChangeNotifier {
     );
 
     // LifeEventの履歴を更新
-    everyLifeEventRecords
-        .add(LifeEventRecodeModel(_currentPlayerLifeStage.human, _currentPlayerLifeStage.lifeStepModel.lifeEvent));
+    everyLifeEventRecords = [
+      ...everyLifeEventRecords,
+      LifeEventRecodeModel(_currentPlayerLifeStage.human, _currentPlayerLifeStage.lifeStepModel.lifeEvent)
+    ];
 
     _changeToNextTurn(); // FIXME: 即ターン交代してるけど、あくまで仮
     notifyListeners();

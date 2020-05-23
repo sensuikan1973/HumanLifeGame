@@ -10,27 +10,15 @@ class LifeEventRecords extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final everylifeEventRecords =
-    //    context.select<PlayRoomNotifier, List<LifeEventRecodeModel>>((model) => model.everyLifeEventRecords);
-    final everylifeEventRecords = Selector<PlayRoomNotifier, PlayRoomNotifier>(
-      builder: (_, __, ___) => const Text(''),
-      selector: (_, model) => model,
-      shouldRebuild: (before, after) {
-        print(before);
-        print(after);
-        return true;
-      },
-    );
-    //final everylifeEventRecords = context.watch<PlayRoomNotifier>().everyLifeEventRecords;
+    final everylifeEventRecords =
+        context.select<PlayRoomNotifier, List<LifeEventRecodeModel>>((model) => model.everyLifeEventRecords);
+
     return Card(
       child: ListView(
         reverse: true,
         children: [
-          const Text('a'),
-          const Text('b'),
-          everylifeEventRecords,
-          //  for (var model in everylifeEventRecords)
-          //    Text('${model.human.name} : ${I18n.of(context).lifeStepEventType(model.lifeEventRecord.type)}'),
+          for (var model in everylifeEventRecords)
+            Text('${model.human.name} : ${I18n.of(context).lifeStepEventType(model.lifeEventRecord.type)}'),
         ],
       ),
     );
