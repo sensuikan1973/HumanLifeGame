@@ -20,7 +20,7 @@ class LifeStages extends StatelessWidget {
     final lifeStages = context.select<PlayRoomNotifier, List<LifeStageModel>>((model) => model.lifeStages);
     final currentPlayer = context.select<PlayRoomNotifier, HumanModel>((model) => model.currentPlayer);
     final humanNames = <Widget>[
-      for (var lifeStage in lifeStages)
+      for (final lifeStage in lifeStages)
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
