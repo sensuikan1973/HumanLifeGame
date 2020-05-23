@@ -14,10 +14,7 @@ import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
   final i18n = await I18n.load(const Locale('en', 'US'));
-  final orderedHumans = [
-    HumanModel(id: 'h1', name: 'foo', icon: Colors.red[200]),
-    HumanModel(id: 'h2', name: 'bar', icon: Colors.blue[200])
-  ];
+  final orderedHumans = [HumanModel(id: 'h1', name: 'foo'), HumanModel(id: 'h2', name: 'bar')];
   final humanLife = HumanLifeModel(
     title: 'dummy HumanLife',
     author: UserModel(id: 'dummyUserId', name: 'dummyUser'),
@@ -78,19 +75,9 @@ Future<void> main() async {
       home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const LifeStages()),
     ));
     await tester.pump();
-    final testWidget = find.byType(DecoratedBox);
-    for (final human in orderedHumans) {
-      expect(
-          find.byWidgetPredicate(
-            (widget) =>
-                widget is DecoratedBox &&
-                widget.decoration ==
-                    BoxDecoration(
-                      color: human.icon,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-          ),
-          findsOneWidget);
+    final _orderedIconData = [Icons.directions_run, Icons.directions_bike, Icons.directions_car, Icons.atm];
+    for (var i = 0; i < orderedHumans.length; ++i) {
+      expect(find.byIcon(_orderedIconData[i]), findsOneWidget);
     }
   });
 }
