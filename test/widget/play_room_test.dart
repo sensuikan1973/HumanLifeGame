@@ -27,7 +27,7 @@ import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
   final i18n = await I18n.load(const Locale('en', 'US'));
-  final orderedHumans = [HumanModel(id: 'h1', name: 'foo'), HumanModel(id: 'h2', name: 'bar')];
+  final orderedHumans = [HumanModel(id: 'h1', name: 'foo', order: 0), HumanModel(id: 'h2', name: 'bar', order: 1)];
   final start = LifeEventModel(LifeEventTarget.myself, const StartParams());
   final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams());
   final gains = LifeEventModel(LifeEventTarget.myself, const GainLifeItemsParams(targetItems: []));
@@ -98,15 +98,6 @@ Future<void> main() async {
     expect(find.text(i18n.rollAnnouncement(orderedHumans.first.name, roll)), findsOneWidget);
   });
 
-  testWidgets('show user name in human life stages', (tester) async {
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
-    await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel));
-    await tester.pump();
-    for (final human in orderedHumans) {
-      expect(find.text(human.name), findsOneWidget);
-    }
-  });
-
   testWidgets('roll-the-dice button shuld be disabled when all Humans reached the goal', (tester) async {
     final dice = MockDice();
     const roll = 6;
@@ -175,6 +166,7 @@ Future<void> main() async {
     await tester.pumpAndSettle();
     expect(find.text(i18n.resultAnnouncementDialogMessage), findsNothing);
   });
+
   testWidgets('stack widgets when screen size is middle', (tester) async {
     final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
 

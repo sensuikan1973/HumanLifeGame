@@ -5,6 +5,8 @@ import '../../models/common/human.dart';
 import '../../models/play_room/life_stage.dart';
 import '../../models/play_room/play_room.dart';
 
+import '../common/human.dart';
+
 /// Humanの状況を表示
 class LifeStages extends StatelessWidget {
   const LifeStages({Key key}) : super(key: key);
@@ -20,12 +22,14 @@ class LifeStages extends StatelessWidget {
     final humanNames = <Widget>[
       for (final lifeStage in lifeStages)
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             SizedBox(
               width: 30,
               height: 30,
               child: (currentPlayer == lifeStage.human) ? currentPlayerSelector() : null,
             ),
+            Human(lifeStage.human),
             Text(lifeStage.human.name),
             const Text(', 💵: '), // FIXME: 仮テキスト
             Text(lifeStage.totalMoney.toString()),
