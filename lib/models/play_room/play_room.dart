@@ -58,7 +58,7 @@ class PlayRoomNotifier extends ChangeNotifier {
       };
 
   /// 全参加者それぞれの LifeEvent 履歴
-  List<LifeEventModel> everyLifeEventRecords;
+  List<LifeEventModel> everyLifeEventRecords = [];
 
   /// 参加者全員がゴールに到着したかどうか
   bool get allHumansReachedTheGoal => lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
@@ -102,6 +102,9 @@ class PlayRoomNotifier extends ChangeNotifier {
       _currentPlayerLifeStage.lifeStepModel.lifeEvent,
       _currentPlayerLifeStage,
     );
+
+    // LifeEventの履歴を更新
+    everyLifeEventRecords.add(_currentPlayerLifeStage.lifeStepModel.lifeEvent);
 
     _changeToNextTurn(); // FIXME: 即ターン交代してるけど、あくまで仮
     notifyListeners();
