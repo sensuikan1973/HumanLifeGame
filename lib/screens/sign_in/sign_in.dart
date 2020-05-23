@@ -1,7 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart' as p;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,13 +23,14 @@ class _SignInState extends State<SignIn> {
   final _emailController = TextEditingController()..text = 'foo.bar@example.com';
   final String _emailPrefsKey = 'email';
 
+  String get _currentURL => Uri.base.toString();
+
   Future<void> _trySignIn() async {
     final prefs = await SharedPreferences.getInstance();
     _emailController.text = prefs.getString(_emailPrefsKey);
-    final currentURL = Uri.base.toString();
-    if (await _auth.isSignInWithEmailLink(currentURL)) {
+    if (await _auth.isSignInWithEmailLink(_currentURL)) {
       try {
-        await _auth.signInWithEmailAndLink(email: _emailController.text, link: currentURL);
+        await _auth.signInWithEmailAndLink(email: _emailController.text, link: _currentURL);
       } on AuthException catch (e) {
         debugPrint(e.message);
         debugPrint(e.code);
@@ -70,7 +70,7 @@ class _SignInState extends State<SignIn> {
                   if (!_emailFormKey.currentState.validate()) return;
                   final prefs = await SharedPreferences.getInstance();
                   await prefs.setString(_emailPrefsKey, _emailController.text);
-                  await _auth.sendSignInLinkToEmail(email: _emailController.text, url: p.current);
+                  await _auth.sendSignInLinkToEmail(email: _emailController.text, url: _currentURL);
                 },
                 color: Colors.blueGrey,
                 child: const Text('Sign up with Email'),
