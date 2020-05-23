@@ -4,13 +4,11 @@ import '../../models/common/human.dart';
 
 class Human extends StatelessWidget {
   const Human(
-    this._humanModel,
-    this._color, {
+    this._humanModel, {
     Key key,
   }) : super(key: key);
 
   final HumanModel _humanModel;
-  final Color _color;
 
   String get humanId => _humanModel.id;
 
@@ -20,7 +18,7 @@ class Human extends StatelessWidget {
         height: 20,
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color: _color,
+            color: _humanModel.icon,
             borderRadius: BorderRadius.circular(10),
           ),
         ),

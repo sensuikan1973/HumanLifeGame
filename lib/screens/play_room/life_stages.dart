@@ -10,7 +10,7 @@ import '../common/human.dart';
 /// Humanの状況を表示
 class LifeStages extends StatelessWidget {
   const LifeStages({Key key}) : super(key: key);
-  List<Color> get _orderedColors => [Colors.red, Colors.blue, Colors.green, Colors.yellow];
+
   @override
   Widget build(BuildContext context) => Card(
         child: _lifeStages(context),
@@ -29,7 +29,7 @@ class LifeStages extends StatelessWidget {
               height: 30,
               child: (currentPlayer == lifeStages[i].human) ? currentPlayerSelector() : null,
             ),
-            Human(lifeStages[i].human, _orderedColors[i]),
+            Human(lifeStages[i].human),
             Text(lifeStages[i].human.name),
             const Text(', 💵: '), // FIXME: 仮テキスト
             Text(lifeStages[i].totalMoney.toString()),
