@@ -8,8 +8,6 @@ import '../common/life_road.dart';
 class PlayView extends StatelessWidget {
   const PlayView({Key key}) : super(key: key);
 
-  /// 手番順に基づく色
-  List<Color> get _orderedColors => [Colors.red, Colors.blue, Colors.green, Colors.yellow];
   Size get _desktopSize => const Size(1440, 1024);
 
   @override
@@ -55,11 +53,7 @@ class PlayView extends StatelessWidget {
             size.width,
             size.height,
             humans: [
-              for (var i = 0; i < model.orderedHumans.length; ++i)
-                Human(
-                  model.orderedHumans[i],
-                  _orderedColors[i],
-                ),
+              for (final orderdHuman in model.orderedHumans) Human(orderdHuman),
             ],
             positionsByHumanId: model.positionsByHumanId,
           ),
