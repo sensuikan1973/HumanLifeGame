@@ -31,7 +31,6 @@ jobs:
       - name: create PR
         uses: peter-evans/create-pull-request@v2
         with:
-          token: ${{ secrets.REPO_SCOPED_TOKEN }}
           commit-message: '[Scheduled] update dependencies'
           title: '[Scheduled] update dependencies'
           body: |
@@ -40,3 +39,4 @@ jobs:
             [1]: https://github.com/peter-evans/create-pull-request
           branch: cron_update_dependencies
           base: master
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
