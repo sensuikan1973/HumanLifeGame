@@ -4,10 +4,10 @@ import '../../i18n/i18n.dart';
 import '../../services/life_event_service.dart';
 import '../common/human.dart';
 import '../common/human_life.dart';
-import '../common/life_event.dart';
 import '../common/life_road.dart';
 import '../common/life_step.dart';
 import 'announcement.dart';
+import 'life_event_record.dart';
 import 'life_stage.dart';
 import 'player_action.dart';
 
@@ -58,7 +58,7 @@ class PlayRoomNotifier extends ChangeNotifier {
       };
 
   /// 全参加者それぞれの LifeEvent 履歴
-  List<LifeEventModel> everyLifeEventRecords;
+  List<LifeEventRecordModel> everyLifeEventRecords = [];
 
   /// 参加者全員がゴールに到着したかどうか
   bool get allHumansReachedTheGoal => lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
@@ -98,10 +98,17 @@ class PlayRoomNotifier extends ChangeNotifier {
     _remainCount = 0;
 
     // LifeEvent 処理
+    lifeStages = [...lifeStages];
     lifeStages[_currentPlayerLifeStageIndex] = _lifeEventService.executeEvent(
       _currentPlayerLifeStage.lifeStepModel.lifeEvent,
       _currentPlayerLifeStage,
     );
+
+    // LifeEventの履歴を更新
+    everyLifeEventRecords = [
+      ...everyLifeEventRecords,
+      LifeEventRecordModel(_i18n, _currentPlayerLifeStage.human, _currentPlayerLifeStage.lifeStepModel.lifeEvent)
+    ];
 
     _changeToNextTurn(); // FIXME: 即ターン交代してるけど、あくまで仮
     notifyListeners();
