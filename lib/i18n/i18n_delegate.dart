@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'i18n.dart';
 
+@immutable
 class I18nDelegate extends LocalizationsDelegate<I18n> {
   const I18nDelegate();
 

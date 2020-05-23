@@ -1,46 +1,96 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart' as p;
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-// FIXME: 仮実装
-class SignIn extends StatelessWidget {
-  SignIn({Key key}) : super(key: key);
+import '../../api/auth.dart';
+import '../../models/common/user.dart';
 
-  final _auth = FirebaseAuth.instance;
-  final _uid = ValueNotifier<String>(' ');
+// FIXME: これはあくまで 下書き Widget。ロジックをベタ書きしてるし、レイアウトも i18n も全てがテキトー。
+// See: https://github.com/FirebaseExtended/flutterfire/blob/master/packages/firebase_auth/firebase_auth/example/lib/signin_page.dart
+class SignIn extends StatefulWidget {
+  const SignIn({Key key}) : super(key: key);
 
-  Future<void> signIn() async {
-    var user = await _auth.currentUser();
-    if (user == null) {
-      final result = await _auth.signInAnonymously();
-      user = result.user;
+  @override
+  _SignInState createState() => _SignInState();
+}
+
+class _SignInState extends State<SignIn> {
+  Auth _auth;
+
+  final _emailFormKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController()..text = 'foo.bar@example.com';
+  final String _emailPrefsKey = 'email';
+
+  Future<void> _trySignIn() async {
+    final prefs = await SharedPreferences.getInstance();
+    _emailController.text = prefs.getString(_emailPrefsKey);
+    final currentURL = Uri.base.toString();
+    if (await _auth.isSignInWithEmailLink(currentURL)) {
+      try {
+        await _auth.signInWithEmailAndLink(email: _emailController.text, link: currentURL);
+      } on AuthException catch (e) {
+        debugPrint(e.message);
+        debugPrint(e.code);
+      }
     }
-    _uid.value = user.uid;
-  }
-
-  Future<void> signOut() async {
-    await _auth.signOut();
-    final user = await _auth.currentUser();
-    _uid.value = user?.uid ?? ' ';
   }
 
   @override
-  Widget build(BuildContext context) => Column(
-        children: [
-          FlatButton(
-            onPressed: signIn,
-            color: Colors.blueGrey,
-            child: const Text('Sign in Anonymously'),
+  void initState() {
+    super.initState();
+    _auth = context.read<Auth>();
+    _trySignIn();
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose(); // See: https://api.flutter.dev/flutter/widgets/TextEditingController-class.html
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        body: Form(
+          key: _emailFormKey,
+          child: Column(
+            children: [
+              TextFormField(
+                controller: _emailController,
+                validator: (value) {
+                  if (EmailValidator.validate(value)) return null;
+                  return 'illegal email string';
+                },
+              ),
+              const SizedBox(height: 100),
+              FlatButton(
+                onPressed: () async {
+                  if (!_emailFormKey.currentState.validate()) return;
+                  final prefs = await SharedPreferences.getInstance();
+                  await prefs.setString(_emailPrefsKey, _emailController.text);
+                  await _auth.sendSignInLinkToEmail(email: _emailController.text, url: p.current);
+                },
+                color: Colors.blueGrey,
+                child: const Text('Sign up with Email'),
+              ),
+              const SizedBox(height: 100),
+              StreamBuilder<UserModel>(
+                stream: _auth.currentUserStream,
+                builder: (context, snap) {
+                  if (!snap.hasData) return const Text('not signed in');
+                  return Text('current id: ${snap.data.id}');
+                },
+              ),
+              const SizedBox(height: 100),
+              FlatButton(
+                onPressed: () async => context.read<Auth>().signOut(),
+                color: Colors.red,
+                child: const Text('Sign out'),
+              ),
+            ],
           ),
-          ValueListenableBuilder<String>(
-            valueListenable: _uid,
-            builder: (_, uid, __) => Text('uid: $uid'),
-          ),
-          const Divider(thickness: 2),
-          FlatButton(
-            onPressed: signOut,
-            color: Colors.red,
-            child: const Text('Sign out'),
-          ),
-        ],
+        ),
       );
 }
