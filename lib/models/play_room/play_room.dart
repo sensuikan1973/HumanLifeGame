@@ -98,12 +98,11 @@ class PlayRoomNotifier extends ChangeNotifier {
     _remainCount = 0;
 
     // LifeEvent 処理
-    lifeStages = [...lifeStages]..insert(
-        _currentPlayerLifeStageIndex,
-        _lifeEventService.executeEvent(
-          _currentPlayerLifeStage.lifeStepModel.lifeEvent,
-          _currentPlayerLifeStage,
-        ));
+    lifeStages = [...lifeStages];
+    lifeStages[_currentPlayerLifeStageIndex] = _lifeEventService.executeEvent(
+      _currentPlayerLifeStage.lifeStepModel.lifeEvent,
+      _currentPlayerLifeStage,
+    );
 
     // LifeEventの履歴を更新
     everyLifeEventRecords = [
