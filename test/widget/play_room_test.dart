@@ -201,6 +201,53 @@ Future<void> main() async {
     playerActionAnsester = playerAction.findAncestorWidgetOfExactType<Stack>();
     expect(find.byWidget(playerActionAnsester), findsOneWidget);
   });
+
+  testWidgets("show 'lifeEventRecords'Text", (tester) async {
+    final dice = MockDice();
+    const roll = 5;
+    when(dice.roll()).thenReturn(roll);
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+
+    // サイコロが振られていない時のリストを確認
+    await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
+    await tester.pump();
+    for (final model in playRoomModel.everyLifeEventRecords) {
+      expect(find.text('${model.human.name} : ${i18n.lifeStepEventType(model.lifeEventRecord.type)}'), findsOneWidget);
+    }
+
+    // fooがサイコロを５出して、アイテム獲得
+    final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
+    await tester.tap(rollDiceButton);
+    await tester.pump();
+
+    for (final model in playRoomModel.everyLifeEventRecords) {
+      expect(find.text('${model.human.name} : ${i18n.lifeStepEventType(model.lifeEventRecord.type)}'), findsOneWidget);
+    }
+
+    // barがサイコロを５出して、アイテム獲得
+    await tester.tap(rollDiceButton);
+    await tester.pump();
+
+    for (final model in playRoomModel.everyLifeEventRecords) {
+      expect(find.text('${model.human.name} : ${i18n.lifeStepEventType(model.lifeEventRecord.type)}'), findsOneWidget);
+    }
+
+    // fooがゴール
+    await tester.tap(rollDiceButton);
+    await tester.pump();
+
+    for (final model in playRoomModel.everyLifeEventRecords) {
+      expect(find.text('${model.human.name} : ${i18n.lifeStepEventType(model.lifeEventRecord.type)}'), findsOneWidget);
+    }
+
+    // barがゴール
+    await tester.tap(rollDiceButton);
+    await tester.pump();
+
+    for (final model in playRoomModel.everyLifeEventRecords) {
+      expect(find.text('${model.human.name} : ${i18n.lifeStepEventType(model.lifeEventRecord.type)}'), findsOneWidget);
+    }
+  });
 }
 
 class _TestablePlayRoom extends StatelessWidget {
