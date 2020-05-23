@@ -30,6 +30,8 @@ jobs:
           sed -i -e 's/\^//' pubspec.yaml
       - name: create PR
         uses: peter-evans/create-pull-request@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_SCOPED_TOKEN }}
         with:
           commit-message: '[Scheduled] update dependencies'
           title: '[Scheduled] update dependencies'
