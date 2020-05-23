@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../i18n/i18n.dart';
 import '../../services/life_event_service.dart';
