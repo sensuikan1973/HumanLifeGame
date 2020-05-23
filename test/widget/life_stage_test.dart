@@ -5,6 +5,7 @@ import 'package:HumanLifeGame/models/common/life_item.dart';
 import 'package:HumanLifeGame/models/common/life_road.dart';
 import 'package:HumanLifeGame/models/common/user.dart';
 import 'package:HumanLifeGame/models/play_room/play_room.dart';
+import 'package:HumanLifeGame/screens/common/human.dart';
 import 'package:HumanLifeGame/screens/play_room/life_stages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -69,15 +70,15 @@ Future<void> main() async {
     }
   });
 
-  testWidgets('show humans', (tester) async {
+  testWidgets('show human icons', (tester) async {
     final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const LifeStages()),
     ));
     await tester.pump();
-    final _orderedIconData = [Icons.directions_run, Icons.directions_bike, Icons.directions_car, Icons.atm];
+
     for (var i = 0; i < orderedHumans.length; ++i) {
-      expect(find.byIcon(_orderedIconData[i]), findsOneWidget);
+      expect(find.byWidget(Human.orderedIcon[i]), findsOneWidget);
     }
   });
 }

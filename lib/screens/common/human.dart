@@ -11,13 +11,15 @@ class Human extends StatelessWidget {
   final HumanModel _humanModel;
 
   String get humanId => _humanModel.id;
-  List<Icon> get _orderedIcon => [
-        const Icon(Icons.directions_run, color: Colors.red, size: 20),
-        const Icon(Icons.directions_bike, color: Colors.blue, size: 20),
-        const Icon(Icons.directions_car, color: Colors.green, size: 20),
-        const Icon(Icons.atm, color: Colors.yellow, size: 20),
-      ];
+
+  @visibleForTesting
+  static const orderedIcon = [
+    Icon(Icons.directions_run, color: Colors.red, size: 20),
+    Icon(Icons.directions_bike, color: Colors.blue, size: 20),
+    Icon(Icons.directions_car, color: Colors.green, size: 20),
+    Icon(Icons.atm, color: Colors.yellow, size: 20),
+  ];
 
   @override
-  Widget build(BuildContext context) => _orderedIcon[_humanModel.order];
+  Widget build(BuildContext context) => orderedIcon[_humanModel.order];
 }
