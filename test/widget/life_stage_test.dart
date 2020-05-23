@@ -5,7 +5,6 @@ import 'package:HumanLifeGame/models/common/life_item.dart';
 import 'package:HumanLifeGame/models/common/life_road.dart';
 import 'package:HumanLifeGame/models/common/user.dart';
 import 'package:HumanLifeGame/models/play_room/play_room.dart';
-import 'package:HumanLifeGame/screens/common/human.dart';
 import 'package:HumanLifeGame/screens/play_room/life_stages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,7 +14,10 @@ import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
   final i18n = await I18n.load(const Locale('en', 'US'));
-  final orderedHumans = [HumanModel(id: 'h1', name: 'foo'), HumanModel(id: 'h2', name: 'bar')];
+  final orderedHumans = [
+    HumanModel(id: 'h1', name: 'foo', icon: Colors.red[200]),
+    HumanModel(id: 'h2', name: 'bar', icon: Colors.blue[200])
+  ];
   final humanLife = HumanLifeModel(
     title: 'dummy HumanLife',
     author: UserModel(id: 'dummyUserId', name: 'dummyUser'),
@@ -77,15 +79,14 @@ Future<void> main() async {
     ));
     await tester.pump();
 
-    final _orderedColors = <Color>[Colors.red, Colors.blue, Colors.green, Colors.yellow];
-    for (var i = 0; i < orderedHumans.length; ++i) {
+    for (final human in orderedHumans) {
       expect(
           find.byWidgetPredicate(
             (widget) =>
                 widget is DecoratedBox &&
                 widget.decoration ==
                     BoxDecoration(
-                      color: _orderedColors[i],
+                      color: human.icon,
                       borderRadius: BorderRadius.circular(10),
                     ),
           ),
