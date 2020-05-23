@@ -1,9 +1,6 @@
 name: Update_Dependencies
 
 on:
-  push:
-    branches:
-      - cron_update_pacakges
   schedule:
     - cron: 0 15 * * *
 
