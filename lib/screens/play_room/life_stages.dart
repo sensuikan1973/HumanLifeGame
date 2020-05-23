@@ -20,19 +20,19 @@ class LifeStages extends StatelessWidget {
     final lifeStages = context.select<PlayRoomNotifier, List<LifeStageModel>>((model) => model.lifeStages);
     final currentPlayer = context.select<PlayRoomNotifier, HumanModel>((model) => model.currentPlayer);
     final humanNames = <Widget>[
-      for (final lifeStage in lifeStages)
+      for (var i = 0; i < lifeStages.length; ++i)
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             SizedBox(
               width: 30,
               height: 30,
-              child: (currentPlayer == lifeStage.human) ? currentPlayerSelector() : null,
+              child: (currentPlayer == lifeStages[i].human) ? currentPlayerSelector() : null,
             ),
-            Human(lifeStage.human),
-            Text(lifeStage.human.name),
+            Human(lifeStages[i].human, i),
+            Text(lifeStages[i].human.name),
             const Text(', 💵: '), // FIXME: 仮テキスト
-            Text(lifeStage.totalMoney.toString()),
+            Text(lifeStages[i].totalMoney.toString()),
           ],
         ),
     ];

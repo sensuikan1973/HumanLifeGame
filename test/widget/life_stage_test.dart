@@ -78,7 +78,7 @@ Future<void> main() async {
       home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const LifeStages()),
     ));
     await tester.pump();
-
+    final testWidget = find.byType(DecoratedBox);
     for (final human in orderedHumans) {
       expect(
           find.byWidgetPredicate(
