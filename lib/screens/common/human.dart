@@ -4,13 +4,12 @@ import '../../models/common/human.dart';
 
 class Human extends StatelessWidget {
   const Human(
-    this._humanModel,
-    this._order, {
+    this._humanModel, {
     Key key,
   }) : super(key: key);
 
   final HumanModel _humanModel;
-  final int _order;
+
   String get humanId => _humanModel.id;
   List<Icon> get _orderedIcon => [
         const Icon(Icons.directions_run, color: Colors.red, size: 20),
@@ -20,5 +19,5 @@ class Human extends StatelessWidget {
       ];
 
   @override
-  Widget build(BuildContext context) => _orderedIcon[_order];
+  Widget build(BuildContext context) => _orderedIcon[_humanModel.order];
 }

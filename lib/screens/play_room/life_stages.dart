@@ -29,7 +29,7 @@ class LifeStages extends StatelessWidget {
               height: 30,
               child: (currentPlayer == lifeStages[i].human) ? currentPlayerSelector() : null,
             ),
-            Human(lifeStages[i].human, i),
+            Human(lifeStages[i].human),
             Text(lifeStages[i].human.name),
             const Text(', 💵: '), // FIXME: 仮テキスト
             Text(lifeStages[i].totalMoney.toString()),
