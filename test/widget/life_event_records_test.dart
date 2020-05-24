@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
+import '../mocks/dice.dart';
 import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
@@ -29,7 +30,7 @@ Future<void> main() async {
   final start = LifeEventModel(LifeEventTarget.myself, const StartParams());
 
   testWidgets("show 'lifeEventRecords'Text", (tester) async {
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, MockDice(), humanLife, humans);
     for (final orderedHuman in humans) {
       playRoomModel.everyLifeEventRecords = [LifeEventRecordModel(i18n, orderedHuman, start)];
     }

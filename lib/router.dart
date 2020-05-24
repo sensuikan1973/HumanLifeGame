@@ -28,6 +28,7 @@ class Router {
                 ChangeNotifierProxyProvider<PlayerActionNotifier, PlayRoomNotifier>(
                   create: (_) => PlayRoomNotifier(
                     I18n.of(context),
+                    context.read<Dice>(),
                     // FIXME: Repository から取ってくる
                     HumanLifeModel(
                       title: 'dummy HumanLife',

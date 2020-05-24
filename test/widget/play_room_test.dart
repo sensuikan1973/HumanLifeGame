@@ -54,7 +54,7 @@ Future<void> main() async {
   });
 
   testWidgets('show some widgets', (tester) async {
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, MockDice(), humanLife, humans);
     await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel));
     await tester.pump();
     expect(find.byType(PlayerAction), findsOneWidget);
@@ -67,7 +67,7 @@ Future<void> main() async {
   testWidgets('random value(1 <= value <= 6) should be displayed when dice is rolled', (tester) async {
     final dice = MockDice();
     when(dice.roll()).thenReturn(5);
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
@@ -80,7 +80,7 @@ Future<void> main() async {
     final dice = MockDice();
     const roll = 5;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
@@ -102,7 +102,7 @@ Future<void> main() async {
     final dice = MockDice();
     const roll = 6;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
@@ -121,7 +121,7 @@ Future<void> main() async {
     final dice = MockDice();
     const roll = 6;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
@@ -138,7 +138,7 @@ Future<void> main() async {
     final dice = MockDice();
     const roll = 6;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
 
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
@@ -168,7 +168,7 @@ Future<void> main() async {
   });
 
   testWidgets('stack widgets when screen size is middle', (tester) async {
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, MockDice(), humanLife, humans);
 
     // デスクトップサイズのスクリーンの場合は、stackされない
     await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel));

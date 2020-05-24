@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import '../../api/dice.dart';
 import '../../i18n/i18n.dart';
 import '../../services/life_event_service.dart';
 import '../common/human.dart';
@@ -14,6 +15,7 @@ import 'player_action.dart';
 class PlayRoomNotifier extends ChangeNotifier {
   PlayRoomNotifier(
     this._i18n,
+    this._dice,
     this.humanLife,
     List<HumanModel> humans,
   ) : orderedHumans = humans..sort((a, b) => a.order.compareTo(b.order)) {
@@ -27,6 +29,7 @@ class PlayRoomNotifier extends ChangeNotifier {
   }
 
   final I18n _i18n;
+  final Dice _dice;
   final _lifeEventService = const LifeEventService();
 
   /// 歩む対象となる人生

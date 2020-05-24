@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
+import '../mocks/dice.dart';
 import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
@@ -36,7 +37,7 @@ Future<void> main() async {
       author: UserModel(id: 'dummyUserId', name: 'dummyUser'),
       lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents)),
     );
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, MockDice(), humanLife, humans);
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const PlayerAction()),
     ));

@@ -41,7 +41,7 @@ void main() {
     ];
     final lifeRoad = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
     final humanLife = HumanLifeModel(title: 'dummy HumanLife', author: author, lifeRoad: lifeRoad);
-    final playRoomModel = PlayRoomNotifier(const I18n('en'), humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(const I18n('en'), MockDice(), humanLife, humans);
 
     // 初期位置
     for (final human in playRoomModel.orderedHumans) {
@@ -86,7 +86,7 @@ void main() {
     final humanLife = HumanLifeModel(title: 'dummy HumanLife', author: author, lifeRoad: lifeRoad);
 
     test('Dice roll is 1', () {
-      final playRoomModel = PlayRoomNotifier(const I18n('en'), humanLife, humans);
+      final playRoomModel = PlayRoomNotifier(const I18n('en'), MockDice(), humanLife, humans);
       final dice = MockDice();
       const roll = 1;
       when(dice.roll()).thenReturn(roll);
@@ -130,7 +130,7 @@ void main() {
     });
 
     test('Dice roll is 3', () {
-      final playRoomModel = PlayRoomNotifier(const I18n('en'), humanLife, humans);
+      final playRoomModel = PlayRoomNotifier(const I18n('en'), MockDice(), humanLife, humans);
       final dice = MockDice();
       const roll = 3;
       when(dice.roll()).thenReturn(roll);

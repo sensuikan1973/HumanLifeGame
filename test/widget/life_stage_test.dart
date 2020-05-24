@@ -11,10 +11,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
+import '../mocks/dice.dart';
 import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
   final i18n = await I18n.load(const Locale('en', 'US'));
+  final dice = MockDice();
   final humans = [HumanModel(id: 'h1', name: 'foo', order: 0), HumanModel(id: 'h2', name: 'bar', order: 1)];
   final humanLife = HumanLifeModel(
     title: 'dummy HumanLife',
@@ -27,7 +29,7 @@ Future<void> main() async {
   );
 
   testWidgets('show initial total moneys', (tester) async {
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const LifeStages()),
     ));
@@ -36,7 +38,7 @@ Future<void> main() async {
   });
 
   testWidgets('show variable total moneys', (tester) async {
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
     for (final lifeStage in playRoomModel.lifeStages) {
       lifeStage.lifeItems.add(LifeItemModel('key', LifeItemType.money, 200));
     }
@@ -48,7 +50,7 @@ Future<void> main() async {
   });
 
   testWidgets('show current player', (tester) async {
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const LifeStages()),
     ));
@@ -60,7 +62,7 @@ Future<void> main() async {
   });
 
   testWidgets('show user name', (tester) async {
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const LifeStages()),
     ));
@@ -71,7 +73,7 @@ Future<void> main() async {
   });
 
   testWidgets('show human icons', (tester) async {
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const LifeStages()),
     ));
