@@ -49,9 +49,6 @@ flutter packages pub run build_runner build
 
 6. you can call `I18n.of(context).hoge`
 
-### [Document](https://github.com/dart-lang/dartdoc)
+### [API Document](https://github.com/dart-lang/dartdoc)
 
-```sh
-# See: https://github.com/dart-lang/dartdoc/pull/2175
-FLUTTER_ROOT=~/development/flutter dartdoc --output doc/api && open doc/api/index.html
-```
+See: https://sensuikan1973.github.io/HumanLifeGame/
