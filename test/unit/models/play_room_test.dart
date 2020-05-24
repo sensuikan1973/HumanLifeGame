@@ -48,7 +48,7 @@ void main() {
     final playRoomNotifier = PlayRoomNotifier(const I18n('en'), dice, humanLife, humans);
 
     // 初期位置
-    for (final human in playRoomNotifier.orderedHumans) {
+    for (final human in playRoomNotifier.value.orderedHumans) {
       final position = playRoomNotifier.positionsByHumanId[human.id];
       expect(position.x, 0);
       expect(position.y, 0);

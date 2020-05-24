@@ -53,7 +53,7 @@ class PlayView extends StatelessWidget {
             size.width,
             size.height,
             humans: [
-              for (final orderdHuman in model.orderedHumans) Human(orderdHuman),
+              for (final humanModel in model.value.orderedHumans) Human(humanModel),
             ],
             positionsByHumanId: model.positionsByHumanId,
           ),

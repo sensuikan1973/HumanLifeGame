@@ -9,21 +9,25 @@ import '../common/life_road.dart';
 import '../common/life_step.dart';
 import 'life_event_record.dart';
 import 'life_stage.dart';
+import 'play_room_state.dart';
 
-class PlayRoomNotifier extends ChangeNotifier {
+class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   PlayRoomNotifier(
     this._i18n,
     this._dice,
     this.humanLife,
     List<HumanModel> humans,
-  ) : orderedHumans = humans..sort((a, b) => a.order.compareTo(b.order)) {
+  ) : super(PlayRoomState(
+          humanLife,
+          humans..sort((a, b) => a.order.compareTo(b.order)),
+        )) {
     // 参加者全員の位置を Start に
-    for (final human in humans) {
+    for (final human in value.orderedHumans) {
       final lifeStage = LifeStageModel(human)..lifeStepModel = humanLife.lifeRoad.start;
       lifeStages.add(lifeStage);
     }
     // 一番手の set
-    _currentPlayer = orderedHumans.first;
+    _currentPlayer = value.orderedHumans.first;
   }
 
   final I18n _i18n;
@@ -32,9 +36,6 @@ class PlayRoomNotifier extends ChangeNotifier {
 
   /// 歩む対象となる人生
   final HumanLifeModel humanLife;
-
-  /// 参加する人。ターン順。
-  final List<HumanModel> orderedHumans;
 
   /// お知らせ
   String get announcement => _announcement;
@@ -130,8 +131,8 @@ class PlayRoomNotifier extends ChangeNotifier {
 
   // 次のターンに変える
   void _changeToNextTurn() {
-    final currentPlayerIndex = orderedHumans.indexOf(_currentPlayer);
-    _currentPlayer = orderedHumans[(currentPlayerIndex + 1) % orderedHumans.length];
+    final currentPlayerIndex = value.orderedHumans.indexOf(_currentPlayer);
+    _currentPlayer = value.orderedHumans[(currentPlayerIndex + 1) % value.orderedHumans.length];
   }
 
   DestinationWithMovedStepCount _moveLifeStepUntilMustStop(int roll, {Direction firstDirection}) {
