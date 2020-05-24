@@ -1,5 +1,4 @@
-/// {@tool sample}
-/// for exmaple, Doctor job:
+/// for exmaple, Doctor job.
 ///
 /// ```dart
 /// LifeItem {
@@ -8,7 +7,6 @@
 ///   amount: 1,
 /// }
 /// ```
-/// {@end-tool}
 class LifeItemModel {
   LifeItemModel(this.key, this.type, this.amount);
 
