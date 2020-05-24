@@ -14,11 +14,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
+import '../mocks/dice.dart';
 import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
   final i18n = await I18n.load(const Locale('en', 'US'));
-  final orderedHumans = [HumanModel(id: 'h1', name: 'foo', order: 0), HumanModel(id: 'h2', name: 'bar', order: 1)];
+  final humans = [HumanModel(id: 'h1', name: 'foo', order: 0), HumanModel(id: 'h2', name: 'bar', order: 1)];
 
   final start = LifeEventModel(LifeEventTarget.myself, const StartParams());
   final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams());
@@ -36,7 +37,7 @@ Future<void> main() async {
       author: UserModel(id: 'dummyUserId', name: 'dummyUser'),
       lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents)),
     );
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, MockDice(), humanLife, humans);
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const PlayerAction()),
     ));

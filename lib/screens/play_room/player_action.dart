@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../../i18n/i18n.dart';
 import '../../models/common/life_step.dart';
 import '../../models/play_room/play_room.dart';
-import '../../models/play_room/player_action.dart';
 
 class PlayerAction extends StatelessWidget {
   const PlayerAction({Key key}) : super(key: key);
@@ -13,7 +12,7 @@ class PlayerAction extends StatelessWidget {
   Widget build(BuildContext context) => Card(
         child: Center(
           child: <Widget>[
-            if (context.select<PlayRoomNotifier, bool>((value) => value.requireSelectDirection))
+            if (context.select<PlayRoomNotifier, bool>((model) => model.value.requireSelectDirection))
               _directionSelectButton(context),
             _rollDiceButton(context),
           ].first, // NOTE: 常に必要な Action UI は 1つ
@@ -24,9 +23,9 @@ class PlayerAction extends StatelessWidget {
         key: const Key('playerActionDiceRollButton'),
         color: Colors.blue,
         textColor: Colors.white,
-        onPressed: context.select<PlayRoomNotifier, bool>((model) => model.allHumansReachedTheGoal)
+        onPressed: context.select<PlayRoomNotifier, bool>((model) => model.value.allHumansReachedTheGoal)
             ? null
-            : () => context.read<PlayerActionNotifier>().rollDice(),
+            : () => context.read<PlayRoomNotifier>().rollDice(),
         child: Text(
           I18n.of(context).rollDice,
           style: const TextStyle(fontSize: 20),
@@ -39,7 +38,7 @@ class PlayerAction extends StatelessWidget {
             child: IconButton(
               icon: const Icon(Icons.arrow_upward),
               onPressed: context.select<PlayRoomNotifier, LifeStepModel>((value) => value.currentPlayerLifeStep).hasUp
-                  ? () => context.read<PlayerActionNotifier>().direction = Direction.up
+                  ? () => context.read<PlayRoomNotifier>().chooseDirection(Direction.up)
                   : null,
             ),
           ),
@@ -50,14 +49,14 @@ class PlayerAction extends StatelessWidget {
                 icon: const Icon(Icons.arrow_back),
                 onPressed:
                     context.select<PlayRoomNotifier, LifeStepModel>((value) => value.currentPlayerLifeStep).hasLeft
-                        ? () => context.read<PlayerActionNotifier>().direction = Direction.left
+                        ? () => context.read<PlayRoomNotifier>().chooseDirection(Direction.left)
                         : null,
               ),
               IconButton(
                 icon: const Icon(Icons.arrow_forward),
                 onPressed:
                     context.select<PlayRoomNotifier, LifeStepModel>((value) => value.currentPlayerLifeStep).hasRight
-                        ? () => context.read<PlayerActionNotifier>().direction = Direction.right
+                        ? () => context.read<PlayRoomNotifier>().chooseDirection(Direction.right)
                         : null,
               ),
             ],
@@ -66,7 +65,7 @@ class PlayerAction extends StatelessWidget {
             child: IconButton(
               icon: const Icon(Icons.arrow_downward),
               onPressed: context.select<PlayRoomNotifier, LifeStepModel>((value) => value.currentPlayerLifeStep).hasDown
-                  ? () => context.read<PlayerActionNotifier>().direction = Direction.down
+                  ? () => context.read<PlayRoomNotifier>().chooseDirection(Direction.down)
                   : null,
             ),
           ),
