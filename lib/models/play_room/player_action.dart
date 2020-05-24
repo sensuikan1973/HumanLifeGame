@@ -9,22 +9,11 @@ class PlayerActionNotifier extends ChangeNotifier {
   final Dice _dice;
 
   /// 出目
-  int get roll => _roll;
-  int _roll = 0;
+  var roll = 0;
 
   /// 一度も振られていないかどうか
-  bool get neverRolled => _roll == 0;
+  bool get neverRolled => roll == 0;
 
   /// 方向の選択
-  Direction _direction;
-  Direction get direction => _direction;
-  set direction(Direction value) {
-    _direction = value;
-    notifyListeners();
-  }
-
-  void rollDice() {
-    _roll = _dice.roll();
-    notifyListeners();
-  }
+  Direction direction;
 }

@@ -66,14 +66,15 @@ Future<void> main() async {
 
   testWidgets('random value(1 <= value <= 6) should be displayed when dice is rolled', (tester) async {
     final dice = MockDice();
-    when(dice.roll()).thenReturn(5);
+    const roll = 5;
+    when(dice.roll()).thenReturn(roll);
     final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
     await tester.tap(find.byKey(const Key('playerActionDiceRollButton')));
     await tester.pump();
-    expect(find.text('5'), findsOneWidget);
+    expect(find.text(roll.toString()), findsOneWidget);
   });
 
   testWidgets('show Announcement message when dice is rolled', (tester) async {
@@ -217,10 +218,8 @@ class _TestablePlayRoom extends StatelessWidget {
             ChangeNotifierProvider<PlayerActionNotifier>(
               create: (context) => PlayerActionNotifier(context.read<Dice>()),
             ),
-            ChangeNotifierProxyProvider<PlayerActionNotifier, PlayRoomNotifier>(
+            ChangeNotifierProvider<PlayRoomNotifier>(
               create: (context) => playRoomModel,
-              update: (context, playerActionNotifier, playRoomNotifier) =>
-                  playRoomNotifier..update(playerActionNotifier),
             )
           ],
           child: MediaQuery(data: MediaQueryData(size: _size), child: const PlayRoom()),

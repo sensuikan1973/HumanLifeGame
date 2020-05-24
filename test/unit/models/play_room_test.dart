@@ -41,38 +41,37 @@ void main() {
     ];
     final lifeRoad = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
     final humanLife = HumanLifeModel(title: 'dummy HumanLife', author: author, lifeRoad: lifeRoad);
-    final playRoomModel = PlayRoomNotifier(const I18n('en'), MockDice(), humanLife, humans);
-
-    // 初期位置
-    for (final human in playRoomModel.orderedHumans) {
-      final position = playRoomModel.positionsByHumanId[human.id];
-      expect(position.x, 0);
-      expect(position.y, 0);
-    }
-    expect(playRoomModel.allHumansReachedTheGoal, false);
 
     // 5しか出ないサイコロを使う
     final dice = MockDice();
     const roll = 5;
     when(dice.roll()).thenReturn(roll);
-    final playerActionNotifier = PlayerActionNotifier(dice);
+    final playRoomNotifier = PlayRoomNotifier(const I18n('en'), dice, humanLife, humans);
+
+    // 初期位置
+    for (final human in playRoomNotifier.orderedHumans) {
+      final position = playRoomNotifier.positionsByHumanId[human.id];
+      expect(position.x, 0);
+      expect(position.y, 0);
+    }
+    expect(playRoomNotifier.allHumansReachedTheGoal, false);
 
     // human1 がサイコロを振って進む
-    playRoomModel.update(playerActionNotifier..rollDice());
-    expect(playRoomModel.positionsByHumanId[human1.id].x, roll);
+    playRoomNotifier.rollDice();
+    expect(playRoomNotifier.positionsByHumanId[human1.id].x, roll);
 
     // human2 がサイコロを振って進む
-    playRoomModel.update(playerActionNotifier..rollDice());
-    expect(playRoomModel.positionsByHumanId[human2.id].x, roll);
+    playRoomNotifier.rollDice();
+    expect(playRoomNotifier.positionsByHumanId[human2.id].x, roll);
 
     // human1 がサイコロを振って進む
-    playRoomModel.update(playerActionNotifier..rollDice());
-    expect(playRoomModel.positionsByHumanId[human1.id].x, lifeRoad.width - 1);
+    playRoomNotifier.rollDice();
+    expect(playRoomNotifier.positionsByHumanId[human1.id].x, lifeRoad.width - 1);
 
     // human2 がサイコロを振って進む
-    playRoomModel.update(playerActionNotifier..rollDice());
-    expect(playRoomModel.positionsByHumanId[human2.id].x, lifeRoad.width - 1);
-    expect(playRoomModel.allHumansReachedTheGoal, true);
+    playRoomNotifier.rollDice();
+    expect(playRoomNotifier.positionsByHumanId[human2.id].x, lifeRoad.width - 1);
+    expect(playRoomNotifier.allHumansReachedTheGoal, true);
   });
 
   group('with Direction', () {
@@ -86,85 +85,85 @@ void main() {
     final humanLife = HumanLifeModel(title: 'dummy HumanLife', author: author, lifeRoad: lifeRoad);
 
     test('Dice roll is 1', () {
-      final playRoomModel = PlayRoomNotifier(const I18n('en'), MockDice(), humanLife, humans);
       final dice = MockDice();
       const roll = 1;
       when(dice.roll()).thenReturn(roll);
+      final playRoomNotifier = PlayRoomNotifier(const I18n('en'), dice, humanLife, humans);
       final playerActionNotifier = PlayerActionNotifier(dice);
 
       // human1 がサイコロを振って進む
-      playRoomModel.update(playerActionNotifier..rollDice());
-      expect(playRoomModel.positionsByHumanId[human1.id].x, roll);
-      expect(playRoomModel.positionsByHumanId[human1.id].y, 0);
+      playRoomNotifier.rollDice();
+      expect(playRoomNotifier.positionsByHumanId[human1.id].x, roll);
+      expect(playRoomNotifier.positionsByHumanId[human1.id].y, 0);
 
       // human2 がサイコロを振って進む
-      playRoomModel.update(playerActionNotifier..rollDice());
-      expect(playRoomModel.positionsByHumanId[human2.id].x, roll);
-      expect(playRoomModel.positionsByHumanId[human2.id].y, 0);
+      playRoomNotifier.rollDice();
+      expect(playRoomNotifier.positionsByHumanId[human2.id].x, roll);
+      expect(playRoomNotifier.positionsByHumanId[human2.id].y, 0);
 
       // human1 がサイコロを振って進もうとする
-      playRoomModel.update(playerActionNotifier..rollDice());
+      playRoomNotifier.rollDice();
       // しかし分岐地点なので、方向の選択を求められる
-      expect(playRoomModel.requireSelectDirection, true);
-      expect(playRoomModel.currentPlayerLifeStep.hasUp, false);
-      expect(playRoomModel.currentPlayerLifeStep.hasDown, true);
-      expect(playRoomModel.currentPlayerLifeStep.hasLeft, false);
-      expect(playRoomModel.currentPlayerLifeStep.hasRight, true);
+      expect(playRoomNotifier.requireSelectDirection, true);
+      expect(playRoomNotifier.currentPlayerLifeStep.hasUp, false);
+      expect(playRoomNotifier.currentPlayerLifeStep.hasDown, true);
+      expect(playRoomNotifier.currentPlayerLifeStep.hasLeft, false);
+      expect(playRoomNotifier.currentPlayerLifeStep.hasRight, true);
       // 右を選ぶ
-      playRoomModel.update(playerActionNotifier..direction = Direction.right);
-      expect(playRoomModel.positionsByHumanId[human1.id].x, 2);
-      expect(playRoomModel.positionsByHumanId[human1.id].y, 0);
+      playRoomNotifier.chooseDirection(Direction.right);
+      expect(playRoomNotifier.positionsByHumanId[human1.id].x, 2);
+      expect(playRoomNotifier.positionsByHumanId[human1.id].y, 0);
 
       // human2 がサイコロを振って進もうとする
-      playRoomModel.update(playerActionNotifier..rollDice());
+      playRoomNotifier.rollDice();
       // しかし分岐地点なので、方向の選択を求められる
-      expect(playRoomModel.requireSelectDirection, true);
-      expect(playRoomModel.currentPlayerLifeStep.hasUp, false);
-      expect(playRoomModel.currentPlayerLifeStep.hasDown, true);
-      expect(playRoomModel.currentPlayerLifeStep.hasLeft, false);
-      expect(playRoomModel.currentPlayerLifeStep.hasRight, true);
+      expect(playRoomNotifier.requireSelectDirection, true);
+      expect(playRoomNotifier.currentPlayerLifeStep.hasUp, false);
+      expect(playRoomNotifier.currentPlayerLifeStep.hasDown, true);
+      expect(playRoomNotifier.currentPlayerLifeStep.hasLeft, false);
+      expect(playRoomNotifier.currentPlayerLifeStep.hasRight, true);
       // 下を選ぶ
-      playRoomModel.update(playerActionNotifier..direction = Direction.down);
-      expect(playRoomModel.positionsByHumanId[human2.id].x, 1);
-      expect(playRoomModel.positionsByHumanId[human2.id].y, 1);
+      playRoomNotifier.chooseDirection(Direction.down);
+      expect(playRoomNotifier.positionsByHumanId[human2.id].x, 1);
+      expect(playRoomNotifier.positionsByHumanId[human2.id].y, 1);
     });
 
     test('Dice roll is 3', () {
-      final playRoomModel = PlayRoomNotifier(const I18n('en'), MockDice(), humanLife, humans);
       final dice = MockDice();
       const roll = 3;
       when(dice.roll()).thenReturn(roll);
+      final playRoomNotifier = PlayRoomNotifier(const I18n('en'), dice, humanLife, humans);
       final playerActionNotifier = PlayerActionNotifier(dice);
 
       // human1 がサイコロを振って進む
-      playRoomModel.update(playerActionNotifier..rollDice());
-      expect(playRoomModel.positionsByHumanId[human1.id].x, 1);
-      expect(playRoomModel.positionsByHumanId[human1.id].y, 0);
+      playRoomNotifier.rollDice();
+      expect(playRoomNotifier.positionsByHumanId[human1.id].x, 1);
+      expect(playRoomNotifier.positionsByHumanId[human1.id].y, 0);
       // 途中で分岐地点を踏むので、方向の選択を求められる
-      expect(playRoomModel.requireSelectDirection, true);
-      expect(playRoomModel.currentPlayerLifeStep.hasUp, false);
-      expect(playRoomModel.currentPlayerLifeStep.hasDown, true);
-      expect(playRoomModel.currentPlayerLifeStep.hasLeft, false);
-      expect(playRoomModel.currentPlayerLifeStep.hasRight, true);
+      expect(playRoomNotifier.requireSelectDirection, true);
+      expect(playRoomNotifier.currentPlayerLifeStep.hasUp, false);
+      expect(playRoomNotifier.currentPlayerLifeStep.hasDown, true);
+      expect(playRoomNotifier.currentPlayerLifeStep.hasLeft, false);
+      expect(playRoomNotifier.currentPlayerLifeStep.hasRight, true);
       // 右を選ぶ
-      playRoomModel.update(playerActionNotifier..direction = Direction.right);
-      expect(playRoomModel.positionsByHumanId[human1.id].x, 3);
-      expect(playRoomModel.positionsByHumanId[human1.id].y, 0);
+      playRoomNotifier.chooseDirection(Direction.right);
+      expect(playRoomNotifier.positionsByHumanId[human1.id].x, 3);
+      expect(playRoomNotifier.positionsByHumanId[human1.id].y, 0);
 
       // human2 がサイコロを振って進む
-      playRoomModel.update(playerActionNotifier..rollDice());
-      expect(playRoomModel.positionsByHumanId[human2.id].x, 1);
-      expect(playRoomModel.positionsByHumanId[human2.id].y, 0);
+      playRoomNotifier.rollDice();
+      expect(playRoomNotifier.positionsByHumanId[human2.id].x, 1);
+      expect(playRoomNotifier.positionsByHumanId[human2.id].y, 0);
       // 途中で分岐地点を踏むので、方向の選択を求められる
-      expect(playRoomModel.requireSelectDirection, true);
-      expect(playRoomModel.currentPlayerLifeStep.hasUp, false);
-      expect(playRoomModel.currentPlayerLifeStep.hasDown, true);
-      expect(playRoomModel.currentPlayerLifeStep.hasLeft, false);
-      expect(playRoomModel.currentPlayerLifeStep.hasRight, true);
+      expect(playRoomNotifier.requireSelectDirection, true);
+      expect(playRoomNotifier.currentPlayerLifeStep.hasUp, false);
+      expect(playRoomNotifier.currentPlayerLifeStep.hasDown, true);
+      expect(playRoomNotifier.currentPlayerLifeStep.hasLeft, false);
+      expect(playRoomNotifier.currentPlayerLifeStep.hasRight, true);
       // 下を選ぶ
-      playRoomModel.update(playerActionNotifier..direction = Direction.down);
-      expect(playRoomModel.positionsByHumanId[human2.id].x, 1);
-      expect(playRoomModel.positionsByHumanId[human2.id].y, 2);
+      playRoomNotifier.chooseDirection(Direction.down);
+      expect(playRoomNotifier.positionsByHumanId[human2.id].x, 1);
+      expect(playRoomNotifier.positionsByHumanId[human2.id].y, 2);
     });
   });
 }

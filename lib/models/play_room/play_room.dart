@@ -73,6 +73,12 @@ class PlayRoomNotifier extends ChangeNotifier {
   /// 進む数の残り
   int _remainCount = 0;
 
+  /// 出目
+  int roll = 0;
+
+  /// 選択した方向
+  Direction chosenDirection;
+
   void update(PlayerActionNotifier playerActionNotifier) {
     assert(playerActionNotifier != null);
     if (playerActionNotifier.neverRolled || allHumansReachedTheGoal) return;
@@ -115,6 +121,20 @@ class PlayRoomNotifier extends ChangeNotifier {
 
     _changeToNextTurn(); // FIXME: 即ターン交代してるけど、あくまで仮
     notifyListeners();
+  }
+
+  /// FIXME: リファクタ途中
+  void rollDice() {
+    roll = _dice.roll();
+    update(PlayerActionNotifier(_dice)..roll = roll);
+  }
+
+  /// FIXME: リファクタ途中
+  void chooseDirection(Direction direction) {
+    chosenDirection = direction;
+    update(PlayerActionNotifier(_dice)
+      ..direction = direction
+      ..roll = 100); // neverRolled 回避
   }
 
   // 次のターンに変える

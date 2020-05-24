@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/play_room/player_action.dart';
+import '../../models/play_room/play_room.dart';
 
 /// ダイスを降った結果
 class DiceResult extends StatelessWidget {
@@ -11,7 +11,7 @@ class DiceResult extends StatelessWidget {
   Widget build(BuildContext context) => Card(
         child: Center(
           child: Text(
-            context.select<PlayerActionNotifier, int>((model) => model.roll).toString(),
+            context.select<PlayRoomNotifier, int>((model) => model.roll).toString(),
             key: const Key('diceResultText'),
           ),
         ),
