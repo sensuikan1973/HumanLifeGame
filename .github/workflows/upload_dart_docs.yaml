@@ -24,7 +24,7 @@ jobs:
       - name: generate dart docs
         run: FLUTTER_ROOT=~/development/flutter dartdoc --output docs/
       - name: deploy
-        usees: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
