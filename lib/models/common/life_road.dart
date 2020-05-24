@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'life_event.dart';
 import 'life_event_params/gain_life_items_params.dart';
 import 'life_event_params/goal_params.dart';
+import 'life_event_params/lose_life_items_params.dart';
 import 'life_event_params/nothing_params.dart';
 import 'life_event_params/select_direction_params.dart';
 import 'life_event_params/start_params.dart';
@@ -38,16 +39,19 @@ class LifeRoadModel {
     final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams(), description: 'Goal');
     final gains =
         LifeEventModel(LifeEventTarget.myself, const GainLifeItemsParams(targetItems: []), description: 'バイトでお金を稼ぐ');
+    final loses =
+        LifeEventModel(LifeEventTarget.myself, const LoseLifeItemsParams(targetItems: []), description: '財布を落とす');
+
     final direc = LifeEventModel(LifeEventTarget.myself, const SelectDirectionParams(), description: '人生の分岐点');
     final blank = LifeEventModel(LifeEventTarget.myself, const NothingParams());
     return [
-      [start, direc, gains, gains, gains, gains, blank, blank, blank, blank],
+      [start, direc, gains, gains, gains, loses, blank, blank, blank, blank],
       [blank, gains, blank, blank, blank, gains, blank, blank, blank, blank],
-      [blank, gains, gains, gains, gains, gains, gains, blank, blank, blank],
+      [blank, gains, gains, loses, gains, gains, gains, blank, blank, blank],
       [blank, blank, blank, blank, blank, blank, gains, blank, blank, blank],
-      [goals, gains, gains, gains, gains, gains, direc, blank, blank, blank],
+      [goals, gains, loses, gains, gains, loses, direc, blank, blank, blank],
       [blank, gains, blank, blank, blank, blank, gains, blank, blank, blank],
-      [blank, gains, gains, gains, gains, gains, gains, blank, blank, blank],
+      [blank, gains, gains, loses, gains, gains, gains, blank, blank, blank],
       [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
       [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
       [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
