@@ -10,6 +10,19 @@ import 'life_event_record.dart';
 import 'life_stage.dart';
 import 'play_room_state.dart';
 
+/// NOTE:
+/// 以下の点を把握した上で状態管理を実装すること。
+/// • 独自に定義した Class を Value としているため、notifyListeners() の明示的な呼び出しが必要である点。
+///   See: https://youtu.be/s-ZG-jS5QHQ?t=57
+/// • State は現状 mutable である点。
+///   immutable に扱おうと思うと、"value = State(a, b, c, d...)" という代入による更新が必要であり面倒。
+///   それ自体は copy_with_extension や freezed で copyWith を生やせば対応可能なので、必要に迫られたら導入する。
+/// • provider の文脈での参照にやや難がある点。
+///   PlayRoomNotifier に関して Widget が参照したいのは、value(PlayRoomState) と PlayRoomNotifier インスタンス の 2 つである。
+///   ValueNotifierProvider だと value(PlayRoomState) を provide することになるため、PlayRoomNotifier インスタンスを provide できない。
+///   そのため、現状は ChangeNotifierProvider で PlayRoomNotifier インスタンスを provide し、
+///   value を参照したければ ".value" を見なさい としている。
+///   この点はイマイチだが、flutter_state_notifier を導入することで対応可能なので、必要に迫られたら導入する。
 class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   PlayRoomNotifier(
     this._i18n,
