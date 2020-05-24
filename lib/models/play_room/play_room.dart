@@ -40,9 +40,6 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   LifeStageModel get _currentPlayerLifeStage => value.lifeStages[_currentPlayerLifeStageIndex];
   LifeStepModel get currentPlayerLifeStep => _currentPlayerLifeStage.lifeStepModel;
 
-  /// 参加者全員がゴールに到着したかどうか
-  bool get allHumansReachedTheGoal => value.lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
-
   /// 現在手番の人に方向の選択を求めるかどうか
   bool _requireSelectDirection = false;
   bool get requireSelectDirection => _requireSelectDirection;
@@ -54,7 +51,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   int roll = 0;
 
   void rollDice() {
-    if (allHumansReachedTheGoal || _requireSelectDirection) return;
+    if (value.allHumansReachedTheGoal || _requireSelectDirection) return;
 
     roll = _dice.roll();
     value.announcement = _i18n.rollAnnouncement(_currentPlayer.name, roll); // FIXME: 状態に応じた適切なメッセージを流すように
@@ -73,7 +70,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   }
 
   void chooseDirection(Direction direction) {
-    if (allHumansReachedTheGoal || !_requireSelectDirection) return;
+    if (value.allHumansReachedTheGoal || !_requireSelectDirection) return;
 
     final dest = _moveLifeStepUntilMustStop(_remainCount, firstDirection: direction);
     _updateByDestination(dest);

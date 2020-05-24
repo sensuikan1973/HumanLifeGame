@@ -53,7 +53,7 @@ void main() {
       expect(position.x, 0);
       expect(position.y, 0);
     }
-    expect(playRoomNotifier.allHumansReachedTheGoal, false);
+    expect(playRoomNotifier.value.allHumansReachedTheGoal, false);
 
     // human1 がサイコロを振って進む
     playRoomNotifier.rollDice();
@@ -70,7 +70,7 @@ void main() {
     // human2 がサイコロを振って進む
     playRoomNotifier.rollDice();
     expect(playRoomNotifier.value.positionsByHumanId[human2.id].x, lifeRoad.width - 1);
-    expect(playRoomNotifier.allHumansReachedTheGoal, true);
+    expect(playRoomNotifier.value.allHumansReachedTheGoal, true);
   });
 
   group('with Direction', () {

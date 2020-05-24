@@ -23,7 +23,7 @@ class PlayerAction extends StatelessWidget {
         key: const Key('playerActionDiceRollButton'),
         color: Colors.blue,
         textColor: Colors.white,
-        onPressed: context.select<PlayRoomNotifier, bool>((model) => model.allHumansReachedTheGoal)
+        onPressed: context.select<PlayRoomNotifier, bool>((model) => model.value.allHumansReachedTheGoal)
             ? null
             : () => context.read<PlayRoomNotifier>().rollDice(),
         child: Text(

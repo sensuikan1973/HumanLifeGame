@@ -31,7 +31,7 @@ class PlayRoomState extends State<PlayRoom> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    if (context.select<PlayRoomNotifier, bool>((model) => model.allHumansReachedTheGoal)) {
+    if (context.select<PlayRoomNotifier, bool>((model) => model.value.allHumansReachedTheGoal)) {
       if (!isDisplayedResult) {
         isDisplayedResult = true;
         WidgetsBinding.instance.addPostFrameCallback((_) async => _showResult(context));
