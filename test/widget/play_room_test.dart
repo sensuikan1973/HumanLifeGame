@@ -27,7 +27,7 @@ import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
   final i18n = await I18n.load(const Locale('en', 'US'));
-  final orderedHumans = [HumanModel(id: 'h1', name: 'foo', order: 0), HumanModel(id: 'h2', name: 'bar', order: 1)];
+  final humans = [HumanModel(id: 'h1', name: 'foo', order: 0), HumanModel(id: 'h2', name: 'bar', order: 1)];
   final start = LifeEventModel(LifeEventTarget.myself, const StartParams());
   final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams());
   final gains = LifeEventModel(LifeEventTarget.myself, const GainLifeItemsParams(targetItems: []));
@@ -54,7 +54,7 @@ Future<void> main() async {
   });
 
   testWidgets('show some widgets', (tester) async {
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
     await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel));
     await tester.pump();
     expect(find.byType(PlayerAction), findsOneWidget);
@@ -67,7 +67,7 @@ Future<void> main() async {
   testWidgets('random value(1 <= value <= 6) should be displayed when dice is rolled', (tester) async {
     final dice = MockDice();
     when(dice.roll()).thenReturn(5);
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
@@ -80,29 +80,29 @@ Future<void> main() async {
     final dice = MockDice();
     const roll = 5;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
     final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
     await tester.tap(rollDiceButton);
     await tester.pump();
-    expect(find.text(i18n.rollAnnouncement(orderedHumans.first.name, roll)), findsOneWidget);
+    expect(find.text(i18n.rollAnnouncement(humans.first.name, roll)), findsOneWidget);
 
     await tester.tap(rollDiceButton);
     await tester.pump();
-    expect(find.text(i18n.rollAnnouncement(orderedHumans[1].name, roll)), findsOneWidget);
+    expect(find.text(i18n.rollAnnouncement(humans[1].name, roll)), findsOneWidget);
 
     await tester.tap(rollDiceButton);
     await tester.pump();
-    expect(find.text(i18n.rollAnnouncement(orderedHumans.first.name, roll)), findsOneWidget);
+    expect(find.text(i18n.rollAnnouncement(humans.first.name, roll)), findsOneWidget);
   });
 
   testWidgets('roll-the-dice button shuld be disabled when all Humans reached the goal', (tester) async {
     final dice = MockDice();
     const roll = 6;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
@@ -121,7 +121,7 @@ Future<void> main() async {
     final dice = MockDice();
     const roll = 6;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
@@ -138,7 +138,7 @@ Future<void> main() async {
     final dice = MockDice();
     const roll = 6;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
 
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
@@ -168,7 +168,7 @@ Future<void> main() async {
   });
 
   testWidgets('stack widgets when screen size is middle', (tester) async {
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
 
     // デスクトップサイズのスクリーンの場合は、stackされない
     await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel));

@@ -14,11 +14,11 @@ import 'player_action.dart';
 class PlayRoomNotifier extends ChangeNotifier {
   PlayRoomNotifier(
     this._i18n,
-    this.humanLife, {
-    @required this.orderedHumans,
-  }) {
+    this.humanLife,
+    List<HumanModel> humans,
+  ) : orderedHumans = humans..sort((a, b) => a.order.compareTo(b.order)) {
     // 参加者全員の位置を Start に
-    for (final human in orderedHumans) {
+    for (final human in humans) {
       final lifeStage = LifeStageModel(human)..lifeStepModel = humanLife.lifeRoad.start;
       lifeStages.add(lifeStage);
     }

@@ -14,11 +14,12 @@ import 'package:HumanLifeGame/screens/play_room/play_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
+
 import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
   final i18n = await I18n.load(const Locale('en', 'US'));
-  final orderedHumans = [HumanModel(id: 'h1', name: 'foo', order: 0), HumanModel(id: 'h2', name: 'bar', order: 1)];
+  final humans = [HumanModel(id: 'h1', name: 'foo', order: 0), HumanModel(id: 'h2', name: 'bar', order: 1)];
   final start = LifeEventModel(LifeEventTarget.myself, const StartParams());
   final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams());
   final gains = LifeEventModel(LifeEventTarget.myself, const GainLifeItemsParams(targetItems: []));
@@ -42,7 +43,7 @@ Future<void> main() async {
     const windowWidth = 1440.0;
     const windowHeight = 1024.0;
     const size = Size(windowWidth, windowHeight);
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
 
     await tester.pumpWidget(
       testableApp(
@@ -59,7 +60,7 @@ Future<void> main() async {
     const windowWidth = 1050.0;
     const windowHeight = 750.0;
     const size = Size(windowWidth, windowHeight);
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
 
     await tester.pumpWidget(
       testableApp(

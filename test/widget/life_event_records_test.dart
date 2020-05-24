@@ -16,7 +16,7 @@ import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
   final i18n = await I18n.load(const Locale('en', 'US'));
-  final orderedHumans = [HumanModel(id: 'h1', name: 'foo', order: 0), HumanModel(id: 'h2', name: 'bar', order: 1)];
+  final humans = [HumanModel(id: 'h1', name: 'foo', order: 0), HumanModel(id: 'h2', name: 'bar', order: 1)];
   final humanLife = HumanLifeModel(
     title: 'dummy HumanLife',
     author: UserModel(id: 'dummyUserId', name: 'dummyUser'),
@@ -29,8 +29,8 @@ Future<void> main() async {
   final start = LifeEventModel(LifeEventTarget.myself, const StartParams());
 
   testWidgets("show 'lifeEventRecords'Text", (tester) async {
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
-    for (final orderedHuman in orderedHumans) {
+    final playRoomModel = PlayRoomNotifier(i18n, humanLife, humans);
+    for (final orderedHuman in humans) {
       playRoomModel.everyLifeEventRecords = [LifeEventRecordModel(i18n, orderedHuman, start)];
     }
     await tester.pumpWidget(testableApp(
