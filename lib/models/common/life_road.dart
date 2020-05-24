@@ -38,8 +38,7 @@ class LifeRoadModel {
     final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams(), description: 'Goal');
     final gains =
         LifeEventModel(LifeEventTarget.myself, const GainLifeItemsParams(targetItems: []), description: 'バイトでお金を稼ぐ');
-    final direc = LifeEventModel(LifeEventTarget.myself, const SelectDirectionParams(),
-        description: '人生の分岐点ああああ人生の分岐点ああああ人生の分岐点ああああ人生の分岐点ああああ');
+    final direc = LifeEventModel(LifeEventTarget.myself, const SelectDirectionParams(), description: '人生の分岐点');
     final blank = LifeEventModel(LifeEventTarget.myself, const NothingParams());
     return [
       [start, direc, gains, gains, gains, gains, blank, blank, blank, blank],

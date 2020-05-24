@@ -58,30 +58,4 @@ Future<void> main() async {
 
     expect(find.text('３年連続皆勤賞の快挙達成！！！'), findsOneWidget);
   });
-
-  //await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.start);
-//
-  //await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.goal);
-//
-  //await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.selectDirection);
-//
-  //await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.gainLifeItems);
-//
-  //await checkLifeEventI18n(LifeEventTarget.myself, LifeEventType.loseLifeItems);
-}
-
-Future<void> checkLifeEventI18n(LifeEventTarget target, LifeEventType type) async {
-  const locale = Locale('en', 'US');
-  final i18n = await I18n.load(locale);
-  testWidgets('show text for target:$target, type:$type', (tester) async {
-    final model = LifeStepModel(
-      id: 0,
-      lifeEvent: LifeEventModel(target, const NothingParams()),
-    );
-
-    await tester.pumpWidget(testableApp(home: LifeStep(model, 1050, 700)));
-    await tester.pump();
-
-    expect(find.text(i18n.lifeStepEventType(model.lifeEvent.type)), findsOneWidget);
-  });
 }
