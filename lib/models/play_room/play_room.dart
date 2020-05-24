@@ -43,24 +43,22 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   /// 進む数の残り
   int _remainCount = 0;
 
-  /// 出目
-  int roll = 0;
-
   void rollDice() {
     if (value.allHumansReachedTheGoal || value.requireSelectDirection) return;
 
-    roll = _dice.roll();
-    value.announcement = _i18n.rollAnnouncement(_currentPlayer.name, roll); // FIXME: 状態に応じた適切なメッセージを流すように
+    value
+      ..roll = _dice.roll()
+      ..announcement = _i18n.rollAnnouncement(_currentPlayer.name, value.roll); // FIXME: 状態に応じた適切なメッセージを流すように
 
     // サイコロ振る出発地点が分岐なら
     if (currentPlayerLifeStep.requireToSelectDirectionManually) {
-      _remainCount = roll;
+      _remainCount = value.roll;
       value.requireSelectDirection = true;
       notifyListeners();
       return;
     }
 
-    final dest = _moveLifeStepUntilMustStop(roll);
+    final dest = _moveLifeStepUntilMustStop(value.roll);
     _updateByDestination(dest);
     notifyListeners();
   }

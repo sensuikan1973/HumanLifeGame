@@ -11,7 +11,7 @@ class DiceResult extends StatelessWidget {
   Widget build(BuildContext context) => Card(
         child: Center(
           child: Text(
-            context.select<PlayRoomNotifier, int>((model) => model.roll).toString(),
+            context.select<PlayRoomNotifier, int>((model) => model.value.roll).toString(),
             key: const Key('diceResultText'),
           ),
         ),
