@@ -2,7 +2,7 @@ name: Update_Dependencies
 
 on:
   schedule:
-    - cron: 0 15 * * *
+    - cron: '0 0 * * *' # UTC
 
 jobs:
   update_dependencies:
