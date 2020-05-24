@@ -31,12 +31,12 @@ class LifeStep extends StatelessWidget {
           width: _width,
           height: _height,
         )
-      : Card(
-          color: exist,
-          elevation: 4,
-          child: SizedBox(
-            width: _width,
-            height: _height,
+      : SizedBox(
+          width: _width,
+          height: _height,
+          child: Card(
+            color: exist,
+            elevation: 4,
             child: Stack(
               children: <Widget>[
                 SizedBox(
