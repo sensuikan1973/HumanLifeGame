@@ -7,7 +7,6 @@ import '../common/human.dart';
 import '../common/human_life.dart';
 import '../common/life_road.dart';
 import '../common/life_step.dart';
-import 'announcement.dart';
 import 'life_event_record.dart';
 import 'life_stage.dart';
 
@@ -38,8 +37,8 @@ class PlayRoomNotifier extends ChangeNotifier {
   final List<HumanModel> orderedHumans;
 
   /// お知らせ
-  AnnouncementModel get announcement => _announcement;
-  final _announcement = AnnouncementModel();
+  String get announcement => _announcement;
+  String _announcement = '';
 
   /// 部屋のタイトル名
   String roomTitle;
@@ -79,7 +78,7 @@ class PlayRoomNotifier extends ChangeNotifier {
     if (allHumansReachedTheGoal || _requireSelectDirection) return;
 
     roll = _dice.roll();
-    _announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, roll); // FIXME: 状態に応じた適切なメッセージを流すように
+    _announcement = _i18n.rollAnnouncement(_currentPlayer.name, roll); // FIXME: 状態に応じた適切なメッセージを流すように
 
     // サイコロ振る出発地点が分岐なら
     if (currentPlayerLifeStep.requireToSelectDirectionManually) {

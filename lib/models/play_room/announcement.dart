@@ -1,3 +1,0 @@
-class AnnouncementModel {
-  String message = '';
-}

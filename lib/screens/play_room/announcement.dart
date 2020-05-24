@@ -8,7 +8,7 @@ class Announcement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final message = context.select<PlayRoomNotifier, String>((model) => model.announcement.message);
+    final message = context.select<PlayRoomNotifier, String>((model) => model.announcement);
     return Card(
       child: Text(
         message,
