@@ -12,12 +12,6 @@ class LifeEventService {
   const LifeEventService();
 
   LifeStageModel executeEvent(LifeEventModel lifeEvent, LifeStageModel lifeStage) {
-    // FIXME: 他の EventType もサポートすること
-    if (lifeEvent.type != LifeEventType.gainLifeItems && lifeEvent.type != LifeEventType.loseLifeItems) {
-      return lifeStage;
-    }
-
-    List<LifeItemModel> items;
     switch (lifeEvent.type) {
       case LifeEventType.nothing:
         // TODO: Handle this case.
@@ -39,9 +33,10 @@ class LifeEventService {
         break;
       case LifeEventType.gainLifeItems:
         final params = lifeEvent.params as GainLifeItemsParams;
-        items = [
+        final items = [
           for (final item in params.targetItems) LifeItemModel(item.key, item.type, item.amount),
         ];
+        return lifeStage..lifeItems.addAll(items);
         break;
       case LifeEventType.gainLifeItemsPerOtherLifeItem:
         // TODO: Handle this case.
@@ -63,9 +58,10 @@ class LifeEventService {
         break;
       case LifeEventType.loseLifeItems:
         final params = lifeEvent.params as LoseLifeItemsParams;
-        items = [
+        final items = [
           for (final item in params.targetItems) LifeItemModel(item.key, item.type, -item.amount),
         ];
+        return lifeStage..lifeItems.addAll(items);
         break;
       case LifeEventType.loseLifeItemsPerDiceRoll:
         // TODO: Handle this case.
@@ -81,9 +77,7 @@ class LifeEventService {
         break;
       default:
         return lifeStage;
-        break;
     }
-
-    return lifeStage..lifeItems.addAll(items);
+    return lifeStage;
   }
 }
