@@ -79,7 +79,7 @@ class PlayRoomNotifier extends ChangeNotifier {
     if (allHumansReachedTheGoal || _requireSelectDirection) return;
 
     roll = _dice.roll();
-    announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, roll); // FIXME: 状態に応じた適切なメッセージを流すように
+    _announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, roll); // FIXME: 状態に応じた適切なメッセージを流すように
 
     // サイコロ振る出発地点が分岐なら
     if (currentPlayerLifeStep.requireToSelectDirectionManually) {
