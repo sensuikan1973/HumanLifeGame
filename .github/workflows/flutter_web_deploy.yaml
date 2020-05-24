@@ -33,6 +33,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - name: start deployment
+        uses: bobheadxi/deployments@master
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: dev
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
@@ -40,34 +47,16 @@ jobs:
         with:
           name: human_life_game_web
           path: build/web
-
-      - name: start deploy
-        uses: chrnorm/deployment-status@releases/v1
-        id: deployment
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          target_url: https://human-life-game-dev.web.app/
-          environemnt: dev
-
       - uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting -P dev
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_DEV_TOKEN }}
 
-      - name: update deployment status (success)
-        if: success()
-        uses: chrnorm/deployment-status@releases/v1
+      - name: update deployment status
+        uses: bobheadxi/deployments@master
         with:
+          step: finish
           token: ${{ secrets.GITHUB_TOKEN }}
-          target_url: https://human-life-game-dev.web.app/
-          state: "success"
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-      - name: update deployment status (failure)
-        if: failure()
-        uses: chrnorm/deployment-status@releases/v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          target_url: https://human-life-game-dev.web.app/
-          state: "failure"
+          status: ${{ job.status }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
