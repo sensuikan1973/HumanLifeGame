@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../i18n/i18n.dart';
 import '../../models/common/life_event_params/life_event_params.dart';
 import '../../models/common/life_step.dart';
 import 'human.dart';
