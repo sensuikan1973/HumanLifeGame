@@ -81,7 +81,6 @@
     
         <li class="section-title"><a href="../../screens_common_life_step/LifeStep-class.html#static-properties">Static properties</a></li>
         <li><a href="../../screens_common_life_step/LifeStep/exist.html">exist</a></li>
-        <li><a href="../../screens_common_life_step/LifeStep/nothing.html">nothing</a></li>
     
     
     
@@ -141,33 +140,39 @@ and</li>
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">@override
-Widget build(BuildContext context) =&gt; Stack(
-      children: &lt;Widget&gt;[
-        SizedBox(
-          width: _width,
-          height: _height,
-          child: Padding(
-            padding: const EdgeInsets.all(2),
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: _model.lifeEvent.type == LifeEventType.nothing ? nothing : exist,
+Widget build(BuildContext context) =&gt; SizedBox(
+      width: _width,
+      height: _height,
+      child: _model.lifeEvent.type == LifeEventType.nothing
+          ? null
+          : Card(
+              color: exist,
+              elevation: 4,
+              child: Stack(
+                children: &lt;Widget&gt;[
+                  SizedBox(
+                    height: 70,
+                    child: Center(
+                      child: Text(_model.lifeEvent.description),
+                    ),
+                  ),
+                  Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: _model.lifeEvent.type == LifeEventType.gainLifeItems
+                          ? Icon(Icons.mood, color: Colors.grey[400], size: 20)
+                          : null,
+                    ),
+                  ),
+                  Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Row(children: _humans),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-        ),
-        Column(
-          children: [
-            Text(_model.lifeEvent.description),
-            Text(I18n.of(context).lifeStepEventType(_model.lifeEvent.type)),
-          ],
-        ),
-        Positioned.fill(
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Row(children: _humans),
-          ),
-        ),
-      ],
     );</code></pre>
     </section>
 
