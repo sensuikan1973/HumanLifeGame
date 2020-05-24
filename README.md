@@ -53,5 +53,5 @@ flutter packages pub run build_runner build
 
 ```sh
 # See: https://github.com/dart-lang/dartdoc/pull/2175
-FLUTTER_ROOT=~/development/flutter dartdoc --output doc/api && open doc/api/index.html
+FLUTTER_ROOT=~/development/flutter dartdoc --output docs && open docs/index.html
 ```
