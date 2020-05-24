@@ -22,7 +22,7 @@ jobs:
       - run: flutter packages pub run build_runner build
       - name: generate dart docs
         run: FLUTTER_ROOT=$FLUTTER_HOME dartdoc --output docs/
-      - name: deploy
+      - name: upload
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
