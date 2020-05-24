@@ -14,7 +14,7 @@ class PlayRoomState {
   final HumanLifeModel humanLife;
   final List<HumanModel> orderedHumans;
 
-  /// 現在手盤の人に方向選択を求めているかどうか
+  /// 現在手番の人に方向選択を求めているかどうか
   bool requireSelectDirection = false;
 
   /// サイコロの出目
