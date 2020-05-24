@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../../models/common/human.dart';
 import '../../models/play_room/life_stage.dart';
 import '../../models/play_room/play_room.dart';
-
 import '../common/human.dart';
 
 /// Humanの状況を表示
@@ -17,7 +16,7 @@ class LifeStages extends StatelessWidget {
       );
 
   Column _lifeStages(BuildContext context) {
-    final lifeStages = context.select<PlayRoomNotifier, List<LifeStageModel>>((model) => model.lifeStages);
+    final lifeStages = context.select<PlayRoomNotifier, List<LifeStageModel>>((model) => model.value.lifeStages);
     final currentPlayer = context.select<PlayRoomNotifier, HumanModel>((model) => model.currentPlayer);
     final humanNames = <Widget>[
       for (final lifeStage in lifeStages)

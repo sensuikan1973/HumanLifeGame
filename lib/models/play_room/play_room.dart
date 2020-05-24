@@ -15,7 +15,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   PlayRoomNotifier(
     this._i18n,
     this._dice,
-    this.humanLife,
+    HumanLifeModel humanLife,
     List<HumanModel> humans,
   ) : super(PlayRoomState(
           humanLife,
@@ -23,8 +23,8 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
         )) {
     // 参加者全員の位置を Start に
     for (final human in value.orderedHumans) {
-      final lifeStage = LifeStageModel(human)..lifeStepModel = humanLife.lifeRoad.start;
-      lifeStages.add(lifeStage);
+      final lifeStage = LifeStageModel(human)..lifeStepModel = value.humanLife.lifeRoad.start;
+      value.lifeStages.add(lifeStage);
     }
     // 一番手の set
     _currentPlayer = value.orderedHumans.first;
@@ -34,29 +34,24 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   final Dice _dice;
   final _lifeEventService = const LifeEventService();
 
-  /// 歩む対象となる人生
-  final HumanLifeModel humanLife;
-
   /// 現在手番の人
   HumanModel get currentPlayer => _currentPlayer;
   HumanModel _currentPlayer;
-  int get _currentPlayerLifeStageIndex => lifeStages.indexWhere((lifeStage) => lifeStage.human == _currentPlayer);
-  LifeStageModel get _currentPlayerLifeStage => lifeStages[_currentPlayerLifeStageIndex];
+  int get _currentPlayerLifeStageIndex => value.lifeStages.indexWhere((lifeStage) => lifeStage.human == _currentPlayer);
+  LifeStageModel get _currentPlayerLifeStage => value.lifeStages[_currentPlayerLifeStageIndex];
   LifeStepModel get currentPlayerLifeStep => _currentPlayerLifeStage.lifeStepModel;
-
-  /// 参加者のそれぞれの人生の進捗
-  List<LifeStageModel> lifeStages = [];
 
   /// 参加者それぞれの位置情報
   Map<String, Position> get positionsByHumanId => {
-        for (final lifeStage in lifeStages) lifeStage.human.id: humanLife.lifeRoad.getPosition(lifeStage.lifeStepModel),
+        for (final lifeStage in value.lifeStages)
+          lifeStage.human.id: value.humanLife.lifeRoad.getPosition(lifeStage.lifeStepModel),
       };
 
   /// 全参加者それぞれの LifeEvent 履歴
   List<LifeEventRecordModel> everyLifeEventRecords = [];
 
   /// 参加者全員がゴールに到着したかどうか
-  bool get allHumansReachedTheGoal => lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
+  bool get allHumansReachedTheGoal => value.lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
 
   /// 現在手番の人に方向の選択を求めるかどうか
   bool _requireSelectDirection = false;
@@ -107,8 +102,8 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     _remainCount = 0; // リセット
 
     // LifeEvent 処理
-    lifeStages = [...lifeStages];
-    lifeStages[_currentPlayerLifeStageIndex] = _lifeEventService.executeEvent(
+    value.lifeStages = [...value.lifeStages];
+    value.lifeStages[_currentPlayerLifeStageIndex] = _lifeEventService.executeEvent(
       _currentPlayerLifeStage.lifeStepModel.lifeEvent,
       _currentPlayerLifeStage,
     );
@@ -133,7 +128,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     final destinationWithMovedStepCount =
         _currentPlayerLifeStage.lifeStepModel.getNextUntilMustStopStep(roll, firstDirection: firstDirection);
     // 進み先の LifeStep を LifeStage に代入する
-    lifeStages[_currentPlayerLifeStageIndex].lifeStepModel = destinationWithMovedStepCount.destination;
+    value.lifeStages[_currentPlayerLifeStageIndex].lifeStepModel = destinationWithMovedStepCount.destination;
     return destinationWithMovedStepCount;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:HumanLifeGame/models/play_room/play_room_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,15 +14,15 @@ class PlayView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final model = context.watch<PlayRoomNotifier>();
+    final playRoomState = context.watch<PlayRoomNotifier>().value;
 
     final lifeStepSize = Size(
       screenSize.width >= _desktopSize.width ? 150 : 130,
       100,
     );
     final lifeRoadSize = Size(
-      lifeStepSize.width * model.humanLife.lifeRoad.width,
-      lifeStepSize.height * model.humanLife.lifeRoad.height,
+      lifeStepSize.width * playRoomState.humanLife.lifeRoad.width,
+      lifeStepSize.height * playRoomState.humanLife.lifeRoad.height,
     );
 
     return Card(
@@ -29,12 +30,12 @@ class PlayView extends StatelessWidget {
         slivers: [
           SliverToBoxAdapter(
             child: SizedBox(
-              height: lifeStepSize.height * model.humanLife.lifeRoad.height,
+              height: lifeStepSize.height * playRoomState.humanLife.lifeRoad.height,
               child: CustomScrollView(
                 scrollDirection: Axis.horizontal,
                 slivers: [
                   SliverToBoxAdapter(
-                    child: _playView(model, lifeRoadSize),
+                    child: _playView(playRoomState, lifeRoadSize),
                   ),
                 ],
               ),
@@ -45,17 +46,17 @@ class PlayView extends StatelessWidget {
     );
   }
 
-  DecoratedBox _playView(PlayRoomNotifier model, Size size) => DecoratedBox(
+  DecoratedBox _playView(PlayRoomState playRoomState, Size size) => DecoratedBox(
         decoration: const BoxDecoration(color: Colors.white),
         child: Center(
           child: LifeRoad(
-            model.humanLife.lifeRoad,
+            playRoomState.humanLife.lifeRoad,
             size.width,
             size.height,
             humans: [
-              for (final humanModel in model.value.orderedHumans) Human(humanModel),
+              for (final humanModel in playRoomState.orderedHumans) Human(humanModel),
             ],
-            positionsByHumanId: model.positionsByHumanId,
+            positionsByHumanId: playRoomState.positionsByHumanId,
           ),
         ),
       );

@@ -152,7 +152,7 @@ class PlayRoomState extends State<PlayRoom> {
   }
 
   Future<void> _showResult(BuildContext context) async {
-    final lifeStages = context.read<PlayRoomNotifier>().lifeStages;
+    final lifeStages = context.read<PlayRoomNotifier>().value.lifeStages;
     final result = <Widget>[
       for (final lifeStage in lifeStages)
         Row(
