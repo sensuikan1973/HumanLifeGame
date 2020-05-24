@@ -7,8 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../api/auth.dart';
 import '../../models/common/user.dart';
 
-// FIXME: これはあくまで 下書き Widget。ロジックをベタ書きしてるし、レイアウトも i18n も全てがテキトー。
-// See: https://github.com/FirebaseExtended/flutterfire/blob/master/packages/firebase_auth/firebase_auth/example/lib/signin_page.dart
+// FIXME: これはあくまで 下書き Widget. ロジックをベタ書きしてるし、レイアウトも i18n も全てがテキトー.
+// See: <https://github.com/FirebaseExtended/flutterfire/blob/master/packages/firebase_auth/firebase_auth/example/lib/signin_page.dart>
 class SignIn extends StatefulWidget {
   const SignIn({Key key}) : super(key: key);
 

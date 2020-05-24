@@ -35,7 +35,7 @@ class LifeRoadModel {
         ),
       );
 
-  // FIXME: いつか消す
+  /// FIXME: いつか消す
   static List<List<LifeEventModel>> dummyLifeEvents() {
     final start = LifeEventModel(LifeEventTarget.myself, const StartParams(), description: 'Start');
     final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams(), description: 'Goal');

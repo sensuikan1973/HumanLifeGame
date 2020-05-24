@@ -21,7 +21,11 @@ class LifeEventModel<T extends LifeEventParams> {
 }
 
 enum LifeEventTarget {
-  myself, // LifeEvent を引き起こした張本人の human のみ
-  all, // 全 human
+  /// LifeEvent を引き起こした張本人の Human のみ
+  myself,
+
+  /// 全ての Human
+  all,
+
   // 特定の他の human を対象に取る LifeEvent は当分サポートしない
 }
