@@ -77,22 +77,9 @@ class PlayRoomState extends State<PlayRoom> {
             height: screenSize.height,
             child: Column(
               children: const <Widget>[
-                Expanded(
-                  flex: 2,
-                  child: SizedBox(
-                    child: LifeStages(),
-                  ),
-                ),
-                Expanded(
-                  child: SizedBox(
-                    child: DiceResult(),
-                  ),
-                ),
-                Expanded(
-                  child: SizedBox(
-                    child: PlayerAction(),
-                  ),
-                ),
+                Expanded(flex: 2, child: LifeStages()),
+                Expanded(child: DiceResult()),
+                Expanded(child: PlayerAction()),
               ],
             ),
           ),
