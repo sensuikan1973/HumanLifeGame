@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../i18n/i18n.dart';
 import '../../models/common/life_event_params/life_event_params.dart';
 import '../../models/common/life_step.dart';
 import 'human.dart';
@@ -21,38 +20,41 @@ class LifeStep extends StatelessWidget {
   final List<Human> _humans;
 
   @visibleForTesting
-  static Color nothing = Colors.amber[50];
-
-  @visibleForTesting
   static Color exist = Colors.cyan[50];
 
   @override
-  Widget build(BuildContext context) => Stack(
-        children: <Widget>[
-          SizedBox(
-            width: _width,
-            height: _height,
-            child: Padding(
-              padding: const EdgeInsets.all(2),
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: _model.lifeEvent.type == LifeEventType.nothing ? nothing : exist,
+  Widget build(BuildContext context) => SizedBox(
+        width: _width,
+        height: _height,
+        child: _model.lifeEvent.type == LifeEventType.nothing
+            ? null
+            : Card(
+                color: exist,
+                elevation: 4,
+                child: Stack(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 70,
+                      child: Center(
+                        child: Text(_model.lifeEvent.description),
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: _model.lifeEvent.type == LifeEventType.gainLifeItems
+                            ? Icon(Icons.mood, color: Colors.grey[400], size: 20)
+                            : null,
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Row(children: _humans),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ),
-          Column(
-            children: [
-              Text(_model.lifeEvent.description),
-              Text(I18n.of(context).lifeStepEventType(_model.lifeEvent.type)),
-            ],
-          ),
-          Positioned.fill(
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Row(children: _humans),
-            ),
-          ),
-        ],
       );
 }

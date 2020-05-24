@@ -24,8 +24,8 @@ class LifeStages extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             SizedBox(
-              width: 30,
-              height: 30,
+              width: 25,
+              height: 25,
               child: (currentPlayer == lifeStage.human) ? currentPlayerSelector() : null,
             ),
             Human(lifeStage.human),
