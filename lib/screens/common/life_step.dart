@@ -21,6 +21,10 @@ class LifeStep extends StatelessWidget {
 
   @visibleForTesting
   static Color exist = Colors.cyan[50];
+  static Color positive = Colors.red[50];
+  static Color negative = Colors.blue[50];
+  static Color normal = Colors.grey[50];
+  static Color challenge = Colors.green[50];
 
   @override
   Widget build(BuildContext context) => SizedBox(
@@ -29,7 +33,7 @@ class LifeStep extends StatelessWidget {
         child: _model.lifeEvent.type == LifeEventType.nothing
             ? null
             : Card(
-                color: exist,
+                color: _eventCategoryColor(_model.lifeEvent.category),
                 elevation: 4,
                 child: Stack(
                   children: <Widget>[
@@ -42,9 +46,7 @@ class LifeStep extends StatelessWidget {
                     Positioned.fill(
                       child: Align(
                         alignment: Alignment.bottomRight,
-                        child: _model.lifeEvent.type == LifeEventType.gainLifeItems
-                            ? Icon(Icons.mood, color: Colors.grey[400], size: 20)
-                            : null,
+                        child: _eventCategoryIcon(_model.lifeEvent.category),
                       ),
                     ),
                     Positioned.fill(
@@ -57,4 +59,34 @@ class LifeStep extends StatelessWidget {
                 ),
               ),
       );
+
+  Icon _eventCategoryIcon(EventCategory category) {
+    switch (category) {
+      case EventCategory.positive:
+        return Icon(Icons.mood, color: Colors.grey[400], size: 20);
+      case EventCategory.negative:
+        return Icon(Icons.mood_bad, color: Colors.grey[400], size: 20);
+      case EventCategory.normal:
+        // TODO: Handle this case.
+        break;
+      case EventCategory.challenge:
+        // TODO: Handle this case.
+        break;
+    }
+    return null;
+  }
+
+  Color _eventCategoryColor(EventCategory category) {
+    switch (category) {
+      case EventCategory.positive:
+        return positive;
+      case EventCategory.negative:
+        return negative;
+      case EventCategory.normal:
+        return normal;
+      case EventCategory.challenge:
+        return challenge;
+    }
+    return null;
+  }
 }

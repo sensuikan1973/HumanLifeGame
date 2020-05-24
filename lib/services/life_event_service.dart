@@ -64,7 +64,7 @@ class LifeEventService {
       case LifeEventType.loseLifeItems:
         final params = lifeEvent.params as LoseLifeItemsParams;
         items = [
-          for (final item in params.targetItems) LifeItemModel(item.key, item.type, item.amount),
+          for (final item in params.targetItems) LifeItemModel(item.key, item.type, -item.amount),
         ];
         break;
       case LifeEventType.loseLifeItemsPerDiceRoll:
