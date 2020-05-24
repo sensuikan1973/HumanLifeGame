@@ -49,7 +49,7 @@ class LifeStep extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.bottomRight,
                     child: _model.lifeEvent.type == LifeEventType.gainLifeItems
-                        ? const Icon(Icons.mood, color: Colors.grey, size: 20)
+                        ? Icon(Icons.mood, color: Colors.grey[400], size: 20)
                         : null,
                   ),
                 ),
