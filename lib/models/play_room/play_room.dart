@@ -25,7 +25,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
       final lifeStage = LifeStageModel(human)..lifeStepModel = value.humanLife.lifeRoad.start;
       value.lifeStages.add(lifeStage);
     }
-    // 一番手の set
+    // 一番手をセット
     value.currentTurnHuman = value.orderedHumans.first;
   }
 
