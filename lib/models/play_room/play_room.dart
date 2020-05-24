@@ -22,7 +22,7 @@ import 'play_room_state.dart';
 ///   ValueNotifierProvider だと value(PlayRoomState) を provide することになるため、PlayRoomNotifier インスタンスを provide できない。
 ///   そのため、現状は ChangeNotifierProvider で PlayRoomNotifier インスタンスを provide し、
 ///   value を参照したければ ".value" を見なさい としている。
-///   この点はイマイチだが、flutter_state_notifier を導入することで対応可能なので、必要に迫られたら導入する。
+///   この点はイマイチだが、flutter_state_notifier を導入することで対応可能(notifyListeners の話も含め)なので、必要に迫られたら導入する。
 class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   PlayRoomNotifier(
     this._i18n,
