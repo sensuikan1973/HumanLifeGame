@@ -27,28 +27,35 @@ class LifeStep extends StatelessWidget {
   static Color exist = Colors.cyan[50];
 
   @override
-  Widget build(BuildContext context) => Card(
-        color: _model.lifeEvent.type == LifeEventType.nothing ? nothing : exist,
-        elevation: 2,
-        child: Stack(
-          children: <Widget>[
-            SizedBox(
-              width: _width,
-              height: _height,
-            ),
-            Column(
-              children: [
-                Text(_model.lifeEvent.description),
-                Text(I18n.of(context).lifeStepEventType(_model.lifeEvent.type)),
+  Widget build(BuildContext context) {
+    return _model.lifeEvent.type == LifeEventType.nothing
+        ? SizedBox(
+            width: _width,
+            height: _height,
+          )
+        : Card(
+            color: _model.lifeEvent.type == LifeEventType.nothing ? nothing : exist,
+            elevation: 2,
+            child: Stack(
+              children: <Widget>[
+                SizedBox(
+                  width: _width,
+                  height: _height,
+                ),
+                Column(
+                  children: [
+                    Text(_model.lifeEvent.description),
+                    Text(I18n.of(context).lifeStepEventType(_model.lifeEvent.type)),
+                  ],
+                ),
+                Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Row(children: _humans),
+                  ),
+                ),
               ],
             ),
-            Positioned.fill(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Row(children: _humans),
-              ),
-            ),
-          ],
-        ),
-      );
+          );
+  }
 }

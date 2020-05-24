@@ -34,10 +34,11 @@ class LifeRoadModel {
 
   // FIXME: いつか消す
   static List<List<LifeEventModel>> dummyLifeEvents() {
-    final start = LifeEventModel(LifeEventTarget.myself, const StartParams());
-    final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams());
-    final gains = LifeEventModel(LifeEventTarget.myself, const GainLifeItemsParams(targetItems: []));
-    final direc = LifeEventModel(LifeEventTarget.myself, const SelectDirectionParams());
+    final start = LifeEventModel(LifeEventTarget.myself, const StartParams(), description: 'Start');
+    final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams(), description: 'Goal');
+    final gains =
+        LifeEventModel(LifeEventTarget.myself, const GainLifeItemsParams(targetItems: []), description: 'バイトでお金を稼ぐ');
+    final direc = LifeEventModel(LifeEventTarget.myself, const SelectDirectionParams(), description: '人生の分岐点');
     final blank = LifeEventModel(LifeEventTarget.myself, const NothingParams());
     return [
       [start, direc, gains, gains, gains, gains, blank, blank, blank, blank],
