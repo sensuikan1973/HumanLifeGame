@@ -40,9 +40,6 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   LifeStageModel get _currentPlayerLifeStage => value.lifeStages[_currentPlayerLifeStageIndex];
   LifeStepModel get currentPlayerLifeStep => _currentPlayerLifeStage.lifeStepModel;
 
-  /// 全参加者それぞれの LifeEvent 履歴
-  List<LifeEventRecordModel> everyLifeEventRecords = [];
-
   /// 参加者全員がゴールに到着したかどうか
   bool get allHumansReachedTheGoal => value.lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
 
@@ -102,8 +99,8 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     );
 
     // LifeEventの履歴を更新
-    everyLifeEventRecords = [
-      ...everyLifeEventRecords,
+    value.everyLifeEventRecords = [
+      ...value.everyLifeEventRecords,
       LifeEventRecordModel(_i18n, _currentPlayerLifeStage.human, _currentPlayerLifeStage.lifeStepModel.lifeEvent)
     ];
 

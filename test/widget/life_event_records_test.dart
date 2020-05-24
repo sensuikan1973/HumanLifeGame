@@ -32,14 +32,14 @@ Future<void> main() async {
   testWidgets("show 'lifeEventRecords'Text", (tester) async {
     final playRoomModel = PlayRoomNotifier(i18n, MockDice(), humanLife, humans);
     for (final orderedHuman in humans) {
-      playRoomModel.everyLifeEventRecords = [LifeEventRecordModel(i18n, orderedHuman, start)];
+      playRoomModel.value.everyLifeEventRecords = [LifeEventRecordModel(i18n, orderedHuman, start)];
     }
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(create: (_) => playRoomModel, child: const LifeEventRecords()),
     ));
     await tester.pump();
 
-    for (final model in playRoomModel.everyLifeEventRecords) {
+    for (final model in playRoomModel.value.everyLifeEventRecords) {
       expect(find.text(model.lifeEventRecordMessage), findsOneWidget);
     }
   });
