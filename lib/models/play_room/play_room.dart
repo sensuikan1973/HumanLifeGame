@@ -10,7 +10,6 @@ import '../common/life_step.dart';
 import 'announcement.dart';
 import 'life_event_record.dart';
 import 'life_stage.dart';
-import 'player_action.dart';
 
 class PlayRoomNotifier extends ChangeNotifier {
   PlayRoomNotifier(
@@ -76,27 +75,22 @@ class PlayRoomNotifier extends ChangeNotifier {
   /// 出目
   int roll = 0;
 
-  /// 選択した方向
-  Direction chosenDirection;
+  /// FIXME: リファクタ途中
+  void rollDice() {
+    if (allHumansReachedTheGoal || _requireSelectDirection) return;
 
-  void update(PlayerActionNotifier playerActionNotifier) {
-    assert(playerActionNotifier != null);
-    if (playerActionNotifier.neverRolled || allHumansReachedTheGoal) return;
-
-    // FIXME: 状態に応じた適切なメッセージを流すように
-    announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, playerActionNotifier.roll);
+    roll = _dice.roll();
+    announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, roll); // FIXME: 状態に応じた適切なメッセージを流すように
 
     // サイコロ振る出発地点が分岐なら
-    if (!_requireSelectDirection && currentPlayerLifeStep.requireToSelectDirectionManually) {
-      _remainCount = playerActionNotifier.roll;
+    if (currentPlayerLifeStep.requireToSelectDirectionManually) {
+      _remainCount = roll;
       _requireSelectDirection = true;
       notifyListeners();
       return;
     }
 
-    final dest = _requireSelectDirection
-        ? _moveLifeStepUntilMustStop(_remainCount, firstDirection: playerActionNotifier.direction)
-        : _moveLifeStepUntilMustStop(playerActionNotifier.roll);
+    final dest = _moveLifeStepUntilMustStop(roll);
     // NOTE: 選択を要するところに止まっても、そこが最終地点なら選択は次のターンに後回しとする
     _requireSelectDirection = dest.remainCount > 0 && dest.destination.requireToSelectDirectionManually;
     if (_requireSelectDirection) {
@@ -104,7 +98,7 @@ class PlayRoomNotifier extends ChangeNotifier {
       notifyListeners();
       return;
     }
-    _remainCount = 0;
+    _remainCount = 0; // リセット
 
     // LifeEvent 処理
     lifeStages = [...lifeStages];
@@ -124,17 +118,34 @@ class PlayRoomNotifier extends ChangeNotifier {
   }
 
   /// FIXME: リファクタ途中
-  void rollDice() {
-    roll = _dice.roll();
-    update(PlayerActionNotifier(_dice)..roll = roll);
-  }
-
-  /// FIXME: リファクタ途中
   void chooseDirection(Direction direction) {
-    chosenDirection = direction;
-    update(PlayerActionNotifier(_dice)
-      ..direction = direction
-      ..roll = 100); // neverRolled 回避
+    if (allHumansReachedTheGoal || !_requireSelectDirection) return;
+
+    final dest = _moveLifeStepUntilMustStop(_remainCount, firstDirection: direction);
+    // NOTE: 選択を要するところに止まっても、そこが最終地点なら選択は次のターンに後回しとする
+    _requireSelectDirection = dest.remainCount > 0 && dest.destination.requireToSelectDirectionManually;
+    if (_requireSelectDirection) {
+      _remainCount = dest.remainCount;
+      notifyListeners();
+      return;
+    }
+    _remainCount = 0; // リセット
+
+    // LifeEvent 処理
+    lifeStages = [...lifeStages];
+    lifeStages[_currentPlayerLifeStageIndex] = _lifeEventService.executeEvent(
+      _currentPlayerLifeStage.lifeStepModel.lifeEvent,
+      _currentPlayerLifeStage,
+    );
+
+    // LifeEventの履歴を更新
+    everyLifeEventRecords = [
+      ...everyLifeEventRecords,
+      LifeEventRecordModel(_i18n, _currentPlayerLifeStage.human, _currentPlayerLifeStage.lifeStepModel.lifeEvent)
+    ];
+
+    _changeToNextTurn(); // FIXME: 即ターン交代してるけど、あくまで仮
+    notifyListeners();
   }
 
   // 次のターンに変える

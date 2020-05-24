@@ -10,7 +10,6 @@ import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart'
 import 'package:HumanLifeGame/models/common/life_road.dart';
 import 'package:HumanLifeGame/models/common/user.dart';
 import 'package:HumanLifeGame/models/play_room/play_room.dart';
-import 'package:HumanLifeGame/models/play_room/player_action.dart';
 import 'package:HumanLifeGame/screens/play_room/announcement.dart';
 import 'package:HumanLifeGame/screens/play_room/dice_result.dart';
 import 'package:HumanLifeGame/screens/play_room/life_stages.dart';
@@ -215,12 +214,7 @@ class _TestablePlayRoom extends StatelessWidget {
         home: MultiProvider(
           providers: [
             Provider<Dice>(create: (context) => dice),
-            ChangeNotifierProvider<PlayerActionNotifier>(
-              create: (context) => PlayerActionNotifier(context.read<Dice>()),
-            ),
-            ChangeNotifierProvider<PlayRoomNotifier>(
-              create: (context) => playRoomModel,
-            )
+            ChangeNotifierProvider<PlayRoomNotifier>(create: (context) => playRoomModel)
           ],
           child: MediaQuery(data: MediaQueryData(size: _size), child: const PlayRoom()),
         ),

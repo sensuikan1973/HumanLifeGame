@@ -8,7 +8,6 @@ import 'models/common/human_life.dart';
 import 'models/common/life_road.dart';
 import 'models/common/user.dart';
 import 'models/play_room/play_room.dart';
-import 'models/play_room/player_action.dart';
 import 'screens/play_room/play_room.dart';
 import 'screens/sign_in/sign_in.dart';
 
@@ -22,10 +21,7 @@ class Router {
         signIn: (context) => const SignIn(),
         playRoom: (context) => MultiProvider(
               providers: [
-                ChangeNotifierProvider(
-                  create: (_) => PlayerActionNotifier(context.read<Dice>()),
-                ),
-                ChangeNotifierProxyProvider<PlayerActionNotifier, PlayRoomNotifier>(
+                ChangeNotifierProvider<PlayRoomNotifier>(
                   create: (_) => PlayRoomNotifier(
                     I18n.of(context),
                     context.read<Dice>(),
@@ -44,8 +40,6 @@ class Router {
                       HumanModel(id: '2', name: 'fuga', order: 1),
                     ],
                   ),
-                  update: (context, playerActionNotifier, playRoomNotifier) =>
-                      playRoomNotifier..update(playerActionNotifier),
                 )
               ],
               child: const PlayRoom(),

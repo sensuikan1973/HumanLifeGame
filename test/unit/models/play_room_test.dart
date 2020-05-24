@@ -11,7 +11,6 @@ import 'package:HumanLifeGame/models/common/life_road.dart';
 import 'package:HumanLifeGame/models/common/life_step.dart';
 import 'package:HumanLifeGame/models/common/user.dart';
 import 'package:HumanLifeGame/models/play_room/play_room.dart';
-import 'package:HumanLifeGame/models/play_room/player_action.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -89,7 +88,6 @@ void main() {
       const roll = 1;
       when(dice.roll()).thenReturn(roll);
       final playRoomNotifier = PlayRoomNotifier(const I18n('en'), dice, humanLife, humans);
-      final playerActionNotifier = PlayerActionNotifier(dice);
 
       // human1 がサイコロを振って進む
       playRoomNotifier.rollDice();
@@ -133,7 +131,6 @@ void main() {
       const roll = 3;
       when(dice.roll()).thenReturn(roll);
       final playRoomNotifier = PlayRoomNotifier(const I18n('en'), dice, humanLife, humans);
-      final playerActionNotifier = PlayerActionNotifier(dice);
 
       // human1 がサイコロを振って進む
       playRoomNotifier.rollDice();
