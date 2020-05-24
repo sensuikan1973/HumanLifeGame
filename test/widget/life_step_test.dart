@@ -40,6 +40,7 @@ Future<void> main() async {
     await tester.pump();
 
     expect(find.byType(SizedBox), findsOneWidget);
+    expect(find.byType(Card), findsNothing);
   });
 
   testWidgets('show description', (tester) async {
