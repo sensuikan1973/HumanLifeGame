@@ -1,0 +1,30 @@
+name: Upload_Dart_Docs
+
+on:
+  push:
+    branches:
+      - document_github_page # FIXME: delete
+      - master
+
+jobs:
+  upload_dart_docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'beta'
+      - run: flutter config --enable-web
+      - run: flutter pub get
+      - run: flutter packages pub run build_runner build
+      - run: which flutter # 確認
+      - name: generate dart docs
+        run: FLUTTER_ROOT=~/development/flutter dartdoc --output docs/
+      - name: deploy
+        usees: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
