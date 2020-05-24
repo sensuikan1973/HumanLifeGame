@@ -37,9 +37,6 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   /// 歩む対象となる人生
   final HumanLifeModel humanLife;
 
-  /// 部屋のタイトル名
-  String roomTitle;
-
   /// 現在手番の人
   HumanModel get currentPlayer => _currentPlayer;
   HumanModel _currentPlayer;
