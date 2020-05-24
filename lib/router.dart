@@ -8,6 +8,7 @@ import 'models/common/human_life.dart';
 import 'models/common/life_road.dart';
 import 'models/common/user.dart';
 import 'models/play_room/play_room.dart';
+import 'screens/lobby/lobby.dart';
 import 'screens/play_room/play_room.dart';
 import 'screens/sign_in/sign_in.dart';
 
@@ -15,11 +16,14 @@ import 'screens/sign_in/sign_in.dart';
 class Router {
   /// FIXME: 当然今だけ.
   String get initial => playRoom;
+
+  final String lobby = '/lobby';
   final String signIn = '/sign_in';
   final String playRoom = '/play_room';
 
   Map<String, WidgetBuilder> get routes => {
-        signIn: (context) => const SignIn(),
+        lobby: (_) => const Lobby(),
+        signIn: (_) => const SignIn(),
         playRoom: (context) => MultiProvider(
               providers: [
                 ChangeNotifierProvider<PlayRoomNotifier>(
