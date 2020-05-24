@@ -12,7 +12,7 @@ class PlayerAction extends StatelessWidget {
   Widget build(BuildContext context) => Card(
         child: Center(
           child: <Widget>[
-            if (context.select<PlayRoomNotifier, bool>((value) => value.requireSelectDirection))
+            if (context.select<PlayRoomNotifier, bool>((model) => model.value.requireSelectDirection))
               _directionSelectButton(context),
             _rollDiceButton(context),
           ].first, // NOTE: 常に必要な Action UI は 1つ

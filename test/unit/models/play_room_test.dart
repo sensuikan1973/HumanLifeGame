@@ -103,7 +103,7 @@ void main() {
       // human1 がサイコロを振って進もうとする
       playRoomNotifier.rollDice();
       // しかし分岐地点なので、方向の選択を求められる
-      expect(playRoomNotifier.requireSelectDirection, true);
+      expect(playRoomNotifier.value.requireSelectDirection, true);
       expect(playRoomNotifier.currentPlayerLifeStep.hasUp, false);
       expect(playRoomNotifier.currentPlayerLifeStep.hasDown, true);
       expect(playRoomNotifier.currentPlayerLifeStep.hasLeft, false);
@@ -116,7 +116,7 @@ void main() {
       // human2 がサイコロを振って進もうとする
       playRoomNotifier.rollDice();
       // しかし分岐地点なので、方向の選択を求められる
-      expect(playRoomNotifier.requireSelectDirection, true);
+      expect(playRoomNotifier.value.requireSelectDirection, true);
       expect(playRoomNotifier.currentPlayerLifeStep.hasUp, false);
       expect(playRoomNotifier.currentPlayerLifeStep.hasDown, true);
       expect(playRoomNotifier.currentPlayerLifeStep.hasLeft, false);
@@ -139,7 +139,7 @@ void main() {
       expect(playRoomNotifier.value.positionsByHumanId[human1.id].x, 1);
       expect(playRoomNotifier.value.positionsByHumanId[human1.id].y, 0);
       // 途中で分岐地点を踏むので、方向の選択を求められる
-      expect(playRoomNotifier.requireSelectDirection, true);
+      expect(playRoomNotifier.value.requireSelectDirection, true);
       expect(playRoomNotifier.currentPlayerLifeStep.hasUp, false);
       expect(playRoomNotifier.currentPlayerLifeStep.hasDown, true);
       expect(playRoomNotifier.currentPlayerLifeStep.hasLeft, false);
@@ -154,7 +154,7 @@ void main() {
       expect(playRoomNotifier.value.positionsByHumanId[human2.id].x, 1);
       expect(playRoomNotifier.value.positionsByHumanId[human2.id].y, 0);
       // 途中で分岐地点を踏むので、方向の選択を求められる
-      expect(playRoomNotifier.requireSelectDirection, true);
+      expect(playRoomNotifier.value.requireSelectDirection, true);
       expect(playRoomNotifier.currentPlayerLifeStep.hasUp, false);
       expect(playRoomNotifier.currentPlayerLifeStep.hasDown, true);
       expect(playRoomNotifier.currentPlayerLifeStep.hasLeft, false);

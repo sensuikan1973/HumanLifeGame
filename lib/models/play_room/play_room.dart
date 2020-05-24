@@ -40,10 +40,6 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   LifeStageModel get _currentPlayerLifeStage => value.lifeStages[_currentPlayerLifeStageIndex];
   LifeStepModel get currentPlayerLifeStep => _currentPlayerLifeStage.lifeStepModel;
 
-  /// 現在手番の人に方向の選択を求めるかどうか
-  bool _requireSelectDirection = false;
-  bool get requireSelectDirection => _requireSelectDirection;
-
   /// 進む数の残り
   int _remainCount = 0;
 
@@ -51,7 +47,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   int roll = 0;
 
   void rollDice() {
-    if (value.allHumansReachedTheGoal || _requireSelectDirection) return;
+    if (value.allHumansReachedTheGoal || value.requireSelectDirection) return;
 
     roll = _dice.roll();
     value.announcement = _i18n.rollAnnouncement(_currentPlayer.name, roll); // FIXME: 状態に応じた適切なメッセージを流すように
@@ -59,7 +55,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     // サイコロ振る出発地点が分岐なら
     if (currentPlayerLifeStep.requireToSelectDirectionManually) {
       _remainCount = roll;
-      _requireSelectDirection = true;
+      value.requireSelectDirection = true;
       notifyListeners();
       return;
     }
@@ -70,7 +66,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   }
 
   void chooseDirection(Direction direction) {
-    if (value.allHumansReachedTheGoal || !_requireSelectDirection) return;
+    if (value.allHumansReachedTheGoal || !value.requireSelectDirection) return;
 
     final dest = _moveLifeStepUntilMustStop(_remainCount, firstDirection: direction);
     _updateByDestination(dest);
@@ -80,8 +76,8 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   // FIXME: 命名も処理範囲も雑。共通処理を切り出しただけ。
   void _updateByDestination(DestinationWithMovedStepCount dest) {
     // NOTE: 選択を要するところに止まっても、そこが最終地点なら選択は次のターンに後回しとする
-    _requireSelectDirection = dest.remainCount > 0 && dest.destination.requireToSelectDirectionManually;
-    if (_requireSelectDirection) {
+    value.requireSelectDirection = dest.remainCount > 0 && dest.destination.requireToSelectDirectionManually;
+    if (value.requireSelectDirection) {
       _remainCount = dest.remainCount;
       notifyListeners();
       return;
