@@ -49,7 +49,7 @@ void main() {
 
     // 初期位置
     for (final human in playRoomNotifier.value.orderedHumans) {
-      final position = playRoomNotifier.positionsByHumanId[human.id];
+      final position = playRoomNotifier.value.positionsByHumanId[human.id];
       expect(position.x, 0);
       expect(position.y, 0);
     }
@@ -57,19 +57,19 @@ void main() {
 
     // human1 がサイコロを振って進む
     playRoomNotifier.rollDice();
-    expect(playRoomNotifier.positionsByHumanId[human1.id].x, roll);
+    expect(playRoomNotifier.value.positionsByHumanId[human1.id].x, roll);
 
     // human2 がサイコロを振って進む
     playRoomNotifier.rollDice();
-    expect(playRoomNotifier.positionsByHumanId[human2.id].x, roll);
+    expect(playRoomNotifier.value.positionsByHumanId[human2.id].x, roll);
 
     // human1 がサイコロを振って進む
     playRoomNotifier.rollDice();
-    expect(playRoomNotifier.positionsByHumanId[human1.id].x, lifeRoad.width - 1);
+    expect(playRoomNotifier.value.positionsByHumanId[human1.id].x, lifeRoad.width - 1);
 
     // human2 がサイコロを振って進む
     playRoomNotifier.rollDice();
-    expect(playRoomNotifier.positionsByHumanId[human2.id].x, lifeRoad.width - 1);
+    expect(playRoomNotifier.value.positionsByHumanId[human2.id].x, lifeRoad.width - 1);
     expect(playRoomNotifier.allHumansReachedTheGoal, true);
   });
 
@@ -92,13 +92,13 @@ void main() {
       // human1 がサイコロを振って進む
       // ignore: cascade_invocations
       playRoomNotifier.rollDice();
-      expect(playRoomNotifier.positionsByHumanId[human1.id].x, roll);
-      expect(playRoomNotifier.positionsByHumanId[human1.id].y, 0);
+      expect(playRoomNotifier.value.positionsByHumanId[human1.id].x, roll);
+      expect(playRoomNotifier.value.positionsByHumanId[human1.id].y, 0);
 
       // human2 がサイコロを振って進む
       playRoomNotifier.rollDice();
-      expect(playRoomNotifier.positionsByHumanId[human2.id].x, roll);
-      expect(playRoomNotifier.positionsByHumanId[human2.id].y, 0);
+      expect(playRoomNotifier.value.positionsByHumanId[human2.id].x, roll);
+      expect(playRoomNotifier.value.positionsByHumanId[human2.id].y, 0);
 
       // human1 がサイコロを振って進もうとする
       playRoomNotifier.rollDice();
@@ -110,8 +110,8 @@ void main() {
       expect(playRoomNotifier.currentPlayerLifeStep.hasRight, true);
       // 右を選ぶ
       playRoomNotifier.chooseDirection(Direction.right);
-      expect(playRoomNotifier.positionsByHumanId[human1.id].x, 2);
-      expect(playRoomNotifier.positionsByHumanId[human1.id].y, 0);
+      expect(playRoomNotifier.value.positionsByHumanId[human1.id].x, 2);
+      expect(playRoomNotifier.value.positionsByHumanId[human1.id].y, 0);
 
       // human2 がサイコロを振って進もうとする
       playRoomNotifier.rollDice();
@@ -123,8 +123,8 @@ void main() {
       expect(playRoomNotifier.currentPlayerLifeStep.hasRight, true);
       // 下を選ぶ
       playRoomNotifier.chooseDirection(Direction.down);
-      expect(playRoomNotifier.positionsByHumanId[human2.id].x, 1);
-      expect(playRoomNotifier.positionsByHumanId[human2.id].y, 1);
+      expect(playRoomNotifier.value.positionsByHumanId[human2.id].x, 1);
+      expect(playRoomNotifier.value.positionsByHumanId[human2.id].y, 1);
     });
 
     test('Dice roll is 3', () {
@@ -136,8 +136,8 @@ void main() {
       // human1 がサイコロを振って進む
       // ignore: cascade_invocations
       playRoomNotifier.rollDice();
-      expect(playRoomNotifier.positionsByHumanId[human1.id].x, 1);
-      expect(playRoomNotifier.positionsByHumanId[human1.id].y, 0);
+      expect(playRoomNotifier.value.positionsByHumanId[human1.id].x, 1);
+      expect(playRoomNotifier.value.positionsByHumanId[human1.id].y, 0);
       // 途中で分岐地点を踏むので、方向の選択を求められる
       expect(playRoomNotifier.requireSelectDirection, true);
       expect(playRoomNotifier.currentPlayerLifeStep.hasUp, false);
@@ -146,13 +146,13 @@ void main() {
       expect(playRoomNotifier.currentPlayerLifeStep.hasRight, true);
       // 右を選ぶ
       playRoomNotifier.chooseDirection(Direction.right);
-      expect(playRoomNotifier.positionsByHumanId[human1.id].x, 3);
-      expect(playRoomNotifier.positionsByHumanId[human1.id].y, 0);
+      expect(playRoomNotifier.value.positionsByHumanId[human1.id].x, 3);
+      expect(playRoomNotifier.value.positionsByHumanId[human1.id].y, 0);
 
       // human2 がサイコロを振って進む
       playRoomNotifier.rollDice();
-      expect(playRoomNotifier.positionsByHumanId[human2.id].x, 1);
-      expect(playRoomNotifier.positionsByHumanId[human2.id].y, 0);
+      expect(playRoomNotifier.value.positionsByHumanId[human2.id].x, 1);
+      expect(playRoomNotifier.value.positionsByHumanId[human2.id].y, 0);
       // 途中で分岐地点を踏むので、方向の選択を求められる
       expect(playRoomNotifier.requireSelectDirection, true);
       expect(playRoomNotifier.currentPlayerLifeStep.hasUp, false);
@@ -161,8 +161,8 @@ void main() {
       expect(playRoomNotifier.currentPlayerLifeStep.hasRight, true);
       // 下を選ぶ
       playRoomNotifier.chooseDirection(Direction.down);
-      expect(playRoomNotifier.positionsByHumanId[human2.id].x, 1);
-      expect(playRoomNotifier.positionsByHumanId[human2.id].y, 2);
+      expect(playRoomNotifier.value.positionsByHumanId[human2.id].x, 1);
+      expect(playRoomNotifier.value.positionsByHumanId[human2.id].y, 2);
     });
   });
 }

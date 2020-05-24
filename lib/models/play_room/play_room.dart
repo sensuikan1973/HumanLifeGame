@@ -5,7 +5,6 @@ import '../../i18n/i18n.dart';
 import '../../services/life_event_service.dart';
 import '../common/human.dart';
 import '../common/human_life.dart';
-import '../common/life_road.dart';
 import '../common/life_step.dart';
 import 'life_event_record.dart';
 import 'life_stage.dart';
@@ -40,12 +39,6 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   int get _currentPlayerLifeStageIndex => value.lifeStages.indexWhere((lifeStage) => lifeStage.human == _currentPlayer);
   LifeStageModel get _currentPlayerLifeStage => value.lifeStages[_currentPlayerLifeStageIndex];
   LifeStepModel get currentPlayerLifeStep => _currentPlayerLifeStage.lifeStepModel;
-
-  /// 参加者それぞれの位置情報
-  Map<String, Position> get positionsByHumanId => {
-        for (final lifeStage in value.lifeStages)
-          lifeStage.human.id: value.humanLife.lifeRoad.getPosition(lifeStage.lifeStepModel),
-      };
 
   /// 全参加者それぞれの LifeEvent 履歴
   List<LifeEventRecordModel> everyLifeEventRecords = [];
