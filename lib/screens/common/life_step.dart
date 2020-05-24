@@ -20,9 +20,6 @@ class LifeStep extends StatelessWidget {
   final List<Human> _humans;
 
   @visibleForTesting
-  static Color nothing = Colors.white;
-
-  @visibleForTesting
   static Color exist = Colors.cyan[50];
 
   @override
