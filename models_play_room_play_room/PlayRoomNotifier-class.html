@@ -68,19 +68,28 @@
       <div><h1><span class="kind-class">PlayRoomNotifier</span> class </h1></div>
 
     <section class="desc markdown">
-      <p>NOTE:
-以下の点を把握した上で状態管理を実装すること。
-• 独自に定義した Class を Value としているため、notifyListeners() の明示的な呼び出しが必要である点。
-See: <a href="https://youtu.be/s-ZG-jS5QHQ?t=57">https://youtu.be/s-ZG-jS5QHQ?t=57</a>
-• State は現状 mutable である点。
-  immutable に扱おうと思うと、"value = State(a, b, c, d...)" という代入による更新が必要であり面倒。
-  それ自体は copy_with_extension や freezed で copyWith を生やせば対応可能なので、必要に迫られたら導入する。
-• provider の文脈での参照にやや難がある点。
-  PlayRoomNotifier に関して Widget が参照したいのは、value(PlayRoomState) と PlayRoomNotifier インスタンス の 2 つである。
-  ValueNotifierProvider だと value(PlayRoomState) を provide することになるため、PlayRoomNotifier インスタンスを provide できない。
-  そのため、現状は ChangeNotifierProvider で PlayRoomNotifier インスタンスを provide し、
-  value を参照したければ ".value" を見なさい としている。
-  この点はイマイチだが、flutter_state_notifier を導入することで対応可能(notifyListeners の話も含め)なので、必要に迫られたら導入する。</p>
+      <p>NOTE: 以下の点を把握した上で状態管理を実装すること.</p>
+<ul>
+<li>独自に定義した Class を Value としているため、notifyListeners() の明示的な呼び出しが必要である点.
+<ul>
+<li>See: <a href="https://youtu.be/s-ZG-jS5QHQ?t=57">youtu.be/s-ZG-jS5QHQ?t=57</a></li>
+</ul>
+</li>
+<li>State は現状 mutable である点.
+<ul>
+<li>immutable に扱おうと思うと、"value = State(a, b, c, d...)" という代入による更新が必要であり面倒.</li>
+<li>copy_with_extension や freezed で copyWith を生やせば対応可能なので、必要に迫られたら導入する.</li>
+</ul>
+</li>
+<li>provider の文脈での参照にやや難がある点.
+<ul>
+<li>PlayRoomNotifier に関して Widget が参照したいのは、value(PlayRoomState) と PlayRoomNotifier インスタンス の 2 つである.<br>
+ValueNotifierProvider だと value(PlayRoomState) を provide することになるため、PlayRoomNotifier インスタンスを provide できない.<br>
+そのため、現状は ChangeNotifierProvider で PlayRoomNotifier インスタンスを provide し、<code>.value</code> を必要に応じて参照することにしている.<br></li>
+<li>flutter_state_notifier を導入することで対応可能(notifyListeners の話も含め)なので、必要に迫られたら導入する.</li>
+</ul>
+</li>
+</ul>
     </section>
     
     <section>
