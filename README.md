@@ -49,7 +49,3 @@ flutter packages pub run build_runner build
 ```
 
 6. you can call `I18n.of(context).hoge`
-
-### [API Document](https://github.com/dart-lang/dartdoc)
-
-See: https://sensuikan1973.github.io/HumanLifeGame/
