@@ -3,7 +3,6 @@ name: Upload_Dart_Docs
 on:
   push:
     branches:
-      - document_github_page # FIXME: delete
       - master
 
 jobs:
