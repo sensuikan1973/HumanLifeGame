@@ -37,10 +37,6 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   /// 歩む対象となる人生
   final HumanLifeModel humanLife;
 
-  /// お知らせ
-  String get announcement => _announcement;
-  String _announcement = '';
-
   /// 部屋のタイトル名
   String roomTitle;
 
@@ -79,7 +75,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     if (allHumansReachedTheGoal || _requireSelectDirection) return;
 
     roll = _dice.roll();
-    _announcement = _i18n.rollAnnouncement(_currentPlayer.name, roll); // FIXME: 状態に応じた適切なメッセージを流すように
+    value.announcement = _i18n.rollAnnouncement(_currentPlayer.name, roll); // FIXME: 状態に応じた適切なメッセージを流すように
 
     // サイコロ振る出発地点が分岐なら
     if (currentPlayerLifeStep.requireToSelectDirectionManually) {
