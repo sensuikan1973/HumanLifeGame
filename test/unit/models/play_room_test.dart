@@ -90,6 +90,7 @@ void main() {
       final playRoomNotifier = PlayRoomNotifier(const I18n('en'), dice, humanLife, humans);
 
       // human1 がサイコロを振って進む
+      // ignore: cascade_invocations
       playRoomNotifier.rollDice();
       expect(playRoomNotifier.positionsByHumanId[human1.id].x, roll);
       expect(playRoomNotifier.positionsByHumanId[human1.id].y, 0);
@@ -133,6 +134,7 @@ void main() {
       final playRoomNotifier = PlayRoomNotifier(const I18n('en'), dice, humanLife, humans);
 
       // human1 がサイコロを振って進む
+      // ignore: cascade_invocations
       playRoomNotifier.rollDice();
       expect(playRoomNotifier.positionsByHumanId[human1.id].x, 1);
       expect(playRoomNotifier.positionsByHumanId[human1.id].y, 0);

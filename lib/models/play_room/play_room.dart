@@ -75,7 +75,6 @@ class PlayRoomNotifier extends ChangeNotifier {
   /// 出目
   int roll = 0;
 
-  /// FIXME: リファクタ途中
   void rollDice() {
     if (allHumansReachedTheGoal || _requireSelectDirection) return;
 
@@ -91,37 +90,20 @@ class PlayRoomNotifier extends ChangeNotifier {
     }
 
     final dest = _moveLifeStepUntilMustStop(roll);
-    // NOTE: 選択を要するところに止まっても、そこが最終地点なら選択は次のターンに後回しとする
-    _requireSelectDirection = dest.remainCount > 0 && dest.destination.requireToSelectDirectionManually;
-    if (_requireSelectDirection) {
-      _remainCount = dest.remainCount;
-      notifyListeners();
-      return;
-    }
-    _remainCount = 0; // リセット
-
-    // LifeEvent 処理
-    lifeStages = [...lifeStages];
-    lifeStages[_currentPlayerLifeStageIndex] = _lifeEventService.executeEvent(
-      _currentPlayerLifeStage.lifeStepModel.lifeEvent,
-      _currentPlayerLifeStage,
-    );
-
-    // LifeEventの履歴を更新
-    everyLifeEventRecords = [
-      ...everyLifeEventRecords,
-      LifeEventRecordModel(_i18n, _currentPlayerLifeStage.human, _currentPlayerLifeStage.lifeStepModel.lifeEvent)
-    ];
-
-    _changeToNextTurn(); // FIXME: 即ターン交代してるけど、あくまで仮
+    _updateByDestination(dest);
     notifyListeners();
   }
 
-  /// FIXME: リファクタ途中
   void chooseDirection(Direction direction) {
     if (allHumansReachedTheGoal || !_requireSelectDirection) return;
 
     final dest = _moveLifeStepUntilMustStop(_remainCount, firstDirection: direction);
+    _updateByDestination(dest);
+    notifyListeners();
+  }
+
+  // FIXME: 命名も処理範囲も雑。共通処理を切り出しただけ。
+  void _updateByDestination(DestinationWithMovedStepCount dest) {
     // NOTE: 選択を要するところに止まっても、そこが最終地点なら選択は次のターンに後回しとする
     _requireSelectDirection = dest.remainCount > 0 && dest.destination.requireToSelectDirectionManually;
     if (_requireSelectDirection) {
@@ -145,7 +127,6 @@ class PlayRoomNotifier extends ChangeNotifier {
     ];
 
     _changeToNextTurn(); // FIXME: 即ターン交代してるけど、あくまで仮
-    notifyListeners();
   }
 
   // 次のターンに変える
