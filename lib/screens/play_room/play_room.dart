@@ -31,7 +31,7 @@ class PlayRoomState extends State<PlayRoom> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    if (context.select<PlayRoomNotifier, bool>((model) => model.allHumansReachedTheGoal)) {
+    if (context.select<PlayRoomNotifier, bool>((model) => model.value.allHumansReachedTheGoal)) {
       if (!isDisplayedResult) {
         isDisplayedResult = true;
         WidgetsBinding.instance.addPostFrameCallback((_) async => _showResult(context));
@@ -77,22 +77,9 @@ class PlayRoomState extends State<PlayRoom> {
             height: screenSize.height,
             child: Column(
               children: const <Widget>[
-                Expanded(
-                  flex: 2,
-                  child: SizedBox(
-                    child: LifeStages(),
-                  ),
-                ),
-                Expanded(
-                  child: SizedBox(
-                    child: DiceResult(),
-                  ),
-                ),
-                Expanded(
-                  child: SizedBox(
-                    child: PlayerAction(),
-                  ),
-                ),
+                Expanded(flex: 2, child: LifeStages()),
+                Expanded(child: DiceResult()),
+                Expanded(child: PlayerAction()),
               ],
             ),
           ),
@@ -165,7 +152,7 @@ class PlayRoomState extends State<PlayRoom> {
   }
 
   Future<void> _showResult(BuildContext context) async {
-    final lifeStages = context.read<PlayRoomNotifier>().lifeStages;
+    final lifeStages = context.read<PlayRoomNotifier>().value.lifeStages;
     final result = <Widget>[
       for (final lifeStage in lifeStages)
         Row(

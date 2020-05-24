@@ -10,7 +10,6 @@ import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart'
 import 'package:HumanLifeGame/models/common/life_road.dart';
 import 'package:HumanLifeGame/models/common/user.dart';
 import 'package:HumanLifeGame/models/play_room/play_room.dart';
-import 'package:HumanLifeGame/models/play_room/player_action.dart';
 import 'package:HumanLifeGame/screens/play_room/announcement.dart';
 import 'package:HumanLifeGame/screens/play_room/dice_result.dart';
 import 'package:HumanLifeGame/screens/play_room/life_stages.dart';
@@ -27,7 +26,7 @@ import 'helper/widget_build_helper.dart';
 
 Future<void> main() async {
   final i18n = await I18n.load(const Locale('en', 'US'));
-  final orderedHumans = [HumanModel(id: 'h1', name: 'foo', order: 0), HumanModel(id: 'h2', name: 'bar', order: 1)];
+  final humans = [HumanModel(id: 'h1', name: 'foo', order: 0), HumanModel(id: 'h2', name: 'bar', order: 1)];
   final start = LifeEventModel(LifeEventTarget.myself, const StartParams());
   final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams());
   final gains = LifeEventModel(LifeEventTarget.myself, const GainLifeItemsParams(targetItems: []));
@@ -54,7 +53,7 @@ Future<void> main() async {
   });
 
   testWidgets('show some widgets', (tester) async {
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, MockDice(), humanLife, humans);
     await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel));
     await tester.pump();
     expect(find.byType(PlayerAction), findsOneWidget);
@@ -66,43 +65,44 @@ Future<void> main() async {
 
   testWidgets('random value(1 <= value <= 6) should be displayed when dice is rolled', (tester) async {
     final dice = MockDice();
-    when(dice.roll()).thenReturn(5);
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+    const roll = 5;
+    when(dice.roll()).thenReturn(roll);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
     await tester.tap(find.byKey(const Key('playerActionDiceRollButton')));
     await tester.pump();
-    expect(find.text('5'), findsOneWidget);
+    expect(find.text(roll.toString()), findsOneWidget);
   });
 
   testWidgets('show Announcement message when dice is rolled', (tester) async {
     final dice = MockDice();
     const roll = 5;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
     final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
     await tester.tap(rollDiceButton);
     await tester.pump();
-    expect(find.text(i18n.rollAnnouncement(orderedHumans.first.name, roll)), findsOneWidget);
+    expect(find.text(i18n.rollAnnouncement(humans.first.name, roll)), findsOneWidget);
 
     await tester.tap(rollDiceButton);
     await tester.pump();
-    expect(find.text(i18n.rollAnnouncement(orderedHumans[1].name, roll)), findsOneWidget);
+    expect(find.text(i18n.rollAnnouncement(humans[1].name, roll)), findsOneWidget);
 
     await tester.tap(rollDiceButton);
     await tester.pump();
-    expect(find.text(i18n.rollAnnouncement(orderedHumans.first.name, roll)), findsOneWidget);
+    expect(find.text(i18n.rollAnnouncement(humans.first.name, roll)), findsOneWidget);
   });
 
   testWidgets('roll-the-dice button shuld be disabled when all Humans reached the goal', (tester) async {
     final dice = MockDice();
     const roll = 6;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
@@ -121,7 +121,7 @@ Future<void> main() async {
     final dice = MockDice();
     const roll = 6;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
@@ -138,7 +138,7 @@ Future<void> main() async {
     final dice = MockDice();
     const roll = 6;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
 
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
@@ -168,7 +168,7 @@ Future<void> main() async {
   });
 
   testWidgets('stack widgets when screen size is middle', (tester) async {
-    final playRoomModel = PlayRoomNotifier(i18n, humanLife, orderedHumans: orderedHumans);
+    final playRoomModel = PlayRoomNotifier(i18n, MockDice(), humanLife, humans);
 
     // デスクトップサイズのスクリーンの場合は、stackされない
     await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel));
@@ -214,14 +214,7 @@ class _TestablePlayRoom extends StatelessWidget {
         home: MultiProvider(
           providers: [
             Provider<Dice>(create: (context) => dice),
-            ChangeNotifierProvider<PlayerActionNotifier>(
-              create: (context) => PlayerActionNotifier(context.read<Dice>()),
-            ),
-            ChangeNotifierProxyProvider<PlayerActionNotifier, PlayRoomNotifier>(
-              create: (context) => playRoomModel,
-              update: (context, playerActionNotifier, playRoomNotifier) =>
-                  playRoomNotifier..update(playerActionNotifier),
-            )
+            ChangeNotifierProvider<PlayRoomNotifier>(create: (context) => playRoomModel)
           ],
           child: MediaQuery(data: MediaQueryData(size: _size), child: const PlayRoom()),
         ),

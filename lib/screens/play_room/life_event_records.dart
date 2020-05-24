@@ -9,14 +9,14 @@ class LifeEventRecords extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final everylifeEventRecords =
-        context.select<PlayRoomNotifier, List<LifeEventRecordModel>>((model) => model.everyLifeEventRecords);
+    final everyLifeEventRecords =
+        context.select<PlayRoomNotifier, List<LifeEventRecordModel>>((model) => model.value.everyLifeEventRecords);
 
     return Card(
       child: ListView(
         reverse: true,
         children: [
-          for (final model in everylifeEventRecords) Text(model.lifeEventRecordMessage),
+          for (final model in everyLifeEventRecords) Text(model.lifeEventRecordMessage),
         ],
       ),
     );

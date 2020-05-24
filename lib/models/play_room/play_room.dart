@@ -1,123 +1,118 @@
 import 'package:flutter/foundation.dart';
 
+import '../../api/dice.dart';
 import '../../i18n/i18n.dart';
 import '../../services/life_event_service.dart';
 import '../common/human.dart';
 import '../common/human_life.dart';
-import '../common/life_road.dart';
 import '../common/life_step.dart';
-import 'announcement.dart';
 import 'life_event_record.dart';
 import 'life_stage.dart';
-import 'player_action.dart';
+import 'play_room_state.dart';
 
-class PlayRoomNotifier extends ChangeNotifier {
+/// NOTE:
+/// 以下の点を把握した上で状態管理を実装すること。
+/// • 独自に定義した Class を Value としているため、notifyListeners() の明示的な呼び出しが必要である点。
+///   See: https://youtu.be/s-ZG-jS5QHQ?t=57
+/// • State は現状 mutable である点。
+///   immutable に扱おうと思うと、"value = State(a, b, c, d...)" という代入による更新が必要であり面倒。
+///   それ自体は copy_with_extension や freezed で copyWith を生やせば対応可能なので、必要に迫られたら導入する。
+/// • provider の文脈での参照にやや難がある点。
+///   PlayRoomNotifier に関して Widget が参照したいのは、value(PlayRoomState) と PlayRoomNotifier インスタンス の 2 つである。
+///   ValueNotifierProvider だと value(PlayRoomState) を provide することになるため、PlayRoomNotifier インスタンスを provide できない。
+///   そのため、現状は ChangeNotifierProvider で PlayRoomNotifier インスタンスを provide し、
+///   value を参照したければ ".value" を見なさい としている。
+///   この点はイマイチだが、flutter_state_notifier を導入することで対応可能(notifyListeners の話も含め)なので、必要に迫られたら導入する。
+class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   PlayRoomNotifier(
     this._i18n,
-    this.humanLife, {
-    @required this.orderedHumans,
-  }) {
+    this._dice,
+    HumanLifeModel humanLife,
+    List<HumanModel> humans,
+  ) : super(PlayRoomState(
+          humanLife,
+          humans..sort((a, b) => a.order.compareTo(b.order)),
+        )) {
     // 参加者全員の位置を Start に
-    for (final human in orderedHumans) {
-      final lifeStage = LifeStageModel(human)..lifeStepModel = humanLife.lifeRoad.start;
-      lifeStages.add(lifeStage);
+    for (final human in value.orderedHumans) {
+      final lifeStage = LifeStageModel(human)..lifeStepModel = value.humanLife.lifeRoad.start;
+      value.lifeStages.add(lifeStage);
     }
-    // 一番手の set
-    _currentPlayer = orderedHumans.first;
+    // 一番手をセット
+    value.currentTurnHuman = value.orderedHumans.first;
   }
 
   final I18n _i18n;
+  final Dice _dice;
   final _lifeEventService = const LifeEventService();
 
-  /// 歩む対象となる人生
-  final HumanLifeModel humanLife;
-
-  /// 参加する人。ターン順。
-  final List<HumanModel> orderedHumans;
-
-  /// お知らせ
-  AnnouncementModel get announcement => _announcement;
-  final _announcement = AnnouncementModel();
-
-  /// 部屋のタイトル名
-  String roomTitle;
-
-  /// 現在手番の人
-  HumanModel get currentPlayer => _currentPlayer;
-  HumanModel _currentPlayer;
-  int get _currentPlayerLifeStageIndex => lifeStages.indexWhere((lifeStage) => lifeStage.human == _currentPlayer);
-  LifeStageModel get _currentPlayerLifeStage => lifeStages[_currentPlayerLifeStageIndex];
+  int get _currentPlayerLifeStageIndex =>
+      value.lifeStages.indexWhere((lifeStage) => lifeStage.human == value.currentTurnHuman);
+  LifeStageModel get _currentPlayerLifeStage => value.lifeStages[_currentPlayerLifeStageIndex];
   LifeStepModel get currentPlayerLifeStep => _currentPlayerLifeStage.lifeStepModel;
-
-  /// 参加者のそれぞれの人生の進捗
-  List<LifeStageModel> lifeStages = [];
-
-  /// 参加者それぞれの位置情報
-  Map<String, Position> get positionsByHumanId => {
-        for (final lifeStage in lifeStages) lifeStage.human.id: humanLife.lifeRoad.getPosition(lifeStage.lifeStepModel),
-      };
-
-  /// 全参加者それぞれの LifeEvent 履歴
-  List<LifeEventRecordModel> everyLifeEventRecords = [];
-
-  /// 参加者全員がゴールに到着したかどうか
-  bool get allHumansReachedTheGoal => lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
-
-  /// 現在手番の人に方向の選択を求めるかどうか
-  bool _requireSelectDirection = false;
-  bool get requireSelectDirection => _requireSelectDirection;
 
   /// 進む数の残り
   int _remainCount = 0;
 
-  void update(PlayerActionNotifier playerActionNotifier) {
-    assert(playerActionNotifier != null);
-    if (playerActionNotifier.neverRolled || allHumansReachedTheGoal) return;
+  void rollDice() {
+    if (value.allHumansReachedTheGoal || value.requireSelectDirection) return;
 
-    // FIXME: 状態に応じた適切なメッセージを流すように
-    announcement.message = _i18n.rollAnnouncement(_currentPlayer.name, playerActionNotifier.roll);
+    value
+      ..roll = _dice.roll()
+      ..announcement = _i18n.rollAnnouncement(value.currentTurnHuman.name, value.roll); // FIXME: 状態に応じた適切なメッセージを流すように
 
     // サイコロ振る出発地点が分岐なら
-    if (!_requireSelectDirection && currentPlayerLifeStep.requireToSelectDirectionManually) {
-      _remainCount = playerActionNotifier.roll;
-      _requireSelectDirection = true;
+    if (currentPlayerLifeStep.requireToSelectDirectionManually) {
+      _remainCount = value.roll;
+      value.requireSelectDirection = true;
       notifyListeners();
       return;
     }
 
-    final dest = _requireSelectDirection
-        ? _moveLifeStepUntilMustStop(_remainCount, firstDirection: playerActionNotifier.direction)
-        : _moveLifeStepUntilMustStop(playerActionNotifier.roll);
+    final dest = _moveLifeStepUntilMustStop(value.roll);
+    _updateByDestination(dest);
+    notifyListeners();
+  }
+
+  void chooseDirection(Direction direction) {
+    if (value.allHumansReachedTheGoal || !value.requireSelectDirection) return;
+
+    final dest = _moveLifeStepUntilMustStop(_remainCount, firstDirection: direction);
+    _updateByDestination(dest);
+    notifyListeners();
+  }
+
+  // FIXME: 命名も処理範囲も雑。共通処理を切り出しただけ。
+  void _updateByDestination(DestinationWithMovedStepCount dest) {
     // NOTE: 選択を要するところに止まっても、そこが最終地点なら選択は次のターンに後回しとする
-    _requireSelectDirection = dest.remainCount > 0 && dest.destination.requireToSelectDirectionManually;
-    if (_requireSelectDirection) {
+    value.requireSelectDirection = dest.remainCount > 0 && dest.destination.requireToSelectDirectionManually;
+    if (value.requireSelectDirection) {
       _remainCount = dest.remainCount;
       notifyListeners();
       return;
     }
-    _remainCount = 0;
+    _remainCount = 0; // リセット
 
     // LifeEvent 処理
-    lifeStages = [...lifeStages];
-    lifeStages[_currentPlayerLifeStageIndex] = _lifeEventService.executeEvent(
+    value.lifeStages = [...value.lifeStages];
+    value.lifeStages[_currentPlayerLifeStageIndex] = _lifeEventService.executeEvent(
       _currentPlayerLifeStage.lifeStepModel.lifeEvent,
       _currentPlayerLifeStage,
     );
 
     // LifeEventの履歴を更新
-    everyLifeEventRecords = [
-      ...everyLifeEventRecords,
+    value.everyLifeEventRecords = [
+      ...value.everyLifeEventRecords,
       LifeEventRecordModel(_i18n, _currentPlayerLifeStage.human, _currentPlayerLifeStage.lifeStepModel.lifeEvent)
     ];
 
     _changeToNextTurn(); // FIXME: 即ターン交代してるけど、あくまで仮
-    notifyListeners();
   }
 
   // 次のターンに変える
   void _changeToNextTurn() {
-    final currentPlayerIndex = orderedHumans.indexOf(_currentPlayer);
-    _currentPlayer = orderedHumans[(currentPlayerIndex + 1) % orderedHumans.length];
+    final currentPlayerIndex = value.orderedHumans.indexOf(value.currentTurnHuman);
+    value.currentTurnHuman = value.orderedHumans[(currentPlayerIndex + 1) % value.orderedHumans.length];
   }
 
   DestinationWithMovedStepCount _moveLifeStepUntilMustStop(int roll, {Direction firstDirection}) {
@@ -125,7 +120,7 @@ class PlayRoomNotifier extends ChangeNotifier {
     final destinationWithMovedStepCount =
         _currentPlayerLifeStage.lifeStepModel.getNextUntilMustStopStep(roll, firstDirection: firstDirection);
     // 進み先の LifeStep を LifeStage に代入する
-    lifeStages[_currentPlayerLifeStageIndex].lifeStepModel = destinationWithMovedStepCount.destination;
+    value.lifeStages[_currentPlayerLifeStageIndex].lifeStepModel = destinationWithMovedStepCount.destination;
     return destinationWithMovedStepCount;
   }
 }
