@@ -1,8 +1,8 @@
-import 'package:HumanLifeGame/models/play_room/play_room_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/play_room/play_room.dart';
+import '../../models/play_room/play_room_state.dart';
 import '../common/human.dart';
 import '../common/life_road.dart';
 
