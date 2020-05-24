@@ -57,7 +57,7 @@ Future<void> main() async {
     await tester.pump();
     final currentPlayerSelector = find.byIcon(Icons.chevron_right);
     final row = tester.element(currentPlayerSelector).findAncestorWidgetOfExactType<Row>();
-    final currentPlayerNameText = find.text(playRoomNotifier.currentPlayer.name);
+    final currentPlayerNameText = find.text(playRoomNotifier.value.currentTurnHuman.name);
     expect(row.children, contains(currentPlayerNameText.evaluate().first.widget));
   });
 

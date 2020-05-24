@@ -17,7 +17,7 @@ class LifeStages extends StatelessWidget {
 
   Column _lifeStages(BuildContext context) {
     final lifeStages = context.select<PlayRoomNotifier, List<LifeStageModel>>((model) => model.value.lifeStages);
-    final currentPlayer = context.select<PlayRoomNotifier, HumanModel>((model) => model.currentPlayer);
+    final currentPlayer = context.select<PlayRoomNotifier, HumanModel>((model) => model.value.currentTurnHuman);
     final humanNames = <Widget>[
       for (final lifeStage in lifeStages)
         Row(

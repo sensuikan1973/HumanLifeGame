@@ -26,17 +26,15 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
       value.lifeStages.add(lifeStage);
     }
     // 一番手の set
-    _currentPlayer = value.orderedHumans.first;
+    value.currentTurnHuman = value.orderedHumans.first;
   }
 
   final I18n _i18n;
   final Dice _dice;
   final _lifeEventService = const LifeEventService();
 
-  /// 現在手番の人
-  HumanModel get currentPlayer => _currentPlayer;
-  HumanModel _currentPlayer;
-  int get _currentPlayerLifeStageIndex => value.lifeStages.indexWhere((lifeStage) => lifeStage.human == _currentPlayer);
+  int get _currentPlayerLifeStageIndex =>
+      value.lifeStages.indexWhere((lifeStage) => lifeStage.human == value.currentTurnHuman);
   LifeStageModel get _currentPlayerLifeStage => value.lifeStages[_currentPlayerLifeStageIndex];
   LifeStepModel get currentPlayerLifeStep => _currentPlayerLifeStage.lifeStepModel;
 
@@ -48,7 +46,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
     value
       ..roll = _dice.roll()
-      ..announcement = _i18n.rollAnnouncement(_currentPlayer.name, value.roll); // FIXME: 状態に応じた適切なメッセージを流すように
+      ..announcement = _i18n.rollAnnouncement(value.currentTurnHuman.name, value.roll); // FIXME: 状態に応じた適切なメッセージを流すように
 
     // サイコロ振る出発地点が分岐なら
     if (currentPlayerLifeStep.requireToSelectDirectionManually) {
@@ -100,8 +98,8 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
   // 次のターンに変える
   void _changeToNextTurn() {
-    final currentPlayerIndex = value.orderedHumans.indexOf(_currentPlayer);
-    _currentPlayer = value.orderedHumans[(currentPlayerIndex + 1) % value.orderedHumans.length];
+    final currentPlayerIndex = value.orderedHumans.indexOf(value.currentTurnHuman);
+    value.currentTurnHuman = value.orderedHumans[(currentPlayerIndex + 1) % value.orderedHumans.length];
   }
 
   DestinationWithMovedStepCount _moveLifeStepUntilMustStop(int roll, {Direction firstDirection}) {
