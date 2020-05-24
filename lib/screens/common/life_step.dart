@@ -26,41 +26,38 @@ class LifeStep extends StatelessWidget {
   static Color exist = Colors.cyan[50];
 
   @override
-  Widget build(BuildContext context) => _model.lifeEvent.type == LifeEventType.nothing
-      ? SizedBox(
-          width: _width,
-          height: _height,
-        )
-      : SizedBox(
-          width: _width,
-          height: _height,
-          child: Card(
-            color: exist,
-            elevation: 4,
-            child: Stack(
-              children: <Widget>[
-                SizedBox(
-                    width: _width,
-                    height: 72,
-                    child: Center(
-                      child: Text(_model.lifeEvent.description),
-                    )),
-                Positioned.fill(
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: _model.lifeEvent.type == LifeEventType.gainLifeItems
-                        ? Icon(Icons.mood, color: Colors.grey[400], size: 20)
-                        : null,
-                  ),
+  Widget build(BuildContext context) => SizedBox(
+        width: _width,
+        height: _height,
+        child: _model.lifeEvent.type == LifeEventType.nothing
+            ? null
+            : Card(
+                color: exist,
+                elevation: 4,
+                child: Stack(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 70,
+                      child: Center(
+                        child: Text(_model.lifeEvent.description),
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: _model.lifeEvent.type == LifeEventType.gainLifeItems
+                            ? Icon(Icons.mood, color: Colors.grey[400], size: 20)
+                            : null,
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Row(children: _humans),
+                      ),
+                    ),
+                  ],
                 ),
-                Positioned.fill(
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Row(children: _humans),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
+              ),
+      );
 }
