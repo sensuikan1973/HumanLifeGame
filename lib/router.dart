@@ -14,8 +14,7 @@ import 'screens/sign_in/sign_in.dart';
 
 @immutable
 class Router {
-  /// FIXME: 当然今だけ.
-  String get initial => playRoom;
+  String get initial => lobby;
 
   final String lobby = '/lobby';
   final String signIn = '/sign_in';
