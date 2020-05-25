@@ -9,6 +9,7 @@
 [![Flutter_Web_Deploy](https://github.com/sensuikan1973/HumanLifeGame/workflows/Flutter_Web_Deploy/badge.svg)](https://human-life-game-dev.web.app/)
 ![Flutter Test](https://github.com/sensuikan1973/HumanLifeGame/workflows/Flutter_Test/badge.svg)  
 [![Codecov](https://codecov.io/gh/sensuikan1973/HumanLifeGame/branch/master/graph/badge.svg)](https://codecov.io/gh/sensuikan1973/HumanLifeGame)
+[![HumanLifeGame_Server](https://img.shields.io/badge/ServerSide_Repository-000000.svg)](https://github.com/sensuikan1973/HumanLifeGame_Server)
 
 ## What's is this game ?
 
