@@ -80,7 +80,7 @@ class LifeStep extends StatelessWidget {
       case InfoCategory.house:
         return const Icon(Icons.home, color: Colors.black38, size: 20);
       case InfoCategory.money:
-        return const Icon(Icons.monetization_on, color: Colors.black38, size: 20);
+        return const Icon(Icons.attach_money, color: Colors.black38, size: 20);
       case InfoCategory.vehicle:
         return const Icon(Icons.directions_car, color: Colors.black38, size: 20);
       case InfoCategory.child:
