@@ -18,6 +18,14 @@ class Auth {
     return _toModel(result.user);
   }
 
+  /// メール+パスワード認証(新規)
+  ///
+  /// See: <https://firebase.google.com/docs/auth/web/password-auth>
+  Future<UserModel> createUserWithEmailAndPassword({String email, String password}) async {
+    final result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+    return _toModel(result.user);
+  }
+
   /// メール+パスワード認証
   ///
   /// See: <https://firebase.google.com/docs/auth/web/password-auth>
