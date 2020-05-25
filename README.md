@@ -1,15 +1,15 @@
 # HumanLifeGame
 
-[![Flutter Version](https://img.shields.io/badge/Flutter-beta-64B5F6.svg)](https://github.com/flutter/flutter/wiki/Flutter-build-release-channels)
-[![Figma](https://img.shields.io/badge/Figma-a260bf.svg)](https://www.figma.com/file/nXa9iPmXYOHOA77GvjBLdj/HumanLifeGame)
-[![SpreadSheet](https://img.shields.io/badge/SpreadSheet-05b142.svg)](https://docs.google.com/spreadsheets/d/1ghhCb5Ux7Mj52QEMrPy4rUhteCk3KgohG1JM29yjhS0)
-[![API_Document](https://img.shields.io/badge/API_Document-025697.svg)](https://sensuikan1973.github.io/HumanLifeGame/)  
+[![Flutter Version](https://img.shields.io/badge/Flutter-beta-64B5F6.svg?logo=flutter)](https://github.com/flutter/flutter/wiki/Flutter-build-release-channels)
+[![Figma](https://img.shields.io/badge/Figma-429bf5.svg?logo=figma)](https://www.figma.com/file/nXa9iPmXYOHOA77GvjBLdj/HumanLifeGame)
+[![SpreadSheet](https://img.shields.io/badge/SpreadSheet-grey.svg?logo=google%20sheets)](https://docs.google.com/spreadsheets/d/1ghhCb5Ux7Mj52QEMrPy4rUhteCk3KgohG1JM29yjhS0)
+[![API_Document](https://img.shields.io/badge/API_Document-025697.svg?logo=dart)](https://sensuikan1973.github.io/HumanLifeGame/)  
 ![Flutter Format](https://github.com/sensuikan1973/HumanLifeGame/workflows/Flutter_Format/badge.svg)
 ![Flutter_Analyzer](https://github.com/sensuikan1973/HumanLifeGame/workflows/Flutter_Analyzer/badge.svg)
 [![Flutter_Web_Deploy](https://github.com/sensuikan1973/HumanLifeGame/workflows/Flutter_Web_Deploy/badge.svg)](https://human-life-game-dev.web.app/)
 ![Flutter Test](https://github.com/sensuikan1973/HumanLifeGame/workflows/Flutter_Test/badge.svg)  
 [![Codecov](https://codecov.io/gh/sensuikan1973/HumanLifeGame/branch/master/graph/badge.svg)](https://codecov.io/gh/sensuikan1973/HumanLifeGame)
-[![HumanLifeGame_Server](https://img.shields.io/badge/ServerSide_Repository-000000.svg)](https://github.com/sensuikan1973/HumanLifeGame_Server)
+[![HumanLifeGame_Server](https://img.shields.io/badge/ServerSide-000000.svg?logo=github)](https://github.com/sensuikan1973/HumanLifeGame_Server)
 
 ## What's is this game ?
 
