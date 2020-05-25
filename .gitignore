@@ -52,4 +52,4 @@ app.*.map.json
 
 # secret
 /config/*
-!/config/sample.env
+!/config/*.sample

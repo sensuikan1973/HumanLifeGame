@@ -18,8 +18,8 @@ Play now Human Life Game on Web. You can also create original map.
 ### Setup
 
 1. https://flutter.dev/docs/get-started/web
-2. `cp config/sample.env config/dev.env`
-3. Edit `dev.env`
+2. `cp config/.env.sample config/.env`
+3. Edit `config/.env`
 
 ### [Local Hosting](https://firebase.google.com/docs/hosting/deploying)
 **You must serve hosting for Authentication**
