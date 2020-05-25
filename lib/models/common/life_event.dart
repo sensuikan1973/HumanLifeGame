@@ -13,6 +13,7 @@ class LifeEventModel<T extends LifeEventParams> {
 
   LifeEventType get type => params.type;
   EmotionCategory get emotionCategory => params.emotionCategory;
+  List<InfoCategory> get infoCategorys => params.infoCategorys;
   bool get isBranch => params.isBranch;
   bool get mustStop => params.mustStop;
   bool get selectableForExecution => params.selectableForExecution;

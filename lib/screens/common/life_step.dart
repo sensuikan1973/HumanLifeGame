@@ -40,15 +40,22 @@ class LifeStep extends StatelessWidget {
                 child: Stack(
                   children: <Widget>[
                     SizedBox(
+                      width: _width,
                       height: 70,
                       child: Center(
                         child: Text(_model.lifeEvent.description),
                       ),
                     ),
-                    Positioned.fill(
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
                       child: Align(
-                        alignment: Alignment.bottomRight,
-                        child: _eventCategoryIcon(_model.lifeEvent.emotionCategory),
+                        alignment: Alignment.bottomCenter,
+                        child: Row(
+                          children: [
+                            for (final category in _model.lifeEvent.infoCategorys) _infoCategoryIcon(category),
+                          ],
+                        ),
                       ),
                     ),
                     Positioned.fill(
@@ -62,20 +69,34 @@ class LifeStep extends StatelessWidget {
               ),
       );
 
-  Icon _eventCategoryIcon(EmotionCategory category) {
+  Icon _infoCategoryIcon(InfoCategory category) {
     switch (category) {
-      case EmotionCategory.positive:
-        return Icon(Icons.mood, color: Colors.grey[400], size: 20);
-      case EmotionCategory.negative:
-        return Icon(Icons.mood_bad, color: Colors.grey[400], size: 20);
-      case EmotionCategory.normal:
-        // TODO: Handle this case.
-        break;
-      case EmotionCategory.challenge:
-        // TODO: Handle this case.
-        break;
+      case InfoCategory.job:
+        return const Icon(Icons.work, color: Colors.black38, size: 20);
+      case InfoCategory.stock:
+        return const Icon(Icons.trending_up, color: Colors.black38, size: 20);
+      case InfoCategory.spouse:
+        return const Icon(Icons.person, color: Colors.black38, size: 20);
+      case InfoCategory.house:
+        return const Icon(Icons.home, color: Colors.black38, size: 20);
+      case InfoCategory.money:
+        return const Icon(Icons.monetization_on, color: Colors.black38, size: 20);
+      case InfoCategory.vehicle:
+        return const Icon(Icons.directions_car, color: Colors.black38, size: 20);
+      case InfoCategory.child:
+        return const Icon(Icons.child_care, color: Colors.black38, size: 20);
+      case InfoCategory.insurance:
+        return const Icon(Icons.security, color: Colors.black38, size: 20);
+      case InfoCategory.coffee:
+        return const Icon(Icons.free_breakfast, color: Colors.black38, size: 20);
+      case InfoCategory.exchange:
+        return const Icon(Icons.swap_horiz, color: Colors.black38, size: 20);
+      case InfoCategory.selectDirection:
+        return const Icon(Icons.directions, color: Colors.black38, size: 20);
+      case InfoCategory.nothing:
+        return const Icon(null, color: Colors.black38, size: 20);
     }
-    return null;
+    return const Icon(null, color: Colors.black38, size: 20);
   }
 
   Color _eventCategoryColor(EmotionCategory category) {
