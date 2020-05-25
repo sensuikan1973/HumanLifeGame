@@ -7,7 +7,7 @@ import 'human_life_game_app.dart';
 Future<void> main() async {
   // ref: https://flutter.dev/docs/testing/debugging
 
-  // NOTE: 現状本番では不要
+  // NOTE: 現状 Production Mode では不要
   if (!kReleaseMode) await DotEnv().load('config/.env');
 
   runApp(
