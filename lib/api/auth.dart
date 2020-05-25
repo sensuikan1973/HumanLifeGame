@@ -47,13 +47,14 @@ class Auth {
 
   /// 現在ログインしてるユーザのオブザーバ.
   /// See: <https://firebase.google.com/docs/auth/web/manage-users>
-  Stream<UserModel> get currentUserStream => _auth.onAuthStateChanged.asyncMap(_toModel);
+  Stream<UserModel> get currentUserStream =>
+      _auth.onAuthStateChanged.asyncMap((user) => user != null ? _toModel(user) : null);
 
   /// 現在ログインしてるユーザ.
   /// See: <https://firebase.google.com/docs/auth/web/manage-users>
   Future<UserModel> get currentUser async {
     final user = await _auth.currentUser();
-    return _toModel(user);
+    return user != null ? _toModel(user) : null;
   }
 
   Future<void> signOut() async => _auth.signOut();
