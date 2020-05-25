@@ -14,8 +14,8 @@ class Lobby extends StatelessWidget {
   /// Only for Debug Mode
   Future<UserModel> _signInOrCreateWithEmailAndPassForDev(Auth auth) async {
     final env = DotEnv().env;
-    final email = env['EMAIL'];
-    final pass = env['PASS'];
+    final email = env['EMAIL'] ?? '';
+    final pass = env['PASS'] ?? '';
     if (email.isEmpty || pass.isEmpty) return null;
     UserModel user;
     try {
