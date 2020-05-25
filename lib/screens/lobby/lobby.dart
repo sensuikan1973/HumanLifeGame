@@ -49,6 +49,7 @@ class Lobby extends StatelessWidget {
                 future: _signIn(context.watch<Auth>()),
                 builder: (context, snap) {
                   if (snap.hasError) return const Text('Oops');
+                  if (snap.connectionState == ConnectionState.waiting) return const Text('waiting...');
                   if (snap.hasData) return Text(snap.data.id);
                   return const Text('You must sign in');
                 },
