@@ -40,7 +40,6 @@ class LifeStep extends StatelessWidget {
                 child: Stack(
                   children: <Widget>[
                     SizedBox(
-                      width: _width,
                       height: 70,
                       child: Center(
                         child: Text(_model.lifeEvent.description),
