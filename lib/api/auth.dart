@@ -3,20 +3,39 @@ import 'package:flutter/foundation.dart';
 
 import '../models/common/user.dart';
 
-/// FIXME: エラーハンドリングの実装.
+/// FIXME: エラーハンドリングの実装
+///
 /// See: <https://firebase.google.com/docs/reference/android/com/google/firebase/auth/FirebaseAuth>
 @immutable
 class Auth {
   final _auth = FirebaseAuth.instance;
 
-  /// 匿名認証.
+  /// 匿名認証
+  ///
   /// See: <https://firebase.google.com/docs/auth/web/anonymous-auth>
   Future<UserModel> signInAnonymously() async {
     final result = await _auth.signInAnonymously();
     return _toModel(result.user);
   }
 
-  /// 認証リンクをメール送信.
+  /// メール+パスワード認証(新規)
+  ///
+  /// See: <https://firebase.google.com/docs/auth/web/password-auth>
+  Future<UserModel> createUserWithEmailAndPassword({String email, String password}) async {
+    final result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+    return _toModel(result.user);
+  }
+
+  /// メール+パスワード認証
+  ///
+  /// See: <https://firebase.google.com/docs/auth/web/password-auth>
+  Future<UserModel> signInWithEmailAndPassword({String email, String password}) async {
+    final result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+    return _toModel(result.user);
+  }
+
+  /// 認証リンクをメール送信
+  ///
   /// See: <https://firebase.google.com/docs/auth/web/email-link-auth#send_an_authentication_link_to_the_users_email_address>
   Future<void> sendSignInLinkToEmail({
     @required String email,
@@ -35,22 +54,25 @@ class Auth {
     );
   }
 
-  /// メールリンク認証を行う.
+  /// メールリンク認証を行う
+  ///
   /// See: <https://firebase.google.com/docs/auth/web/email-link-auth>
   Future<UserModel> signInWithEmailAndLink({String email, String link}) async {
     final result = await _auth.signInWithEmailAndLink(email: email, link: link);
     return _toModel(result.user);
   }
 
-  /// 認証用メールリンクの文字列であるかどうか.
+  /// 認証用メールリンクの文字列であるかどうか
   Future<bool> isSignInWithEmailLink(String str) async => _auth.isSignInWithEmailLink(str);
 
-  /// 現在ログインしてるユーザのオブザーバ.
+  /// 現在ログインしてるユーザのオブザーバ
+  ///
   /// See: <https://firebase.google.com/docs/auth/web/manage-users>
   Stream<UserModel> get currentUserStream =>
       _auth.onAuthStateChanged.asyncMap((user) => user != null ? _toModel(user) : null);
 
-  /// 現在ログインしてるユーザ.
+  /// 現在ログインしてるユーザ
+  ///
   /// See: <https://firebase.google.com/docs/auth/web/manage-users>
   Future<UserModel> get currentUser async {
     final user = await _auth.currentUser();

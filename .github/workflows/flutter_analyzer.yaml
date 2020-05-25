@@ -22,4 +22,5 @@ jobs:
         run: flutter channel beta && flutter upgrade
       - run: flutter pub get
       - run: flutter packages pub run build_runner build
+      - run: cp config/.env.sample config/.env
       - run: flutter analyze
