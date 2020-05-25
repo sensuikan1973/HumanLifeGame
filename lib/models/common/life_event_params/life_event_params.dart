@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 
-import '../life_event.dart';
+import '../life_item.dart';
+import 'gain_life_items_params.dart';
+import 'lose_life_items_params.dart';
 
 @immutable
 abstract class LifeEventParams {
@@ -76,19 +78,21 @@ abstract class LifeEventParams {
     return EmotionCategory.normal;
   }
 
-  InfoCategory get infoCategory {
+  List<InfoCategory> get infoCategorys {
     switch (type) {
       case LifeEventType.nothing:
       case LifeEventType.start:
       case LifeEventType.goal:
-        return InfoCategory.nothing;
+        return [InfoCategory.nothing];
       case LifeEventType.selectDirection:
       case LifeEventType.selectDirectionPerDiceRoll:
       case LifeEventType.selectDirectionPerLifeItem:
-        return InfoCategory.selectDirection;
+        return [InfoCategory.selectDirection];
       case LifeEventType.gainLifeItems:
-        // TODO: Handle this case.
-        break;
+        final params = this as GainLifeItemsParams;
+        return [
+          for (final item in params.targetItems) fromLifeItemType(item.type),
+        ];
       case LifeEventType.gainLifeItemsPerOtherLifeItem:
         // TODO: Handle this case.
         break;
@@ -103,10 +107,12 @@ abstract class LifeEventParams {
         break;
       case LifeEventType.exchangeLifeItems:
       case LifeEventType.exchangeLifeItemsWithDiceRoll:
-        return InfoCategory.exchange;
+        return [InfoCategory.exchange];
       case LifeEventType.loseLifeItems:
-        // TODO: Handle this case.
-        break;
+        final params = this as LoseLifeItemsParams;
+        return [
+          for (final item in params.targetItems) fromLifeItemType(item.type),
+        ];
       case LifeEventType.loseLifeItemsPerDiceRoll:
         // TODO: Handle this case.
         break;
@@ -119,6 +125,34 @@ abstract class LifeEventParams {
       case LifeEventType.loseLifeItemsIfNotExistOtherLifeItem:
         // TODO: Handle this case.
         break;
+    }
+    return [InfoCategory.nothing];
+  }
+
+  InfoCategory fromLifeItemType(LifeItemType type) {
+    switch (type) {
+      case LifeItemType.job:
+        return InfoCategory.job;
+      case LifeItemType.stock:
+        return InfoCategory.stock;
+      case LifeItemType.spouse:
+        return InfoCategory.spouse;
+      case LifeItemType.house:
+        return InfoCategory.house;
+      case LifeItemType.money:
+        return InfoCategory.money;
+      case LifeItemType.vehicle:
+        return InfoCategory.vehicle;
+      case LifeItemType.childGirl:
+      case LifeItemType.childBoy:
+        return InfoCategory.child;
+      case LifeItemType.fireInsurance:
+      case LifeItemType.lifeInsurance:
+      case LifeItemType.earthquakeInsurance:
+      case LifeItemType.carInsurance:
+        return InfoCategory.insurance;
+      case LifeItemType.coffee:
+        return InfoCategory.coffee;
     }
     return InfoCategory.nothing;
   }
