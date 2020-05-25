@@ -32,7 +32,7 @@ class Lobby extends StatelessWidget {
     return user;
   }
 
-  Future<UserModel> _signInWithEmailAndPassword(Auth auth) async {
+  Future<UserModel> _signIn(Auth auth) async {
     var user = await auth.currentUser;
     if (user != null) return user;
     if (!kReleaseMode) user = await _signInOrCreateWithEmailAndPassForDev(auth);
@@ -46,7 +46,7 @@ class Lobby extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FutureBuilder<UserModel>(
-                future: _signInWithEmailAndPassword(context.watch<Auth>()),
+                future: _signIn(context.watch<Auth>()),
                 builder: (context, snap) {
                   if (snap.hasError) return const Text('Oops');
                   if (snap.hasData) return Text(snap.data.id);
