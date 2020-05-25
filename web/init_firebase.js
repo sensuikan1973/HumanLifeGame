@@ -7,4 +7,5 @@ if(window.location.hostname === 'localhost'){
 fetch(config_url).then( res => res.json() ).then( json => {
  firebase.initializeApp(json);
  firebase.analytics();
+// firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 });
