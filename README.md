@@ -24,7 +24,8 @@ Play now Human Life Game on Web. You can also create original map.
 ### [Local Hosting](https://firebase.google.com/docs/hosting/deploying)
 **You must serve hosting for Authentication**
 ```sh
-flutter build web
+flutter build web # optional
+firebase use dev
 firebase serve --only hosting --port=5000
 ```
 
