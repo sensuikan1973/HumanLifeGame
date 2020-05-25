@@ -26,7 +26,6 @@ class LifeStepModel {
   bool get hasLeft => left != null;
   bool get hasRight => right != null;
 
-  EmotionCategory get emotionCategory => lifeEvent.emotionCategory;
   bool get isTargetToRoad => lifeEvent.type != LifeEventType.nothing;
   bool get isStart => lifeEvent.type == LifeEventType.start;
   bool get isGoal => lifeEvent.type == LifeEventType.goal;
