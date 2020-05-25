@@ -21,19 +21,48 @@ class LifeItemModel {
   bool operator ==(Object other) => other is LifeItemModel && other.key == key;
 }
 
-// 効果を持つアイテムを定義したい場合、都度追加する。
+/// アイテム種別
 enum LifeItemType {
-  job, // 職業
-  stock, // 株
-  spouse, // 配偶者
-  house, // 家
-  money, // 金
-  vehicle, // 乗り物
-  childGirl, // 子供(女の子)
-  childBoy, // 子供(男の子)
-  fireInsurance, // 火災保険
-  lifeInsurance, // 生命保険
-  earthquakeInsurance, // 地震保険
-  carInsurance, // 自動車保険
-  coffee, // 消費することで1回休みになる。持っていたら必ず消費させる。
+  /// 職業
+  ///
+  /// 詳細は key 文字列で表現する.
+  job,
+
+  /// 株
+  stock,
+
+  /// 配偶者
+  spouse,
+
+  /// 家
+  house,
+
+  /// 金
+  money,
+
+  /// 乗り物
+  vehicle,
+
+  /// 子供(女の子)
+  childGirl,
+
+  /// 子供(男の子)
+  childBoy,
+
+  /// 火災保険
+  fireInsurance,
+
+  /// 生命保険
+  lifeInsurance,
+
+  /// 地震保険
+  earthquakeInsurance,
+
+  /// 自動車保険
+  carInsurance,
+
+  /// コーヒー
+  ///
+  /// 特殊アイテム. 所有している場合、強制的に消費して「1回休み」をくらう.
+  coffee,
 }
