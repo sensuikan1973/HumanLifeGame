@@ -117,10 +117,15 @@
 <p>Play now Human Life Game on Web. You can also create original map.</p>
 <h2 id="development">Development</h2>
 <h3 id="setup">Setup</h3>
-<p>See: <a href="https://flutter.dev/docs/get-started/web">https://flutter.dev/docs/get-started/web</a></p>
+<ol>
+<li><a href="https://flutter.dev/docs/get-started/web">https://flutter.dev/docs/get-started/web</a></li>
+<li><code>cp config/.env.sample config/.env</code></li>
+<li>Edit <code>config/.env</code></li>
+</ol>
 <h3 id="local-hostinghttpsfirebasegooglecomdocshostingdeploying"><a href="https://firebase.google.com/docs/hosting/deploying">Local Hosting</a></h3>
 <p><strong>You must serve hosting for Authentication</strong></p>
-<pre class="language-sh"><code class="language-sh">flutter build web
+<pre class="language-sh"><code class="language-sh">flutter build web # optional
+firebase use dev
 firebase serve --only hosting --port=5000
 </code></pre>
 <h3 id="code-generatehttpspubdevpackagesfreezed"><a href="https://pub.dev/packages/freezed">Code Generate</a></h3>

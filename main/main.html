@@ -78,6 +78,9 @@
       <pre class="language-dart"><code class="language-dart">Future&lt;void&gt; main() async {
   &#47;&#47; ref: https:&#47;&#47;flutter.dev&#47;docs&#47;testing&#47;debugging
 
+  &#47;&#47; NOTE: 現状 Production Mode では不要
+  if (!kReleaseMode) await DotEnv().load(&#39;config&#47;.env&#39;);
+
   runApp(
     HumanLifeGameApp.inProviders(),
   );

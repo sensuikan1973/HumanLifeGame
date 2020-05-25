@@ -143,6 +143,15 @@ Widget build(BuildContext context) =&gt; Scaffold(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            FutureBuilder&lt;UserModel&gt;(
+              future: _signIn(context.watch&lt;Auth&gt;()),
+              builder: (context, snap) {
+                if (snap.hasError) return const Text(&#39;Oops&#39;);
+                if (snap.connectionState == ConnectionState.waiting) return const Text(&#39;waiting...&#39;);
+                if (snap.hasData) return Text(snap.data.id);
+                return const Text(&#39;You must sign in&#39;);
+              },
+            ),
             RaisedButton(
               onPressed: () =&gt; Navigator.of(context).pushNamed(context.read&lt;Router&gt;().playRoom),
               child: const Text(&#39;Go to PlayRoom&#39;),
