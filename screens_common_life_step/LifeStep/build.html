@@ -149,7 +149,7 @@ Widget build(BuildContext context) =&gt; SizedBox(
       child: _model.lifeEvent.type == LifeEventType.nothing
           ? null
           : Card(
-              color: _eventCategoryColor(_model.lifeEvent.category),
+              color: _emotionCategoryColor(_model.lifeEvent.emotionCategory),
               elevation: 4,
               child: Stack(
                 children: &lt;Widget&gt;[
@@ -159,10 +159,16 @@ Widget build(BuildContext context) =&gt; SizedBox(
                       child: Text(_model.lifeEvent.description),
                     ),
                   ),
-                  Positioned.fill(
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
                     child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: _eventCategoryIcon(_model.lifeEvent.category),
+                      alignment: Alignment.bottomCenter,
+                      child: Row(
+                        children: [
+                          for (final category in _model.lifeEvent.infoCategories) _infoCategoryIcon(category),
+                        ],
+                      ),
                     ),
                   ),
                   Positioned.fill(
