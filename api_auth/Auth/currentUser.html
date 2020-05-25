@@ -104,7 +104,7 @@ See: <a href="https://firebase.google.com/docs/auth/web/manage-users">firebase.g
           <h2><span>Implementation</span></h2>
           <pre class="language-dart"><code class="language-dart">Future&lt;UserModel&gt; get currentUser async {
   final user = await _auth.currentUser();
-  return _toModel(user);
+  return user != null ? _toModel(user) : null;
 }</code></pre>
         </section>
 </section>

@@ -61,6 +61,7 @@
             <a href="../../router/Router-class.html#instance-properties">Properties</a>
         </li>
         <li><a href="../../router/Router/initial.html">initial</a></li>
+        <li><a href="../../router/Router/lobby.html">lobby</a></li>
         <li><a href="../../router/Router/playRoom.html">playRoom</a></li>
         <li><a href="../../router/Router/routes.html">routes</a></li>
         <li><a href="../../router/Router/signIn.html">signIn</a></li>
@@ -96,7 +97,8 @@
                         <section class="summary source-code" id="source">
           <h2><span>Implementation</span></h2>
           <pre class="language-dart"><code class="language-dart">Map&lt;String, WidgetBuilder&gt; get routes =&gt; {
-      signIn: (context) =&gt; const SignIn(),
+      lobby: (_) =&gt; const Lobby(),
+      signIn: (_) =&gt; const SignIn(),
       playRoom: (context) =&gt; MultiProvider(
             providers: [
               ChangeNotifierProvider&lt;PlayRoomNotifier&gt;(
