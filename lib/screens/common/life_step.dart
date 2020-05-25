@@ -35,7 +35,7 @@ class LifeStep extends StatelessWidget {
         child: _model.lifeEvent.type == LifeEventType.nothing
             ? null
             : Card(
-                color: _eventCategoryColor(_model.lifeEvent.category),
+                color: _eventCategoryColor(_model.lifeEvent.emotionCategory),
                 elevation: 4,
                 child: Stack(
                   children: <Widget>[
@@ -48,7 +48,7 @@ class LifeStep extends StatelessWidget {
                     Positioned.fill(
                       child: Align(
                         alignment: Alignment.bottomRight,
-                        child: _eventCategoryIcon(_model.lifeEvent.category),
+                        child: _eventCategoryIcon(_model.lifeEvent.emotionCategory),
                       ),
                     ),
                     Positioned.fill(

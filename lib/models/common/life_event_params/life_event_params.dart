@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+import '../life_event.dart';
+
 @immutable
 abstract class LifeEventParams {
   const LifeEventParams();
@@ -39,7 +41,7 @@ abstract class LifeEventParams {
       ].contains(type);
 
   /// 感情の Category を取得する
-  EmotionCategory get category {
+  EmotionCategory get emotionCategory {
     switch (type) {
       case LifeEventType.nothing:
       case LifeEventType.start:
@@ -72,6 +74,53 @@ abstract class LifeEventParams {
         break;
     }
     return EmotionCategory.normal;
+  }
+
+  InfoCategory get infoCategory {
+    switch (type) {
+      case LifeEventType.nothing:
+      case LifeEventType.start:
+      case LifeEventType.goal:
+        return InfoCategory.nothing;
+      case LifeEventType.selectDirection:
+      case LifeEventType.selectDirectionPerDiceRoll:
+      case LifeEventType.selectDirectionPerLifeItem:
+        return InfoCategory.selectDirection;
+      case LifeEventType.gainLifeItems:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.gainLifeItemsPerOtherLifeItem:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.gainLifeItemsPerDiceRoll:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.gainLifeItemsIfExistOtherLifeItem:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.gainLifeItemsIfNotExistOtherLifeItem:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.exchangeLifeItems:
+      case LifeEventType.exchangeLifeItemsWithDiceRoll:
+        return InfoCategory.exchange;
+      case LifeEventType.loseLifeItems:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.loseLifeItemsPerDiceRoll:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.loseLifeItemsPerOtherLifeItem:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.loseLifeItemsIfExistOtherLifeItem:
+        // TODO: Handle this case.
+        break;
+      case LifeEventType.loseLifeItemsIfNotExistOtherLifeItem:
+        // TODO: Handle this case.
+        break;
+    }
+    return InfoCategory.nothing;
   }
 }
 
@@ -145,4 +194,19 @@ enum EmotionCategory {
 
   /// 恩恵を受けるか損害を受けるかが不定な種類の Event を指す
   challenge,
+}
+
+enum InfoCategory {
+  job, // 職業
+  stock, // 株
+  spouse, // 配偶者
+  house, // 家
+  money, // 金
+  vehicle, // 乗り物
+  child, // 子供
+  insurance, // 保険
+  coffee, // 1回休み
+  exchange, // アイテムの交換
+  selectDirection, // 方向選択
+  nothing, //案内なし
 }
