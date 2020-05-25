@@ -78,7 +78,7 @@ abstract class LifeEventParams {
     return EmotionCategory.normal;
   }
 
-  List<InfoCategory> get infoCategorys {
+  List<InfoCategory> get infoCategories {
     switch (type) {
       case LifeEventType.nothing:
       case LifeEventType.start:
@@ -231,16 +231,39 @@ enum EmotionCategory {
 }
 
 enum InfoCategory {
-  job, // 職業
-  stock, // 株
-  spouse, // 配偶者
-  house, // 家
-  money, // 金
-  vehicle, // 乗り物
-  child, // 子供
-  insurance, // 保険
-  coffee, // 1回休み
-  exchange, // アイテムの交換
-  selectDirection, // 方向選択
-  nothing, //案内なし
+  /// 職業
+  job,
+
+  /// 株
+  stock,
+
+  /// 配偶者
+  spouse,
+
+  /// 家
+  house,
+
+  /// 金
+  money,
+
+  /// 乗り物
+  vehicle,
+
+  /// 子供
+  child,
+
+  /// 保険
+  insurance,
+
+  /// 1回休み
+  coffee,
+
+  /// アイテムの交換
+  exchange,
+
+  /// 方向選択
+  selectDirection,
+
+  /// 案内なし
+  nothing,
 }

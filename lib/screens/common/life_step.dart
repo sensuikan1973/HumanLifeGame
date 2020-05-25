@@ -52,7 +52,7 @@ class LifeStep extends StatelessWidget {
                         alignment: Alignment.bottomCenter,
                         child: Row(
                           children: [
-                            for (final category in _model.lifeEvent.infoCategorys) _infoCategoryIcon(category),
+                            for (final category in _model.lifeEvent.infoCategories) _infoCategoryIcon(category),
                           ],
                         ),
                       ),
