@@ -38,8 +38,8 @@ abstract class LifeEventParams {
         LifeEventType.selectDirection,
       ].contains(type);
 
-  /// 所属する Category を取得する
-  EventCategory get category {
+  /// 感情の Category を取得する
+  EmotionCategory get category {
     switch (type) {
       case LifeEventType.nothing:
       case LifeEventType.start:
@@ -47,7 +47,7 @@ abstract class LifeEventParams {
       case LifeEventType.selectDirection:
       case LifeEventType.selectDirectionPerDiceRoll:
       case LifeEventType.selectDirectionPerLifeItem:
-        return EventCategory.normal;
+        return EmotionCategory.normal;
         break;
 
       case LifeEventType.gainLifeItems:
@@ -56,7 +56,7 @@ abstract class LifeEventParams {
       case LifeEventType.gainLifeItemsIfExistOtherLifeItem:
       case LifeEventType.gainLifeItemsIfNotExistOtherLifeItem:
       case LifeEventType.exchangeLifeItems:
-        return EventCategory.positive;
+        return EmotionCategory.positive;
         break;
 
       case LifeEventType.loseLifeItems:
@@ -64,14 +64,14 @@ abstract class LifeEventParams {
       case LifeEventType.loseLifeItemsPerOtherLifeItem:
       case LifeEventType.loseLifeItemsIfExistOtherLifeItem:
       case LifeEventType.loseLifeItemsIfNotExistOtherLifeItem:
-        return EventCategory.negative;
+        return EmotionCategory.negative;
         break;
 
       case LifeEventType.exchangeLifeItemsWithDiceRoll:
-        return EventCategory.challenge;
+        return EmotionCategory.challenge;
         break;
     }
-    return EventCategory.normal;
+    return EmotionCategory.normal;
   }
 }
 
@@ -133,7 +133,7 @@ enum LifeEventType {
   loseLifeItemsIfNotExistOtherLifeItem,
 }
 
-enum EventCategory {
+enum EmotionCategory {
   /// 恩恵を受ける種類の Event を指す
   positive,
 
