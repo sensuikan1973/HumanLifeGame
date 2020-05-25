@@ -35,7 +35,7 @@ class LifeStep extends StatelessWidget {
         child: _model.lifeEvent.type == LifeEventType.nothing
             ? null
             : Card(
-                color: _eventCategoryColor(_model.lifeEvent.emotionCategory),
+                color: _emotionCategoryColor(_model.lifeEvent.emotionCategory),
                 elevation: 4,
                 child: Stack(
                   children: <Widget>[
@@ -99,7 +99,7 @@ class LifeStep extends StatelessWidget {
     return const Icon(null, color: Colors.black38, size: 20);
   }
 
-  Color _eventCategoryColor(EmotionCategory category) {
+  Color _emotionCategoryColor(EmotionCategory category) {
     switch (category) {
       case EmotionCategory.positive:
         return positive;
