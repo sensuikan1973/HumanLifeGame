@@ -62,31 +62,31 @@ class LifeStep extends StatelessWidget {
               ),
       );
 
-  Icon _eventCategoryIcon(EventCategory category) {
+  Icon _eventCategoryIcon(EmotionCategory category) {
     switch (category) {
-      case EventCategory.positive:
+      case EmotionCategory.positive:
         return Icon(Icons.mood, color: Colors.grey[400], size: 20);
-      case EventCategory.negative:
+      case EmotionCategory.negative:
         return Icon(Icons.mood_bad, color: Colors.grey[400], size: 20);
-      case EventCategory.normal:
+      case EmotionCategory.normal:
         // TODO: Handle this case.
         break;
-      case EventCategory.challenge:
+      case EmotionCategory.challenge:
         // TODO: Handle this case.
         break;
     }
     return null;
   }
 
-  Color _eventCategoryColor(EventCategory category) {
+  Color _eventCategoryColor(EmotionCategory category) {
     switch (category) {
-      case EventCategory.positive:
+      case EmotionCategory.positive:
         return positive;
-      case EventCategory.negative:
+      case EmotionCategory.negative:
         return negative;
-      case EventCategory.normal:
+      case EmotionCategory.normal:
         return normal;
-      case EventCategory.challenge:
+      case EmotionCategory.challenge:
         return challenge;
     }
     return null;
