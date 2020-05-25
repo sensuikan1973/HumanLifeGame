@@ -20,4 +20,5 @@ jobs:
       - run: flutter config --enable-web
       - run: flutter pub get
       - run: flutter packages pub run build_runner build
+      - run: cp config/.env.sample config/.env
       - run: flutter build web
