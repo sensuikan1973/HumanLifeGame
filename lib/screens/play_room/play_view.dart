@@ -26,48 +26,48 @@ class PlayView extends StatelessWidget {
     );
 
     return Card(
-      child: Stack(
-        children: <Widget>[
-          Image.asset(
-            'images/play_view_background.jpg',
-            width: lifeRoadSize.width,
-            height: lifeRoadSize.height,
-            fit: BoxFit.fill,
-          ),
-          CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: SizedBox(
-                  height: lifeStepSize.height * playRoomState.humanLife.lifeRoad.height,
-                  child: CustomScrollView(
-                    scrollDirection: Axis.horizontal,
-                    slivers: [
-                      SliverToBoxAdapter(
-                        child: _playView(playRoomState, lifeRoadSize),
-                      ),
-                    ],
+      child: ColoredBox(
+        color: Colors.blue[50],
+        child: Stack(
+          children: <Widget>[
+            Positioned(
+              left: 0,
+              child: Image.asset(
+                'images/play_view_background.jpg',
+                height: 600,
+                fit: BoxFit.fitHeight,
+              ),
+            ),
+            CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: lifeRoadSize.height,
+                    child: CustomScrollView(
+                      scrollDirection: Axis.horizontal,
+                      slivers: [
+                        SliverToBoxAdapter(
+                          child: _lifeRoad(playRoomState, lifeRoadSize),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  SizedBox _playView(PlayRoomState playRoomState, Size size) => SizedBox(
-        //decoration: const BoxDecoration(color: Colors.white),
-        child: Center(
-          child: LifeRoad(
-            playRoomState.humanLife.lifeRoad,
-            size.width,
-            size.height,
-            humans: [
-              for (final humanModel in playRoomState.orderedHumans) Human(humanModel),
-            ],
-            positionsByHumanId: playRoomState.positionsByHumanId,
-          ),
-        ),
+  LifeRoad _lifeRoad(PlayRoomState playRoomState, Size size) => LifeRoad(
+        playRoomState.humanLife.lifeRoad,
+        size.width,
+        size.height,
+        humans: [
+          for (final humanModel in playRoomState.orderedHumans) Human(humanModel),
+        ],
+        positionsByHumanId: playRoomState.positionsByHumanId,
       );
 }
