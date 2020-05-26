@@ -26,28 +26,38 @@ class PlayView extends StatelessWidget {
     );
 
     return Card(
-      child: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: lifeStepSize.height * playRoomState.humanLife.lifeRoad.height,
-              child: CustomScrollView(
-                scrollDirection: Axis.horizontal,
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: _playView(playRoomState, lifeRoadSize),
+      child: Stack(
+        children: <Widget>[
+          Image.asset(
+            'images/play_view_background.jpg',
+            width: lifeRoadSize.width,
+            height: lifeRoadSize.height,
+            fit: BoxFit.fill,
+          ),
+          CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: lifeStepSize.height * playRoomState.humanLife.lifeRoad.height,
+                  child: CustomScrollView(
+                    scrollDirection: Axis.horizontal,
+                    slivers: [
+                      SliverToBoxAdapter(
+                        child: _playView(playRoomState, lifeRoadSize),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         ],
       ),
     );
   }
 
-  DecoratedBox _playView(PlayRoomState playRoomState, Size size) => DecoratedBox(
-        decoration: const BoxDecoration(color: Colors.white),
+  SizedBox _playView(PlayRoomState playRoomState, Size size) => SizedBox(
+        //decoration: const BoxDecoration(color: Colors.white),
         child: Center(
           child: LifeRoad(
             playRoomState.humanLife.lifeRoad,
