@@ -16,9 +16,7 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: 'beta'
-      - run: flutter config --enable-web
-      - run: flutter pub get
-      - run: flutter packages pub run build_runner build
+      - run: ./scripts/setup_flutter_web.sh
       - name: generate dart docs
         run: FLUTTER_ROOT=$FLUTTER_HOME dartdoc --output docs/
       - name: upload
