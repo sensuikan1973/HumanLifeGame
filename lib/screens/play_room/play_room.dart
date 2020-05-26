@@ -68,7 +68,7 @@ class PlayRoomState extends State<PlayRoom> {
             SizedBox(
               width: playViewSize.width,
               height: playViewSize.height,
-              child: const PlayView(),
+              child: PlayView(playViewSize.height),
             ),
           ],
         ),
@@ -114,7 +114,7 @@ class PlayRoomState extends State<PlayRoom> {
             SizedBox(
               width: playViewSize.width,
               height: playViewSize.height,
-              child: const PlayView(),
+              child: PlayView(playViewSize.height),
             ),
             Positioned(
               right: 0,

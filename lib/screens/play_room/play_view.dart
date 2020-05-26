@@ -7,10 +7,11 @@ import '../common/human.dart';
 import '../common/life_road.dart';
 
 class PlayView extends StatelessWidget {
-  const PlayView({Key key}) : super(key: key);
+  const PlayView(this._height, {Key key}) : super(key: key);
 
   Size get _desktopSize => const Size(1440, 1024);
 
+  final double _height;
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -34,7 +35,7 @@ class PlayView extends StatelessWidget {
               left: 0,
               child: Image.asset(
                 'images/play_view_background.jpg',
-                height: 600,
+                height: _height,
                 fit: BoxFit.fitHeight,
               ),
             ),
