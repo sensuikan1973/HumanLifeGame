@@ -49,6 +49,7 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_DEV_TOKEN }}
       - name: update deployment status
         uses: bobheadxi/deployments@master
+        if: always()
         with:
           step: finish
           token: ${{ secrets.GITHUB_TOKEN }}
