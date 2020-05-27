@@ -35,7 +35,6 @@ class PlayView extends StatelessWidget {
                       left: 0,
                       child: Image.asset(
                         'images/play_view_background.jpg',
-                        //height: _height,
                         height: constraints.maxHeight,
                         fit: BoxFit.fitHeight,
                       ),
