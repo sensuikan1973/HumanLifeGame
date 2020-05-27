@@ -55,7 +55,6 @@ class LifeRoad extends StatelessWidget {
         ),
       );
 
-  LifeStep _lifeStep(LifeStepModel model, List<Human> humans) {
-    return model.lifeEvent.type == LifeEventType.nothing ? null : LifeStep(model, humans: humans);
-  }
+  LifeStep _lifeStep(LifeStepModel model, List<Human> humans) =>
+      model.lifeEvent.type == LifeEventType.nothing ? null : LifeStep(model, humans: humans);
 }
