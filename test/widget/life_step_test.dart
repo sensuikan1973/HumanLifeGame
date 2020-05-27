@@ -1,7 +1,6 @@
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/lose_life_items_params.dart';
-import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
 import 'package:HumanLifeGame/models/common/life_step.dart';
 import 'package:HumanLifeGame/screens/common/life_step.dart';
