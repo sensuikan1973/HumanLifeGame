@@ -7,11 +7,10 @@ import '../common/human.dart';
 import '../common/life_road.dart';
 
 class PlayView extends StatelessWidget {
-  const PlayView(this._height, {Key key}) : super(key: key);
+  const PlayView({Key key}) : super(key: key);
 
   Size get _desktopSize => const Size(1440, 1024);
 
-  final double _height;
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -26,24 +25,26 @@ class PlayView extends StatelessWidget {
       lifeStepSize.height * playRoomState.humanLife.lifeRoad.height,
     );
 
-    return Card(
-      child: ColoredBox(
-        color: Colors.blue[50],
-        child: Stack(
-          children: <Widget>[
-            Positioned(
-              left: 0,
-              child: Image.asset(
-                'images/play_view_background.jpg',
-                height: _height,
-                fit: BoxFit.fitHeight,
+    return LayoutBuilder(
+        builder: (context, constraints) => Card(
+              child: ColoredBox(
+                color: Colors.blue[50],
+                child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                      left: 0,
+                      child: Image.asset(
+                        'images/play_view_background.jpg',
+                        //height: _height,
+                        height: constraints.maxHeight,
+                        fit: BoxFit.fitHeight,
+                      ),
+                    ),
+                    _playView(playRoomState, lifeRoadSize),
+                  ],
+                ),
               ),
-            ),
-            _playView(playRoomState, lifeRoadSize),
-          ],
-        ),
-      ),
-    );
+            ));
   }
 
   CustomScrollView _playView(PlayRoomState playRoomState, Size lifeRoadSize) => CustomScrollView(

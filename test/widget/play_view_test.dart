@@ -51,7 +51,7 @@ Future<void> main() async {
       testableApp(
         home: ChangeNotifierProvider(
           create: (_) => playRoomModel,
-          child: const MediaQuery(data: MediaQueryData(size: size), child: PlayView(750)),
+          child: const MediaQuery(data: MediaQueryData(size: size), child: PlayView()),
         ),
       ),
     );
@@ -70,7 +70,7 @@ Future<void> main() async {
           create: (_) => playRoomModel,
           child: const MediaQuery(
             data: MediaQueryData(size: size),
-            child: PlayView(750),
+            child: PlayView(),
           ),
         ),
       ),
