@@ -39,28 +39,30 @@ class PlayView extends StatelessWidget {
                 fit: BoxFit.fitHeight,
               ),
             ),
-            CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: lifeRoadSize.height,
-                    child: CustomScrollView(
-                      scrollDirection: Axis.horizontal,
-                      slivers: [
-                        SliverToBoxAdapter(
-                          child: _lifeRoad(playRoomState, lifeRoadSize),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            _playView(playRoomState, lifeRoadSize),
           ],
         ),
       ),
     );
   }
+
+  CustomScrollView _playView(PlayRoomState playRoomState, Size lifeRoadSize) => CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: lifeRoadSize.height,
+              child: CustomScrollView(
+                scrollDirection: Axis.horizontal,
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: _lifeRoad(playRoomState, lifeRoadSize),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      );
 
   LifeRoad _lifeRoad(PlayRoomState playRoomState, Size size) => LifeRoad(
         playRoomState.humanLife.lifeRoad,
