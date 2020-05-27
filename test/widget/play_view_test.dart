@@ -56,7 +56,7 @@ Future<void> main() async {
       ),
     );
     await tester.pump();
-    expect(find.byType(LifeStep), findsNWidgets(lifeEvents.length * lifeEvents.first.length));
+    expect(find.byType(LifeStep), findsNWidgets(7));
   });
   testWidgets('show LifeSteps, display size = (1050, 750)', (tester) async {
     const windowWidth = 1050.0;
@@ -76,6 +76,6 @@ Future<void> main() async {
       ),
     );
     await tester.pump();
-    expect(find.byType(LifeStep), findsNWidgets(lifeEvents.length * lifeEvents.first.length));
+    expect(find.byType(LifeStep), findsNWidgets(7));
   });
 }
