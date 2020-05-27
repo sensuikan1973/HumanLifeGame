@@ -25,25 +25,26 @@ class PlayView extends StatelessWidget {
       lifeStepSize.height * playRoomState.humanLife.lifeRoad.height,
     );
 
-    return LayoutBuilder(
-        builder: (context, constraints) => Card(
-              child: ColoredBox(
-                color: Colors.blue[50],
-                child: Stack(
-                  children: <Widget>[
-                    Positioned(
-                      left: 0,
-                      child: Image.asset(
-                        'images/play_view_background.jpg',
-                        height: constraints.maxHeight,
-                        fit: BoxFit.fitHeight,
-                      ),
-                    ),
-                    _playView(playRoomState, lifeRoadSize),
-                  ],
+    return Card(
+      child: ColoredBox(
+        color: Colors.blue[50],
+        child: LayoutBuilder(
+          builder: (context, constraints) => Stack(
+            children: <Widget>[
+              Positioned(
+                left: 0,
+                child: Image.asset(
+                  'images/play_view_background.jpg',
+                  height: constraints.maxHeight,
+                  fit: BoxFit.fitHeight,
                 ),
               ),
-            ));
+              _playView(playRoomState, lifeRoadSize),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   CustomScrollView _playView(PlayRoomState playRoomState, Size lifeRoadSize) => CustomScrollView(
