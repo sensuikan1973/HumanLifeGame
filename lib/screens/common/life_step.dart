@@ -6,17 +6,14 @@ import 'human.dart';
 
 class LifeStep extends StatelessWidget {
   LifeStep(
-    this._model,
-    this._width,
-    this._height, {
+    this._model, {
     List<Human> humans,
     Key key,
   })  : _humans = humans ?? [],
         super(key: key);
 
   final LifeStepModel _model;
-  final double _width;
-  final double _height;
+
   final List<Human> _humans;
 
   @visibleForTesting
@@ -29,43 +26,37 @@ class LifeStep extends StatelessWidget {
   static Color challenge = Colors.green[50];
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-        width: _width,
-        height: _height,
-        child: _model.lifeEvent.type == LifeEventType.nothing
-            ? null
-            : Card(
-                color: _emotionCategoryColor(_model.lifeEvent.emotionCategory),
-                elevation: 4,
-                child: Stack(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 70,
-                      child: Center(
-                        child: Text(_model.lifeEvent.description),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Row(
-                          children: [
-                            for (final category in _model.lifeEvent.infoCategories) _infoCategoryIcon(category),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Positioned.fill(
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Row(children: _humans),
-                      ),
-                    ),
+  Widget build(BuildContext context) => Card(
+        color: _emotionCategoryColor(_model.lifeEvent.emotionCategory),
+        elevation: 4,
+        child: Stack(
+          children: <Widget>[
+            SizedBox(
+              height: 70,
+              child: Center(
+                child: Text(_model.lifeEvent.description),
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Row(
+                  children: [
+                    for (final category in _model.lifeEvent.infoCategories) _infoCategoryIcon(category),
                   ],
                 ),
               ),
+            ),
+            Positioned.fill(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Row(children: _humans),
+              ),
+            ),
+          ],
+        ),
       );
 
   Icon _infoCategoryIcon(InfoCategory category) {
