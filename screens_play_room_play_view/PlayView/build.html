@@ -152,22 +152,23 @@ Widget build(BuildContext context) {
   );
 
   return Card(
-    child: CustomScrollView(
-      slivers: [
-        SliverToBoxAdapter(
-          child: SizedBox(
-            height: lifeStepSize.height * playRoomState.humanLife.lifeRoad.height,
-            child: CustomScrollView(
-              scrollDirection: Axis.horizontal,
-              slivers: [
-                SliverToBoxAdapter(
-                  child: _playView(playRoomState, lifeRoadSize),
-                ),
-              ],
+    child: ColoredBox(
+      color: Colors.blue[50],
+      child: LayoutBuilder(
+        builder: (context, constraints) =&gt; Stack(
+          children: &lt;Widget&gt;[
+            Positioned(
+              left: 0,
+              child: Image.asset(
+                &#39;images&#47;play_view_background.jpg&#39;,
+                height: constraints.maxHeight,
+                fit: BoxFit.fitHeight,
+              ),
             ),
-          ),
+            _playView(playRoomState, lifeRoadSize),
+          ],
         ),
-      ],
+      ),
     ),
   );
 }</code></pre>
