@@ -4,6 +4,7 @@ import 'package:HumanLifeGame/models/common/human_life.dart';
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/life_event_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
 import 'package:HumanLifeGame/models/common/life_road.dart';
@@ -55,8 +56,10 @@ Future<void> main() async {
         ),
       ),
     );
+
     await tester.pump();
-    expect(find.byType(LifeStep), findsNWidgets(7));
+
+    expect(find.byType(LifeStep), findsNWidgets(lifeEvents.expand((el) => el.where((el) => el != blank)).length));
   });
   testWidgets('show LifeSteps, display size = (1050, 750)', (tester) async {
     const windowWidth = 1050.0;
