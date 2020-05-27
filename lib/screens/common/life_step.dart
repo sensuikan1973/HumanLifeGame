@@ -40,13 +40,10 @@ class LifeStep extends StatelessWidget {
             Positioned(
               bottom: 0,
               right: 0,
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Row(
-                  children: [
-                    for (final category in _model.lifeEvent.infoCategories) _infoCategoryIcon(category),
-                  ],
-                ),
+              child: Row(
+                children: [
+                  for (final category in _model.lifeEvent.infoCategories) _infoCategoryIcon(category),
+                ],
               ),
             ),
             Positioned.fill(
