@@ -49,6 +49,7 @@ Future<void> main() async {
           create: (_) => playRoomModel, child: LifeRoad(lifeRoad, lifeRoadSize.width, lifeRoadSize.height)),
     ));
     await tester.pump();
-    expect(find.byType(LifeStep), findsNWidgets(7));
+
+    expect(find.byType(LifeStep), findsNWidgets(lifeEvents.expand((el) => el.where((el) => el != blank)).length));
   });
 }
