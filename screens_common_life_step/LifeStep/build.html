@@ -143,43 +143,34 @@ and</li>
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">@override
-Widget build(BuildContext context) =&gt; SizedBox(
-      width: _width,
-      height: _height,
-      child: _model.lifeEvent.type == LifeEventType.nothing
-          ? null
-          : Card(
-              color: _emotionCategoryColor(_model.lifeEvent.emotionCategory),
-              elevation: 4,
-              child: Stack(
-                children: &lt;Widget&gt;[
-                  SizedBox(
-                    height: 70,
-                    child: Center(
-                      child: Text(_model.lifeEvent.description),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Row(
-                        children: [
-                          for (final category in _model.lifeEvent.infoCategories) _infoCategoryIcon(category),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Positioned.fill(
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Row(children: _humans),
-                    ),
-                  ),
-                ],
-              ),
+Widget build(BuildContext context) =&gt; Card(
+      color: _emotionCategoryColor(_model.lifeEvent.emotionCategory),
+      elevation: 4,
+      child: Stack(
+        children: &lt;Widget&gt;[
+          SizedBox(
+            height: 70,
+            child: Center(
+              child: Text(_model.lifeEvent.description),
             ),
+          ),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: Row(
+              children: [
+                for (final category in _model.lifeEvent.infoCategories) _infoCategoryIcon(category),
+              ],
+            ),
+          ),
+          Positioned.fill(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(children: _humans),
+            ),
+          ),
+        ],
+      ),
     );</code></pre>
     </section>
 

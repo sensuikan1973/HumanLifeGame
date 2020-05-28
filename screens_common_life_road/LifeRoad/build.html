@@ -138,22 +138,17 @@ and</li>
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">@override
-Widget build(BuildContext context) =&gt; SizedBox(
-      width: _width,
-      height: _height,
-      child: Table(
-        children: List.generate(
-          _model.height,
-          (y) =&gt; TableRow(
-            children: List.generate(
-              _model.width,
-              (x) =&gt; TableCell(
-                child: LifeStep(
-                  _model.lifeStepsOnBoard[y][x],
-                  _width &#47; _model.width,
-                  _height &#47; _model.height,
-                  humans: _putTargetHumans(x, y),
-                ),
+Widget build(BuildContext context) =&gt; Table(
+      children: List.generate(
+        _model.height,
+        (y) =&gt; TableRow(
+          children: List.generate(
+            _model.width,
+            (x) =&gt; TableCell(
+              child: SizedBox(
+                width: _width &#47; _model.width,
+                height: _height &#47; _model.height,
+                child: _lifeStep(_model.lifeStepsOnBoard[y][x], _putTargetHumans(x, y)),
               ),
             ),
           ),
