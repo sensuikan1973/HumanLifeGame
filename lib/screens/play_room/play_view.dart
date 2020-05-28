@@ -56,7 +56,11 @@ class PlayView extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 slivers: [
                   SliverToBoxAdapter(
-                    child: _lifeRoad(playRoomState, lifeRoadSize),
+                    child: SizedBox(
+                      width: lifeRoadSize.width,
+                      height: lifeRoadSize.height,
+                      child: _lifeRoad(playRoomState, lifeRoadSize),
+                    ),
                   ),
                 ],
               ),

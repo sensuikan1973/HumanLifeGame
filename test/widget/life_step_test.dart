@@ -1,7 +1,6 @@
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/lose_life_items_params.dart';
-import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
 import 'package:HumanLifeGame/models/common/life_step.dart';
 import 'package:HumanLifeGame/screens/common/life_step.dart';
@@ -20,7 +19,7 @@ Future<void> main() async {
       ),
     );
 
-    await tester.pumpWidget(testableApp(home: LifeStep(model, 1050, 700)));
+    await tester.pumpWidget(testableApp(home: LifeStep(model)));
     await tester.pump();
 
     expect(
@@ -39,7 +38,7 @@ Future<void> main() async {
       ),
     );
 
-    await tester.pumpWidget(testableApp(home: LifeStep(model, 1050, 700)));
+    await tester.pumpWidget(testableApp(home: LifeStep(model)));
     await tester.pump();
 
     expect(
@@ -58,7 +57,7 @@ Future<void> main() async {
       ),
     );
 
-    await tester.pumpWidget(testableApp(home: LifeStep(model, 1050, 700)));
+    await tester.pumpWidget(testableApp(home: LifeStep(model)));
     await tester.pump();
 
     expect(
@@ -66,19 +65,6 @@ Future<void> main() async {
           (widget) => widget is Card && widget.color == LifeStep.normal,
         ),
         findsOneWidget);
-  });
-
-  testWidgets('show SizedBox when NotiongParams', (tester) async {
-    final model = LifeStepModel(
-      id: 0,
-      lifeEvent: LifeEventModel(LifeEventTarget.myself, const NothingParams()),
-    );
-
-    await tester.pumpWidget(testableApp(home: LifeStep(model, 1050, 700)));
-    await tester.pump();
-
-    expect(find.byType(SizedBox), findsOneWidget);
-    expect(find.byType(Card), findsNothing);
   });
 
   testWidgets('show description', (tester) async {
@@ -91,7 +77,7 @@ Future<void> main() async {
       ),
     );
 
-    await tester.pumpWidget(testableApp(home: LifeStep(model, 1050, 700)));
+    await tester.pumpWidget(testableApp(home: LifeStep(model)));
     await tester.pump();
 
     expect(find.text('３年連続皆勤賞の快挙達成！！！'), findsOneWidget);
