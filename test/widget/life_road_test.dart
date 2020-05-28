@@ -50,6 +50,6 @@ Future<void> main() async {
     ));
     await tester.pump();
 
-    expect(find.byType(LifeStep), findsNWidgets(lifeEvents.expand((el) => el.where((el) => el != blank)).length));
+    expect(find.byType(LifeStep), findsNWidgets(lifeEvents.expand((el) => el).where((el) => el != blank).length));
   });
 }
