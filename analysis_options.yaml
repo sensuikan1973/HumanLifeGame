@@ -2,6 +2,10 @@ analyzer:
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false
+  errors:
+    todo: ignore
+    missing_required_param: error
+    missing_return: error
 
   # See: https://github.com/dart-lang/sdk/issues/25551#issuecomment-608501698
   # See: https://github.com/dart-lang/sdk/issues/34098
