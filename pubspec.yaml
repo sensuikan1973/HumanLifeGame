@@ -34,6 +34,11 @@ dev_dependencies:
   mockito: 4.1.1
   intl_translation: 0.17.9
 
+  dartman_sensuikan1973:
+    git:
+      url: https://github.com/sensuikan1973/dartman_sensuikan1973
+      ref: 0.0.1
+
 flutter:
   uses-material-design: true
   assets:
