@@ -11,7 +11,7 @@
 [![Codecov](https://codecov.io/gh/sensuikan1973/HumanLifeGame/branch/master/graph/badge.svg)](https://codecov.io/gh/sensuikan1973/HumanLifeGame)
 [![HumanLifeGame_Server](https://img.shields.io/badge/ServerSide-000000.svg?logo=github)](https://github.com/sensuikan1973/HumanLifeGame_Server)
 
-## What's is this game ?
+## What's this game ?
 
 Play now Human Life Game on Web. You can also create original map.
 
