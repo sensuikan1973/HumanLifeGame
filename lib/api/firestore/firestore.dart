@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 
 @immutable
 class Store {
-  const Store({this.firestore});
+  const Store(this.firestore);
 
   final Firestore firestore;
 }

@@ -1,3 +1,4 @@
+import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,7 @@ class HumanLifeGameApp extends StatelessWidget {
         providers: [
           Provider(create: (_) => Router()),
           Provider(create: (_) => auth ?? const Auth()),
-          Provider(create: (_) => auth ?? const Store()),
+          Provider(create: (_) => auth ?? Store(Firestore.instance)),
           Provider(create: (_) => dice ?? const Dice()),
         ],
         child: const HumanLifeGameApp._(),
