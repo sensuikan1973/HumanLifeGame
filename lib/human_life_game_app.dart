@@ -1,10 +1,10 @@
-import 'package:HumanLifeGame/api/firestore/firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'api/auth.dart';
 import 'api/dice.dart';
+import 'api/firestore/firestore.dart';
 import 'i18n/i18n.dart';
 import 'i18n/i18n_delegate.dart';
 import 'router.dart';
