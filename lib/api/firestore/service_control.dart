@@ -29,7 +29,18 @@ CollectionRef<ServiceControl, Document<ServiceControl>> serviceControlsRef(Store
     );
 
 class ServiceControlField {
+  /// メンテナス中かどうか
   static const isMaintenance = 'isMaintenance';
+
+  /// 求める最低バージョン
   static const requiredMinVersion = 'requiredMinVersion';
+
+  /// 更新時刻
   static const updatedAt = 'updatedAt';
+}
+
+/// 特定の Document を Id で参照する用
+class ServiceControlDocumentId {
+  /// Web application
+  static const web = 'web';
 }
