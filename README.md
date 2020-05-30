@@ -39,7 +39,6 @@ firebase emulators:start --only firestore
 
 then, run by `main_emulator` config.
 
-
 ### [Code Generate](https://pub.dev/packages/freezed)
 ```sh
 flutter packages pub run build_runner build
