@@ -6,6 +6,8 @@ import 'human_life_game_app.dart';
 Future<void> main() async {
   // ref: https://flutter.dev/docs/testing/debugging
 
+  WidgetsFlutterBinding.ensureInitialized();
+
   await DotEnv().load('config/.env');
 
   runApp(
