@@ -40,7 +40,7 @@ class ServiceControlField {
 }
 
 /// 特定の Document を Id で参照する用
-class ServiceControlDocumentId {
+class ServiceControlDocId {
   /// Web application
   static const web = 'web';
 }
