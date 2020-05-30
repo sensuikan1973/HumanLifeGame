@@ -9,6 +9,7 @@ import 'models/common/life_road.dart';
 import 'models/common/user.dart';
 import 'models/play_room/play_room.dart';
 import 'screens/lobby/lobby.dart';
+import 'screens/maintenance/maintenance.dart';
 import 'screens/play_room/play_room.dart';
 import 'screens/sign_in/sign_in.dart';
 
@@ -19,10 +20,12 @@ class Router {
   final String lobby = '/lobby';
   final String signIn = '/sign_in';
   final String playRoom = '/play_room';
+  final String maintenance = '/maintenance';
 
   Map<String, WidgetBuilder> get routes => {
         lobby: (_) => const Lobby(),
         signIn: (_) => const SignIn(),
+        maintenance: (_) => const Maintenance(),
         playRoom: (context) => MultiProvider(
               providers: [
                 ChangeNotifierProvider<PlayRoomNotifier>(
