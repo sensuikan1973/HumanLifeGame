@@ -185,20 +185,26 @@ void main() {
     // human1 がサイコロを振って進む
     // ignore: cascade_invocations
     playRoomNotifier.rollDice();
+    expect(playRoomNotifier.value.currentTurnHuman, equals(human2));
     expect(playRoomNotifier.value.positionsByHumanId[human1.id].x, 3);
     expect(playRoomNotifier.value.positionsByHumanId[human1.id].y, 0);
 
     // human2 は1しか出ないサイコロを使う
     const rollForHuman2 = 1;
     when(dice.roll()).thenReturn(rollForHuman2);
+
     // human2 がサイコロを振って進む
     playRoomNotifier.rollDice();
+    expect(playRoomNotifier.value.currentTurnHuman, equals(human2));
     expect(playRoomNotifier.value.positionsByHumanId[human2.id].x, 1);
     expect(playRoomNotifier.value.positionsByHumanId[human2.id].y, 0);
+
     // human2 がサイコロを振って進む
     playRoomNotifier.rollDice();
+    expect(playRoomNotifier.value.currentTurnHuman, equals(human2));
     expect(playRoomNotifier.value.positionsByHumanId[human2.id].x, 2);
     expect(playRoomNotifier.value.positionsByHumanId[human2.id].y, 0);
+
     // human2 がサイコロを振って進む
     playRoomNotifier.rollDice();
     expect(playRoomNotifier.value.positionsByHumanId[human2.id].x, 3);
