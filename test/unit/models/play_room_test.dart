@@ -165,4 +165,43 @@ void main() {
       expect(playRoomNotifier.value.positionsByHumanId[human2.id].y, 2);
     });
   });
+  test('human2 can play alone when human1 reach the goal', () {
+    final lifeEvents = [
+      [start, gains, gains, goals],
+      [blank, blank, blank, blank],
+      [blank, blank, blank, blank],
+      [blank, blank, blank, blank],
+    ];
+    final lifeRoad = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
+    final humanLife = HumanLifeModel(title: 'dummy HumanLife', author: author, lifeRoad: lifeRoad);
+
+    // human1 は3しか出ないサイコロを使う
+    final dice = MockDice();
+    const rollForHuman1 = 3;
+    when(dice.roll()).thenReturn(rollForHuman1);
+
+    final playRoomNotifier = PlayRoomNotifier(const I18n('en'), dice, humanLife, humans);
+
+    // human1 がサイコロを振って進む
+    // ignore: cascade_invocations
+    playRoomNotifier.rollDice();
+    expect(playRoomNotifier.value.positionsByHumanId[human1.id].x, 3);
+    expect(playRoomNotifier.value.positionsByHumanId[human1.id].y, 0);
+
+    // human2 は1しか出ないサイコロを使う
+    const rollForHuman2 = 1;
+    when(dice.roll()).thenReturn(rollForHuman2);
+    // human2 がサイコロを振って進む
+    playRoomNotifier.rollDice();
+    expect(playRoomNotifier.value.positionsByHumanId[human2.id].x, 1);
+    expect(playRoomNotifier.value.positionsByHumanId[human2.id].y, 0);
+    // human2 がサイコロを振って進む
+    playRoomNotifier.rollDice();
+    expect(playRoomNotifier.value.positionsByHumanId[human2.id].x, 2);
+    expect(playRoomNotifier.value.positionsByHumanId[human2.id].y, 0);
+    // human2 がサイコロを振って進む
+    playRoomNotifier.rollDice();
+    expect(playRoomNotifier.value.positionsByHumanId[human2.id].x, 3);
+    expect(playRoomNotifier.value.positionsByHumanId[human2.id].y, 0);
+  });
 }

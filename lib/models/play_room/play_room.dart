@@ -53,6 +53,9 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   // 進む数の残り
   int _remainCount = 0;
 
+  /// 現在手番の Human がゴールに到着したかどうか
+  bool get _currentHumanReachedTheGoal => value.currentPlayerLifeStep.isGoal;
+
   void rollDice() {
     if (value.allHumansReachedTheGoal || value.requireSelectDirection) return;
 
@@ -111,7 +114,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     final currentPlayerIndex = value.orderedHumans.indexOf(value.currentTurnHuman);
     value.currentTurnHuman = value.orderedHumans[(currentPlayerIndex + 1) % value.orderedHumans.length];
     // 現在手番の Human がゴールしていたら次の Human にターンを変える
-    if (value.currentHumanReachedTheGoal) {
+    if (_currentHumanReachedTheGoal) {
       if (value.allHumansReachedTheGoal) return;
       _changeToNextTurn();
     }
