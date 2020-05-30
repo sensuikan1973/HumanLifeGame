@@ -110,6 +110,12 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   void _changeToNextTurn() {
     final currentPlayerIndex = value.orderedHumans.indexOf(value.currentTurnHuman);
     value.currentTurnHuman = value.orderedHumans[(currentPlayerIndex + 1) % value.orderedHumans.length];
+
+    if (value.allHumansReachedTheGoal) return;
+    // 現在手番の Human がゴールしていたら次の Human にターンを変える
+    if (value.currentPlayerLifeStep.isGoal) {
+      _changeToNextTurn();
+    }
   }
 
   DestinationWithMovedStepCount _moveLifeStepUntilMustStop(int roll, {Direction firstDirection}) {
