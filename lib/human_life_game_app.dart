@@ -18,7 +18,7 @@ class HumanLifeGameApp extends StatelessWidget {
         providers: [
           Provider(create: (_) => Router()),
           Provider(create: (_) => auth ?? const Auth()),
-          Provider(create: (_) => auth ?? Store(Firestore.instance)),
+          Provider(create: (_) => Store(Firestore.instance)),
           Provider(create: (_) => dice ?? const Dice()),
         ],
         child: const HumanLifeGameApp._(),
