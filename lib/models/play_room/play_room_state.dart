@@ -40,6 +40,10 @@ class PlayRoomState {
   /// 参加者全員がゴールに到着したかどうか
   bool get allHumansReachedTheGoal => lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
 
+  /// 現在手番の Human がゴールに到着したかどうか
+  bool get currentHumanReachedTheGoal =>
+      lifeStages.firstWhere((lifeStage) => lifeStage.human == currentTurnHuman).lifeStepModel.isGoal;
+
   /// 参加者全員の Position
   Map<String, Position> get positionsByHumanId => {
         for (final lifeStage in lifeStages) lifeStage.human.id: humanLife.lifeRoad.getPosition(lifeStage.lifeStepModel),
