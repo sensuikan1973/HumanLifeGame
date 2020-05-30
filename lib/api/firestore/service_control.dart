@@ -15,7 +15,7 @@ abstract class ServiceControl with _$ServiceControl {
   factory ServiceControl.fromJson(Map<String, dynamic> json) => _$ServiceControlFromJson(json);
 }
 
-final CollectionRef<ServiceControl, Document<ServiceControl>> serviceControlRef = CollectionRef(
+final CollectionRef<ServiceControl, Document<ServiceControl>> serviceControlsRef = CollectionRef(
   Firestore.instance.collection('serviceControl'),
   decoder: (snapshot) => Document(snapshot.reference, ServiceControl.fromJson(snapshot.data)),
   encoder: (serviceControl) => replacingTimestamp(

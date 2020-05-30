@@ -6,9 +6,6 @@ import 'api/auth.dart';
 import 'api/dice.dart';
 import 'i18n/i18n.dart';
 import 'i18n/i18n_delegate.dart';
-import 'infra/human_life_repository.dart';
-import 'infra/infra.dart';
-import 'infra/play_room_repository.dart';
 import 'router.dart';
 
 class HumanLifeGameApp extends StatelessWidget {
@@ -20,7 +17,6 @@ class HumanLifeGameApp extends StatelessWidget {
           Provider(create: (_) => Router()),
           Provider(create: (_) => auth ?? Auth()),
           Provider(create: (_) => dice ?? const Dice()),
-          Provider(create: (_) => Infra(HumanLifeRepository(), PlayRoomRepository()))
         ],
         child: const HumanLifeGameApp._(),
       );
