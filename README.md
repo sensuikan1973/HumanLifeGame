@@ -31,7 +31,7 @@ firebase use dev
 firebase serve --only hosting --port=5000
 ```
 
-### use Firestore Emulator
+### with [Firestore Emulator](https://firebase.google.com/docs/emulator-suite)
 ```sh
 # Server Side
 firebase emulators:start --only firestore
