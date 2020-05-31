@@ -120,6 +120,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.13.6"
+  cloud_firestore_mocks:
+    dependency: "direct dev"
+    description:
+      name: cloud_firestore_mocks
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.4"
   cloud_firestore_platform_interface:
     dependency: transitive
     description:
