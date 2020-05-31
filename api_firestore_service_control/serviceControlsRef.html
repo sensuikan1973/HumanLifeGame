@@ -80,11 +80,14 @@
 (<wbr><ol class="parameter-list"><li><span class="parameter" id="serviceControlsRef-param-store"><span class="type-annotation"><a href="../api_firestore_firestore/Store-class.html">Store</a></span> <span class="parameter-name">store</span></span></li>
 </ol>)
     </section>
+    <section class="desc markdown">
+      <p>TODO: 関数直置きママでいいかは追々検討</p>
+    </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">CollectionRef&lt;ServiceControl, Document&lt;ServiceControl&gt;&gt; serviceControlsRef(Store store) =&gt; CollectionRef(
-      store.firestore.collection(_collectionId),
+      store.firestore.collection(ServiceControl.collectionId),
       decoder: (snapshot) =&gt; Document(snapshot.reference, ServiceControl.fromJson(snapshot.data)),
       encoder: (serviceControl) =&gt; replacingTimestamp(
         json: serviceControl.toJson(),
