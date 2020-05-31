@@ -24,9 +24,8 @@ Play now Human Life Game on Web. You can also create original map.
 3. Edit `config/.env`
 
 ### [Local Hosting](https://firebase.google.com/docs/hosting/deploying)
-**You must serve hosting for Authentication**
 ```sh
-firebase serve --only hosting --port=5000
+firebase serve --only hosting
 ```
 
 ### with [Firestore Emulator](https://firebase.google.com/docs/emulator-suite)
