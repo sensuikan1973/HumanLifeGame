@@ -94,20 +94,21 @@
             <span class="name ">inProviders</span>
 (<wbr><ol class="parameter-list"><li><span class="parameter" id="inProviders-param-key">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/foundation/Key-class.html">Key</a></span> <span class="parameter-name">key</span>, </span></li>
 <li><span class="parameter" id="inProviders-param-auth"><span class="type-annotation"><a href="../../api_auth/Auth-class.html">Auth</a></span> <span class="parameter-name">auth</span>, </span></li>
-<li><span class="parameter" id="inProviders-param-dice"><span class="type-annotation"><a href="../../api_dice/Dice-class.html">Dice</a></span> <span class="parameter-name">dice</span>}</span></li>
+<li><span class="parameter" id="inProviders-param-dice"><span class="type-annotation"><a href="../../api_dice/Dice-class.html">Dice</a></span> <span class="parameter-name">dice</span>, </span></li>
+<li><span class="parameter" id="inProviders-param-store"><span class="type-annotation"><a href="../../api_firestore_firestore/Store-class.html">Store</a></span> <span class="parameter-name">store</span>}</span></li>
 </ol>)
       
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">static Widget inProviders({Key key, Auth auth, Dice dice}) =&gt; MultiProvider(
+      <pre class="language-dart"><code class="language-dart">static Widget inProviders({Key key, Auth auth, Dice dice, Store store}) =&gt; MultiProvider(
       key: key,
       providers: [
         Provider(create: (_) =&gt; Router()),
-        Provider(create: (_) =&gt; auth ?? Auth()),
+        Provider(create: (_) =&gt; auth ?? const Auth()),
+        Provider(create: (_) =&gt; store ?? Store(Firestore.instance)),
         Provider(create: (_) =&gt; dice ?? const Dice()),
-        Provider(create: (_) =&gt; Infra(HumanLifeRepository(), PlayRoomRepository()))
       ],
       child: const HumanLifeGameApp._(),
     );</code></pre>

@@ -105,7 +105,7 @@
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">Future&lt;UserModel&gt; signInWithEmailAndLink({String email, String link}) async {
-  final result = await _auth.signInWithEmailAndLink(email: email, link: link);
+  final result = await FirebaseAuth.instance.signInWithEmailAndLink(email: email, link: link);
   return _toModel(result.user);
 }</code></pre>
     </section>

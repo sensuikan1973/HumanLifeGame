@@ -99,7 +99,7 @@
     </section>
     <section class="desc markdown">
       <p>認証リンクをメール送信</p>
-<p>See: <a href="https://firebase.google.com/docs/auth/web/email-link-auth#send_an_authentication_link_to_the_users_email_address">firebase.google.com/docs/auth/web/email-link-auth#send_an_authentication_link_to_the_users_email_address</a></p>
+<p>See: <a href="https://firebase.google.com/docs/auth/web/email-link-auth#send_anFirebaseAuth.instanceentication_link_to_the_users_email_address">firebase.google.com/docs/auth/web/email-link-auth#send_anFirebaseAuth.instanceentication_link_to_the_users_email_address</a></p>
     </section>
     
     <section class="summary source-code" id="source">
@@ -110,7 +110,7 @@
 }) async {
   &#47;&#47; See: https:&#47;&#47;firebase.google.com&#47;docs&#47;auth&#47;web&#47;passing-state-in-email-actions
   &#47;&#47; FIXME: 現状 ios, android アプリは考えてないが、必須パラメータなのでテキトーに指定してる
-  await _auth.sendSignInWithEmailLink(
+  await FirebaseAuth.instance.sendSignInWithEmailLink(
     email: email,
     url: url,
     handleCodeInApp: true,

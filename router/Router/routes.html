@@ -62,6 +62,7 @@
         </li>
         <li><a href="../../router/Router/initial.html">initial</a></li>
         <li><a href="../../router/Router/lobby.html">lobby</a></li>
+        <li><a href="../../router/Router/maintenance.html">maintenance</a></li>
         <li><a href="../../router/Router/playRoom.html">playRoom</a></li>
         <li><a href="../../router/Router/routes.html">routes</a></li>
         <li><a href="../../router/Router/signIn.html">signIn</a></li>
@@ -99,13 +100,13 @@
           <pre class="language-dart"><code class="language-dart">Map&lt;String, WidgetBuilder&gt; get routes =&gt; {
       lobby: (_) =&gt; const Lobby(),
       signIn: (_) =&gt; const SignIn(),
+      maintenance: (_) =&gt; const Maintenance(),
       playRoom: (context) =&gt; MultiProvider(
             providers: [
               ChangeNotifierProvider&lt;PlayRoomNotifier&gt;(
                 create: (_) =&gt; PlayRoomNotifier(
                   I18n.of(context),
                   context.read&lt;Dice&gt;(),
-                  &#47;&#47; FIXME: Repository から取ってくる
                   HumanLifeModel(
                     title: &#39;dummy HumanLife&#39;,
                     author: UserModel(id: &#39;123&#39;, name: &#39;dummyUser&#39;),

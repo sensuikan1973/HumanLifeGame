@@ -103,7 +103,7 @@
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">Future&lt;UserModel&gt; signInAnonymously() async {
-  final result = await _auth.signInAnonymously();
+  final result = await FirebaseAuth.instance.signInAnonymously();
   return _toModel(result.user);
 }</code></pre>
     </section>
