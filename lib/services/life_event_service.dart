@@ -14,7 +14,6 @@ class LifeEventService {
 
   LifeStageModel executeEvent(LifeEventModel lifeEvent, LifeStageModel lifeStage) {
     final model = LifeStageModel(lifeStage.human)..lifeStepModel = lifeStage.lifeStepModel;
-    var items = [...lifeStage.lifeItems];
     switch (lifeEvent.type) {
       case LifeEventType.nothing:
         // TODO: Handle this case.
@@ -36,8 +35,8 @@ class LifeEventService {
         break;
       case LifeEventType.gainLifeItems:
         final params = lifeEvent.params as GainLifeItemsParams;
-        items = [
-          ...items,
+        final items = [
+          ...lifeStage.lifeItems,
           for (final item in params.targetItems) LifeItemModel(item.key, item.type, item.amount),
         ];
         model.lifeItems = items;
@@ -56,8 +55,8 @@ class LifeEventService {
         break;
       case LifeEventType.exchangeLifeItems:
         final params = lifeEvent.params as ExchangeLifeItemsParams;
-        items = [
-          ...items,
+        final items = [
+          ...lifeStage.lifeItems,
           ...exchangeLifeItems(lifeStage.lifeItems, params),
         ];
         model.lifeItems = items;
@@ -67,8 +66,8 @@ class LifeEventService {
         break;
       case LifeEventType.loseLifeItems:
         final params = lifeEvent.params as LoseLifeItemsParams;
-        items = [
-          ...items,
+        final items = [
+          ...lifeStage.lifeItems,
           for (final item in params.targetItems) LifeItemModel(item.key, item.type, -item.amount),
         ];
         model.lifeItems = items;
@@ -86,10 +85,10 @@ class LifeEventService {
         // TODO: Handle this case.
         break;
       default:
-        model.lifeItems = items;
+        model.lifeItems = [...lifeStage.lifeItems];
         return model;
     }
-    model.lifeItems = items;
+    model.lifeItems = [...lifeStage.lifeItems];
     return model;
   }
 
@@ -105,8 +104,8 @@ class LifeEventService {
           containsBaseItemInLifeItems = true;
         }
       }
-      if (!containsBaseItemInLifeItems) return <LifeItemModel>[];
-      if (totalAmountOfBaseItemInLifeItems < baseItem.amount) return <LifeItemModel>[];
+      if (!containsBaseItemInLifeItems) return items;
+      if (totalAmountOfBaseItemInLifeItems < baseItem.amount) return items;
 
       // lifeItemsにbaseItemが必要量入っていれば減らす
       items.add(LifeItemModel(baseItem.key, baseItem.type, -baseItem.amount));
