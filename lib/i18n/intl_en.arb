@@ -5,7 +5,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "lifeStepEventType": "{type,select, nothing{}start{Start}goal{Goal}selectDirection{Select Direction}gainLifeItems{Gain Item :}loseLifeItems{Lose Item :}}",
+  "lifeStepEventType": "{type,select, nothing{}start{Start}goal{Goal}selectDirection{Select Direction}gainLifeItems{Gain Item :}exchangeLifeItems{Exchange Item :}loseLifeItems{Lose Item :}}",
   "@lifeStepEventType": {
     "type": "text",
     "placeholders": {

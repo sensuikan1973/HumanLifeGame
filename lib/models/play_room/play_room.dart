@@ -93,15 +93,17 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     _remainCount = 0; // リセット
 
     // LifeEvent 処理
+    value.lifeStages = [...value.lifeStages];
     value.lifeStages[_currentPlayerLifeStageIndex] = _lifeEventService.executeEvent(
       _currentPlayerLifeStage.lifeStepModel.lifeEvent,
       _currentPlayerLifeStage,
     );
 
     // LifeEventの履歴を更新
-    value.everyLifeEventRecords.add(
-      LifeEventRecordModel(_i18n, _currentPlayerLifeStage.human, _currentPlayerLifeStage.lifeStepModel.lifeEvent),
-    );
+    value.everyLifeEventRecords = [
+      ...value.everyLifeEventRecords,
+      LifeEventRecordModel(_i18n, _currentPlayerLifeStage.human, _currentPlayerLifeStage.lifeStepModel.lifeEvent)
+    ];
 
     _changeToNextTurn(); // FIXME: 即ターン交代してるけど、あくまで仮
   }
