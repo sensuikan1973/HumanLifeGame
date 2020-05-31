@@ -1,13 +1,21 @@
-let config_url;
 if(window.location.hostname === 'localhost'){
- config_url = "http://localhost:5000/__/firebase/init.json"
+ firebase.initializeApp({
+    apiKey: "AIzaSyC__1zDF8-3wqj6-6srMTkNbRPYQzD52B4",
+    appId: "1:273276530293:web:fcadec7fa9ba2f159ad23c",
+    authDomain: "human-life-game-dev.firebaseapp.com",
+    databaseURL: "https://human-life-game-dev.firebaseio.com",
+    measurementId: "G-P10ZHWT57Q",
+    messagingSenderId: "273276530293",
+    projectId: "human-life-game-dev",
+    storageBucket: "human-life-game-dev.appspot.com"
+ });
 } else {
- config_url = "/__/firebase/init.json";
+  fetch("/__/firebase/init.json").then( res => res.json() ).then( json => {
+   firebase.initializeApp(json);
+  });
 }
-fetch(config_url).then( res => res.json() ).then( json => {
- firebase.initializeApp(json);
- firebase.analytics();
- // See: https://firebase.google.com/docs/auth/web/auth-state-persistence
- // See: https://github.com/FirebaseExtended/flutterfire/issues/1714
- // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-});
+
+firebase.analytics();
+// See: https://firebase.google.com/docs/auth/web/auth-state-persistence
+// See: https://github.com/FirebaseExtended/flutterfire/issues/1714
+// firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);

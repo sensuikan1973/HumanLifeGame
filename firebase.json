@@ -11,17 +11,6 @@
         "source": "**",
         "destination": "/index.html"
       }
-    ],
-    "headers": [
-      {
-        "source": "/__/firebase/init.json",
-        "headers": [
-          {
-            "key" : "Access-Control-Allow-Origin",
-            "value" : "http://localhost:8686"
-          }
-        ]
-      }
     ]
   }
 }
