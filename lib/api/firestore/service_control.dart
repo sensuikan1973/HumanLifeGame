@@ -15,12 +15,14 @@ abstract class ServiceControl with _$ServiceControl {
     @TimestampConverter() DateTime updatedAt,
   }) = _ServiceControl;
   factory ServiceControl.fromJson(Map<String, dynamic> json) => _$ServiceControlFromJson(json);
+
+  @visibleForTesting
+  static const collectionId = 'serviceControl';
 }
 
-const _collectionId = 'serviceControl';
-
+/// TODO: 関数直置きママでいいかは追々検討
 CollectionRef<ServiceControl, Document<ServiceControl>> serviceControlsRef(Store store) => CollectionRef(
-      store.firestore.collection(_collectionId),
+      store.firestore.collection(ServiceControl.collectionId),
       decoder: (snapshot) => Document(snapshot.reference, ServiceControl.fromJson(snapshot.data)),
       encoder: (serviceControl) => replacingTimestamp(
         json: serviceControl.toJson(),
