@@ -38,8 +38,7 @@ class LifeEventService {
           ...lifeStage.lifeItems,
           for (final item in params.targetItems) LifeItemModel(item.key, item.type, item.amount),
         ];
-        lifeStage.lifeItems = items;
-        return lifeStage;
+        return lifeStage.copyWith(lifeItems: items);
       case LifeEventType.gainLifeItemsPerOtherLifeItem:
         // TODO: Handle this case.
         break;
@@ -58,8 +57,7 @@ class LifeEventService {
           ...lifeStage.lifeItems,
           ...exchangeLifeItems(lifeStage.lifeItems, params),
         ];
-        lifeStage.lifeItems = items;
-        return lifeStage;
+        return lifeStage.copyWith(lifeItems: items);
       case LifeEventType.exchangeLifeItemsWithDiceRoll:
         // TODO: Handle this case.
         break;
@@ -69,8 +67,7 @@ class LifeEventService {
           ...lifeStage.lifeItems,
           for (final item in params.targetItems) LifeItemModel(item.key, item.type, -item.amount),
         ];
-        lifeStage.lifeItems = items;
-        return lifeStage;
+        return lifeStage.copyWith(lifeItems: items);
       case LifeEventType.loseLifeItemsPerDiceRoll:
         // TODO: Handle this case.
         break;
@@ -84,9 +81,9 @@ class LifeEventService {
         // TODO: Handle this case.
         break;
       default:
-        return lifeStage;
+        return lifeStage.copyWith();
     }
-    return lifeStage;
+    return lifeStage.copyWith();
   }
 
   List<LifeItemModel> exchangeLifeItems(List<LifeItemModel> lifeItems, ExchangeLifeItemsParams params) {

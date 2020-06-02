@@ -34,7 +34,11 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
         )) {
     // 参加者全員の位置を Start に
     for (final human in value.orderedHumans) {
-      final lifeStage = LifeStageModel(human)..lifeStepModel = value.humanLife.lifeRoad.start;
+      final lifeStage = LifeStageModel(
+        human,
+        lifeStepModel: value.humanLife.lifeRoad.start,
+        lifeItems: [],
+      );
       value.lifeStages.add(lifeStage);
     }
     // 一番手をセット
@@ -96,7 +100,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     value.lifeStages = [...value.lifeStages];
     value.lifeStages[_currentPlayerLifeStageIndex] = _lifeEventService.executeEvent(
       _currentPlayerLifeStage.lifeStepModel.lifeEvent,
-      _currentPlayerLifeStage.copyWith(),
+      _currentPlayerLifeStage,
     );
 
     // LifeEventの履歴を更新
@@ -125,7 +129,8 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     final destinationWithMovedStepCount =
         _currentPlayerLifeStage.lifeStepModel.getNextUntilMustStopStep(roll, firstDirection: firstDirection);
     // 進み先の LifeStep を LifeStage に代入する
-    value.lifeStages[_currentPlayerLifeStageIndex].lifeStepModel = destinationWithMovedStepCount.destination;
+    value.lifeStages[_currentPlayerLifeStageIndex] = value.lifeStages[_currentPlayerLifeStageIndex]
+        .copyWith(lifeStepModel: destinationWithMovedStepCount.destination);
     return destinationWithMovedStepCount;
   }
 }
