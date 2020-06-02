@@ -13,7 +13,6 @@ class LifeEventService {
   const LifeEventService();
 
   LifeStageModel executeEvent(LifeEventModel lifeEvent, LifeStageModel lifeStage) {
-    //final model = LifeStageModel(lifeStage.human)..lifeStepModel = lifeStage.lifeStepModel;
     switch (lifeEvent.type) {
       case LifeEventType.nothing:
         // TODO: Handle this case.
