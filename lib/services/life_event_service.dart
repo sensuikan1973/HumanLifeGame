@@ -13,7 +13,7 @@ class LifeEventService {
   const LifeEventService();
 
   LifeStageModel executeEvent(LifeEventModel lifeEvent, LifeStageModel lifeStage) {
-    final model = LifeStageModel(lifeStage.human)..lifeStepModel = lifeStage.lifeStepModel;
+    //final model = LifeStageModel(lifeStage.human)..lifeStepModel = lifeStage.lifeStepModel;
     switch (lifeEvent.type) {
       case LifeEventType.nothing:
         // TODO: Handle this case.
@@ -39,8 +39,8 @@ class LifeEventService {
           ...lifeStage.lifeItems,
           for (final item in params.targetItems) LifeItemModel(item.key, item.type, item.amount),
         ];
-        model.lifeItems = items;
-        return model;
+        lifeStage.lifeItems = items;
+        return lifeStage;
       case LifeEventType.gainLifeItemsPerOtherLifeItem:
         // TODO: Handle this case.
         break;
@@ -59,8 +59,8 @@ class LifeEventService {
           ...lifeStage.lifeItems,
           ...exchangeLifeItems(lifeStage.lifeItems, params),
         ];
-        model.lifeItems = items;
-        return model;
+        lifeStage.lifeItems = items;
+        return lifeStage;
       case LifeEventType.exchangeLifeItemsWithDiceRoll:
         // TODO: Handle this case.
         break;
@@ -70,8 +70,8 @@ class LifeEventService {
           ...lifeStage.lifeItems,
           for (final item in params.targetItems) LifeItemModel(item.key, item.type, -item.amount),
         ];
-        model.lifeItems = items;
-        return model;
+        lifeStage.lifeItems = items;
+        return lifeStage;
       case LifeEventType.loseLifeItemsPerDiceRoll:
         // TODO: Handle this case.
         break;
@@ -85,11 +85,9 @@ class LifeEventService {
         // TODO: Handle this case.
         break;
       default:
-        model.lifeItems = [...lifeStage.lifeItems];
-        return model;
+        return lifeStage;
     }
-    model.lifeItems = [...lifeStage.lifeItems];
-    return model;
+    return lifeStage;
   }
 
   List<LifeItemModel> exchangeLifeItems(List<LifeItemModel> lifeItems, ExchangeLifeItemsParams params) {

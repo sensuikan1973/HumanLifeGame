@@ -96,7 +96,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     value.lifeStages = [...value.lifeStages];
     value.lifeStages[_currentPlayerLifeStageIndex] = _lifeEventService.executeEvent(
       _currentPlayerLifeStage.lifeStepModel.lifeEvent,
-      _currentPlayerLifeStage,
+      _currentPlayerLifeStage.copyWith(),
     );
 
     // LifeEventの履歴を更新
