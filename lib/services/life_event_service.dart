@@ -90,16 +90,11 @@ class LifeEventService {
     final items = <LifeItemModel>[];
 
     for (final baseItem in params.baseItems) {
-      var containsBaseItemInLifeItems = false;
-      var totalAmountOfBaseItemInLifeItems = 0;
-      for (final item in lifeItems) {
-        if (item.key == baseItem.key) {
-          totalAmountOfBaseItemInLifeItems += item.amount;
-          containsBaseItemInLifeItems = true;
-        }
-      }
-      if (!containsBaseItemInLifeItems) return items;
-      if (totalAmountOfBaseItemInLifeItems < baseItem.amount) return items;
+      final totalAmountOfBaseItem = lifeItems
+          .where((item) => item.key == baseItem.key)
+          .map((item) => item.amount)
+          .reduce((value, element) => value + element);
+      if (totalAmountOfBaseItem < baseItem.amount) return items;
 
       // lifeItemsにbaseItemが必要量入っていれば減らす
       items.add(LifeItemModel(baseItem.key, baseItem.type, -baseItem.amount));
