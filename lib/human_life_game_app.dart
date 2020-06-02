@@ -1,26 +1,25 @@
+import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'api/auth.dart';
 import 'api/dice.dart';
+import 'api/firestore/firestore.dart';
 import 'i18n/i18n.dart';
 import 'i18n/i18n_delegate.dart';
-import 'infra/human_life_repository.dart';
-import 'infra/infra.dart';
-import 'infra/play_room_repository.dart';
 import 'router.dart';
 
 class HumanLifeGameApp extends StatelessWidget {
   const HumanLifeGameApp._();
 
-  static Widget inProviders({Key key, Auth auth, Dice dice}) => MultiProvider(
+  static Widget inProviders({Key key, Auth auth, Dice dice, Store store}) => MultiProvider(
         key: key,
         providers: [
           Provider(create: (_) => Router()),
-          Provider(create: (_) => auth ?? Auth()),
+          Provider(create: (_) => auth ?? const Auth()),
+          Provider(create: (_) => store ?? Store(Firestore.instance)),
           Provider(create: (_) => dice ?? const Dice()),
-          Provider(create: (_) => Infra(HumanLifeRepository(), PlayRoomRepository()))
         ],
         child: const HumanLifeGameApp._(),
       );

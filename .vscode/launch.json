@@ -1,14 +1,20 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Flutter",
-            "request": "launch",
-            "type": "dart",
-            "args": ["--web-port", "8686"]
-        }
-    ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Flutter",
+      "request": "launch",
+      "type": "dart",
+      "args": ["--target", "lib/main.dart", "--web-port", "8686"]
+    },
+    {
+      "name": "Flutter_Emulator",
+      "request": "launch",
+      "type": "dart",
+      "args": ["--target", "lib/main_emulator.dart", "--web-port", "8686"]
+    }
+  ]
 }

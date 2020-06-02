@@ -8,13 +8,13 @@ import '../models/common/user.dart';
 /// See: <https://firebase.google.com/docs/reference/android/com/google/firebase/auth/FirebaseAuth>
 @immutable
 class Auth {
-  final _auth = FirebaseAuth.instance;
+  const Auth();
 
   /// 匿名認証
   ///
   /// See: <https://firebase.google.com/docs/auth/web/anonymous-auth>
   Future<UserModel> signInAnonymously() async {
-    final result = await _auth.signInAnonymously();
+    final result = await FirebaseAuth.instance.signInAnonymously();
     return _toModel(result.user);
   }
 
@@ -22,7 +22,7 @@ class Auth {
   ///
   /// See: <https://firebase.google.com/docs/auth/web/password-auth>
   Future<UserModel> createUserWithEmailAndPassword({String email, String password}) async {
-    final result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+    final result = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
     return _toModel(result.user);
   }
 
@@ -30,20 +30,20 @@ class Auth {
   ///
   /// See: <https://firebase.google.com/docs/auth/web/password-auth>
   Future<UserModel> signInWithEmailAndPassword({String email, String password}) async {
-    final result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+    final result = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
     return _toModel(result.user);
   }
 
   /// 認証リンクをメール送信
   ///
-  /// See: <https://firebase.google.com/docs/auth/web/email-link-auth#send_an_authentication_link_to_the_users_email_address>
+  /// See: <https://firebase.google.com/docs/auth/web/email-link-auth#send_anFirebaseAuth.instanceentication_link_to_the_users_email_address>
   Future<void> sendSignInLinkToEmail({
     @required String email,
     @required String url,
   }) async {
     // See: https://firebase.google.com/docs/auth/web/passing-state-in-email-actions
     // FIXME: 現状 ios, android アプリは考えてないが、必須パラメータなのでテキトーに指定してる
-    await _auth.sendSignInWithEmailLink(
+    await FirebaseAuth.instance.sendSignInWithEmailLink(
       email: email,
       url: url,
       handleCodeInApp: true,
@@ -58,28 +58,28 @@ class Auth {
   ///
   /// See: <https://firebase.google.com/docs/auth/web/email-link-auth>
   Future<UserModel> signInWithEmailAndLink({String email, String link}) async {
-    final result = await _auth.signInWithEmailAndLink(email: email, link: link);
+    final result = await FirebaseAuth.instance.signInWithEmailAndLink(email: email, link: link);
     return _toModel(result.user);
   }
 
   /// 認証用メールリンクの文字列であるかどうか
-  Future<bool> isSignInWithEmailLink(String str) async => _auth.isSignInWithEmailLink(str);
+  Future<bool> isSignInWithEmailLink(String str) async => FirebaseAuth.instance.isSignInWithEmailLink(str);
 
   /// 現在ログインしてるユーザのオブザーバ
   ///
   /// See: <https://firebase.google.com/docs/auth/web/manage-users>
   Stream<UserModel> get currentUserStream =>
-      _auth.onAuthStateChanged.asyncMap((user) => user != null ? _toModel(user) : null);
+      FirebaseAuth.instance.onAuthStateChanged.asyncMap((user) => user != null ? _toModel(user) : null);
 
   /// 現在ログインしてるユーザ
   ///
   /// See: <https://firebase.google.com/docs/auth/web/manage-users>
   Future<UserModel> get currentUser async {
-    final user = await _auth.currentUser();
+    final user = await FirebaseAuth.instance.currentUser();
     return user != null ? _toModel(user) : null;
   }
 
-  Future<void> signOut() async => _auth.signOut();
+  Future<void> signOut() async => FirebaseAuth.instance.signOut();
 
   UserModel _toModel(FirebaseUser user) => UserModel(
         id: user.uid,
