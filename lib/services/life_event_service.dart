@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import '../models/common/life_event.dart';
+import '../models/common/life_event_params/exchange_life_items_params.dart';
 import '../models/common/life_event_params/gain_life_items_params.dart';
 import '../models/common/life_event_params/life_event_params.dart';
 import '../models/common/life_event_params/lose_life_items_params.dart';
@@ -34,10 +35,10 @@ class LifeEventService {
       case LifeEventType.gainLifeItems:
         final params = lifeEvent.params as GainLifeItemsParams;
         final items = [
+          ...lifeStage.lifeItems,
           for (final item in params.targetItems) LifeItemModel(item.key, item.type, item.amount),
         ];
-        return lifeStage..lifeItems.addAll(items);
-        break;
+        return lifeStage.copyWith(lifeItems: items);
       case LifeEventType.gainLifeItemsPerOtherLifeItem:
         // TODO: Handle this case.
         break;
@@ -51,18 +52,22 @@ class LifeEventService {
         // TODO: Handle this case.
         break;
       case LifeEventType.exchangeLifeItems:
-        // TODO: Handle this case.
-        break;
+        final params = lifeEvent.params as ExchangeLifeItemsParams;
+        final items = [
+          ...lifeStage.lifeItems,
+          ..._exchangeLifeItems(lifeStage.lifeItems, params),
+        ];
+        return lifeStage.copyWith(lifeItems: items);
       case LifeEventType.exchangeLifeItemsWithDiceRoll:
         // TODO: Handle this case.
         break;
       case LifeEventType.loseLifeItems:
         final params = lifeEvent.params as LoseLifeItemsParams;
         final items = [
+          ...lifeStage.lifeItems,
           for (final item in params.targetItems) LifeItemModel(item.key, item.type, -item.amount),
         ];
-        return lifeStage..lifeItems.addAll(items);
-        break;
+        return lifeStage.copyWith(lifeItems: items);
       case LifeEventType.loseLifeItemsPerDiceRoll:
         // TODO: Handle this case.
         break;
@@ -76,8 +81,28 @@ class LifeEventService {
         // TODO: Handle this case.
         break;
       default:
-        return lifeStage;
+        return lifeStage.copyWith();
     }
-    return lifeStage;
+    return lifeStage.copyWith();
+  }
+
+  List<LifeItemModel> _exchangeLifeItems(List<LifeItemModel> lifeItems, ExchangeLifeItemsParams params) {
+    final items = <LifeItemModel>[];
+
+    for (final baseItem in params.baseItems) {
+      final totalAmountOfBaseItem = lifeItems
+          .where((item) => item.key == baseItem.key)
+          .map((item) => item.amount)
+          .reduce((value, element) => value + element);
+      if (totalAmountOfBaseItem < baseItem.amount) return items;
+
+      // lifeItemsにbaseItemが必要量入っていれば減らす
+      items.add(LifeItemModel(baseItem.key, baseItem.type, -baseItem.amount));
+    }
+    // lifeItemsにtargetItemを追加する
+    for (final targetItem in params.targetItems) {
+      items.add(LifeItemModel(targetItem.key, targetItem.type, targetItem.amount));
+    }
+    return items;
   }
 }

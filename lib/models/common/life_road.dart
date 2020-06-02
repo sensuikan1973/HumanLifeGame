@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import 'life_event.dart';
+import 'life_event_params/exchange_life_items_params.dart';
 import 'life_event_params/gain_life_items_params.dart';
 import 'life_event_params/goal_params.dart';
 import 'life_event_params/lose_life_items_params.dart';
@@ -51,17 +52,27 @@ class LifeRoadModel {
           TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
         ]),
         description: '財布を落とす');
-
+    final exchg = LifeEventModel(
+        LifeEventTarget.myself,
+        const ExchangeLifeItemsParams(
+          targetItems: [
+            TargetLifeItemParams(key: 'HumanLifeGames Inc.', type: LifeItemType.stock, amount: 1),
+          ],
+          baseItems: [
+            TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
+          ],
+        ),
+        description: '株を購入する');
     final direc = LifeEventModel(LifeEventTarget.myself, const SelectDirectionParams(), description: '人生の分岐点');
     final blank = LifeEventModel(LifeEventTarget.myself, const NothingParams());
     return [
-      [start, direc, gains, gains, gains, loses, blank, blank, blank, blank],
+      [start, direc, gains, gains, exchg, loses, blank, blank, blank, blank],
       [blank, gains, blank, blank, blank, gains, blank, blank, blank, blank],
       [blank, gains, gains, loses, gains, gains, gains, blank, blank, blank],
-      [blank, blank, blank, blank, blank, blank, gains, blank, blank, blank],
-      [goals, gains, loses, gains, gains, loses, direc, blank, blank, blank],
+      [blank, blank, blank, blank, blank, blank, exchg, blank, blank, blank],
+      [goals, exchg, loses, gains, exchg, loses, direc, blank, blank, blank],
       [blank, gains, blank, blank, blank, blank, gains, blank, blank, blank],
-      [blank, gains, gains, loses, gains, gains, gains, blank, blank, blank],
+      [blank, gains, exchg, loses, gains, gains, gains, blank, blank, blank],
       [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
       [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
       [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],

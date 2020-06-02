@@ -34,7 +34,11 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
         )) {
     // 参加者全員の位置を Start に
     for (final human in value.orderedHumans) {
-      final lifeStage = LifeStageModel(human)..lifeStepModel = value.humanLife.lifeRoad.start;
+      final lifeStage = LifeStageModel(
+        human: human,
+        lifeStepModel: value.humanLife.lifeRoad.start,
+        lifeItems: [],
+      );
       value.lifeStages.add(lifeStage);
     }
     // 一番手をセット
@@ -93,15 +97,17 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     _remainCount = 0; // リセット
 
     // LifeEvent 処理
+    value.lifeStages = [...value.lifeStages];
     value.lifeStages[_currentPlayerLifeStageIndex] = _lifeEventService.executeEvent(
       _currentPlayerLifeStage.lifeStepModel.lifeEvent,
       _currentPlayerLifeStage,
     );
 
     // LifeEventの履歴を更新
-    value.everyLifeEventRecords.add(
-      LifeEventRecordModel(_i18n, _currentPlayerLifeStage.human, _currentPlayerLifeStage.lifeStepModel.lifeEvent),
-    );
+    value.everyLifeEventRecords = [
+      ...value.everyLifeEventRecords,
+      LifeEventRecordModel(_i18n, _currentPlayerLifeStage.human, _currentPlayerLifeStage.lifeStepModel.lifeEvent)
+    ];
 
     _changeToNextTurn(); // FIXME: 即ターン交代してるけど、あくまで仮
   }
@@ -123,7 +129,8 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     final destinationWithMovedStepCount =
         _currentPlayerLifeStage.lifeStepModel.getNextUntilMustStopStep(roll, firstDirection: firstDirection);
     // 進み先の LifeStep を LifeStage に代入する
-    value.lifeStages[_currentPlayerLifeStageIndex].lifeStepModel = destinationWithMovedStepCount.destination;
+    value.lifeStages[_currentPlayerLifeStageIndex] = value.lifeStages[_currentPlayerLifeStageIndex]
+        .copyWith(lifeStepModel: destinationWithMovedStepCount.destination);
     return destinationWithMovedStepCount;
   }
 }

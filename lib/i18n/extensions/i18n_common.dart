@@ -18,6 +18,7 @@ extension I18nCommon on I18n {
           LifeEventType.goal: 'Goal',
           LifeEventType.selectDirection: 'Select Direction',
           LifeEventType.gainLifeItems: 'Gain Item :',
+          LifeEventType.exchangeLifeItems: 'Exchange Item :',
           LifeEventType.loseLifeItems: 'Lose Item :',
         },
         name: 'lifeStepEventType',

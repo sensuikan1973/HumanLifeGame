@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         'goal': 'Goal',
         'selectDirection': 'Select Direction',
         'gainLifeItems': 'Gain Item :',
+        'exchangeLifeItems': 'Exchange Item :',
         'loseLifeItems': 'Lose Item :',
       })}";
 

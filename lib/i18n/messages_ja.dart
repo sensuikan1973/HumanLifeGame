@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         'goal': 'ゴール',
         'selectDirection': '方向を選択',
         'gainLifeItems': 'アイテムを獲得 :',
+        'exchangeLifeItems': 'アイテムを交換 :',
         'loseLifeItems': 'アイテムを損失 :',
       })}";
 
