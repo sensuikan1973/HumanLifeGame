@@ -115,10 +115,10 @@
     case LifeEventType.gainLifeItems:
       final params = lifeEvent.params as GainLifeItemsParams;
       final items = [
+        ...lifeStage.lifeItems,
         for (final item in params.targetItems) LifeItemModel(item.key, item.type, item.amount),
       ];
-      return lifeStage..lifeItems.addAll(items);
-      break;
+      return lifeStage.copyWith(lifeItems: items);
     case LifeEventType.gainLifeItemsPerOtherLifeItem:
       &#47;&#47; TODO: Handle this case.
       break;
@@ -132,18 +132,22 @@
       &#47;&#47; TODO: Handle this case.
       break;
     case LifeEventType.exchangeLifeItems:
-      &#47;&#47; TODO: Handle this case.
-      break;
+      final params = lifeEvent.params as ExchangeLifeItemsParams;
+      final items = [
+        ...lifeStage.lifeItems,
+        ..._exchangeLifeItems(lifeStage.lifeItems, params),
+      ];
+      return lifeStage.copyWith(lifeItems: items);
     case LifeEventType.exchangeLifeItemsWithDiceRoll:
       &#47;&#47; TODO: Handle this case.
       break;
     case LifeEventType.loseLifeItems:
       final params = lifeEvent.params as LoseLifeItemsParams;
       final items = [
+        ...lifeStage.lifeItems,
         for (final item in params.targetItems) LifeItemModel(item.key, item.type, -item.amount),
       ];
-      return lifeStage..lifeItems.addAll(items);
-      break;
+      return lifeStage.copyWith(lifeItems: items);
     case LifeEventType.loseLifeItemsPerDiceRoll:
       &#47;&#47; TODO: Handle this case.
       break;
@@ -157,9 +161,9 @@
       &#47;&#47; TODO: Handle this case.
       break;
     default:
-      return lifeStage;
+      return lifeStage.copyWith();
   }
-  return lifeStage;
+  return lifeStage.copyWith();
 }</code></pre>
     </section>
 

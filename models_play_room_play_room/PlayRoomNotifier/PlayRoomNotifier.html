@@ -111,7 +111,11 @@
       )) {
   &#47;&#47; 参加者全員の位置を Start に
   for (final human in value.orderedHumans) {
-    final lifeStage = LifeStageModel(human)..lifeStepModel = value.humanLife.lifeRoad.start;
+    final lifeStage = LifeStageModel(
+      human: human,
+      lifeStepModel: value.humanLife.lifeRoad.start,
+      lifeItems: [],
+    );
     value.lifeStages.add(lifeStage);
   }
   &#47;&#47; 一番手をセット

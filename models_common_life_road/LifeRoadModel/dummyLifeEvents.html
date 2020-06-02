@@ -116,17 +116,27 @@
         TargetLifeItemParams(key: &#39;money&#39;, type: LifeItemType.money, amount: 1000),
       ]),
       description: &#39;財布を落とす&#39;);
-
+  final exchg = LifeEventModel(
+      LifeEventTarget.myself,
+      const ExchangeLifeItemsParams(
+        targetItems: [
+          TargetLifeItemParams(key: &#39;HumanLifeGames Inc.&#39;, type: LifeItemType.stock, amount: 1),
+        ],
+        baseItems: [
+          TargetLifeItemParams(key: &#39;money&#39;, type: LifeItemType.money, amount: 1000),
+        ],
+      ),
+      description: &#39;株を購入する&#39;);
   final direc = LifeEventModel(LifeEventTarget.myself, const SelectDirectionParams(), description: &#39;人生の分岐点&#39;);
   final blank = LifeEventModel(LifeEventTarget.myself, const NothingParams());
   return [
-    [start, direc, gains, gains, gains, loses, blank, blank, blank, blank],
+    [start, direc, gains, gains, exchg, loses, blank, blank, blank, blank],
     [blank, gains, blank, blank, blank, gains, blank, blank, blank, blank],
     [blank, gains, gains, loses, gains, gains, gains, blank, blank, blank],
-    [blank, blank, blank, blank, blank, blank, gains, blank, blank, blank],
-    [goals, gains, loses, gains, gains, loses, direc, blank, blank, blank],
+    [blank, blank, blank, blank, blank, blank, exchg, blank, blank, blank],
+    [goals, exchg, loses, gains, exchg, loses, direc, blank, blank, blank],
     [blank, gains, blank, blank, blank, blank, gains, blank, blank, blank],
-    [blank, gains, gains, loses, gains, gains, gains, blank, blank, blank],
+    [blank, gains, exchg, loses, gains, gains, gains, blank, blank, blank],
     [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
     [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
     [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
