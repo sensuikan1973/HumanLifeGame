@@ -9,8 +9,8 @@ part 'life_stage.freezed.dart';
 
 @freezed
 abstract class LifeStageModel with _$LifeStageModel {
-  factory LifeStageModel(
-    HumanModel human, {
+  factory LifeStageModel({
+    HumanModel human,
     List<LifeItemModel> lifeItems,
     LifeStepModel lifeStepModel,
   }) = _LifeStageModel;

@@ -35,7 +35,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     // 参加者全員の位置を Start に
     for (final human in value.orderedHumans) {
       final lifeStage = LifeStageModel(
-        human,
+        human: human,
         lifeStepModel: value.humanLife.lifeRoad.start,
         lifeItems: [],
       );

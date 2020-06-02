@@ -55,7 +55,7 @@ class LifeEventService {
         final params = lifeEvent.params as ExchangeLifeItemsParams;
         final items = [
           ...lifeStage.lifeItems,
-          ...exchangeLifeItems(lifeStage.lifeItems, params),
+          ..._exchangeLifeItems(lifeStage.lifeItems, params),
         ];
         return lifeStage.copyWith(lifeItems: items);
       case LifeEventType.exchangeLifeItemsWithDiceRoll:
@@ -86,7 +86,7 @@ class LifeEventService {
     return lifeStage.copyWith();
   }
 
-  List<LifeItemModel> exchangeLifeItems(List<LifeItemModel> lifeItems, ExchangeLifeItemsParams params) {
+  List<LifeItemModel> _exchangeLifeItems(List<LifeItemModel> lifeItems, ExchangeLifeItemsParams params) {
     final items = <LifeItemModel>[];
 
     for (final baseItem in params.baseItems) {
