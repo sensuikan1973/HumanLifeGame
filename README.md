@@ -2,7 +2,7 @@
 
 [![Flutter Version](https://img.shields.io/badge/Flutter-beta-64B5F6.svg?logo=flutter)](https://github.com/flutter/flutter/wiki/Flutter-build-release-channels)
 [![Figma](https://img.shields.io/badge/Figma-grey.svg?logo=figma)](https://www.figma.com/file/nXa9iPmXYOHOA77GvjBLdj/HumanLifeGame)
-[![SpreadSheet](https://img.shields.io/badge/SpreadSheet-grey.svg?logo=google%20sheets)](https://docs.google.com/spreadsheets/d/1ghhCb5Ux7Mj52QEMrPy4rUhteCk3KgohG1JM29yjhS0)
+[![SpreadSheet](https://img.shields.io/badge/GoogleDrive-grey.svg?logo=google%20drive)](https://drive.google.com/drive/u/0/folders/1yxBm-ArcEtR_Tfe949nEzk5b6jnjjFV7)
 [![API_Document](https://img.shields.io/badge/API_Document-025697.svg?logo=dart)](https://sensuikan1973.github.io/HumanLifeGame/)  
 ![Flutter Format](https://github.com/sensuikan1973/HumanLifeGame/workflows/Flutter_Format/badge.svg)
 ![Flutter_Analyzer](https://github.com/sensuikan1973/HumanLifeGame/workflows/Flutter_Analyzer/badge.svg)
