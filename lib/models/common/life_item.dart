@@ -13,12 +13,6 @@ class LifeItemModel {
   final String key;
   final LifeItemType type;
   int amount;
-
-  @override
-  int get hashCode => key.hashCode;
-
-  @override
-  bool operator ==(Object other) => other is LifeItemModel && other.key == key;
 }
 
 /// アイテム種別
