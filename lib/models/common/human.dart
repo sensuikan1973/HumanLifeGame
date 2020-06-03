@@ -2,8 +2,13 @@ import 'package:flutter/foundation.dart';
 
 import 'user.dart';
 
+@immutable
 class HumanModel {
-  HumanModel({@required this.id, @required this.name, @required this.order});
+  const HumanModel({
+    @required this.id,
+    @required this.name,
+    @required this.order,
+  });
   HumanModel.fromUserModel(UserModel user, this.order)
       : id = user.id,
         name = user.name;

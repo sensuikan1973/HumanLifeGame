@@ -72,12 +72,6 @@ class LifeStepModel {
     }
     return null;
   }
-
-  @override
-  int get hashCode => id.hashCode;
-
-  @override
-  bool operator ==(Object other) => other is LifeStepModel && other.id == id;
 }
 
 class DestinationWithMovedStepCount {

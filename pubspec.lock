@@ -194,11 +194,11 @@ packages:
     dependency: "direct dev"
     description:
       path: "."
-      ref: "0.0.1"
-      resolved-ref: a811101ecfaecd60a297e65c392540b8d408b17c
+      ref: "1.0.0"
+      resolved-ref: "30f1942eb5f0da791a909c4484440eb195530d98"
       url: "https://github.com/sensuikan1973/dartman_sensuikan1973"
     source: git
-    version: "0.0.1"
+    version: "1.0.0"
   disposable_provider:
     dependency: transitive
     description:
