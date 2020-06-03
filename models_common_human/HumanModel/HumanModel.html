@@ -27,7 +27,7 @@
     <li><a href="../../index.html">HumanLifeGame</a></li>
     <li><a href="../../models_common_human/models_common_human-library.html">human</a></li>
     <li><a href="../../models_common_human/HumanModel-class.html">HumanModel</a></li>
-    <li class="self-crumb">HumanModel constructor</li>
+    <li class="self-crumb">HumanModel const constructor</li>
   </ol>
   <div class="self-name">HumanModel</div>
   <form class="search navbar-right" role="search">
@@ -48,7 +48,7 @@
       <li><a href="../../index.html">HumanLifeGame</a></li>
       <li><a href="../../models_common_human/models_common_human-library.html">human</a></li>
       <li><a href="../../models_common_human/HumanModel-class.html">HumanModel</a></li>
-      <li class="self-crumb">HumanModel constructor</li>
+      <li class="self-crumb">HumanModel const constructor</li>
     </ol>
     
     <h5>HumanModel class</h5>
@@ -84,7 +84,7 @@
       <div><h1><span class="kind-constructor">HumanModel</span> constructor</h1></div>
 
     <section class="multi-line-signature">
-      
+      const
       <span class="name ">HumanModel</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-id">{<span>@required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">id</span>, </span></li>
 <li><span class="parameter" id="-param-name"><span>@required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span></li>
 <li><span class="parameter" id="-param-order"><span>@required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">order</span>}</span></li>
@@ -94,7 +94,11 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">HumanModel({@required this.id, @required this.name, @required this.order});</code></pre>
+      <pre class="language-dart"><code class="language-dart">const HumanModel({
+  @required this.id,
+  @required this.name,
+  @required this.order,
+});</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
