@@ -58,7 +58,7 @@ void main() {
 
   test('exchangeLifeItems', () {
     final items = [
-      LifeItemModel('money', LifeItemType.money, 1500),
+      LifeItemModel('car', LifeItemType.vehicle, 1),
     ];
     final lifeStageModel = LifeStageModel(human: HumanModel(id: 'human_1', name: 'foo', order: 0), lifeItems: items);
     final exchange = LifeEventModel(
@@ -68,24 +68,25 @@ void main() {
           TargetLifeItemParams(key: 'HumanLifeGames Inc.', type: LifeItemType.stock, amount: 1),
         ],
         baseItems: [
-          TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
+          TargetLifeItemParams(key: 'car', type: LifeItemType.vehicle, amount: 1),
         ],
       ),
     );
     var model = const LifeEventService().executeEvent(exchange, lifeStageModel);
-    expect(model.lifeItems[0].amount, 1500);
-    expect(model.lifeItems[0].key, 'money');
-    expect(model.lifeItems[1].amount, -1000);
-    expect(model.lifeItems[1].key, 'money');
+    expect(model.lifeItems[0].amount, 1);
+    expect(model.lifeItems[0].key, 'car');
+    expect(model.lifeItems[1].amount, -1);
+    expect(model.lifeItems[1].key, 'car');
     expect(model.lifeItems[2].amount, 1);
     expect(model.lifeItems[2].key, 'HumanLifeGames Inc.');
 
+    // ２回目の交換では、交換の条件を満たしていないため交換できない
     model = const LifeEventService().executeEvent(exchange, model);
     expect(model.lifeItems.length, 3);
-    expect(model.lifeItems[0].amount, 1500);
-    expect(model.lifeItems[0].key, 'money');
-    expect(model.lifeItems[1].amount, -1000);
-    expect(model.lifeItems[1].key, 'money');
+    expect(model.lifeItems[0].amount, 1);
+    expect(model.lifeItems[0].key, 'car');
+    expect(model.lifeItems[1].amount, -1);
+    expect(model.lifeItems[1].key, 'car');
     expect(model.lifeItems[2].amount, 1);
     expect(model.lifeItems[2].key, 'HumanLifeGames Inc.');
   });
