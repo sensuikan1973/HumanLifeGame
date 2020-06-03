@@ -1,5 +1,6 @@
 import 'package:HumanLifeGame/models/common/human.dart';
 import 'package:HumanLifeGame/models/common/life_event.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/exchange_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/lose_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/target_life_item_params.dart';
@@ -53,5 +54,39 @@ void main() {
     expect(model.lifeItems[1].key, 'money');
     expect(model.lifeItems[2].amount, -5000);
     expect(model.lifeItems[2].key, 'money');
+  });
+
+  test('exchangeLifeItems', () {
+    final items = [
+      LifeItemModel('money', LifeItemType.money, 1500),
+    ];
+    final lifeStageModel = LifeStageModel(human: HumanModel(id: 'human_1', name: 'foo', order: 0), lifeItems: items);
+    final exchange = LifeEventModel(
+      LifeEventTarget.myself,
+      const ExchangeLifeItemsParams(
+        targetItems: [
+          TargetLifeItemParams(key: 'HumanLifeGames Inc.', type: LifeItemType.stock, amount: 1),
+        ],
+        baseItems: [
+          TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
+        ],
+      ),
+    );
+    var model = const LifeEventService().executeEvent(exchange, lifeStageModel);
+    expect(model.lifeItems[0].amount, 1500);
+    expect(model.lifeItems[0].key, 'money');
+    expect(model.lifeItems[1].amount, -1000);
+    expect(model.lifeItems[1].key, 'money');
+    expect(model.lifeItems[2].amount, 1);
+    expect(model.lifeItems[2].key, 'HumanLifeGames Inc.');
+
+    model = const LifeEventService().executeEvent(exchange, model);
+    expect(model.lifeItems.length, 3);
+    expect(model.lifeItems[0].amount, 1500);
+    expect(model.lifeItems[0].key, 'money');
+    expect(model.lifeItems[1].amount, -1000);
+    expect(model.lifeItems[1].key, 'money');
+    expect(model.lifeItems[2].amount, 1);
+    expect(model.lifeItems[2].key, 'HumanLifeGames Inc.');
   });
 }
