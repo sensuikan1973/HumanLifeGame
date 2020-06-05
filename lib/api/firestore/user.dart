@@ -27,7 +27,7 @@ class UserField {
   static const displayName = 'displayName';
 
   /// 作成時刻
-  static const createdAt = 'updatedAt';
+  static const createdAt = 'createdAt';
 
   /// 更新時刻
   static const updatedAt = 'updatedAt';
