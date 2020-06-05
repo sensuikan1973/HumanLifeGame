@@ -16,7 +16,7 @@ abstract class LifeEvent with _$LifeEvent {
   factory LifeEvent.fromJson(Map<String, dynamic> json) => _$LifeEventFromJson(json);
 
   @visibleForTesting
-  static const collectionId = 'LifeEvent';
+  static const collectionId = 'lifeEvent';
 }
 
 class LifeEventField {
