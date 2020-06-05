@@ -25,7 +25,7 @@ abstract class PlayRoom with _$PlayRoom {
     @required String currentTurnHumanId,
     @required @TimestampConverter() DateTime createdAt,
     @required @TimestampConverter() DateTime updatedAt,
-    @required @TimestampConverter() DateTime finishedAt,
+    @TimestampConverter() DateTime finishedAt,
   }) = _PlayRoom;
   factory PlayRoom.fromJson(Map<String, dynamic> json) => _$PlayRoomFromJson(json);
 
