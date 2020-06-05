@@ -10,7 +10,7 @@ abstract class LifeEventRecord with _$LifeEventRecord {
   const factory LifeEventRecord({
     @required String humanId,
     @required String lifeEvent,
-    @TimestampConverter() DateTime updatedAt,
+    @required @TimestampConverter() DateTime updatedAt,
   }) = _LifeEventRecord;
   factory LifeEventRecord.fromJson(Map<String, dynamic> json) => _$LifeEventRecordFromJson(json);
 

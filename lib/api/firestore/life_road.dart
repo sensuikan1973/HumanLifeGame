@@ -8,10 +8,11 @@ part 'life_road.g.dart';
 @freezed
 abstract class LifeRoad with _$LifeRoad {
   const factory LifeRoad({
-    @required String uid,
-    @required String displayName,
-    @TimestampConverter() DateTime createdAt,
-    @TimestampConverter() DateTime updatedAt,
+    @required @DocumentReferenceConverter() DocumentReference author,
+    @required String title,
+    @required List<Map<String, dynamic>> lifeEvents,
+    @required @TimestampConverter() DateTime createdAt,
+    @required @TimestampConverter() DateTime updatedAt,
   }) = _LifeRoad;
   factory LifeRoad.fromJson(Map<String, dynamic> json) => _$LifeRoadFromJson(json);
 

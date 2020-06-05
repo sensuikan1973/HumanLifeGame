@@ -10,8 +10,8 @@ abstract class User with _$User {
   const factory User({
     @required String uid,
     @required String displayName,
-    @TimestampConverter() DateTime createdAt,
-    @TimestampConverter() DateTime updatedAt,
+    @required @TimestampConverter() DateTime createdAt,
+    @required @TimestampConverter() DateTime updatedAt,
   }) = _User;
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
