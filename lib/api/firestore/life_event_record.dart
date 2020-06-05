@@ -2,6 +2,8 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'life_event.dart';
+
 part 'life_event_record.freezed.dart';
 part 'life_event_record.g.dart';
 
@@ -9,7 +11,7 @@ part 'life_event_record.g.dart';
 abstract class LifeEventRecord with _$LifeEventRecord {
   const factory LifeEventRecord({
     @required String humanId,
-    @required String lifeEvent,
+    @required LifeEvent lifeEvent,
     @required @TimestampConverter() DateTime updatedAt,
   }) = _LifeEventRecord;
   factory LifeEventRecord.fromJson(Map<String, dynamic> json) => _$LifeEventRecordFromJson(json);

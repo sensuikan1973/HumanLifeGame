@@ -2,6 +2,8 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'life_event.dart';
+
 part 'life_road.freezed.dart';
 part 'life_road.g.dart';
 
@@ -10,7 +12,7 @@ abstract class LifeRoad with _$LifeRoad {
   const factory LifeRoad({
     @required @DocumentReferenceConverter() DocumentReference author,
     @required String title,
-    @required List<Map<String, dynamic>> lifeEvents,
+    @required List<LifeEvent> lifeEvents,
     @required @TimestampConverter() DateTime createdAt,
     @required @TimestampConverter() DateTime updatedAt,
   }) = _LifeRoad;
