@@ -7,6 +7,7 @@ import 'life_event.dart';
 part 'life_event_record.freezed.dart';
 part 'life_event_record.g.dart';
 
+/// Document on Firestore
 @freezed
 abstract class LifeEventRecord with _$LifeEventRecord {
   const factory LifeEventRecord({

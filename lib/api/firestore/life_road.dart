@@ -7,6 +7,7 @@ import 'life_event.dart';
 part 'life_road.freezed.dart';
 part 'life_road.g.dart';
 
+/// Document on Firestore
 @freezed
 abstract class LifeRoad with _$LifeRoad {
   const factory LifeRoad({

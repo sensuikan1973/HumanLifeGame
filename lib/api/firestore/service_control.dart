@@ -7,6 +7,7 @@ import 'firestore.dart';
 part 'service_control.freezed.dart';
 part 'service_control.g.dart';
 
+/// Document on Firestore
 @freezed
 abstract class ServiceControl with _$ServiceControl {
   const factory ServiceControl({

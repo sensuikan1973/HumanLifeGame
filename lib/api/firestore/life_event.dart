@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'life_event.freezed.dart';
 part 'life_event.g.dart';
 
+/// Map Value on Firestore
 @freezed
 abstract class LifeEvent with _$LifeEvent {
   const factory LifeEvent({
