@@ -142,8 +142,9 @@ Widget build(BuildContext context) =&gt; Card(
       child: Center(
         child: &lt;Widget&gt;[
           if (context.select&lt;PlayRoomNotifier, bool&gt;((model) =&gt; model.value.requireSelectDirection))
-            _directionSelectButton(context),
-          _rollDiceButton(context),
+            _directionSelectButton(context)
+          else
+            _rollDiceButton(context),
         ].first, &#47;&#47; NOTE: 常に必要な Action UI は 1つ
       ),
     );</code></pre>
