@@ -37,7 +37,7 @@ Future<void> main() async {
   ];
   final humanLife = HumanLifeModel(
     title: 'hello',
-    author: UserModel(id: 'user', name: 'hoge'),
+    author: UserModel(id: 'user', name: 'hoge', isAnonymous: true),
     lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents)),
   );
 

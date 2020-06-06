@@ -38,7 +38,7 @@ Future<void> main() async {
 
   final humanLife = HumanLifeModel(
     title: 'hello',
-    author: UserModel(id: 'user', name: 'hoge'),
+    author: UserModel(id: 'user', name: 'hoge', isAnonymous: true),
     lifeRoad: lifeRoad,
   );
   final lifeRoadSize = Size(150.0 * humanLife.lifeRoad.width, 100.0 * humanLife.lifeRoad.height);

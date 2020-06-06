@@ -20,7 +20,7 @@ Future<void> main() async {
   final humans = [const HumanModel(id: 'h1', name: 'foo', order: 0), const HumanModel(id: 'h2', name: 'bar', order: 1)];
   final humanLife = HumanLifeModel(
     title: 'dummy HumanLife',
-    author: UserModel(id: 'dummyUserId', name: 'dummyUser'),
+    author: UserModel(id: 'dummyUserId', name: 'dummyUser', isAnonymous: true),
     lifeRoad: LifeRoadModel(
       lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
         LifeRoadModel.dummyLifeEvents(),

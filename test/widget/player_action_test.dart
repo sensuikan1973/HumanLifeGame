@@ -34,7 +34,7 @@ Future<void> main() async {
     ];
     final humanLife = HumanLifeModel(
       title: 'dummy HumanLife',
-      author: UserModel(id: 'dummyUserId', name: 'dummyUser'),
+      author: UserModel(id: 'dummyUserId', name: 'dummyUser', isAnonymous: true),
       lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents)),
     );
     final playRoomModel = PlayRoomNotifier(i18n, MockDice(), humanLife, humans);

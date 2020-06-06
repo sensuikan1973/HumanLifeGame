@@ -5,15 +5,20 @@ class UserModel {
   UserModel({
     @required this.id,
     @required this.name,
-    this.email,
+    @required this.isAnonymous,
+    this.isEmailVerified = false,
+    this.email = '',
     DateTime createdAt,
     DateTime updatedAt,
-  })  : createdAt = createdAt ?? DateTime.now(),
+  })  : assert(isEmailVerified && email.isNotEmpty || !isEmailVerified && email.isEmpty),
+        createdAt = createdAt ?? DateTime.now(),
         updatedAt = updatedAt ?? DateTime.now();
 
   final String id;
   final String name;
+  final bool isAnonymous;
   final String email;
+  final bool isEmailVerified;
   final DateTime createdAt;
   final DateTime updatedAt;
 

@@ -84,7 +84,9 @@ class Auth {
   UserModel _toModel(FirebaseUser user) => UserModel(
         id: user.uid,
         name: user.displayName,
+        isAnonymous: user.isAnonymous,
         email: user.email,
+        isEmailVerified: user.isEmailVerified,
         // TODO: 他に必要な属性が無いか検討
       );
 }

@@ -12,7 +12,7 @@ coverage:
   status:
     project:
       default:
-        target: 65%
+        target: 70%
     patch: no # See: https://docs.codecov.io/docs/commit-status#section-patch-status
     changes: no
 
