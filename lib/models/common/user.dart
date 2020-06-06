@@ -10,8 +10,7 @@ class UserModel {
     this.email = '',
     DateTime createdAt,
     DateTime updatedAt,
-  })  : assert(isEmailVerified && email.isNotEmpty || !isEmailVerified && email.isEmpty),
-        createdAt = createdAt ?? DateTime.now(),
+  })  : createdAt = createdAt ?? DateTime.now(),
         updatedAt = updatedAt ?? DateTime.now();
 
   final String id;
