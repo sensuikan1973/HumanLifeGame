@@ -7,12 +7,13 @@ import 'firestore.dart';
 part 'service_control.freezed.dart';
 part 'service_control.g.dart';
 
+/// Document on Firestore
 @freezed
 abstract class ServiceControl with _$ServiceControl {
   const factory ServiceControl({
     @required bool isMaintenance,
     @required String requiredMinVersion,
-    @TimestampConverter() DateTime updatedAt,
+    @required @TimestampConverter() DateTime updatedAt,
   }) = _ServiceControl;
   factory ServiceControl.fromJson(Map<String, dynamic> json) => _$ServiceControlFromJson(json);
 
