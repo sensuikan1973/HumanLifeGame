@@ -98,7 +98,7 @@ Future<void> main() async {
     expect(find.text(i18n.rollAnnouncement(humans.first.name, roll)), findsOneWidget);
   });
 
-  testWidgets('roll-the-dice button shuld be disabled when all Humans reached the goal', (tester) async {
+  testWidgets('roll-the-dice button should be disabled when all Humans reached the goal', (tester) async {
     final dice = MockDice();
     const roll = 6;
     when(dice.roll()).thenReturn(roll);
