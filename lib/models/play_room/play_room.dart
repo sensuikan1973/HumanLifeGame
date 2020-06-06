@@ -49,9 +49,9 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   final Dice _dice;
   final _lifeEventService = const LifeEventService();
 
-  int get _currentPlayerLifeStageIndex =>
+  int get _currentHumanLifeStageIndex =>
       value.lifeStages.indexWhere((lifeStage) => lifeStage.human == value.currentTurnHuman);
-  LifeStageModel get _currentPlayerLifeStage => value.lifeStages[_currentPlayerLifeStageIndex];
+  LifeStageModel get _currentHumanLifeStage => value.lifeStages[_currentHumanLifeStageIndex];
 
   // 進む数の残り
   int _remainCount = 0;
@@ -97,15 +97,15 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
     // LifeEvent 処理
     value.lifeStages = [...value.lifeStages];
-    value.lifeStages[_currentPlayerLifeStageIndex] = _lifeEventService.executeEvent(
-      _currentPlayerLifeStage.lifeStepModel.lifeEvent,
-      _currentPlayerLifeStage,
+    value.lifeStages[_currentHumanLifeStageIndex] = _lifeEventService.executeEvent(
+      _currentHumanLifeStage.lifeStepModel.lifeEvent,
+      _currentHumanLifeStage,
     );
 
     // LifeEventの履歴を更新
     value.everyLifeEventRecords = [
       ...value.everyLifeEventRecords,
-      LifeEventRecordModel(_i18n, _currentPlayerLifeStage.human, _currentPlayerLifeStage.lifeStepModel.lifeEvent)
+      LifeEventRecordModel(_i18n, _currentHumanLifeStage.human, _currentHumanLifeStage.lifeStepModel.lifeEvent)
     ];
 
     _changeToNextTurn(); // FIXME: 即ターン交代してるけど、あくまで仮
@@ -126,9 +126,9 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   DestinationWithMovedStepCount _moveLifeStepUntilMustStop(int roll, {Direction firstDirection}) {
     // 現在の LifeStep から指定の数だけ進んだ LifeStep を取得する
     final destinationWithMovedStepCount =
-        _currentPlayerLifeStage.lifeStepModel.getNextUntilMustStopStep(roll, firstDirection: firstDirection);
+        _currentHumanLifeStage.lifeStepModel.getNextUntilMustStopStep(roll, firstDirection: firstDirection);
     // 進み先の LifeStep を LifeStage に代入する
-    value.lifeStages[_currentPlayerLifeStageIndex] = value.lifeStages[_currentPlayerLifeStageIndex]
+    value.lifeStages[_currentHumanLifeStageIndex] = value.lifeStages[_currentHumanLifeStageIndex]
         .copyWith(lifeStepModel: destinationWithMovedStepCount.destination);
     return destinationWithMovedStepCount;
   }
