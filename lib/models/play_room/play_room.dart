@@ -70,41 +70,47 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     }
 
     final dest = _moveLifeStepUntilMustStop(value.roll);
-    _updateByDestination(dest);
+    _updateRequireSelectDirectionAndRemainCount(dest);
+    if (!value.requireSelectDirection) {
+      _executeEventToCurrentHuman();
+      _changeToNextTurn();
+    }
     notifyListeners();
   }
 
   void chooseDirection(Direction direction) {
     if (value.allHumansReachedTheGoal || !value.requireSelectDirection) return;
     final dest = _moveLifeStepUntilMustStop(_remainCount, firstDirection: direction);
-    _updateByDestination(dest);
+    _updateRequireSelectDirectionAndRemainCount(dest);
+    if (!value.requireSelectDirection) {
+      _executeEventToCurrentHuman();
+      _changeToNextTurn();
+    }
     notifyListeners();
   }
 
-  // FIXME: 命名も処理範囲も雑。共通処理を切り出しただけ。
-  void _updateByDestination(DestinationWithMovedStepCount dest) {
-    // NOTE: 選択を要するところに止まっても、そこが最終地点なら選択は次のターンに後回しとする
-    value.requireSelectDirection = dest.remainCount > 0 && dest.destination.requireToSelectDirectionManually;
-    if (value.requireSelectDirection) {
-      _remainCount = dest.remainCount;
-      return;
-    }
-    _remainCount = 0; // リセット
-
+  void _executeEventToCurrentHuman() {
     // LifeEvent 処理
     value.lifeStages = [...value.lifeStages];
     value.lifeStages[_currentHumanLifeStageIndex] = _lifeEventService.executeEvent(
       _currentHumanLifeStage.lifeStepModel.lifeEvent,
       _currentHumanLifeStage,
     );
-
     // LifeEventの履歴を更新
     value.everyLifeEventRecords = [
       ...value.everyLifeEventRecords,
       LifeEventRecordModel(_i18n, _currentHumanLifeStage.human, _currentHumanLifeStage.lifeStepModel.lifeEvent)
     ];
+  }
 
-    _changeToNextTurn();
+  void _updateRequireSelectDirectionAndRemainCount(DestinationWithMovedStepCount dest) {
+    // NOTE: 選択を要するところが到着の場合、そこが最終地点なら選択は次のターンに後回しとするため、「dest.remainCount > 0」としてる
+    value.requireSelectDirection = dest.remainCount > 0 && dest.destination.requireToSelectDirectionManually;
+    if (value.requireSelectDirection) {
+      _remainCount = dest.remainCount;
+    } else {
+      _remainCount = 0; // リセット
+    }
   }
 
   // 次のターンに変える
