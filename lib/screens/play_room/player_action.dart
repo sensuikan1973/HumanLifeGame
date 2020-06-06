@@ -13,8 +13,9 @@ class PlayerAction extends StatelessWidget {
         child: Center(
           child: <Widget>[
             if (context.select<PlayRoomNotifier, bool>((model) => model.value.requireSelectDirection))
-              _directionSelectButton(context),
-            _rollDiceButton(context),
+              _directionSelectButton(context)
+            else
+              _rollDiceButton(context),
           ].first, // NOTE: 常に必要な Action UI は 1つ
         ),
       );
@@ -32,49 +33,45 @@ class PlayerAction extends StatelessWidget {
         ),
       );
 
-  Column _directionSelectButton(BuildContext context) => Column(
-        children: <Widget>[
-          Center(
-            child: IconButton(
-              icon: const Icon(Icons.arrow_upward),
-              onPressed: context
-                      .select<PlayRoomNotifier, LifeStepModel>((notifier) => notifier.value.currentHumanLifeStep)
-                      .hasUp
-                  ? () => context.read<PlayRoomNotifier>().chooseDirection(Direction.up)
+  Column _directionSelectButton(BuildContext context) {
+    final currentHumanLifeStep =
+        context.select<PlayRoomNotifier, LifeStepModel>((notifier) => notifier.value.currentHumanLifeStep);
+    return Column(
+      children: <Widget>[
+        Center(
+          child: IconButton(
+            icon: const Icon(Icons.arrow_upward),
+            onPressed: currentHumanLifeStep.hasUp
+                ? () => context.read<PlayRoomNotifier>().chooseDirection(Direction.up)
+                : null,
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: currentHumanLifeStep.hasLeft
+                  ? () => context.read<PlayRoomNotifier>().chooseDirection(Direction.left)
                   : null,
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: context
-                        .select<PlayRoomNotifier, LifeStepModel>((notifier) => notifier.value.currentHumanLifeStep)
-                        .hasLeft
-                    ? () => context.read<PlayRoomNotifier>().chooseDirection(Direction.left)
-                    : null,
-              ),
-              IconButton(
-                icon: const Icon(Icons.arrow_forward),
-                onPressed: context
-                        .select<PlayRoomNotifier, LifeStepModel>((notifier) => notifier.value.currentHumanLifeStep)
-                        .hasRight
-                    ? () => context.read<PlayRoomNotifier>().chooseDirection(Direction.right)
-                    : null,
-              ),
-            ],
-          ),
-          Center(
-            child: IconButton(
-              icon: const Icon(Icons.arrow_downward),
-              onPressed: context
-                      .select<PlayRoomNotifier, LifeStepModel>((notifier) => notifier.value.currentHumanLifeStep)
-                      .hasDown
-                  ? () => context.read<PlayRoomNotifier>().chooseDirection(Direction.down)
+            IconButton(
+              icon: const Icon(Icons.arrow_forward),
+              onPressed: currentHumanLifeStep.hasRight
+                  ? () => context.read<PlayRoomNotifier>().chooseDirection(Direction.right)
                   : null,
             ),
+          ],
+        ),
+        Center(
+          child: IconButton(
+            icon: const Icon(Icons.arrow_downward),
+            onPressed: currentHumanLifeStep.hasDown
+                ? () => context.read<PlayRoomNotifier>().chooseDirection(Direction.down)
+                : null,
           ),
-        ],
-      );
+        ),
+      ],
+    );
+  }
 }

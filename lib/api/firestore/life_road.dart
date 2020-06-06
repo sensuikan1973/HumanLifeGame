@@ -9,31 +9,31 @@ part 'life_road.g.dart';
 
 /// Document on Firestore
 @freezed
-abstract class LifeRoad with _$LifeRoad {
-  const factory LifeRoad({
+abstract class HumanLife with _$HumanLife {
+  const factory HumanLife({
     @required @DocumentReferenceConverter() DocumentReference author,
     @required String title,
     @required List<LifeEvent> lifeEvents,
     @required @TimestampConverter() DateTime createdAt,
     @required @TimestampConverter() DateTime updatedAt,
-  }) = _LifeRoad;
-  factory LifeRoad.fromJson(Map<String, dynamic> json) => _$LifeRoadFromJson(json);
+  }) = _HumanLife;
+  factory HumanLife.fromJson(Map<String, dynamic> json) => _$HumanLifeFromJson(json);
 
   @visibleForTesting
-  static const collectionId = 'lifeRoad';
+  static const collectionId = 'humanLife';
 }
 
-class LifeRoadField {
+class HumanLifeField {
   /// 作成者
   static const author = 'author';
 
   /// タイトル
   static const title = 'title';
 
-  /// LifeEvent の配列
+  /// LifeRoad の LifeEvent 配列
   ///
   /// クライアントサイドで二次元に展開 + 連結リスト化 するのが必要
-  static const lifeEvents = 'lifeEvents';
+  static const lifeRoadEvents = 'lifeRoadEvents';
 
   /// 作成時刻
   static const createdAt = 'createdAt';
