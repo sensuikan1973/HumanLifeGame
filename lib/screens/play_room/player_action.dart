@@ -37,7 +37,9 @@ class PlayerAction extends StatelessWidget {
           Center(
             child: IconButton(
               icon: const Icon(Icons.arrow_upward),
-              onPressed: context.select<PlayRoomNotifier, LifeStepModel>((value) => value.currentPlayerLifeStep).hasUp
+              onPressed: context
+                      .select<PlayRoomNotifier, LifeStepModel>((notifier) => notifier.value.currentHumanLifeStep)
+                      .hasUp
                   ? () => context.read<PlayRoomNotifier>().chooseDirection(Direction.up)
                   : null,
             ),
@@ -47,24 +49,28 @@ class PlayerAction extends StatelessWidget {
             children: <Widget>[
               IconButton(
                 icon: const Icon(Icons.arrow_back),
-                onPressed:
-                    context.select<PlayRoomNotifier, LifeStepModel>((value) => value.currentPlayerLifeStep).hasLeft
-                        ? () => context.read<PlayRoomNotifier>().chooseDirection(Direction.left)
-                        : null,
+                onPressed: context
+                        .select<PlayRoomNotifier, LifeStepModel>((notifier) => notifier.value.currentHumanLifeStep)
+                        .hasLeft
+                    ? () => context.read<PlayRoomNotifier>().chooseDirection(Direction.left)
+                    : null,
               ),
               IconButton(
                 icon: const Icon(Icons.arrow_forward),
-                onPressed:
-                    context.select<PlayRoomNotifier, LifeStepModel>((value) => value.currentPlayerLifeStep).hasRight
-                        ? () => context.read<PlayRoomNotifier>().chooseDirection(Direction.right)
-                        : null,
+                onPressed: context
+                        .select<PlayRoomNotifier, LifeStepModel>((notifier) => notifier.value.currentHumanLifeStep)
+                        .hasRight
+                    ? () => context.read<PlayRoomNotifier>().chooseDirection(Direction.right)
+                    : null,
               ),
             ],
           ),
           Center(
             child: IconButton(
               icon: const Icon(Icons.arrow_downward),
-              onPressed: context.select<PlayRoomNotifier, LifeStepModel>((value) => value.currentPlayerLifeStep).hasDown
+              onPressed: context
+                      .select<PlayRoomNotifier, LifeStepModel>((notifier) => notifier.value.currentHumanLifeStep)
+                      .hasDown
                   ? () => context.read<PlayRoomNotifier>().chooseDirection(Direction.down)
                   : null,
             ),

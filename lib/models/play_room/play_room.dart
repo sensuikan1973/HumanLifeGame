@@ -52,7 +52,6 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   int get _currentPlayerLifeStageIndex =>
       value.lifeStages.indexWhere((lifeStage) => lifeStage.human == value.currentTurnHuman);
   LifeStageModel get _currentPlayerLifeStage => value.lifeStages[_currentPlayerLifeStageIndex];
-  LifeStepModel get currentPlayerLifeStep => _currentPlayerLifeStage.lifeStepModel;
 
   // 進む数の残り
   int _remainCount = 0;
@@ -65,7 +64,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
       ..announcement = _i18n.rollAnnouncement(value.currentTurnHuman.name, value.roll); // FIXME: 状態に応じた適切なメッセージを流すように
 
     // サイコロ振る出発地点が分岐なら
-    if (currentPlayerLifeStep.requireToSelectDirectionManually) {
+    if (value.currentHumanLifeStep.requireToSelectDirectionManually) {
       _remainCount = value.roll;
       value.requireSelectDirection = true;
       notifyListeners();
