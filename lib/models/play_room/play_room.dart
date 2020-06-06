@@ -113,8 +113,8 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
   // 次のターンに変える
   void _changeToNextTurn() {
-    final currentPlayerIndex = value.orderedHumans.indexOf(value.currentTurnHuman);
-    value.currentTurnHuman = value.orderedHumans[(currentPlayerIndex + 1) % value.orderedHumans.length];
+    final currentHumanIndex = value.orderedHumans.indexOf(value.currentTurnHuman);
+    value.currentTurnHuman = value.orderedHumans[(currentHumanIndex + 1) % value.orderedHumans.length];
 
     if (value.allHumansReachedTheGoal) return;
     // 現在手番の Human がゴールしていたら次の Human にターンを変える

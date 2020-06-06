@@ -49,16 +49,16 @@ Future<void> main() async {
     expect(find.text('200'), findsNWidgets(playRoomNotifier.value.lifeStages.length));
   });
 
-  testWidgets('show current player', (tester) async {
+  testWidgets('show current human', (tester) async {
     final playRoomNotifier = PlayRoomNotifier(i18n, dice, humanLife, humans);
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(create: (_) => playRoomNotifier, child: const LifeStages()),
     ));
     await tester.pump();
-    final currentPlayerSelector = find.byIcon(Icons.chevron_right);
-    final row = tester.element(currentPlayerSelector).findAncestorWidgetOfExactType<Row>();
-    final currentPlayerNameText = find.text(playRoomNotifier.value.currentTurnHuman.name);
-    expect(row.children, contains(currentPlayerNameText.evaluate().first.widget));
+    final currentHumanSelector = find.byIcon(Icons.chevron_right);
+    final row = tester.element(currentHumanSelector).findAncestorWidgetOfExactType<Row>();
+    final currentHumanNameText = find.text(playRoomNotifier.value.currentTurnHuman.name);
+    expect(row.children, contains(currentHumanNameText.evaluate().first.widget));
   });
 
   testWidgets('show user name', (tester) async {
