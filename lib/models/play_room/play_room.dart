@@ -100,7 +100,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
       _currentHumanLifeStage.lifeStepModel.lifeEvent,
       _currentHumanLifeStage,
     );
-    // LifeEventの履歴を更新
+    // LifeEvent の履歴を更新
     value.everyLifeEventRecords = [
       ...value.everyLifeEventRecords,
       LifeEventRecordModel(_i18n, _currentHumanLifeStage.human, _currentHumanLifeStage.lifeStepModel.lifeEvent)
