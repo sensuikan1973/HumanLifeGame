@@ -104,7 +104,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
       LifeEventRecordModel(_i18n, _currentHumanLifeStage.human, _currentHumanLifeStage.lifeStepModel.lifeEvent)
     ];
 
-    _changeToNextTurn(); // FIXME: 即ターン交代してるけど、あくまで仮
+    _changeToNextTurn();
   }
 
   // 次のターンに変える
