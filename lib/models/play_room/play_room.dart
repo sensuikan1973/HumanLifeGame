@@ -119,7 +119,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
     if (value.allHumansReachedTheGoal) return;
     // 現在手番の Human がゴールしていたら次の Human にターンを変える
-    if (value.currentPlayerLifeStep.isGoal) {
+    if (value.currentHumanLifeStep.isGoal) {
       _changeToNextTurn();
     }
   }
