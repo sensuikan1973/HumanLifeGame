@@ -1,4 +1,3 @@
-import 'package:HumanLifeGame/screens/lobby/room_list_item.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import '../../api/auth.dart';
 import '../../models/common/user.dart';
 import 'create_human_life.dart';
+import 'room_list_item.dart';
 
 /// FIXME: ロジックべた書き
 class Lobby extends StatelessWidget {
@@ -48,25 +48,25 @@ class Lobby extends StatelessWidget {
         body: Center(
           child: Row(
             children: [
-              roomList(),
+              _roomList(),
               const CreateHumanLife(),
             ],
           ),
         ),
       );
 
-  SizedBox roomList() {
-    return SizedBox(
-      width: 720,
-      height: 970,
-      child: ListView(
-        children: const [
-          RoomListItem(),
-          RoomListItem(),
-        ],
-      ),
-    );
-  }
+  SizedBox _roomList() => SizedBox(
+        width: 720,
+        height: 970,
+        child: ListView(
+          children: const [
+            RoomListItem(),
+            RoomListItem(),
+            RoomListItem(),
+            RoomListItem(),
+          ],
+        ),
+      );
 //  SizedBox playView(BuildContext context) {
 //    return SizedBox(
 //      width: 720,
@@ -103,46 +103,4 @@ class Lobby extends StatelessWidget {
 //    );
 //  }
 
-//  SizedBox roomTitle() {
-//    return SizedBox(
-//      width: 720,
-//      height: 40,
-//      child: ColoredBox(
-//        color: Colors.grey[100],
-//        child: const Text('Room 1'),
-//      ),
-//    );
-//  }
-
-//  SizedBox roomImage() {
-//    return SizedBox(
-//      width: 300,
-//      height: 200,
-//      child: Image.asset(
-//        'images/play_view_background.jpg',
-//        fit: BoxFit.fitHeight,
-//      ),
-//    );
-//  }
-
-//  SizedBox playingHumans() {
-//    return SizedBox(
-//      width: 420,
-//      height: 170,
-//      child: Column(
-//        children: const [
-//          Text('Human 1'),
-//          Text('Human 2'),
-//        ],
-//      ),
-//    );
-//  }
-
-//  SizedBox createHumanLifeGame() {
-//    return const SizedBox(
-//      width: 720,
-//      height: 1020,
-//      child: Center(child: Text('開発中')),
-//    );
-//  }
 }

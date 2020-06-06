@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../router.dart';
 
@@ -10,14 +11,14 @@ class RoomListItem extends StatelessWidget {
     return SizedBox(
       child: Column(
         children: [
-          roomTitle(),
+          _roomTitle(),
           Row(
             children: [
-              preview(),
+              _preview(),
               Column(
                 children: [
-                  humans(),
-                  joinButton(context),
+                  _humans(),
+                  _joinButton(context),
                 ],
               ),
             ],
@@ -27,7 +28,7 @@ class RoomListItem extends StatelessWidget {
     );
   }
 
-  SizedBox roomTitle() {
+  SizedBox _roomTitle() {
     return SizedBox(
       width: 720,
       height: 40,
@@ -38,7 +39,7 @@ class RoomListItem extends StatelessWidget {
     );
   }
 
-  SizedBox preview() {
+  SizedBox _preview() {
     return SizedBox(
       width: 300,
       height: 200,
@@ -49,7 +50,7 @@ class RoomListItem extends StatelessWidget {
     );
   }
 
-  SizedBox humans() {
+  SizedBox _humans() {
     return SizedBox(
       width: 420,
       height: 170,
@@ -62,14 +63,12 @@ class RoomListItem extends StatelessWidget {
     );
   }
 
-  SizedBox joinButton(BuildContext context) {
-    return SizedBox(
-      width: 420,
-      height: 40,
-      child: FlatButton(
-        onPressed: null, //() => Navigator.of(context).pushNamed(context.read<Router>().playRoom),
-        child: const Text('Join a Game'),
-      ),
-    );
-  }
+  SizedBox _joinButton(BuildContext context) => SizedBox(
+        width: 420,
+        height: 40,
+        child: FlatButton(
+          onPressed: () => Navigator.of(context).pushNamed(context.read<Router>().playRoom),
+          child: const Text('Join a Game'),
+        ),
+      );
 }
