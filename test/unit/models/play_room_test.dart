@@ -26,7 +26,7 @@ void main() {
   const human1 = HumanModel(id: 'h1', name: 'foo', order: 0);
   const human2 = HumanModel(id: 'h2', name: 'bar', order: 1);
   final humans = [human1, human2];
-  final author = UserModel(id: 'dummyUserId', name: 'dummyUser');
+  final author = UserModel(id: 'dummyUserId', name: 'dummyUser', isAnonymous: true);
 
   test('without Direction', () {
     final lifeEvents = [

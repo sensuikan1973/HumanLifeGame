@@ -34,7 +34,7 @@ class Router {
                     context.read<Dice>(),
                     HumanLifeModel(
                       title: 'dummy HumanLife',
-                      author: UserModel(id: '123', name: 'dummyUser'),
+                      author: UserModel(id: '123', name: 'dummyUser', isAnonymous: true),
                       lifeRoad: LifeRoadModel(
                         lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
                           LifeRoadModel.dummyLifeEvents(),

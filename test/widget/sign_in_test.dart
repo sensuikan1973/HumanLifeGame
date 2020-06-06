@@ -20,7 +20,7 @@ Future<void> main() async {
   });
 
   testWidgets('already signed in', (tester) async {
-    final user = UserModel(id: '123', name: 'foo');
+    final user = UserModel(id: '123', name: 'foo', isAnonymous: true);
     final auth = MockAuth();
     when(auth.currentUserStream).thenAnswer((_) => Stream.fromIterable([user]));
     await tester.pumpWidget(testableApp(

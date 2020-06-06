@@ -5,6 +5,7 @@ class UserModel {
   UserModel({
     @required this.id,
     @required this.name,
+    @required this.isAnonymous,
     this.email,
     DateTime createdAt,
     DateTime updatedAt,
@@ -13,6 +14,7 @@ class UserModel {
 
   final String id;
   final String name;
+  final bool isAnonymous;
   final String email;
   final DateTime createdAt;
   final DateTime updatedAt;
