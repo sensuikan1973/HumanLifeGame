@@ -35,8 +35,6 @@ class PlayRoomState {
   /// 部屋タイトル
   String roomTitle = 'Room Title';
 
-  /* Getter */
-
   /// 参加者全員がゴールに到着したかどうか
   bool get allHumansReachedTheGoal => lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
 
@@ -46,6 +44,6 @@ class PlayRoomState {
       };
 
   /// 現在手番の Human が位置する LifeStep
-  LifeStepModel get currentPlayerLifeStep =>
+  LifeStepModel get currentHumanLifeStep =>
       lifeStages.firstWhere((lifeStage) => lifeStage.human == currentTurnHuman).lifeStepModel;
 }

@@ -104,10 +104,10 @@ void main() {
       playRoomNotifier.rollDice();
       // しかし分岐地点なので、方向の選択を求められる
       expect(playRoomNotifier.value.requireSelectDirection, true);
-      expect(playRoomNotifier.currentPlayerLifeStep.hasUp, false);
-      expect(playRoomNotifier.currentPlayerLifeStep.hasDown, true);
-      expect(playRoomNotifier.currentPlayerLifeStep.hasLeft, false);
-      expect(playRoomNotifier.currentPlayerLifeStep.hasRight, true);
+      expect(playRoomNotifier.value.currentHumanLifeStep.hasUp, false);
+      expect(playRoomNotifier.value.currentHumanLifeStep.hasDown, true);
+      expect(playRoomNotifier.value.currentHumanLifeStep.hasLeft, false);
+      expect(playRoomNotifier.value.currentHumanLifeStep.hasRight, true);
       // 右を選ぶ
       playRoomNotifier.chooseDirection(Direction.right);
       expect(playRoomNotifier.value.positionsByHumanId[human1.id].x, 2);
@@ -117,10 +117,10 @@ void main() {
       playRoomNotifier.rollDice();
       // しかし分岐地点なので、方向の選択を求められる
       expect(playRoomNotifier.value.requireSelectDirection, true);
-      expect(playRoomNotifier.currentPlayerLifeStep.hasUp, false);
-      expect(playRoomNotifier.currentPlayerLifeStep.hasDown, true);
-      expect(playRoomNotifier.currentPlayerLifeStep.hasLeft, false);
-      expect(playRoomNotifier.currentPlayerLifeStep.hasRight, true);
+      expect(playRoomNotifier.value.currentHumanLifeStep.hasUp, false);
+      expect(playRoomNotifier.value.currentHumanLifeStep.hasDown, true);
+      expect(playRoomNotifier.value.currentHumanLifeStep.hasLeft, false);
+      expect(playRoomNotifier.value.currentHumanLifeStep.hasRight, true);
       // 下を選ぶ
       playRoomNotifier.chooseDirection(Direction.down);
       expect(playRoomNotifier.value.positionsByHumanId[human2.id].x, 1);
@@ -140,10 +140,10 @@ void main() {
       expect(playRoomNotifier.value.positionsByHumanId[human1.id].y, 0);
       // 途中で分岐地点を踏むので、方向の選択を求められる
       expect(playRoomNotifier.value.requireSelectDirection, true);
-      expect(playRoomNotifier.currentPlayerLifeStep.hasUp, false);
-      expect(playRoomNotifier.currentPlayerLifeStep.hasDown, true);
-      expect(playRoomNotifier.currentPlayerLifeStep.hasLeft, false);
-      expect(playRoomNotifier.currentPlayerLifeStep.hasRight, true);
+      expect(playRoomNotifier.value.currentHumanLifeStep.hasUp, false);
+      expect(playRoomNotifier.value.currentHumanLifeStep.hasDown, true);
+      expect(playRoomNotifier.value.currentHumanLifeStep.hasLeft, false);
+      expect(playRoomNotifier.value.currentHumanLifeStep.hasRight, true);
       // 右を選ぶ
       playRoomNotifier.chooseDirection(Direction.right);
       expect(playRoomNotifier.value.positionsByHumanId[human1.id].x, 3);
@@ -155,10 +155,10 @@ void main() {
       expect(playRoomNotifier.value.positionsByHumanId[human2.id].y, 0);
       // 途中で分岐地点を踏むので、方向の選択を求められる
       expect(playRoomNotifier.value.requireSelectDirection, true);
-      expect(playRoomNotifier.currentPlayerLifeStep.hasUp, false);
-      expect(playRoomNotifier.currentPlayerLifeStep.hasDown, true);
-      expect(playRoomNotifier.currentPlayerLifeStep.hasLeft, false);
-      expect(playRoomNotifier.currentPlayerLifeStep.hasRight, true);
+      expect(playRoomNotifier.value.currentHumanLifeStep.hasUp, false);
+      expect(playRoomNotifier.value.currentHumanLifeStep.hasDown, true);
+      expect(playRoomNotifier.value.currentHumanLifeStep.hasLeft, false);
+      expect(playRoomNotifier.value.currentHumanLifeStep.hasRight, true);
       // 下を選ぶ
       playRoomNotifier.chooseDirection(Direction.down);
       expect(playRoomNotifier.value.positionsByHumanId[human2.id].x, 1);

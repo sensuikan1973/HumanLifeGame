@@ -17,7 +17,7 @@ class LifeStages extends StatelessWidget {
 
   Column _lifeStages(BuildContext context) {
     final lifeStages = context.select<PlayRoomNotifier, List<LifeStageModel>>((model) => model.value.lifeStages);
-    final currentPlayer = context.select<PlayRoomNotifier, HumanModel>((model) => model.value.currentTurnHuman);
+    final currentTurnHuman = context.select<PlayRoomNotifier, HumanModel>((model) => model.value.currentTurnHuman);
     final humanNames = <Widget>[
       for (final lifeStage in lifeStages)
         Row(
@@ -26,7 +26,7 @@ class LifeStages extends StatelessWidget {
             SizedBox(
               width: 25,
               height: 25,
-              child: (currentPlayer == lifeStage.human) ? currentPlayerSelector() : null,
+              child: (currentTurnHuman == lifeStage.human) ? currentTurnHumanSelector() : null,
             ),
             Human(lifeStage.human),
             Text(lifeStage.human.name),
@@ -41,5 +41,5 @@ class LifeStages extends StatelessWidget {
     );
   }
 
-  Icon currentPlayerSelector() => const Icon(Icons.chevron_right, color: Colors.pink);
+  Icon currentTurnHumanSelector() => const Icon(Icons.chevron_right, color: Colors.pink);
 }

@@ -49,10 +49,9 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   final Dice _dice;
   final _lifeEventService = const LifeEventService();
 
-  int get _currentPlayerLifeStageIndex =>
+  int get _currentHumanLifeStageIndex =>
       value.lifeStages.indexWhere((lifeStage) => lifeStage.human == value.currentTurnHuman);
-  LifeStageModel get _currentPlayerLifeStage => value.lifeStages[_currentPlayerLifeStageIndex];
-  LifeStepModel get currentPlayerLifeStep => _currentPlayerLifeStage.lifeStepModel;
+  LifeStageModel get _currentHumanLifeStage => value.lifeStages[_currentHumanLifeStageIndex];
 
   // 進む数の残り
   int _remainCount = 0;
@@ -65,7 +64,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
       ..announcement = _i18n.rollAnnouncement(value.currentTurnHuman.name, value.roll); // FIXME: 状態に応じた適切なメッセージを流すように
 
     // サイコロ振る出発地点が分岐なら
-    if (currentPlayerLifeStep.requireToSelectDirectionManually) {
+    if (value.currentHumanLifeStep.requireToSelectDirectionManually) {
       _remainCount = value.roll;
       value.requireSelectDirection = true;
       notifyListeners();
@@ -98,15 +97,15 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
     // LifeEvent 処理
     value.lifeStages = [...value.lifeStages];
-    value.lifeStages[_currentPlayerLifeStageIndex] = _lifeEventService.executeEvent(
-      _currentPlayerLifeStage.lifeStepModel.lifeEvent,
-      _currentPlayerLifeStage,
+    value.lifeStages[_currentHumanLifeStageIndex] = _lifeEventService.executeEvent(
+      _currentHumanLifeStage.lifeStepModel.lifeEvent,
+      _currentHumanLifeStage,
     );
 
     // LifeEventの履歴を更新
     value.everyLifeEventRecords = [
       ...value.everyLifeEventRecords,
-      LifeEventRecordModel(_i18n, _currentPlayerLifeStage.human, _currentPlayerLifeStage.lifeStepModel.lifeEvent)
+      LifeEventRecordModel(_i18n, _currentHumanLifeStage.human, _currentHumanLifeStage.lifeStepModel.lifeEvent)
     ];
 
     _changeToNextTurn(); // FIXME: 即ターン交代してるけど、あくまで仮
@@ -114,22 +113,20 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
   // 次のターンに変える
   void _changeToNextTurn() {
-    final currentPlayerIndex = value.orderedHumans.indexOf(value.currentTurnHuman);
-    value.currentTurnHuman = value.orderedHumans[(currentPlayerIndex + 1) % value.orderedHumans.length];
+    final currentHumanIndex = value.orderedHumans.indexOf(value.currentTurnHuman);
+    value.currentTurnHuman = value.orderedHumans[(currentHumanIndex + 1) % value.orderedHumans.length];
 
     if (value.allHumansReachedTheGoal) return;
     // 現在手番の Human がゴールしていたら次の Human にターンを変える
-    if (value.currentPlayerLifeStep.isGoal) {
-      _changeToNextTurn();
-    }
+    if (value.currentHumanLifeStep.isGoal) _changeToNextTurn();
   }
 
   DestinationWithMovedStepCount _moveLifeStepUntilMustStop(int roll, {Direction firstDirection}) {
     // 現在の LifeStep から指定の数だけ進んだ LifeStep を取得する
     final destinationWithMovedStepCount =
-        _currentPlayerLifeStage.lifeStepModel.getNextUntilMustStopStep(roll, firstDirection: firstDirection);
+        _currentHumanLifeStage.lifeStepModel.getNextUntilMustStopStep(roll, firstDirection: firstDirection);
     // 進み先の LifeStep を LifeStage に代入する
-    value.lifeStages[_currentPlayerLifeStageIndex] = value.lifeStages[_currentPlayerLifeStageIndex]
+    value.lifeStages[_currentHumanLifeStageIndex] = value.lifeStages[_currentHumanLifeStageIndex]
         .copyWith(lifeStepModel: destinationWithMovedStepCount.destination);
     return destinationWithMovedStepCount;
   }
