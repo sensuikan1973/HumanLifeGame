@@ -58,7 +58,6 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
   void rollDice() {
     if (value.allHumansReachedTheGoal || value.requireSelectDirection) return;
-
     value
       ..roll = _dice.roll()
       ..announcement = _i18n.rollAnnouncement(value.currentTurnHuman.name, value.roll); // FIXME: 状態に応じた適切なメッセージを流すように
@@ -67,8 +66,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     if (value.currentHumanLifeStep.requireToSelectDirectionManually) {
       _remainCount = value.roll;
       value.requireSelectDirection = true;
-      notifyListeners();
-      return;
+      return notifyListeners();
     }
 
     final dest = _moveLifeStepUntilMustStop(value.roll);
@@ -78,7 +76,6 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
   void chooseDirection(Direction direction) {
     if (value.allHumansReachedTheGoal || !value.requireSelectDirection) return;
-
     final dest = _moveLifeStepUntilMustStop(_remainCount, firstDirection: direction);
     _updateByDestination(dest);
     notifyListeners();
