@@ -71,6 +71,8 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
     final dest = _moveLifeStepUntilMustStop(value.roll);
     _updateRequireSelectDirectionAndRemainCount(dest);
+
+    // TODO: 今は requireSelectDirection だけだけど、今後は requireDiceRoll とかも考慮しなきゃいけなくなる
     if (!value.requireSelectDirection) {
       _executeEventToCurrentHuman();
       _changeToNextTurn();
@@ -82,6 +84,8 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     if (value.allHumansReachedTheGoal || !value.requireSelectDirection) return;
     final dest = _moveLifeStepUntilMustStop(_remainCount, firstDirection: direction);
     _updateRequireSelectDirectionAndRemainCount(dest);
+
+    // TODO: 今は requireSelectDirection だけだけど、今後は requireDiceRoll とかも考慮しなきゃいけなくなる
     if (!value.requireSelectDirection) {
       _executeEventToCurrentHuman();
       _changeToNextTurn();
