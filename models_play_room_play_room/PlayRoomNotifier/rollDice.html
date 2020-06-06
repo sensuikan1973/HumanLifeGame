@@ -99,21 +99,25 @@
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">void rollDice() {
   if (value.allHumansReachedTheGoal || value.requireSelectDirection) return;
-
   value
     ..roll = _dice.roll()
     ..announcement = _i18n.rollAnnouncement(value.currentTurnHuman.name, value.roll); &#47;&#47; FIXME: 状態に応じた適切なメッセージを流すように
 
-  &#47;&#47; サイコロ振る出発地点が分岐なら
+  &#47;&#47; サイコロ振る出発地点が分岐なら、サイコロ振るのを求めて notify でお終い
   if (value.currentHumanLifeStep.requireToSelectDirectionManually) {
     _remainCount = value.roll;
     value.requireSelectDirection = true;
-    notifyListeners();
-    return;
+    return notifyListeners();
   }
 
   final dest = _moveLifeStepUntilMustStop(value.roll);
-  _updateByDestination(dest);
+  _updateRequireSelectDirectionAndRemainCount(dest);
+
+  &#47;&#47; TODO: 今は requireSelectDirection だけだけど、今後は requireDiceRoll とかも考慮しなきゃいけなくなる
+  if (!value.requireSelectDirection) {
+    _executeEventToCurrentHuman();
+    _changeToNextTurn();
+  }
   notifyListeners();
 }</code></pre>
     </section>
