@@ -90,7 +90,6 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     value.requireSelectDirection = dest.remainCount > 0 && dest.destination.requireToSelectDirectionManually;
     if (value.requireSelectDirection) {
       _remainCount = dest.remainCount;
-      notifyListeners();
       return;
     }
     _remainCount = 0; // リセット
