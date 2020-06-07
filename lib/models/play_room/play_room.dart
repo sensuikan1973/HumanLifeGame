@@ -58,57 +58,63 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
   void rollDice() {
     if (value.allHumansReachedTheGoal || value.requireSelectDirection) return;
-
     value
       ..roll = _dice.roll()
       ..announcement = _i18n.rollAnnouncement(value.currentTurnHuman.name, value.roll); // FIXME: 状態に応じた適切なメッセージを流すように
 
-    // サイコロ振る出発地点が分岐なら
+    // サイコロ振る出発地点が分岐なら、サイコロ振るのを求めて notify でお終い
     if (value.currentHumanLifeStep.requireToSelectDirectionManually) {
       _remainCount = value.roll;
       value.requireSelectDirection = true;
-      notifyListeners();
-      return;
+      return notifyListeners();
     }
 
     final dest = _moveLifeStepUntilMustStop(value.roll);
-    _updateByDestination(dest);
+    _updateRequireSelectDirectionAndRemainCount(dest);
+
+    // TODO: 今は requireSelectDirection だけだけど、今後は requireDiceRoll とかも考慮しなきゃいけなくなる
+    if (!value.requireSelectDirection) {
+      _executeEventToCurrentHuman();
+      _changeToNextTurn();
+    }
     notifyListeners();
   }
 
   void chooseDirection(Direction direction) {
     if (value.allHumansReachedTheGoal || !value.requireSelectDirection) return;
-
     final dest = _moveLifeStepUntilMustStop(_remainCount, firstDirection: direction);
-    _updateByDestination(dest);
+    _updateRequireSelectDirectionAndRemainCount(dest);
+
+    // TODO: 今は requireSelectDirection だけだけど、今後は requireDiceRoll とかも考慮しなきゃいけなくなる
+    if (!value.requireSelectDirection) {
+      _executeEventToCurrentHuman();
+      _changeToNextTurn();
+    }
     notifyListeners();
   }
 
-  // FIXME: 命名も処理範囲も雑。共通処理を切り出しただけ。
-  void _updateByDestination(DestinationWithMovedStepCount dest) {
-    // NOTE: 選択を要するところに止まっても、そこが最終地点なら選択は次のターンに後回しとする
-    value.requireSelectDirection = dest.remainCount > 0 && dest.destination.requireToSelectDirectionManually;
-    if (value.requireSelectDirection) {
-      _remainCount = dest.remainCount;
-      notifyListeners();
-      return;
-    }
-    _remainCount = 0; // リセット
-
+  void _executeEventToCurrentHuman() {
     // LifeEvent 処理
     value.lifeStages = [...value.lifeStages];
     value.lifeStages[_currentHumanLifeStageIndex] = _lifeEventService.executeEvent(
       _currentHumanLifeStage.lifeStepModel.lifeEvent,
       _currentHumanLifeStage,
     );
-
-    // LifeEventの履歴を更新
+    // LifeEvent の履歴を更新
     value.everyLifeEventRecords = [
       ...value.everyLifeEventRecords,
       LifeEventRecordModel(_i18n, _currentHumanLifeStage.human, _currentHumanLifeStage.lifeStepModel.lifeEvent)
     ];
+  }
 
-    _changeToNextTurn(); // FIXME: 即ターン交代してるけど、あくまで仮
+  void _updateRequireSelectDirectionAndRemainCount(DestinationWithMovedStepCount dest) {
+    // NOTE: 選択を要するところが到着の場合、そこが最終地点なら選択は次のターンに後回しとするため、「dest.remainCount > 0」としてる
+    value.requireSelectDirection = dest.remainCount > 0 && dest.destination.requireToSelectDirectionManually;
+    if (value.requireSelectDirection) {
+      _remainCount = dest.remainCount;
+    } else {
+      _remainCount = 0; // リセット
+    }
   }
 
   // 次のターンに変える
