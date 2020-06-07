@@ -51,7 +51,7 @@ class Lobby extends StatelessWidget {
             future: _signIn(context.watch<Auth>()),
             builder: (context, snap) {
               if (snap.hasError) return const Text('Oops');
-              if (snap.connectionState == ConnectionState.waiting) return const Text('waiting...');
+              if (snap.connectionState == ConnectionState.waiting) return const CircularProgressIndicator();
               if (snap.hasData) {
                 return Row(
                   children: [
