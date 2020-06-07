@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../../api/auth.dart';
 import '../../models/common/user.dart';
-import '../../router.dart';
+import 'create_human_life.dart';
+import 'room_list_item.dart';
 
 /// FIXME: ロジックべた書き
 class Lobby extends StatelessWidget {
@@ -41,25 +42,49 @@ class Lobby extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FutureBuilder<UserModel>(
-                future: _signIn(context.watch<Auth>()),
-                builder: (context, snap) {
-                  if (snap.hasError) return const Text('Oops');
-                  if (snap.connectionState == ConnectionState.waiting) return const Text('waiting...');
-                  if (snap.hasData) return Text(snap.data.id);
-                  return const Text('You must sign in');
-                },
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(50),
+          child: AppBar(
+            title: const Text(
+              'Human Life Game',
+              style: TextStyle(
+                fontFamily: 'varega',
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
               ),
-              RaisedButton(
-                onPressed: () => Navigator.of(context).pushNamed(context.read<Router>().playRoom),
-                child: const Text('Go to PlayRoom'),
-              ),
-            ],
+            ),
           ),
+        ),
+        body: Center(
+          child: FutureBuilder<UserModel>(
+            future: _signIn(context.watch<Auth>()),
+            builder: (context, snap) {
+              if (snap.hasError) return const Text('Oops');
+              if (snap.connectionState == ConnectionState.waiting) return const CircularProgressIndicator();
+              if (snap.hasData) {
+                return Row(
+                  children: [
+                    _roomList(),
+                    const CreateHumanLife(),
+                  ],
+                );
+              }
+              return const Text('You must sign in');
+            },
+          ),
+        ),
+      );
+
+  SizedBox _roomList() => SizedBox(
+        width: 720,
+        height: 970,
+        child: ListView(
+          children: const [
+            RoomListItem(),
+            RoomListItem(),
+            RoomListItem(),
+            RoomListItem(),
+          ],
         ),
       );
 }
