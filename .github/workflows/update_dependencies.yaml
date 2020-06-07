@@ -19,12 +19,9 @@ jobs:
 
         # See: https://pub.dev/packages/pubspec_update
         # 公式で yarn upgrade --latest 相当のことができるコマンドが用意されてないので、サードパーティの package を使う
+        # Ref: https://github.com/flutter/flutter/issues/12627
       - run: pub global activate pubspec_update
       - run: pub global run pubspec_update:pubspec-update --force  # See: https://dart.dev/tools/pub/cmd/pub-global#running-a-script-using-pub-global-run
-      - name: edit pubspec.yaml
-        run: |
-          # NOTE: pubspec_update は「^」で管理するため。本当は package に PR 送るのが望ましい。
-          sed -i -e 's/\^//' pubspec.yaml
       - name: create PR
         uses: peter-evans/create-pull-request@v2
         with:
