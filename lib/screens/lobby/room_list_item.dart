@@ -59,6 +59,7 @@ class RoomListItem extends StatelessWidget {
         width: 420,
         height: 40,
         child: FlatButton(
+          color: Colors.lightBlue,
           onPressed: () => Navigator.of(context).pushNamed(context.read<Router>().playRoom),
           child: const Text('Join a Game'),
         ),

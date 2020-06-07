@@ -44,7 +44,16 @@ class Lobby extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(50),
-          child: AppBar(title: const Text('Human Life Game')),
+          child: AppBar(
+            title: const Text(
+              'Human Life Game',
+              style: TextStyle(
+                fontFamily: 'varega',
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
         ),
         body: Center(
           child: FutureBuilder<UserModel>(
@@ -78,40 +87,4 @@ class Lobby extends StatelessWidget {
           ],
         ),
       );
-//  SizedBox playView(BuildContext context) {
-//    return SizedBox(
-//      width: 720,
-//      height: 1020,
-//      child: Column(
-//        mainAxisAlignment: MainAxisAlignment.center,
-//        children: [
-//          roomTitle(),
-//          Row(
-//            children: [
-//              roomImage(),
-//              Column(
-//                children: [
-//                  playingHumans(),
-//                  FutureBuilder<UserModel>(
-//                    future: _signIn(context.watch<Auth>()),
-//                    builder: (context, snap) {
-//                      if (snap.hasError) return const Text('Oops');
-//                      if (snap.connectionState == ConnectionState.waiting) return const Text('waiting...');
-//                      if (snap.hasData) return Text(snap.data.id);
-//                      return const Text('You must sign in');
-//                    },
-//                  ),
-//                ],
-//              ),
-//            ],
-//          ),
-//          RaisedButton(
-//            onPressed: () => Navigator.of(context).pushNamed(context.read<Router>().playRoom),
-//            child: const Text('Join the game'),
-//          ),
-//        ],
-//      ),
-//    );
-//  }
-
 }
