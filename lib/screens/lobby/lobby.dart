@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../../api/auth.dart';
@@ -46,11 +47,21 @@ class Lobby extends StatelessWidget {
           child: AppBar(title: const Text('Human Life Game')),
         ),
         body: Center(
-          child: Row(
-            children: [
-              _roomList(),
-              const CreateHumanLife(),
-            ],
+          child: FutureBuilder<UserModel>(
+            future: _signIn(context.watch<Auth>()),
+            builder: (context, snap) {
+              if (snap.hasError) return const Text('Oops');
+              if (snap.connectionState == ConnectionState.waiting) return const Text('waiting...');
+              if (snap.hasData) {
+                return Row(
+                  children: [
+                    _roomList(),
+                    const CreateHumanLife(),
+                  ],
+                );
+              }
+              return const Text('You must sign in');
+            },
           ),
         ),
       );
