@@ -61,11 +61,30 @@ class Lobby extends StatelessWidget {
             builder: (context, snap) {
               if (snap.hasError) return const Text('Oops');
               if (snap.connectionState == ConnectionState.waiting) return const CircularProgressIndicator();
-              if (snap.hasData) return Row(children: [_roomList(), const CreateHumanLife()]);
+              if (snap.hasData) {
+                return Row(
+                  children: [
+                    Stack(
+                      children: [
+                        _roomList(),
+                        Positioned(bottom: 0, right: 0, child: _createRoomButton()),
+                      ],
+                    ),
+                    const CreateHumanLife(),
+                  ],
+                );
+              }
               return const Text('You must sign in');
             },
           ),
         ),
+      );
+
+  FloatingActionButton _createRoomButton() => FloatingActionButton(
+        tooltip: 'create PlayRoom',
+        backgroundColor: Colors.indigo,
+        onPressed: () => debugPrint('TODO: create PlayRoom'),
+        child: const Icon(Icons.add),
       );
 
   SizedBox _roomList() => SizedBox(
