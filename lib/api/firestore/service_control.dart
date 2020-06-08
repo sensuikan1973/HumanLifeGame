@@ -22,15 +22,17 @@ abstract class ServiceControl with _$ServiceControl {
   static const collectionId = 'serviceControl';
 }
 
-/// TODO: 関数直置きママでいいかは追々検討
-CollectionRef<ServiceControl, Document<ServiceControl>> serviceControlsRef(Store store) => CollectionRef(
-      store.firestore.collection(ServiceControl.collectionId),
-      decoder: (snapshot) => Document(snapshot.reference, ServiceControl.fromJson(snapshot.data)),
-      encoder: (serviceControl) => replacingTimestamp(
-        json: serviceControl.toJson(),
-        createdAt: serviceControl.createdAt,
-      ),
-    );
+class ServiceControlsRef extends CollectionRef<ServiceControl, Document<ServiceControl>> {
+  ServiceControlsRef(Store store)
+      : super(
+          store.firestore.collection(ServiceControl.collectionId),
+          decoder: (snapshot) => Document(snapshot.reference, ServiceControl.fromJson(snapshot.data)),
+          encoder: (serviceControl) => replacingTimestamp(
+            json: serviceControl.toJson(),
+            createdAt: serviceControl.createdAt,
+          ),
+        );
+}
 
 class ServiceControlField {
   /// メンテナス中かどうか
