@@ -11,8 +11,9 @@ void main() {
   testWidgets('not under maintenance', (tester) async {
     final serviceControlData = {
       ServiceControlField.isMaintenance: false,
-      TimestampField.updatedAt: DateTime.now(),
       ServiceControlField.requiredMinVersion: 'X.Y.Z',
+      TimestampField.createdAt: DateTime.now(),
+      TimestampField.updatedAt: DateTime.now(),
     };
     final firestore = MockFirestoreInstance();
     await firestore
@@ -34,8 +35,9 @@ void main() {
   testWidgets('under maintenance', (tester) async {
     final serviceControlData = {
       ServiceControlField.isMaintenance: true,
-      TimestampField.updatedAt: DateTime.now(),
       ServiceControlField.requiredMinVersion: 'X.Y.Z',
+      TimestampField.createdAt: DateTime.now(),
+      TimestampField.updatedAt: DateTime.now(),
     };
     final firestore = MockFirestoreInstance();
     await firestore

@@ -13,6 +13,7 @@ abstract class ServiceControl with _$ServiceControl {
   const factory ServiceControl({
     @required bool isMaintenance,
     @required String requiredMinVersion,
+    @required @TimestampConverter() DateTime createdAt,
     @required @TimestampConverter() DateTime updatedAt,
   }) = _ServiceControl;
   factory ServiceControl.fromJson(Map<String, dynamic> json) => _$ServiceControlFromJson(json);
@@ -27,7 +28,7 @@ CollectionRef<ServiceControl, Document<ServiceControl>> serviceControlsRef(Store
       decoder: (snapshot) => Document(snapshot.reference, ServiceControl.fromJson(snapshot.data)),
       encoder: (serviceControl) => replacingTimestamp(
         json: serviceControl.toJson(),
-        createdAt: serviceControl.updatedAt,
+        createdAt: serviceControl.createdAt,
       ),
     );
 
