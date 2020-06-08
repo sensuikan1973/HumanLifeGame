@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:provider/provider.dart';
 
 import '../../api/auth.dart';
 import '../../models/common/user.dart';
@@ -61,14 +61,7 @@ class Lobby extends StatelessWidget {
             builder: (context, snap) {
               if (snap.hasError) return const Text('Oops');
               if (snap.connectionState == ConnectionState.waiting) return const CircularProgressIndicator();
-              if (snap.hasData) {
-                return Row(
-                  children: [
-                    _roomList(),
-                    const CreateHumanLife(),
-                  ],
-                );
-              }
+              if (snap.hasData) return Row(children: [_roomList(), const CreateHumanLife()]);
               return const Text('You must sign in');
             },
           ),
