@@ -138,23 +138,21 @@ and</li>
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">@override
-Widget build(BuildContext context) =&gt; SizedBox(
-      child: Column(
-        children: [
-          _roomTitle(),
-          Row(
-            children: [
-              _preview(),
-              Column(
-                children: [
-                  _humans(),
-                  _joinButton(context),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
+Widget build(BuildContext context) =&gt; Column(
+      children: [
+        _roomTitle(),
+        Row(
+          children: [
+            _preview(),
+            Column(
+              children: [
+                _humans(),
+                _joinButton(context),
+              ],
+            ),
+          ],
+        ),
+      ],
     );</code></pre>
     </section>
 
