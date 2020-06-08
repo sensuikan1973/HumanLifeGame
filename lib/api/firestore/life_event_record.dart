@@ -27,7 +27,4 @@ class LifeEventRecordField {
 
   /// LifeEvent
   static const lifeEvent = 'lifeEvent';
-
-  /// 作成時刻
-  static const createdAt = 'createdAt';
 }

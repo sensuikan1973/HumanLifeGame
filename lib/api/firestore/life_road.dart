@@ -34,10 +34,4 @@ class HumanLifeField {
   ///
   /// クライアントサイドで二次元に展開 + 連結リスト化 するのが必要
   static const lifeRoadEvents = 'lifeRoadEvents';
-
-  /// 作成時刻
-  static const createdAt = 'createdAt';
-
-  /// 更新時刻
-  static const updatedAt = 'updatedAt';
 }

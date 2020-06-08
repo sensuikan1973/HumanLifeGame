@@ -55,12 +55,6 @@ class PlayRoomField {
   /// 現在手番の human id
   static const currentTurnHumanId = 'currentTurnHumanId';
 
-  /// 作成時刻
-  static const createdAt = 'createdAt';
-
-  /// 更新時刻
-  static const updatedAt = 'updatedAt';
-
   /// ゲーム終了時刻
   static const finishedAt = 'finishedAt';
 }
