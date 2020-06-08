@@ -28,10 +28,4 @@ class LifeStageField {
 
   /// 所持してる LifeItem
   static const lifeItems = 'lifeItems';
-
-  /// 作成時刻
-  static const createdAt = 'createdAt';
-
-  /// 更新時刻
-  static const updatedAt = 'updatedAt';
 }
