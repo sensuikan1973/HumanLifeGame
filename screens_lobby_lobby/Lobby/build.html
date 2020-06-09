@@ -161,7 +161,12 @@ Widget build(BuildContext context) =&gt; Scaffold(
             if (snap.hasData) {
               return Row(
                 children: [
-                  _roomList(),
+                  Stack(
+                    children: [
+                      _roomList(),
+                      Positioned(bottom: 0, right: 0, child: _createRoomButton()),
+                    ],
+                  ),
                   const CreateHumanLife(),
                 ],
               );
