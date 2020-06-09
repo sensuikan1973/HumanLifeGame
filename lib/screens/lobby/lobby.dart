@@ -7,7 +7,6 @@ import '../../models/common/user.dart';
 import 'create_human_life.dart';
 import 'room_list_item.dart';
 
-/// FIXME: ロジックべた書き
 class Lobby extends StatelessWidget {
   const Lobby({Key key}) : super(key: key);
 
