@@ -26,5 +26,6 @@ Future<void> main() async {
     await tester.pump();
     await tester.pump();
     expect(find.byType(CreateHumanLife), findsOneWidget);
+    expect(find.byType(FloatingActionButton), findsOneWidget);
   });
 }
