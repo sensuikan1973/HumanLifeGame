@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:provider/provider.dart';
 
 import '../../api/auth.dart';
 import '../../models/common/user.dart';
@@ -64,7 +64,12 @@ class Lobby extends StatelessWidget {
               if (snap.hasData) {
                 return Row(
                   children: [
-                    _roomList(),
+                    Stack(
+                      children: [
+                        _roomList(),
+                        Positioned(bottom: 0, right: 0, child: _createRoomButton()),
+                      ],
+                    ),
                     const CreateHumanLife(),
                   ],
                 );
@@ -73,6 +78,13 @@ class Lobby extends StatelessWidget {
             },
           ),
         ),
+      );
+
+  FloatingActionButton _createRoomButton() => FloatingActionButton(
+        tooltip: 'create PlayRoom',
+        backgroundColor: Colors.indigo,
+        onPressed: () => debugPrint('TODO: create PlayRoom'),
+        child: const Icon(Icons.add),
       );
 
   SizedBox _roomList() => SizedBox(
