@@ -7,23 +7,21 @@ class RoomListItem extends StatelessWidget {
   const RoomListItem({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-        child: Column(
-          children: [
-            _roomTitle(),
-            Row(
-              children: [
-                _preview(),
-                Column(
-                  children: [
-                    _humans(),
-                    _joinButton(context),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
+  Widget build(BuildContext context) => Column(
+        children: [
+          _roomTitle(),
+          Row(
+            children: [
+              _preview(),
+              Column(
+                children: [
+                  _humans(),
+                  _joinButton(context),
+                ],
+              ),
+            ],
+          ),
+        ],
       );
 
   SizedBox _roomTitle() => SizedBox(
