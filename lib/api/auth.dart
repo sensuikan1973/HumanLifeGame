@@ -79,6 +79,7 @@ class Auth {
     return user != null ? _toModel(user) : null;
   }
 
+  /// サインアウトする
   Future<void> signOut() async => FirebaseAuth.instance.signOut();
 
   UserModel _toModel(FirebaseUser user) => UserModel(
