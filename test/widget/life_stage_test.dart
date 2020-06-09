@@ -4,7 +4,7 @@ import 'package:HumanLifeGame/models/common/human_life.dart';
 import 'package:HumanLifeGame/models/common/life_item.dart';
 import 'package:HumanLifeGame/models/common/life_road.dart';
 import 'package:HumanLifeGame/models/common/user.dart';
-import 'package:HumanLifeGame/models/play_room/play_room.dart';
+import 'package:HumanLifeGame/models/play_room/play_room_notifier.dart';
 import 'package:HumanLifeGame/screens/common/human.dart';
 import 'package:HumanLifeGame/screens/play_room/life_stages.dart';
 import 'package:flutter/material.dart';

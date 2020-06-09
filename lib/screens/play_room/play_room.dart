@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../i18n/i18n.dart';
-import '../../models/play_room/play_room.dart';
+import '../../models/play_room/play_room_notifier.dart';
 import 'announcement.dart';
 import 'dice_result.dart';
 import 'life_event_records.dart';

@@ -7,7 +7,7 @@ import 'models/common/human.dart';
 import 'models/common/human_life.dart';
 import 'models/common/life_road.dart';
 import 'models/common/user.dart';
-import 'models/play_room/play_room.dart';
+import 'models/play_room/play_room_notifier.dart';
 import 'screens/lobby/lobby.dart';
 import 'screens/maintenance/maintenance.dart';
 import 'screens/play_room/play_room.dart';
