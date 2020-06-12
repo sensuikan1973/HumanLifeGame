@@ -13,7 +13,7 @@
 
 ## What's this game ?
 
-Play now Human Life Game on Web. You can also create original map.
+Play now Human Life Game on Web. You can also create original _Life_.
 
 ## Development
 
