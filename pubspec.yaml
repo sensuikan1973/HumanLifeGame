@@ -8,8 +8,8 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.9.0-8.2.beta <3.0.0"
-  flutter: 1.18.0-11.1.pre # See: https://flutter.dev/docs/development/tools/sdk/releases
+  sdk: ">=2.9.0-14.1.beta <3.0.0"
+  flutter: 1.19.0-4.1.pre # See: https://flutter.dev/docs/development/tools/sdk/releases
 
 dependencies:
   flutter:
@@ -35,7 +35,7 @@ dev_dependencies:
   dartman_sensuikan1973:
     git:
       url: https://github.com/sensuikan1973/dartman_sensuikan1973
-      ref: 1.0.0
+      ref: 1.1.0
   freezed: ^0.10.9
   json_serializable: ^3.3.0
   intl_translation: ^0.17.10
