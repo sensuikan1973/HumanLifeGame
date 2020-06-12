@@ -80,8 +80,6 @@ class LifeEventService {
       case LifeEventType.loseLifeItemsIfNotExistOtherLifeItem:
         // TODO: Handle this case.
         break;
-      default:
-        return lifeStage.copyWith();
     }
     return lifeStage.copyWith();
   }
