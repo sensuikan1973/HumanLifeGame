@@ -65,7 +65,7 @@
   </div>
 
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
-      <div><h1><span class="kind-class">Auth</span> class </h1></div>
+      <div><h1><span class="kind-class">Auth</span> class  </h1></div>
 
     <section class="desc markdown">
       <p>FIXME: エラーハンドリングの実装</p>
@@ -160,6 +160,15 @@
           認証用メールリンクの文字列であるかどうか 
                   
 </dd>
+        <dt id="noSuchMethod" class="callable inherited">
+          <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span><wbr>)
+            <span class="returntype parameter">&#8594; dynamic</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Invoked when a non-existent method or property is accessed. <a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
         <dt id="sendSignInLinkToEmail" class="callable">
           <span class="name"><a href="../api_auth/Auth/sendSignInLinkToEmail.html">sendSignInLinkToEmail</a></span><span class="signature">(<wbr><span class="parameter" id="sendSignInLinkToEmail-param-email">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">email</span>, </span><wbr><span class="parameter" id="sendSignInLinkToEmail-param-url"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">url</span>}</span><wbr>)
             <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
@@ -176,6 +185,15 @@
                   </dt>
         <dd>
           匿名認証 <a href="../api_auth/Auth/signInAnonymously.html">[...]</a>
+                  
+</dd>
+        <dt id="signInForDebug" class="callable">
+          <span class="name"><a href="../api_auth/Auth/signInForDebug.html">signInForDebug</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../models_common_user/UserModel-class.html">UserModel</a></span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          開発環境専用の sign in ロジック <a href="../api_auth/Auth/signInForDebug.html">[...]</a>
                   
 </dd>
         <dt id="signInWithEmailAndLink" class="callable">
@@ -202,17 +220,8 @@
           </span>
                   </dt>
         <dd>
-           
+          サインアウトする 
                   
-</dd>
-        <dt id="noSuchMethod" class="callable inherited">
-          <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span><wbr>)
-            <span class="returntype parameter">&#8594; dynamic</span>
-          </span>
-                  </dt>
-        <dd class="inherited">
-          Invoked when a non-existent method or property is accessed. <a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">[...]</a>
-                  <div class="features">inherited</div>
 </dd>
         <dt id="toString" class="callable inherited">
           <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
@@ -263,12 +272,13 @@
       <li class="section-title"><a href="../api_auth/Auth-class.html#instance-methods">Methods</a></li>
       <li><a href="../api_auth/Auth/createUserWithEmailAndPassword.html">createUserWithEmailAndPassword</a></li>
       <li><a href="../api_auth/Auth/isSignInWithEmailLink.html">isSignInWithEmailLink</a></li>
+      <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
       <li><a href="../api_auth/Auth/sendSignInLinkToEmail.html">sendSignInLinkToEmail</a></li>
       <li><a href="../api_auth/Auth/signInAnonymously.html">signInAnonymously</a></li>
+      <li><a href="../api_auth/Auth/signInForDebug.html">signInForDebug</a></li>
       <li><a href="../api_auth/Auth/signInWithEmailAndLink.html">signInWithEmailAndLink</a></li>
       <li><a href="../api_auth/Auth/signInWithEmailAndPassword.html">signInWithEmailAndPassword</a></li>
       <li><a href="../api_auth/Auth/signOut.html">signOut</a></li>
-      <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
       <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></li>
     
       <li class="section-title inherited"><a href="../api_auth/Auth-class.html#operators">Operators</a></li>

@@ -65,7 +65,6 @@
       <li class="inherited"><a href="../../api_firestore_play_room/PlayRoom/createdAt.html">createdAt</a></li>
       <li class="inherited"><a href="../../api_firestore_play_room/PlayRoom/currentTurnHumanId.html">currentTurnHumanId</a></li>
       <li class="inherited"><a href="../../api_firestore_play_room/PlayRoom/everyLifeEventRecords.html">everyLifeEventRecords</a></li>
-      <li class="inherited"><a href="../../api_firestore_play_room/PlayRoom/finishedAt.html">finishedAt</a></li>
       <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
       <li class="inherited"><a href="../../api_firestore_play_room/PlayRoom/host.html">host</a></li>
       <li class="inherited"><a href="../../api_firestore_play_room/PlayRoom/humans.html">humans</a></li>
@@ -92,7 +91,7 @@
   </div><!--/.sidebar-offcanvas-left-->
 
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
-      <div><h1><span class="kind-constructor">PlayRoom</span> constructor</h1></div>
+      <div><h1><span class="kind-constructor">PlayRoom</span> constructor </h1></div>
 
     <section class="multi-line-signature">
       const
@@ -104,8 +103,7 @@
 <li><span class="parameter" id="-param-lifeStages"><span>@required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../api_firestore_life_stage/LifeStage-class.html">LifeStage</a></span>&gt;</span></span> <span class="parameter-name">lifeStages</span>, </span></li>
 <li><span class="parameter" id="-param-currentTurnHumanId"><span>@required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">currentTurnHumanId</span>, </span></li>
 <li><span class="parameter" id="-param-createdAt"><span>@required</span> <span>@<a href="https://pub.dev/documentation/firestore_ref/0.8.14+2/firestore_ref/TimestampConverter-class.html">TimestampConverter</a>()</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">createdAt</span>, </span></li>
-<li><span class="parameter" id="-param-updatedAt"><span>@required</span> <span>@<a href="https://pub.dev/documentation/firestore_ref/0.8.14+2/firestore_ref/TimestampConverter-class.html">TimestampConverter</a>()</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">updatedAt</span>, </span></li>
-<li><span class="parameter" id="-param-finishedAt"><span>@<a href="https://pub.dev/documentation/firestore_ref/0.8.14+2/firestore_ref/TimestampConverter-class.html">TimestampConverter</a>()</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">finishedAt</span>}</span></li>
+<li><span class="parameter" id="-param-updatedAt"><span>@required</span> <span>@<a href="https://pub.dev/documentation/firestore_ref/0.8.14+2/firestore_ref/TimestampConverter-class.html">TimestampConverter</a>()</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">updatedAt</span>}</span></li>
 </ol>)
     </section>
 
@@ -122,7 +120,7 @@
   @required String currentTurnHumanId,
   @required @TimestampConverter() DateTime createdAt,
   @required @TimestampConverter() DateTime updatedAt,
-  @TimestampConverter() DateTime finishedAt,
+&#47;&#47;    @TimestampConverter() DateTime finishedAt,
 }) = _PlayRoom;</code></pre>
     </section>
 
