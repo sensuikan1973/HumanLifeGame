@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../i18n/i18n.dart';
 import '../../models/common/life_step.dart';
-import '../../models/play_room/play_room.dart';
+import '../../models/play_room/play_room_notifier.dart';
 
 class PlayerAction extends StatelessWidget {
   const PlayerAction({Key key}) : super(key: key);

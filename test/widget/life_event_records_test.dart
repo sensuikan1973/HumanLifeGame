@@ -6,7 +6,7 @@ import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart'
 import 'package:HumanLifeGame/models/common/life_road.dart';
 import 'package:HumanLifeGame/models/common/user.dart';
 import 'package:HumanLifeGame/models/play_room/life_event_record.dart';
-import 'package:HumanLifeGame/models/play_room/play_room.dart';
+import 'package:HumanLifeGame/models/play_room/play_room_notifier.dart';
 import 'package:HumanLifeGame/screens/play_room/life_event_records.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

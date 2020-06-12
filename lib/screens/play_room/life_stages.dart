@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../models/common/human.dart';
 import '../../models/play_room/life_stage.dart';
-import '../../models/play_room/play_room.dart';
+import '../../models/play_room/play_room_notifier.dart';
 import '../common/human.dart';
 
 /// Humanの状況を表示

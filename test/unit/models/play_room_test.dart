@@ -10,7 +10,7 @@ import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart'
 import 'package:HumanLifeGame/models/common/life_road.dart';
 import 'package:HumanLifeGame/models/common/life_step.dart';
 import 'package:HumanLifeGame/models/common/user.dart';
-import 'package:HumanLifeGame/models/play_room/play_room.dart';
+import 'package:HumanLifeGame/models/play_room/play_room_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 

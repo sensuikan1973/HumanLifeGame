@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../models/common/user.dart';
 
@@ -79,7 +80,32 @@ class Auth {
     return user != null ? _toModel(user) : null;
   }
 
+  /// サインアウトする
   Future<void> signOut() async => FirebaseAuth.instance.signOut();
+
+  /// 開発環境専用の sign in ロジック
+  ///
+  /// デバッグ実行のたびに匿名アカウントが作られるのが煩わしいので、Email + Password 認証を行う.
+  /// Email, Password の設定が不適切な場合は、通常通り匿名認証を行う
+  Future<UserModel> signInForDebug() async {
+    final env = DotEnv().env;
+    final email = env['EMAIL'] ?? '';
+    final pass = env['PASS'] ?? '';
+    if (email.isEmpty || pass.isEmpty) return null;
+    UserModel user;
+    try {
+      user = await createUserWithEmailAndPassword(email: email, password: pass);
+      // ignore: avoid_catches_without_on_clauses
+    } catch (e) {
+      // See: https://github.com/FirebaseExtended/flutterfire/pull/1698
+      // 上記 issue にあるように、現状 Error を広く拾って強引に解釈する他ない
+      final code = e.code as String;
+      if (code == 'auth/email-already-in-use') {
+        user = await signInWithEmailAndPassword(email: email, password: pass);
+      }
+    }
+    return user ?? await signInAnonymously();
+  }
 
   UserModel _toModel(FirebaseUser user) => UserModel(
         id: user.uid,

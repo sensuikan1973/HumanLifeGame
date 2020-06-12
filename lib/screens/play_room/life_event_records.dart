@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/play_room/life_event_record.dart';
-import '../../models/play_room/play_room.dart';
+import '../../models/play_room/play_room_notifier.dart';
 
 class LifeEventRecords extends StatelessWidget {
   const LifeEventRecords({Key key}) : super(key: key);
