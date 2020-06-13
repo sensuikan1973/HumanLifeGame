@@ -1,3 +1,4 @@
+import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,6 +12,8 @@ abstract class LifeItem with _$LifeItem {
     @required String type,
     @required String key,
     @required int amount,
+    @required @TimestampConverter() DateTime createdAt,
+    @required @TimestampConverter() DateTime updatedAt,
   }) = _LifeItem;
   factory LifeItem.fromJson(Map<String, dynamic> json) => _$LifeItemFromJson(json);
 
