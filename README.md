@@ -27,7 +27,7 @@ Play now Human Life Game on Web. You can also create original _Life_.
 firebase serve --only hosting
 ```
 
-### with [Firestore Emulator](https://firebase.google.com/docs/emulator-suite)
+### with [Firebase Emulator](https://firebase.google.com/docs/emulator-suite)
 ```sh
 # Server Side
 firebase emulators:start --only firestore,functions
