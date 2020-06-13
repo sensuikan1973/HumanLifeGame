@@ -16,7 +16,7 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: 'beta'
-      - run: ./scripts/setup_flutter_web.sh
+      - run: .github/scripts/setup_flutter_web.sh
       - run: flutter build web
       - uses: actions/upload-artifact@master
         with:
