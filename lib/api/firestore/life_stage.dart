@@ -11,8 +11,8 @@ part 'life_stage.g.dart';
 @freezed
 abstract class LifeStage with _$LifeStage {
   const factory LifeStage({
+    @required @DocumentReferenceConverter() DocumentReference human,
     @required String currentLifeStepId,
-    @required List<LifeItem> lifeItems,
     @required @TimestampConverter() DateTime createdAt,
     @required @TimestampConverter() DateTime updatedAt,
   }) = _LifeStage;
@@ -23,9 +23,9 @@ abstract class LifeStage with _$LifeStage {
 }
 
 class LifeStageField {
+  /// 対象の human
+  static const human = 'human';
+
   /// 現在位置する LifeStep の識別子
   static const currentLifeStepId = 'currentLifeStepId';
-
-  /// 所持してる LifeItem
-  static const lifeItems = 'lifeItems';
 }
