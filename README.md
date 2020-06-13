@@ -20,8 +20,7 @@ Play now Human Life Game on Web. You can also create original _Life_.
 ### Setup
 
 1. https://flutter.dev/docs/get-started/web
-2. `cp config/.env.sample config/.env`
-3. Edit `config/.env`
+2. `cp config/.env.sample config/.env && vim config/.env`
 
 ### [Local Hosting](https://firebase.google.com/docs/hosting/deploying)
 ```sh
