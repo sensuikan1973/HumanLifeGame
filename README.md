@@ -31,7 +31,7 @@ firebase serve --only hosting
 ### with [Firestore Emulator](https://firebase.google.com/docs/emulator-suite)
 ```sh
 # Server Side
-firebase emulators:start --only firestore
+firebase emulators:start --only firestore,functions
 ```
 
 then, run by `main_emulator` config.
