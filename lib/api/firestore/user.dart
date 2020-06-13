@@ -11,6 +11,7 @@ abstract class User with _$User {
   const factory User({
     @required String uid,
     @required String displayName,
+    @required @DocumentReferenceConverter() DocumentReference joinPlayRoom,
     @required @TimestampConverter() DateTime createdAt,
     @required @TimestampConverter() DateTime updatedAt,
   }) = _User;
@@ -26,4 +27,7 @@ class UserField {
 
   /// displayName (by Auth)
   static const displayName = 'displayName';
+
+  /// 参加中の playRoom
+  static const joinPlayRoom = 'joinPlayRoom';
 }
