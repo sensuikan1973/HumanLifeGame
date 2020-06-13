@@ -2,8 +2,6 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'life_item.dart';
-
 part 'life_stage.freezed.dart';
 part 'life_stage.g.dart';
 
