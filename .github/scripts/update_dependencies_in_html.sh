@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# NOTE: Shimizu Naoki changed the behavior of arg and after job
+# NOTE: Shimizu Naoki changed the behavior of arg and after job to adjust GitHubActions.
 
 # TODO: publish GitHub Actions Marketplace. be careful to the LICENSE.
 
@@ -22,7 +22,7 @@ print_usage () {
   (>&2 echo "This script replaces strings matching a given regex with a given string in all HTML files.")
   (>&2 echo "This is typically used to update JS dependencies included using a <script> tag.")
   (>&2 echo "Usage:")
-  (>&2 echo "    $0 [-d] regex new_string github-user/repository-name")
+  (>&2 echo "    $0 [-d] regex new_string")
   (>&2 echo "Arguments:")
   (>&2 echo "    -d: do a dry-run. Don't push or send a PR.")
   (>&2 echo "    regex: Regex matching the original strings to replace.")
