@@ -3,8 +3,6 @@ name: Update_Firebase_JS_SDK_IN_HTML_Dependencies
 on:
   schedule:
     - cron: '0 0 * * *' # UTC
-  pull_request:
-    types: [opened, synchronize]
 
 jobs:
   update_firebase_js_sdk_in_html_dependencies:
