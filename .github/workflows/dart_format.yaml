@@ -1,5 +1,5 @@
 
-name: Flutter_Format
+name: Dart_Format
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  flutter_format:
+  dart_format:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
