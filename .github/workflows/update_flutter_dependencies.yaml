@@ -1,11 +1,11 @@
-name: Update_Dependencies
+name: Update_Flutter_Dependencies
 
 on:
   schedule:
     - cron: '0 0 * * *' # UTC
 
 jobs:
-  update_dependencies:
+  update_flutter_dependencies:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
