@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 1
           ref: master
-      - name: decide latest dep
+      - name: fetch latest version
         run: echo "::set-env name=LATEST_VERSION::$(npm show firebase version)"
       - uses: sensuikan1973/replace-deps@master
         with:
