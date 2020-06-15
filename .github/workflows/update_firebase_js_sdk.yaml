@@ -17,7 +17,7 @@ jobs:
         run: echo "::set-env name=LATEST_VERSION::$(npm show firebase version)"
       - uses: sensuikan1973/replace-deps@v1
         with:
-          extenstion: 'html'
+          extension: 'html'
           regex: 'firebasejs/[0-9]*\.[0-9]*\.[0-9]*/'
           replacement: "firebasejs/${{ env.LATEST_VERSION }}/"
       - name: create PR
