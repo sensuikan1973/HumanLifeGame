@@ -21,7 +21,7 @@ jobs:
         with:
           extenstion: 'html'
           regex: 'firebasejs/[0-9]*\.[0-9]*\.[0-9]*/'
-          replacement: "firebasejs/${{ npm show firebase version }}/"
+          replacement: "firebasejs/${{ env.LATEST_VERSION }}/"
       - name: create PR
         uses: peter-evans/create-pull-request@v2
         with:
