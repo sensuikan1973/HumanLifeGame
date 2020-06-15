@@ -1,11 +1,13 @@
-name: Update_Firebase_JS_SDK_IN_HTML_Dependencies
+name: Update_Firebase_JS_SDK
 
 on:
   schedule:
     - cron: '0 0 * * *' # UTC
+  pull_request: # FIXME: 消す. test trigger.
+    types: [opened, synchronize]
 
 jobs:
-  update_firebase_js_sdk_in_html_dependencies:
+  update_firebase_js_sdk_in_html:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -13,7 +15,13 @@ jobs:
         with:
           fetch-depth: 1
           ref: master
-      - run: .github/scripts/update_dependencies_in_html.sh "firebasejs/[0-9]*\.[0-9]*\.[0-9]*/" "firebasejs/$(npm show firebase version)/"
+      - name: decide latest dep
+        run: echo "::set-env name=LATEST_VERSION::$(npm show firebase version)"
+      - uses: sensuikan1973/replace-deps@master
+        with:
+          extenstion: 'html'
+          regex: 'firebasejs/[0-9]*\.[0-9]*\.[0-9]*/'
+          replacement: "firebasejs/${{ env.LATEST_VERSION }}/"
       - name: create PR
         uses: peter-evans/create-pull-request@v2
         with:
