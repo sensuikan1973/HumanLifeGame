@@ -3,6 +3,15 @@ name: Update_Firebase_JS_SDK_in_HTML
 on:
   schedule:
     - cron: '0 0 * * *' # UTC
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - .github/workflows/update_firebase_js_sdk.yaml
+    push:
+      branches:
+        - master
+      paths:
+        - .github/workflows/update_firebase_js_sdk.yaml
 
 jobs:
   update_firebase_js_sdk_in_html:
