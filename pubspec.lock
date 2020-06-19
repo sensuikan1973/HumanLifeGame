@@ -275,7 +275,7 @@ packages:
       name: firestore_ref
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.16"
+    version: "0.8.17"
   fixnum:
     dependency: transitive
     description:
@@ -575,7 +575,7 @@ packages:
       name: shelf
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.5"
+    version: "0.7.6"
   shelf_web_socket:
     dependency: transitive
     description:
