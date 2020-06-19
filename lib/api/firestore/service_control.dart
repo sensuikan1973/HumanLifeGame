@@ -29,7 +29,6 @@ class ServiceControlsRef extends CollectionRef<ServiceControl, Document<ServiceC
           decoder: (snapshot) => Document(snapshot.reference, ServiceControl.fromJson(snapshot.data)),
           encoder: (serviceControl) => replacingTimestamp(
             json: serviceControl.toJson(),
-            createdAt: serviceControl.createdAt,
           ),
         );
 }
