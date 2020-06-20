@@ -28,6 +28,6 @@ class Store {
   @visibleForTesting
   String getCollectionId<T>() {
     if (T == ServiceControl) return 'serviceControl';
-    return '';
+    throw Error();
   }
 }
