@@ -22,12 +22,12 @@ class Store {
   // 関連: https://stackoverflow.com/a/55237197/10928938
   T _jsonFactory<T extends Entity>(Map<String, dynamic> json) {
     if (T == ServiceControl) return ServiceControl.fromJson(json) as T;
-    return null;
+    throw Error(); // unexpected
   }
 
   @visibleForTesting
   String getCollectionId<T>() {
     if (T == ServiceControl) return 'serviceControl';
-    throw Error();
+    throw Error(); // unexpected
   }
 }
