@@ -139,19 +139,7 @@ and</li>
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) =&gt; Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50),
-        child: AppBar(
-          title: const Text(
-            &#39;Human Life Game&#39;,
-            style: TextStyle(
-              fontFamily: &#39;varega&#39;,
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ),
+      appBar: const LobbyAppBar(),
       body: Center(
         child: FutureBuilder&lt;UserModel&gt;(
           future: _signIn(context.watch&lt;Auth&gt;()),
@@ -167,7 +155,7 @@ Widget build(BuildContext context) =&gt; Scaffold(
                       Positioned(bottom: 0, right: 0, child: _createRoomButton()),
                     ],
                   ),
-                  const CreateHumanLife(),
+                  const HumanLifeTips(),
                 ],
               );
             }
