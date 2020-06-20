@@ -2,12 +2,14 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'entity.dart';
+
 part 'service_control.freezed.dart';
 part 'service_control.g.dart';
 
 /// Document on Firestore
 @freezed
-abstract class ServiceControl with _$ServiceControl {
+abstract class ServiceControl with _$ServiceControl implements Entity {
   const factory ServiceControl({
     @required bool isMaintenance,
     @required String requiredMinVersion,
@@ -15,18 +17,6 @@ abstract class ServiceControl with _$ServiceControl {
     @required @TimestampConverter() DateTime updatedAt,
   }) = _ServiceControl;
   factory ServiceControl.fromJson(Map<String, dynamic> json) => _$ServiceControlFromJson(json);
-
-  @visibleForTesting
-  static const collectionId = 'serviceControl';
-}
-
-class ServiceControlsRef extends CollectionRef<ServiceControl, Document<ServiceControl>> {
-  ServiceControlsRef(Firestore firestore)
-      : super(
-          firestore.collection(ServiceControl.collectionId),
-          decoder: (snapshot) => Document(snapshot.reference, ServiceControl.fromJson(snapshot.data)),
-          encoder: (serviceControl) => replacingTimestamp(json: serviceControl.toJson()),
-        );
 }
 
 class ServiceControlField {
