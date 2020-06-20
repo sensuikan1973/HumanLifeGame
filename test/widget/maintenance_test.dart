@@ -1,4 +1,3 @@
-import 'package:HumanLifeGame/api/firestore/firestore.dart';
 import 'package:HumanLifeGame/api/firestore/service_control.dart';
 import 'package:HumanLifeGame/screens/maintenance/maintenance.dart';
 import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
@@ -22,8 +21,8 @@ void main() {
         .setData(serviceControlData);
 
     await tester.pumpWidget(
-      Provider<Store>(
-        create: (context) => Store(firestore),
+      Provider<Firestore>(
+        create: (context) => firestore,
         child: const MaterialApp(home: Maintenance()),
       ),
     );
@@ -46,8 +45,8 @@ void main() {
         .setData(serviceControlData);
 
     await tester.pumpWidget(
-      Provider<Store>(
-        create: (context) => Store(firestore),
+      Provider<Firestore>(
+        create: (context) => firestore,
         child: const MaterialApp(home: Maintenance()),
       ),
     );

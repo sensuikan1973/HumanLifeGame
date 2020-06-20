@@ -2,8 +2,6 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'firestore.dart';
-
 part 'service_control.freezed.dart';
 part 'service_control.g.dart';
 
@@ -23,9 +21,9 @@ abstract class ServiceControl with _$ServiceControl {
 }
 
 class ServiceControlsRef extends CollectionRef<ServiceControl, Document<ServiceControl>> {
-  ServiceControlsRef(Store store)
+  ServiceControlsRef(Firestore firestore)
       : super(
-          store.firestore.collection(ServiceControl.collectionId),
+          firestore.collection(ServiceControl.collectionId),
           decoder: (snapshot) => Document(snapshot.reference, ServiceControl.fromJson(snapshot.data)),
           encoder: (serviceControl) => replacingTimestamp(
             json: serviceControl.toJson(),
