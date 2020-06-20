@@ -25,9 +25,7 @@ class ServiceControlsRef extends CollectionRef<ServiceControl, Document<ServiceC
       : super(
           firestore.collection(ServiceControl.collectionId),
           decoder: (snapshot) => Document(snapshot.reference, ServiceControl.fromJson(snapshot.data)),
-          encoder: (serviceControl) => replacingTimestamp(
-            json: serviceControl.toJson(),
-          ),
+          encoder: (serviceControl) => replacingTimestamp(json: serviceControl.toJson()),
         );
 }
 
