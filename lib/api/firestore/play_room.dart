@@ -33,6 +33,15 @@ abstract class PlayRoom with _$PlayRoom {
   static const collectionId = 'playRoom';
 }
 
+class PlayRoomsRef extends CollectionRef<PlayRoom, Document<PlayRoom>> {
+  PlayRoomsRef(Firestore firestore)
+      : super(
+          firestore.collection(PlayRoom.collectionId),
+          decoder: (snapshot) => Document(snapshot.reference, PlayRoom.fromJson(snapshot.data)),
+          encoder: (serviceControl) => replacingTimestamp(json: serviceControl.toJson()),
+        );
+}
+
 class PlayRoomField {
   /// 主催者(user)
   static const host = 'host';

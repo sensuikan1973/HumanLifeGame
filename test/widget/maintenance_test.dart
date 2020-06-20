@@ -1,5 +1,5 @@
-import 'package:HumanLifeGame/api/firestore/firestore.dart';
 import 'package:HumanLifeGame/api/firestore/service_control.dart';
+import 'package:HumanLifeGame/api/firestore/store.dart';
 import 'package:HumanLifeGame/screens/maintenance/maintenance.dart';
 import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
 import 'package:firestore_ref/firestore_ref.dart';
@@ -16,14 +16,15 @@ void main() {
       TimestampField.updatedAt: DateTime.now(),
     };
     final firestore = MockFirestoreInstance();
+    final store = Store(firestore);
     await firestore
-        .collection(ServiceControl.collectionId)
+        .collection(store.getCollectionId<ServiceControl>())
         .document(ServiceControlDocId.web)
         .setData(serviceControlData);
 
     await tester.pumpWidget(
       Provider<Store>(
-        create: (context) => Store(firestore),
+        create: (context) => store,
         child: const MaterialApp(home: Maintenance()),
       ),
     );
@@ -40,14 +41,15 @@ void main() {
       TimestampField.updatedAt: DateTime.now(),
     };
     final firestore = MockFirestoreInstance();
+    final store = Store(firestore);
     await firestore
-        .collection(ServiceControl.collectionId)
+        .collection(store.getCollectionId<ServiceControl>())
         .document(ServiceControlDocId.web)
         .setData(serviceControlData);
 
     await tester.pumpWidget(
       Provider<Store>(
-        create: (context) => Store(firestore),
+        create: (context) => store,
         child: const MaterialApp(home: Maintenance()),
       ),
     );

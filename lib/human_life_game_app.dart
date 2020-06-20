@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'api/auth.dart';
 import 'api/dice.dart';
-import 'api/firestore/firestore.dart';
+import 'api/firestore/store.dart';
 import 'i18n/i18n.dart';
 import 'i18n/i18n_delegate.dart';
 import 'router.dart';

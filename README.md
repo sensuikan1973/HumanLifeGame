@@ -33,8 +33,7 @@ firebase serve --only hosting
 firebase emulators:start --only firestore,functions
 ```
 
-then, run by `main_emulator` config.  
-(Note: [Auth Trigger is not supported](https://firebase.google.com/docs/emulator-suite#which_firebase_features_and_platforms_are_supported))
+then, run by `main_emulator` config. (Note: [Auth Trigger is not supported](https://firebase.google.com/docs/emulator-suite#which_firebase_features_and_platforms_are_supported))
 
 ### [Code Generate](https://pub.dev/packages/freezed)
 ```sh

@@ -4,7 +4,8 @@ import 'package:provider/provider.dart';
 
 import '../../api/auth.dart';
 import '../../models/common/user.dart';
-import 'create_human_life.dart';
+import 'app_bar.dart';
+import 'human_life_tips.dart';
 import 'room_list_item.dart';
 
 class Lobby extends StatelessWidget {
@@ -19,19 +20,7 @@ class Lobby extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(50),
-          child: AppBar(
-            title: const Text(
-              'Human Life Game',
-              style: TextStyle(
-                fontFamily: 'varega',
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ),
+        appBar: const LobbyAppBar(),
         body: Center(
           child: FutureBuilder<UserModel>(
             future: _signIn(context.watch<Auth>()),
@@ -47,7 +36,7 @@ class Lobby extends StatelessWidget {
                         Positioned(bottom: 0, right: 0, child: _createRoomButton()),
                       ],
                     ),
-                    const CreateHumanLife(),
+                    const HumanLifeTips(),
                   ],
                 );
               }

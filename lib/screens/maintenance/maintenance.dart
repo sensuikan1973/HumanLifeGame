@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../api/firestore/firestore.dart';
 import '../../api/firestore/service_control.dart';
+import '../../api/firestore/store.dart';
 
 /// FIXME: ロジックべた書き
 class Maintenance extends StatelessWidget {
@@ -14,7 +14,7 @@ class Maintenance extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         body: Center(
           child: StreamBuilder<Document<ServiceControl>>(
-            stream: ServiceControlsRef(context.watch<Store>()).docRef(ServiceControlDocId.web).document(),
+            stream: context.watch<Store>().collectionRef<ServiceControl>().docRef(ServiceControlDocId.web).document(),
             builder: (context, snap) {
               if (!snap.hasData) return const Text('no data');
               return snap.data.entity.isMaintenance
