@@ -1,5 +1,9 @@
-class LobbyNotifier {
-  LobbyNotifier();
+import 'package:firestore_ref/firestore_ref.dart';
 
-  // TODO: PlayRoom Document の作成
+class LobbyNotifier {
+  LobbyNotifier(this._firestore);
+
+  final Firestore _firestore;
+
+  Future<void> createPlayRoom() async {}
 }

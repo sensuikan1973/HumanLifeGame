@@ -1,6 +1,6 @@
 import 'package:HumanLifeGame/api/auth.dart';
 import 'package:HumanLifeGame/models/common/user.dart';
-import 'package:HumanLifeGame/screens/lobby/create_human_life.dart';
+import 'package:HumanLifeGame/screens/lobby/human_life_tips.dart';
 import 'package:HumanLifeGame/screens/lobby/lobby.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -25,7 +25,7 @@ Future<void> main() async {
     ));
     await tester.pump();
     await tester.pump();
-    expect(find.byType(CreateHumanLife), findsOneWidget);
+    expect(find.byType(HumanLifeTips), findsOneWidget);
     expect(find.byType(FloatingActionButton), findsOneWidget);
   });
 }

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../api/auth.dart';
 import '../../models/common/user.dart';
-import 'create_human_life.dart';
+import 'human_life_tips.dart';
 import 'room_list_item.dart';
 
 class Lobby extends StatelessWidget {
@@ -47,7 +47,7 @@ class Lobby extends StatelessWidget {
                         Positioned(bottom: 0, right: 0, child: _createRoomButton()),
                       ],
                     ),
-                    const CreateHumanLife(),
+                    const HumanLifeTips(),
                   ],
                 );
               }
