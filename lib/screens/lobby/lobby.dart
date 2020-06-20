@@ -25,7 +25,7 @@ class Lobby extends StatelessWidget {
             title: const Text(
               'Human Life Game',
               style: TextStyle(
-                fontFamily: 'varega',
+                fontFamily: 'varela',
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),
