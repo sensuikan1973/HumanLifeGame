@@ -27,7 +27,7 @@ class Store {
 
   @visibleForTesting
   String getCollectionId<T>() {
-    if (T is ServiceControl) return 'serviceControl';
+    if (T == ServiceControl) return 'serviceControl';
     return '';
   }
 }
