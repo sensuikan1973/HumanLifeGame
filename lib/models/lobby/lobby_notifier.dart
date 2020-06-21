@@ -5,13 +5,18 @@ import '../../api/auth.dart';
 import '../../api/firestore/play_room.dart';
 import '../../api/firestore/store.dart';
 import '../../api/firestore/user.dart';
+import 'lobby_state.dart';
 
-// TODO: ValueNotifier に
-class LobbyNotifier extends ChangeNotifier {
-  LobbyNotifier(this._auth, this._store);
+class LobbyNotifier extends ValueNotifier<LobbyState> {
+  LobbyNotifier(this._auth, this._store) : super(LobbyState()) {
+    // 初期取得
+    fetchPlayRooms();
+  }
 
   final Auth _auth;
   final Store _store;
+
+  final _roomListLimit = 5;
 
   Future<void> createPublicPlayRoom() async {
     final user = await _auth.currentUser;
@@ -36,5 +41,14 @@ class LobbyNotifier extends ChangeNotifier {
       batch: batch,
     );
     await batch.commit();
+  }
+
+  Future<void> fetchPlayRooms() async {
+    final collectionRef = _store.collectionRef<PlayRoom>();
+    final documents = await collectionRef.getDocuments(
+      (query) => query.limit(_roomListLimit).orderBy(TimestampField.createdAt),
+    );
+    value.publicPlayRooms = documents;
+    notifyListeners();
   }
 }

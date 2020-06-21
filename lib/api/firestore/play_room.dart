@@ -30,6 +30,11 @@ abstract class PlayRoom implements _$PlayRoom, Entity {
 
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
+
+  static Document<PlayRoom> decode(DocumentSnapshot snapshot) => Document<PlayRoom>(
+        snapshot.reference,
+        PlayRoom.fromJson(snapshot.data),
+      );
 }
 
 class PlayRoomField {
