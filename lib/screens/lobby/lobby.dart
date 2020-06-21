@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../api/auth.dart';
 import '../../api/firestore/store.dart';
+import '../../i18n/i18n.dart';
 import '../../models/common/user.dart';
 import '../../models/lobby/lobby_notifier.dart';
 import 'app_bar.dart';
@@ -16,7 +17,7 @@ class Lobby extends StatelessWidget {
   static Widget inProviders({Key key}) => MultiProvider(
         key: key,
         providers: [
-          Provider(
+          ChangeNotifierProvider(
             create: (context) => LobbyNotifier(context.read<Auth>(), context.read<Store>()),
           ),
         ],
@@ -59,7 +60,7 @@ class Lobby extends StatelessWidget {
       );
 
   FloatingActionButton _createRoomButton(BuildContext context) => FloatingActionButton(
-        tooltip: 'create public PlayRoom',
+        tooltip: I18n.of(context).lobbyCreatePublicRoomButtonTooltip,
         backgroundColor: Colors.indigo,
         onPressed: () async => context.read<LobbyNotifier>().createPublicPlayRoom(),
         child: const Icon(Icons.add),

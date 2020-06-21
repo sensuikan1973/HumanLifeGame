@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-05-31T00:39:56.532336",
+  "@@last_modified": "2020-06-21T23:22:55.697804",
   "appTitle": "Human Life Game",
   "@appTitle": {
     "type": "text",
@@ -11,6 +11,11 @@
     "placeholders": {
       "type": {}
     }
+  },
+  "lobbyCreatePublicRoomButtonTooltip": "create public room",
+  "@lobbyCreatePublicRoomButtonTooltip": {
+    "type": "text",
+    "placeholders": {}
   },
   "rollDice": "Roll the dice",
   "@rollDice": {
