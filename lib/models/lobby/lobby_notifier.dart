@@ -45,10 +45,9 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
 
   Future<void> fetchPlayRooms() async {
     final collectionRef = _store.collectionRef<PlayRoom>();
-    final documents = await collectionRef.getDocuments(
+    value.publicPlayRooms = await collectionRef.getDocuments(
       (query) => query.limit(_roomListLimit).orderBy(TimestampField.createdAt),
     );
-    value.publicPlayRooms = documents;
     notifyListeners();
   }
 }
