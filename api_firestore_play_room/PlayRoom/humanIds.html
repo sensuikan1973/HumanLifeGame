@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the updatedAt property from the PlayRoom class, for the Dart programming language.">
-  <title>updatedAt property - PlayRoom class - play_room library - Dart API</title>
+  <meta name="description" content="API docs for the humanIds property from the PlayRoom class, for the Dart programming language.">
+  <title>humanIds property - PlayRoom class - play_room library - Dart API</title>
 
   
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
@@ -27,9 +27,9 @@
     <li><a href="../../index.html">HumanLifeGame</a></li>
     <li><a href="../../api_firestore_play_room/api_firestore_play_room-library.html">play_room</a></li>
     <li><a href="../../api_firestore_play_room/PlayRoom-class.html">PlayRoom</a></li>
-    <li class="self-crumb">updatedAt property</li>
+    <li class="self-crumb">humanIds property</li>
   </ol>
-  <div class="self-name">updatedAt</div>
+  <div class="self-name">humanIds</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -48,7 +48,7 @@
       <li><a href="../../index.html">HumanLifeGame</a></li>
       <li><a href="../../api_firestore_play_room/api_firestore_play_room-library.html">play_room</a></li>
       <li><a href="../../api_firestore_play_room/PlayRoom-class.html">PlayRoom</a></li>
-      <li class="self-crumb">updatedAt property</li>
+      <li class="self-crumb">humanIds property</li>
     </ol>
     
     <h5>PlayRoom class</h5>
@@ -92,21 +92,23 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
-      <div><h1><span class="kind-property">updatedAt</span> property </h1></div>
+      <div><h1><span class="kind-property">humanIds</span> property </h1></div>
 
 
         <section id="getter">
         
         <section class="multi-line-signature">
-          <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span>
-                  <span class="name ">updatedAt</span>
-          <div class="features">@<a href="https://pub.dev/documentation/firestore_ref/0.8.17/firestore_ref/TimestampConverter-class.html">TimestampConverter</a>(), inherited</div>
+          <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span></span>
+                  <span class="name ">humanIds</span>
+          
 </section>
         
-                        <section class="summary source-code" id="source">
+                <section class="desc markdown">
+          <p>humans の document ID List</p>
+        </section>
+                <section class="summary source-code" id="source">
           <h2><span>Implementation</span></h2>
-          <pre class="language-dart"><code class="language-dart">@TimestampConverter()
-DateTime get updatedAt;</code></pre>
+          <pre class="language-dart"><code class="language-dart">List&lt;String&gt; get humanIds =&gt; humans.map((human) =&gt; human.documentID).toList();</code></pre>
         </section>
 </section>
         

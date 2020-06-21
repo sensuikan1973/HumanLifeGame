@@ -99,10 +99,9 @@
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">Future&lt;void&gt; fetchPlayRooms() async {
   final collectionRef = _store.collectionRef&lt;PlayRoom&gt;();
-  final documents = await collectionRef.getDocuments(
+  value.publicPlayRooms = await collectionRef.getDocuments(
     (query) =&gt; query.limit(_roomListLimit).orderBy(TimestampField.createdAt),
   );
-  value.publicPlayRooms = documents;
   notifyListeners();
 }</code></pre>
     </section>
