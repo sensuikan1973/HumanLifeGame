@@ -4,6 +4,7 @@ import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/models/common/user.dart';
 import 'package:HumanLifeGame/screens/lobby/human_life_tips.dart';
 import 'package:HumanLifeGame/screens/lobby/lobby.dart';
+import 'package:HumanLifeGame/screens/lobby/room_list_item.dart';
 import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -41,13 +42,13 @@ Future<void> main() async {
     await tester.pump();
     expect(find.byType(HumanLifeTips), findsOneWidget);
     expect(find.byType(FloatingActionButton), findsOneWidget);
+    expect(find.byType(RoomListItem), findsNothing); // room 存在しない
 
     final createPublicPlayRoomButton = find.byTooltip(i18n.lobbyCreatePublicRoomButtonTooltip);
     expect(createPublicPlayRoomButton, findsOneWidget);
 
-    await tester.tap(createPublicPlayRoomButton);
+    await tester.tap(createPublicPlayRoomButton); // room が作成される
     await tester.pump();
-
-    expect(find.byType(Lobby), findsOneWidget);
+    expect(find.byType(RoomListItem), findsOneWidget);
   });
 }
