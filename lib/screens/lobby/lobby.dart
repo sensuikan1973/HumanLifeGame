@@ -17,7 +17,7 @@ class Lobby extends StatelessWidget {
   static Widget inProviders({Key key}) => MultiProvider(
         key: key,
         providers: [
-          Provider(
+          ChangeNotifierProvider(
             create: (context) => LobbyNotifier(context.read<Auth>(), context.read<Store>()),
           ),
         ],
