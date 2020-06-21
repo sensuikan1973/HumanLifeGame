@@ -35,6 +35,9 @@ abstract class PlayRoom implements _$PlayRoom, Entity {
         snapshot.reference,
         PlayRoom.fromJson(snapshot.data),
       );
+
+  /// humans の document ID List
+  List<String> get humanIds => humans.map((human) => human.documentID).toList();
 }
 
 class PlayRoomField {

@@ -50,5 +50,6 @@ Future<void> main() async {
     await tester.tap(createPublicPlayRoomButton); // room が作成される
     await tester.pump();
     expect(find.byType(RoomListItem), findsOneWidget);
+    expect(find.text(user.id), findsOneWidget); // 参加者である自分の id が表示される
   });
 }
