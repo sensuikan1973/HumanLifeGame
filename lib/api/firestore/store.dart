@@ -23,6 +23,12 @@ class Store {
         encoder: (entity) => entity.encode(),
       );
 
+  CollectionGroup<T, Document<T>> collectionGroupRef<T extends Entity>(String path) => CollectionGroup(
+        path: path,
+        decoder: (snapshot) => _decode<T>(snapshot),
+        encoder: (entity) => entity.encode(),
+      );
+
   DocumentRef<T, Document<T>> docRef<T extends Entity>(String documentId) => DocumentRef(
         collectionRef: collectionRef<T>(),
         id: documentId,

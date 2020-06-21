@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../api/auth.dart';
+import '../../api/firestore/store.dart';
 import '../../models/common/user.dart';
 import '../../models/lobby/lobby_notifier.dart';
 import 'app_bar.dart';
@@ -10,7 +11,17 @@ import 'human_life_tips.dart';
 import 'room_list_item.dart';
 
 class Lobby extends StatelessWidget {
-  const Lobby({Key key}) : super(key: key);
+  const Lobby._();
+
+  static Widget inProviders({Key key}) => MultiProvider(
+        key: key,
+        providers: [
+          Provider(
+            create: (context) => LobbyNotifier(context.read<Auth>(), context.read<Store>()),
+          ),
+        ],
+        child: const Lobby._(),
+      );
 
   Future<UserModel> _signIn(Auth auth) async {
     final user = await auth.currentUser;
