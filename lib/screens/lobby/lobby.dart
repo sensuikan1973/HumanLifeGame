@@ -45,7 +45,7 @@ class Lobby extends StatelessWidget {
                   children: [
                     Stack(
                       children: [
-                        _roomList(),
+                        _roomList(context),
                         Positioned(bottom: 0, right: 0, child: _createRoomButton(context)),
                       ],
                     ),
@@ -62,20 +62,23 @@ class Lobby extends StatelessWidget {
   FloatingActionButton _createRoomButton(BuildContext context) => FloatingActionButton(
         tooltip: I18n.of(context).lobbyCreatePublicRoomButtonTooltip,
         backgroundColor: Colors.indigo,
-        onPressed: () async => context.read<LobbyNotifier>().createPublicPlayRoom(),
+        onPressed: () async {
+          final notifier = context.read<LobbyNotifier>();
+          await notifier.createPublicPlayRoom();
+          await notifier.fetchPlayRooms();
+        },
         child: const Icon(Icons.add),
       );
 
-  SizedBox _roomList() => SizedBox(
-        width: 720,
-        height: 970,
-        child: ListView(
-          children: const [
-            RoomListItem(),
-            RoomListItem(),
-            RoomListItem(),
-            RoomListItem(),
-          ],
-        ),
-      );
+  SizedBox _roomList(BuildContext context) {
+    final rooms = context.watch<LobbyNotifier>().value.publicPlayRooms;
+    return SizedBox(
+      width: 720,
+      height: 970,
+      child: ListView.builder(
+        itemCount: rooms.length,
+        itemBuilder: (context, index) => const RoomListItem(), // TODO: 取得したデータをもとに
+      ),
+    );
+  }
 }

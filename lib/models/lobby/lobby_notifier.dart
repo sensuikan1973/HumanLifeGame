@@ -49,5 +49,6 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
       (query) => query.limit(_roomListLimit).orderBy(TimestampField.createdAt),
     );
     value.publicPlayRooms = documents;
+    notifyListeners();
   }
 }
