@@ -77,7 +77,7 @@ class Lobby extends StatelessWidget {
       height: 970,
       child: ListView.builder(
         itemCount: rooms.length,
-        itemBuilder: (context, index) => const RoomListItem(), // TODO: 取得したデータをもとに
+        itemBuilder: (context, index) => RoomListItem(rooms[index]),
       ),
     );
   }

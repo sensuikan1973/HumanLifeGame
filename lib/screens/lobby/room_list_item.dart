@@ -1,10 +1,14 @@
+import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../api/firestore/play_room.dart';
 import '../../router.dart';
 
 class RoomListItem extends StatelessWidget {
-  const RoomListItem({Key key}) : super(key: key);
+  const RoomListItem(this._playRoom, {Key key}) : super(key: key);
+
+  final Document<PlayRoom> _playRoom;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -29,26 +33,22 @@ class RoomListItem extends StatelessWidget {
         height: 40,
         child: ColoredBox(
           color: Colors.grey[100],
-          child: const Text('Room 1'),
+          child: Text(_playRoom.entity.title),
         ),
       );
 
   SizedBox _preview() => SizedBox(
         width: 300,
         height: 200,
-        child: Image.asset(
-          'images/play_view_background.jpg',
-          fit: BoxFit.fitHeight,
-        ),
+        child: Image.asset('images/play_view_background.jpg', fit: BoxFit.fitHeight),
       );
 
   SizedBox _humans() => SizedBox(
         width: 420,
         height: 170,
         child: Column(
-          children: const [
-            Text('Human 1'),
-            Text('Human 2'),
+          children: [
+            for (final humanId in _playRoom.entity.humanIds) Text(humanId),
           ],
         ),
       );
