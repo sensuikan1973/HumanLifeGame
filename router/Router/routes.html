@@ -98,10 +98,7 @@
                         <section class="summary source-code" id="source">
           <h2><span>Implementation</span></h2>
           <pre class="language-dart"><code class="language-dart">Map&lt;String, WidgetBuilder&gt; get routes =&gt; {
-      lobby: (_) =&gt; ChangeNotifierProvider(
-            create: (context) =&gt; LobbyNotifier(context.read&lt;Auth&gt;(), context.read&lt;Store&gt;()),
-            child: const Lobby(),
-          ),
+      lobby: (_) =&gt; Lobby.inProviders(),
       signIn: (_) =&gt; const SignIn(),
       maintenance: (_) =&gt; const Maintenance(),
       playRoom: (context) =&gt; ChangeNotifierProvider&lt;PlayRoomNotifier&gt;(
