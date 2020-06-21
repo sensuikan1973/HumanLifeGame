@@ -102,7 +102,7 @@
       <pre class="language-dart"><code class="language-dart">static Widget inProviders({Key key}) =&gt; MultiProvider(
       key: key,
       providers: [
-        Provider(
+        ChangeNotifierProvider(
           create: (context) =&gt; LobbyNotifier(context.read&lt;Auth&gt;(), context.read&lt;Store&gt;()),
         ),
       ],
