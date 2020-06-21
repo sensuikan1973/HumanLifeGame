@@ -21,7 +21,7 @@ Future<void> main() async {
     final auth = MockAuth();
     when(auth.currentUser).thenAnswer((_) async => user);
     await tester.pumpWidget(testableApp(
-      home: Provider<Auth>(create: (_) => auth, child: const Lobby()),
+      home: Provider<Auth>(create: (_) => auth, child: Lobby.inProviders()),
     ));
     await tester.pump();
     await tester.pump();
