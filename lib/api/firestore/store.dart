@@ -19,16 +19,13 @@ class Store {
 
   CollectionRef<T, Document<T>> collectionRef<T extends Entity>() => CollectionRef(
         firestore.collection(getCollectionId<T>()),
-        decoder: (snapshot) => Document(
-          snapshot.reference,
-          _jsonFactory<T>(snapshot.data),
-        ),
+        decoder: (snapshot) => _decode<T>(snapshot),
         encoder: (entity) => entity.encode(),
       );
 
   // 関連: https://stackoverflow.com/a/55237197/10928938
-  T _jsonFactory<T extends Entity>(Map<String, dynamic> json) {
-    if (T == ServiceControl) return ServiceControl.fromJson(json) as T;
+  Document<T> _decode<T extends Entity>(DocumentSnapshot snapshot) {
+    if (T == ServiceControl) return ServiceControl.decode(snapshot) as Document<T>;
     throw Error(); // unexpected
   }
 

@@ -22,6 +22,11 @@ abstract class ServiceControl implements _$ServiceControl, Entity {
 
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
+
+  static Document<ServiceControl> decode(DocumentSnapshot snapshot) => Document<ServiceControl>(
+        snapshot.reference,
+        ServiceControl.fromJson(snapshot.data),
+      );
 }
 
 class ServiceControlField {
