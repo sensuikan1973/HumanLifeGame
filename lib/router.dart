@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'api/auth.dart';
 import 'api/dice.dart';
+import 'api/firestore/store.dart';
 import 'i18n/i18n.dart';
 import 'models/common/human.dart';
 import 'models/common/human_life.dart';
 import 'models/common/life_road.dart';
 import 'models/common/user.dart';
+import 'models/lobby/lobby_notifier.dart';
 import 'models/play_room/play_room_notifier.dart';
 import 'screens/lobby/lobby.dart';
 import 'screens/maintenance/maintenance.dart';
@@ -24,7 +27,10 @@ class Router {
 
   // TODO: provider の移動
   Map<String, WidgetBuilder> get routes => {
-        lobby: (_) => const Lobby(),
+        lobby: (_) => ChangeNotifierProvider(
+              create: (context) => LobbyNotifier(context.read<Auth>(), context.read<Store>()),
+              child: const Lobby(),
+            ),
         signIn: (_) => const SignIn(),
         maintenance: (_) => const Maintenance(),
         playRoom: (context) => ChangeNotifierProvider<PlayRoomNotifier>(

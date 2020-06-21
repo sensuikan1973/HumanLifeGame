@@ -3,8 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'entity.dart';
-import 'life_event_record.dart';
-import 'life_stage.dart';
 
 part 'play_room.freezed.dart';
 part 'play_room.g.dart';
@@ -21,8 +19,6 @@ abstract class PlayRoom implements _$PlayRoom, Entity {
     @required String title,
     @required @DocumentReferenceListConverter() List<DocumentReference> humans,
     @required @DocumentReferenceConverter() DocumentReference lifeRoad,
-    @required List<LifeEventRecord> everyLifeEventRecords,
-    @required List<LifeStage> lifeStages,
     @required String currentTurnHumanId,
     @TimestampConverter() DateTime createdAt,
     @TimestampConverter() DateTime updatedAt,
