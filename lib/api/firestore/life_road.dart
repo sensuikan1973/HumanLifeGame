@@ -2,6 +2,7 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'entity.dart';
 import 'life_event.dart';
 
 part 'life_road.freezed.dart';
@@ -9,7 +10,7 @@ part 'life_road.g.dart';
 
 /// Document on Firestore
 @freezed
-abstract class HumanLife with _$HumanLife {
+abstract class HumanLife implements _$HumanLife, Entity {
   const factory HumanLife({
     @required @DocumentReferenceConverter() DocumentReference author,
     @required String title,
@@ -17,10 +18,12 @@ abstract class HumanLife with _$HumanLife {
     @required @TimestampConverter() DateTime createdAt,
     @required @TimestampConverter() DateTime updatedAt,
   }) = _HumanLife;
+  const HumanLife._();
+
   factory HumanLife.fromJson(Map<String, dynamic> json) => _$HumanLifeFromJson(json);
 
-  @visibleForTesting
-  static const collectionId = 'humanLife';
+  @override
+  Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 }
 
 class HumanLifeField {

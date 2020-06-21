@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../api/auth.dart';
 import '../../models/common/user.dart';
+import '../../models/lobby/lobby_notifier.dart';
 import 'app_bar.dart';
 import 'human_life_tips.dart';
 import 'room_list_item.dart';
@@ -33,7 +34,7 @@ class Lobby extends StatelessWidget {
                     Stack(
                       children: [
                         _roomList(),
-                        Positioned(bottom: 0, right: 0, child: _createRoomButton()),
+                        Positioned(bottom: 0, right: 0, child: _createRoomButton(context)),
                       ],
                     ),
                     const HumanLifeTips(),
@@ -46,10 +47,10 @@ class Lobby extends StatelessWidget {
         ),
       );
 
-  FloatingActionButton _createRoomButton() => FloatingActionButton(
-        tooltip: 'create PlayRoom',
+  FloatingActionButton _createRoomButton(BuildContext context) => FloatingActionButton(
+        tooltip: 'create public PlayRoom',
         backgroundColor: Colors.indigo,
-        onPressed: () => debugPrint('TODO: create PlayRoom'),
+        onPressed: () async => context.read<LobbyNotifier>().createPublicPlayRoom(),
         child: const Icon(Icons.add),
       );
 
