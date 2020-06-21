@@ -5,10 +5,11 @@ import '../../api/auth.dart';
 import '../../api/firestore/play_room.dart';
 import '../../api/firestore/store.dart';
 import '../../api/firestore/user.dart';
+import 'lobby_state.dart';
 
 // TODO: ValueNotifier に
-class LobbyNotifier extends ChangeNotifier {
-  LobbyNotifier(this._auth, this._store);
+class LobbyNotifier extends ValueNotifier<LobbyState> {
+  LobbyNotifier(this._auth, this._store) : super(LobbyState());
 
   final Auth _auth;
   final Store _store;
