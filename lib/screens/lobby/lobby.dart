@@ -1,10 +1,10 @@
-import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../api/auth.dart';
 import '../../api/firestore/store.dart';
+import '../../i18n/i18n.dart';
 import '../../models/common/user.dart';
 import '../../models/lobby/lobby_notifier.dart';
 import 'app_bar.dart';
