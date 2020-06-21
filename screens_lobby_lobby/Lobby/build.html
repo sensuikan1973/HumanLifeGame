@@ -151,7 +151,7 @@ Widget build(BuildContext context) =&gt; Scaffold(
                 children: [
                   Stack(
                     children: [
-                      _roomList(),
+                      _roomList(context),
                       Positioned(bottom: 0, right: 0, child: _createRoomButton(context)),
                     ],
                   ),
