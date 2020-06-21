@@ -2,12 +2,14 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'entity.dart';
+
 part 'user.freezed.dart';
 part 'user.g.dart';
 
 /// Document on Firestore
 @freezed
-abstract class User with _$User {
+abstract class User implements _$User, Entity {
   const factory User({
     @required String uid,
     @required String displayName,
@@ -15,10 +17,12 @@ abstract class User with _$User {
     @required @TimestampConverter() DateTime createdAt,
     @required @TimestampConverter() DateTime updatedAt,
   }) = _User;
+  const User._();
+
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
-  @visibleForTesting
-  static const collectionId = 'user';
+  @override
+  Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 }
 
 class UserField {

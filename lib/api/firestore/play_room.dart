@@ -2,6 +2,7 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'entity.dart';
 import 'life_event_record.dart';
 import 'life_stage.dart';
 
@@ -14,7 +15,7 @@ part 'play_room.g.dart';
 /// TODO: announcement はクライアントサイド完結想定だが、必要になったら追加.
 /// TODO: finishedAt は削除ロジックに使う想定だが、不要だったら削除. まだロジックを考え中.
 @freezed
-abstract class PlayRoom with _$PlayRoom {
+abstract class PlayRoom implements _$PlayRoom, Entity {
   const factory PlayRoom({
     @required @DocumentReferenceConverter() DocumentReference host,
     @required String title,
@@ -27,19 +28,12 @@ abstract class PlayRoom with _$PlayRoom {
     @required @TimestampConverter() DateTime updatedAt,
 //    @TimestampConverter() DateTime finishedAt,
   }) = _PlayRoom;
+  const PlayRoom._();
+
   factory PlayRoom.fromJson(Map<String, dynamic> json) => _$PlayRoomFromJson(json);
 
-  @visibleForTesting
-  static const collectionId = 'playRoom';
-}
-
-class PlayRoomsRef extends CollectionRef<PlayRoom, Document<PlayRoom>> {
-  PlayRoomsRef(Firestore firestore)
-      : super(
-          firestore.collection(PlayRoom.collectionId),
-          decoder: (snapshot) => Document(snapshot.reference, PlayRoom.fromJson(snapshot.data)),
-          encoder: (serviceControl) => replacingTimestamp(json: serviceControl.toJson()),
-        );
+  @override
+  Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 }
 
 class PlayRoomField {

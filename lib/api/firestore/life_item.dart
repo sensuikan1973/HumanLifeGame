@@ -2,12 +2,14 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'entity.dart';
+
 part 'life_item.freezed.dart';
 part 'life_item.g.dart';
 
 /// Map Value on Firestore
 @freezed
-abstract class LifeItem with _$LifeItem {
+abstract class LifeItem implements _$LifeItem, Entity {
   const factory LifeItem({
     @required String type,
     @required String key,
@@ -15,10 +17,12 @@ abstract class LifeItem with _$LifeItem {
     @required @TimestampConverter() DateTime createdAt,
     @required @TimestampConverter() DateTime updatedAt,
   }) = _LifeItem;
+  const LifeItem._();
+
   factory LifeItem.fromJson(Map<String, dynamic> json) => _$LifeItemFromJson(json);
 
-  @visibleForTesting
-  static const collectionId = 'lifeItem';
+  @override
+  Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 }
 
 class LifeItemField {

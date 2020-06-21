@@ -1,22 +1,27 @@
+import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'entity.dart';
 
 part 'life_event.freezed.dart';
 part 'life_event.g.dart';
 
 /// Map Value on Firestore
 @freezed
-abstract class LifeEvent with _$LifeEvent {
+abstract class LifeEvent implements _$LifeEvent, Entity {
   const factory LifeEvent({
     @required String type,
     @required String target,
     @required String description,
     @required Map<String, dynamic> params,
   }) = _LifeEvent;
+  const LifeEvent._();
+
   factory LifeEvent.fromJson(Map<String, dynamic> json) => _$LifeEventFromJson(json);
 
-  @visibleForTesting
-  static const collectionId = 'lifeEvent';
+  @override
+  Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 }
 
 class LifeEventField {
