@@ -8,4 +8,4 @@ lib/i18n/intl_*.arb
 # 本当は exclude option 的なのがあれば使いたいけど、無い。
 # See: https://github.com/dart-lang/dart_style/issues/864#issuecomment-544628480
 # ↑みたくやってもいいけど、まあ format だけだしここに入れちゃってる
-flutter format ./ -l 120
+dart format ./ -l 120
