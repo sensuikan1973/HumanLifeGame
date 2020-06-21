@@ -24,8 +24,8 @@ abstract class PlayRoom implements _$PlayRoom, Entity {
     @required List<LifeEventRecord> everyLifeEventRecords,
     @required List<LifeStage> lifeStages,
     @required String currentTurnHumanId,
-    @required @TimestampConverter() DateTime createdAt,
-    @required @TimestampConverter() DateTime updatedAt,
+    @TimestampConverter() DateTime createdAt,
+    @TimestampConverter() DateTime updatedAt,
 //    @TimestampConverter() DateTime finishedAt,
   }) = _PlayRoom;
   const PlayRoom._();

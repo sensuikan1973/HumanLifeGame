@@ -23,6 +23,11 @@ class Store {
         encoder: (entity) => entity.encode(),
       );
 
+  DocumentRef<T, Document<T>> docRef<T extends Entity>(String documentId) => DocumentRef(
+        collectionRef: collectionRef<T>(),
+        id: documentId,
+      );
+
   // 関連: https://stackoverflow.com/a/55237197/10928938
   Document<T> _decode<T extends Entity>(DocumentSnapshot snapshot) {
     if (T == ServiceControl) return ServiceControl.decode(snapshot) as Document<T>;

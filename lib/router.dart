@@ -22,32 +22,29 @@ class Router {
   final String playRoom = '/play_room';
   final String maintenance = '/maintenance';
 
+  // TODO: provider の移動
   Map<String, WidgetBuilder> get routes => {
         lobby: (_) => const Lobby(),
         signIn: (_) => const SignIn(),
         maintenance: (_) => const Maintenance(),
-        playRoom: (context) => MultiProvider(
-              providers: [
-                ChangeNotifierProvider<PlayRoomNotifier>(
-                  create: (_) => PlayRoomNotifier(
-                    I18n.of(context),
-                    context.read<Dice>(),
-                    HumanLifeModel(
-                      title: 'dummy HumanLife',
-                      author: UserModel(id: '123', name: 'dummyUser', isAnonymous: true),
-                      lifeRoad: LifeRoadModel(
-                        lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
-                          LifeRoadModel.dummyLifeEvents(),
-                        ),
-                      ),
+        playRoom: (context) => ChangeNotifierProvider<PlayRoomNotifier>(
+              create: (_) => PlayRoomNotifier(
+                I18n.of(context),
+                context.read<Dice>(),
+                HumanLifeModel(
+                  title: 'dummy HumanLife',
+                  author: UserModel(id: '123', name: 'dummyUser', isAnonymous: true),
+                  lifeRoad: LifeRoadModel(
+                    lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
+                      LifeRoadModel.dummyLifeEvents(),
                     ),
-                    [
-                      const HumanModel(id: '1', name: 'hoge', order: 0),
-                      const HumanModel(id: '2', name: 'fuga', order: 1),
-                    ],
                   ),
-                )
-              ],
+                ),
+                [
+                  const HumanModel(id: '1', name: 'hoge', order: 0),
+                  const HumanModel(id: '2', name: 'fuga', order: 1),
+                ],
+              ),
               child: const PlayRoom(),
             ),
       };
