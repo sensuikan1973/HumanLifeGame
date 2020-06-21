@@ -1,3 +1,4 @@
+import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -59,7 +60,7 @@ class Lobby extends StatelessWidget {
       );
 
   FloatingActionButton _createRoomButton(BuildContext context) => FloatingActionButton(
-        tooltip: 'create public PlayRoom',
+        tooltip: I18n.of(context).lobbyCreatePublicRoomButtonTooltip,
         backgroundColor: Colors.indigo,
         onPressed: () async => context.read<LobbyNotifier>().createPublicPlayRoom(),
         child: const Icon(Icons.add),

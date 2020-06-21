@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'messages_all.dart';
 
 export 'extensions/i18n_common.dart';
+export 'extensions/i18n_lobby.dart';
 export 'extensions/i18n_play_room.dart';
 
 @immutable

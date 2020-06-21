@@ -12,6 +12,11 @@
       "type": {}
     }
   },
+  "lobbyCreatePublicRoomButtonTooltip": "create public room",
+  "@lobbyCreatePublicRoomButtonTooltip": {
+    "type": "text",
+    "placeholders": {}
+  },
   "rollDice": "Roll the dice",
   "@rollDice": {
     "type": "text",

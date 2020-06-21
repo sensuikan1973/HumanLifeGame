@@ -12,6 +12,11 @@
       "type": {}
     }
   },
+  "lobbyCreatePublicRoomButtonTooltip": "部屋を作る",
+  "@lobbyCreatePublicRoomButtonTooltip": {
+    "type": "text",
+    "placeholders": {}
+  },
   "rollDice": "サイコロを振る",
   "@rollDice": {
     "type": "text",
