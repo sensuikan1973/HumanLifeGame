@@ -66,6 +66,7 @@
     
         <li class="section-title"><a href="../../api_firestore_store/Store-class.html#instance-methods">Methods</a></li>
         <li><a href="../../api_firestore_store/Store/collectionRef.html">collectionRef</a></li>
+        <li><a href="../../api_firestore_store/Store/docRef.html">docRef</a></li>
         <li><a href="../../api_firestore_store/Store/getCollectionId.html">getCollectionId</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></li>
@@ -100,7 +101,14 @@
       <pre class="language-dart"><code class="language-dart">@visibleForTesting
 String getCollectionId&lt;T&gt;() {
   if (T == ServiceControl) return &#39;serviceControl&#39;;
-  throw Error();
+  if (T == LifeEvent) return &#39;lifeEvent&#39;;
+  if (T == LifeEventRecord) return &#39;lifeEventRecord&#39;;
+  if (T == LifeItem) return &#39;lifeItem&#39;;
+  if (T == HumanLife) return &#39;humanLife&#39;;
+  if (T == LifeStage) return &#39;LifeStage&#39;;
+  if (T == PlayRoom) return &#39;playRoom&#39;;
+  if (T == User) return &#39;user&#39;;
+  throw Error(); &#47;&#47; unexpected
 }</code></pre>
     </section>
 

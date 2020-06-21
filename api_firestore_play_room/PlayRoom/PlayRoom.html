@@ -64,17 +64,16 @@
       <li class="inherited"><a href="../../api_firestore_play_room/PlayRoom/copyWith.html">copyWith</a></li>
       <li class="inherited"><a href="../../api_firestore_play_room/PlayRoom/createdAt.html">createdAt</a></li>
       <li class="inherited"><a href="../../api_firestore_play_room/PlayRoom/currentTurnHumanId.html">currentTurnHumanId</a></li>
-      <li class="inherited"><a href="../../api_firestore_play_room/PlayRoom/everyLifeEventRecords.html">everyLifeEventRecords</a></li>
       <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
       <li class="inherited"><a href="../../api_firestore_play_room/PlayRoom/host.html">host</a></li>
       <li class="inherited"><a href="../../api_firestore_play_room/PlayRoom/humans.html">humans</a></li>
       <li class="inherited"><a href="../../api_firestore_play_room/PlayRoom/lifeRoad.html">lifeRoad</a></li>
-      <li class="inherited"><a href="../../api_firestore_play_room/PlayRoom/lifeStages.html">lifeStages</a></li>
       <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></li>
       <li class="inherited"><a href="../../api_firestore_play_room/PlayRoom/title.html">title</a></li>
       <li class="inherited"><a href="../../api_firestore_play_room/PlayRoom/updatedAt.html">updatedAt</a></li>
     
-      <li class="section-title inherited"><a href="../../api_firestore_play_room/PlayRoom-class.html#instance-methods">Methods</a></li>
+      <li class="section-title"><a href="../../api_firestore_play_room/PlayRoom-class.html#instance-methods">Methods</a></li>
+      <li><a href="../../api_firestore_play_room/PlayRoom/encode.html">encode</a></li>
       <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
       <li class="inherited"><a href="../../api_firestore_play_room/PlayRoom/toJson.html">toJson</a></li>
       <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></li>
@@ -84,8 +83,6 @@
     
     
     
-      <li class="section-title"><a href="../../api_firestore_play_room/PlayRoom-class.html#constants">Constants</a></li>
-      <li><a href="../../api_firestore_play_room/PlayRoom/collectionId-constant.html">collectionId</a></li>
     
     </ol>
   </div><!--/.sidebar-offcanvas-left-->
@@ -99,11 +96,9 @@
 <li><span class="parameter" id="-param-title"><span>@required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">title</span>, </span></li>
 <li><span class="parameter" id="-param-humans"><span>@required</span> <span>@<a href="https://pub.dev/documentation/firestore_ref/0.8.17/firestore_ref/DocumentReferenceListConverter-class.html">DocumentReferenceListConverter</a>()</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/cloud_firestore/0.13.7/cloud_firestore/DocumentReference-class.html">DocumentReference</a></span>&gt;</span></span> <span class="parameter-name">humans</span>, </span></li>
 <li><span class="parameter" id="-param-lifeRoad"><span>@required</span> <span>@<a href="https://pub.dev/documentation/firestore_ref/0.8.17/firestore_ref/DocumentReferenceConverter-class.html">DocumentReferenceConverter</a>()</span> <span class="type-annotation"><a href="https://pub.dev/documentation/cloud_firestore/0.13.7/cloud_firestore/DocumentReference-class.html">DocumentReference</a></span> <span class="parameter-name">lifeRoad</span>, </span></li>
-<li><span class="parameter" id="-param-everyLifeEventRecords"><span>@required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../api_firestore_life_event_record/LifeEventRecord-class.html">LifeEventRecord</a></span>&gt;</span></span> <span class="parameter-name">everyLifeEventRecords</span>, </span></li>
-<li><span class="parameter" id="-param-lifeStages"><span>@required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../api_firestore_life_stage/LifeStage-class.html">LifeStage</a></span>&gt;</span></span> <span class="parameter-name">lifeStages</span>, </span></li>
 <li><span class="parameter" id="-param-currentTurnHumanId"><span>@required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">currentTurnHumanId</span>, </span></li>
-<li><span class="parameter" id="-param-createdAt"><span>@required</span> <span>@<a href="https://pub.dev/documentation/firestore_ref/0.8.17/firestore_ref/TimestampConverter-class.html">TimestampConverter</a>()</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">createdAt</span>, </span></li>
-<li><span class="parameter" id="-param-updatedAt"><span>@required</span> <span>@<a href="https://pub.dev/documentation/firestore_ref/0.8.17/firestore_ref/TimestampConverter-class.html">TimestampConverter</a>()</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">updatedAt</span>}</span></li>
+<li><span class="parameter" id="-param-createdAt"><span>@<a href="https://pub.dev/documentation/firestore_ref/0.8.17/firestore_ref/TimestampConverter-class.html">TimestampConverter</a>()</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">createdAt</span>, </span></li>
+<li><span class="parameter" id="-param-updatedAt"><span>@<a href="https://pub.dev/documentation/firestore_ref/0.8.17/firestore_ref/TimestampConverter-class.html">TimestampConverter</a>()</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">updatedAt</span>}</span></li>
 </ol>)
     </section>
 
@@ -115,11 +110,9 @@
   @required String title,
   @required @DocumentReferenceListConverter() List&lt;DocumentReference&gt; humans,
   @required @DocumentReferenceConverter() DocumentReference lifeRoad,
-  @required List&lt;LifeEventRecord&gt; everyLifeEventRecords,
-  @required List&lt;LifeStage&gt; lifeStages,
   @required String currentTurnHumanId,
-  @required @TimestampConverter() DateTime createdAt,
-  @required @TimestampConverter() DateTime updatedAt,
+  @TimestampConverter() DateTime createdAt,
+  @TimestampConverter() DateTime updatedAt,
 &#47;&#47;    @TimestampConverter() DateTime finishedAt,
 }) = _PlayRoom;</code></pre>
     </section>

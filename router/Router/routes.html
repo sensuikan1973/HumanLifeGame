@@ -98,31 +98,30 @@
                         <section class="summary source-code" id="source">
           <h2><span>Implementation</span></h2>
           <pre class="language-dart"><code class="language-dart">Map&lt;String, WidgetBuilder&gt; get routes =&gt; {
-      lobby: (_) =&gt; const Lobby(),
+      lobby: (_) =&gt; ChangeNotifierProvider(
+            create: (context) =&gt; LobbyNotifier(context.read&lt;Auth&gt;(), context.read&lt;Store&gt;()),
+            child: const Lobby(),
+          ),
       signIn: (_) =&gt; const SignIn(),
       maintenance: (_) =&gt; const Maintenance(),
-      playRoom: (context) =&gt; MultiProvider(
-            providers: [
-              ChangeNotifierProvider&lt;PlayRoomNotifier&gt;(
-                create: (_) =&gt; PlayRoomNotifier(
-                  I18n.of(context),
-                  context.read&lt;Dice&gt;(),
-                  HumanLifeModel(
-                    title: &#39;dummy HumanLife&#39;,
-                    author: UserModel(id: &#39;123&#39;, name: &#39;dummyUser&#39;, isAnonymous: true),
-                    lifeRoad: LifeRoadModel(
-                      lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
-                        LifeRoadModel.dummyLifeEvents(),
-                      ),
-                    ),
+      playRoom: (context) =&gt; ChangeNotifierProvider&lt;PlayRoomNotifier&gt;(
+            create: (_) =&gt; PlayRoomNotifier(
+              I18n.of(context),
+              context.read&lt;Dice&gt;(),
+              HumanLifeModel(
+                title: &#39;dummy HumanLife&#39;,
+                author: UserModel(id: &#39;123&#39;, name: &#39;dummyUser&#39;, isAnonymous: true),
+                lifeRoad: LifeRoadModel(
+                  lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
+                    LifeRoadModel.dummyLifeEvents(),
                   ),
-                  [
-                    const HumanModel(id: &#39;1&#39;, name: &#39;hoge&#39;, order: 0),
-                    const HumanModel(id: &#39;2&#39;, name: &#39;fuga&#39;, order: 1),
-                  ],
                 ),
-              )
-            ],
+              ),
+              [
+                const HumanModel(id: &#39;1&#39;, name: &#39;hoge&#39;, order: 0),
+                const HumanModel(id: &#39;2&#39;, name: &#39;fuga&#39;, order: 1),
+              ],
+            ),
             child: const PlayRoom(),
           ),
     };</code></pre>
