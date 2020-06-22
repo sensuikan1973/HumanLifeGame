@@ -40,7 +40,7 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
       },
       batch: batch,
     );
-    await batch.commit();
+    await batch.commit(); // FIXME: エラーハンドリング. 特に既に join 済みの場合のハンドリング.
   }
 
   Future<void> fetchPlayRooms() async {
