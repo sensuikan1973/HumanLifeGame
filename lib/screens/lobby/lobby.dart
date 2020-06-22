@@ -38,7 +38,7 @@ class Lobby extends StatelessWidget {
           child: FutureBuilder<UserModel>(
             future: _signIn(context.watch<Auth>()),
             builder: (context, snap) {
-              if (snap.hasError) return const Text('Oops');
+              if (snap.hasError) return const Text('Oops'); // FIXME: まじめにハンドリング
               if (snap.connectionState == ConnectionState.waiting) return const CircularProgressIndicator();
               if (snap.hasData) {
                 return Row(
