@@ -32,6 +32,7 @@ class Router {
       return MaterialPageRoute<Maintenance>(builder: (_) => const Maintenance());
     }
     if (name == playRoom) {
+      // FIXME: ダミーデータを渡して強引に動いてるだけ。argument で受け取るように改修すること。
       return MaterialPageRoute<PlayRoom>(
         builder: (context) => ChangeNotifierProvider<PlayRoomNotifier>(
           create: (_) => PlayRoomNotifier(
