@@ -9,8 +9,7 @@ import 'lobby_state.dart';
 
 class LobbyNotifier extends ValueNotifier<LobbyState> {
   LobbyNotifier(this._auth, this._store) : super(LobbyState()) {
-    // 初期取得
-    fetchPlayRooms();
+    fetchPlayRooms(); // 非同期で初期取得
   }
 
   final Auth _auth;
