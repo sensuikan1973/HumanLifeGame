@@ -9,6 +9,7 @@ import 'api/firestore/store.dart';
 import 'i18n/i18n.dart';
 import 'i18n/i18n_delegate.dart';
 import 'router.dart';
+import 'screens/lobby/lobby.dart';
 
 class HumanLifeGameApp extends StatelessWidget {
   const HumanLifeGameApp._();
@@ -39,7 +40,7 @@ class HumanLifeGameApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        initialRoute: context.watch<Router>().initial,
-        routes: context.watch<Router>().routes,
+        home: Lobby.inProviders(),
+        onGenerateRoute: context.watch<Router>().generateRoutes,
       );
 }
