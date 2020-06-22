@@ -27,6 +27,7 @@ Widget testableApp({@required Widget home, Locale locale = const Locale('en', 'U
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
           home: home,
+          onGenerateRoute: router.generateRoutes,
         ),
       ),
     );
