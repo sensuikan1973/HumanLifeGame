@@ -144,7 +144,7 @@ Widget build(BuildContext context) =&gt; Scaffold(
         child: FutureBuilder&lt;UserModel&gt;(
           future: _signIn(context.watch&lt;Auth&gt;()),
           builder: (context, snap) {
-            if (snap.hasError) return const Text(&#39;Oops&#39;);
+            if (snap.hasError) return const Text(&#39;Oops&#39;); &#47;&#47; FIXME: まじめにハンドリング
             if (snap.connectionState == ConnectionState.waiting) return const CircularProgressIndicator();
             if (snap.hasData) {
               return Row(

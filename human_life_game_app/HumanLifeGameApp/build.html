@@ -152,8 +152,8 @@ Widget build(BuildContext context) =&gt; MaterialApp(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: context.watch&lt;Router&gt;().initial,
-      routes: context.watch&lt;Router&gt;().routes,
+      home: Lobby.inProviders(),
+      onGenerateRoute: context.watch&lt;Router&gt;().generateRoutes,
     );</code></pre>
     </section>
 
