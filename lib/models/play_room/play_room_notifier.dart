@@ -1,6 +1,8 @@
+import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../api/dice.dart';
+import '../../api/firestore/play_room.dart';
 import '../../i18n/i18n.dart';
 import '../../services/life_event_service.dart';
 import '../common/human.dart';
@@ -9,6 +11,12 @@ import '../common/life_step.dart';
 import 'life_event_record.dart';
 import 'life_stage.dart';
 import 'play_room_state.dart';
+
+@immutable
+class PlayRoomNotifierArguments {
+  const PlayRoomNotifierArguments(this.playRoom);
+  final Document<PlayRoom> playRoom;
+}
 
 /// NOTE: 以下の点を把握した上で状態管理を実装すること.
 ///
