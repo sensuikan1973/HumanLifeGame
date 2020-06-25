@@ -13,9 +13,9 @@ abstract class UserEntity implements _$UserEntity, Entity {
   const factory UserEntity({
     @required String uid,
     @required String displayName,
-    @required @DocumentReferenceConverter() DocumentReference joinPlayRoom,
     @required @TimestampConverter() DateTime createdAt,
     @required @TimestampConverter() DateTime updatedAt,
+    @DocumentReferenceConverter() DocumentReference joinPlayRoom,
   }) = _UserEntity;
   const UserEntity._();
 
