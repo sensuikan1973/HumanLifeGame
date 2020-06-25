@@ -35,7 +35,7 @@ Future<void> main() async {
     await tester.pumpWidget(
       testableApp(
         providers: [
-          Provider<Router>(create: (_) => Router()),
+          Provider<Router>(create: (_) => const Router()),
           Provider<Dice>(create: (_) => const Dice()),
           Provider<Auth>(create: (_) => auth),
           Provider<Store>(create: (_) => store),
@@ -56,5 +56,35 @@ Future<void> main() async {
     await tester.pump();
     await tester.pump();
     expect(find.byType(PlayRoom), findsOneWidget); // playRoom に遷移する
+  });
+
+  testWidgets('list public play rooms', (tester) async {
+    final user = UserModel(id: '123', name: 'foo', isAnonymous: true);
+    final auth = MockAuth();
+    when(auth.currentUser).thenAnswer((_) async => user);
+    final firestore = MockFirestoreInstance();
+    final store = Store(firestore);
+    // TODO: ダミーデータを投入
+
+    await tester.pumpWidget(
+      testableApp(
+        providers: [
+          Provider<Router>(create: (_) => const Router()),
+          Provider<Dice>(create: (_) => const Dice()),
+          Provider<Auth>(create: (_) => auth),
+          Provider<Store>(create: (_) => store),
+        ],
+        home: Lobby.inProviders(),
+      ),
+    );
+    await tester.pump();
+    await tester.pump();
+    expect(find.byType(HumanLifeTips), findsOneWidget);
+    expect(find.byType(FloatingActionButton), findsOneWidget);
+    expect(find.byType(RoomListItem), findsNWidgets(12345)); // ダミーデータの数だけ表示されてる
+
+    // TODO: join
+
+    // TODO: playRoom に遷移
   });
 }
