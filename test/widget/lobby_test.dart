@@ -1,6 +1,9 @@
 import 'package:HumanLifeGame/api/auth.dart';
 import 'package:HumanLifeGame/api/dice.dart';
+import 'package:HumanLifeGame/api/firestore/life_road.dart';
+import 'package:HumanLifeGame/api/firestore/play_room.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
+import 'package:HumanLifeGame/api/firestore/user.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/models/common/user.dart';
 import 'package:HumanLifeGame/router.dart';
@@ -65,6 +68,26 @@ Future<void> main() async {
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
     // TODO: ダミーデータを投入
+    const uid = 'foo';
+    final userDocRef = store.docRef<UserEntity>(uid);
+    await userDocRef.set(UserEntity(
+      uid: uid,
+      displayName: 'widget test man',
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ));
+    final playRoom = await store.collectionRef<PlayRoomEntity>().add(PlayRoomEntity(
+        host: userDocRef.ref,
+        humans: [userDocRef.ref],
+        title: 'bar',
+        lifeRoad: store.docRef<LifeRoadEntity>('aaa').ref,
+        currentTurnHumanId: uid));
+    final playRoom2 = await store.collectionRef<PlayRoomEntity>().add(PlayRoomEntity(
+        host: userDocRef.ref,
+        humans: [userDocRef.ref],
+        title: 'bar2',
+        lifeRoad: store.docRef<LifeRoadEntity>('bbb').ref,
+        currentTurnHumanId: uid));
 
     await tester.pumpWidget(
       testableApp(
@@ -81,7 +104,7 @@ Future<void> main() async {
     await tester.pump();
     expect(find.byType(HumanLifeTips), findsOneWidget);
     expect(find.byType(FloatingActionButton), findsOneWidget);
-    expect(find.byType(RoomListItem), findsNWidgets(12345)); // ダミーデータの数だけ表示されてる
+    expect(find.byType(RoomListItem), findsNWidgets(2)); // ダミーデータの数だけ表示されてる
 
     // TODO: join
 
