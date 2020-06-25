@@ -8,7 +8,7 @@ import '../../router.dart';
 class RoomListItem extends StatelessWidget {
   const RoomListItem(this._playRoom, {Key key}) : super(key: key);
 
-  final Document<PlayRoom> _playRoom;
+  final Document<PlayRoomEntity> _playRoom;
 
   @override
   Widget build(BuildContext context) => Column(

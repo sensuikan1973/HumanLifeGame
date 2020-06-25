@@ -9,22 +9,22 @@ part 'life_stage.g.dart';
 
 /// Document on Firestore
 @freezed
-abstract class LifeStage implements _$LifeStage, Entity {
-  const factory LifeStage({
+abstract class LifeStageEntity implements _$LifeStageEntity, Entity {
+  const factory LifeStageEntity({
     @required @DocumentReferenceConverter() DocumentReference human,
     @required String currentLifeStepId,
     @required @TimestampConverter() DateTime createdAt,
     @required @TimestampConverter() DateTime updatedAt,
-  }) = _LifeStage;
-  const LifeStage._();
+  }) = _LifeStageEntity;
+  const LifeStageEntity._();
 
-  factory LifeStage.fromJson(Map<String, dynamic> json) => _$LifeStageFromJson(json);
+  factory LifeStageEntity.fromJson(Map<String, dynamic> json) => _$LifeStageEntityFromJson(json);
 
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 }
 
-class LifeStageField {
+class LifeStageEntityField {
   /// 対象の human
   static const human = 'human';
 

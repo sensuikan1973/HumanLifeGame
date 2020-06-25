@@ -10,15 +10,15 @@ import 'package:provider/provider.dart';
 void main() {
   testWidgets('not under maintenance', (tester) async {
     final serviceControlData = {
-      ServiceControlField.isMaintenance: false,
-      ServiceControlField.requiredMinVersion: 'X.Y.Z',
+      ServiceControlEntityField.isMaintenance: false,
+      ServiceControlEntityField.requiredMinVersion: 'X.Y.Z',
       TimestampField.createdAt: DateTime.now(),
       TimestampField.updatedAt: DateTime.now(),
     };
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
     await firestore
-        .collection(store.getCollectionId<ServiceControl>())
+        .collection(store.getCollectionId<ServiceControlEntity>())
         .document(ServiceControlDocId.web)
         .setData(serviceControlData);
 
@@ -35,15 +35,15 @@ void main() {
 
   testWidgets('under maintenance', (tester) async {
     final serviceControlData = {
-      ServiceControlField.isMaintenance: true,
-      ServiceControlField.requiredMinVersion: 'X.Y.Z',
+      ServiceControlEntityField.isMaintenance: true,
+      ServiceControlEntityField.requiredMinVersion: 'X.Y.Z',
       TimestampField.createdAt: DateTime.now(),
       TimestampField.updatedAt: DateTime.now(),
     };
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
     await firestore
-        .collection(store.getCollectionId<ServiceControl>())
+        .collection(store.getCollectionId<ServiceControlEntity>())
         .document(ServiceControlDocId.web)
         .setData(serviceControlData);
 

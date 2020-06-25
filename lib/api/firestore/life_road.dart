@@ -8,13 +8,13 @@ import 'life_event.dart';
 part 'life_road.freezed.dart';
 part 'life_road.g.dart';
 
-/// Document on Firestore
+// FIXME: LifeRoad だし、あるべき Field でない
 @freezed
 abstract class HumanLife implements _$HumanLife, Entity {
   const factory HumanLife({
     @required @DocumentReferenceConverter() DocumentReference author,
     @required String title,
-    @required List<LifeEvent> lifeEvents,
+    @required List<LifeEventEntity> lifeEvents,
     @required @TimestampConverter() DateTime createdAt,
     @required @TimestampConverter() DateTime updatedAt,
   }) = _HumanLife;

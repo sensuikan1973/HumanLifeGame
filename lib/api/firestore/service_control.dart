@@ -9,27 +9,27 @@ part 'service_control.g.dart';
 
 /// Document on Firestore
 @freezed
-abstract class ServiceControl implements _$ServiceControl, Entity {
-  const factory ServiceControl({
+abstract class ServiceControlEntity implements _$ServiceControlEntity, Entity {
+  const factory ServiceControlEntity({
     @required bool isMaintenance,
     @required String requiredMinVersion,
     @required @TimestampConverter() DateTime createdAt,
     @required @TimestampConverter() DateTime updatedAt,
-  }) = _ServiceControl;
-  const ServiceControl._();
+  }) = _ServiceControlEntity;
+  const ServiceControlEntity._();
 
-  factory ServiceControl.fromJson(Map<String, dynamic> json) => _$ServiceControlFromJson(json);
+  factory ServiceControlEntity.fromJson(Map<String, dynamic> json) => _$ServiceControlEntityFromJson(json);
 
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 
-  static Document<ServiceControl> decode(DocumentSnapshot snapshot) => Document<ServiceControl>(
+  static Document<ServiceControlEntity> decode(DocumentSnapshot snapshot) => Document<ServiceControlEntity>(
         snapshot.reference,
-        ServiceControl.fromJson(snapshot.data),
+        ServiceControlEntity.fromJson(snapshot.data),
       );
 }
 
-class ServiceControlField {
+class ServiceControlEntityField {
   /// メンテナス中かどうか
   static const isMaintenance = 'isMaintenance';
 

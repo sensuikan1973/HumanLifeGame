@@ -9,23 +9,23 @@ part 'user.g.dart';
 
 /// Document on Firestore
 @freezed
-abstract class User implements _$User, Entity {
-  const factory User({
+abstract class UserEntity implements _$UserEntity, Entity {
+  const factory UserEntity({
     @required String uid,
     @required String displayName,
     @required @DocumentReferenceConverter() DocumentReference joinPlayRoom,
     @required @TimestampConverter() DateTime createdAt,
     @required @TimestampConverter() DateTime updatedAt,
-  }) = _User;
-  const User._();
+  }) = _UserEntity;
+  const UserEntity._();
 
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  factory UserEntity.fromJson(Map<String, dynamic> json) => _$UserEntityFromJson(json);
 
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 }
 
-class UserField {
+class UserEntityField {
   /// uid (by Auth)
   static const uid = 'uid';
 

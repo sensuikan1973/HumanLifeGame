@@ -6,7 +6,7 @@ import '../play_room/play_room_notifier.dart';
 class LobbyState {
   LobbyState();
 
-  List<Document<PlayRoom>> publicPlayRooms = [];
+  List<Document<PlayRoomEntity>> publicPlayRooms = [];
 
   PlayRoomNotifierArguments navigateArgumentsToPlayRoom;
 }

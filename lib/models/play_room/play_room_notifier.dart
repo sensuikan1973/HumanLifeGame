@@ -15,7 +15,7 @@ import 'play_room_state.dart';
 @immutable
 class PlayRoomNotifierArguments {
   const PlayRoomNotifierArguments(this.playRoom);
-  final Document<PlayRoom> playRoom;
+  final Document<PlayRoomEntity> playRoom;
 }
 
 /// NOTE: 以下の点を把握した上で状態管理を実装すること.

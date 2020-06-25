@@ -8,23 +8,22 @@ import 'life_event.dart';
 part 'life_event_record.freezed.dart';
 part 'life_event_record.g.dart';
 
-/// Document on Firestore
 @freezed
-abstract class LifeEventRecord implements _$LifeEventRecord, Entity {
-  const factory LifeEventRecord({
+abstract class LifeEventRecordEntity implements _$LifeEventRecordEntity, Entity {
+  const factory LifeEventRecordEntity({
     @required String humanId,
-    @required LifeEvent lifeEvent,
+    @required LifeEventEntity lifeEvent,
     @required @TimestampConverter() DateTime createdAt,
-  }) = _LifeEventRecord;
-  const LifeEventRecord._();
+  }) = _LifeEventRecordEntity;
+  const LifeEventRecordEntity._();
 
-  factory LifeEventRecord.fromJson(Map<String, dynamic> json) => _$LifeEventRecordFromJson(json);
+  factory LifeEventRecordEntity.fromJson(Map<String, dynamic> json) => _$LifeEventRecordEntityFromJson(json);
 
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 }
 
-class LifeEventRecordField {
+class LifeEventRecordEntityField {
   /// 主(human) の id
   static const humanId = 'humanId';
 

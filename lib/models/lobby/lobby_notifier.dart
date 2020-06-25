@@ -33,8 +33,8 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
 
   Future<void> createPublicPlayRoom() async {
     final user = await _auth.currentUser;
-    final userDocRef = _store.docRef<User>(user.id);
-    final room = PlayRoom(
+    final userDocRef = _store.docRef<UserEntity>(user.id);
+    final room = PlayRoomEntity(
       host: userDocRef.ref,
       title: 'はじめての人生',
       humans: [userDocRef.ref],
@@ -43,25 +43,25 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
       lifeRoad: userDocRef.ref,
       currentTurnHumanId: user.id,
     );
-    final roomDocRef = _store.collectionRef<PlayRoom>().docRef();
+    final roomDocRef = _store.collectionRef<PlayRoomEntity>().docRef();
     final batch = _store.firestore.batch();
     await roomDocRef.setData(room.encode(), batch: batch);
     await userDocRef.updateData(
       <String, dynamic>{
-        UserField.joinPlayRoom: roomDocRef.ref,
+        UserEntityField.joinPlayRoom: roomDocRef.ref,
         TimestampField.updatedAt: FieldValue.serverTimestamp(),
       },
       batch: batch,
     );
     await batch.commit(); // FIXME: エラーハンドリング. 特に既に join 済みの場合のハンドリング.
     value.navigateArgumentsToPlayRoom = PlayRoomNotifierArguments(
-      Document<PlayRoom>(roomDocRef.ref, room),
+      Document<PlayRoomEntity>(roomDocRef.ref, room),
     );
     notifyListeners();
   }
 
   Future<void> fetchPlayRooms() async {
-    final collectionRef = _store.collectionRef<PlayRoom>();
+    final collectionRef = _store.collectionRef<PlayRoomEntity>();
     value.publicPlayRooms = await collectionRef.getDocuments(
       (query) => query.limit(_roomListLimit).orderBy(TimestampField.createdAt),
     );

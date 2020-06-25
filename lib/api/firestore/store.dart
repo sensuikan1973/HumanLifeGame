@@ -36,21 +36,21 @@ class Store {
 
   // 関連: https://stackoverflow.com/a/55237197/10928938
   Document<T> _decode<T extends Entity>(DocumentSnapshot snapshot) {
-    if (T == ServiceControl) return ServiceControl.decode(snapshot) as Document<T>;
-    if (T == PlayRoom) return PlayRoom.decode(snapshot) as Document<T>;
+    if (T == ServiceControlEntity) return ServiceControlEntity.decode(snapshot) as Document<T>;
+    if (T == PlayRoomEntity) return PlayRoomEntity.decode(snapshot) as Document<T>;
     throw Error(); // unexpected
   }
 
   @visibleForTesting
   String getCollectionId<T>() {
-    if (T == ServiceControl) return 'serviceControl';
-    if (T == LifeEvent) return 'lifeEvent';
-    if (T == LifeEventRecord) return 'lifeEventRecord';
-    if (T == LifeItem) return 'lifeItem';
+    if (T == ServiceControlEntity) return 'serviceControl';
+    if (T == LifeEventEntity) return 'lifeEvent';
+    if (T == LifeEventRecordEntity) return 'lifeEventRecord';
+    if (T == LifeItemEntity) return 'lifeItem';
     if (T == HumanLife) return 'humanLife';
-    if (T == LifeStage) return 'LifeStage';
-    if (T == PlayRoom) return 'playRoom';
-    if (T == User) return 'user';
+    if (T == LifeStageEntity) return 'LifeStage';
+    if (T == PlayRoomEntity) return 'playRoom';
+    if (T == UserEntity) return 'user';
     throw Error(); // unexpected
   }
 }
