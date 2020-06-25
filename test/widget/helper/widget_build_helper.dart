@@ -15,7 +15,7 @@ Widget testableApp({
   List<Provider> providers,
 }) {
   final defaultProviders = [
-    Provider(create: (_) => Router()),
+    Provider(create: (_) => const Router()),
     Provider(create: (_) => const Auth()),
     Provider(create: (_) => Store(MockFirestoreInstance())),
     Provider(create: (_) => const Dice()),
