@@ -695,4 +695,4 @@ packages:
     version: "2.2.1"
 sdks:
   dart: ">=2.9.0-14.1.beta <3.0.0"
-  flutter: "1.19.0-4.1.pre"
+  flutter: "1.19.0-4.2.pre"
