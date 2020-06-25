@@ -16,6 +16,8 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: 'beta'
+      - name: Workaround for https://github.com/subosito/flutter-action/issues/39
+        run: flutter channel beta && flutter upgrade
       - run: .github/scripts/setup_flutter_web.sh
       - name: generate dart docs
         run: FLUTTER_ROOT=$FLUTTER_HOME dartdoc --output docs/
