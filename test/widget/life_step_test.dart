@@ -23,10 +23,9 @@ Future<void> main() async {
     await tester.pump();
 
     expect(
-        find.byWidgetPredicate(
-          (widget) => widget is Card && widget.color == LifeStep.positive,
-        ),
-        findsOneWidget);
+      find.byWidgetPredicate((widget) => widget is Card && widget.color == LifeStep.positive),
+      findsOneWidget,
+    );
   });
 
   testWidgets('show Card with negative Color', (tester) async {
@@ -42,10 +41,9 @@ Future<void> main() async {
     await tester.pump();
 
     expect(
-        find.byWidgetPredicate(
-          (widget) => widget is Card && widget.color == LifeStep.negative,
-        ),
-        findsOneWidget);
+      find.byWidgetPredicate((widget) => widget is Card && widget.color == LifeStep.negative),
+      findsOneWidget,
+    );
   });
 
   testWidgets('show Card with normal Color', (tester) async {
@@ -61,10 +59,9 @@ Future<void> main() async {
     await tester.pump();
 
     expect(
-        find.byWidgetPredicate(
-          (widget) => widget is Card && widget.color == LifeStep.normal,
-        ),
-        findsOneWidget);
+      find.byWidgetPredicate((widget) => widget is Card && widget.color == LifeStep.normal),
+      findsOneWidget,
+    );
   });
 
   testWidgets('show description', (tester) async {

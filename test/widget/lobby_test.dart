@@ -1,10 +1,13 @@
 import 'package:HumanLifeGame/api/auth.dart';
+import 'package:HumanLifeGame/api/dice.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/models/common/user.dart';
+import 'package:HumanLifeGame/router.dart';
 import 'package:HumanLifeGame/screens/lobby/human_life_tips.dart';
 import 'package:HumanLifeGame/screens/lobby/lobby.dart';
 import 'package:HumanLifeGame/screens/lobby/room_list_item.dart';
+import 'package:HumanLifeGame/screens/play_room/play_room.dart';
 import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -22,22 +25,24 @@ Future<void> main() async {
   });
 
   final i18n = await I18n.load(const Locale('en', 'US'));
-  final firestore = MockFirestoreInstance();
-  final store = Store(firestore);
 
   testWidgets('create public play room', (tester) async {
     final user = UserModel(id: '123', name: 'foo', isAnonymous: true);
     final auth = MockAuth();
     when(auth.currentUser).thenAnswer((_) async => user);
-    await tester.pumpWidget(testableApp(
-      home: MultiProvider(
+    final firestore = MockFirestoreInstance();
+    final store = Store(firestore);
+    await tester.pumpWidget(
+      testableApp(
         providers: [
+          Provider<Router>(create: (_) => Router()),
+          Provider<Dice>(create: (_) => const Dice()),
           Provider<Auth>(create: (_) => auth),
           Provider<Store>(create: (_) => store),
         ],
-        child: Lobby.inProviders(),
+        home: Lobby.inProviders(),
       ),
-    ));
+    );
     await tester.pump();
     await tester.pump();
     expect(find.byType(HumanLifeTips), findsOneWidget);
@@ -49,7 +54,7 @@ Future<void> main() async {
 
     await tester.tap(createPublicPlayRoomButton); // room が作成される
     await tester.pump();
-    expect(find.byType(RoomListItem), findsOneWidget);
-    expect(find.text(user.id), findsOneWidget); // 参加者である自分の id が表示される
+    await tester.pump();
+    expect(find.byType(PlayRoom), findsOneWidget); // playRoom に遷移する
   });
 }
