@@ -24,7 +24,6 @@ class LifeRoadModel {
 
   final String title;
   final UserEntity author;
-
   final List<List<LifeStepModel>> lifeStepsOnBoard;
   int get height => lifeStepsOnBoard.length;
   int get width => lifeStepsOnBoard.first.length;
