@@ -66,7 +66,7 @@
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/currentTurnHuman.html">currentTurnHuman</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/everyLifeEventRecords.html">everyLifeEventRecords</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
-        <li><a href="../../models_play_room_play_room_state/PlayRoomState/humanLife.html">humanLife</a></li>
+        <li><a href="../../models_play_room_play_room_state/PlayRoomState/lifeRoad.html">lifeRoad</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/lifeStages.html">lifeStages</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/orderedHumans.html">orderedHumans</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/positionsByHumanId.html">positionsByHumanId</a></li>
@@ -107,7 +107,7 @@
                 <section class="summary source-code" id="source">
           <h2><span>Implementation</span></h2>
           <pre class="language-dart"><code class="language-dart">Map&lt;String, Position&gt; get positionsByHumanId =&gt; {
-      for (final lifeStage in lifeStages) lifeStage.human.id: humanLife.lifeRoad.getPosition(lifeStage.lifeStepModel),
+      for (final lifeStage in lifeStages) lifeStage.human.id: lifeRoad.getPosition(lifeStage.lifeStepModel),
     };</code></pre>
         </section>
 </section>

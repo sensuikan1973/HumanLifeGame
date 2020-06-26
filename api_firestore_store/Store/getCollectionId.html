@@ -109,7 +109,7 @@ String getCollectionId&lt;T&gt;() {
   if (T == LifeStageEntity) return &#39;LifeStage&#39;;
   if (T == PlayRoomEntity) return &#39;playRoom&#39;;
   if (T == UserEntity) return &#39;user&#39;;
-  throw Error(); &#47;&#47; unexpected
+  throw Exception(&#39;unexpected Entity Type: $T&#39;);
 }</code></pre>
     </section>
 

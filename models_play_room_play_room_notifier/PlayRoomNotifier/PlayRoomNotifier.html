@@ -91,7 +91,7 @@
       
       <span class="name ">PlayRoomNotifier</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-_i18n"><span class="type-annotation"><a href="../../i18n_i18n/I18n-class.html">I18n</a></span> <span class="parameter-name">_i18n</span>, </span></li>
 <li><span class="parameter" id="-param-_dice"><span class="type-annotation"><a href="../../api_dice/Dice-class.html">Dice</a></span> <span class="parameter-name">_dice</span>, </span></li>
-<li><span class="parameter" id="-param-humanLife"><span class="type-annotation"><a href="../../models_common_human_life/HumanLifeModel-class.html">HumanLifeModel</a></span> <span class="parameter-name">humanLife</span>, </span></li>
+<li><span class="parameter" id="-param-lifeRoad"><span class="type-annotation"><a href="../../models_common_life_road/LifeRoadModel-class.html">LifeRoadModel</a></span> <span class="parameter-name">lifeRoad</span>, </span></li>
 <li><span class="parameter" id="-param-humans"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../models_common_human/HumanModel-class.html">HumanModel</a></span>&gt;</span></span> <span class="parameter-name">humans</span></span></li>
 </ol>)
     </section>
@@ -102,17 +102,17 @@
       <pre class="language-dart"><code class="language-dart">PlayRoomNotifier(
   this._i18n,
   this._dice,
-  HumanLifeModel humanLife,
+  LifeRoadModel lifeRoad,
   List&lt;HumanModel&gt; humans,
 ) : super(PlayRoomState(
-        humanLife,
+        lifeRoad,
         humans..sort((a, b) =&gt; a.order.compareTo(b.order)),
       )) {
   &#47;&#47; 参加者全員の位置を Start に
   for (final human in value.orderedHumans) {
     final lifeStage = LifeStageModel(
       human: human,
-      lifeStepModel: value.humanLife.lifeRoad.start,
+      lifeStepModel: value.lifeRoad.start,
       lifeItems: [],
     );
     value.lifeStages.add(lifeStage);

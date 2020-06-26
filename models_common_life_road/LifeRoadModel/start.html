@@ -60,11 +60,13 @@
         <li class="section-title">
             <a href="../../models_common_life_road/LifeRoadModel-class.html#instance-properties">Properties</a>
         </li>
+        <li><a href="../../models_common_life_road/LifeRoadModel/author.html">author</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
         <li><a href="../../models_common_life_road/LifeRoadModel/height.html">height</a></li>
         <li><a href="../../models_common_life_road/LifeRoadModel/lifeStepsOnBoard.html">lifeStepsOnBoard</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></li>
         <li><a href="../../models_common_life_road/LifeRoadModel/start.html">start</a></li>
+        <li><a href="../../models_common_life_road/LifeRoadModel/title.html">title</a></li>
         <li><a href="../../models_common_life_road/LifeRoadModel/width.html">width</a></li>
     
         <li class="section-title"><a href="../../models_common_life_road/LifeRoadModel-class.html#instance-methods">Methods</a></li>
@@ -101,12 +103,12 @@
                         <section class="summary source-code" id="source">
           <h2><span>Implementation</span></h2>
           <pre class="language-dart"><code class="language-dart">LifeStepModel get start {
-  for (final list in lifeStepsOnBoard) {
-    for (final lifeStep in list) {
-      if (lifeStep.isStart) return lifeStep;
-    }
+  final lifeSteps = lifeStepsOnBoard.expand((el) =&gt; el);
+  final startSteps = lifeSteps.where((step) =&gt; step.isStart).toList();
+  if (startSteps.isEmpty || startSteps.length &gt; 1) {
+    throw Exception(&#39;start step should be just one. found start ${startSteps.length} steps.&#39;);
   }
-  return null; &#47;&#47; TODO: エラーでいい
+  return startSteps.first;
 }</code></pre>
         </section>
 </section>
