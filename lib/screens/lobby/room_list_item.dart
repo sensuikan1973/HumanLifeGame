@@ -1,9 +1,9 @@
-import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../api/firestore/play_room.dart';
+import '../../i18n/i18n.dart';
 import '../../router.dart';
 
 class RoomListItem extends StatelessWidget {
