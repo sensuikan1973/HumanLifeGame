@@ -20,6 +20,7 @@ Future<void> main() async {
 
   testWidgets('already signed in', (tester) async {
     final user = MockFirebaseUser();
+    when(user.uid).thenReturn('foo');
     final auth = MockAuth();
     when(auth.currentUserStream).thenAnswer((_) => Stream.fromIterable([user]));
     await tester.pumpWidget(testableApp(
