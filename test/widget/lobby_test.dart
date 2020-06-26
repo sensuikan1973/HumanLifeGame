@@ -7,7 +7,6 @@ import 'package:HumanLifeGame/api/firestore/play_room.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
 import 'package:HumanLifeGame/api/firestore/user.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
-import 'package:HumanLifeGame/models/common/user.dart';
 import 'package:HumanLifeGame/router.dart';
 import 'package:HumanLifeGame/screens/lobby/human_life_tips.dart';
 import 'package:HumanLifeGame/screens/lobby/lobby.dart';
@@ -30,9 +29,11 @@ Future<void> main() async {
   });
 
   final i18n = await I18n.load(const Locale('en', 'US'));
+  final user = MockFirebaseUser();
+  when(user.uid).thenReturn('foo');
+  when(user.displayName).thenReturn('dummy user');
 
   testWidgets('create public play room', (tester) async {
-    final user = UserModel(id: '123', name: 'foo', isAnonymous: true);
     final auth = MockAuth();
     when(auth.currentUser).thenAnswer((_) async => user);
     final firestore = MockFirestoreInstance();
@@ -64,17 +65,16 @@ Future<void> main() async {
   });
 
   testWidgets('list public play rooms', (tester) async {
-    final user = UserModel(id: '123', name: 'foo', isAnonymous: true);
     final auth = MockAuth();
     when(auth.currentUser).thenAnswer((_) async => user);
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
 
     // ダミー user を投入
-    final userDocRef = store.docRef<UserEntity>(user.id);
+    final userDocRef = store.docRef<UserEntity>(user.uid);
     await userDocRef.set(UserEntity(
-      uid: user.id,
-      displayName: user.name,
+      uid: user.uid,
+      displayName: user.displayName,
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ));
@@ -89,7 +89,7 @@ Future<void> main() async {
           humans: [userDocRef.ref],
           title: randString,
           lifeRoad: store.docRef<LifeRoadEntity>(randString).ref,
-          currentTurnHumanId: user.id));
+          currentTurnHumanId: user.uid));
     }
 
     await tester.pumpWidget(

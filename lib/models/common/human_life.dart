@@ -1,9 +1,11 @@
-import 'life_road.dart';
-import 'user.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
+import 'life_road.dart';
+
+// FIXME: そもそもこのクラスいらない
 class HumanLifeModel {
   HumanLifeModel({this.title, this.author, this.lifeRoad});
   String title;
-  UserModel author;
+  FirebaseUser author;
   LifeRoadModel lifeRoad;
 }

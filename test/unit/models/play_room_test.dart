@@ -9,7 +9,6 @@ import 'package:HumanLifeGame/models/common/life_event_params/select_direction_p
 import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
 import 'package:HumanLifeGame/models/common/life_road.dart';
 import 'package:HumanLifeGame/models/common/life_step.dart';
-import 'package:HumanLifeGame/models/common/user.dart';
 import 'package:HumanLifeGame/models/play_room/play_room_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -26,7 +25,6 @@ void main() {
   const human1 = HumanModel(id: 'h1', name: 'foo', order: 0);
   const human2 = HumanModel(id: 'h2', name: 'bar', order: 1);
   final humans = [human1, human2];
-  final author = UserModel(id: 'dummyUserId', name: 'dummyUser', isAnonymous: true);
 
   test('without Direction', () {
     final lifeEvents = [
@@ -39,7 +37,7 @@ void main() {
       [blank, blank, blank, blank, blank, blank, blank],
     ];
     final lifeRoad = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
-    final humanLife = HumanLifeModel(title: 'dummy HumanLife', author: author, lifeRoad: lifeRoad);
+    final humanLife = HumanLifeModel(title: 'dummy HumanLife', lifeRoad: lifeRoad);
 
     // 5しか出ないサイコロを使う
     final dice = MockDice();
@@ -81,7 +79,7 @@ void main() {
       [blank, blank, blank, blank],
     ];
     final lifeRoad = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
-    final humanLife = HumanLifeModel(title: 'dummy HumanLife', author: author, lifeRoad: lifeRoad);
+    final humanLife = HumanLifeModel(title: 'dummy HumanLife', lifeRoad: lifeRoad);
 
     test('Dice roll is 1', () {
       final dice = MockDice();
@@ -173,7 +171,7 @@ void main() {
       [blank, blank, blank, blank],
     ];
     final lifeRoad = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
-    final humanLife = HumanLifeModel(title: 'dummy HumanLife', author: author, lifeRoad: lifeRoad);
+    final humanLife = HumanLifeModel(title: 'dummy HumanLife', lifeRoad: lifeRoad);
 
     // human1 は3しか出ないサイコロを使う
     final dice = MockDice();

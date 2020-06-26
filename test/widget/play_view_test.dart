@@ -7,7 +7,6 @@ import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
 import 'package:HumanLifeGame/models/common/life_road.dart';
-import 'package:HumanLifeGame/models/common/user.dart';
 import 'package:HumanLifeGame/models/play_room/play_room_notifier.dart';
 import 'package:HumanLifeGame/screens/common/life_step.dart';
 import 'package:HumanLifeGame/screens/play_room/play_view.dart';
@@ -37,7 +36,6 @@ Future<void> main() async {
   ];
   final humanLife = HumanLifeModel(
     title: 'hello',
-    author: UserModel(id: 'user', name: 'hoge', isAnonymous: true),
     lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents)),
   );
 

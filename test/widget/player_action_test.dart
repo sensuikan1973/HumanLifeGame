@@ -8,7 +8,6 @@ import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dar
 import 'package:HumanLifeGame/models/common/life_event_params/select_direction_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
 import 'package:HumanLifeGame/models/common/life_road.dart';
-import 'package:HumanLifeGame/models/common/user.dart';
 import 'package:HumanLifeGame/models/play_room/play_room_notifier.dart';
 import 'package:HumanLifeGame/screens/play_room/player_action.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +22,6 @@ import 'helper/widget_build_helper.dart';
 Future<void> main() async {
   final i18n = await I18n.load(const Locale('en', 'US'));
   final humans = [const HumanModel(id: 'h1', name: 'foo', order: 0), const HumanModel(id: 'h2', name: 'bar', order: 1)];
-  final user = UserModel(id: 'dummyUserId', name: 'dummyUser', isAnonymous: true);
 
   final start = LifeEventModel(LifeEventTarget.myself, const StartParams());
   final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams());
@@ -39,7 +37,6 @@ Future<void> main() async {
     ];
     final humanLife = HumanLifeModel(
       title: 'dummy HumanLife',
-      author: user,
       lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents)),
     );
     final playRoomNotifier = PlayRoomNotifier(i18n, MockDice(), humanLife, humans);
@@ -60,7 +57,6 @@ Future<void> main() async {
     ];
     final humanLife = HumanLifeModel(
       title: 'dummy HumanLife',
-      author: user,
       lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents)),
     );
     final state = MockPlayRoomState();
@@ -85,7 +81,6 @@ Future<void> main() async {
     ];
     final humanLife = HumanLifeModel(
       title: 'dummy HumanLife',
-      author: user,
       lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents)),
     );
     final state = MockPlayRoomState();
