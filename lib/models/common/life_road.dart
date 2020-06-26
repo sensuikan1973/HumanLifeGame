@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import '../../api/firestore/user.dart';
 import 'life_event.dart';
 import 'life_event_params/exchange_life_items_params.dart';
 import 'life_event_params/gain_life_items_params.dart';
@@ -15,15 +16,18 @@ import 'life_step.dart';
 class LifeRoadModel {
   LifeRoadModel({
     @required this.lifeStepsOnBoard,
-  })  : height = lifeStepsOnBoard.length,
-        width = lifeStepsOnBoard.first.length,
-        assert(lifeStepsOnBoard.every((row) => row.length == lifeStepsOnBoard.first.length)) {
+    this.title,
+    this.author,
+  }) : assert(lifeStepsOnBoard.every((row) => row.length == lifeStepsOnBoard.first.length)) {
     _initDirections(start);
   }
 
-  final int width;
-  final int height;
+  final String title;
+  final UserEntity author;
+
   final List<List<LifeStepModel>> lifeStepsOnBoard;
+  int get height => lifeStepsOnBoard.length;
+  int get width => lifeStepsOnBoard.first.length;
 
   /// TODO: これ本当にいいんか?
   /// LifeStepsOnBoard の生成ヘルパー
