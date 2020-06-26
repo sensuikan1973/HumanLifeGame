@@ -99,7 +99,7 @@
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">Future&lt;void&gt; createPublicPlayRoom() async {
   final user = await _auth.currentUser;
-  final userDocRef = _store.docRef&lt;UserEntity&gt;(user.id);
+  final userDocRef = _store.docRef&lt;UserEntity&gt;(user.uid);
   final room = PlayRoomEntity(
     host: userDocRef.ref,
     title: &#39;はじめての人生&#39;,
@@ -107,7 +107,7 @@
     &#47;&#47; FIXME: null 禁止だからテキトーに入れてるだけで絶対に修正しないとダメ
     &#47;&#47;        rules 側に存否チェックが無いからこれ通るけど、ホント一時的なダミー実装に過ぎない
     lifeRoad: userDocRef.ref,
-    currentTurnHumanId: user.id,
+    currentTurnHumanId: user.uid,
   );
   final roomDocRef = _store.collectionRef&lt;PlayRoomEntity&gt;().docRef();
   final batch = _store.firestore.batch();

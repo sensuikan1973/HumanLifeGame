@@ -91,7 +91,7 @@
       <div><h1><span class="kind-method">signInAnonymously</span> method </h1></div>
 
     <section class="multi-line-signature">
-      <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../models_common_user/UserModel-class.html">UserModel</a></span>&gt;</span></span>
+      <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/firebase_auth/0.16.1/firebase_auth/FirebaseUser-class.html">FirebaseUser</a></span>&gt;</span></span>
             <span class="name ">signInAnonymously</span>
 (<wbr>)
       
@@ -103,9 +103,9 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;UserModel&gt; signInAnonymously() async {
-  final result = await FirebaseAuth.instance.signInAnonymously();
-  return _toModel(result.user);
+      <pre class="language-dart"><code class="language-dart">Future&lt;FirebaseUser&gt; signInAnonymously() async {
+  final result = await _auth.signInAnonymously();
+  return result.user;
 }</code></pre>
     </section>
 

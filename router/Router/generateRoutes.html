@@ -115,7 +115,8 @@
           context.read&lt;Dice&gt;(),
           HumanLifeModel(
             title: &#39;dummy HumanLife&#39;,
-            author: UserModel(id: &#39;123&#39;, name: &#39;dummyUser&#39;, isAnonymous: true),
+&#47;&#47; FIXME: author 適切な値を入れる
+&#47;&#47;              author: null,
             lifeRoad: LifeRoadModel(
               lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
                 LifeRoadModel.dummyLifeEvents(),

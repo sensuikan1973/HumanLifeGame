@@ -91,7 +91,7 @@
       <div><h1><span class="kind-method">signInForDebug</span> method </h1></div>
 
     <section class="multi-line-signature">
-      <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../models_common_user/UserModel-class.html">UserModel</a></span>&gt;</span></span>
+      <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/firebase_auth/0.16.1/firebase_auth/FirebaseUser-class.html">FirebaseUser</a></span>&gt;</span></span>
             <span class="name ">signInForDebug</span>
 (<wbr>)
       
@@ -104,12 +104,12 @@ Email, Password の設定が不適切な場合は、通常通り匿名認証を�
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;UserModel&gt; signInForDebug() async {
+      <pre class="language-dart"><code class="language-dart">Future&lt;FirebaseUser&gt; signInForDebug() async {
   final env = DotEnv().env;
   final email = env[&#39;EMAIL&#39;] ?? &#39;&#39;;
   final pass = env[&#39;PASS&#39;] ?? &#39;&#39;;
   if (email.isEmpty || pass.isEmpty) return null;
-  UserModel user;
+  FirebaseUser user;
   try {
     user = await createUserWithEmailAndPassword(email: email, password: pass);
     &#47;&#47; ignore: avoid_catches_without_on_clauses

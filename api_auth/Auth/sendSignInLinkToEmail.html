@@ -111,7 +111,7 @@
 }) async {
   &#47;&#47; See: https:&#47;&#47;firebase.google.com&#47;docs&#47;auth&#47;web&#47;passing-state-in-email-actions
   &#47;&#47; FIXME: 現状 ios, android アプリは考えてないが、必須パラメータなのでテキトーに指定してる
-  await FirebaseAuth.instance.sendSignInWithEmailLink(
+  await _auth.sendSignInWithEmailLink(
     email: email,
     url: url,
     handleCodeInApp: true,
