@@ -1,6 +1,5 @@
 import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/models/common/human.dart';
-import 'package:HumanLifeGame/models/common/human_life.dart';
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
@@ -34,14 +33,9 @@ Future<void> main() async {
     [blank, blank, blank, blank, blank, blank, blank],
   ];
   final lifeRoad = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
-
-  final humanLife = HumanLifeModel(
-    title: 'hello',
-    lifeRoad: lifeRoad,
-  );
-  final lifeRoadSize = Size(150.0 * humanLife.lifeRoad.width, 100.0 * humanLife.lifeRoad.height);
+  final lifeRoadSize = Size(150.0 * lifeRoad.width, 100.0 * lifeRoad.height);
   testWidgets('show LifeSteps', (tester) async {
-    final playRoomModel = PlayRoomNotifier(i18n, MockDice(), humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, MockDice(), lifeRoad, humans);
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(
           create: (_) => playRoomModel, child: LifeRoad(lifeRoad, lifeRoadSize.width, lifeRoadSize.height)),

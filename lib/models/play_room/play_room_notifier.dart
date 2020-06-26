@@ -6,7 +6,7 @@ import '../../api/firestore/play_room.dart';
 import '../../i18n/i18n.dart';
 import '../../services/life_event_service.dart';
 import '../common/human.dart';
-import '../common/human_life.dart';
+import '../common/life_road.dart';
 import '../common/life_step.dart';
 import 'life_event_record.dart';
 import 'life_stage.dart';
@@ -34,17 +34,17 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   PlayRoomNotifier(
     this._i18n,
     this._dice,
-    HumanLifeModel humanLife,
+    LifeRoadModel lifeRoad,
     List<HumanModel> humans,
   ) : super(PlayRoomState(
-          humanLife,
+          lifeRoad,
           humans..sort((a, b) => a.order.compareTo(b.order)),
         )) {
     // 参加者全員の位置を Start に
     for (final human in value.orderedHumans) {
       final lifeStage = LifeStageModel(
         human: human,
-        lifeStepModel: value.humanLife.lifeRoad.start,
+        lifeStepModel: value.lifeRoad.start,
         lifeItems: [],
       );
       value.lifeStages.add(lifeStage);

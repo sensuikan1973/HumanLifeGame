@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'api/dice.dart';
 import 'i18n/i18n.dart';
 import 'models/common/human.dart';
-import 'models/common/human_life.dart';
 import 'models/common/life_road.dart';
 import 'models/play_room/play_room_notifier.dart';
 import 'screens/lobby/lobby.dart';
@@ -39,14 +38,10 @@ class Router {
           create: (_) => PlayRoomNotifier(
             I18n.of(context),
             context.read<Dice>(),
-            HumanLifeModel(
+            LifeRoadModel(
               title: 'dummy HumanLife',
-// FIXME: author 適切な値を入れる
-//              author: null,
-              lifeRoad: LifeRoadModel(
-                lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
-                  LifeRoadModel.dummyLifeEvents(),
-                ),
+              lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
+                LifeRoadModel.dummyLifeEvents(),
               ),
             ),
             [

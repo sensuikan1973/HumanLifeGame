@@ -1,6 +1,5 @@
 import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/models/common/human.dart';
-import 'package:HumanLifeGame/models/common/human_life.dart';
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
@@ -34,16 +33,13 @@ Future<void> main() async {
     [blank, blank, blank, blank, blank, blank, blank],
     [blank, blank, blank, blank, blank, blank, blank],
   ];
-  final humanLife = HumanLifeModel(
-    title: 'hello',
-    lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents)),
-  );
+  final lifeRoad = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
 
   testWidgets('show LifeSteps, display size = (1440, 1024)', (tester) async {
     const windowWidth = 1440.0;
     const windowHeight = 1024.0;
     const size = Size(windowWidth, windowHeight);
-    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, lifeRoad, humans);
 
     await tester.pumpWidget(
       testableApp(
@@ -61,7 +57,7 @@ Future<void> main() async {
     const windowWidth = 1050.0;
     const windowHeight = 750.0;
     const size = Size(windowWidth, windowHeight);
-    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, lifeRoad, humans);
 
     await tester.pumpWidget(
       testableApp(
