@@ -69,16 +69,17 @@ Future<void> main() async {
     when(auth.currentUser).thenAnswer((_) async => user);
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
-    // TODO: ダミーデータを投入
-    const uid = 'foo';
-    final userDocRef = store.docRef<UserEntity>(uid);
+
+    // ダミー user を投入
+    final userDocRef = store.docRef<UserEntity>(user.id);
     await userDocRef.set(UserEntity(
-      uid: uid,
-      displayName: 'widget test man',
+      uid: user.id,
+      displayName: user.name,
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ));
 
+    // ダミー room を投入
     // FIXME: 本当は add で書くべきだが、https://github.com/atn832/cloud_firestore_mocks/pull/99 のバグがあるので set で書いてる
     const roomNum = 2;
     for (var i = 0; i < roomNum; ++i) {
@@ -88,7 +89,7 @@ Future<void> main() async {
           humans: [userDocRef.ref],
           title: randString,
           lifeRoad: store.docRef<LifeRoadEntity>(randString).ref,
-          currentTurnHumanId: uid));
+          currentTurnHumanId: user.id));
     }
 
     await tester.pumpWidget(
@@ -106,7 +107,7 @@ Future<void> main() async {
     await tester.pump();
     expect(find.byType(HumanLifeTips), findsOneWidget);
     expect(find.byType(FloatingActionButton), findsOneWidget);
-    expect(find.byType(RoomListItem), findsNWidgets(roomNum)); // ダミーデータの数だけ表示されてる
+    expect(find.byType(RoomListItem), findsNWidgets(roomNum)); // ダミーデータの数だけ表示される
 
     // 複数ある enter button のうち１つをタップする
     await tester.tap(find.text(i18n.lobbyEnterTheRoomButtonText).first);
