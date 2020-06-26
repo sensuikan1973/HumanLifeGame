@@ -108,8 +108,10 @@ Future<void> main() async {
     expect(find.byType(FloatingActionButton), findsOneWidget);
     expect(find.byType(RoomListItem), findsNWidgets(roomNum)); // ダミーデータの数だけ表示されてる
 
-    // TODO: join
-
-    // TODO: playRoom に遷移
+    // 複数ある enter button のうち１つをタップする
+    await tester.tap(find.text(i18n.lobbyEnterTheRoomButtonText).first);
+    await tester.pump();
+    await tester.pump();
+    expect(find.byType(PlayRoom), findsOneWidget); // playRoom に遷移
   });
 }

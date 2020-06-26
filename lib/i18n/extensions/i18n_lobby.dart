@@ -9,4 +9,9 @@ extension I18nLobby on I18n {
         name: 'lobbyCreatePublicRoomButtonTooltip',
         locale: localeName,
       );
+  String get lobbyEnterTheRoomButtonText => Intl.message(
+        'enter the room',
+        name: 'lobbyEnterTheRoomButtonText',
+        locale: localeName,
+      );
 }

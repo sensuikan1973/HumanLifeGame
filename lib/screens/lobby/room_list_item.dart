@@ -1,3 +1,4 @@
+import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -59,7 +60,7 @@ class RoomListItem extends StatelessWidget {
         child: FlatButton(
           color: Colors.lightBlue,
           onPressed: () => Navigator.of(context).pushNamed(context.read<Router>().playRoom),
-          child: const Text('enter the room'),
+          child: Text(I18n.of(context).lobbyEnterTheRoomButtonText),
         ),
       );
 }
