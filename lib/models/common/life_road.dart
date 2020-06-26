@@ -81,12 +81,12 @@ class LifeRoadModel {
   }
 
   LifeStepModel get start {
-    for (final list in lifeStepsOnBoard) {
-      for (final lifeStep in list) {
-        if (lifeStep.isStart) return lifeStep;
-      }
+    final lifeSteps = lifeStepsOnBoard.expand((el) => el);
+    final startSteps = lifeSteps.where((step) => step.isStart).toList();
+    if (startSteps.isEmpty || startSteps.length > 1) {
+      throw Exception('start step should be just one. found start ${startSteps.length} steps.');
     }
-    return null; // TODO: エラーでいい
+    return startSteps.first;
   }
 
   Position getPosition(LifeStepModel lifeStep) {
@@ -95,7 +95,7 @@ class LifeRoadModel {
         if (lifeStepsOnBoard[y][x] == lifeStep) return Position(y, x);
       }
     }
-    return null;
+    throw Exception('lifeStep should be in lifeStepsOnBoard');
   }
 
   void _initDirections(LifeStepModel currentLifeStep) {
