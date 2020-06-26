@@ -56,10 +56,13 @@ class RoomListItem extends StatelessWidget {
   SizedBox _joinButton(BuildContext context) => SizedBox(
         width: 420,
         height: 40,
-        child: FlatButton(
-          color: Colors.lightBlue,
-          onPressed: () => Navigator.of(context).pushNamed(context.read<Router>().playRoom),
-          child: const Text('Join a Game'),
+        child: Tooltip(
+          message: 'enter the room',
+          child: FlatButton(
+            color: Colors.lightBlue,
+            onPressed: () => Navigator.of(context).pushNamed(context.read<Router>().playRoom),
+            child: const Text('enter the room'),
+          ),
         ),
       );
 }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:HumanLifeGame/api/auth.dart';
 import 'package:HumanLifeGame/api/dice.dart';
 import 'package:HumanLifeGame/api/firestore/life_road.dart';
@@ -76,18 +78,18 @@ Future<void> main() async {
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ));
-    final playRoom = await store.collectionRef<PlayRoomEntity>().add(PlayRoomEntity(
-        host: userDocRef.ref,
-        humans: [userDocRef.ref],
-        title: 'bar',
-        lifeRoad: store.docRef<LifeRoadEntity>('aaa').ref,
-        currentTurnHumanId: uid));
-    final playRoom2 = await store.collectionRef<PlayRoomEntity>().add(PlayRoomEntity(
-        host: userDocRef.ref,
-        humans: [userDocRef.ref],
-        title: 'bar2',
-        lifeRoad: store.docRef<LifeRoadEntity>('bbb').ref,
-        currentTurnHumanId: uid));
+
+    // FIXME: 本当は add で書くべきだが、https://github.com/atn832/cloud_firestore_mocks/pull/99 のバグがあるので set で書いてる
+    const roomNum = 2;
+    for (var i = 0; i < roomNum; ++i) {
+      final randString = Random().nextInt(1000).toString();
+      await store.collectionRef<PlayRoomEntity>().docRef().set(PlayRoomEntity(
+          host: userDocRef.ref,
+          humans: [userDocRef.ref],
+          title: randString,
+          lifeRoad: store.docRef<LifeRoadEntity>(randString).ref,
+          currentTurnHumanId: uid));
+    }
 
     await tester.pumpWidget(
       testableApp(
@@ -104,7 +106,7 @@ Future<void> main() async {
     await tester.pump();
     expect(find.byType(HumanLifeTips), findsOneWidget);
     expect(find.byType(FloatingActionButton), findsOneWidget);
-    expect(find.byType(RoomListItem), findsNWidgets(2)); // ダミーデータの数だけ表示されてる
+    expect(find.byType(RoomListItem), findsNWidgets(roomNum)); // ダミーデータの数だけ表示されてる
 
     // TODO: join
 
