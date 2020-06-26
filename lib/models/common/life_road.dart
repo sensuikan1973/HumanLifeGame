@@ -25,6 +25,7 @@ class LifeRoadModel {
   final int height;
   final List<List<LifeStepModel>> lifeStepsOnBoard;
 
+  /// TODO: これ本当にいいんか?
   /// LifeStepsOnBoard の生成ヘルパー
   static List<List<LifeStepModel>> createLifeStepsOnBoard(List<List<LifeEventModel>> lifeEvents) => List.generate(
         lifeEvents.length,
