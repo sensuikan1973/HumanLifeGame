@@ -13,8 +13,8 @@ part 'play_room.g.dart';
 /// TODO: announcement はクライアントサイド完結想定だが、必要になったら追加.
 /// TODO: finishedAt は削除ロジックに使う想定だが、不要だったら削除. まだロジックを考え中.
 @freezed
-abstract class PlayRoom implements _$PlayRoom, Entity {
-  const factory PlayRoom({
+abstract class PlayRoomEntity implements _$PlayRoomEntity, Entity {
+  const factory PlayRoomEntity({
     @required @DocumentReferenceConverter() DocumentReference host,
     @required String title,
     @required @DocumentReferenceListConverter() List<DocumentReference> humans,
@@ -23,24 +23,24 @@ abstract class PlayRoom implements _$PlayRoom, Entity {
     @TimestampConverter() DateTime createdAt,
     @TimestampConverter() DateTime updatedAt,
 //    @TimestampConverter() DateTime finishedAt,
-  }) = _PlayRoom;
-  const PlayRoom._();
+  }) = _PlayRoomEntity;
+  const PlayRoomEntity._();
 
-  factory PlayRoom.fromJson(Map<String, dynamic> json) => _$PlayRoomFromJson(json);
+  factory PlayRoomEntity.fromJson(Map<String, dynamic> json) => _$PlayRoomEntityFromJson(json);
 
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 
-  static Document<PlayRoom> decode(DocumentSnapshot snapshot) => Document<PlayRoom>(
+  static Document<PlayRoomEntity> decode(DocumentSnapshot snapshot) => Document<PlayRoomEntity>(
         snapshot.reference,
-        PlayRoom.fromJson(snapshot.data),
+        PlayRoomEntity.fromJson(snapshot.data),
       );
 
   /// humans の document ID List
   List<String> get humanIds => humans.map((human) => human.documentID).toList();
 }
 
-class PlayRoomField {
+class PlayRoomEntityField {
   /// 主催者(user)
   static const host = 'host';
 

@@ -7,25 +7,24 @@ import 'entity.dart';
 part 'life_item.freezed.dart';
 part 'life_item.g.dart';
 
-/// Map Value on Firestore
 @freezed
-abstract class LifeItem implements _$LifeItem, Entity {
-  const factory LifeItem({
+abstract class LifeItemEntity implements _$LifeItemEntity, Entity {
+  const factory LifeItemEntity({
     @required String type,
     @required String key,
     @required int amount,
     @required @TimestampConverter() DateTime createdAt,
     @required @TimestampConverter() DateTime updatedAt,
-  }) = _LifeItem;
-  const LifeItem._();
+  }) = _LifeItemEntity;
+  const LifeItemEntity._();
 
-  factory LifeItem.fromJson(Map<String, dynamic> json) => _$LifeItemFromJson(json);
+  factory LifeItemEntity.fromJson(Map<String, dynamic> json) => _$LifeItemEntityFromJson(json);
 
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 }
 
-class LifeItemField {
+class LifeItemFieldEntity {
   /// Item の種別
   static const type = 'type';
 

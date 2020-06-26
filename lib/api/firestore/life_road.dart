@@ -8,25 +8,25 @@ import 'life_event.dart';
 part 'life_road.freezed.dart';
 part 'life_road.g.dart';
 
-/// Document on Firestore
+// FIXME: LifeRoad だし、あるべき Field でない
 @freezed
-abstract class HumanLife implements _$HumanLife, Entity {
-  const factory HumanLife({
+abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
+  const factory LifeRoadEntity({
     @required @DocumentReferenceConverter() DocumentReference author,
     @required String title,
-    @required List<LifeEvent> lifeEvents,
+    @required List<LifeEventEntity> lifeEvents,
     @required @TimestampConverter() DateTime createdAt,
     @required @TimestampConverter() DateTime updatedAt,
-  }) = _HumanLife;
-  const HumanLife._();
+  }) = _LifeRoadEntity;
+  const LifeRoadEntity._();
 
-  factory HumanLife.fromJson(Map<String, dynamic> json) => _$HumanLifeFromJson(json);
+  factory LifeRoadEntity.fromJson(Map<String, dynamic> json) => _$LifeRoadEntityFromJson(json);
 
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 }
 
-class HumanLifeField {
+class LifeRoadEntityField {
   /// 作成者
   static const author = 'author';
 

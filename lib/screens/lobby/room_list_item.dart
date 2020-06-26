@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../api/firestore/play_room.dart';
+import '../../i18n/i18n.dart';
 import '../../router.dart';
 
 class RoomListItem extends StatelessWidget {
   const RoomListItem(this._playRoom, {Key key}) : super(key: key);
 
-  final Document<PlayRoom> _playRoom;
+  final Document<PlayRoomEntity> _playRoom;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -59,7 +60,7 @@ class RoomListItem extends StatelessWidget {
         child: FlatButton(
           color: Colors.lightBlue,
           onPressed: () => Navigator.of(context).pushNamed(context.read<Router>().playRoom),
-          child: const Text('Join a Game'),
+          child: Text(I18n.of(context).lobbyEnterTheRoomButtonText),
         ),
       );
 }

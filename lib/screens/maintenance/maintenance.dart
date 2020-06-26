@@ -13,8 +13,8 @@ class Maintenance extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Center(
-          child: StreamBuilder<Document<ServiceControl>>(
-            stream: context.watch<Store>().docRef<ServiceControl>(ServiceControlDocId.web).document(),
+          child: StreamBuilder<Document<ServiceControlEntity>>(
+            stream: context.watch<Store>().docRef<ServiceControlEntity>(ServiceControlDocId.web).document(),
             builder: (context, snap) {
               if (!snap.hasData) return const Text('no data');
               return snap.data.entity.isMaintenance

@@ -17,6 +17,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "lobbyEnterTheRoomButtonText": "enter the room",
+  "@lobbyEnterTheRoomButtonText": {
+    "type": "text",
+    "placeholders": {}
+  },
   "rollDice": "Roll the dice",
   "@rollDice": {
     "type": "text",

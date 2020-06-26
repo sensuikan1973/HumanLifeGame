@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lifeEventRecordsText": MessageLookupByLibrary.simpleMessage("Reserved area:lifeEventRecords"),
         "lifeStepEventType": m0,
         "lobbyCreatePublicRoomButtonTooltip": MessageLookupByLibrary.simpleMessage("create public room"),
+        "lobbyEnterTheRoomButtonText": MessageLookupByLibrary.simpleMessage("enter the room"),
         "playerActionNo": MessageLookupByLibrary.simpleMessage("NO"),
         "playerActionYes": MessageLookupByLibrary.simpleMessage("YES"),
         "resultAnnouncementDialogMessage": MessageLookupByLibrary.simpleMessage("Result Announcement !!"),

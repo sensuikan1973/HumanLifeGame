@@ -17,6 +17,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "lobbyEnterTheRoomButtonText": "部屋に入る",
+  "@lobbyEnterTheRoomButtonText": {
+    "type": "text",
+    "placeholders": {}
+  },
   "rollDice": "サイコロを振る",
   "@rollDice": {
     "type": "text",

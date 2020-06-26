@@ -7,24 +7,23 @@ import 'entity.dart';
 part 'life_event.freezed.dart';
 part 'life_event.g.dart';
 
-/// Map Value on Firestore
 @freezed
-abstract class LifeEvent implements _$LifeEvent, Entity {
-  const factory LifeEvent({
+abstract class LifeEventEntity implements _$LifeEventEntity, Entity {
+  const factory LifeEventEntity({
     @required String type,
     @required String target,
     @required String description,
     @required Map<String, dynamic> params,
-  }) = _LifeEvent;
-  const LifeEvent._();
+  }) = _LifeEventEntity;
+  const LifeEventEntity._();
 
-  factory LifeEvent.fromJson(Map<String, dynamic> json) => _$LifeEventFromJson(json);
+  factory LifeEventEntity.fromJson(Map<String, dynamic> json) => _$LifeEventEntityFromJson(json);
 
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 }
 
-class LifeEventField {
+class LifeEventEntityField {
   /// Event の種別
   static const type = 'type';
 

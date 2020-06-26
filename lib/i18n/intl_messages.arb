@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-06-21T23:22:55.697804",
+  "@@last_modified": "2020-06-26T21:21:07.903910",
   "appTitle": "Human Life Game",
   "@appTitle": {
     "type": "text",
@@ -14,6 +14,11 @@
   },
   "lobbyCreatePublicRoomButtonTooltip": "create public room",
   "@lobbyCreatePublicRoomButtonTooltip": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lobbyEnterTheRoomButtonText": "enter the room",
+  "@lobbyEnterTheRoomButtonText": {
     "type": "text",
     "placeholders": {}
   },

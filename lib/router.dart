@@ -15,10 +15,12 @@ import 'screens/sign_in/sign_in.dart';
 
 @immutable
 class Router {
-  final String lobby = '/lobby';
-  final String signIn = '/sign_in';
-  final String playRoom = '/play_room';
-  final String maintenance = '/maintenance';
+  const Router();
+
+  String get lobby => '/lobby';
+  String get signIn => '/sign_in';
+  String get playRoom => '/play_room';
+  String get maintenance => '/maintenance';
 
   Route<dynamic> generateRoutes(RouteSettings settings) {
     final name = settings.name;

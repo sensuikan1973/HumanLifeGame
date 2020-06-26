@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import '../../api/auth.dart';
 import '../../api/firestore/store.dart';
 import '../../i18n/i18n.dart';
-import '../../models/common/user.dart';
 import '../../models/lobby/lobby_notifier.dart';
+import '../../router.dart';
 import 'app_bar.dart';
 import 'human_life_tips.dart';
 import 'room_list_item.dart';
@@ -24,37 +24,20 @@ class Lobby extends StatelessWidget {
         child: const Lobby._(),
       );
 
-  Future<UserModel> _signIn(Auth auth) async {
-    final user = await auth.currentUser;
-    if (user != null) return user;
-    if (kDebugMode) return auth.signInForDebug();
-    return auth.signInAnonymously();
-  }
-
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: const LobbyAppBar(),
         body: Center(
-          child: FutureBuilder<UserModel>(
-            future: _signIn(context.watch<Auth>()),
-            builder: (context, snap) {
-              if (snap.hasError) return const Text('Oops'); // FIXME: まじめにハンドリング
-              if (snap.connectionState == ConnectionState.waiting) return const CircularProgressIndicator();
-              if (snap.hasData) {
-                return Row(
-                  children: [
-                    Stack(
-                      children: [
-                        _roomList(context),
-                        Positioned(bottom: 0, right: 0, child: _createRoomButton(context)),
-                      ],
-                    ),
-                    const HumanLifeTips(),
-                  ],
-                );
-              }
-              return const Text('You must sign in');
-            },
+          child: Row(
+            children: [
+              Stack(
+                children: [
+                  _roomList(context),
+                  Positioned(bottom: 0, right: 0, child: _createRoomButton(context)),
+                ],
+              ),
+              const HumanLifeTips(),
+            ],
           ),
         ),
       );
@@ -65,7 +48,10 @@ class Lobby extends StatelessWidget {
         onPressed: () async {
           final notifier = context.read<LobbyNotifier>();
           await notifier.createPublicPlayRoom();
-          await notifier.fetchPlayRooms();
+          await Navigator.of(context).pushNamed(
+            context.read<Router>().playRoom,
+            arguments: notifier.value.navigateArgumentsToPlayRoom,
+          );
         },
         child: const Icon(Icons.add),
       );
