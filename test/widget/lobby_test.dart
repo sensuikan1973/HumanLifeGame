@@ -64,10 +64,10 @@ Future<void> main() async {
     ));
 
     // ダミー room を投入
-    // FIXME: 本当は add で書くべきだが、https://github.com/atn832/cloud_firestore_mocks/pull/99 のバグがあるので set で書いてる
     const roomNum = 2;
     for (var i = 0; i < roomNum; ++i) {
       final randString = Random().nextInt(1000).toString();
+      // FIXME: 本来は add で書くべきだが、https://github.com/atn832/cloud_firestore_mocks/pull/99 のバグがあるので set で書いてる
       await store.collectionRef<PlayRoomEntity>().docRef().set(PlayRoomEntity(
           host: userDocRef.ref,
           humans: [userDocRef.ref],
