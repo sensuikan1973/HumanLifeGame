@@ -233,6 +233,7 @@ class LifeRoadModel {
   }
 }
 
+@immutable
 class Position {
   const Position(this.y, this.x);
   final int y;
