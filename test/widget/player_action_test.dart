@@ -1,6 +1,5 @@
 import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/models/common/human.dart';
-import 'package:HumanLifeGame/models/common/human_life.dart';
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
@@ -35,11 +34,8 @@ Future<void> main() async {
       [blank, blank, blank],
       [blank, blank, blank],
     ];
-    final humanLife = HumanLifeModel(
-      title: 'dummy HumanLife',
-      lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents)),
-    );
-    final playRoomNotifier = PlayRoomNotifier(i18n, MockDice(), humanLife, humans);
+    final lifeRoad = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
+    final playRoomNotifier = PlayRoomNotifier(i18n, MockDice(), lifeRoad, humans);
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(create: (_) => playRoomNotifier, child: const PlayerAction()),
     ));
@@ -55,14 +51,11 @@ Future<void> main() async {
       [blank, gains, blank, gains],
       [blank, gains, gains, gains],
     ];
-    final humanLife = HumanLifeModel(
-      title: 'dummy HumanLife',
-      lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents)),
-    );
+    final lifeRoad = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
     final state = MockPlayRoomState();
-    final playRoomNotifier = PlayRoomNotifier(i18n, MockDice(), humanLife, humans)..value = state;
+    final playRoomNotifier = PlayRoomNotifier(i18n, MockDice(), lifeRoad, humans)..value = state;
     when(state.requireSelectDirection).thenReturn(true);
-    when(state.currentHumanLifeStep).thenReturn(humanLife.lifeRoad.start.right); // 最初の分岐
+    when(state.currentHumanLifeStep).thenReturn(lifeRoad.start.right); // 最初の分岐
 
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(create: (_) => playRoomNotifier, child: const PlayerAction()),
@@ -79,14 +72,11 @@ Future<void> main() async {
       [goals, blank, gains],
       [gains, gains, gains],
     ];
-    final humanLife = HumanLifeModel(
-      title: 'dummy HumanLife',
-      lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents)),
-    );
+    final lifeRoad = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
     final state = MockPlayRoomState();
-    final playRoomNotifier = PlayRoomNotifier(i18n, MockDice(), humanLife, humans)..value = state;
+    final playRoomNotifier = PlayRoomNotifier(i18n, MockDice(), lifeRoad, humans)..value = state;
     when(state.requireSelectDirection).thenReturn(true);
-    when(state.currentHumanLifeStep).thenReturn(humanLife.lifeRoad.start.down); // 最初の分岐
+    when(state.currentHumanLifeStep).thenReturn(lifeRoad.start.down); // 最初の分岐
 
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(create: (_) => playRoomNotifier, child: const PlayerAction()),

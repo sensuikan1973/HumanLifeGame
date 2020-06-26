@@ -1,6 +1,5 @@
 import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/models/common/human.dart';
-import 'package:HumanLifeGame/models/common/human_life.dart';
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
 import 'package:HumanLifeGame/models/common/life_road.dart';
@@ -17,18 +16,15 @@ import 'helper/widget_build_helper.dart';
 Future<void> main() async {
   final i18n = await I18n.load(const Locale('en', 'US'));
   final humans = [const HumanModel(id: 'h1', name: 'foo', order: 0), const HumanModel(id: 'h2', name: 'bar', order: 1)];
-  final humanLife = HumanLifeModel(
-    title: 'dummy HumanLife',
-    lifeRoad: LifeRoadModel(
-      lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
-        LifeRoadModel.dummyLifeEvents(),
-      ),
+  final lifeRoad = LifeRoadModel(
+    lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
+      LifeRoadModel.dummyLifeEvents(),
     ),
   );
   final start = LifeEventModel(LifeEventTarget.myself, const StartParams());
 
   testWidgets("show 'lifeEventRecords'Text", (tester) async {
-    final playRoomModel = PlayRoomNotifier(i18n, MockDice(), humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, MockDice(), lifeRoad, humans);
     for (final orderedHuman in humans) {
       playRoomModel.value.everyLifeEventRecords = [LifeEventRecordModel(i18n, orderedHuman, start)];
     }

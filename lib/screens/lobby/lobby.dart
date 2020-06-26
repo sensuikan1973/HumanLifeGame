@@ -36,7 +36,7 @@ class Lobby extends StatelessWidget {
                   Positioned(bottom: 0, right: 0, child: _createRoomButton(context)),
                 ],
               ),
-              const HumanLifeTips(),
+              const LifeRoadTips(),
             ],
           ),
         ),

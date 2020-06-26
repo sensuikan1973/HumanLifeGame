@@ -1,6 +1,5 @@
 import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/models/common/human.dart';
-import 'package:HumanLifeGame/models/common/human_life.dart';
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
@@ -37,13 +36,12 @@ void main() {
       [blank, blank, blank, blank, blank, blank, blank],
     ];
     final lifeRoad = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
-    final humanLife = HumanLifeModel(title: 'dummy HumanLife', lifeRoad: lifeRoad);
 
     // 5しか出ないサイコロを使う
     final dice = MockDice();
     const roll = 5;
     when(dice.roll()).thenReturn(roll);
-    final playRoomNotifier = PlayRoomNotifier(const I18n('en'), dice, humanLife, humans);
+    final playRoomNotifier = PlayRoomNotifier(const I18n('en'), dice, lifeRoad, humans);
 
     // 初期位置
     for (final human in playRoomNotifier.value.orderedHumans) {
@@ -79,13 +77,12 @@ void main() {
       [blank, blank, blank, blank],
     ];
     final lifeRoad = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
-    final humanLife = HumanLifeModel(title: 'dummy HumanLife', lifeRoad: lifeRoad);
 
     test('Dice roll is 1', () {
       final dice = MockDice();
       const roll = 1;
       when(dice.roll()).thenReturn(roll);
-      final playRoomNotifier = PlayRoomNotifier(const I18n('en'), dice, humanLife, humans);
+      final playRoomNotifier = PlayRoomNotifier(const I18n('en'), dice, lifeRoad, humans);
 
       // human1 がサイコロを振って進む
       // ignore: cascade_invocations
@@ -129,7 +126,7 @@ void main() {
       final dice = MockDice();
       const roll = 3;
       when(dice.roll()).thenReturn(roll);
-      final playRoomNotifier = PlayRoomNotifier(const I18n('en'), dice, humanLife, humans);
+      final playRoomNotifier = PlayRoomNotifier(const I18n('en'), dice, lifeRoad, humans);
 
       // human1 がサイコロを振って進む
       // ignore: cascade_invocations
@@ -171,14 +168,13 @@ void main() {
       [blank, blank, blank, blank],
     ];
     final lifeRoad = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
-    final humanLife = HumanLifeModel(title: 'dummy HumanLife', lifeRoad: lifeRoad);
 
     // human1 は3しか出ないサイコロを使う
     final dice = MockDice();
     const rollForHuman1 = 3;
     when(dice.roll()).thenReturn(rollForHuman1);
 
-    final playRoomNotifier = PlayRoomNotifier(const I18n('en'), dice, humanLife, humans);
+    final playRoomNotifier = PlayRoomNotifier(const I18n('en'), dice, lifeRoad, humans);
 
     // human1 がサイコロを振って進む
     // ignore: cascade_invocations

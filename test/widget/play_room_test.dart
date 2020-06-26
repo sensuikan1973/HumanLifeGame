@@ -1,7 +1,6 @@
 import 'package:HumanLifeGame/api/dice.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/models/common/human.dart';
-import 'package:HumanLifeGame/models/common/human_life.dart';
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
@@ -39,10 +38,7 @@ Future<void> main() async {
     [blank, blank, blank, blank, blank, blank, blank],
     [blank, blank, blank, blank, blank, blank, blank],
   ];
-  final humanLife = HumanLifeModel(
-    title: 'hello',
-    lifeRoad: LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents)),
-  );
+  final lifeRoad = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
 
   setUp(() {
     // See: https://github.com/flutter/flutter/issues/12994#issuecomment-397321431
@@ -51,7 +47,7 @@ Future<void> main() async {
   });
 
   testWidgets('show some widgets', (tester) async {
-    final playRoomModel = PlayRoomNotifier(i18n, MockDice(), humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, MockDice(), lifeRoad, humans);
     await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel));
     await tester.pump();
     expect(find.byType(PlayerAction), findsOneWidget);
@@ -65,7 +61,7 @@ Future<void> main() async {
     final dice = MockDice();
     const roll = 5;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, lifeRoad, humans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
@@ -78,7 +74,7 @@ Future<void> main() async {
     final dice = MockDice();
     const roll = 5;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, lifeRoad, humans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
@@ -100,7 +96,7 @@ Future<void> main() async {
     final dice = MockDice();
     const roll = 6;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, lifeRoad, humans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
@@ -119,7 +115,7 @@ Future<void> main() async {
     final dice = MockDice();
     const roll = 6;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, lifeRoad, humans);
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
 
@@ -136,7 +132,7 @@ Future<void> main() async {
     final dice = MockDice();
     const roll = 6;
     when(dice.roll()).thenReturn(roll);
-    final playRoomModel = PlayRoomNotifier(i18n, dice, humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, dice, lifeRoad, humans);
 
     await tester.pumpWidget(_TestablePlayRoom(dice, playRoomModel));
     await tester.pump();
@@ -166,7 +162,7 @@ Future<void> main() async {
   });
 
   testWidgets('stack widgets when screen size is middle', (tester) async {
-    final playRoomModel = PlayRoomNotifier(i18n, MockDice(), humanLife, humans);
+    final playRoomModel = PlayRoomNotifier(i18n, MockDice(), lifeRoad, humans);
 
     // デスクトップサイズのスクリーンの場合は、stackされない
     await tester.pumpWidget(_TestablePlayRoom(const Dice(), playRoomModel));

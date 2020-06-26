@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import '../../api/firestore/user.dart';
 import 'life_event.dart';
 import 'life_event_params/exchange_life_items_params.dart';
 import 'life_event_params/gain_life_items_params.dart';
@@ -15,15 +16,19 @@ import 'life_step.dart';
 class LifeRoadModel {
   LifeRoadModel({
     @required this.lifeStepsOnBoard,
-  })  : height = lifeStepsOnBoard.length,
-        width = lifeStepsOnBoard.first.length,
-        assert(lifeStepsOnBoard.every((row) => row.length == lifeStepsOnBoard.first.length)) {
+    this.title,
+    this.author,
+  }) : assert(lifeStepsOnBoard.every((row) => row.length == lifeStepsOnBoard.first.length)) {
     _initDirections(start);
   }
 
-  final int width;
-  final int height;
+  final String title;
+  final UserEntity author;
+  final List<List<LifeStepModel>> lifeStepsOnBoard;
+  int get height => lifeStepsOnBoard.length;
+  int get width => lifeStepsOnBoard.first.length;
 
+  /// TODO: これ本当にいいんか?
   /// LifeStepsOnBoard の生成ヘルパー
   static List<List<LifeStepModel>> createLifeStepsOnBoard(List<List<LifeEventModel>> lifeEvents) => List.generate(
         lifeEvents.length,
@@ -79,15 +84,13 @@ class LifeRoadModel {
     ];
   }
 
-  List<List<LifeStepModel>> lifeStepsOnBoard;
-
   LifeStepModel get start {
-    for (final list in lifeStepsOnBoard) {
-      for (final lifeStep in list) {
-        if (lifeStep.isStart) return lifeStep;
-      }
+    final lifeSteps = lifeStepsOnBoard.expand((el) => el);
+    final startSteps = lifeSteps.where((step) => step.isStart).toList();
+    if (startSteps.isEmpty || startSteps.length > 1) {
+      throw Exception('start step should be just one. found start ${startSteps.length} steps.');
     }
-    return null; // TODO: エラーでいい
+    return startSteps.first;
   }
 
   Position getPosition(LifeStepModel lifeStep) {
@@ -96,7 +99,7 @@ class LifeRoadModel {
         if (lifeStepsOnBoard[y][x] == lifeStep) return Position(y, x);
       }
     }
-    return null;
+    throw Exception('lifeStep should be in lifeStepsOnBoard');
   }
 
   void _initDirections(LifeStepModel currentLifeStep) {
@@ -234,6 +237,7 @@ class LifeRoadModel {
   }
 }
 
+@immutable
 class Position {
   const Position(this.y, this.x);
   final int y;

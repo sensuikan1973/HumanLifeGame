@@ -51,7 +51,7 @@ Future<void> main() async {
     );
     await tester.pump();
     await tester.pump();
-    expect(find.byType(HumanLifeTips), findsOneWidget);
+    expect(find.byType(LifeRoadTips), findsOneWidget);
     expect(find.byType(FloatingActionButton), findsOneWidget);
     expect(find.byType(RoomListItem), findsNothing); // room 存在しない
 
@@ -105,7 +105,7 @@ Future<void> main() async {
     );
     await tester.pump();
     await tester.pump();
-    expect(find.byType(HumanLifeTips), findsOneWidget);
+    expect(find.byType(LifeRoadTips), findsOneWidget);
     expect(find.byType(FloatingActionButton), findsOneWidget);
     expect(find.byType(RoomListItem), findsNWidgets(roomNum)); // ダミーデータの数だけ表示される
 

@@ -1,5 +1,4 @@
 import '../common/human.dart';
-import '../common/human_life.dart';
 import '../common/life_road.dart';
 import '../common/life_step.dart';
 import 'life_event_record.dart';
@@ -7,11 +6,11 @@ import 'life_stage.dart';
 
 class PlayRoomState {
   PlayRoomState(
-    this.humanLife,
+    this.lifeRoad,
     this.orderedHumans,
   );
 
-  final HumanLifeModel humanLife;
+  final LifeRoadModel lifeRoad;
   final List<HumanModel> orderedHumans;
 
   /// 現在手番の人に方向選択を求めているかどうか
@@ -40,7 +39,7 @@ class PlayRoomState {
 
   /// 参加者全員の Position
   Map<String, Position> get positionsByHumanId => {
-        for (final lifeStage in lifeStages) lifeStage.human.id: humanLife.lifeRoad.getPosition(lifeStage.lifeStepModel),
+        for (final lifeStage in lifeStages) lifeStage.human.id: lifeRoad.getPosition(lifeStage.lifeStepModel),
       };
 
   /// 現在手番の Human が位置する LifeStep
