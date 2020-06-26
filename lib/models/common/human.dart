@@ -1,7 +1,5 @@
 import 'package:flutter/foundation.dart';
 
-import 'user.dart';
-
 @immutable
 class HumanModel {
   const HumanModel({
@@ -9,9 +7,6 @@ class HumanModel {
     @required this.name,
     @required this.order,
   });
-  HumanModel.fromUserModel(UserModel user, this.order)
-      : id = user.id,
-        name = user.name;
 
   final String id;
   final String name;

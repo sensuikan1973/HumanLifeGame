@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../api/auth.dart';
-import '../../models/common/user.dart';
 
 // FIXME: これはあくまで 下書き Widget. ロジックをベタ書きしてるし、レイアウトも i18n も全てがテキトー.
 // See: <https://github.com/FirebaseExtended/flutterfire/blob/master/packages/firebase_auth/firebase_auth/example/lib/signin_page.dart>
@@ -76,11 +75,11 @@ class _SignInState extends State<SignIn> {
                 child: const Text('Sign up with Email'),
               ),
               const SizedBox(height: 100),
-              StreamBuilder<UserModel>(
+              StreamBuilder<FirebaseUser>(
                 stream: _auth.currentUserStream,
                 builder: (context, snap) {
                   if (!snap.hasData) return const Text('not signed in');
-                  return Text('current id: ${snap.data.id}');
+                  return Text('current id: ${snap.data.uid}');
                 },
               ),
               const SizedBox(height: 100),

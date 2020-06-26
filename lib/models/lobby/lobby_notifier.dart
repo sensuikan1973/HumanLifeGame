@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 
@@ -5,7 +6,6 @@ import '../../api/auth.dart';
 import '../../api/firestore/play_room.dart';
 import '../../api/firestore/store.dart';
 import '../../api/firestore/user.dart';
-import '../common/user.dart';
 import '../play_room/play_room_notifier.dart';
 import 'lobby_state.dart';
 
@@ -24,7 +24,7 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
     await fetchPlayRooms();
   }
 
-  Future<UserModel> _signIn(Auth auth) async {
+  Future<FirebaseUser> _signIn(Auth auth) async {
     final user = await auth.currentUser;
     if (user != null) return user;
     if (kDebugMode) return auth.signInForDebug();
@@ -33,7 +33,7 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
 
   Future<void> createPublicPlayRoom() async {
     final user = await _auth.currentUser;
-    final userDocRef = _store.docRef<UserEntity>(user.id);
+    final userDocRef = _store.docRef<UserEntity>(user.uid);
     final room = PlayRoomEntity(
       host: userDocRef.ref,
       title: 'はじめての人生',
@@ -41,7 +41,7 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
       // FIXME: null 禁止だからテキトーに入れてるだけで絶対に修正しないとダメ
       //        rules 側に存否チェックが無いからこれ通るけど、ホント一時的なダミー実装に過ぎない
       lifeRoad: userDocRef.ref,
-      currentTurnHumanId: user.id,
+      currentTurnHumanId: user.uid,
     );
     final roomDocRef = _store.collectionRef<PlayRoomEntity>().docRef();
     final batch = _store.firestore.batch();
