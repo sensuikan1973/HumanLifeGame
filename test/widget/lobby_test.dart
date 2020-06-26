@@ -30,8 +30,6 @@ Future<void> main() async {
 
   final i18n = await I18n.load(const Locale('en', 'US'));
   final user = MockFirebaseUser();
-  when(user.uid).thenReturn('foo');
-  when(user.displayName).thenReturn('dummy user');
 
   testWidgets('create public play room', (tester) async {
     final auth = MockAuth();

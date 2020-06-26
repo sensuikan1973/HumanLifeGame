@@ -5,4 +5,10 @@ import 'package:mockito/mockito.dart';
 // ignore: must_be_immutable
 class MockAuth extends Mock implements Auth {}
 
-class MockFirebaseUser extends Mock implements FirebaseUser {}
+class MockFirebaseUser extends Mock implements FirebaseUser {
+  @override
+  String get uid => 'dummy uid';
+
+  @override
+  String get displayName => 'dummy displayName';
+}
