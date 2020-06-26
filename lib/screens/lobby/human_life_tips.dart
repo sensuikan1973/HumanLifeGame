@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HumanLifeTips extends StatelessWidget {
-  const HumanLifeTips({Key key}) : super(key: key);
+class LifeRoadTips extends StatelessWidget {
+  const LifeRoadTips({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => const SizedBox(
