@@ -99,8 +99,8 @@
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">Future&lt;void&gt; createPublicPlayRoom() async {
   final user = await _auth.currentUser;
-  final userDocRef = _store.docRef&lt;User&gt;(user.id);
-  final room = PlayRoom(
+  final userDocRef = _store.docRef&lt;UserEntity&gt;(user.id);
+  final room = PlayRoomEntity(
     host: userDocRef.ref,
     title: &#39;はじめての人生&#39;,
     humans: [userDocRef.ref],
@@ -109,17 +109,21 @@
     lifeRoad: userDocRef.ref,
     currentTurnHumanId: user.id,
   );
-  final roomDocRef = _store.collectionRef&lt;PlayRoom&gt;().docRef();
+  final roomDocRef = _store.collectionRef&lt;PlayRoomEntity&gt;().docRef();
   final batch = _store.firestore.batch();
   await roomDocRef.setData(room.encode(), batch: batch);
   await userDocRef.updateData(
     &lt;String, dynamic&gt;{
-      UserField.joinPlayRoom: roomDocRef.ref,
+      UserEntityField.joinPlayRoom: roomDocRef.ref,
       TimestampField.updatedAt: FieldValue.serverTimestamp(),
     },
     batch: batch,
   );
   await batch.commit(); &#47;&#47; FIXME: エラーハンドリング. 特に既に join 済みの場合のハンドリング.
+  value.navigateArgumentsToPlayRoom = PlayRoomNotifierArguments(
+    Document&lt;PlayRoomEntity&gt;(roomDocRef.ref, room),
+  );
+  notifyListeners();
 }</code></pre>
     </section>
 

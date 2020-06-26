@@ -141,26 +141,16 @@ and</li>
 Widget build(BuildContext context) =&gt; Scaffold(
       appBar: const LobbyAppBar(),
       body: Center(
-        child: FutureBuilder&lt;UserModel&gt;(
-          future: _signIn(context.watch&lt;Auth&gt;()),
-          builder: (context, snap) {
-            if (snap.hasError) return const Text(&#39;Oops&#39;); &#47;&#47; FIXME: まじめにハンドリング
-            if (snap.connectionState == ConnectionState.waiting) return const CircularProgressIndicator();
-            if (snap.hasData) {
-              return Row(
-                children: [
-                  Stack(
-                    children: [
-                      _roomList(context),
-                      Positioned(bottom: 0, right: 0, child: _createRoomButton(context)),
-                    ],
-                  ),
-                  const HumanLifeTips(),
-                ],
-              );
-            }
-            return const Text(&#39;You must sign in&#39;);
-          },
+        child: Row(
+          children: [
+            Stack(
+              children: [
+                _roomList(context),
+                Positioned(bottom: 0, right: 0, child: _createRoomButton(context)),
+              ],
+            ),
+            const HumanLifeTips(),
+          ],
         ),
       ),
     );</code></pre>

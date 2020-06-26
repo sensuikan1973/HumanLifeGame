@@ -105,7 +105,7 @@
       <pre class="language-dart"><code class="language-dart">static Widget inProviders({Key key, Auth auth, Dice dice, Store store}) =&gt; MultiProvider(
       key: key,
       providers: [
-        Provider(create: (_) =&gt; Router()),
+        Provider(create: (_) =&gt; const Router()),
         Provider(create: (_) =&gt; auth ?? const Auth()),
         Provider(create: (_) =&gt; store ?? Store(Firestore.instance)),
         Provider(create: (_) =&gt; dice ?? const Dice()),
