@@ -30,10 +30,10 @@ Future<void> main() async {
 
   final i18n = await I18n.load(const Locale('en', 'US'));
   final user = MockFirebaseUser();
+  final auth = MockAuth();
+  when(auth.currentUser).thenAnswer((_) async => user);
 
   testWidgets('create public play room', (tester) async {
-    final auth = MockAuth();
-    when(auth.currentUser).thenAnswer((_) async => user);
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
     await tester.pumpWidget(
@@ -63,8 +63,6 @@ Future<void> main() async {
   });
 
   testWidgets('list public play rooms', (tester) async {
-    final auth = MockAuth();
-    when(auth.currentUser).thenAnswer((_) async => user);
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
 
