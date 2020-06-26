@@ -23,6 +23,7 @@ class LifeRoadModel {
 
   final int width;
   final int height;
+  final List<List<LifeStepModel>> lifeStepsOnBoard;
 
   /// LifeStepsOnBoard の生成ヘルパー
   static List<List<LifeStepModel>> createLifeStepsOnBoard(List<List<LifeEventModel>> lifeEvents) => List.generate(
@@ -78,8 +79,6 @@ class LifeRoadModel {
       [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
     ];
   }
-
-  List<List<LifeStepModel>> lifeStepsOnBoard;
 
   LifeStepModel get start {
     for (final list in lifeStepsOnBoard) {
