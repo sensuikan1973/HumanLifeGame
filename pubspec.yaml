@@ -31,7 +31,7 @@ dev_dependencies:
     sdk: flutter
 
   build_runner: ^1.10.0
-  cloud_firestore_mocks: ^0.4.4
+  cloud_firestore_mocks: ^0.4.5
   dartman_sensuikan1973:
     git:
       url: https://github.com/sensuikan1973/dartman_sensuikan1973

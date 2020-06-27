@@ -11,35 +11,36 @@ import 'package:provider/provider.dart';
 
 Widget testableApp({
   @required Widget home,
+  Store store,
+  Router router = const Router(),
+  Auth auth = const Auth(),
+  Dice dice = const Dice(),
   Locale locale = const Locale('en', 'US'),
-  List<Provider> providers,
-}) {
-  final defaultProviders = [
-    Provider(create: (_) => const Router()),
-    Provider(create: (_) => const Auth()),
-    Provider(create: (_) => Store(MockFirestoreInstance())),
-    Provider(create: (_) => const Dice()),
-  ];
-  return MultiProvider(
-    providers: providers ?? defaultProviders,
-    child: Builder(
-      builder: (context) => MaterialApp(
-        onGenerateTitle: (context) => I18n.of(context).appTitle,
-        localizationsDelegates: const [
-          I18nDelegate(),
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [Locale('en', 'US'), Locale('ja', 'JP')],
-        locale: locale,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
+}) =>
+    MultiProvider(
+      providers: [
+        Provider(create: (_) => router),
+        Provider(create: (_) => auth),
+        Provider(create: (_) => dice),
+        Provider(create: (_) => store ?? Store(MockFirestoreInstance())),
+      ],
+      child: Builder(
+        builder: (context) => MaterialApp(
+          onGenerateTitle: (context) => I18n.of(context).appTitle,
+          localizationsDelegates: const [
+            I18nDelegate(),
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [Locale('en', 'US'), Locale('ja', 'JP')],
+          locale: locale,
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          home: home,
+          onGenerateRoute: context.watch<Router>().generateRoutes,
         ),
-        home: home,
-        onGenerateRoute: context.watch<Router>().generateRoutes,
       ),
-    ),
-  );
-}
+    );

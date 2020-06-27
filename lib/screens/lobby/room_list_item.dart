@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../api/firestore/play_room.dart';
 import '../../i18n/i18n.dart';
+import '../../models/lobby/lobby_notifier.dart';
 import '../../router.dart';
 
 class RoomListItem extends StatelessWidget {
@@ -59,7 +60,10 @@ class RoomListItem extends StatelessWidget {
         height: 40,
         child: FlatButton(
           color: Colors.lightBlue,
-          onPressed: () => Navigator.of(context).pushNamed(context.read<Router>().playRoom),
+          onPressed: () async {
+            await context.read<LobbyNotifier>().join(_playRoom); // TODO: 依存整理
+            await Navigator.of(context).pushNamed(context.read<Router>().playRoom);
+          },
           child: Text(I18n.of(context).lobbyEnterTheRoomButtonText),
         ),
       );

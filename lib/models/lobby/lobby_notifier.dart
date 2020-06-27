@@ -3,6 +3,7 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../api/auth.dart';
+import '../../api/firestore/life_road.dart';
 import '../../api/firestore/play_room.dart';
 import '../../api/firestore/store.dart';
 import '../../api/firestore/user.dart';
@@ -38,25 +39,41 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
       host: userDocRef.ref,
       title: 'はじめての人生',
       humans: [userDocRef.ref],
-      // FIXME: null 禁止だからテキトーに入れてるだけで絶対に修正しないとダメ
-      //        rules 側に存否チェックが無いからこれ通るけど、ホント一時的なダミー実装に過ぎない
-      lifeRoad: userDocRef.ref,
+      // FIXME: 本当に存在する lifeRoad を参照するように
+      lifeRoad: _store.docRef<LifeRoadEntity>('FIXME').ref,
       currentTurnHumanId: user.uid,
     );
     final roomDocRef = _store.collectionRef<PlayRoomEntity>().docRef();
     final batch = _store.firestore.batch();
     await roomDocRef.setData(room.encode(), batch: batch);
-    await userDocRef.updateData(
-      <String, dynamic>{
-        UserEntityField.joinPlayRoom: roomDocRef.ref,
-        TimestampField.updatedAt: FieldValue.serverTimestamp(),
-      },
-      batch: batch,
-    );
+    await userDocRef.updateData(<String, dynamic>{
+      UserEntityField.joinPlayRoom: roomDocRef.ref,
+      TimestampField.updatedAt: FieldValue.serverTimestamp(),
+    }, batch: batch);
     await batch.commit(); // FIXME: エラーハンドリング. 特に既に join 済みの場合のハンドリング.
     value.navigateArgumentsToPlayRoom = PlayRoomNotifierArguments(
       Document<PlayRoomEntity>(roomDocRef.ref, room),
     );
+    notifyListeners();
+  }
+
+  Future<void> join(Document<PlayRoomEntity> playRoomDoc) async {
+    final user = await _auth.currentUser;
+    final userDocRef = _store.docRef<UserEntity>(user.uid);
+    // 既に参加済みの場合は何もしない
+    if (playRoomDoc.entity.humans.contains(userDocRef.ref)) return notifyListeners();
+
+    final roomDocRef = _store.collectionRef<PlayRoomEntity>().docRef(playRoomDoc.id);
+    final batch = _store.firestore.batch();
+    await userDocRef.updateData(<String, dynamic>{
+      UserEntityField.joinPlayRoom: playRoomDoc.ref,
+      TimestampField.updatedAt: FieldValue.serverTimestamp(),
+    }, batch: batch);
+    await roomDocRef.updateData(<String, dynamic>{
+      PlayRoomEntityField.humans: FieldValue.arrayUnion(<DocumentReference>[userDocRef.ref]),
+      TimestampField.updatedAt: FieldValue.serverTimestamp(),
+    }, batch: batch);
+    await batch.commit();
     notifyListeners();
   }
 
