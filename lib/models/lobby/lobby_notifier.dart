@@ -70,7 +70,7 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
       TimestampField.updatedAt: FieldValue.serverTimestamp(),
     }, batch: batch);
     await roomDocRef.updateData(<String, dynamic>{
-      PlayRoomEntityField.humans: FieldValue.arrayUnion(<dynamic>[userDocRef.ref]),
+      PlayRoomEntityField.humans: FieldValue.arrayUnion(<DocumentReference>[userDocRef.ref]),
       TimestampField.updatedAt: FieldValue.serverTimestamp(),
     }, batch: batch);
     await batch.commit();
