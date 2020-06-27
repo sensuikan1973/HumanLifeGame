@@ -99,7 +99,10 @@ Future<void> main() async {
     await tester.pump();
     expect(find.byType(PlayRoom), findsOneWidget); // playRoom に遷移
 
-    // FIXME: 現状は DB 上の参加者をチェックしているが、UI 実装したら "Widget" テストするべき
+    // FIXME: UI 実装したら "Widget" テストするべき
+    // NOTE: その前にまず DB チェックのテストだけでもと思ったが、
+    // cloud_firestore_mocks で DocumentReference の arrayUnion が機能しないことが分かったので、一旦コメントアウトしてる
+    // See: https://github.com/atn832/cloud_firestore_mocks/blob/bc57783b8ae993852e3ad19212fa985c208fd601/lib/src/mock_document_reference.dart#L25
 //    final joinedRoom = await store
 //        .collectionRef<PlayRoomEntity>()
 //        .ref
