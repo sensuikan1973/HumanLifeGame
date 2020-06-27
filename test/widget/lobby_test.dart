@@ -54,7 +54,7 @@ Future<void> main() async {
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
 
-    // ダミー user を投入
+    // 自身の user document を投入
     final userDocRef = store.docRef<UserEntity>(user.uid);
     await userDocRef.set(UserEntity(
       uid: user.uid,
@@ -63,17 +63,25 @@ Future<void> main() async {
       updatedAt: DateTime.now(),
     ));
 
-    // ダミー room を投入
+    // 見知らぬ他人の user document を投入
+    final otherUserDocRef = store.docRef<UserEntity>('aaa');
+    await otherUserDocRef.set(UserEntity(
+      uid: otherUserDocRef.ref.documentID,
+      displayName: 'unknown person',
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ));
+
+    // 自身では無い、他人の投稿した room を投入
     const roomNum = 2;
     for (var i = 0; i < roomNum; ++i) {
       final randString = Random().nextInt(1000).toString();
-      // FIXME: 本来は add で書くべきだが、https://github.com/atn832/cloud_firestore_mocks/pull/99 のバグがあるので set で書いてる
-      await store.collectionRef<PlayRoomEntity>().docRef().set(PlayRoomEntity(
-          host: userDocRef.ref,
-          humans: [userDocRef.ref],
+      await store.collectionRef<PlayRoomEntity>().add(PlayRoomEntity(
+          host: otherUserDocRef.ref,
+          humans: [otherUserDocRef.ref],
           title: randString,
           lifeRoad: store.docRef<LifeRoadEntity>(randString).ref,
-          currentTurnHumanId: user.uid));
+          currentTurnHumanId: otherUserDocRef.ref.documentID));
     }
 
     await tester.pumpWidget(
@@ -83,12 +91,20 @@ Future<void> main() async {
     await tester.pump();
     expect(find.byType(LifeRoadTips), findsOneWidget);
     expect(find.byType(FloatingActionButton), findsOneWidget);
-    expect(find.byType(RoomListItem), findsNWidgets(roomNum)); // ダミーデータの数だけ表示される
+    expect(find.byType(RoomListItem), findsNWidgets(roomNum));
 
     // 複数ある enter button のうち１つをタップする
     await tester.tap(find.text(i18n.lobbyEnterTheRoomButtonText).first);
     await tester.pump();
     await tester.pump();
     expect(find.byType(PlayRoom), findsOneWidget); // playRoom に遷移
+
+    // FIXME: 現状は DB 上の参加者をチェックしているが、UI 実装したら "Widget" テストするべき
+//    final joinedRoom = await store
+//        .collectionRef<PlayRoomEntity>()
+//        .ref
+//        .where(PlayRoomEntityField.humans, arrayContains: userDocRef)
+//        .getDocuments();
+//    expect(joinedRoom.documents.length, 1);
   });
 }
