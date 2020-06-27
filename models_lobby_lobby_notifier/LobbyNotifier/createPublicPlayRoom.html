@@ -70,6 +70,7 @@
         <li><a href="../../models_lobby_lobby_notifier/LobbyNotifier/createPublicPlayRoom.html">createPublicPlayRoom</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/ChangeNotifier/dispose.html">dispose</a></li>
         <li><a href="../../models_lobby_lobby_notifier/LobbyNotifier/fetchPlayRooms.html">fetchPlayRooms</a></li>
+        <li><a href="../../models_lobby_lobby_notifier/LobbyNotifier/join.html">join</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/ChangeNotifier/notifyListeners.html">notifyListeners</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/ChangeNotifier/removeListener.html">removeListener</a></li>
@@ -104,21 +105,17 @@
     host: userDocRef.ref,
     title: &#39;はじめての人生&#39;,
     humans: [userDocRef.ref],
-    &#47;&#47; FIXME: null 禁止だからテキトーに入れてるだけで絶対に修正しないとダメ
-    &#47;&#47;        rules 側に存否チェックが無いからこれ通るけど、ホント一時的なダミー実装に過ぎない
-    lifeRoad: userDocRef.ref,
+    &#47;&#47; FIXME: 本当に存在する lifeRoad を参照するように
+    lifeRoad: _store.docRef&lt;LifeRoadEntity&gt;(&#39;FIXME&#39;).ref,
     currentTurnHumanId: user.uid,
   );
   final roomDocRef = _store.collectionRef&lt;PlayRoomEntity&gt;().docRef();
   final batch = _store.firestore.batch();
   await roomDocRef.setData(room.encode(), batch: batch);
-  await userDocRef.updateData(
-    &lt;String, dynamic&gt;{
-      UserEntityField.joinPlayRoom: roomDocRef.ref,
-      TimestampField.updatedAt: FieldValue.serverTimestamp(),
-    },
-    batch: batch,
-  );
+  await userDocRef.updateData(&lt;String, dynamic&gt;{
+    UserEntityField.joinPlayRoom: roomDocRef.ref,
+    TimestampField.updatedAt: FieldValue.serverTimestamp(),
+  }, batch: batch);
   await batch.commit(); &#47;&#47; FIXME: エラーハンドリング. 特に既に join 済みの場合のハンドリング.
   value.navigateArgumentsToPlayRoom = PlayRoomNotifierArguments(
     Document&lt;PlayRoomEntity&gt;(roomDocRef.ref, room),
