@@ -38,6 +38,7 @@ class Store {
   Document<T> _decode<T extends Entity>(DocumentSnapshot snapshot) {
     if (T == ServiceControlEntity) return ServiceControlEntity.decode(snapshot) as Document<T>;
     if (T == PlayRoomEntity) return PlayRoomEntity.decode(snapshot) as Document<T>;
+    if (T == UserEntity) return UserEntity.decode(snapshot) as Document<T>;
     throw Exception('unexpected Entity Type: $T');
   }
 

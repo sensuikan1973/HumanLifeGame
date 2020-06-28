@@ -17,19 +17,18 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
 
   final Auth _auth;
   final Store _store;
-
   final _roomListLimit = 5;
 
   Future<void> _init() async {
-    await _signIn(_auth);
+    await _signIn();
     await fetchPlayRooms();
   }
 
-  Future<FirebaseUser> _signIn(Auth auth) async {
-    final user = await auth.currentUser;
+  Future<FirebaseUser> _signIn() async {
+    final user = await _auth.currentUser;
     if (user != null) return user;
-    if (kDebugMode) return auth.signInForDebug();
-    return auth.signInAnonymously();
+    if (kDebugMode) return _auth.signInForDebug();
+    return _auth.signInAnonymously();
   }
 
   Future<void> createPublicPlayRoom() async {

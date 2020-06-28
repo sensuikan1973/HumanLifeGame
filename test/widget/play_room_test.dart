@@ -20,7 +20,7 @@ import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 
 import '../mocks/dice.dart';
-import 'helper/widget_build_helper.dart';
+import 'helper/testable_app.dart';
 
 Future<void> main() async {
   final i18n = await I18n.load(const Locale('en', 'US'));
