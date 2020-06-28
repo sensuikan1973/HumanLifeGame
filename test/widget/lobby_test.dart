@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:HumanLifeGame/api/firestore/life_road.dart';
 import 'package:HumanLifeGame/api/firestore/play_room.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
@@ -50,7 +48,50 @@ Future<void> main() async {
     expect(find.byType(PlayRoom), findsOneWidget); // playRoom に遷移する
   });
 
-  testWidgets('list public play rooms', (tester) async {
+  testWidgets('join the public play rooms which myself hosts', (tester) async {
+    final firestore = MockFirestoreInstance();
+    final store = Store(firestore);
+
+    // 自身の user document を投入
+    final userDocRef = store.docRef<UserEntity>(user.uid);
+    await userDocRef.set(UserEntity(
+      uid: user.uid,
+      displayName: user.displayName,
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ));
+    // playRoom を作成
+    await store.collectionRef<PlayRoomEntity>().add(
+          PlayRoomEntity(
+              host: userDocRef.ref,
+              humans: [userDocRef.ref],
+              title: 'THE Life',
+              lifeRoad: store.docRef<LifeRoadEntity>('FIXME').ref,
+              currentTurnHumanId: user.uid),
+        );
+
+    await tester.pumpWidget(
+      testableApp(auth: auth, store: store, home: Lobby.inProviders()),
+    );
+    await tester.pump();
+    await tester.pump();
+    expect(find.byType(LifeRoadTips), findsOneWidget);
+    expect(find.byType(FloatingActionButton), findsOneWidget);
+    expect(find.byType(RoomListItem), findsOneWidget);
+    expect(find.text(user.uid), findsOneWidget); // 参加者としてテキストが表示されてる
+
+    // playRoom に遷移
+    await tester.tap(find.text(i18n.lobbyEnterTheRoomButtonText).first);
+    await tester.pump();
+    await tester.pump();
+    expect(find.byType(PlayRoom), findsOneWidget); // playRoom に遷移
+
+    // TODO: 遷移後に humans の表示だけ test しておきたい
+    // ただし、cloud_firestore_mocks で DocumentReference の arrayUnion が機能しないのが辛い
+    // See: https://github.com/atn832/cloud_firestore_mocks/issues/106
+  });
+
+  testWidgets('join the public play rooms which other hosts', (tester) async {
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
 
@@ -71,17 +112,58 @@ Future<void> main() async {
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ));
+    // 他人が作成した playRoom
+    await store.collectionRef<PlayRoomEntity>().add(
+          PlayRoomEntity(
+              host: otherUserDocRef.ref,
+              humans: [otherUserDocRef.ref],
+              title: 'THE Life',
+              lifeRoad: store.docRef<LifeRoadEntity>('FIXME').ref,
+              currentTurnHumanId: otherUserDocRef.ref.documentID),
+        );
 
-    // 自身では無い、他人の投稿した room を投入
-    const roomNum = 2;
+    await tester.pumpWidget(
+      testableApp(auth: auth, store: store, home: Lobby.inProviders()),
+    );
+    await tester.pump();
+    await tester.pump();
+    expect(find.byType(LifeRoadTips), findsOneWidget);
+    expect(find.byType(FloatingActionButton), findsOneWidget);
+    expect(find.byType(RoomListItem), findsOneWidget);
+    expect(find.text(otherUserDocRef.ref.documentID), findsOneWidget); // 参加者としてテキストが表示されてる
+
+    // playRoom に遷移
+    await tester.tap(find.text(i18n.lobbyEnterTheRoomButtonText).first);
+    await tester.pump();
+    await tester.pump();
+    expect(find.byType(PlayRoom), findsOneWidget); // playRoom に遷移
+
+    // TODO: 遷移後に humans の表示だけ test しておきたい
+    // ただし、cloud_firestore_mocks で DocumentReference の arrayUnion が機能しないのが辛い
+    // See: https://github.com/atn832/cloud_firestore_mocks/issues/106
+  });
+
+  testWidgets('list play rooms', (tester) async {
+    final firestore = MockFirestoreInstance();
+    final store = Store(firestore);
+
+    const roomNum = 3;
     for (var i = 0; i < roomNum; ++i) {
-      final randString = Random().nextInt(1000).toString();
-      await store.collectionRef<PlayRoomEntity>().add(PlayRoomEntity(
-          host: otherUserDocRef.ref,
-          humans: [otherUserDocRef.ref],
-          title: randString,
-          lifeRoad: store.docRef<LifeRoadEntity>(randString).ref,
-          currentTurnHumanId: otherUserDocRef.ref.documentID));
+      final userDocRef = store.docRef<UserEntity>('user_$i');
+      await userDocRef.set(UserEntity(
+        uid: userDocRef.ref.documentID,
+        displayName: 'user_$i',
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+      ));
+      await store.collectionRef<PlayRoomEntity>().add(
+            PlayRoomEntity(
+                host: userDocRef.ref,
+                humans: [userDocRef.ref],
+                title: 'life_$i',
+                lifeRoad: store.docRef<LifeRoadEntity>('FIXME').ref,
+                currentTurnHumanId: userDocRef.ref.documentID),
+          );
     }
 
     await tester.pumpWidget(
@@ -92,22 +174,5 @@ Future<void> main() async {
     expect(find.byType(LifeRoadTips), findsOneWidget);
     expect(find.byType(FloatingActionButton), findsOneWidget);
     expect(find.byType(RoomListItem), findsNWidgets(roomNum));
-
-    // 複数ある enter button のうち１つをタップする
-    await tester.tap(find.text(i18n.lobbyEnterTheRoomButtonText).first);
-    await tester.pump();
-    await tester.pump();
-    expect(find.byType(PlayRoom), findsOneWidget); // playRoom に遷移
-
-    // FIXME: UI 実装したら "Widget" テストするべき
-    // NOTE: その前にまず DB チェックのテストだけでもと思ったが、
-    // cloud_firestore_mocks で DocumentReference の arrayUnion が機能しないことが分かったので、一旦コメントアウトしてる
-    // See: https://github.com/atn832/cloud_firestore_mocks/blob/bc57783b8ae993852e3ad19212fa985c208fd601/lib/src/mock_document_reference.dart#L25
-//    final joinedRoom = await store
-//        .collectionRef<PlayRoomEntity>()
-//        .ref
-//        .where(PlayRoomEntityField.humans, arrayContains: userDocRef)
-//        .getDocuments();
-//    expect(joinedRoom.documents.length, 1);
   });
 }
