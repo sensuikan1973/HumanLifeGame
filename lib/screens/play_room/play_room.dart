@@ -37,6 +37,10 @@ class PlayRoomState extends State<PlayRoom> {
     return Size(width, height);
   }
 
+  bool _showLifeEventRecords(BuildContext context) =>
+      MediaQuery.of(context).size.height >
+      _announcementSize.height + _lifeEventRecordsSize.height + _playViewSize(context).height;
+
   @override
   Widget build(BuildContext context) {
     if (context.select<PlayRoomNotifier, bool>((model) => model.value.allHumansReachedTheGoal)) {
@@ -60,8 +64,7 @@ class PlayRoomState extends State<PlayRoom> {
                 height: _announcementSize.height,
                 child: const Announcement(),
               ),
-              if (screenSize.height >
-                  _announcementSize.height + _lifeEventRecordsSize.height + _playViewSize(context).height)
+              if (_showLifeEventRecords(context))
                 Expanded(
                   child: SizedBox(
                     width: _lifeEventRecordsSize.width,
@@ -97,8 +100,7 @@ class PlayRoomState extends State<PlayRoom> {
             height: _announcementSize.height,
             child: const Announcement(),
           ),
-          if (screenSize.height >
-              _announcementSize.height + _lifeEventRecordsSize.height + _playViewSize(context).height)
+          if (_showLifeEventRecords(context))
             Expanded(
               child: SizedBox(
                 width: screenSize.width < _lifeEventRecordsSize.width ? screenSize.width : _lifeEventRecordsSize.width,
