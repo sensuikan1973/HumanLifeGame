@@ -10,6 +10,8 @@ import '../common/human.dart';
 class LifeStages extends StatelessWidget {
   const LifeStages({Key key}) : super(key: key);
 
+  Icon _turnSelector() => const Icon(Icons.chevron_right, color: Colors.pink);
+
   @override
   Widget build(BuildContext context) => Card(
         child: _lifeStages(context),
@@ -26,7 +28,7 @@ class LifeStages extends StatelessWidget {
             SizedBox(
               width: 25,
               height: 25,
-              child: (currentTurnHuman == lifeStage.human) ? currentTurnHumanSelector() : null,
+              child: (currentTurnHuman == lifeStage.human) ? _turnSelector() : null,
             ),
             Human(lifeStage.human),
             Text(lifeStage.human.name),
@@ -40,6 +42,4 @@ class LifeStages extends StatelessWidget {
       children: humanNames,
     );
   }
-
-  Icon currentTurnHumanSelector() => const Icon(Icons.chevron_right, color: Colors.pink);
 }
