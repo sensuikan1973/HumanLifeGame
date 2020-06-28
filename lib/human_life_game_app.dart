@@ -25,21 +25,36 @@ class HumanLifeGameApp extends StatelessWidget {
         child: const HumanLifeGameApp._(),
       );
 
+  @visibleForTesting
+  static const supportedLocales = [Locale('en', 'US'), Locale('ja', 'JP')];
+
+  @visibleForTesting
+  static const defaultLocale = Locale('en', 'US');
+
+  @visibleForTesting
+  static ThemeData get theme => ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      );
+
+  @visibleForTesting
+  static String onGenerateTitle(BuildContext context) => I18n.of(context).appTitle;
+
+  @visibleForTesting
+  static const List<LocalizationsDelegate<dynamic>> localizationDelegates = [
+    I18nDelegate(),
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+  ];
+
   @override
   Widget build(BuildContext context) => MaterialApp(
-        onGenerateTitle: (context) => I18n.of(context).appTitle,
-        localizationsDelegates: const [
-          I18nDelegate(),
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [Locale('en', 'US'), Locale('ja', 'JP')],
-        locale: const Locale('en'),
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
+        onGenerateTitle: onGenerateTitle,
+        localizationsDelegates: localizationDelegates,
+        supportedLocales: supportedLocales,
+        locale: defaultLocale,
+        theme: theme,
         home: Lobby.inProviders(),
         onGenerateRoute: context.watch<Router>().generateRoutes,
       );
