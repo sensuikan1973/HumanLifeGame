@@ -129,7 +129,7 @@ Future<void> main() async {
 
     const roomNum = 3;
     for (var i = 0; i < roomNum; ++i) {
-      final userDoc = await createUser(store, uid: user.uid);
+      final userDoc = await createUser(store);
       await store.collectionRef<PlayRoomEntity>().add(
             PlayRoomEntity(
                 host: userDoc.ref,
