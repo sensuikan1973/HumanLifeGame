@@ -10,9 +10,6 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-          ref: master
       - uses: subosito/flutter-action@v1
         with:
           channel: 'beta'
