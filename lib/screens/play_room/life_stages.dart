@@ -6,7 +6,7 @@ import '../../models/play_room/life_stage.dart';
 import '../../models/play_room/play_room_notifier.dart';
 import '../common/human.dart';
 
-/// Humanの状況を表示
+/// 各 Human たちの人生の進捗(= LifeStage)を表示
 class LifeStages extends StatelessWidget {
   const LifeStages({Key key}) : super(key: key);
 
