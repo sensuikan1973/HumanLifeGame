@@ -26,8 +26,10 @@ class PlayRoomState extends State<PlayRoom> {
   Size get _lifeStagesSize => const Size(200, 500);
   Size get _diceResultSize => const Size(200, 100);
   Size get _playerActionSize => const Size(200, 300);
-
-  Size _playViewSize(BuildContext context) {
+  bool get _showLifeEventRecords =>
+      MediaQuery.of(context).size.height >
+      _announcementSize.height + _lifeEventRecordsSize.height + _playViewSize.height;
+  Size get _playViewSize {
     const defaultPlayViewSize = Size(1050, 750);
     final screenSize = MediaQuery.of(context).size;
     final width = screenSize.width > defaultPlayViewSize.width ? defaultPlayViewSize.width : screenSize.width;
@@ -36,10 +38,6 @@ class PlayRoomState extends State<PlayRoom> {
         : defaultPlayViewSize.height;
     return Size(width, height);
   }
-
-  bool _showLifeEventRecords(BuildContext context) =>
-      MediaQuery.of(context).size.height >
-      _announcementSize.height + _lifeEventRecordsSize.height + _playViewSize(context).height;
 
   void _setShowDialogCallback() {
     if (isDisplayedResult) return;
@@ -55,13 +53,12 @@ class PlayRoomState extends State<PlayRoom> {
   @override
   Widget build(BuildContext context) {
     _setShowDialogCallback();
-    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: screenSize.width >= _desktopSize.width ? _largeScreen(screenSize) : _middleScreen(screenSize),
+      body: MediaQuery.of(context).size.width >= _desktopSize.width ? _largeScreen() : _middleScreen(),
     );
   }
 
-  Row _largeScreen(Size screenSize) => Row(
+  Row _largeScreen() => Row(
         children: <Widget>[
           Column(
             children: <Widget>[
@@ -70,7 +67,7 @@ class PlayRoomState extends State<PlayRoom> {
                 height: _announcementSize.height,
                 child: const Announcement(),
               ),
-              if (_showLifeEventRecords(context))
+              if (_showLifeEventRecords)
                 Expanded(
                   child: SizedBox(
                     width: _lifeEventRecordsSize.width,
@@ -78,15 +75,15 @@ class PlayRoomState extends State<PlayRoom> {
                   ),
                 ),
               SizedBox(
-                width: _playViewSize(context).width,
-                height: _playViewSize(context).height,
+                width: _playViewSize.width,
+                height: _playViewSize.height,
                 child: const PlayView(),
               ),
             ],
           ),
           Expanded(
             child: SizedBox(
-              height: screenSize.height,
+              height: MediaQuery.of(context).size.height,
               child: Column(
                 children: const <Widget>[
                   Expanded(flex: 2, child: LifeStages()),
@@ -99,31 +96,35 @@ class PlayRoomState extends State<PlayRoom> {
         ],
       );
 
-  Column _middleScreen(Size screenSize) => Column(
+  Column _middleScreen() => Column(
         children: <Widget>[
           SizedBox(
-            width: screenSize.width < _announcementSize.width ? screenSize.width : _announcementSize.width,
+            width: MediaQuery.of(context).size.width < _announcementSize.width
+                ? MediaQuery.of(context).size.width
+                : _announcementSize.width,
             height: _announcementSize.height,
             child: const Announcement(),
           ),
-          if (_showLifeEventRecords(context))
+          if (_showLifeEventRecords)
             Expanded(
               child: SizedBox(
-                width: screenSize.width < _lifeEventRecordsSize.width ? screenSize.width : _lifeEventRecordsSize.width,
+                width: MediaQuery.of(context).size.width < _lifeEventRecordsSize.width
+                    ? MediaQuery.of(context).size.width
+                    : _lifeEventRecordsSize.width,
                 child: const LifeEventRecords(),
               ),
             ),
           Stack(
             children: <Widget>[
               SizedBox(
-                width: _playViewSize(context).width,
-                height: _playViewSize(context).height,
+                width: _playViewSize.width,
+                height: _playViewSize.height,
                 child: const PlayView(),
               ),
               Positioned(
                 right: 0,
                 child: SizedBox(
-                  height: _playViewSize(context).height,
+                  height: _playViewSize.height,
                   child: Column(
                     children: <Widget>[
                       Expanded(
