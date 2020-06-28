@@ -91,7 +91,7 @@ Future<void> main() async {
 //    final userDoc = await createUser(store, uid: user.uid);
 
     // 見知らぬ他人の user document を投入
-    final otherUserDoc = await createUser(store, uid: 'aaa');
+    final otherUserDoc = await createUser(store);
     // 他人が作成した playRoom
     await store.collectionRef<PlayRoomEntity>().add(
           PlayRoomEntity(
