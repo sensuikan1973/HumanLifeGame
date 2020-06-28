@@ -23,6 +23,11 @@ abstract class UserEntity implements _$UserEntity, Entity {
 
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
+
+  static Document<UserEntity> decode(DocumentSnapshot snapshot) => Document<UserEntity>(
+        snapshot.reference,
+        UserEntity.fromJson(snapshot.data),
+      );
 }
 
 class UserEntityField {

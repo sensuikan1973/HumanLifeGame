@@ -1,7 +1,6 @@
 import 'package:HumanLifeGame/api/firestore/life_road.dart';
 import 'package:HumanLifeGame/api/firestore/play_room.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
-import 'package:HumanLifeGame/api/firestore/user.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/screens/lobby/human_life_tips.dart';
 import 'package:HumanLifeGame/screens/lobby/lobby.dart';
@@ -13,6 +12,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 import '../mocks/auth.dart';
+import 'helper/firestore/user_helper.dart';
 import 'helper/testable_app.dart';
 
 Future<void> main() async {
@@ -52,19 +52,12 @@ Future<void> main() async {
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
 
-    // 自身の user document を投入
-    final userDocRef = store.docRef<UserEntity>(user.uid);
-    await userDocRef.set(UserEntity(
-      uid: user.uid,
-      displayName: user.displayName,
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-    ));
+    final userDoc = await createUser(store, uid: user.uid);
     // playRoom を作成
     await store.collectionRef<PlayRoomEntity>().add(
           PlayRoomEntity(
-              host: userDocRef.ref,
-              humans: [userDocRef.ref],
+              host: userDoc.ref,
+              humans: [userDoc.ref],
               title: 'THE Life',
               lifeRoad: store.docRef<LifeRoadEntity>('FIXME').ref,
               currentTurnHumanId: user.uid),
@@ -95,31 +88,18 @@ Future<void> main() async {
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
 
-    // 自身の user document を投入
-    final userDocRef = store.docRef<UserEntity>(user.uid);
-    await userDocRef.set(UserEntity(
-      uid: user.uid,
-      displayName: user.displayName,
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-    ));
+//    final userDoc = await createUser(store, uid: user.uid);
 
     // 見知らぬ他人の user document を投入
-    final otherUserDocRef = store.docRef<UserEntity>('aaa');
-    await otherUserDocRef.set(UserEntity(
-      uid: otherUserDocRef.ref.documentID,
-      displayName: 'unknown person',
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-    ));
+    final otherUserDoc = await createUser(store, uid: 'aaa');
     // 他人が作成した playRoom
     await store.collectionRef<PlayRoomEntity>().add(
           PlayRoomEntity(
-              host: otherUserDocRef.ref,
-              humans: [otherUserDocRef.ref],
+              host: otherUserDoc.ref,
+              humans: [otherUserDoc.ref],
               title: 'THE Life',
               lifeRoad: store.docRef<LifeRoadEntity>('FIXME').ref,
-              currentTurnHumanId: otherUserDocRef.ref.documentID),
+              currentTurnHumanId: otherUserDoc.entity.uid),
         );
 
     await tester.pumpWidget(
@@ -130,7 +110,7 @@ Future<void> main() async {
     expect(find.byType(LifeRoadTips), findsOneWidget);
     expect(find.byType(FloatingActionButton), findsOneWidget);
     expect(find.byType(RoomListItem), findsOneWidget);
-    expect(find.text(otherUserDocRef.ref.documentID), findsOneWidget); // 参加者としてテキストが表示されてる
+    expect(find.text(otherUserDoc.entity.uid), findsOneWidget); // 参加者としてテキストが表示されてる
 
     // playRoom に遷移
     await tester.tap(find.text(i18n.lobbyEnterTheRoomButtonText).first);
@@ -149,20 +129,14 @@ Future<void> main() async {
 
     const roomNum = 3;
     for (var i = 0; i < roomNum; ++i) {
-      final userDocRef = store.docRef<UserEntity>('user_$i');
-      await userDocRef.set(UserEntity(
-        uid: userDocRef.ref.documentID,
-        displayName: 'user_$i',
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-      ));
+      final userDoc = await createUser(store, uid: user.uid);
       await store.collectionRef<PlayRoomEntity>().add(
             PlayRoomEntity(
-                host: userDocRef.ref,
-                humans: [userDocRef.ref],
+                host: userDoc.ref,
+                humans: [userDoc.ref],
                 title: 'life_$i',
                 lifeRoad: store.docRef<LifeRoadEntity>('FIXME').ref,
-                currentTurnHumanId: userDocRef.ref.documentID),
+                currentTurnHumanId: userDoc.entity.uid),
           );
     }
 
