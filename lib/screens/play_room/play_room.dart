@@ -148,24 +148,20 @@ class PlayRoomState extends State<PlayRoom> {
         ],
       );
 
-  Future<void> _showResult(BuildContext context) async {
-    final lifeStages = context.read<PlayRoomNotifier>().value.lifeStages;
-    final result = <Widget>[
-      for (final lifeStage in lifeStages)
-        Row(
+  Future<void> _showResult(BuildContext context) async => showDialog<void>(
+        context: context,
+        builder: (_) => SimpleDialog(
+          title: Text(I18n.of(context).resultAnnouncementDialogMessage),
           children: [
-            Text(lifeStage.human.name),
-            const Text(', 💵: '), // FIXME: 仮テキスト
-            Text(lifeStage.totalMoney.toString()),
+            for (final lifeStage in context.read<PlayRoomNotifier>().value.lifeStages)
+              Row(
+                children: [
+                  Text(lifeStage.human.name),
+                  const Text(', 💵: '), // FIXME: 仮テキスト
+                  Text(lifeStage.totalMoney.toString()),
+                ],
+              ),
           ],
         ),
-    ];
-    await showDialog<void>(
-      context: context,
-      builder: (context) => SimpleDialog(
-        title: Text(I18n.of(context).resultAnnouncementDialogMessage),
-        children: result,
-      ),
-    );
-  }
+      );
 }
