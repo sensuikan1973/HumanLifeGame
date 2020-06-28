@@ -10,9 +10,6 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-          ref: master
       - name: fetch latest version
         run: echo "::set-env name=LATEST_VERSION::$(npm show firebase version)"
       - uses: sensuikan1973/replace-deps@v1
