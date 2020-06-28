@@ -24,23 +24,21 @@ Widget testableApp({
         Provider(create: (_) => dice),
         Provider(create: (_) => store ?? Store(MockFirestoreInstance())),
       ],
-      child: Builder(
-        builder: (context) => MaterialApp(
-          onGenerateTitle: (context) => I18n.of(context).appTitle,
-          localizationsDelegates: const [
-            I18nDelegate(),
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [Locale('en', 'US'), Locale('ja', 'JP')],
-          locale: locale,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
-          home: home,
-          onGenerateRoute: context.watch<Router>().generateRoutes,
+      child: MaterialApp(
+        onGenerateTitle: (context) => I18n.of(context).appTitle,
+        localizationsDelegates: const [
+          I18nDelegate(),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [Locale('en', 'US'), Locale('ja', 'JP')],
+        locale: locale,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
+        home: home,
+        onGenerateRoute: router.generateRoutes,
       ),
     );
