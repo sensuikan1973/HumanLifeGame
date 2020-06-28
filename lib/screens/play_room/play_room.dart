@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../i18n/i18n.dart';
 import '../../models/play_room/play_room_notifier.dart';
 import 'announcement.dart';
 import 'dice_result.dart';
@@ -9,6 +8,7 @@ import 'life_event_records.dart';
 import 'life_stages.dart';
 import 'play_view.dart';
 import 'player_action.dart';
+import 'result_dialog.dart';
 
 class PlayRoom extends StatefulWidget {
   const PlayRoom({Key key}) : super(key: key);
@@ -41,14 +41,20 @@ class PlayRoomState extends State<PlayRoom> {
       MediaQuery.of(context).size.height >
       _announcementSize.height + _lifeEventRecordsSize.height + _playViewSize(context).height;
 
+  void _setShowDialogCallback() {
+    if (isDisplayedResult) return;
+    if (context.select<PlayRoomNotifier, bool>((model) => model.value.allHumansReachedTheGoal)) {
+      isDisplayedResult = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) async => showDialog<void>(
+            context: context,
+            builder: (_) => ResultDialog(context.read<PlayRoomNotifier>().value.lifeStages),
+          ));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    if (context.select<PlayRoomNotifier, bool>((model) => model.value.allHumansReachedTheGoal)) {
-      if (!isDisplayedResult) {
-        isDisplayedResult = true;
-        WidgetsBinding.instance.addPostFrameCallback((_) async => _showResult(context));
-      }
-    }
+    _setShowDialogCallback();
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: screenSize.width >= _desktopSize.width ? _largeScreen(screenSize) : _middleScreen(screenSize),
@@ -146,22 +152,5 @@ class PlayRoomState extends State<PlayRoom> {
             ],
           ),
         ],
-      );
-
-  Future<void> _showResult(BuildContext context) async => showDialog<void>(
-        context: context,
-        builder: (_) => SimpleDialog(
-          title: Text(I18n.of(context).resultAnnouncementDialogMessage),
-          children: [
-            for (final lifeStage in context.read<PlayRoomNotifier>().value.lifeStages)
-              Row(
-                children: [
-                  Text(lifeStage.human.name),
-                  const Text(', 💵: '), // FIXME: 仮テキスト
-                  Text(lifeStage.totalMoney.toString()),
-                ],
-              ),
-          ],
-        ),
       );
 }
