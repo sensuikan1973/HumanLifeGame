@@ -13,7 +13,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 import '../mocks/auth.dart';
-import 'helper/widget_build_helper.dart';
+import 'helper/testable_app.dart';
 
 Future<void> main() async {
   setUp(() {

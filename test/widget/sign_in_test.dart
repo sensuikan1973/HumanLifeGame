@@ -5,7 +5,7 @@ import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 
 import '../mocks/auth.dart';
-import 'helper/widget_build_helper.dart';
+import 'helper/testable_app.dart';
 
 Future<void> main() async {
   testWidgets('not signed in', (tester) async {

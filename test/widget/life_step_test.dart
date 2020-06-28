@@ -7,7 +7,7 @@ import 'package:HumanLifeGame/screens/common/life_step.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'helper/widget_build_helper.dart';
+import 'helper/testable_app.dart';
 
 Future<void> main() async {
   testWidgets('show Card with positive Color', (tester) async {
