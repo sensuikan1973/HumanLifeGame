@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the createdAt property from the UserEntity class, for the Dart programming language.">
-  <title>createdAt property - UserEntity class - user library - Dart API</title>
+  <meta name="description" content="API docs for the decode method from the UserEntity class, for the Dart programming language.">
+  <title>decode method - UserEntity class - user library - Dart API</title>
 
   
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
@@ -27,9 +27,9 @@
     <li><a href="../../index.html">HumanLifeGame</a></li>
     <li><a href="../../api_firestore_user/api_firestore_user-library.html">user</a></li>
     <li><a href="../../api_firestore_user/UserEntity-class.html">UserEntity</a></li>
-    <li class="self-crumb">createdAt property</li>
+    <li class="self-crumb">decode method</li>
   </ol>
-  <div class="self-name">createdAt</div>
+  <div class="self-name">decode</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -48,7 +48,7 @@
       <li><a href="../../index.html">HumanLifeGame</a></li>
       <li><a href="../../api_firestore_user/api_firestore_user-library.html">user</a></li>
       <li><a href="../../api_firestore_user/UserEntity-class.html">UserEntity</a></li>
-      <li class="self-crumb">createdAt property</li>
+      <li class="self-crumb">decode method</li>
     </ol>
     
     <h5>UserEntity class</h5>
@@ -89,24 +89,24 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
-      <div><h1><span class="kind-property">createdAt</span> property </h1></div>
+      <div><h1><span class="kind-method">decode</span> method </h1></div>
 
+    <section class="multi-line-signature">
+      <span class="returntype"><a href="https://pub.dev/documentation/firestore_ref/0.8.17/firestore_ref/Document-class.html">Document</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../api_firestore_user/UserEntity-class.html">UserEntity</a></span>&gt;</span></span>
+            <span class="name ">decode</span>
+(<wbr><ol class="parameter-list"><li><span class="parameter" id="decode-param-snapshot"><span class="type-annotation"><a href="https://pub.dev/documentation/cloud_firestore/0.13.7/cloud_firestore/DocumentSnapshot-class.html">DocumentSnapshot</a></span> <span class="parameter-name">snapshot</span></span></li>
+</ol>)
+      
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span></h2>
+      <pre class="language-dart"><code class="language-dart">static Document&lt;UserEntity&gt; decode(DocumentSnapshot snapshot) =&gt; Document&lt;UserEntity&gt;(
+      snapshot.reference,
+      UserEntity.fromJson(snapshot.data),
+    );</code></pre>
+    </section>
 
-        <section id="getter">
-        
-        <section class="multi-line-signature">
-          <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span>
-                  <span class="name ">createdAt</span>
-          <div class="features">@<a href="https://pub.dev/documentation/firestore_ref/0.8.17/firestore_ref/TimestampConverter-class.html">TimestampConverter</a>(), inherited</div>
-</section>
-        
-                        <section class="summary source-code" id="source">
-          <h2><span>Implementation</span></h2>
-          <pre class="language-dart"><code class="language-dart">@TimestampConverter()
-DateTime get createdAt;</code></pre>
-        </section>
-</section>
-        
   </div> <!-- /.main-content -->
 
   <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">

@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the build method from the HumanLifeGameApp class, for the Dart programming language.">
-  <title>build method - HumanLifeGameApp class - human_life_game_app library - Dart API</title>
+  <meta name="description" content="API docs for the theme property from the HumanLifeGameApp class, for the Dart programming language.">
+  <title>theme property - HumanLifeGameApp class - human_life_game_app library - Dart API</title>
 
   
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
@@ -27,9 +27,9 @@
     <li><a href="../../index.html">HumanLifeGame</a></li>
     <li><a href="../../human_life_game_app/human_life_game_app-library.html">human_life_game_app</a></li>
     <li><a href="../../human_life_game_app/HumanLifeGameApp-class.html">HumanLifeGameApp</a></li>
-    <li class="self-crumb">build method</li>
+    <li class="self-crumb">theme property</li>
   </ol>
-  <div class="self-name">build</div>
+  <div class="self-name">theme</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -48,7 +48,7 @@
       <li><a href="../../index.html">HumanLifeGame</a></li>
       <li><a href="../../human_life_game_app/human_life_game_app-library.html">human_life_game_app</a></li>
       <li><a href="../../human_life_game_app/HumanLifeGameApp-class.html">HumanLifeGameApp</a></li>
-      <li class="self-crumb">build method</li>
+      <li class="self-crumb">theme property</li>
     </ol>
     
     <h5>HumanLifeGameApp class</h5>
@@ -94,68 +94,27 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
-      <div><h1><span class="kind-method">build</span> method </h1></div>
+      <div><h1><span class="kind-property">theme</span> property </h1></div>
 
-    <section class="multi-line-signature">
-      <div>
-        <ol class="annotation-list">
-          <li>@override</li>
-        </ol>
-      </div>
-      <span class="returntype"><a href="https://api.flutter.dev/flutter/widgets/Widget-class.html">Widget</a></span>
-            <span class="name ">build</span>
-(<wbr><ol class="parameter-list"><li><span class="parameter" id="build-param-context"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/BuildContext-class.html">BuildContext</a></span> <span class="parameter-name">context</span></span></li>
-</ol>)
-      <div class="features">override</div>
-    </section>
-    <section class="desc markdown">
-      <p>Describes the part of the user interface represented by this widget.</p>
-<p>The framework calls this method when this widget is inserted into the
-tree in a given <a href="https://api.flutter.dev/flutter/widgets/BuildContext-class.html">BuildContext</a> and when the dependencies of this widget
-change (e.g., an <a href="https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html">InheritedWidget</a> referenced by this widget changes).</p>
-<p>The framework replaces the subtree below this widget with the widget
-returned by this method, either by updating the existing subtree or by
-removing the subtree and inflating a new subtree, depending on whether the
-widget returned by this method can update the root of the existing
-subtree, as determined by calling <a href="https://api.flutter.dev/flutter/widgets/Widget/canUpdate.html">Widget.canUpdate</a>.</p>
-<p>Typically implementations return a newly created constellation of widgets
-that are configured with information from this widget's constructor and
-from the given <a href="https://api.flutter.dev/flutter/widgets/BuildContext-class.html">BuildContext</a>.</p>
-<p>The given <a href="https://api.flutter.dev/flutter/widgets/BuildContext-class.html">BuildContext</a> contains information about the location in the
-tree at which this widget is being built. For example, the context
-provides the set of inherited widgets for this location in the tree. A
-given widget might be built with multiple different <a href="https://api.flutter.dev/flutter/widgets/BuildContext-class.html">BuildContext</a>
-arguments over time if the widget is moved around the tree or if the
-widget is inserted into the tree in multiple places at once.</p>
-<p>The implementation of this method must only depend on:</p>
-<ul>
-<li>the fields of the widget, which themselves must not change over time,
-and</li>
-<li>any ambient state obtained from the <code>context</code> using
-<a href="https://api.flutter.dev/flutter/widgets/BuildContext/dependOnInheritedWidgetOfExactType.html">BuildContext.dependOnInheritedWidgetOfExactType</a>.</li>
-</ul>
-<p>If a widget's <a href="../../human_life_game_app/HumanLifeGameApp/build.html">build</a> method is to depend on anything else, use a
-<a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a> instead.</p>
-<p>See also:</p>
-<ul>
-<li><a href="https://api.flutter.dev/flutter/widgets/StatelessWidget-class.html">StatelessWidget</a>, which contains the discussion on performance considerations.</li>
-</ul>
-    </section>
-    
-    <section class="summary source-code" id="source">
-      <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">@override
-Widget build(BuildContext context) =&gt; MaterialApp(
-      onGenerateTitle: onGenerateTitle,
-      localizationsDelegates: localizationDelegates,
-      supportedLocales: supportedLocales,
-      locale: defaultLocale,
-      theme: theme,
-      home: Lobby.inProviders(),
-      onGenerateRoute: context.watch&lt;Router&gt;().generateRoutes,
+
+        <section id="getter">
+        
+        <section class="multi-line-signature">
+          <span class="returntype"><a href="https://api.flutter.dev/flutter/material/ThemeData-class.html">ThemeData</a></span>
+                  <span class="name ">theme</span>
+          <div class="features">@visibleForTesting</div>
+</section>
+        
+                        <section class="summary source-code" id="source">
+          <h2><span>Implementation</span></h2>
+          <pre class="language-dart"><code class="language-dart">@visibleForTesting
+static ThemeData get theme =&gt; ThemeData(
+      primarySwatch: Colors.blue,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
     );</code></pre>
-    </section>
-
+        </section>
+</section>
+        
   </div> <!-- /.main-content -->
 
   <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
