@@ -13,33 +13,29 @@ class LifeStages extends StatelessWidget {
   Icon _turnSelector() => const Icon(Icons.chevron_right, color: Colors.pink);
 
   @override
-  Widget build(BuildContext context) => Card(
-        child: _lifeStages(context),
-      );
+  Widget build(BuildContext context) => Card(child: _lifeStages(context));
 
   Column _lifeStages(BuildContext context) {
     final lifeStages = context.select<PlayRoomNotifier, List<LifeStageModel>>((model) => model.value.lifeStages);
     final currentTurnHuman = context.select<PlayRoomNotifier, HumanModel>((model) => model.value.currentTurnHuman);
-    final humanNames = <Widget>[
-      for (final lifeStage in lifeStages)
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            SizedBox(
-              width: 25,
-              height: 25,
-              child: (currentTurnHuman == lifeStage.human) ? _turnSelector() : null,
-            ),
-            Human(lifeStage.human),
-            Text(lifeStage.human.name),
-            const Text(', 💵: '), // FIXME: 仮テキスト
-            Text(lifeStage.totalMoney.toString()),
-          ],
-        ),
-    ];
-
     return Column(
-      children: humanNames,
+      children: [
+        for (final lifeStage in lifeStages)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              SizedBox(
+                width: 25,
+                height: 25,
+                child: (currentTurnHuman == lifeStage.human) ? _turnSelector() : null,
+              ),
+              Human(lifeStage.human),
+              Text(lifeStage.human.name),
+              const Text(', 💵: '), // FIXME: 仮テキスト
+              Text(lifeStage.totalMoney.toString()),
+            ],
+          ),
+      ],
     );
   }
 }
