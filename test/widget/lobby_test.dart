@@ -9,7 +9,6 @@ import 'package:HumanLifeGame/screens/play_room/play_room.dart';
 import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
 
 import '../mocks/auth.dart';
 import 'helper/firestore/user_helper.dart';
@@ -24,8 +23,7 @@ Future<void> main() async {
 
   final i18n = await I18n.load(const Locale('en', 'US'));
   final user = MockFirebaseUser();
-  final auth = MockAuth();
-  when(auth.currentUser).thenAnswer((_) async => user);
+  final auth = MockAuth(user);
 
   testWidgets('create public play room', (tester) async {
     final firestore = MockFirestoreInstance();

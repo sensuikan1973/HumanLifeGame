@@ -20,13 +20,12 @@ Future<void> main() async {
 
   testWidgets('already signed in', (tester) async {
     final user = MockFirebaseUser();
-    final auth = MockAuth();
-    when(auth.currentUserStream).thenAnswer((_) => Stream.fromIterable([user]));
+    final auth = MockAuth(user);
     await tester.pumpWidget(testableApp(
       home: Provider<Auth>(create: (_) => auth, child: const SignIn()),
     ));
-    await tester.pump(); // currentUserStream の initialData(つまり null)が流れる
-    await tester.pump(); // currentUserStream の次の値(つまり user)が流れる
+    await tester.pump();
+    await tester.pump();
     expect(find.text('current id: ${user.uid}'), findsOneWidget);
   });
 }

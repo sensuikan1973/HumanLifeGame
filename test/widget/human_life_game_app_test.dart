@@ -14,7 +14,9 @@ void main() {
   });
 
   testWidgets('show Lobby', (tester) async {
-    await tester.pumpWidget(HumanLifeGameApp.inProviders(auth: MockAuth()));
+    await tester.pumpWidget(HumanLifeGameApp.inProviders(
+      auth: MockAuth(MockFirebaseUser()),
+    ));
     await tester.pump();
     expect(find.byType(Lobby), findsOneWidget);
   });
