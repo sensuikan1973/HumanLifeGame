@@ -7,6 +7,7 @@ import '../../api/firestore/store.dart';
 import '../../i18n/i18n.dart';
 import '../../models/lobby/lobby_notifier.dart';
 import '../../router.dart';
+import '../play_room/play_room.dart';
 import 'app_bar.dart';
 import 'human_life_tips.dart';
 import 'room_list_item.dart';
@@ -50,7 +51,7 @@ class Lobby extends StatelessWidget {
           await notifier.createPublicPlayRoom();
           await Navigator.of(context).pushNamed(
             context.read<Router>().playRoom,
-            arguments: notifier.value.navigateArgumentsToPlayRoom,
+            arguments: PlayRoomNavigateArguments(notifier.value.haveCreatedPlayRoom),
           );
         },
         child: const Icon(Icons.add),

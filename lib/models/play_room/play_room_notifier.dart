@@ -5,18 +5,10 @@ import '../../api/dice.dart';
 import '../../api/firestore/play_room.dart';
 import '../../i18n/i18n.dart';
 import '../../services/life_event_service.dart';
-import '../common/human.dart';
-import '../common/life_road.dart';
 import '../common/life_step.dart';
 import 'life_event_record.dart';
 import 'life_stage.dart';
 import 'play_room_state.dart';
-
-@immutable
-class PlayRoomNotifierArguments {
-  const PlayRoomNotifierArguments(this.playRoom);
-  final Document<PlayRoomEntity> playRoom;
-}
 
 /// NOTE: 以下の点を把握した上で状態管理を実装すること.
 ///
@@ -31,15 +23,7 @@ class PlayRoomNotifierArguments {
 ///       そのため、現状は ChangeNotifierProvider で PlayRoomNotifier インスタンスを provide し、`.value` を必要に応じて参照することにしている.<br>
 ///     * flutter_state_notifier を導入することで対応可能(notifyListeners の話も含め)なので、必要に迫られたら導入する.
 class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
-  PlayRoomNotifier(
-    this._i18n,
-    this._dice,
-    LifeRoadModel lifeRoad,
-    List<HumanModel> humans,
-  ) : super(PlayRoomState(
-          lifeRoad,
-          humans..sort((a, b) => a.order.compareTo(b.order)),
-        )) {
+  PlayRoomNotifier(this._i18n, this._dice, this._playRoom) : super(PlayRoomState()) {
     // 参加者全員の位置を Start に
     for (final human in value.orderedHumans) {
       final lifeStage = LifeStageModel(
@@ -55,6 +39,9 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
   final I18n _i18n;
   final Dice _dice;
+  // TODO: 実装
+  // ignore: unused_field
+  final Document<PlayRoomEntity> _playRoom;
   final _lifeEventService = const LifeEventService();
 
   int get _currentHumanLifeStageIndex =>

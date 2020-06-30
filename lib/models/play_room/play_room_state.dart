@@ -5,13 +5,21 @@ import 'life_event_record.dart';
 import 'life_stage.dart';
 
 class PlayRoomState {
-  PlayRoomState(
-    this.lifeRoad,
-    this.orderedHumans,
+  PlayRoomState();
+
+  /// FIXME: 今はダミーで固定してる
+  final LifeRoadModel lifeRoad = LifeRoadModel(
+    title: 'dummy HumanLife',
+    lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
+      LifeRoadModel.dummyLifeEvents(),
+    ),
   );
 
-  final LifeRoadModel lifeRoad;
-  final List<HumanModel> orderedHumans;
+  /// FIXME: 今はダミーで固定してる
+  final List<HumanModel> orderedHumans = [
+    const HumanModel(id: '1', name: 'hoge', order: 0),
+    const HumanModel(id: '2', name: 'fuga', order: 1),
+  ]..sort((a, b) => a.order.compareTo(b.order));
 
   /// 現在手番の人に方向選択を求めているかどうか
   bool requireSelectDirection = false;

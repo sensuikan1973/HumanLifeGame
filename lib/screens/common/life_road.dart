@@ -6,6 +6,7 @@ import '../../models/common/life_step.dart';
 import 'human.dart';
 import 'life_step.dart';
 
+/// FIXME: ちゃんと DB から取ってきて表示
 class LifeRoad extends StatelessWidget {
   LifeRoad(
     this._model,

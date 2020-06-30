@@ -1,6 +1,10 @@
+import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../api/dice.dart';
+import '../../api/firestore/play_room.dart';
+import '../../i18n/i18n.dart';
 import '../../models/play_room/play_room_notifier.dart';
 import 'announcement.dart';
 import 'dice_result.dart';
@@ -10,8 +14,29 @@ import 'play_view.dart';
 import 'player_action.dart';
 import 'result_dialog.dart';
 
+@immutable
+class PlayRoomNavigateArguments {
+  const PlayRoomNavigateArguments(this.playRoomDoc);
+  final Document<PlayRoomEntity> playRoomDoc;
+}
+
 class PlayRoom extends StatefulWidget {
-  const PlayRoom({Key key}) : super(key: key);
+  const PlayRoom._();
+
+  static Widget inProviders({@required Document<PlayRoomEntity> playRoomDoc, Key key}) => Builder(
+      builder: (context) => MultiProvider(
+            key: key,
+            providers: [
+              ChangeNotifierProvider<PlayRoomNotifier>(
+                create: (_) => PlayRoomNotifier(
+                  I18n.of(context),
+                  context.read<Dice>(),
+                  playRoomDoc,
+                ),
+              ),
+            ],
+            child: const PlayRoom._(),
+          ));
 
   @override
   PlayRoomState createState() => PlayRoomState();

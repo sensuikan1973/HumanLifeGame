@@ -6,6 +6,7 @@ import '../../api/firestore/play_room.dart';
 import '../../i18n/i18n.dart';
 import '../../models/lobby/lobby_notifier.dart';
 import '../../router.dart';
+import '../play_room/play_room.dart';
 
 class RoomListItem extends StatelessWidget {
   const RoomListItem(this._playRoom, {Key key}) : super(key: key);
@@ -61,8 +62,12 @@ class RoomListItem extends StatelessWidget {
         child: FlatButton(
           color: Colors.lightBlue,
           onPressed: () async {
-            await context.read<LobbyNotifier>().join(_playRoom); // TODO: 依存整理
-            await Navigator.of(context).pushNamed(context.read<Router>().playRoom);
+            final notifier = context.read<LobbyNotifier>();
+            await notifier.join(_playRoom);
+            await Navigator.of(context).pushNamed(
+              context.read<Router>().playRoom,
+              arguments: PlayRoomNavigateArguments(notifier.value.haveJoinedPlayRoom),
+            );
           },
           child: Text(I18n.of(context).lobbyEnterTheRoomButtonText),
         ),

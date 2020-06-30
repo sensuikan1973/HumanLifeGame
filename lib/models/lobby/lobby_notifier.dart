@@ -7,7 +7,6 @@ import '../../api/firestore/life_road.dart';
 import '../../api/firestore/play_room.dart';
 import '../../api/firestore/store.dart';
 import '../../api/firestore/user.dart';
-import '../play_room/play_room_notifier.dart';
 import 'lobby_state.dart';
 
 class LobbyNotifier extends ValueNotifier<LobbyState> {
@@ -50,9 +49,7 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
       TimestampField.updatedAt: FieldValue.serverTimestamp(),
     }, batch: batch);
     await batch.commit(); // FIXME: エラーハンドリング. 特に既に join 済みの場合のハンドリング.
-    value.navigateArgumentsToPlayRoom = PlayRoomNotifierArguments(
-      Document<PlayRoomEntity>(roomDocRef.ref, room),
-    );
+    value.haveCreatedPlayRoom = Document<PlayRoomEntity>(roomDocRef.ref, room);
     notifyListeners();
   }
 
@@ -73,6 +70,7 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
       TimestampField.updatedAt: FieldValue.serverTimestamp(),
     }, batch: batch);
     await batch.commit();
+    value.haveJoinedPlayRoom = await roomDocRef.get();
     notifyListeners();
   }
 
