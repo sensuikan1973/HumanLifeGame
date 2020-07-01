@@ -11,8 +11,8 @@ import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../helper/firestore/user_helper.dart';
 import '../mocks/auth.dart';
-import 'helper/firestore/user_helper.dart';
 import 'helper/testable_app.dart';
 
 Future<void> main() async {

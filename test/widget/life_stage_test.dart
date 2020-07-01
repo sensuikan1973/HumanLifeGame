@@ -11,8 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
+import '../helper/firestore/play_room_helper.dart';
 import '../mocks/dice.dart';
-import 'helper/firestore/play_room_helper.dart';
 import 'helper/testable_app.dart';
 
 Future<void> main() async {
