@@ -1,3 +1,5 @@
+import 'package:HumanLifeGame/api/firestore/life_road.dart';
+import 'package:HumanLifeGame/api/firestore/user.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -38,6 +40,15 @@ abstract class PlayRoomEntity implements _$PlayRoomEntity, Entity {
 
   /// humans の document ID List
   List<String> get humanIds => humans.map((human) => human.documentID).toList();
+
+  /// host の UserEntity を取得する
+  Future<Document<UserEntity>> fetchHost() async => UserEntity.decode(await host.get());
+
+  Future<List<Document<UserEntity>>> fetchHumans() async => Future.wait(
+        humans.map((human) async => UserEntity.decode(await human.get())).toList(),
+      );
+
+  Future<Document<LifeRoadEntity>> fetchLifeRoad() async => LifeRoadEntity.decode(await lifeRoad.get());
 }
 
 class PlayRoomEntityField {
