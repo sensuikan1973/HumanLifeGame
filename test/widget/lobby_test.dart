@@ -1,6 +1,7 @@
 import 'package:HumanLifeGame/api/firestore/life_road.dart';
 import 'package:HumanLifeGame/api/firestore/play_room.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
+import 'package:HumanLifeGame/human_life_game_app.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/screens/lobby/human_life_tips.dart';
 import 'package:HumanLifeGame/screens/lobby/lobby.dart';
@@ -21,7 +22,7 @@ Future<void> main() async {
     WidgetsBinding.instance.renderView.configuration = TestViewConfiguration(size: const Size(1440, 1024));
   });
 
-  final i18n = await I18n.load(const Locale('en', 'US'));
+  final i18n = await I18n.load(HumanLifeGameApp.defaultLocale);
   final user = MockFirebaseUser();
   final auth = MockAuth(user);
 
