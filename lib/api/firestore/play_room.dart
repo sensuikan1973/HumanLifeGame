@@ -1,10 +1,10 @@
-import 'package:HumanLifeGame/api/firestore/life_road.dart';
-import 'package:HumanLifeGame/api/firestore/user.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'entity.dart';
+import 'life_road.dart';
+import 'user.dart';
 
 part 'play_room.freezed.dart';
 part 'play_room.g.dart';
