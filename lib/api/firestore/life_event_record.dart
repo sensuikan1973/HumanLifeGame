@@ -21,6 +21,11 @@ abstract class LifeEventRecordEntity implements _$LifeEventRecordEntity, Entity 
 
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
+
+  static Document<LifeEventRecordEntity> decode(DocumentSnapshot snapshot) => Document<LifeEventRecordEntity>(
+        snapshot.reference,
+        LifeEventRecordEntity.fromJson(snapshot.data),
+      );
 }
 
 class LifeEventRecordEntityField {

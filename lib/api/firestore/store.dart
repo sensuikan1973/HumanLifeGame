@@ -39,6 +39,9 @@ class Store {
     if (T == ServiceControlEntity) return ServiceControlEntity.decode(snapshot) as Document<T>;
     if (T == PlayRoomEntity) return PlayRoomEntity.decode(snapshot) as Document<T>;
     if (T == UserEntity) return UserEntity.decode(snapshot) as Document<T>;
+    if (T == LifeRoadEntity) return LifeRoadEntity.decode(snapshot) as Document<T>;
+    if (T == LifeStageEntity) return LifeStageEntity.decode(snapshot) as Document<T>;
+    if (T == LifeEventRecordEntity) return LifeEventRecordEntity.decode(snapshot) as Document<T>;
     throw Exception('unexpected Entity Type: $T');
   }
 

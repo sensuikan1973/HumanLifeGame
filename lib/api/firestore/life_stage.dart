@@ -22,6 +22,11 @@ abstract class LifeStageEntity implements _$LifeStageEntity, Entity {
 
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
+
+  static Document<LifeStageEntity> decode(DocumentSnapshot snapshot) => Document<LifeStageEntity>(
+        snapshot.reference,
+        LifeStageEntity.fromJson(snapshot.data),
+      );
 }
 
 class LifeStageEntityField {

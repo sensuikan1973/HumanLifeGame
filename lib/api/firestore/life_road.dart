@@ -24,6 +24,11 @@ abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
 
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
+
+  static Document<LifeRoadEntity> decode(DocumentSnapshot snapshot) => Document<LifeRoadEntity>(
+        snapshot.reference,
+        LifeRoadEntity.fromJson(snapshot.data),
+      );
 }
 
 class LifeRoadEntityField {
