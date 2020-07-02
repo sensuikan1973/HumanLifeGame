@@ -12,7 +12,7 @@ class LifeItemModel {
 
   final String key;
   final LifeItemType type;
-  int amount;
+  final int amount;
 }
 
 /// アイテム種別
