@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import '../entities/life_item.dart';
+import '../api/firestore/life_item.dart';
 import '../models/common/life_event.dart';
 import '../models/common/life_event_params/exchange_life_items_params.dart';
 import '../models/common/life_event_params/gain_life_items_params.dart';
@@ -36,7 +36,7 @@ class LifeEventService {
         final params = lifeEvent.params as GainLifeItemsParams;
         final items = [
           ...lifeStage.lifeItems,
-          for (final item in params.targetItems) LifeItemEntity(item.key, item.type, item.amount),
+          for (final item in params.targetItems) LifeItemEntity(key: item.key, type: item.type, amount: item.amount),
         ];
         return lifeStage.copyWith(lifeItems: items);
       case LifeEventType.gainLifeItemsPerOtherLifeItem:
@@ -65,7 +65,7 @@ class LifeEventService {
         final params = lifeEvent.params as LoseLifeItemsParams;
         final items = [
           ...lifeStage.lifeItems,
-          for (final item in params.targetItems) LifeItemEntity(item.key, item.type, -item.amount),
+          for (final item in params.targetItems) LifeItemEntity(key: item.key, type: item.type, amount: -item.amount),
         ];
         return lifeStage.copyWith(lifeItems: items);
       case LifeEventType.loseLifeItemsPerDiceRoll:
@@ -95,11 +95,11 @@ class LifeEventService {
       if (totalAmountOfBaseItem < baseItem.amount) return items;
 
       // lifeItemsにbaseItemが必要量入っていれば減らす
-      items.add(LifeItemEntity(baseItem.key, baseItem.type, -baseItem.amount));
+      items.add(LifeItemEntity(key: baseItem.key, type: baseItem.type, amount: -baseItem.amount));
     }
     // lifeItemsにtargetItemを追加する
     for (final targetItem in params.targetItems) {
-      items.add(LifeItemEntity(targetItem.key, targetItem.type, targetItem.amount));
+      items.add(LifeItemEntity(key: targetItem.key, type: targetItem.type, amount: targetItem.amount));
     }
     return items;
   }

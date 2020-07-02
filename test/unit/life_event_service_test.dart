@@ -1,5 +1,5 @@
+import 'package:HumanLifeGame/api/firestore/life_item.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
-import 'package:HumanLifeGame/entities/life_item.dart';
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/exchange_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
@@ -14,7 +14,7 @@ import '../helper/firestore/user_helper.dart';
 
 void main() {
   test('gainLifeItems', () async {
-    const items = [LifeItemEntity('money', LifeItemType.money, 200)];
+    const items = [LifeItemEntity(key: 'money', type: LifeItemType.money, amount: 200)];
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
     final lifeStageModel = LifeStageModel(
@@ -40,7 +40,7 @@ void main() {
   });
 
   test('loseLifeItems', () async {
-    const items = [LifeItemEntity('money', LifeItemType.money, 200)];
+    const items = [LifeItemEntity(key: 'money', type: LifeItemType.money, amount: 200)];
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
     final lifeStageModel = LifeStageModel(
@@ -66,7 +66,7 @@ void main() {
   });
 
   test('exchangeLifeItems', () async {
-    const items = [LifeItemEntity('car', LifeItemType.vehicle, 1)];
+    const items = [LifeItemEntity(key: 'car', type: LifeItemType.vehicle, amount: 1)];
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
     final lifeStageModel = LifeStageModel(
