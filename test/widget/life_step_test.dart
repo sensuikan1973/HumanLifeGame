@@ -1,4 +1,4 @@
-import 'package:HumanLifeGame/entities/life_step.dart';
+import 'package:HumanLifeGame/entities/life_step_entity.dart';
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/lose_life_items_params.dart';

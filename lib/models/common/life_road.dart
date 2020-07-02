@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 
 import '../../api/firestore/user.dart';
 import '../../entities/life_item.dart';
-import '../../entities/life_step.dart';
+import '../../entities/life_step_entity.dart';
 import 'life_event.dart';
 import 'life_event_params/exchange_life_items_params.dart';
 import 'life_event_params/gain_life_items_params.dart';

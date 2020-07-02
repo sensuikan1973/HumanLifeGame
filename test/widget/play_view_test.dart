@@ -8,7 +8,7 @@ void main() {}
 //import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
 //import 'package:HumanLifeGame/models/common/life_road.dart';
 //import 'package:HumanLifeGame/models/play_room/play_room_notifier.dart';
-//import 'package:HumanLifeGame/screens/common/life_step.dart';
+//import 'package:HumanLifeGame/screens/common/life_step_entity.dart';
 //import 'package:HumanLifeGame/screens/play_room/play_view.dart';
 //import 'package:flutter/material.dart';
 //import 'package:flutter_test/flutter_test.dart';

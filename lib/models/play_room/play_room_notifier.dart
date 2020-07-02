@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 
 import '../../api/dice.dart';
 import '../../api/firestore/play_room.dart';
-import '../../entities/life_step.dart';
+import '../../entities/life_step_entity.dart';
 import '../../i18n/i18n.dart';
 import '../../services/life_event_service.dart';
 import 'life_event_record.dart';

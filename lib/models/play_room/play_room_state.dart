@@ -1,7 +1,7 @@
 import 'package:firestore_ref/firestore_ref.dart';
 
 import '../../api/firestore/user.dart';
-import '../../entities/life_step.dart';
+import '../../entities/life_step_entity.dart';
 import '../common/life_road.dart';
 import 'life_event_record.dart';
 import 'life_stage.dart';
