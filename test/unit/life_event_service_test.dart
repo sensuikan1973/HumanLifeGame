@@ -1,4 +1,4 @@
-import 'package:HumanLifeGame/models/common/human.dart';
+import 'package:HumanLifeGame/api/firestore/store.dart';
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/exchange_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
@@ -7,15 +7,18 @@ import 'package:HumanLifeGame/models/common/life_event_params/target_life_item_p
 import 'package:HumanLifeGame/models/common/life_item.dart';
 import 'package:HumanLifeGame/models/play_room/life_stage.dart';
 import 'package:HumanLifeGame/services/life_event_service.dart';
+import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../helper/firestore/user_helper.dart';
+
 void main() {
-  test('gainLifeItems', () {
-    final items = [
-      LifeItemModel('money', LifeItemType.money, 200),
-    ];
+  test('gainLifeItems', () async {
+    final items = [LifeItemModel('money', LifeItemType.money, 200)];
+    final firestore = MockFirestoreInstance();
+    final store = Store(firestore);
     final lifeStageModel = LifeStageModel(
-      human: const HumanModel(id: 'human_1', name: 'foo'),
+      human: await createUser(store),
       lifeItems: items,
     );
     final gain = LifeEventModel(
@@ -36,12 +39,12 @@ void main() {
     expect(model.lifeItems[2].key, 'coffee');
   });
 
-  test('loseLifeItems', () {
-    final items = [
-      LifeItemModel('money', LifeItemType.money, 200),
-    ];
+  test('loseLifeItems', () async {
+    final items = [LifeItemModel('money', LifeItemType.money, 200)];
+    final firestore = MockFirestoreInstance();
+    final store = Store(firestore);
     final lifeStageModel = LifeStageModel(
-      human: const HumanModel(id: 'human_1', name: 'foo'),
+      human: await createUser(store),
       lifeItems: items,
     );
     final lose = LifeEventModel(
@@ -62,12 +65,12 @@ void main() {
     expect(model.lifeItems[2].key, 'money');
   });
 
-  test('exchangeLifeItems', () {
-    final items = [
-      LifeItemModel('car', LifeItemType.vehicle, 1),
-    ];
+  test('exchangeLifeItems', () async {
+    final items = [LifeItemModel('car', LifeItemType.vehicle, 1)];
+    final firestore = MockFirestoreInstance();
+    final store = Store(firestore);
     final lifeStageModel = LifeStageModel(
-      human: const HumanModel(id: 'human_1', name: 'foo'),
+      human: await createUser(store),
       lifeItems: items,
     );
     final exchange = LifeEventModel(

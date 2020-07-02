@@ -56,8 +56,11 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
   Future<void> join(Document<PlayRoomEntity> playRoomDoc) async {
     final user = await _auth.currentUser;
     final userDocRef = _store.docRef<UserEntity>(user.uid);
-    // 既に参加済みの場合は何もしない
-    if (playRoomDoc.entity.humans.contains(userDocRef.ref)) return notifyListeners();
+    // 既に参加済みの場合
+    if (playRoomDoc.entity.humans.contains(userDocRef.ref)) {
+      value.haveJoinedPlayRoom = playRoomDoc;
+      return notifyListeners();
+    }
 
     final roomDocRef = _store.collectionRef<PlayRoomEntity>().docRef(playRoomDoc.id);
     final batch = _store.firestore.batch();
@@ -70,7 +73,7 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
       TimestampField.updatedAt: FieldValue.serverTimestamp(),
     }, batch: batch);
     await batch.commit();
-    value.haveJoinedPlayRoom = await roomDocRef.get();
+    value.haveJoinedPlayRoom = playRoomDoc;
     notifyListeners();
   }
 

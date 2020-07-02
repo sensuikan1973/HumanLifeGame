@@ -10,21 +10,26 @@ import 'package:HumanLifeGame/screens/play_room/player_action.dart';
 import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
 
 import '../helper/firestore/play_room_helper.dart';
 import '../helper/firestore/user_helper.dart';
+import '../mocks/auth.dart';
 import '../mocks/dice.dart';
 import 'helper/testable_app.dart';
 
 Future<void> main() async {
   final i18n = await I18n.load(HumanLifeGameApp.defaultLocale);
 
+  final user = MockFirebaseUser();
+  final auth = MockAuth(user);
+
   testWidgets('show some widgets', (tester) async {
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
-    final humans = [await createUser(store), await createUser(store)];
+    final humans = [await createUser(store), await createUser(store, uid: user.uid)];
     await tester.pumpWidget(testableApp(
+      store: store,
+      auth: auth,
       home: PlayRoom.inProviders(
         playRoomDoc: await createPlayRoom(
           store,
@@ -32,7 +37,7 @@ Future<void> main() async {
         ),
       ),
     ));
-    await tester.pump();
+    await tester.pumpAndSettle(PlayRoomState.showDelay);
     expect(find.byType(PlayerAction), findsOneWidget);
     expect(find.byType(DiceResult), findsOneWidget);
     expect(find.byType(LifeStages), findsOneWidget);
@@ -41,12 +46,11 @@ Future<void> main() async {
   });
 
   testWidgets('random value(1 <= value <= 6) should be displayed when dice is rolled', (tester) async {
-    final dice = MockDice();
     const roll = 5;
-    when(dice.roll()).thenReturn(roll);
+    final dice = MockDice(roll);
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
-    final humans = [await createUser(store), await createUser(store)];
+    final humans = [await createUser(store), await createUser(store, uid: user.uid)];
     await tester.pumpWidget(testableApp(
       dice: dice,
       store: store,
@@ -70,14 +74,14 @@ Future<void> main() async {
   }, skip: true);
 
   testWidgets('show Announcement message when dice is rolled', (tester) async {
-    final dice = MockDice();
     const roll = 5;
-    when(dice.roll()).thenReturn(roll);
+    final dice = MockDice(roll);
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
-    final humans = [await createUser(store), await createUser(store)];
+    final humans = [await createUser(store), await createUser(store, uid: user.uid)];
     await tester.pumpWidget(testableApp(
       dice: dice,
+      auth: auth,
       store: store,
       home: MediaQuery(
         data: const MediaQueryData(size: Size(1440, 1024)),
@@ -106,14 +110,11 @@ Future<void> main() async {
   }, skip: true);
 
   testWidgets('roll-the-dice button should be disabled when all Humans reached the goal', (tester) async {
-    final dice = MockDice();
-    const roll = 6;
-    when(dice.roll()).thenReturn(roll);
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
-    final humans = [await createUser(store), await createUser(store)];
+    final humans = [await createUser(store), await createUser(store, uid: user.uid)];
     await tester.pumpWidget(testableApp(
-      dice: dice,
+      auth: auth,
       store: store,
       home: MediaQuery(
         data: const MediaQueryData(size: Size(1440, 1024)),
@@ -139,14 +140,11 @@ Future<void> main() async {
   }, skip: true);
 
   testWidgets('show result dialog', (tester) async {
-    final dice = MockDice();
-    const roll = 6;
-    when(dice.roll()).thenReturn(roll);
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
-    final humans = [await createUser(store), await createUser(store)];
+    final humans = [await createUser(store), await createUser(store, uid: user.uid)];
     await tester.pumpWidget(testableApp(
-      dice: dice,
+      auth: auth,
       store: store,
       home: MediaQuery(
         data: const MediaQueryData(size: Size(1440, 1024)),
@@ -171,14 +169,11 @@ Future<void> main() async {
   }, skip: true);
 
   testWidgets('not show dialog after rebuilt', (tester) async {
-    final dice = MockDice();
-    const roll = 6;
-    when(dice.roll()).thenReturn(roll);
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
-    final humans = [await createUser(store), await createUser(store)];
+    final humans = [await createUser(store), await createUser(store, uid: user.uid)];
     await tester.pumpWidget(testableApp(
-      dice: dice,
+      auth: auth,
       store: store,
       home: MediaQuery(
         data: const MediaQueryData(size: Size(1440, 1024)),
@@ -220,10 +215,11 @@ Future<void> main() async {
   testWidgets('stack widgets when screen size is middle', (tester) async {
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
-    final humans = [await createUser(store), await createUser(store)];
+    final humans = [await createUser(store), await createUser(store, uid: user.uid)];
 
     // デスクトップサイズのスクリーンの場合は、stackされない
     await tester.pumpWidget(testableApp(
+      auth: auth,
       store: store,
       home: MediaQuery(
         data: const MediaQueryData(size: Size(1440, 1024)),
@@ -238,14 +234,14 @@ Future<void> main() async {
     await tester.pump();
     await tester.pump();
     var lifeStages = tester.element(find.byType(LifeStages));
-    var lifeStagesAnsester = lifeStages.findAncestorWidgetOfExactType<Stack>();
-    expect(find.byWidget(lifeStagesAnsester), findsNothing);
+    var lifeStagesAncestor = lifeStages.findAncestorWidgetOfExactType<Stack>();
+    expect(find.byWidget(lifeStagesAncestor), findsNothing);
     var diceResult = tester.element(find.byType(DiceResult));
-    var diceResultAnsester = diceResult.findAncestorWidgetOfExactType<Stack>();
-    expect(find.byWidget(diceResultAnsester), findsNothing);
+    var diceResultAncestor = diceResult.findAncestorWidgetOfExactType<Stack>();
+    expect(find.byWidget(diceResultAncestor), findsNothing);
     var playerAction = tester.element(find.byType(PlayerAction));
-    var playerActionAnsester = playerAction.findAncestorWidgetOfExactType<Stack>();
-    expect(find.byWidget(playerActionAnsester), findsNothing);
+    var playerActionAncestor = playerAction.findAncestorWidgetOfExactType<Stack>();
+    expect(find.byWidget(playerActionAncestor), findsNothing);
 
     // デスクトップサイズより小さいスクリーンの場合は、stackする
     await tester.pumpWidget(testableApp(
@@ -261,15 +257,15 @@ Future<void> main() async {
     ));
     await tester.pump();
     lifeStages = tester.element(find.byType(LifeStages));
-    lifeStagesAnsester = lifeStages.findAncestorWidgetOfExactType<Stack>();
-    expect(find.byWidget(lifeStagesAnsester), findsOneWidget);
+    lifeStagesAncestor = lifeStages.findAncestorWidgetOfExactType<Stack>();
+    expect(find.byWidget(lifeStagesAncestor), findsOneWidget);
 
     diceResult = tester.element(find.byType(DiceResult));
-    diceResultAnsester = diceResult.findAncestorWidgetOfExactType<Stack>();
-    expect(find.byWidget(diceResultAnsester), findsOneWidget);
+    diceResultAncestor = diceResult.findAncestorWidgetOfExactType<Stack>();
+    expect(find.byWidget(diceResultAncestor), findsOneWidget);
 
     playerAction = tester.element(find.byType(PlayerAction));
-    playerActionAnsester = playerAction.findAncestorWidgetOfExactType<Stack>();
-    expect(find.byWidget(playerActionAnsester), findsOneWidget);
+    playerActionAncestor = playerAction.findAncestorWidgetOfExactType<Stack>();
+    expect(find.byWidget(playerActionAncestor), findsOneWidget);
   }, skip: true);
 }

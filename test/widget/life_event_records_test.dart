@@ -1,7 +1,6 @@
 import 'package:HumanLifeGame/api/firestore/store.dart';
 import 'package:HumanLifeGame/human_life_game_app.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
-import 'package:HumanLifeGame/models/common/human.dart';
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
 import 'package:HumanLifeGame/models/play_room/life_event_record.dart';
@@ -12,21 +11,22 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
 import '../helper/firestore/play_room_helper.dart';
+import '../helper/firestore/user_helper.dart';
 import '../mocks/dice.dart';
 import 'helper/testable_app.dart';
 
 // FIXME:
 Future<void> main() async {
   final i18n = await I18n.load(HumanLifeGameApp.defaultLocale);
-  final humans = [const HumanModel(id: 'h1', name: 'foo'), const HumanModel(id: 'h2', name: 'bar')];
   final start = LifeEventModel(LifeEventTarget.myself, const StartParams());
 
   testWidgets("show 'lifeEventRecords'Text", (tester) async {
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
+    final humans = [await createUser(store), await createUser(store)];
     final playRoomNotifier = PlayRoomNotifier(i18n, MockDice(), await createPlayRoom(store));
-    for (final orderedHuman in humans) {
-      playRoomNotifier.value.everyLifeEventRecords = [LifeEventRecordModel(i18n, orderedHuman, start)];
+    for (final human in humans) {
+      playRoomNotifier.value.everyLifeEventRecords = [LifeEventRecordModel(i18n, human, start)];
     }
     await tester.pumpWidget(testableApp(
       store: store,

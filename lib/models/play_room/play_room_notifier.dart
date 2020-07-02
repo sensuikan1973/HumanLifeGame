@@ -23,9 +23,13 @@ import 'play_room_state.dart';
 ///       そのため、現状は ChangeNotifierProvider で PlayRoomNotifier インスタンスを provide し、`.value` を必要に応じて参照することにしている.<br>
 ///     * flutter_state_notifier を導入することで対応可能(notifyListeners の話も含め)なので、必要に迫られたら導入する.
 class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
-  PlayRoomNotifier(this._i18n, this._dice, this._playRoom) : super(PlayRoomState()) {
+  PlayRoomNotifier(this._i18n, this._dice, this._playRoom) : super(PlayRoomState());
+
+  Future<void> init() async {
+    final humans = await _playRoom.entity.fetchHumans();
+    value.humans = humans;
     // 参加者全員の位置を Start に
-    for (final human in value.orderedHumans) {
+    for (final human in humans) {
       final lifeStage = LifeStageModel(
         human: human,
         lifeStepModel: value.lifeRoad.start,
@@ -34,13 +38,12 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
       value.lifeStages.add(lifeStage);
     }
     // 一番手をセット
-    value.currentTurnHuman = value.orderedHumans.first;
+    value.currentTurnHuman = humans.first;
+//    notifyListeners();
   }
 
   final I18n _i18n;
   final Dice _dice;
-  // TODO: 実装
-  // ignore: unused_field
   final Document<PlayRoomEntity> _playRoom;
   final _lifeEventService = const LifeEventService();
 
@@ -51,11 +54,12 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   // 進む数の残り
   int _remainCount = 0;
 
-  void rollDice() {
+  Future<void> rollDice() async {
     if (value.allHumansReachedTheGoal || value.requireSelectDirection) return;
     value
       ..roll = _dice.roll()
-      ..announcement = _i18n.rollAnnouncement(value.currentTurnHuman.name, value.roll); // FIXME: 状態に応じた適切なメッセージを流すように
+      ..announcement =
+          _i18n.rollAnnouncement(value.currentTurnHuman.entity.displayName, value.roll); // FIXME: 状態に応じた適切なメッセージを流すように
 
     // サイコロ振る出発地点が分岐なら、サイコロ振るのを求めて notify でお終い
     if (value.currentHumanLifeStep.requireToSelectDirectionManually) {
@@ -70,7 +74,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     // TODO: 今は requireSelectDirection だけだけど、今後は requireDiceRoll とかも考慮しなきゃいけなくなる
     if (!value.requireSelectDirection) {
       _executeEventToCurrentHuman();
-      _changeToNextTurn();
+      await _changeToNextTurn();
     }
     notifyListeners();
   }
@@ -113,13 +117,14 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   }
 
   // 次のターンに変える
-  void _changeToNextTurn() {
-    final currentHumanIndex = value.orderedHumans.indexOf(value.currentTurnHuman);
-    value.currentTurnHuman = value.orderedHumans[(currentHumanIndex + 1) % value.orderedHumans.length];
+  Future<void> _changeToNextTurn() async {
+    final humans = await _playRoom.entity.fetchHumans();
+    final currentHumanIndex = humans.indexOf(value.currentTurnHuman);
+    value.currentTurnHuman = humans[(currentHumanIndex + 1) % humans.length];
 
     if (value.allHumansReachedTheGoal) return;
     // 現在手番の Human がゴールしていたら次の Human にターンを変える
-    if (value.currentHumanLifeStep.isGoal) _changeToNextTurn();
+    if (value.currentHumanLifeStep.isGoal) await _changeToNextTurn();
   }
 
   DestinationWithMovedStepCount _moveLifeStepUntilMustStop(int roll, {Direction firstDirection}) {

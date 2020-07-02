@@ -1,4 +1,5 @@
 import 'package:firestore_ref/firestore_ref.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,19 +25,20 @@ class PlayRoom extends StatefulWidget {
   const PlayRoom._();
 
   static Widget inProviders({@required Document<PlayRoomEntity> playRoomDoc, Key key}) => Builder(
-      builder: (context) => MultiProvider(
-            key: key,
-            providers: [
-              ChangeNotifierProvider<PlayRoomNotifier>(
-                create: (_) => PlayRoomNotifier(
-                  I18n.of(context),
-                  context.read<Dice>(),
-                  playRoomDoc,
-                ),
+        builder: (context) => MultiProvider(
+          key: key,
+          providers: [
+            ChangeNotifierProvider<PlayRoomNotifier>(
+              create: (_) => PlayRoomNotifier(
+                I18n.of(context),
+                context.read<Dice>(),
+                playRoomDoc,
               ),
-            ],
-            child: const PlayRoom._(),
-          ));
+            ),
+          ],
+          child: const PlayRoom._(),
+        ),
+      );
 
   @override
   PlayRoomState createState() => PlayRoomState();
@@ -44,6 +46,7 @@ class PlayRoom extends StatefulWidget {
 
 class PlayRoomState extends State<PlayRoom> {
   bool isDisplayedResult = false;
+  final hasInitialized = ValueNotifier<bool>(false);
 
   Size get _desktopSize => const Size(1440, 1024); // FIXME: 最終的には、左側のビューと右側のビューの最小サイズをトリガとして切り替える
   Size get _announcementSize => const Size(1050, 50);
@@ -64,9 +67,12 @@ class PlayRoomState extends State<PlayRoom> {
     return Size(width, height);
   }
 
-  void _setShowDialogCallback() {
+  @visibleForTesting
+  static const showDelay = Duration(milliseconds: 200);
+
+  void _showDialogCallback() {
     if (isDisplayedResult) return;
-    if (context.select<PlayRoomNotifier, bool>((model) => model.value.allHumansReachedTheGoal)) {
+    if (context.select<PlayRoomNotifier, bool>((notifier) => notifier.value.allHumansReachedTheGoal)) {
       isDisplayedResult = true;
       WidgetsBinding.instance.addPostFrameCallback((_) async => showDialog<void>(
             context: context,
@@ -76,10 +82,25 @@ class PlayRoomState extends State<PlayRoom> {
   }
 
   @override
+  void initState() {
+    context.read<PlayRoomNotifier>().init().then((_) async {
+      await Future<void>.delayed(const Duration(milliseconds: 200));
+      return hasInitialized.value = true;
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    _setShowDialogCallback();
+    _showDialogCallback();
     return Scaffold(
-      body: MediaQuery.of(context).size.width >= _desktopSize.width ? _largeScreen() : _middleScreen(),
+      body: ValueListenableBuilder<bool>(
+        valueListenable: hasInitialized,
+        builder: (_, hasInitialized, __) {
+          if (!hasInitialized) return const CupertinoActivityIndicator();
+          return MediaQuery.of(context).size.width >= _desktopSize.width ? _largeScreen() : _middleScreen();
+        },
+      ),
     );
   }
 

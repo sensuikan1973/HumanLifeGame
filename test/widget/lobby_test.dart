@@ -29,6 +29,7 @@ Future<void> main() async {
   testWidgets('create public play room', (tester) async {
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
+    await createUser(store, uid: user.uid);
     await tester.pumpWidget(
       testableApp(auth: auth, store: store, home: Lobby.inProviders()),
     );
@@ -42,15 +43,13 @@ Future<void> main() async {
     expect(createPublicPlayRoomButton, findsOneWidget);
 
     await tester.tap(createPublicPlayRoomButton); // room が作成される
-    await tester.pump();
-    await tester.pump();
+    await tester.pumpAndSettle(PlayRoomState.showDelay);
     expect(find.byType(PlayRoom), findsOneWidget); // playRoom に遷移する
   });
 
   testWidgets('join the public play rooms which myself hosts', (tester) async {
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
-
     final userDoc = await createUser(store, uid: user.uid);
     // playRoom を作成
     await store.collectionRef<PlayRoomEntity>().add(
@@ -74,8 +73,7 @@ Future<void> main() async {
 
     // playRoom に遷移
     await tester.tap(find.text(i18n.lobbyEnterTheRoomButtonText).first);
-    await tester.pump();
-    await tester.pump();
+    await tester.pumpAndSettle(PlayRoomState.showDelay);
     expect(find.byType(PlayRoom), findsOneWidget); // playRoom に遷移
 
     // TODO: 遷移後に humans の表示だけ test しておきたい
@@ -113,8 +111,7 @@ Future<void> main() async {
 
     // playRoom に遷移
     await tester.tap(find.text(i18n.lobbyEnterTheRoomButtonText).first);
-    await tester.pump();
-    await tester.pump();
+    await tester.pumpAndSettle(PlayRoomState.showDelay);
     expect(find.byType(PlayRoom), findsOneWidget); // playRoom に遷移
 
     // TODO: 遷移後に humans の表示だけ test しておきたい
@@ -142,8 +139,7 @@ Future<void> main() async {
     await tester.pumpWidget(
       testableApp(auth: auth, store: store, home: Lobby.inProviders()),
     );
-    await tester.pump();
-    await tester.pump();
+    await tester.pumpAndSettle(PlayRoomState.showDelay);
     expect(find.byType(LifeRoadTips), findsOneWidget);
     expect(find.byType(FloatingActionButton), findsOneWidget);
     expect(find.byType(RoomListItem), findsNWidgets(roomNum));

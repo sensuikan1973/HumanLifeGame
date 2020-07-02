@@ -8,6 +8,7 @@ part 'user.freezed.dart';
 part 'user.g.dart';
 
 /// Document on Firestore
+@immutable
 @freezed
 abstract class UserEntity implements _$UserEntity, Entity {
   const factory UserEntity({
@@ -28,6 +29,12 @@ abstract class UserEntity implements _$UserEntity, Entity {
         snapshot.reference,
         UserEntity.fromJson(snapshot.data),
       );
+
+  @override
+  int get hashCode => uid.hashCode;
+
+  @override
+  bool operator ==(Object other) => other is UserEntity && other.uid == uid;
 }
 
 class UserEntityField {

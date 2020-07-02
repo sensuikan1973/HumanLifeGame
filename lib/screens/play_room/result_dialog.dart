@@ -16,7 +16,7 @@ class ResultDialog extends StatelessWidget {
           for (final lifeStage in _lifeStages)
             Row(
               children: [
-                Text(lifeStage.human.name),
+                Text(lifeStage.human.entity.displayName),
                 const Text(', 💵: '), // FIXME: 仮テキスト
                 Text(lifeStage.totalMoney.toString()),
               ],

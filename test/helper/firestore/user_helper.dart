@@ -8,7 +8,7 @@ Future<Document<UserEntity>> createUser(Store store, {String uid}) async {
   final userDocRef = store.docRef<UserEntity>(docId);
   await userDocRef.set(UserEntity(
     uid: docId,
-    displayName: docId.substring(0, 6), // NOTE: 雑に頭6文字
+    displayName: docId.substring(0, 4), // NOTE: 雑に頭から数文字
     createdAt: DateTime.now(),
     updatedAt: DateTime.now(),
   ));

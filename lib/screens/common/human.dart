@@ -1,16 +1,14 @@
+import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/common/human.dart';
+import '../../api/firestore/user.dart';
 
 class Human extends StatelessWidget {
-  const Human(
-    this._humanModel, {
-    Key key,
-  }) : super(key: key);
+  const Human(this._user, {Key key}) : super(key: key);
 
-  final HumanModel _humanModel;
+  final Document<UserEntity> _user;
 
-  String get humanId => _humanModel.id;
+  String get humanId => _user.entity.uid;
 
   @visibleForTesting
   static const orderedIcon = [
