@@ -5,12 +5,10 @@ class HumanModel {
   const HumanModel({
     @required this.id,
     @required this.name,
-    @required this.order,
   });
 
   final String id;
   final String name;
-  final int order;
 
   @override
   int get hashCode => id.hashCode;

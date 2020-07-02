@@ -15,7 +15,7 @@ void main() {
       LifeItemModel('money', LifeItemType.money, 200),
     ];
     final lifeStageModel = LifeStageModel(
-      human: const HumanModel(id: 'human_1', name: 'foo', order: 0),
+      human: const HumanModel(id: 'human_1', name: 'foo'),
       lifeItems: items,
     );
     final gain = LifeEventModel(
@@ -41,7 +41,7 @@ void main() {
       LifeItemModel('money', LifeItemType.money, 200),
     ];
     final lifeStageModel = LifeStageModel(
-      human: const HumanModel(id: 'human_1', name: 'foo', order: 0),
+      human: const HumanModel(id: 'human_1', name: 'foo'),
       lifeItems: items,
     );
     final lose = LifeEventModel(
@@ -67,7 +67,7 @@ void main() {
       LifeItemModel('car', LifeItemType.vehicle, 1),
     ];
     final lifeStageModel = LifeStageModel(
-      human: const HumanModel(id: 'human_1', name: 'foo', order: 0),
+      human: const HumanModel(id: 'human_1', name: 'foo'),
       lifeItems: items,
     );
     final exchange = LifeEventModel(

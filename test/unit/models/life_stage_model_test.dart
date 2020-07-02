@@ -13,7 +13,7 @@ void main() {
       LifeItemModel('coffee', LifeItemType.coffee, 1),
     ];
     final lifeStageModel = LifeStageModel(
-      human: const HumanModel(id: 'human_1', name: 'foo', order: 0),
+      human: const HumanModel(id: 'human_1', name: 'foo'),
       lifeItems: items,
     );
     expect(lifeStageModel.totalMoney, 600);

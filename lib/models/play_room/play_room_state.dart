@@ -17,9 +17,9 @@ class PlayRoomState {
 
   /// FIXME: 今はダミーで固定してる
   final List<HumanModel> orderedHumans = [
-    const HumanModel(id: '1', name: 'hoge', order: 0),
-    const HumanModel(id: '2', name: 'fuga', order: 1),
-  ]..sort((a, b) => a.order.compareTo(b.order));
+    const HumanModel(id: '1', name: 'hoge'),
+    const HumanModel(id: '2', name: 'fuga'),
+  ];
 
   /// 現在手番の人に方向選択を求めているかどうか
   bool requireSelectDirection = false;

@@ -18,7 +18,7 @@ import 'helper/testable_app.dart';
 // FIXME:
 Future<void> main() async {
   final i18n = await I18n.load(HumanLifeGameApp.defaultLocale);
-  final humans = [const HumanModel(id: 'h1', name: 'foo', order: 0), const HumanModel(id: 'h2', name: 'bar', order: 1)];
+  final humans = [const HumanModel(id: 'h1', name: 'foo'), const HumanModel(id: 'h2', name: 'bar')];
   final start = LifeEventModel(LifeEventTarget.myself, const StartParams());
 
   testWidgets("show 'lifeEventRecords'Text", (tester) async {
