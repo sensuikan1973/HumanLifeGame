@@ -26,10 +26,9 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   PlayRoomNotifier(this._i18n, this._dice, this._playRoom) : super(PlayRoomState());
 
   Future<void> init() async {
-    final humans = await _playRoom.entity.fetchHumans();
-    value.humans = humans;
+    value.humans = await _playRoom.entity.fetchHumans();
     // 参加者全員の位置を Start に
-    for (final human in humans) {
+    for (final human in value.humans) {
       final lifeStage = LifeStageModel(
         human: human,
         lifeStepModel: value.lifeRoad.start,
@@ -38,7 +37,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
       value.lifeStages.add(lifeStage);
     }
     // 一番手をセット
-    value.currentTurnHuman = humans.first;
+    value.currentTurnHuman = value.humans.first;
 //    notifyListeners();
   }
 
