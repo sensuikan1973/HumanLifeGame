@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../api/firestore/user.dart';
+import '../../entities/life_item.dart';
 import '../../entities/life_step.dart';
-import '../common/life_item.dart';
 
 part 'life_stage.freezed.dart';
 

@@ -1,8 +1,8 @@
 import 'package:HumanLifeGame/api/firestore/store.dart';
 import 'package:HumanLifeGame/api/firestore/user.dart';
+import 'package:HumanLifeGame/entities/life_item.dart';
 import 'package:HumanLifeGame/human_life_game_app.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
-import 'package:HumanLifeGame/models/common/life_item.dart';
 import 'package:HumanLifeGame/models/play_room/play_room_notifier.dart';
 import 'package:HumanLifeGame/screens/common/human.dart';
 import 'package:HumanLifeGame/screens/play_room/life_stages.dart';

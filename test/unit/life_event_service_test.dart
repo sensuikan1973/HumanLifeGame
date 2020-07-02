@@ -1,10 +1,10 @@
 import 'package:HumanLifeGame/api/firestore/store.dart';
+import 'package:HumanLifeGame/entities/life_item.dart';
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/exchange_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/lose_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/target_life_item_params.dart';
-import 'package:HumanLifeGame/models/common/life_item.dart';
 import 'package:HumanLifeGame/models/play_room/life_stage.dart';
 import 'package:HumanLifeGame/services/life_event_service.dart';
 import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';

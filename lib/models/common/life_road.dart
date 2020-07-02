@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import '../../api/firestore/user.dart';
+import '../../entities/life_item.dart';
 import '../../entities/life_step.dart';
 import 'life_event.dart';
 import 'life_event_params/exchange_life_items_params.dart';
@@ -11,7 +12,6 @@ import 'life_event_params/nothing_params.dart';
 import 'life_event_params/select_direction_params.dart';
 import 'life_event_params/start_params.dart';
 import 'life_event_params/target_life_item_params.dart';
-import 'life_item.dart';
 
 class LifeRoadModel {
   LifeRoadModel({

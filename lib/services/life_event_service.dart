@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 
+import '../entities/life_item.dart';
 import '../models/common/life_event.dart';
 import '../models/common/life_event_params/exchange_life_items_params.dart';
 import '../models/common/life_event_params/gain_life_items_params.dart';
 import '../models/common/life_event_params/life_event_params.dart';
 import '../models/common/life_event_params/lose_life_items_params.dart';
-import '../models/common/life_item.dart';
 import '../models/play_room/life_stage.dart';
 
 @immutable
