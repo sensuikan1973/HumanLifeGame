@@ -35,7 +35,7 @@ Future<void> main() async {
     final store = Store(firestore);
     final playRoomNotifier = PlayRoomNotifier(i18n, dice, await createPlayRoom(store));
     for (final lifeStage in playRoomNotifier.value.lifeStages) {
-      lifeStage.lifeItems.add(LifeItemEntity('key', LifeItemType.money, 200));
+      lifeStage.lifeItems.add(const LifeItemEntity('key', LifeItemType.money, 200));
     }
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(create: (_) => playRoomNotifier, child: const LifeStages()),

@@ -8,7 +8,7 @@ import '../../helper/firestore/user_helper.dart';
 
 void main() {
   test('totalMoney', () async {
-    final items = [
+    const items = [
       LifeItemEntity('doctor', LifeItemType.job, 1),
       LifeItemEntity('money', LifeItemType.money, 200),
       LifeItemEntity('money', LifeItemType.money, 300),

@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 /// for exmaple, Doctor job.
 ///
 /// ```dart
@@ -7,8 +9,9 @@
 ///   amount: 1,
 /// }
 /// ```
+@immutable
 class LifeItemEntity {
-  LifeItemEntity(this.key, this.type, this.amount);
+  const LifeItemEntity(this.key, this.type, this.amount);
 
   final String key;
   final LifeItemType type;
