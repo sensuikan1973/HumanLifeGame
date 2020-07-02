@@ -3,9 +3,9 @@ import 'package:flutter/foundation.dart';
 
 import '../../api/dice.dart';
 import '../../api/firestore/play_room.dart';
+import '../../entities/life_step.dart';
 import '../../i18n/i18n.dart';
 import '../../services/life_event_service.dart';
-import '../common/life_step.dart';
 import 'life_event_record.dart';
 import 'life_stage.dart';
 import 'play_room_state.dart';
@@ -31,7 +31,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     for (final human in value.humans) {
       final lifeStage = LifeStageModel(
         human: human,
-        lifeStepModel: value.lifeRoad.start,
+        lifeStepEntity: value.lifeRoad.start,
         lifeItems: [],
       );
       value.lifeStages.add(lifeStage);
@@ -95,13 +95,13 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     // LifeEvent 処理
     value.lifeStages = [...value.lifeStages];
     value.lifeStages[_currentHumanLifeStageIndex] = _lifeEventService.executeEvent(
-      _currentHumanLifeStage.lifeStepModel.lifeEvent,
+      _currentHumanLifeStage.lifeStepEntity.lifeEvent,
       _currentHumanLifeStage,
     );
     // LifeEvent の履歴を更新
     value.everyLifeEventRecords = [
       ...value.everyLifeEventRecords,
-      LifeEventRecordModel(_i18n, _currentHumanLifeStage.human, _currentHumanLifeStage.lifeStepModel.lifeEvent)
+      LifeEventRecordModel(_i18n, _currentHumanLifeStage.human, _currentHumanLifeStage.lifeStepEntity.lifeEvent)
     ];
   }
 
@@ -129,10 +129,10 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   DestinationWithMovedStepCount _moveLifeStepUntilMustStop(int roll, {Direction firstDirection}) {
     // 現在の LifeStep から指定の数だけ進んだ LifeStep を取得する
     final destinationWithMovedStepCount =
-        _currentHumanLifeStage.lifeStepModel.getNextUntilMustStopStep(roll, firstDirection: firstDirection);
+        _currentHumanLifeStage.lifeStepEntity.getNextUntilMustStopStep(roll, firstDirection: firstDirection);
     // 進み先の LifeStep を LifeStage に代入する
     value.lifeStages[_currentHumanLifeStageIndex] = value.lifeStages[_currentHumanLifeStageIndex]
-        .copyWith(lifeStepModel: destinationWithMovedStepCount.destination);
+        .copyWith(lifeStepEntity: destinationWithMovedStepCount.destination);
     return destinationWithMovedStepCount;
   }
 }

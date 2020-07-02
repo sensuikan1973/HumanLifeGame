@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 
-import 'life_event.dart';
-import 'life_event_params/life_event_params.dart';
+import '../models/common/life_event.dart';
+import '../models/common/life_event_params/life_event_params.dart';
 
-class LifeStepModel {
-  LifeStepModel({
+class LifeStepEntity {
+  LifeStepEntity({
     @required this.id,
     @required this.lifeEvent,
     this.right,
@@ -16,10 +16,10 @@ class LifeStepModel {
   final int id;
   final LifeEventModel lifeEvent;
 
-  LifeStepModel up;
-  LifeStepModel down;
-  LifeStepModel right;
-  LifeStepModel left;
+  LifeStepEntity up;
+  LifeStepEntity down;
+  LifeStepEntity right;
+  LifeStepEntity left;
 
   bool get hasUp => up != null;
   bool get hasDown => down != null;
@@ -52,7 +52,7 @@ class LifeStepModel {
     return DestinationWithMovedStepCount(wantToMoveCount: num, movedCount: count, destination: current);
   }
 
-  LifeStepModel _getNext([Direction direction]) {
+  LifeStepEntity _getNext([Direction direction]) {
     if (direction == null) {
       final candidateList = [up, down, right, left].where((el) => el != null);
       if (candidateList.length > 1) {
@@ -88,7 +88,7 @@ class DestinationWithMovedStepCount {
   final int movedCount;
 
   /// 進んだ結果到着した lifeStep
-  final LifeStepModel destination;
+  final LifeStepEntity destination;
 
   /// 残り
   int get remainCount => wantToMoveCount - movedCount;

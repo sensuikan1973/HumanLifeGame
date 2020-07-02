@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../entities/life_step.dart';
 import '../../models/common/life_event_params/life_event_params.dart';
-import '../../models/common/life_step.dart';
 import 'human.dart';
 
 class LifeStep extends StatelessWidget {
@@ -12,7 +12,7 @@ class LifeStep extends StatelessWidget {
   })  : _humans = humans ?? [],
         super(key: key);
 
-  final LifeStepModel _model;
+  final LifeStepEntity _model;
 
   final List<Human> _humans;
 

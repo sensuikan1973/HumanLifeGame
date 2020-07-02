@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../entities/life_step.dart';
 import '../../models/common/life_event_params/life_event_params.dart';
 import '../../models/common/life_road.dart';
-import '../../models/common/life_step.dart';
 import 'human.dart';
 import 'life_step.dart';
 
@@ -56,6 +56,6 @@ class LifeRoad extends StatelessWidget {
         ),
       );
 
-  LifeStep _lifeStep(LifeStepModel model, List<Human> humans) =>
+  LifeStep _lifeStep(LifeStepEntity model, List<Human> humans) =>
       model.lifeEvent.type == LifeEventType.nothing ? null : LifeStep(model, humans: humans);
 }

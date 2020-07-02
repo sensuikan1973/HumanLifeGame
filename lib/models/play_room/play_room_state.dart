@@ -1,8 +1,8 @@
 import 'package:firestore_ref/firestore_ref.dart';
 
 import '../../api/firestore/user.dart';
+import '../../entities/life_step.dart';
 import '../common/life_road.dart';
-import '../common/life_step.dart';
 import 'life_event_record.dart';
 import 'life_stage.dart';
 
@@ -43,14 +43,14 @@ class PlayRoomState {
 
   /// 参加者全員がゴールに到着したかどうか
   bool get allHumansReachedTheGoal =>
-      lifeStages.isNotEmpty && lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
+      lifeStages.isNotEmpty && lifeStages.every((lifeStage) => lifeStage.lifeStepEntity.isGoal);
 
   /// 参加者全員の Position
   Map<String, Position> get positionsByHumanId => {
-        for (final lifeStage in lifeStages) lifeStage.human.entity.uid: lifeRoad.getPosition(lifeStage.lifeStepModel),
+        for (final lifeStage in lifeStages) lifeStage.human.entity.uid: lifeRoad.getPosition(lifeStage.lifeStepEntity),
       };
 
   /// 現在手番の Human が位置する LifeStep
-  LifeStepModel get currentHumanLifeStep =>
-      lifeStages.firstWhere((lifeStage) => lifeStage.human == currentTurnHuman).lifeStepModel;
+  LifeStepEntity get currentHumanLifeStep =>
+      lifeStages.firstWhere((lifeStage) => lifeStage.human == currentTurnHuman).lifeStepEntity;
 }

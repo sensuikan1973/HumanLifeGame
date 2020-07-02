@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import '../../api/firestore/user.dart';
+import '../../entities/life_step.dart';
 import 'life_event.dart';
 import 'life_event_params/exchange_life_items_params.dart';
 import 'life_event_params/gain_life_items_params.dart';
@@ -11,7 +12,6 @@ import 'life_event_params/select_direction_params.dart';
 import 'life_event_params/start_params.dart';
 import 'life_event_params/target_life_item_params.dart';
 import 'life_item.dart';
-import 'life_step.dart';
 
 class LifeRoadModel {
   LifeRoadModel({
@@ -24,17 +24,17 @@ class LifeRoadModel {
 
   final String title;
   final UserEntity author;
-  final List<List<LifeStepModel>> lifeStepsOnBoard;
+  final List<List<LifeStepEntity>> lifeStepsOnBoard;
   int get height => lifeStepsOnBoard.length;
   int get width => lifeStepsOnBoard.first.length;
 
   /// TODO: これ本当にいいんか?
   /// LifeStepsOnBoard の生成ヘルパー
-  static List<List<LifeStepModel>> createLifeStepsOnBoard(List<List<LifeEventModel>> lifeEvents) => List.generate(
+  static List<List<LifeStepEntity>> createLifeStepsOnBoard(List<List<LifeEventModel>> lifeEvents) => List.generate(
         lifeEvents.length,
         (y) => List.generate(
           lifeEvents[y].length,
-          (x) => LifeStepModel(
+          (x) => LifeStepEntity(
             id: x + (y * lifeEvents[y].length),
             lifeEvent: lifeEvents[y][x],
           ),
@@ -84,7 +84,7 @@ class LifeRoadModel {
     ];
   }
 
-  LifeStepModel get start {
+  LifeStepEntity get start {
     final lifeSteps = lifeStepsOnBoard.expand((el) => el);
     final startSteps = lifeSteps.where((step) => step.isStart).toList();
     if (startSteps.isEmpty || startSteps.length > 1) {
@@ -93,7 +93,7 @@ class LifeRoadModel {
     return startSteps.first;
   }
 
-  Position getPosition(LifeStepModel lifeStep) {
+  Position getPosition(LifeStepEntity lifeStep) {
     for (var y = 0; y < lifeStepsOnBoard.length; ++y) {
       for (var x = 0; x < lifeStepsOnBoard[y].length; ++x) {
         if (lifeStepsOnBoard[y][x] == lifeStep) return Position(y, x);
@@ -102,14 +102,14 @@ class LifeRoadModel {
     throw Exception('lifeStep should be in lifeStepsOnBoard');
   }
 
-  void _initDirections(LifeStepModel currentLifeStep) {
+  void _initDirections(LifeStepEntity currentLifeStep) {
     if (currentLifeStep.isGoal) return;
 
     final pos = getPosition(currentLifeStep);
-    LifeStepModel upLifeStep;
-    LifeStepModel downLifeStep;
-    LifeStepModel rightLifeStep;
-    LifeStepModel leftLifeStep;
+    LifeStepEntity upLifeStep;
+    LifeStepEntity downLifeStep;
+    LifeStepEntity rightLifeStep;
+    LifeStepEntity leftLifeStep;
     var isUpUnchecked = false;
     var isDownUnchecked = false;
     var isRightUnchecked = false;
@@ -188,7 +188,7 @@ class LifeRoadModel {
     }
   }
 
-  bool _isUncheckedLifeStep(LifeStepModel lifeStep) {
+  bool _isUncheckedLifeStep(LifeStepEntity lifeStep) {
     if (!lifeStep.isTargetToRoad) return false;
     return [lifeStep.up, lifeStep.down, lifeStep.right, lifeStep.left].every((el) => el == null);
   }

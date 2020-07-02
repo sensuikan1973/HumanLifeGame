@@ -1,9 +1,9 @@
+import 'package:HumanLifeGame/entities/life_step.dart';
 import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/select_direction_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
-import 'package:HumanLifeGame/models/common/life_step.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -18,7 +18,7 @@ void main() {
       ];
       final lifeStepsOnBoard = [
         for (var i = 0; i < lifeEventParams.length; ++i)
-          LifeStepModel(
+          LifeStepEntity(
             id: i,
             lifeEvent: LifeEventModel(LifeEventTarget.myself, lifeEventParams[i]),
           )
@@ -57,7 +57,7 @@ void main() {
       ];
       final lifeStepsOnBoard = [
         for (var i = 0; i < lifeEventParams.length; ++i)
-          LifeStepModel(
+          LifeStepEntity(
             id: i,
             lifeEvent: LifeEventModel(LifeEventTarget.myself, lifeEventParams[i]),
           )
