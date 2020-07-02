@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-/// for exmaple, Doctor job.
+/// for example, Doctor job.
 ///
 /// ```dart
 /// LifeItem {
