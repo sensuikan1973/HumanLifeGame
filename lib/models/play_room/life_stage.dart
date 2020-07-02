@@ -12,7 +12,7 @@ part 'life_stage.freezed.dart';
 abstract class LifeStageModel with _$LifeStageModel {
   factory LifeStageModel({
     Document<UserEntity> human,
-    List<LifeItemModel> lifeItems,
+    List<LifeItemEntity> lifeItems,
     LifeStepEntity lifeStepEntity,
   }) = _LifeStageModel;
 

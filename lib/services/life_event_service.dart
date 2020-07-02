@@ -36,7 +36,7 @@ class LifeEventService {
         final params = lifeEvent.params as GainLifeItemsParams;
         final items = [
           ...lifeStage.lifeItems,
-          for (final item in params.targetItems) LifeItemModel(item.key, item.type, item.amount),
+          for (final item in params.targetItems) LifeItemEntity(item.key, item.type, item.amount),
         ];
         return lifeStage.copyWith(lifeItems: items);
       case LifeEventType.gainLifeItemsPerOtherLifeItem:
@@ -65,7 +65,7 @@ class LifeEventService {
         final params = lifeEvent.params as LoseLifeItemsParams;
         final items = [
           ...lifeStage.lifeItems,
-          for (final item in params.targetItems) LifeItemModel(item.key, item.type, -item.amount),
+          for (final item in params.targetItems) LifeItemEntity(item.key, item.type, -item.amount),
         ];
         return lifeStage.copyWith(lifeItems: items);
       case LifeEventType.loseLifeItemsPerDiceRoll:
@@ -84,8 +84,8 @@ class LifeEventService {
     return lifeStage.copyWith();
   }
 
-  List<LifeItemModel> _exchangeLifeItems(List<LifeItemModel> lifeItems, ExchangeLifeItemsParams params) {
-    final items = <LifeItemModel>[];
+  List<LifeItemEntity> _exchangeLifeItems(List<LifeItemEntity> lifeItems, ExchangeLifeItemsParams params) {
+    final items = <LifeItemEntity>[];
 
     for (final baseItem in params.baseItems) {
       final totalAmountOfBaseItem = lifeItems
@@ -95,11 +95,11 @@ class LifeEventService {
       if (totalAmountOfBaseItem < baseItem.amount) return items;
 
       // lifeItemsにbaseItemが必要量入っていれば減らす
-      items.add(LifeItemModel(baseItem.key, baseItem.type, -baseItem.amount));
+      items.add(LifeItemEntity(baseItem.key, baseItem.type, -baseItem.amount));
     }
     // lifeItemsにtargetItemを追加する
     for (final targetItem in params.targetItems) {
-      items.add(LifeItemModel(targetItem.key, targetItem.type, targetItem.amount));
+      items.add(LifeItemEntity(targetItem.key, targetItem.type, targetItem.amount));
     }
     return items;
   }

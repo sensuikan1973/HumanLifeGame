@@ -9,11 +9,11 @@ import '../../helper/firestore/user_helper.dart';
 void main() {
   test('totalMoney', () async {
     final items = [
-      LifeItemModel('doctor', LifeItemType.job, 1),
-      LifeItemModel('money', LifeItemType.money, 200),
-      LifeItemModel('money', LifeItemType.money, 300),
-      LifeItemModel('money', LifeItemType.money, 100),
-      LifeItemModel('coffee', LifeItemType.coffee, 1),
+      LifeItemEntity('doctor', LifeItemType.job, 1),
+      LifeItemEntity('money', LifeItemType.money, 200),
+      LifeItemEntity('money', LifeItemType.money, 300),
+      LifeItemEntity('money', LifeItemType.money, 100),
+      LifeItemEntity('coffee', LifeItemType.coffee, 1),
     ];
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);

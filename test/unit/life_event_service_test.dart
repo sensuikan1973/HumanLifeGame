@@ -14,7 +14,7 @@ import '../helper/firestore/user_helper.dart';
 
 void main() {
   test('gainLifeItems', () async {
-    final items = [LifeItemModel('money', LifeItemType.money, 200)];
+    final items = [LifeItemEntity('money', LifeItemType.money, 200)];
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
     final lifeStageModel = LifeStageModel(
@@ -40,7 +40,7 @@ void main() {
   });
 
   test('loseLifeItems', () async {
-    final items = [LifeItemModel('money', LifeItemType.money, 200)];
+    final items = [LifeItemEntity('money', LifeItemType.money, 200)];
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
     final lifeStageModel = LifeStageModel(
@@ -66,7 +66,7 @@ void main() {
   });
 
   test('exchangeLifeItems', () async {
-    final items = [LifeItemModel('car', LifeItemType.vehicle, 1)];
+    final items = [LifeItemEntity('car', LifeItemType.vehicle, 1)];
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
     final lifeStageModel = LifeStageModel(

@@ -7,8 +7,8 @@
 ///   amount: 1,
 /// }
 /// ```
-class LifeItemModel {
-  LifeItemModel(this.key, this.type, this.amount);
+class LifeItemEntity {
+  LifeItemEntity(this.key, this.type, this.amount);
 
   final String key;
   final LifeItemType type;
