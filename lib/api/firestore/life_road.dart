@@ -2,6 +2,7 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../models/common/life_event_params/life_event_params.dart';
 import 'entity.dart';
 import 'life_event.dart';
 
@@ -14,7 +15,7 @@ abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
   const factory LifeRoadEntity({
     @required @DocumentReferenceConverter() DocumentReference author,
     @required String title,
-    @required List<LifeEventEntity> lifeEvents,
+    @required List<LifeEventEntity<LifeEventParams>> lifeEvents,
     @required @TimestampConverter() DateTime createdAt,
     @required @TimestampConverter() DateTime updatedAt,
   }) = _LifeRoadEntity;

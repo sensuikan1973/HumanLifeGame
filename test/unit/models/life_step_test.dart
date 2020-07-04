@@ -1,6 +1,7 @@
+import 'package:HumanLifeGame/api/firestore/life_event.dart';
 import 'package:HumanLifeGame/entities/life_step_entity.dart';
-import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/life_event_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/select_direction_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
@@ -20,7 +21,12 @@ void main() {
         for (var i = 0; i < lifeEventParams.length; ++i)
           LifeStepEntity(
             id: i,
-            lifeEvent: LifeEventModel(LifeEventTarget.myself, lifeEventParams[i]),
+            lifeEvent: LifeEventEntity(
+              target: LifeEventTarget.myself,
+              params: lifeEventParams[i],
+              type: LifeEventType.nothing,
+              description: 'null',
+            ),
           )
       ];
       // 全て up 方向に進めるものとする
@@ -59,7 +65,12 @@ void main() {
         for (var i = 0; i < lifeEventParams.length; ++i)
           LifeStepEntity(
             id: i,
-            lifeEvent: LifeEventModel(LifeEventTarget.myself, lifeEventParams[i]),
+            lifeEvent: LifeEventEntity(
+              target: LifeEventTarget.myself,
+              params: lifeEventParams[i],
+              type: LifeEventType.nothing,
+              description: 'null',
+            ),
           )
       ];
       // 全て up 方向に進めるものとする

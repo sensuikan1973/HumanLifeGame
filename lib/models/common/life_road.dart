@@ -1,12 +1,13 @@
 import 'package:flutter/foundation.dart';
 
+import '../../api/firestore/life_event.dart';
 import '../../api/firestore/life_item.dart';
 import '../../api/firestore/user.dart';
 import '../../entities/life_step_entity.dart';
-import 'life_event.dart';
 import 'life_event_params/exchange_life_items_params.dart';
 import 'life_event_params/gain_life_items_params.dart';
 import 'life_event_params/goal_params.dart';
+import 'life_event_params/life_event_params.dart';
 import 'life_event_params/lose_life_items_params.dart';
 import 'life_event_params/nothing_params.dart';
 import 'life_event_params/select_direction_params.dart';
@@ -30,7 +31,7 @@ class LifeRoadModel {
 
   /// TODO: これ本当にいいんか?
   /// LifeStepsOnBoard の生成ヘルパー
-  static List<List<LifeStepEntity>> createLifeStepsOnBoard(List<List<LifeEventModel>> lifeEvents) => List.generate(
+  static List<List<LifeStepEntity>> createLifeStepsOnBoard(List<List<LifeEventEntity>> lifeEvents) => List.generate(
         lifeEvents.length,
         (y) => List.generate(
           lifeEvents[y].length,
@@ -42,34 +43,53 @@ class LifeRoadModel {
       );
 
   /// FIXME: いつか消す
-  static List<List<LifeEventModel>> dummyLifeEvents() {
-    final start = LifeEventModel(LifeEventTarget.myself, const StartParams(), description: 'Start');
-    final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams(), description: 'Goal');
-    final gains = LifeEventModel(
-        LifeEventTarget.myself,
-        const GainLifeItemsParams(targetItems: [
-          TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
-        ]),
-        description: 'バイトでお金を稼ぐ');
-    final loses = LifeEventModel(
-        LifeEventTarget.myself,
-        const LoseLifeItemsParams(targetItems: [
-          TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
-        ]),
-        description: '財布を落とす');
-    final exchg = LifeEventModel(
-        LifeEventTarget.myself,
-        const ExchangeLifeItemsParams(
-          targetItems: [
-            TargetLifeItemParams(key: 'HumanLifeGames Inc.', type: LifeItemType.stock, amount: 1),
-          ],
-          baseItems: [
-            TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
-          ],
-        ),
-        description: '株を購入する');
-    final direc = LifeEventModel(LifeEventTarget.myself, const SelectDirectionParams(), description: '人生の分岐点');
-    final blank = LifeEventModel(LifeEventTarget.myself, const NothingParams());
+  static List<List<LifeEventEntity>> dummyLifeEvents() {
+    final start = LifeEventEntity<StartParams>(
+      target: LifeEventTarget.myself,
+      type: LifeEventType.start,
+      params: StartParams(),
+      description: 'Start',
+    );
+    final goals = LifeEventEntity<GoalParams>(
+      target: LifeEventTarget.myself,
+      type: LifeEventType.goal,
+      params: GoalParams(),
+      description: 'Start',
+    );
+    final gains = LifeEventEntity<GainLifeItemsParams>(
+      target: LifeEventTarget.myself,
+      type: LifeEventType.gainLifeItems,
+      params: GainLifeItemsParams(targetItems: []),
+      description: 'Start',
+    );
+    final loses = LifeEventEntity<LoseLifeItemsParams>(
+      target: LifeEventTarget.myself,
+      type: LifeEventType.loseLifeItems,
+      params: LoseLifeItemsParams(targetItems: []),
+      description: 'Start',
+    );
+    final exchg = LifeEventEntity<ExchangeLifeItemsParams>(
+      target: LifeEventTarget.myself,
+      type: LifeEventType.goal,
+      params: ExchangeLifeItemsParams(targetItems: [
+        TargetLifeItemParams(key: 'HumanLifeGames Inc.', type: LifeItemType.stock, amount: 1),
+      ], baseItems: [
+        TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
+      ]),
+      description: 'Start',
+    );
+    final direc = LifeEventEntity<SelectDirectionParams>(
+      target: LifeEventTarget.myself,
+      type: LifeEventType.loseLifeItems,
+      params: SelectDirectionParams(),
+      description: 'Start',
+    );
+    final blank = LifeEventEntity<NothingParams>(
+      target: LifeEventTarget.myself,
+      type: LifeEventType.loseLifeItems,
+      params: NothingParams(),
+      description: 'Start',
+    );
     return [
       [start, direc, gains, gains, exchg, loses, blank, blank, blank, blank],
       [blank, gains, blank, blank, blank, gains, blank, blank, blank, blank],

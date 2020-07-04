@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+import '../api/firestore/life_event.dart';
 import '../api/firestore/life_item.dart';
-import '../models/common/life_event.dart';
 import '../models/common/life_event_params/exchange_life_items_params.dart';
 import '../models/common/life_event_params/gain_life_items_params.dart';
 import '../models/common/life_event_params/life_event_params.dart';
@@ -12,7 +12,7 @@ import '../models/play_room/life_stage.dart';
 class LifeEventService {
   const LifeEventService();
 
-  LifeStageModel executeEvent(LifeEventModel lifeEvent, LifeStageModel lifeStage) {
+  LifeStageModel executeEvent(LifeEventEntity lifeEvent, LifeStageModel lifeStage) {
     switch (lifeEvent.type) {
       case LifeEventType.nothing:
         // TODO: Handle this case.

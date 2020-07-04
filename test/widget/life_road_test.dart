@@ -1,9 +1,10 @@
+import 'package:HumanLifeGame/api/firestore/life_event.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
 import 'package:HumanLifeGame/human_life_game_app.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
-import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/life_event_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
 import 'package:HumanLifeGame/models/common/life_road.dart';
@@ -22,10 +23,30 @@ import 'helper/testable_app.dart';
 // FIXME:
 Future<void> main() async {
   final i18n = await I18n.load(HumanLifeGameApp.defaultLocale);
-  final start = LifeEventModel(LifeEventTarget.myself, const StartParams());
-  final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams());
-  final gains = LifeEventModel(LifeEventTarget.myself, const GainLifeItemsParams(targetItems: []));
-  final blank = LifeEventModel(LifeEventTarget.myself, const NothingParams());
+  final start = LifeEventEntity<StartParams>(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.start,
+    params: StartParams(),
+    description: 'Start',
+  );
+  final goals = LifeEventEntity<GoalParams>(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.goal,
+    params: GoalParams(),
+    description: 'Start',
+  );
+  final gains = LifeEventEntity<GainLifeItemsParams>(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.gainLifeItems,
+    params: GainLifeItemsParams(targetItems: []),
+    description: 'Start',
+  );
+  final blank = LifeEventEntity<NothingParams>(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.nothing,
+    params: NothingParams(),
+    description: 'Start',
+  );
   final lifeEvents = [
     [start, gains, gains, gains, gains, gains, goals],
     [blank, blank, blank, blank, blank, blank, blank],

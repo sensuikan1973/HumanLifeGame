@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import '../models/common/life_event.dart';
+import '../api/firestore/life_event.dart';
 import '../models/common/life_event_params/life_event_params.dart';
 
 class LifeStepEntity {
@@ -14,7 +14,7 @@ class LifeStepEntity {
   });
 
   final int id;
-  final LifeEventModel lifeEvent;
+  final LifeEventEntity lifeEvent;
 
   LifeStepEntity up;
   LifeStepEntity down;

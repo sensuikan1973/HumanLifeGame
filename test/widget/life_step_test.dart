@@ -1,6 +1,7 @@
+import 'package:HumanLifeGame/api/firestore/life_event.dart';
 import 'package:HumanLifeGame/entities/life_step_entity.dart';
-import 'package:HumanLifeGame/models/common/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/life_event_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/lose_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
 import 'package:HumanLifeGame/screens/common/life_step.dart';
@@ -13,9 +14,11 @@ Future<void> main() async {
   testWidgets('show Card with positive Color', (tester) async {
     final model = LifeStepEntity(
       id: 0,
-      lifeEvent: LifeEventModel(
-        LifeEventTarget.myself,
-        const GainLifeItemsParams(targetItems: []),
+      lifeEvent: LifeEventEntity<GainLifeItemsParams>(
+        target: LifeEventTarget.myself,
+        params: const GainLifeItemsParams(targetItems: []),
+        type: LifeEventType.gainLifeItems,
+        description: '',
       ),
     );
 
@@ -31,9 +34,11 @@ Future<void> main() async {
   testWidgets('show Card with negative Color', (tester) async {
     final model = LifeStepEntity(
       id: 0,
-      lifeEvent: LifeEventModel(
-        LifeEventTarget.myself,
-        const LoseLifeItemsParams(targetItems: []),
+      lifeEvent: LifeEventEntity<LoseLifeItemsParams>(
+        target: LifeEventTarget.myself,
+        params: const LoseLifeItemsParams(targetItems: []),
+        type: LifeEventType.gainLifeItems,
+        description: '',
       ),
     );
 
@@ -49,9 +54,11 @@ Future<void> main() async {
   testWidgets('show Card with normal Color', (tester) async {
     final model = LifeStepEntity(
       id: 0,
-      lifeEvent: LifeEventModel(
-        LifeEventTarget.myself,
-        const StartParams(),
+      lifeEvent: LifeEventEntity<StartParams>(
+        target: LifeEventTarget.myself,
+        params: const StartParams(),
+        type: LifeEventType.gainLifeItems,
+        description: '',
       ),
     );
 
@@ -65,18 +72,17 @@ Future<void> main() async {
   });
 
   testWidgets('show description', (tester) async {
-    final model = LifeStepEntity(
-      id: 0,
-      lifeEvent: LifeEventModel(
-        LifeEventTarget.myself,
-        const GainLifeItemsParams(targetItems: []),
-        description: '３年連続皆勤賞の快挙達成！！！',
-      ),
+    final gainEvent = LifeEventEntity<GainLifeItemsParams>(
+      target: LifeEventTarget.myself,
+      params: const GainLifeItemsParams(targetItems: []),
+      type: LifeEventType.gainLifeItems,
+      description: '',
     );
+    final model = LifeStepEntity(id: 0, lifeEvent: gainEvent);
 
     await tester.pumpWidget(testableApp(home: LifeStep(model)));
     await tester.pump();
 
-    expect(find.text('３年連続皆勤賞の快挙達成！！！'), findsOneWidget);
+    expect(find.text(gainEvent.description), findsOneWidget);
   });
 }

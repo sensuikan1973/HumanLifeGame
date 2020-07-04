@@ -84,7 +84,7 @@ class PlayRoomState extends State<PlayRoom> {
   @override
   void initState() {
     context.read<PlayRoomNotifier>().init().then((_) async {
-      await Future<void>.delayed(const Duration(milliseconds: 200));
+      await Future<void>.delayed(const Duration(milliseconds: 200)); // FIXME: showDelay を使う
       return hasInitialized.value = true;
     });
     super.initState();

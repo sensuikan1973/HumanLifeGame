@@ -9,6 +9,7 @@ abstract class LifeEventParams {
   const LifeEventParams();
 
   LifeEventType get type;
+  Map<String, dynamic> toJson();
 
   /// 分岐かどうか
   bool get isBranch => [

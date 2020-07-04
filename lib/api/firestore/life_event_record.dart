@@ -2,6 +2,7 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../models/common/life_event_params/life_event_params.dart';
 import 'entity.dart';
 import 'life_event.dart';
 
@@ -12,7 +13,7 @@ part 'life_event_record.g.dart';
 abstract class LifeEventRecordEntity implements _$LifeEventRecordEntity, Entity {
   const factory LifeEventRecordEntity({
     @required String humanId,
-    @required LifeEventEntity lifeEvent,
+    @required LifeEventEntity<LifeEventParams> lifeEvent,
     @required @TimestampConverter() DateTime createdAt,
   }) = _LifeEventRecordEntity;
   const LifeEventRecordEntity._();
