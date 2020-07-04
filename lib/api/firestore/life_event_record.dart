@@ -12,9 +12,10 @@ part 'life_event_record.g.dart';
 @freezed
 abstract class LifeEventRecordEntity implements _$LifeEventRecordEntity, Entity {
   const factory LifeEventRecordEntity({
-    @required String humanId,
+    @required @DocumentReferenceConverter() DocumentReference human,
     @required LifeEventEntity lifeEvent,
     @TimestampConverter() DateTime createdAt,
+    @TimestampConverter() DateTime updatedAt,
   }) = _LifeEventRecordEntity;
   const LifeEventRecordEntity._();
 
@@ -30,8 +31,8 @@ abstract class LifeEventRecordEntity implements _$LifeEventRecordEntity, Entity 
 }
 
 class LifeEventRecordEntityField {
-  /// 主(human) の id
-  static const humanId = 'humanId';
+  /// Event を経験した human (user)
+  static const human = 'human';
 
   /// LifeEvent
   static const lifeEvent = 'lifeEvent';

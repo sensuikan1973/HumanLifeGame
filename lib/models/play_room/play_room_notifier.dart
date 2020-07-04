@@ -101,14 +101,12 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
       _currentHumanLifeStage,
     );
     // LifeEvent の履歴を追加
-    final recordDocRef = await _store.collectionRef<LifeEventRecordEntity>(_playRoom.ref.path).add(
-          LifeEventRecordEntity(
-            humanId: _currentHumanLifeStage.human.entity.uid,
-            lifeEvent: _currentHumanLifeStage.lifeStepEntity.lifeEvent,
-          ),
-        );
-    final recordDoc = await recordDocRef.get();
-    value.everyLifeEventRecords = [...value.everyLifeEventRecords, recordDoc.entity];
+    final record = LifeEventRecordEntity(
+      human: _currentHumanLifeStage.human.ref,
+      lifeEvent: _currentHumanLifeStage.lifeStepEntity.lifeEvent,
+    );
+    await _store.collectionRef<LifeEventRecordEntity>(_playRoom.ref.path).add(record);
+    value.everyLifeEventRecords = [...value.everyLifeEventRecords, record]; // FIXME: query でひっぱてきて上位数件のみ表示する
   }
 
   void _updateRequireSelectDirectionAndRemainCount(DestinationWithMovedStepCount dest) {
