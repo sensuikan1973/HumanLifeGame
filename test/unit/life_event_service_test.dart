@@ -22,14 +22,13 @@ void main() {
       human: await createUser(store),
       lifeItems: items,
     );
-    final gain = LifeEventEntity<GainLifeItemsParams>(
+    const gain = LifeEventEntity<GainLifeItemsParams>(
       target: LifeEventTarget.myself,
-      params: const GainLifeItemsParams(targetItems: [
+      params: GainLifeItemsParams(targetItems: [
         TargetLifeItemParams(key: 'doctor', type: LifeItemType.job, amount: 1),
         TargetLifeItemParams(key: 'coffee', type: LifeItemType.coffee, amount: 1),
       ]),
       type: LifeEventType.gainLifeItems,
-      description: '',
     );
 
     final model = const LifeEventService().executeEvent(gain, lifeStageModel);
@@ -50,14 +49,13 @@ void main() {
       human: await createUser(store),
       lifeItems: items,
     );
-    final lose = LifeEventEntity<LoseLifeItemsParams>(
+    const lose = LifeEventEntity<LoseLifeItemsParams>(
       target: LifeEventTarget.myself,
-      params: const LoseLifeItemsParams(targetItems: [
+      params: LoseLifeItemsParams(targetItems: [
         TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
         TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 5000),
       ]),
       type: LifeEventType.loseLifeItems,
-      description: '',
     );
 
     final model = const LifeEventService().executeEvent(lose, lifeStageModel);
@@ -78,9 +76,9 @@ void main() {
       human: await createUser(store),
       lifeItems: items,
     );
-    final exchange = LifeEventEntity<ExchangeLifeItemsParams>(
+    const exchange = LifeEventEntity<ExchangeLifeItemsParams>(
       target: LifeEventTarget.myself,
-      params: const ExchangeLifeItemsParams(
+      params: ExchangeLifeItemsParams(
         targetItems: [
           TargetLifeItemParams(key: 'HumanLifeGames Inc.', type: LifeItemType.stock, amount: 1),
         ],
@@ -89,7 +87,6 @@ void main() {
         ],
       ),
       type: LifeEventType.exchangeLifeItems,
-      description: '',
     );
     var model = const LifeEventService().executeEvent(exchange, lifeStageModel);
     expect(model.lifeItems[0].amount, 1);

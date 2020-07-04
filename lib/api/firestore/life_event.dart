@@ -20,8 +20,8 @@ abstract class LifeEventEntity<T extends LifeEventParams> implements _$LifeEvent
   const factory LifeEventEntity({
     @required LifeEventType type,
     @required LifeEventTarget target,
-    @required String description,
     @required @ParamsConverter() T params,
+    @Default('') String description,
   }) = _LifeEventEntity<T>;
   const LifeEventEntity._();
 

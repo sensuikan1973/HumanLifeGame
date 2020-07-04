@@ -10,35 +10,30 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final start = LifeEventEntity<StartParams>(
+  const start = LifeEventEntity<StartParams>(
     target: LifeEventTarget.myself,
     type: LifeEventType.start,
     params: StartParams(),
-    description: 'Start',
   );
-  final goals = LifeEventEntity<GoalParams>(
+  const goals = LifeEventEntity<GoalParams>(
     target: LifeEventTarget.myself,
     type: LifeEventType.goal,
     params: GoalParams(),
-    description: 'Start',
   );
-  final gains = LifeEventEntity<GainLifeItemsParams>(
+  const gains = LifeEventEntity<GainLifeItemsParams>(
     target: LifeEventTarget.myself,
     type: LifeEventType.gainLifeItems,
     params: GainLifeItemsParams(targetItems: []),
-    description: 'Start',
   );
-  final direc = LifeEventEntity<SelectDirectionParams>(
+  const direc = LifeEventEntity<SelectDirectionParams>(
     target: LifeEventTarget.myself,
     type: LifeEventType.selectDirection,
     params: SelectDirectionParams(),
-    description: 'Start',
   );
-  final blank = LifeEventEntity<NothingParams>(
+  const blank = LifeEventEntity<NothingParams>(
     target: LifeEventTarget.myself,
     type: LifeEventType.nothing,
     params: NothingParams(),
-    description: 'Start',
   );
 
   final epBlank = _Pointer(up: false, down: false, right: false, left: false);
@@ -50,7 +45,7 @@ void main() {
   final epBrDL = _Pointer(up: false, down: true, right: false, left: true);
   final epBrUDR = _Pointer(up: true, down: true, right: true, left: false);
 
-  test('ditect a single direction ', () {
+  test('detect a single direction ', () {
     final lifeEvents = [
       [start, gains, gains, gains, gains, gains, gains],
       [blank, blank, blank, blank, blank, blank, gains],

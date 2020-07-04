@@ -44,31 +44,27 @@ class LifeRoadModel {
 
   /// FIXME: いつか消す
   static List<List<LifeEventEntity>> dummyLifeEvents() {
-    final start = LifeEventEntity<StartParams>(
+    const start = LifeEventEntity<StartParams>(
       target: LifeEventTarget.myself,
       type: LifeEventType.start,
       params: StartParams(),
-      description: 'Start',
     );
-    final goals = LifeEventEntity<GoalParams>(
+    const goals = LifeEventEntity<GoalParams>(
       target: LifeEventTarget.myself,
       type: LifeEventType.goal,
       params: GoalParams(),
-      description: 'Start',
     );
-    final gains = LifeEventEntity<GainLifeItemsParams>(
+    const gains = LifeEventEntity<GainLifeItemsParams>(
       target: LifeEventTarget.myself,
       type: LifeEventType.gainLifeItems,
       params: GainLifeItemsParams(targetItems: []),
-      description: 'Start',
     );
-    final loses = LifeEventEntity<LoseLifeItemsParams>(
+    const loses = LifeEventEntity<LoseLifeItemsParams>(
       target: LifeEventTarget.myself,
       type: LifeEventType.loseLifeItems,
       params: LoseLifeItemsParams(targetItems: []),
-      description: 'Start',
     );
-    final exchg = LifeEventEntity<ExchangeLifeItemsParams>(
+    const exchg = LifeEventEntity<ExchangeLifeItemsParams>(
       target: LifeEventTarget.myself,
       type: LifeEventType.goal,
       params: ExchangeLifeItemsParams(targetItems: [
@@ -76,19 +72,16 @@ class LifeRoadModel {
       ], baseItems: [
         TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
       ]),
-      description: 'Start',
     );
-    final direc = LifeEventEntity<SelectDirectionParams>(
+    const direc = LifeEventEntity<SelectDirectionParams>(
       target: LifeEventTarget.myself,
       type: LifeEventType.loseLifeItems,
       params: SelectDirectionParams(),
-      description: 'Start',
     );
-    final blank = LifeEventEntity<NothingParams>(
+    const blank = LifeEventEntity<NothingParams>(
       target: LifeEventTarget.myself,
       type: LifeEventType.loseLifeItems,
       params: NothingParams(),
-      description: 'Start',
     );
     return [
       [start, direc, gains, gains, exchg, loses, blank, blank, blank, blank],

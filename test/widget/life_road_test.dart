@@ -23,29 +23,25 @@ import 'helper/testable_app.dart';
 // FIXME:
 Future<void> main() async {
   final i18n = await I18n.load(HumanLifeGameApp.defaultLocale);
-  final start = LifeEventEntity<StartParams>(
+  const start = LifeEventEntity<StartParams>(
     target: LifeEventTarget.myself,
     type: LifeEventType.start,
     params: StartParams(),
-    description: 'Start',
   );
-  final goals = LifeEventEntity<GoalParams>(
+  const goals = LifeEventEntity<GoalParams>(
     target: LifeEventTarget.myself,
     type: LifeEventType.goal,
     params: GoalParams(),
-    description: 'Start',
   );
-  final gains = LifeEventEntity<GainLifeItemsParams>(
+  const gains = LifeEventEntity<GainLifeItemsParams>(
     target: LifeEventTarget.myself,
     type: LifeEventType.gainLifeItems,
     params: GainLifeItemsParams(targetItems: []),
-    description: 'Start',
   );
-  final blank = LifeEventEntity<NothingParams>(
+  const blank = LifeEventEntity<NothingParams>(
     target: LifeEventTarget.myself,
     type: LifeEventType.nothing,
     params: NothingParams(),
-    description: 'Start',
   );
   final lifeEvents = [
     [start, gains, gains, gains, gains, gains, goals],

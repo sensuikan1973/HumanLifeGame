@@ -19,11 +19,10 @@ import 'helper/testable_app.dart';
 // FIXME:
 Future<void> main() async {
   final i18n = await I18n.load(HumanLifeGameApp.defaultLocale);
-  final start = LifeEventEntity<StartParams>(
+  const start = LifeEventEntity<StartParams>(
     target: LifeEventTarget.myself,
     type: LifeEventType.start,
     params: StartParams(),
-    description: 'Start',
   );
 
   testWidgets("show 'lifeEventRecords'Text", (tester) async {

@@ -14,11 +14,10 @@ Future<void> main() async {
   testWidgets('show Card with positive Color', (tester) async {
     final model = LifeStepEntity(
       id: 0,
-      lifeEvent: LifeEventEntity<GainLifeItemsParams>(
+      lifeEvent: const LifeEventEntity<GainLifeItemsParams>(
         target: LifeEventTarget.myself,
-        params: const GainLifeItemsParams(targetItems: []),
+        params: GainLifeItemsParams(targetItems: []),
         type: LifeEventType.gainLifeItems,
-        description: '',
       ),
     );
 
@@ -34,11 +33,10 @@ Future<void> main() async {
   testWidgets('show Card with negative Color', (tester) async {
     final model = LifeStepEntity(
       id: 0,
-      lifeEvent: LifeEventEntity<LoseLifeItemsParams>(
+      lifeEvent: const LifeEventEntity<LoseLifeItemsParams>(
         target: LifeEventTarget.myself,
-        params: const LoseLifeItemsParams(targetItems: []),
+        params: LoseLifeItemsParams(targetItems: []),
         type: LifeEventType.gainLifeItems,
-        description: '',
       ),
     );
 
@@ -54,11 +52,10 @@ Future<void> main() async {
   testWidgets('show Card with normal Color', (tester) async {
     final model = LifeStepEntity(
       id: 0,
-      lifeEvent: LifeEventEntity<StartParams>(
+      lifeEvent: const LifeEventEntity<StartParams>(
         target: LifeEventTarget.myself,
-        params: const StartParams(),
+        params: StartParams(),
         type: LifeEventType.gainLifeItems,
-        description: '',
       ),
     );
 
@@ -72,11 +69,10 @@ Future<void> main() async {
   });
 
   testWidgets('show description', (tester) async {
-    final gainEvent = LifeEventEntity<GainLifeItemsParams>(
+    const gainEvent = LifeEventEntity<GainLifeItemsParams>(
       target: LifeEventTarget.myself,
-      params: const GainLifeItemsParams(targetItems: []),
+      params: GainLifeItemsParams(targetItems: []),
       type: LifeEventType.gainLifeItems,
-      description: '',
     );
     final model = LifeStepEntity(id: 0, lifeEvent: gainEvent);
 
