@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../api/dice.dart';
 import '../../api/firestore/play_room.dart';
+import '../../api/firestore/store.dart';
 import '../../i18n/i18n.dart';
 import '../../models/play_room/play_room_notifier.dart';
 import 'announcement.dart';
@@ -32,6 +33,7 @@ class PlayRoom extends StatefulWidget {
               create: (_) => PlayRoomNotifier(
                 I18n.of(context),
                 context.read<Dice>(),
+                context.read<Store>(),
                 playRoomDoc,
               ),
             ),

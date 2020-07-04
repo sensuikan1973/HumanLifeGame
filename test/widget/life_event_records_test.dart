@@ -1,10 +1,10 @@
 import 'package:HumanLifeGame/api/firestore/life_event.dart';
+import 'package:HumanLifeGame/api/firestore/life_event_record.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
 import 'package:HumanLifeGame/human_life_game_app.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/life_event_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
-import 'package:HumanLifeGame/models/play_room/life_event_record.dart';
 import 'package:HumanLifeGame/models/play_room/play_room_notifier.dart';
 import 'package:HumanLifeGame/screens/play_room/life_event_records.dart';
 import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
@@ -29,9 +29,11 @@ Future<void> main() async {
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
     final humans = [await createUser(store), await createUser(store)];
-    final playRoomNotifier = PlayRoomNotifier(i18n, MockDice(), await createPlayRoom(store));
+    final playRoomNotifier = PlayRoomNotifier(i18n, MockDice(), store, await createPlayRoom(store));
     for (final human in humans) {
-      playRoomNotifier.value.everyLifeEventRecords = [LifeEventRecordModel(i18n, human, start)];
+      playRoomNotifier.value.everyLifeEventRecords = [
+        LifeEventRecordEntity(humanId: human.entity.uid, lifeEvent: start)
+      ];
     }
     await tester.pumpWidget(testableApp(
       store: store,
@@ -39,8 +41,8 @@ Future<void> main() async {
     ));
     await tester.pump();
 
-    for (final model in playRoomNotifier.value.everyLifeEventRecords) {
-      expect(find.text(model.lifeEventRecordMessage), findsOneWidget);
+    for (final record in playRoomNotifier.value.everyLifeEventRecords) {
+      expect(find.text(i18n.lifeStepEventType(record.lifeEvent.type)), findsOneWidget);
     }
   });
 }

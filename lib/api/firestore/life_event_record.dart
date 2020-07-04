@@ -14,7 +14,7 @@ abstract class LifeEventRecordEntity implements _$LifeEventRecordEntity, Entity 
   const factory LifeEventRecordEntity({
     @required String humanId,
     @required LifeEventEntity<LifeEventParams> lifeEvent,
-    @required @TimestampConverter() DateTime createdAt,
+    @TimestampConverter() DateTime createdAt,
   }) = _LifeEventRecordEntity;
   const LifeEventRecordEntity._();
 

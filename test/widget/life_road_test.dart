@@ -58,7 +58,7 @@ Future<void> main() async {
   testWidgets('show LifeSteps', (tester) async {
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
-    final playRoomNotifier = PlayRoomNotifier(i18n, MockDice(), await createPlayRoom(store));
+    final playRoomNotifier = PlayRoomNotifier(i18n, MockDice(), store, await createPlayRoom(store));
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(
         create: (_) => playRoomNotifier,

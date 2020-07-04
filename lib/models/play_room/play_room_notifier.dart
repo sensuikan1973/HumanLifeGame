@@ -2,11 +2,12 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../api/dice.dart';
+import '../../api/firestore/life_event_record.dart';
 import '../../api/firestore/play_room.dart';
+import '../../api/firestore/store.dart';
 import '../../entities/life_step_entity.dart';
 import '../../i18n/i18n.dart';
 import '../../services/life_event_service.dart';
-import 'life_event_record.dart';
 import 'life_stage.dart';
 import 'play_room_state.dart';
 
@@ -23,7 +24,7 @@ import 'play_room_state.dart';
 ///       そのため、現状は ChangeNotifierProvider で PlayRoomNotifier インスタンスを provide し、`.value` を必要に応じて参照することにしている.<br>
 ///     * flutter_state_notifier を導入することで対応可能(notifyListeners の話も含め)なので、必要に迫られたら導入する.
 class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
-  PlayRoomNotifier(this._i18n, this._dice, this._playRoom) : super(PlayRoomState());
+  PlayRoomNotifier(this._i18n, this._dice, this._store, this._playRoom) : super(PlayRoomState());
 
   Future<void> init() async {
     value.humans = await _playRoom.entity.fetchHumans();
@@ -43,6 +44,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
   final I18n _i18n;
   final Dice _dice;
+  final Store _store;
   final Document<PlayRoomEntity> _playRoom;
   final _lifeEventService = const LifeEventService();
 
@@ -72,7 +74,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
     // TODO: 今は requireSelectDirection だけだけど、今後は requireDiceRoll とかも考慮しなきゃいけなくなる
     if (!value.requireSelectDirection) {
-      _executeEventToCurrentHuman();
+      await _executeEventToCurrentHuman();
       await _changeToNextTurn();
     }
     notifyListeners();
@@ -91,7 +93,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     notifyListeners();
   }
 
-  void _executeEventToCurrentHuman() {
+  Future<void> _executeEventToCurrentHuman() async {
     // LifeEvent 処理
     value.lifeStages = [...value.lifeStages];
     value.lifeStages[_currentHumanLifeStageIndex] = _lifeEventService.executeEvent(
@@ -99,10 +101,14 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
       _currentHumanLifeStage,
     );
     // LifeEvent の履歴を更新
-    value.everyLifeEventRecords = [
-      ...value.everyLifeEventRecords,
-      LifeEventRecordModel(_i18n, _currentHumanLifeStage.human, _currentHumanLifeStage.lifeStepEntity.lifeEvent)
-    ];
+    final recordDocRef = await _store.collectionRef<LifeEventRecordEntity>().add(
+          LifeEventRecordEntity(
+            humanId: _currentHumanLifeStage.human.entity.uid,
+            lifeEvent: _currentHumanLifeStage.lifeStepEntity.lifeEvent,
+          ),
+        );
+    final recordDoc = await recordDocRef.get();
+    value.everyLifeEventRecords = [...value.everyLifeEventRecords, recordDoc.entity];
   }
 
   void _updateRequireSelectDirectionAndRemainCount(DestinationWithMovedStepCount dest) {
