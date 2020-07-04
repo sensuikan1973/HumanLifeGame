@@ -48,35 +48,48 @@ class LifeRoadModel {
       target: LifeEventTarget.myself,
       type: LifeEventType.start,
       params: StartParams(),
+      description: 'Start だよ',
     );
     const goals = LifeEventEntity<GoalParams>(
       target: LifeEventTarget.myself,
       type: LifeEventType.goal,
       params: GoalParams(),
+      description: 'Goal だよ',
     );
     const gains = LifeEventEntity<GainLifeItemsParams>(
       target: LifeEventTarget.myself,
       type: LifeEventType.gainLifeItems,
-      params: GainLifeItemsParams(targetItems: []),
+      params: GainLifeItemsParams(targetItems: [
+        TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
+      ]),
+      description: 'お金ゲット〜',
     );
     const loses = LifeEventEntity<LoseLifeItemsParams>(
       target: LifeEventTarget.myself,
       type: LifeEventType.loseLifeItems,
-      params: LoseLifeItemsParams(targetItems: []),
+      params: LoseLifeItemsParams(targetItems: [
+        TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
+      ]),
+      description: 'お金なくした...',
     );
     const exchg = LifeEventEntity<ExchangeLifeItemsParams>(
       target: LifeEventTarget.myself,
       type: LifeEventType.goal,
-      params: ExchangeLifeItemsParams(targetItems: [
-        TargetLifeItemParams(key: 'HumanLifeGames Inc.', type: LifeItemType.stock, amount: 1),
-      ], baseItems: [
-        TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
-      ]),
+      params: ExchangeLifeItemsParams(
+        targetItems: [
+          TargetLifeItemParams(key: 'HumanLifeGames Inc.', type: LifeItemType.stock, amount: 1),
+        ],
+        baseItems: [
+          TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
+        ],
+      ),
+      description: '株を購入する',
     );
     const direc = LifeEventEntity<SelectDirectionParams>(
       target: LifeEventTarget.myself,
       type: LifeEventType.loseLifeItems,
       params: SelectDirectionParams(),
+      description: '分岐だよー',
     );
     const blank = LifeEventEntity<NothingParams>(
       target: LifeEventTarget.myself,
