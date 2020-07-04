@@ -100,7 +100,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
       _currentHumanLifeStage.lifeStepEntity.lifeEvent,
       _currentHumanLifeStage,
     );
-    // LifeEvent の履歴を更新
+    // LifeEvent の履歴を追加
     final recordDocRef = await _store.collectionRef<LifeEventRecordEntity>().add(
           LifeEventRecordEntity(
             humanId: _currentHumanLifeStage.human.entity.uid,
