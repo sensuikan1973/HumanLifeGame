@@ -13,7 +13,7 @@ part 'life_event_record.g.dart';
 abstract class LifeEventRecordEntity implements _$LifeEventRecordEntity, Entity {
   const factory LifeEventRecordEntity({
     @required String humanId,
-    @required LifeEventEntity<LifeEventParams> lifeEvent,
+    @required LifeEventEntity lifeEvent,
     @TimestampConverter() DateTime createdAt,
   }) = _LifeEventRecordEntity;
   const LifeEventRecordEntity._();

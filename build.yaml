@@ -1,0 +1,13 @@
+# See: https://pub.dev/packages/build_runner#usage
+# See: https://pub.dev/packages/json_serializable#build-configuration
+targets:
+  $default:
+    builders:
+      json_serializable:
+        options:
+          # JsonSerializable なクラスをネストした状態で、子 class にも toJson() を明示的に呼ばせたい場合、これをオンにしておく必要がある
+          # [例 (前後略)]
+          # before: 'lifeEvent': instance.lifeEvent?.toJson(),
+          # after : 'lifeEvent': instance.lifeEvent,
+          # See: https://github.com/rrousselGit/freezed/issues/86
+          explicit_to_json: true # custom
