@@ -17,8 +17,8 @@ class Store {
 
   final Firestore firestore;
 
-  CollectionRef<T, Document<T>> collectionRef<T extends Entity>() => CollectionRef(
-        firestore.collection(getCollectionId<T>()),
+  CollectionRef<T, Document<T>> collectionRef<T extends Entity>([String parent]) => CollectionRef(
+        firestore.collection(parent == null ? getCollectionId<T>() : '$parent/${getCollectionId<T>()}'),
         decoder: (snapshot) => _decode<T>(snapshot),
         encoder: (entity) => entity.encode(),
       );
