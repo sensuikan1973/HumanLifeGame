@@ -36,7 +36,7 @@ class LifeRoadModel {
         (y) => List.generate(
           lifeEvents[y].length,
           (x) => LifeStepEntity(
-            id: x + (y * lifeEvents[y].length),
+            id: (x + (y * lifeEvents[y].length)).toString(),
             lifeEvent: lifeEvents[y][x],
           ),
         ),

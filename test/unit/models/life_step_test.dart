@@ -20,12 +20,11 @@ void main() {
       final lifeStepsOnBoard = [
         for (var i = 0; i < lifeEventParams.length; ++i)
           LifeStepEntity(
-            id: i,
+            id: i.toString(),
             lifeEvent: LifeEventEntity(
               target: LifeEventTarget.myself,
               params: lifeEventParams[i],
               type: LifeEventType.nothing,
-              description: 'null',
             ),
           )
       ];
@@ -36,19 +35,19 @@ void main() {
       }
 
       test('move up straight', () {
-        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(0).destination.id, 0);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(0).destination.id, '0');
         expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(0).movedCount, 0);
 
-        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(3).destination.id, 3);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(3).destination.id, '3');
         expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(3).movedCount, 3);
 
-        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(4).destination.id, 4);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(4).destination.id, '4');
         expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(4).movedCount, 4);
 
-        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(5).destination.id, 4);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(5).destination.id, '4');
         expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(5).movedCount, 4);
 
-        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(100).destination.id, 4);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(100).destination.id, '4');
         expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(100).movedCount, 4);
       });
     });
@@ -64,12 +63,11 @@ void main() {
       final lifeStepsOnBoard = [
         for (var i = 0; i < lifeEventParams.length; ++i)
           LifeStepEntity(
-            id: i,
+            id: i.toString(),
             lifeEvent: LifeEventEntity(
               target: LifeEventTarget.myself,
               params: lifeEventParams[i],
               type: LifeEventType.nothing,
-              description: 'null',
             ),
           )
       ];
@@ -81,15 +79,15 @@ void main() {
       }
 
       test('move until direction', () {
-        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(3).destination.id, 3);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(3).destination.id, '3');
         expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(3).movedCount, 3);
 
         // 途中に SelectDirection があるから、強制ストップ
-        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(4).destination.id, 3);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(4).destination.id, '3');
         expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(4).movedCount, 3);
 
         // SelectDirection から進もうとしても、そこ自体が強制ストップ Event だから先に進めない
-        expect(lifeStepsOnBoard[3].getNextUntilMustStopStep(4).destination.id, 3);
+        expect(lifeStepsOnBoard[3].getNextUntilMustStopStep(4).destination.id, '3');
         expect(lifeStepsOnBoard[3].getNextUntilMustStopStep(4).movedCount, 0);
       });
     });

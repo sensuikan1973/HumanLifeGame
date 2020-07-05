@@ -13,7 +13,7 @@ class LifeStepEntity {
     this.down,
   });
 
-  final int id;
+  final String id;
   final LifeEventEntity lifeEvent;
 
   LifeStepEntity up;

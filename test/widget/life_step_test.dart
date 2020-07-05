@@ -13,7 +13,7 @@ import 'helper/testable_app.dart';
 Future<void> main() async {
   testWidgets('show Card with positive Color', (tester) async {
     final model = LifeStepEntity(
-      id: 0,
+      id: '0',
       lifeEvent: const LifeEventEntity<GainLifeItemsParams>(
         target: LifeEventTarget.myself,
         params: GainLifeItemsParams(targetItems: []),
@@ -32,7 +32,7 @@ Future<void> main() async {
 
   testWidgets('show Card with negative Color', (tester) async {
     final model = LifeStepEntity(
-      id: 0,
+      id: '0',
       lifeEvent: const LifeEventEntity<LoseLifeItemsParams>(
         target: LifeEventTarget.myself,
         params: LoseLifeItemsParams(targetItems: []),
@@ -51,7 +51,7 @@ Future<void> main() async {
 
   testWidgets('show Card with normal Color', (tester) async {
     final model = LifeStepEntity(
-      id: 0,
+      id: '0',
       lifeEvent: const LifeEventEntity<StartParams>(
         target: LifeEventTarget.myself,
         params: StartParams(),
@@ -74,7 +74,7 @@ Future<void> main() async {
       params: GainLifeItemsParams(targetItems: []),
       type: LifeEventType.gainLifeItems,
     );
-    final model = LifeStepEntity(id: 0, lifeEvent: gainEvent);
+    final model = LifeStepEntity(id: '0', lifeEvent: gainEvent);
 
     await tester.pumpWidget(testableApp(home: LifeStep(model)));
     await tester.pump();
