@@ -49,11 +49,11 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
       TimestampField.updatedAt: FieldValue.serverTimestamp(),
     }, batch: batch);
     await batch.commit(); // FIXME: エラーハンドリング. 特に既に join 済みの場合のハンドリング.
-    value.haveCreatedPlayRoom = Document<PlayRoomEntity>(roomDocRef.ref, room);
+    value.haveCreatedPlayRoom = Doc<PlayRoomEntity>(_store, roomDocRef.ref, room);
     notifyListeners();
   }
 
-  Future<void> join(Document<PlayRoomEntity> playRoomDoc) async {
+  Future<void> join(Doc<PlayRoomEntity> playRoomDoc) async {
     final user = await _auth.currentUser;
     final userDocRef = _store.docRef<UserEntity>(user.uid);
     // 既に参加済みの場合

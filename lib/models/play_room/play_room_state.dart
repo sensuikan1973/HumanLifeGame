@@ -1,6 +1,5 @@
-import 'package:firestore_ref/firestore_ref.dart';
-
 import '../../api/firestore/life_event_record.dart';
+import '../../api/firestore/store.dart';
 import '../../api/firestore/user.dart';
 import '../../entities/life_step_entity.dart';
 import '../common/life_road.dart';
@@ -24,10 +23,10 @@ class PlayRoomState {
   int roll = 0;
 
   /// 参加者
-  List<Document<UserEntity>> humans;
+  List<Doc<UserEntity>> humans;
 
   /// 現在手番の Human
-  Document<UserEntity> currentTurnHuman;
+  Doc<UserEntity> currentTurnHuman;
 
   /// 全 Human の人生の進捗
   List<LifeStageModel> lifeStages = [];

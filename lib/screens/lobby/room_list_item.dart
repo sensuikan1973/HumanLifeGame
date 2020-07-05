@@ -1,8 +1,8 @@
-import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../api/firestore/play_room.dart';
+import '../../api/firestore/store.dart';
 import '../../i18n/i18n.dart';
 import '../../models/lobby/lobby_notifier.dart';
 import '../../router.dart';
@@ -11,7 +11,7 @@ import '../play_room/play_room.dart';
 class RoomListItem extends StatelessWidget {
   const RoomListItem(this._playRoom, {Key key}) : super(key: key);
 
-  final Document<PlayRoomEntity> _playRoom;
+  final Doc<PlayRoomEntity> _playRoom;
 
   @override
   Widget build(BuildContext context) => Column(

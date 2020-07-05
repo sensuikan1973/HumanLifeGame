@@ -1,4 +1,3 @@
-import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +12,7 @@ class Maintenance extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Center(
-          child: StreamBuilder<Document<ServiceControlEntity>>(
+          child: StreamBuilder<Doc<ServiceControlEntity>>(
             stream: context.watch<Store>().docRef<ServiceControlEntity>(ServiceControlDocId.web).document(),
             builder: (context, snap) {
               if (!snap.hasData) return const Text('no data');

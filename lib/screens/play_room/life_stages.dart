@@ -1,7 +1,7 @@
-import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../api/firestore/store.dart';
 import '../../api/firestore/user.dart';
 import '../../models/play_room/life_stage.dart';
 import '../../models/play_room/play_room_notifier.dart';
@@ -19,7 +19,7 @@ class LifeStages extends StatelessWidget {
   Column _lifeStages(BuildContext context) {
     final lifeStages = context.select<PlayRoomNotifier, List<LifeStageModel>>((notifier) => notifier.value.lifeStages);
     final currentTurnHuman =
-        context.select<PlayRoomNotifier, Document<UserEntity>>((notifier) => notifier.value.currentTurnHuman);
+        context.select<PlayRoomNotifier, Doc<UserEntity>>((notifier) => notifier.value.currentTurnHuman);
     return Column(
       children: [
         for (final lifeStage in lifeStages)

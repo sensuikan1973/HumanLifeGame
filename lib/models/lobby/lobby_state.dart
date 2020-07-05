@@ -1,11 +1,10 @@
-import 'package:firestore_ref/firestore_ref.dart';
-
 import '../../api/firestore/play_room.dart';
+import '../../api/firestore/store.dart';
 
 class LobbyState {
   LobbyState();
 
-  List<Document<PlayRoomEntity>> publicPlayRooms = [];
-  Document<PlayRoomEntity> haveCreatedPlayRoom;
-  Document<PlayRoomEntity> haveJoinedPlayRoom;
+  List<Doc<PlayRoomEntity>> publicPlayRooms = [];
+  Doc<PlayRoomEntity> haveCreatedPlayRoom;
+  Doc<PlayRoomEntity> haveJoinedPlayRoom;
 }

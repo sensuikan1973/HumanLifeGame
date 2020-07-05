@@ -1,4 +1,3 @@
-import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,13 +18,13 @@ import 'result_dialog.dart';
 @immutable
 class PlayRoomNavigateArguments {
   const PlayRoomNavigateArguments(this.playRoomDoc);
-  final Document<PlayRoomEntity> playRoomDoc;
+  final Doc<PlayRoomEntity> playRoomDoc;
 }
 
 class PlayRoom extends StatefulWidget {
   const PlayRoom._();
 
-  static Widget inProviders({@required Document<PlayRoomEntity> playRoomDoc, Key key}) => Builder(
+  static Widget inProviders({@required Doc<PlayRoomEntity> playRoomDoc, Key key}) => Builder(
         builder: (context) => MultiProvider(
           key: key,
           providers: [

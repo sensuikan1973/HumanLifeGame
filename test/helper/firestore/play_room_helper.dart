@@ -6,7 +6,7 @@ import 'package:uuid/uuid.dart';
 
 import 'user_helper.dart';
 
-Future<Document<PlayRoomEntity>> createPlayRoom(
+Future<Doc<PlayRoomEntity>> createPlayRoom(
   Store store, {
   DocumentReference host,
   String title,

@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../models/common/life_event_params/life_event_params.dart';
 import 'entity.dart';
 import 'life_event.dart';
+import 'store.dart';
 
 part 'life_road.freezed.dart';
 part 'life_road.g.dart';
@@ -26,7 +27,8 @@ abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 
-  static Document<LifeRoadEntity> decode(DocumentSnapshot snapshot) => Document<LifeRoadEntity>(
+  static Doc<LifeRoadEntity> decode(Store store, DocumentSnapshot snapshot) => Doc<LifeRoadEntity>(
+        store,
         snapshot.reference,
         LifeRoadEntity.fromJson(snapshot.data),
       );

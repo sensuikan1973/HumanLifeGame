@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'entity.dart';
 import 'life_road.dart';
+import 'store.dart';
 import 'user.dart';
 
 part 'play_room.freezed.dart';
@@ -33,7 +34,8 @@ abstract class PlayRoomEntity implements _$PlayRoomEntity, Entity {
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 
-  static Document<PlayRoomEntity> decode(DocumentSnapshot snapshot) => Document<PlayRoomEntity>(
+  static Doc<PlayRoomEntity> decode(Store store, DocumentSnapshot snapshot) => Doc<PlayRoomEntity>(
+        store,
         snapshot.reference,
         PlayRoomEntity.fromJson(snapshot.data),
       );
@@ -42,14 +44,14 @@ abstract class PlayRoomEntity implements _$PlayRoomEntity, Entity {
   List<String> get humanIds => humans.map((human) => human.documentID).toList();
 
   /// host の UserEntity を取得する
-  Future<Document<UserEntity>> fetchHost() async => UserEntity.decode(await host.get());
+  Future<Doc<UserEntity>> fetchHost(Store store) async => UserEntity.decode(store, await host.get());
 
-  Future<List<Document<UserEntity>>> fetchHumans() async => Future.wait(
-        humans.map((human) async => UserEntity.decode(await human.get())).toList(),
+  Future<List<Doc<UserEntity>>> fetchHumans(Store store) async => Future.wait(
+        humans.map((human) async => UserEntity.decode(store, await human.get())).toList(),
       );
 
   @late
-  Future<Document<LifeRoadEntity>> fetchLifeRoad() async => LifeRoadEntity.decode(await lifeRoad.get());
+  Future<Doc<LifeRoadEntity>> fetchLifeRoad(Store store) async => LifeRoadEntity.decode(store, await lifeRoad.get());
 }
 
 class PlayRoomEntityField {

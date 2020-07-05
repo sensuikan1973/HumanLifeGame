@@ -1,12 +1,12 @@
-import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/material.dart';
 
+import '../../api/firestore/store.dart';
 import '../../api/firestore/user.dart';
 
 class Human extends StatelessWidget {
   const Human(this._user, {Key key}) : super(key: key);
 
-  final Document<UserEntity> _user;
+  final Doc<UserEntity> _user;
 
   String get humanId => _user.entity.uid;
 

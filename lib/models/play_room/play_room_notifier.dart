@@ -1,4 +1,3 @@
-import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../api/dice.dart';
@@ -27,7 +26,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   PlayRoomNotifier(this._i18n, this._dice, this._store, this._playRoom) : super(PlayRoomState());
 
   Future<void> init() async {
-    value.humans = await _playRoom.entity.fetchHumans();
+    value.humans = await _playRoom.entity.fetchHumans(_store);
     // 参加者全員の位置を Start に
     for (final human in value.humans) {
       final lifeStage = LifeStageModel(
@@ -45,7 +44,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   final I18n _i18n;
   final Dice _dice;
   final Store _store;
-  final Document<PlayRoomEntity> _playRoom;
+  final Doc<PlayRoomEntity> _playRoom;
   final _lifeEventService = const LifeEventService();
 
   int get _currentHumanLifeStageIndex =>
@@ -121,7 +120,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
   // 次のターンに変える
   Future<void> _changeToNextTurn() async {
-    final humans = await _playRoom.entity.fetchHumans();
+    final humans = await _playRoom.entity.fetchHumans(_store);
     final currentHumanIndex = humans.indexOf(value.currentTurnHuman);
     value.currentTurnHuman = humans[(currentHumanIndex + 1) % humans.length];
 
