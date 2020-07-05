@@ -39,14 +39,11 @@ abstract class PlayRoomEntity implements _$PlayRoomEntity, Entity {
       );
 
   /// humans の document ID List
-  @late
   List<String> get humanIds => humans.map((human) => human.documentID).toList();
 
   /// host の UserEntity を取得する
-  @late
   Future<Document<UserEntity>> fetchHost() async => UserEntity.decode(await host.get());
 
-  @late
   Future<List<Document<UserEntity>>> fetchHumans() async => Future.wait(
         humans.map((human) async => UserEntity.decode(await human.get())).toList(),
       );
