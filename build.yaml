@@ -10,4 +10,4 @@ targets:
           # before : 'lifeEvent': instance.lifeEvent,
           # after : 'lifeEvent': instance.lifeEvent?.toJson(),
           # See: https://github.com/rrousselGit/freezed/issues/86
-          explicit_to_json: true # custom
+          explicit_to_json: true
