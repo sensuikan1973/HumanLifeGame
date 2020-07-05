@@ -14,10 +14,10 @@ part 'life_road.g.dart';
 abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
   const factory LifeRoadEntity({
     @required @DocumentReferenceConverter() DocumentReference author,
-    @required String title,
     @required List<LifeEventEntity<LifeEventParams>> lifeEvents,
     @required @TimestampConverter() DateTime createdAt,
     @required @TimestampConverter() DateTime updatedAt,
+    @Default('') String title,
   }) = _LifeRoadEntity;
   const LifeRoadEntity._();
 

@@ -18,12 +18,12 @@ part 'play_room.g.dart';
 abstract class PlayRoomEntity implements _$PlayRoomEntity, Entity {
   const factory PlayRoomEntity({
     @required @DocumentReferenceConverter() DocumentReference host,
-    @required String title,
     @required @DocumentReferenceListConverter() List<DocumentReference> humans,
     @required @DocumentReferenceConverter() DocumentReference lifeRoad,
     @required String currentTurnHumanId,
     @TimestampConverter() DateTime createdAt,
     @TimestampConverter() DateTime updatedAt,
+    @Default('') String title,
 //    @TimestampConverter() DateTime finishedAt,
   }) = _PlayRoomEntity;
   const PlayRoomEntity._();
