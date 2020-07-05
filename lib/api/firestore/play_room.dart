@@ -16,7 +16,7 @@ part 'play_room.g.dart';
 /// TODO: finishedAt は削除ロジックに使う想定だが、不要だったら削除. まだロジックを考え中.
 @freezed
 abstract class PlayRoomEntity implements _$PlayRoomEntity, Entity {
-  const factory PlayRoomEntity({
+  factory PlayRoomEntity({
     @required @DocumentReferenceConverter() DocumentReference host,
     @required @DocumentReferenceListConverter() List<DocumentReference> humans,
     @required @DocumentReferenceConverter() DocumentReference lifeRoad,
@@ -26,7 +26,7 @@ abstract class PlayRoomEntity implements _$PlayRoomEntity, Entity {
     @Default('') String title,
 //    @TimestampConverter() DateTime finishedAt,
   }) = _PlayRoomEntity;
-  const PlayRoomEntity._();
+  PlayRoomEntity._();
 
   factory PlayRoomEntity.fromJson(Map<String, dynamic> json) => _$PlayRoomEntityFromJson(json);
 
@@ -39,15 +39,19 @@ abstract class PlayRoomEntity implements _$PlayRoomEntity, Entity {
       );
 
   /// humans の document ID List
+  @late
   List<String> get humanIds => humans.map((human) => human.documentID).toList();
 
   /// host の UserEntity を取得する
+  @late
   Future<Document<UserEntity>> fetchHost() async => UserEntity.decode(await host.get());
 
+  @late
   Future<List<Document<UserEntity>>> fetchHumans() async => Future.wait(
         humans.map((human) async => UserEntity.decode(await human.get())).toList(),
       );
 
+  @late
   Future<Document<LifeRoadEntity>> fetchLifeRoad() async => LifeRoadEntity.decode(await lifeRoad.get());
 }
 
