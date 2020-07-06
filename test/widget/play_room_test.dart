@@ -1,6 +1,18 @@
+import 'package:HumanLifeGame/api/firestore/life_event.dart';
+import 'package:HumanLifeGame/api/firestore/life_item.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
 import 'package:HumanLifeGame/human_life_game_app.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/exchange_life_items_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/life_event_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/lose_life_items_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/select_direction_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/target_life_item_params.dart';
+import 'package:HumanLifeGame/models/common/life_road.dart';
 import 'package:HumanLifeGame/screens/play_room/announcement.dart';
 import 'package:HumanLifeGame/screens/play_room/dice_result.dart';
 import 'package:HumanLifeGame/screens/play_room/life_stages.dart';
@@ -17,11 +29,78 @@ import '../mocks/auth.dart';
 import '../mocks/dice.dart';
 import 'helper/testable_app.dart';
 
+// ignore: unused_element
+LifeRoadModel _dummyLifeRoad() {
+  const start = LifeEventEntity<StartParams>(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.start,
+    params: StartParams(),
+  );
+  const goals = LifeEventEntity<GoalParams>(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.goal,
+    params: GoalParams(),
+  );
+  const gains = LifeEventEntity<GainLifeItemsParams>(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.gainLifeItems,
+    params: GainLifeItemsParams(targetItems: [
+      TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
+    ]),
+  );
+  const loses = LifeEventEntity<LoseLifeItemsParams>(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.loseLifeItems,
+    params: LoseLifeItemsParams(targetItems: [
+      TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
+    ]),
+  );
+  const exchg = LifeEventEntity<ExchangeLifeItemsParams>(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.exchangeLifeItems,
+    params: ExchangeLifeItemsParams(
+      targetItems: [
+        TargetLifeItemParams(key: 'HumanLifeGames Inc.', type: LifeItemType.stock, amount: 1),
+      ],
+      baseItems: [
+        TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
+      ],
+    ),
+  );
+  const direc = LifeEventEntity<SelectDirectionParams>(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.selectDirection,
+    params: SelectDirectionParams(),
+  );
+  const blank = LifeEventEntity<NothingParams>(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.nothing,
+    params: NothingParams(),
+  );
+  final lifeEvents = [
+    [start, direc, gains, gains, exchg, loses, blank, blank, blank, blank],
+    [blank, gains, blank, blank, blank, gains, blank, blank, blank, blank],
+    [blank, gains, gains, loses, gains, gains, gains, blank, blank, blank],
+    [blank, blank, blank, blank, blank, blank, exchg, blank, blank, blank],
+    [goals, exchg, loses, gains, exchg, loses, direc, blank, blank, blank],
+    [blank, gains, blank, blank, blank, blank, gains, blank, blank, blank],
+    [blank, gains, exchg, loses, gains, gains, gains, blank, blank, blank],
+    [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
+    [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
+    [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
+  ];
+  return LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
+}
+
 Future<void> main() async {
   final i18n = await I18n.load(HumanLifeGameApp.defaultLocale);
-
   final user = MockFirebaseUser();
   final auth = MockAuth(user);
+
+  setUp(() {
+    // See: https://github.com/flutter/flutter/issues/12994#issuecomment-397321431
+    WidgetsBinding.instance.renderView.configuration = TestViewConfiguration(size: const Size(1440, 1024));
+  });
 
   testWidgets('show some widgets', (tester) async {
     final firestore = MockFirestoreInstance();
@@ -53,20 +132,20 @@ Future<void> main() async {
     final humans = [await createUser(store), await createUser(store, uid: user.uid)];
     await tester.pumpWidget(testableApp(
       dice: dice,
+      auth: auth,
       store: store,
       home: MediaQuery(
         data: const MediaQueryData(size: Size(1440, 1024)),
         child: PlayRoom.inProviders(
           playRoomDoc: await createPlayRoom(
             store,
+            host: humans.first.ref,
             humans: humans.map((el) => el.ref).toList(),
           ),
         ),
       ),
     ));
-    await tester.pump();
-    await tester.pump();
-    await tester.pump();
+    await tester.pumpAndSettle(PlayRoomState.showDelay);
 
     await tester.tap(find.byKey(const Key('playerActionDiceRollButton')));
     await tester.pump();
@@ -88,12 +167,13 @@ Future<void> main() async {
         child: PlayRoom.inProviders(
           playRoomDoc: await createPlayRoom(
             store,
+            host: humans.first.ref,
             humans: humans.map((el) => el.ref).toList(),
           ),
         ),
       ),
     ));
-    await tester.pump();
+    await tester.pumpAndSettle(PlayRoomState.showDelay);
 
     final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
     await tester.tap(rollDiceButton);
@@ -121,12 +201,13 @@ Future<void> main() async {
         child: PlayRoom.inProviders(
           playRoomDoc: await createPlayRoom(
             store,
+            host: humans.first.ref,
             humans: humans.map((el) => el.ref).toList(),
           ),
         ),
       ),
     ));
-    await tester.pump();
+    await tester.pumpAndSettle(PlayRoomState.showDelay);
 
     final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
 
@@ -151,12 +232,13 @@ Future<void> main() async {
         child: PlayRoom.inProviders(
           playRoomDoc: await createPlayRoom(
             store,
+            host: humans.first.ref,
             humans: humans.map((el) => el.ref).toList(),
           ),
         ),
       ),
     ));
-    await tester.pump();
+    await tester.pumpAndSettle(PlayRoomState.showDelay);
 
     final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
     await tester.tap(rollDiceButton);
@@ -180,12 +262,13 @@ Future<void> main() async {
         child: PlayRoom.inProviders(
           playRoomDoc: await createPlayRoom(
             store,
+            host: humans.first.ref,
             humans: humans.map((el) => el.ref).toList(),
           ),
         ),
       ),
     ));
-    await tester.pump();
+    await tester.pumpAndSettle(PlayRoomState.showDelay);
 
     final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
     await tester.tap(rollDiceButton);
@@ -231,8 +314,8 @@ Future<void> main() async {
         ),
       ),
     ));
-    await tester.pump();
-    await tester.pump();
+    await tester.pumpAndSettle(PlayRoomState.showDelay);
+
     var lifeStages = tester.element(find.byType(LifeStages));
     var lifeStagesAncestor = lifeStages.findAncestorWidgetOfExactType<Stack>();
     expect(find.byWidget(lifeStagesAncestor), findsNothing);
@@ -255,7 +338,8 @@ Future<void> main() async {
         ),
       ),
     ));
-    await tester.pump();
+    await tester.pumpAndSettle(PlayRoomState.showDelay);
+
     lifeStages = tester.element(find.byType(LifeStages));
     lifeStagesAncestor = lifeStages.findAncestorWidgetOfExactType<Stack>();
     expect(find.byWidget(lifeStagesAncestor), findsOneWidget);
