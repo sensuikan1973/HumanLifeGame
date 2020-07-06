@@ -20,7 +20,7 @@ abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
     @required @TimestampConverter() DateTime updatedAt,
     @Default('') String title,
   }) = _LifeRoadEntity;
-  LifeRoadEntity._();
+  LifeRoadEntity._() : assert(lifeEvents.every((row) => row.length == lifeEvents.first.length));
 
   factory LifeRoadEntity.fromJson(Map<String, dynamic> json) => _$LifeRoadEntityFromJson(json);
 
