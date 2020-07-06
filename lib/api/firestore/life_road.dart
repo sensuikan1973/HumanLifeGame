@@ -20,6 +20,7 @@ abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
     @required @TimestampConverter() DateTime updatedAt,
     @Default('') String title,
   }) = _LifeRoadEntity;
+  // Road は正方形とする。実際には必須というわけではないが、仕様単純化のため。将来的には拡張してもいい。
   LifeRoadEntity._() : assert(lifeEvents.every((row) => row.length == lifeEvents.first.length));
 
   factory LifeRoadEntity.fromJson(Map<String, dynamic> json) => _$LifeRoadEntityFromJson(json);
