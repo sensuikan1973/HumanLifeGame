@@ -23,6 +23,7 @@ Future<void> main() async {
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
     final playRoomNotifier = PlayRoomNotifier(i18n, dice, store, await createPlayRoom(store));
+    await playRoomNotifier.init();
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(create: (_) => playRoomNotifier, child: const LifeStages()),
     ));
@@ -34,6 +35,7 @@ Future<void> main() async {
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
     final playRoomNotifier = PlayRoomNotifier(i18n, dice, store, await createPlayRoom(store));
+    await playRoomNotifier.init();
     for (final lifeStage in playRoomNotifier.value.lifeStages) {
       lifeStage.lifeItems.add(const LifeItemEntity(key: 'key', type: LifeItemType.money, amount: 200));
     }
@@ -50,6 +52,7 @@ Future<void> main() async {
       final firestore = MockFirestoreInstance();
       final store = Store(firestore);
       final playRoomNotifier = PlayRoomNotifier(i18n, dice, store, await createPlayRoom(store));
+      await playRoomNotifier.init();
       await tester.pumpWidget(testableApp(
         home: ChangeNotifierProvider(create: (_) => playRoomNotifier, child: const LifeStages()),
       ));
@@ -62,24 +65,21 @@ Future<void> main() async {
     skip: true, // FIXME: humans の order がまともに機能してなく、selector がちゃんと動いてない
   );
 
-  testWidgets(
-    'show user name',
-    (tester) async {
-      final firestore = MockFirestoreInstance();
-      final store = Store(firestore);
-      final playRoom = await createPlayRoom(store);
-      final playRoomNotifier = PlayRoomNotifier(i18n, dice, store, playRoom);
-      await tester.pumpWidget(testableApp(
-        home: ChangeNotifierProvider(create: (_) => playRoomNotifier, child: const LifeStages()),
-      ));
-      await tester.pump();
-      for (final ref in playRoom.entity.humans) {
-        final human = await store.docRef<UserEntity>(ref.documentID).get();
-        expect(find.text(human.entity.displayName), findsOneWidget);
-      }
-    },
-    skip: true, // FIXME: 単に実装が無いので今だけ skip
-  );
+  testWidgets('show user name', (tester) async {
+    final firestore = MockFirestoreInstance();
+    final store = Store(firestore);
+    final playRoom = await createPlayRoom(store);
+    final playRoomNotifier = PlayRoomNotifier(i18n, dice, store, playRoom);
+    await playRoomNotifier.init();
+    await tester.pumpWidget(testableApp(
+      home: ChangeNotifierProvider(create: (_) => playRoomNotifier, child: const LifeStages()),
+    ));
+    await tester.pump();
+    for (final ref in playRoom.entity.humans) {
+      final human = await store.docRef<UserEntity>(ref.documentID).get();
+      expect(find.text(human.entity.displayName), findsOneWidget);
+    }
+  });
 
   testWidgets(
     'show human icons',
@@ -88,6 +88,7 @@ Future<void> main() async {
       final store = Store(firestore);
       final playRoom = await createPlayRoom(store);
       final playRoomNotifier = PlayRoomNotifier(i18n, dice, store, playRoom);
+      await playRoomNotifier.init();
       await tester.pumpWidget(testableApp(
         home: ChangeNotifierProvider(create: (_) => playRoomNotifier, child: const LifeStages()),
       ));
