@@ -35,6 +35,7 @@ abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
       );
 
   /// LifeEvent の二次元配列から LifeStep の二次元配列を作るヘルパー
+  // TODO: @visibleForTesting
   static List<List<LifeStepEntity>> createLifeStepsOnBoard(List<List<LifeEventEntity>> lifeEvents) => List.generate(
         lifeEvents.length,
         (y) => List.generate(
@@ -50,7 +51,10 @@ abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
   @late
   List<List<LifeStepEntity>> get lifeStepsOnBoard => _lifeStepsOnBoard;
   List<List<LifeStepEntity>> get _lifeStepsOnBoard {
-    return [];
+    final board = createLifeStepsOnBoard(lifeEvents);
+    final start = board.expand((el) => el).firstWhere((el) => el.isStart);
+    _initDirections(start);
+    return board;
   }
 
   /// Y 方向の長さ
@@ -82,6 +86,7 @@ abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
     throw Exception('lifeStep should be in lifeStepsOnBoard');
   }
 
+  // LifeSte の上下左右を再帰的にチェックし、連結リスト構造を構築する
   void _initDirections(LifeStepEntity currentLifeStep) {
     if (currentLifeStep.isGoal) return;
 
@@ -160,16 +165,13 @@ abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
         } else if (isLeftUnchecked) {
           lifeStepsOnBoard[pos.y][pos.x].left = leftLifeStep;
           _initDirections(leftLifeStep);
-        } else {
-          // TODO: 例外
         }
+        // TODO: 例外
       } else if (numOfUncheckedLifeStep > 1) {
         // 合流のため、探索終了
         // TODO: LifeStepが４つボックス状にくっついてたらどうする
-        return;
-      } else {
-        // TODO: 例外（もしくは離小島にジャンプ）
       }
+      // TODO: 例外（もしくは離小島にジャンプ）
     }
   }
 
