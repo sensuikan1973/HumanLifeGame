@@ -44,5 +44,5 @@ class LifeRoadEntityField {
   /// LifeRoad の LifeEvent 配列
   ///
   /// クライアントサイドで二次元に展開 + 連結リスト化 するのが必要
-  static const lifeRoadEvents = 'lifeRoadEvents';
+  static const lifeEvents = 'lifeEvents';
 }
