@@ -62,6 +62,7 @@
         </li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/State/context.html">context</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
+        <li><a href="../../screens_play_room_play_room/PlayRoomState/hasInitialized.html">hasInitialized</a></li>
         <li><a href="../../screens_play_room_play_room/PlayRoomState/isDisplayedResult.html">isDisplayedResult</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/State/mounted.html">mounted</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></li>
@@ -74,7 +75,7 @@
         <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/State/didChangeDependencies.html">didChangeDependencies</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/State/didUpdateWidget.html">didUpdateWidget</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/State/dispose.html">dispose</a></li>
-        <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/State/initState.html">initState</a></li>
+        <li><a href="../../screens_play_room_play_room/PlayRoomState/initState.html">initState</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/State/reassemble.html">reassemble</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/State/setState.html">setState</a></li>
@@ -87,6 +88,8 @@
     
     
     
+        <li class="section-title"><a href="../../screens_play_room_play_room/PlayRoomState-class.html#constants">Constants</a></li>
+        <li><a href="../../screens_play_room_play_room/PlayRoomState/showDelay-constant.html">showDelay</a></li>
     
     
     </ol>
@@ -111,7 +114,7 @@
       <p>Describes the part of the user interface represented by this widget.</p>
 <p>The framework calls this method in a number of different situations:</p>
 <ul>
-<li>After calling <a href="https://api.flutter.dev/flutter/widgets/State/initState.html">initState</a>.</li>
+<li>After calling <a href="../../screens_play_room_play_room/PlayRoomState/initState.html">initState</a>.</li>
 <li>After calling <a href="https://api.flutter.dev/flutter/widgets/State/didUpdateWidget.html">didUpdateWidget</a>.</li>
 <li>After receiving a call to <a href="https://api.flutter.dev/flutter/widgets/State/setState.html">setState</a>.</li>
 <li>After a dependency of this <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a> object changes (e.g., an
@@ -197,15 +200,15 @@ prints green, as expected.</p>
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) {
-  final screenSize = MediaQuery.of(context).size;
-  if (context.select&lt;PlayRoomNotifier, bool&gt;((model) =&gt; model.value.allHumansReachedTheGoal)) {
-    if (!isDisplayedResult) {
-      isDisplayedResult = true;
-      WidgetsBinding.instance.addPostFrameCallback((_) async =&gt; _showResult(context));
-    }
-  }
+  _showDialogCallback();
   return Scaffold(
-    body: screenSize.width &gt;= _desktopSize.width ? _largeScreen(screenSize) : _middleScreen(screenSize),
+    body: ValueListenableBuilder&lt;bool&gt;(
+      valueListenable: hasInitialized,
+      builder: (_, hasInitialized, __) {
+        if (!hasInitialized) return const CupertinoActivityIndicator();
+        return MediaQuery.of(context).size.width &gt;= _desktopSize.width ? _largeScreen() : _middleScreen();
+      },
+    ),
   );
 }</code></pre>
     </section>

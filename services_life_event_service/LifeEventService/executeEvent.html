@@ -84,7 +84,7 @@
     <section class="multi-line-signature">
       <span class="returntype"><a href="../../models_play_room_life_stage/LifeStageModel-class.html">LifeStageModel</a></span>
             <span class="name ">executeEvent</span>
-(<wbr><ol class="parameter-list"><li><span class="parameter" id="executeEvent-param-lifeEvent"><span class="type-annotation"><a href="../../models_common_life_event/LifeEventModel-class.html">LifeEventModel</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../models_common_life_event_params_life_event_params/LifeEventParams-class.html">LifeEventParams</a></span>&gt;</span></span> <span class="parameter-name">lifeEvent</span>, </span></li>
+(<wbr><ol class="parameter-list"><li><span class="parameter" id="executeEvent-param-lifeEvent"><span class="type-annotation"><a href="../../api_firestore_life_event/LifeEventEntity-class.html">LifeEventEntity</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../models_common_life_event_params_life_event_params/LifeEventParams-class.html">LifeEventParams</a></span>&gt;</span></span> <span class="parameter-name">lifeEvent</span>, </span></li>
 <li><span class="parameter" id="executeEvent-param-lifeStage"><span class="type-annotation"><a href="../../models_play_room_life_stage/LifeStageModel-class.html">LifeStageModel</a></span> <span class="parameter-name">lifeStage</span></span></li>
 </ol>)
       
@@ -92,7 +92,7 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">LifeStageModel executeEvent(LifeEventModel lifeEvent, LifeStageModel lifeStage) {
+      <pre class="language-dart"><code class="language-dart">LifeStageModel executeEvent(LifeEventEntity lifeEvent, LifeStageModel lifeStage) {
   switch (lifeEvent.type) {
     case LifeEventType.nothing:
       &#47;&#47; TODO: Handle this case.
@@ -116,7 +116,7 @@
       final params = lifeEvent.params as GainLifeItemsParams;
       final items = [
         ...lifeStage.lifeItems,
-        for (final item in params.targetItems) LifeItemModel(item.key, item.type, item.amount),
+        for (final item in params.targetItems) LifeItemEntity(key: item.key, type: item.type, amount: item.amount),
       ];
       return lifeStage.copyWith(lifeItems: items);
     case LifeEventType.gainLifeItemsPerOtherLifeItem:
@@ -145,7 +145,7 @@
       final params = lifeEvent.params as LoseLifeItemsParams;
       final items = [
         ...lifeStage.lifeItems,
-        for (final item in params.targetItems) LifeItemModel(item.key, item.type, -item.amount),
+        for (final item in params.targetItems) LifeItemEntity(key: item.key, type: item.type, amount: -item.amount),
       ];
       return lifeStage.copyWith(lifeItems: items);
     case LifeEventType.loseLifeItemsPerDiceRoll:

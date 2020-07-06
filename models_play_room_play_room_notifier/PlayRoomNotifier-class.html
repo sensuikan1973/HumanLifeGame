@@ -53,7 +53,6 @@
     <ol>
       <li class="section-title"><a href="../models_play_room_play_room_notifier/models_play_room_play_room_notifier-library.html#classes">Classes</a></li>
       <li><a href="../models_play_room_play_room_notifier/PlayRoomNotifier-class.html">PlayRoomNotifier</a></li>
-      <li><a href="../models_play_room_play_room_notifier/PlayRoomNotifierArguments-class.html">PlayRoomNotifierArguments</a></li>
     
     
     
@@ -115,7 +114,7 @@ ValueNotifierProvider だと value(PlayRoomState) を provide することにな
 
       <dl class="constructor-summary-list">
         <dt id="PlayRoomNotifier" class="callable">
-          <span class="name"><a href="../models_play_room_play_room_notifier/PlayRoomNotifier/PlayRoomNotifier.html">PlayRoomNotifier</a></span><span class="signature">(<span class="parameter" id="-param-_i18n"><span class="type-annotation"><a href="../i18n_i18n/I18n-class.html">I18n</a></span> <span class="parameter-name">_i18n</span>, </span><wbr><span class="parameter" id="-param-_dice"><span class="type-annotation"><a href="../api_dice/Dice-class.html">Dice</a></span> <span class="parameter-name">_dice</span>, </span><wbr><span class="parameter" id="-param-lifeRoad"><span class="type-annotation"><a href="../models_common_life_road/LifeRoadModel-class.html">LifeRoadModel</a></span> <span class="parameter-name">lifeRoad</span>, </span><wbr><span class="parameter" id="-param-humans"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../models_common_human/HumanModel-class.html">HumanModel</a></span>&gt;</span></span> <span class="parameter-name">humans</span></span><wbr>)</span>
+          <span class="name"><a href="../models_play_room_play_room_notifier/PlayRoomNotifier/PlayRoomNotifier.html">PlayRoomNotifier</a></span><span class="signature">(<span class="parameter" id="-param-_i18n"><span class="type-annotation"><a href="../i18n_i18n/I18n-class.html">I18n</a></span> <span class="parameter-name">_i18n</span>, </span><wbr><span class="parameter" id="-param-_dice"><span class="type-annotation"><a href="../api_dice/Dice-class.html">Dice</a></span> <span class="parameter-name">_dice</span>, </span><wbr><span class="parameter" id="-param-_store"><span class="type-annotation"><a href="../api_firestore_store/Store-class.html">Store</a></span> <span class="parameter-name">_store</span>, </span><wbr><span class="parameter" id="-param-_playRoom"><span class="type-annotation"><a href="../api_firestore_store/Doc-class.html">Doc</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../api_firestore_play_room/PlayRoomEntity-class.html">PlayRoomEntity</a></span>&gt;</span></span> <span class="parameter-name">_playRoom</span></span><wbr>)</span>
         </dt>
         <dd>
            
@@ -175,7 +174,7 @@ ValueNotifierProvider だと value(PlayRoomState) を provide することにな
                   <div class="features">inherited</div>
 </dd>
         <dt id="chooseDirection" class="callable">
-          <span class="name"><a href="../models_play_room_play_room_notifier/PlayRoomNotifier/chooseDirection.html">chooseDirection</a></span><span class="signature">(<wbr><span class="parameter" id="chooseDirection-param-direction"><span class="type-annotation"><a href="../models_common_life_step/Direction-class.html">Direction</a></span> <span class="parameter-name">direction</span></span><wbr>)
+          <span class="name"><a href="../models_play_room_play_room_notifier/PlayRoomNotifier/chooseDirection.html">chooseDirection</a></span><span class="signature">(<wbr><span class="parameter" id="chooseDirection-param-direction"><span class="type-annotation"><a href="../entities_life_step_entity/Direction-class.html">Direction</a></span> <span class="parameter-name">direction</span></span><wbr>)
             <span class="returntype parameter">&#8594; void</span>
           </span>
                   </dt>
@@ -194,6 +193,15 @@ object is not in a usable state and should be discarded (calls to
 <a href="https://api.flutter.dev/flutter/foundation/ChangeNotifier/addListener.html">addListener</a> and <a href="https://api.flutter.dev/flutter/foundation/ChangeNotifier/removeListener.html">removeListener</a> will throw after the object is
 disposed). <a href="https://api.flutter.dev/flutter/foundation/ChangeNotifier/dispose.html">[...]</a>
                   <div class="features">@mustCallSuper, inherited</div>
+</dd>
+        <dt id="init" class="callable">
+          <span class="name"><a href="../models_play_room_play_room_notifier/PlayRoomNotifier/init.html">init</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+           
+                  
 </dd>
         <dt id="noSuchMethod" class="callable inherited">
           <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span><wbr>)
@@ -225,7 +233,7 @@ notified when the object changes. <a href="https://api.flutter.dev/flutter/found
 </dd>
         <dt id="rollDice" class="callable">
           <span class="name"><a href="../models_play_room_play_room_notifier/PlayRoomNotifier/rollDice.html">rollDice</a></span><span class="signature">(<wbr>)
-            <span class="returntype parameter">&#8594; void</span>
+            <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
           </span>
                   </dt>
         <dd>
@@ -282,6 +290,7 @@ notified when the object changes. <a href="https://api.flutter.dev/flutter/found
       <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/ChangeNotifier/addListener.html">addListener</a></li>
       <li><a href="../models_play_room_play_room_notifier/PlayRoomNotifier/chooseDirection.html">chooseDirection</a></li>
       <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/ChangeNotifier/dispose.html">dispose</a></li>
+      <li><a href="../models_play_room_play_room_notifier/PlayRoomNotifier/init.html">init</a></li>
       <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
       <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/ChangeNotifier/notifyListeners.html">notifyListeners</a></li>
       <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/ChangeNotifier/removeListener.html">removeListener</a></li>

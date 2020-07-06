@@ -69,6 +69,7 @@
       <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/ChangeNotifier/addListener.html">addListener</a></li>
       <li><a href="../../models_play_room_play_room_notifier/PlayRoomNotifier/chooseDirection.html">chooseDirection</a></li>
       <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/ChangeNotifier/dispose.html">dispose</a></li>
+      <li><a href="../../models_play_room_play_room_notifier/PlayRoomNotifier/init.html">init</a></li>
       <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
       <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/ChangeNotifier/notifyListeners.html">notifyListeners</a></li>
       <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/ChangeNotifier/removeListener.html">removeListener</a></li>
@@ -91,35 +92,15 @@
       
       <span class="name ">PlayRoomNotifier</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-_i18n"><span class="type-annotation"><a href="../../i18n_i18n/I18n-class.html">I18n</a></span> <span class="parameter-name">_i18n</span>, </span></li>
 <li><span class="parameter" id="-param-_dice"><span class="type-annotation"><a href="../../api_dice/Dice-class.html">Dice</a></span> <span class="parameter-name">_dice</span>, </span></li>
-<li><span class="parameter" id="-param-lifeRoad"><span class="type-annotation"><a href="../../models_common_life_road/LifeRoadModel-class.html">LifeRoadModel</a></span> <span class="parameter-name">lifeRoad</span>, </span></li>
-<li><span class="parameter" id="-param-humans"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../models_common_human/HumanModel-class.html">HumanModel</a></span>&gt;</span></span> <span class="parameter-name">humans</span></span></li>
+<li><span class="parameter" id="-param-_store"><span class="type-annotation"><a href="../../api_firestore_store/Store-class.html">Store</a></span> <span class="parameter-name">_store</span>, </span></li>
+<li><span class="parameter" id="-param-_playRoom"><span class="type-annotation"><a href="../../api_firestore_store/Doc-class.html">Doc</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../api_firestore_play_room/PlayRoomEntity-class.html">PlayRoomEntity</a></span>&gt;</span></span> <span class="parameter-name">_playRoom</span></span></li>
 </ol>)
     </section>
 
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">PlayRoomNotifier(
-  this._i18n,
-  this._dice,
-  LifeRoadModel lifeRoad,
-  List&lt;HumanModel&gt; humans,
-) : super(PlayRoomState(
-        lifeRoad,
-        humans..sort((a, b) =&gt; a.order.compareTo(b.order)),
-      )) {
-  &#47;&#47; 参加者全員の位置を Start に
-  for (final human in value.orderedHumans) {
-    final lifeStage = LifeStageModel(
-      human: human,
-      lifeStepModel: value.lifeRoad.start,
-      lifeItems: [],
-    );
-    value.lifeStages.add(lifeStage);
-  }
-  &#47;&#47; 一番手をセット
-  value.currentTurnHuman = value.orderedHumans.first;
-}</code></pre>
+      <pre class="language-dart"><code class="language-dart">PlayRoomNotifier(this._i18n, this._dice, this._store, this._playRoom) : super(PlayRoomState());</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

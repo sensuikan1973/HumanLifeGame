@@ -92,9 +92,9 @@
       <div><h1><span class="kind-method">createLifeStepsOnBoard</span> method </h1></div>
 
     <section class="multi-line-signature">
-      <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../models_common_life_step/LifeStepModel-class.html">LifeStepModel</a></span>&gt;</span></span>&gt;</span></span>
+      <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../entities_life_step_entity/LifeStepEntity-class.html">LifeStepEntity</a></span>&gt;</span></span>&gt;</span></span>
             <span class="name ">createLifeStepsOnBoard</span>
-(<wbr><ol class="parameter-list"><li><span class="parameter" id="createLifeStepsOnBoard-param-lifeEvents"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../models_common_life_event/LifeEventModel-class.html">LifeEventModel</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../models_common_life_event_params_life_event_params/LifeEventParams-class.html">LifeEventParams</a></span>&gt;</span></span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">lifeEvents</span></span></li>
+(<wbr><ol class="parameter-list"><li><span class="parameter" id="createLifeStepsOnBoard-param-lifeEvents"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../api_firestore_life_event/LifeEventEntity-class.html">LifeEventEntity</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../models_common_life_event_params_life_event_params/LifeEventParams-class.html">LifeEventParams</a></span>&gt;</span></span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">lifeEvents</span></span></li>
 </ol>)
       
     </section>
@@ -105,12 +105,12 @@ LifeStepsOnBoard の生成ヘルパー</p>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">static List&lt;List&lt;LifeStepModel&gt;&gt; createLifeStepsOnBoard(List&lt;List&lt;LifeEventModel&gt;&gt; lifeEvents) =&gt; List.generate(
+      <pre class="language-dart"><code class="language-dart">static List&lt;List&lt;LifeStepEntity&gt;&gt; createLifeStepsOnBoard(List&lt;List&lt;LifeEventEntity&gt;&gt; lifeEvents) =&gt; List.generate(
       lifeEvents.length,
       (y) =&gt; List.generate(
         lifeEvents[y].length,
-        (x) =&gt; LifeStepModel(
-          id: x + (y * lifeEvents[y].length),
+        (x) =&gt; LifeStepEntity(
+          id: (x + (y * lifeEvents[y].length)).toString(),
           lifeEvent: lifeEvents[y][x],
         ),
       ),

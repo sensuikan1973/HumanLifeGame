@@ -27,7 +27,7 @@
     <li><a href="../../index.html">HumanLifeGame</a></li>
     <li><a href="../../api_firestore_play_room/api_firestore_play_room-library.html">play_room</a></li>
     <li><a href="../../api_firestore_play_room/PlayRoomEntity-class.html">PlayRoomEntity</a></li>
-    <li class="self-crumb">PlayRoomEntity const constructor</li>
+    <li class="self-crumb">PlayRoomEntity factory constructor</li>
   </ol>
   <div class="self-name">PlayRoomEntity</div>
   <form class="search navbar-right" role="search">
@@ -48,7 +48,7 @@
       <li><a href="../../index.html">HumanLifeGame</a></li>
       <li><a href="../../api_firestore_play_room/api_firestore_play_room-library.html">play_room</a></li>
       <li><a href="../../api_firestore_play_room/PlayRoomEntity-class.html">PlayRoomEntity</a></li>
-      <li class="self-crumb">PlayRoomEntity const constructor</li>
+      <li class="self-crumb">PlayRoomEntity factory constructor</li>
     </ol>
     
     <h5>PlayRoomEntity class</h5>
@@ -75,6 +75,9 @@
     
       <li class="section-title"><a href="../../api_firestore_play_room/PlayRoomEntity-class.html#instance-methods">Methods</a></li>
       <li><a href="../../api_firestore_play_room/PlayRoomEntity/encode.html">encode</a></li>
+      <li><a href="../../api_firestore_play_room/PlayRoomEntity/fetchHost.html">fetchHost</a></li>
+      <li><a href="../../api_firestore_play_room/PlayRoomEntity/fetchHumans.html">fetchHumans</a></li>
+      <li><a href="../../api_firestore_play_room/PlayRoomEntity/fetchLifeRoad.html">fetchLifeRoad</a></li>
       <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
       <li class="inherited"><a href="../../api_firestore_play_room/PlayRoomEntity/toJson.html">toJson</a></li>
       <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></li>
@@ -94,28 +97,28 @@
       <div><h1><span class="kind-constructor">PlayRoomEntity</span> constructor </h1></div>
 
     <section class="multi-line-signature">
-      const
+      
       <span class="name ">PlayRoomEntity</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-host">{<span>@required</span> <span>@<a href="https://pub.dev/documentation/firestore_ref/0.8.17/firestore_ref/DocumentReferenceConverter-class.html">DocumentReferenceConverter</a>()</span> <span class="type-annotation"><a href="https://pub.dev/documentation/cloud_firestore/0.13.7/cloud_firestore/DocumentReference-class.html">DocumentReference</a></span> <span class="parameter-name">host</span>, </span></li>
-<li><span class="parameter" id="-param-title"><span>@required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">title</span>, </span></li>
 <li><span class="parameter" id="-param-humans"><span>@required</span> <span>@<a href="https://pub.dev/documentation/firestore_ref/0.8.17/firestore_ref/DocumentReferenceListConverter-class.html">DocumentReferenceListConverter</a>()</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/cloud_firestore/0.13.7/cloud_firestore/DocumentReference-class.html">DocumentReference</a></span>&gt;</span></span> <span class="parameter-name">humans</span>, </span></li>
 <li><span class="parameter" id="-param-lifeRoad"><span>@required</span> <span>@<a href="https://pub.dev/documentation/firestore_ref/0.8.17/firestore_ref/DocumentReferenceConverter-class.html">DocumentReferenceConverter</a>()</span> <span class="type-annotation"><a href="https://pub.dev/documentation/cloud_firestore/0.13.7/cloud_firestore/DocumentReference-class.html">DocumentReference</a></span> <span class="parameter-name">lifeRoad</span>, </span></li>
 <li><span class="parameter" id="-param-currentTurnHumanId"><span>@required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">currentTurnHumanId</span>, </span></li>
 <li><span class="parameter" id="-param-createdAt"><span>@<a href="https://pub.dev/documentation/firestore_ref/0.8.17/firestore_ref/TimestampConverter-class.html">TimestampConverter</a>()</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">createdAt</span>, </span></li>
-<li><span class="parameter" id="-param-updatedAt"><span>@<a href="https://pub.dev/documentation/firestore_ref/0.8.17/firestore_ref/TimestampConverter-class.html">TimestampConverter</a>()</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">updatedAt</span>}</span></li>
+<li><span class="parameter" id="-param-updatedAt"><span>@<a href="https://pub.dev/documentation/firestore_ref/0.8.17/firestore_ref/TimestampConverter-class.html">TimestampConverter</a>()</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">updatedAt</span>, </span></li>
+<li><span class="parameter" id="-param-title"><span>@<a href="https://pub.dev/documentation/freezed_annotation/0.7.1/freezed_annotation/Default-class.html">Default</a>(&#39;&#39;)</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">title</span>}</span></li>
 </ol>)
     </section>
 
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">const factory PlayRoomEntity({
+      <pre class="language-dart"><code class="language-dart">factory PlayRoomEntity({
   @required @DocumentReferenceConverter() DocumentReference host,
-  @required String title,
   @required @DocumentReferenceListConverter() List&lt;DocumentReference&gt; humans,
   @required @DocumentReferenceConverter() DocumentReference lifeRoad,
   @required String currentTurnHumanId,
   @TimestampConverter() DateTime createdAt,
   @TimestampConverter() DateTime updatedAt,
+  @Default(&#39;&#39;) String title,
 &#47;&#47;    @TimestampConverter() DateTime finishedAt,
 }) = _PlayRoomEntity;</code></pre>
     </section>

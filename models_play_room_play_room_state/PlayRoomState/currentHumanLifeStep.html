@@ -66,9 +66,9 @@
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/currentTurnHuman.html">currentTurnHuman</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/everyLifeEventRecords.html">everyLifeEventRecords</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
+        <li><a href="../../models_play_room_play_room_state/PlayRoomState/humans.html">humans</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/lifeRoad.html">lifeRoad</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/lifeStages.html">lifeStages</a></li>
-        <li><a href="../../models_play_room_play_room_state/PlayRoomState/orderedHumans.html">orderedHumans</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/positionsByHumanId.html">positionsByHumanId</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/requireSelectDirection.html">requireSelectDirection</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/roll.html">roll</a></li>
@@ -96,7 +96,7 @@
         <section id="getter">
         
         <section class="multi-line-signature">
-          <span class="returntype"><a href="../../models_common_life_step/LifeStepModel-class.html">LifeStepModel</a></span>
+          <span class="returntype"><a href="../../entities_life_step_entity/LifeStepEntity-class.html">LifeStepEntity</a></span>
                   <span class="name ">currentHumanLifeStep</span>
           
 </section>
@@ -106,8 +106,8 @@
         </section>
                 <section class="summary source-code" id="source">
           <h2><span>Implementation</span></h2>
-          <pre class="language-dart"><code class="language-dart">LifeStepModel get currentHumanLifeStep =&gt;
-    lifeStages.firstWhere((lifeStage) =&gt; lifeStage.human == currentTurnHuman).lifeStepModel;</code></pre>
+          <pre class="language-dart"><code class="language-dart">LifeStepEntity get currentHumanLifeStep =&gt;
+    lifeStages.firstWhere((lifeStage) =&gt; lifeStage.human == currentTurnHuman).lifeStepEntity;</code></pre>
         </section>
 </section>
         

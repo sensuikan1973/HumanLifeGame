@@ -107,25 +107,9 @@
     return MaterialPageRoute&lt;Maintenance&gt;(builder: (_) =&gt; const Maintenance());
   }
   if (name == playRoom) {
-    &#47;&#47; FIXME: ダミーデータを渡して強引に動いてるだけ。argument で受け取るように改修すること。
+    final args = settings.arguments as PlayRoomNavigateArguments;
     return MaterialPageRoute&lt;PlayRoom&gt;(
-      builder: (context) =&gt; ChangeNotifierProvider&lt;PlayRoomNotifier&gt;(
-        create: (_) =&gt; PlayRoomNotifier(
-          I18n.of(context),
-          context.read&lt;Dice&gt;(),
-          LifeRoadModel(
-            title: &#39;dummy HumanLife&#39;,
-            lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
-              LifeRoadModel.dummyLifeEvents(),
-            ),
-          ),
-          [
-            const HumanModel(id: &#39;1&#39;, name: &#39;hoge&#39;, order: 0),
-            const HumanModel(id: &#39;2&#39;, name: &#39;fuga&#39;, order: 1),
-          ],
-        ),
-        child: const PlayRoom(),
-      ),
+      builder: (context) =&gt; PlayRoom.inProviders(playRoomDoc: args.playRoomDoc),
     );
   }
 

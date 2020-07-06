@@ -84,7 +84,6 @@
     
       <li class="section-title"><a href="../../screens_common_human/Human-class.html#constants">Constants</a></li>
       <li><a href="../../screens_common_human/Human/orderedIcon-constant.html">orderedIcon</a></li>
-      <li><a href="../../screens_common_human/Human/orderedIconShadow-constant.html">orderedIconShadow</a></li>
     
     </ol>
   </div><!--/.sidebar-offcanvas-left-->
@@ -94,7 +93,7 @@
 
     <section class="multi-line-signature">
       const
-      <span class="name ">Human</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-_humanModel"><span class="type-annotation"><a href="../../models_common_human/HumanModel-class.html">HumanModel</a></span> <span class="parameter-name">_humanModel</span>, </span></li>
+      <span class="name ">Human</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-_user"><span class="type-annotation"><a href="../../api_firestore_store/Doc-class.html">Doc</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../api_firestore_user/UserEntity-class.html">UserEntity</a></span>&gt;</span></span> <span class="parameter-name">_user</span>, </span></li>
 <li><span class="parameter" id="-param-key">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/foundation/Key-class.html">Key</a></span> <span class="parameter-name">key</span>}</span></li>
 </ol>)
     </section>
@@ -102,10 +101,7 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">const Human(
-  this._humanModel, {
-  Key key,
-}) : super(key: key);</code></pre>
+      <pre class="language-dart"><code class="language-dart">const Human(this._user, {Key key}) : super(key: key);</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

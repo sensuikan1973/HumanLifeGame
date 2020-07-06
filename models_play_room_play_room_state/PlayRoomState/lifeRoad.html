@@ -66,9 +66,9 @@
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/currentTurnHuman.html">currentTurnHuman</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/everyLifeEventRecords.html">everyLifeEventRecords</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
+        <li><a href="../../models_play_room_play_room_state/PlayRoomState/humans.html">humans</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/lifeRoad.html">lifeRoad</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/lifeStages.html">lifeStages</a></li>
-        <li><a href="../../models_play_room_play_room_state/PlayRoomState/orderedHumans.html">orderedHumans</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/positionsByHumanId.html">positionsByHumanId</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/requireSelectDirection.html">requireSelectDirection</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/roll.html">roll</a></li>
@@ -97,9 +97,17 @@
           <span class="name ">lifeRoad</span>
           <div class="features">final</div>
         </section>
+        <section class="desc markdown">
+          <p>FIXME: 今はダミーで固定してる</p>
+        </section>
                 <section class="summary source-code" id="source">
           <h2><span>Implementation</span></h2>
-          <pre class="language-dart"><code class="language-dart">final LifeRoadModel lifeRoad
+          <pre class="language-dart"><code class="language-dart">final LifeRoadModel lifeRoad = LifeRoadModel(
+  title: &#39;dummy HumanLife&#39;,
+  lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
+    LifeRoadModel.dummyLifeEvents(),
+  ),
+)
 
 </code></pre>
         </section>

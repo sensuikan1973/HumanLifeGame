@@ -139,14 +139,17 @@ and</li>
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) {
-  final everyLifeEventRecords =
-      context.select&lt;PlayRoomNotifier, List&lt;LifeEventRecordModel&gt;&gt;((model) =&gt; model.value.everyLifeEventRecords);
+  final everyLifeEventRecords = context
+      .select&lt;PlayRoomNotifier, List&lt;LifeEventRecordEntity&gt;&gt;((notifier) =&gt; notifier.value.everyLifeEventRecords);
 
   return Card(
     child: ListView(
       reverse: true,
       children: [
-        for (final model in everyLifeEventRecords) Text(model.lifeEventRecordMessage),
+        for (final record in everyLifeEventRecords)
+          Text(
+            I18n.of(context).lifeStepEventType(record.lifeEvent.type),
+          ),
       ],
     ),
   );

@@ -90,6 +90,7 @@
 
         <dt>Annotations</dt>
         <dd><ul class="annotation-list clazz-relationships">
+          <li>@immutable</li>
           <li>@freezed</li>
         </ul></dd>
       </dl>
@@ -117,7 +118,7 @@
       </dl>
     </section>
 
-    <section class="summary offset-anchor inherited" id="instance-properties">
+    <section class="summary offset-anchor" id="instance-properties">
       <h2>Properties</h2>
 
       <dl class="properties">
@@ -145,13 +146,13 @@
            
                   <div class="features">read-only, inherited</div>
 </dd>
-        <dt id="hashCode" class="property inherited">
-          <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></span>
+        <dt id="hashCode" class="property">
+          <span class="name"><a href="../api_firestore_user/UserEntity/hashCode.html">hashCode</a></span>
           <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span>         
         </dt>
-        <dd class="inherited">
-          The hash code for this object. <a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">[...]</a>
-                  <div class="features">read-only, inherited</div>
+        <dd>
+          The hash code for this object. <a href="../api_firestore_user/UserEntity/hashCode.html">[...]</a>
+                  <div class="features">read-only, override</div>
 </dd>
         <dt id="joinPlayRoom" class="property inherited">
           <span class="name"><a href="../api_firestore_user/UserEntity/joinPlayRoom.html">joinPlayRoom</a></span>
@@ -230,17 +231,17 @@
       </dl>
     </section>
 
-    <section class="summary offset-anchor inherited" id="operators">
+    <section class="summary offset-anchor" id="operators">
       <h2>Operators</h2>
       <dl class="callables">
-        <dt id="operator ==" class="callable inherited">
-          <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation">dynamic</span> <span class="parameter-name">other</span></span><wbr>)
+        <dt id="operator ==" class="callable">
+          <span class="name"><a href="../api_firestore_user/UserEntity/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span><wbr>)
             <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>
           </span>
                   </dt>
-        <dd class="inherited">
-          The equality operator. <a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">[...]</a>
-                  <div class="features">inherited</div>
+        <dd>
+          The equality operator. <a href="../api_firestore_user/UserEntity/operator_equals.html">[...]</a>
+                  <div class="features">override</div>
 </dd>
       </dl>
     </section>
@@ -250,8 +251,8 @@
       <h2>Static Methods</h2>
       <dl class="callables">
         <dt id="decode" class="callable">
-          <span class="name"><a href="../api_firestore_user/UserEntity/decode.html">decode</a></span><span class="signature">(<wbr><span class="parameter" id="decode-param-snapshot"><span class="type-annotation"><a href="https://pub.dev/documentation/cloud_firestore/0.13.7/cloud_firestore/DocumentSnapshot-class.html">DocumentSnapshot</a></span> <span class="parameter-name">snapshot</span></span><wbr>)
-            <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/firestore_ref/0.8.17/firestore_ref/Document-class.html">Document</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../api_firestore_user/UserEntity-class.html">UserEntity</a></span>&gt;</span></span>
+          <span class="name"><a href="../api_firestore_user/UserEntity/decode.html">decode</a></span><span class="signature">(<wbr><span class="parameter" id="decode-param-store"><span class="type-annotation"><a href="../api_firestore_store/Store-class.html">Store</a></span> <span class="parameter-name">store</span>, </span><wbr><span class="parameter" id="decode-param-snapshot"><span class="type-annotation"><a href="https://pub.dev/documentation/cloud_firestore/0.13.7/cloud_firestore/DocumentSnapshot-class.html">DocumentSnapshot</a></span> <span class="parameter-name">snapshot</span></span><wbr>)
+            <span class="returntype parameter">&#8594; <a href="../api_firestore_store/Doc-class.html">Doc</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../api_firestore_user/UserEntity-class.html">UserEntity</a></span>&gt;</span></span>
           </span>
                   </dt>
         <dd>
@@ -271,13 +272,13 @@
       <li><a href="../api_firestore_user/UserEntity/UserEntity.html">UserEntity</a></li>
       <li><a href="../api_firestore_user/UserEntity/UserEntity.fromJson.html">fromJson</a></li>
     
-      <li class="section-title inherited">
+      <li class="section-title">
         <a href="../api_firestore_user/UserEntity-class.html#instance-properties">Properties</a>
       </li>
       <li class="inherited"><a href="../api_firestore_user/UserEntity/copyWith.html">copyWith</a></li>
       <li class="inherited"><a href="../api_firestore_user/UserEntity/createdAt.html">createdAt</a></li>
       <li class="inherited"><a href="../api_firestore_user/UserEntity/displayName.html">displayName</a></li>
-      <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
+      <li><a href="../api_firestore_user/UserEntity/hashCode.html">hashCode</a></li>
       <li class="inherited"><a href="../api_firestore_user/UserEntity/joinPlayRoom.html">joinPlayRoom</a></li>
       <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></li>
       <li class="inherited"><a href="../api_firestore_user/UserEntity/uid.html">uid</a></li>
@@ -289,8 +290,8 @@
       <li class="inherited"><a href="../api_firestore_user/UserEntity/toJson.html">toJson</a></li>
       <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></li>
     
-      <li class="section-title inherited"><a href="../api_firestore_user/UserEntity-class.html#operators">Operators</a></li>
-      <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></li>
+      <li class="section-title"><a href="../api_firestore_user/UserEntity-class.html#operators">Operators</a></li>
+      <li><a href="../api_firestore_user/UserEntity/operator_equals.html">operator ==</a></li>
     
     
       <li class="section-title"><a href="../api_firestore_user/UserEntity-class.html#static-methods">Static methods</a></li>

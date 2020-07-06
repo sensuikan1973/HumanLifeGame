@@ -117,9 +117,7 @@
     TimestampField.updatedAt: FieldValue.serverTimestamp(),
   }, batch: batch);
   await batch.commit(); &#47;&#47; FIXME: エラーハンドリング. 特に既に join 済みの場合のハンドリング.
-  value.navigateArgumentsToPlayRoom = PlayRoomNotifierArguments(
-    Document&lt;PlayRoomEntity&gt;(roomDocRef.ref, room),
-  );
+  value.haveCreatedPlayRoom = Doc&lt;PlayRoomEntity&gt;(_store, roomDocRef.ref, room);
   notifyListeners();
 }</code></pre>
     </section>

@@ -95,14 +95,14 @@
         <section id="getter">
         
         <section class="multi-line-signature">
-          <span class="returntype"><a href="../../models_common_life_step/LifeStepModel-class.html">LifeStepModel</a></span>
+          <span class="returntype"><a href="../../entities_life_step_entity/LifeStepEntity-class.html">LifeStepEntity</a></span>
                   <span class="name ">start</span>
           
 </section>
         
                         <section class="summary source-code" id="source">
           <h2><span>Implementation</span></h2>
-          <pre class="language-dart"><code class="language-dart">LifeStepModel get start {
+          <pre class="language-dart"><code class="language-dart">LifeStepEntity get start {
   final lifeSteps = lifeStepsOnBoard.expand((el) =&gt; el);
   final startSteps = lifeSteps.where((step) =&gt; step.isStart).toList();
   if (startSteps.isEmpty || startSteps.length &gt; 1) {

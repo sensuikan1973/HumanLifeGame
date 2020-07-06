@@ -139,7 +139,7 @@ and</li>
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) {
-  final message = context.select&lt;PlayRoomNotifier, String&gt;((model) =&gt; model.value.announcement);
+  final message = context.select&lt;PlayRoomNotifier, String&gt;((notifier) =&gt; notifier.value.announcement);
   return Card(
     child: Text(
       message,

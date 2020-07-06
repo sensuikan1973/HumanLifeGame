@@ -92,7 +92,7 @@
       <div><h1><span class="kind-method">dummyLifeEvents</span> method </h1></div>
 
     <section class="multi-line-signature">
-      <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../models_common_life_event/LifeEventModel-class.html">LifeEventModel</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../models_common_life_event_params_life_event_params/LifeEventParams-class.html">LifeEventParams</a></span>&gt;</span></span>&gt;</span></span>&gt;</span></span>
+      <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../api_firestore_life_event/LifeEventEntity-class.html">LifeEventEntity</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../models_common_life_event_params_life_event_params/LifeEventParams-class.html">LifeEventParams</a></span>&gt;</span></span>&gt;</span></span>&gt;</span></span>
             <span class="name ">dummyLifeEvents</span>
 (<wbr>)
       
@@ -103,34 +103,59 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">static List&lt;List&lt;LifeEventModel&gt;&gt; dummyLifeEvents() {
-  final start = LifeEventModel(LifeEventTarget.myself, const StartParams(), description: &#39;Start&#39;);
-  final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams(), description: &#39;Goal&#39;);
-  final gains = LifeEventModel(
-      LifeEventTarget.myself,
-      const GainLifeItemsParams(targetItems: [
+      <pre class="language-dart"><code class="language-dart">static List&lt;List&lt;LifeEventEntity&gt;&gt; dummyLifeEvents() {
+  const start = LifeEventEntity&lt;StartParams&gt;(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.start,
+    params: StartParams(),
+    description: &#39;Start だよ&#39;,
+  );
+  const goals = LifeEventEntity&lt;GoalParams&gt;(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.goal,
+    params: GoalParams(),
+    description: &#39;Goal だよ&#39;,
+  );
+  const gains = LifeEventEntity&lt;GainLifeItemsParams&gt;(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.gainLifeItems,
+    params: GainLifeItemsParams(targetItems: [
+      TargetLifeItemParams(key: &#39;money&#39;, type: LifeItemType.money, amount: 1000),
+    ]),
+    description: &#39;お金ゲット〜&#39;,
+  );
+  const loses = LifeEventEntity&lt;LoseLifeItemsParams&gt;(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.loseLifeItems,
+    params: LoseLifeItemsParams(targetItems: [
+      TargetLifeItemParams(key: &#39;money&#39;, type: LifeItemType.money, amount: 1000),
+    ]),
+    description: &#39;お金なくした...&#39;,
+  );
+  const exchg = LifeEventEntity&lt;ExchangeLifeItemsParams&gt;(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.exchangeLifeItems,
+    params: ExchangeLifeItemsParams(
+      targetItems: [
+        TargetLifeItemParams(key: &#39;HumanLifeGames Inc.&#39;, type: LifeItemType.stock, amount: 1),
+      ],
+      baseItems: [
         TargetLifeItemParams(key: &#39;money&#39;, type: LifeItemType.money, amount: 1000),
-      ]),
-      description: &#39;バイトでお金を稼ぐ&#39;);
-  final loses = LifeEventModel(
-      LifeEventTarget.myself,
-      const LoseLifeItemsParams(targetItems: [
-        TargetLifeItemParams(key: &#39;money&#39;, type: LifeItemType.money, amount: 1000),
-      ]),
-      description: &#39;財布を落とす&#39;);
-  final exchg = LifeEventModel(
-      LifeEventTarget.myself,
-      const ExchangeLifeItemsParams(
-        targetItems: [
-          TargetLifeItemParams(key: &#39;HumanLifeGames Inc.&#39;, type: LifeItemType.stock, amount: 1),
-        ],
-        baseItems: [
-          TargetLifeItemParams(key: &#39;money&#39;, type: LifeItemType.money, amount: 1000),
-        ],
-      ),
-      description: &#39;株を購入する&#39;);
-  final direc = LifeEventModel(LifeEventTarget.myself, const SelectDirectionParams(), description: &#39;人生の分岐点&#39;);
-  final blank = LifeEventModel(LifeEventTarget.myself, const NothingParams());
+      ],
+    ),
+    description: &#39;株を購入する&#39;,
+  );
+  const direc = LifeEventEntity&lt;SelectDirectionParams&gt;(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.selectDirection,
+    params: SelectDirectionParams(),
+    description: &#39;分岐だよー&#39;,
+  );
+  const blank = LifeEventEntity&lt;NothingParams&gt;(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.nothing,
+    params: NothingParams(),
+  );
   return [
     [start, direc, gains, gains, exchg, loses, blank, blank, blank, blank],
     [blank, gains, blank, blank, blank, gains, blank, blank, blank, blank],

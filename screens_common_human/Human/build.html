@@ -84,7 +84,6 @@
     
         <li class="section-title"><a href="../../screens_common_human/Human-class.html#constants">Constants</a></li>
         <li><a href="../../screens_common_human/Human/orderedIcon-constant.html">orderedIcon</a></li>
-        <li><a href="../../screens_common_human/Human/orderedIconShadow-constant.html">orderedIconShadow</a></li>
     
     
     </ol>
@@ -143,8 +142,8 @@ and</li>
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) =&gt; Stack(children: &lt;Widget&gt;[
-      Positioned(top: 2, left: 2, child: orderedIconShadow[_humanModel.order]),
-      orderedIcon[_humanModel.order],
+      Positioned(top: 2, left: 2, child: _orderedIconShadow.first),
+      orderedIcon.first,
     ]);</code></pre>
     </section>
 

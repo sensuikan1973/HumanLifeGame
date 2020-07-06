@@ -91,16 +91,18 @@
       <div><h1><span class="kind-method">decode</span> method </h1></div>
 
     <section class="multi-line-signature">
-      <span class="returntype"><a href="https://pub.dev/documentation/firestore_ref/0.8.17/firestore_ref/Document-class.html">Document</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../api_firestore_service_control/ServiceControlEntity-class.html">ServiceControlEntity</a></span>&gt;</span></span>
+      <span class="returntype"><a href="../../api_firestore_store/Doc-class.html">Doc</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../api_firestore_service_control/ServiceControlEntity-class.html">ServiceControlEntity</a></span>&gt;</span></span>
             <span class="name ">decode</span>
-(<wbr><ol class="parameter-list"><li><span class="parameter" id="decode-param-snapshot"><span class="type-annotation"><a href="https://pub.dev/documentation/cloud_firestore/0.13.7/cloud_firestore/DocumentSnapshot-class.html">DocumentSnapshot</a></span> <span class="parameter-name">snapshot</span></span></li>
+(<wbr><ol class="parameter-list"><li><span class="parameter" id="decode-param-store"><span class="type-annotation"><a href="../../api_firestore_store/Store-class.html">Store</a></span> <span class="parameter-name">store</span>, </span></li>
+<li><span class="parameter" id="decode-param-snapshot"><span class="type-annotation"><a href="https://pub.dev/documentation/cloud_firestore/0.13.7/cloud_firestore/DocumentSnapshot-class.html">DocumentSnapshot</a></span> <span class="parameter-name">snapshot</span></span></li>
 </ol>)
       
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">static Document&lt;ServiceControlEntity&gt; decode(DocumentSnapshot snapshot) =&gt; Document&lt;ServiceControlEntity&gt;(
+      <pre class="language-dart"><code class="language-dart">static Doc&lt;ServiceControlEntity&gt; decode(Store store, DocumentSnapshot snapshot) =&gt; Doc&lt;ServiceControlEntity&gt;(
+      store,
       snapshot.reference,
       ServiceControlEntity.fromJson(snapshot.data),
     );</code></pre>

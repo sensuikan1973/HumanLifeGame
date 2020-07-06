@@ -69,6 +69,7 @@
         <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/ChangeNotifier/addListener.html">addListener</a></li>
         <li><a href="../../models_play_room_play_room_notifier/PlayRoomNotifier/chooseDirection.html">chooseDirection</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/ChangeNotifier/dispose.html">dispose</a></li>
+        <li><a href="../../models_play_room_play_room_notifier/PlayRoomNotifier/init.html">init</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/ChangeNotifier/notifyListeners.html">notifyListeners</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/ChangeNotifier/removeListener.html">removeListener</a></li>
@@ -89,7 +90,7 @@
       <div><h1><span class="kind-method">rollDice</span> method </h1></div>
 
     <section class="multi-line-signature">
-      <span class="returntype">void</span>
+      <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
             <span class="name ">rollDice</span>
 (<wbr>)
       
@@ -97,11 +98,12 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">void rollDice() {
+      <pre class="language-dart"><code class="language-dart">Future&lt;void&gt; rollDice() async {
   if (value.allHumansReachedTheGoal || value.requireSelectDirection) return;
   value
     ..roll = _dice.roll()
-    ..announcement = _i18n.rollAnnouncement(value.currentTurnHuman.name, value.roll); &#47;&#47; FIXME: 状態に応じた適切なメッセージを流すように
+    ..announcement =
+        _i18n.rollAnnouncement(value.currentTurnHuman.entity.displayName, value.roll); &#47;&#47; FIXME: 状態に応じた適切なメッセージを流すように
 
   &#47;&#47; サイコロ振る出発地点が分岐なら、サイコロ振るのを求めて notify でお終い
   if (value.currentHumanLifeStep.requireToSelectDirectionManually) {
@@ -115,8 +117,8 @@
 
   &#47;&#47; TODO: 今は requireSelectDirection だけだけど、今後は requireDiceRoll とかも考慮しなきゃいけなくなる
   if (!value.requireSelectDirection) {
-    _executeEventToCurrentHuman();
-    _changeToNextTurn();
+    await _executeEventToCurrentHuman();
+    await _changeToNextTurn();
   }
   notifyListeners();
 }</code></pre>

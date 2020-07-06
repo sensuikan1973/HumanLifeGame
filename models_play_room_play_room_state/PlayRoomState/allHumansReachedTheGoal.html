@@ -66,9 +66,9 @@
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/currentTurnHuman.html">currentTurnHuman</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/everyLifeEventRecords.html">everyLifeEventRecords</a></li>
         <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
+        <li><a href="../../models_play_room_play_room_state/PlayRoomState/humans.html">humans</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/lifeRoad.html">lifeRoad</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/lifeStages.html">lifeStages</a></li>
-        <li><a href="../../models_play_room_play_room_state/PlayRoomState/orderedHumans.html">orderedHumans</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/positionsByHumanId.html">positionsByHumanId</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/requireSelectDirection.html">requireSelectDirection</a></li>
         <li><a href="../../models_play_room_play_room_state/PlayRoomState/roll.html">roll</a></li>
@@ -106,7 +106,8 @@
         </section>
                 <section class="summary source-code" id="source">
           <h2><span>Implementation</span></h2>
-          <pre class="language-dart"><code class="language-dart">bool get allHumansReachedTheGoal =&gt; lifeStages.every((lifeStage) =&gt; lifeStage.lifeStepModel.isGoal);</code></pre>
+          <pre class="language-dart"><code class="language-dart">bool get allHumansReachedTheGoal =&gt;
+    lifeStages.isNotEmpty &amp;&amp; lifeStages.every((lifeStage) =&gt; lifeStage.lifeStepEntity.isGoal);</code></pre>
         </section>
 </section>
         

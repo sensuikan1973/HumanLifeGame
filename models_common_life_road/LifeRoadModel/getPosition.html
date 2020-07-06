@@ -94,14 +94,14 @@
     <section class="multi-line-signature">
       <span class="returntype"><a href="../../models_common_life_road/Position-class.html">Position</a></span>
             <span class="name ">getPosition</span>
-(<wbr><ol class="parameter-list"><li><span class="parameter" id="getPosition-param-lifeStep"><span class="type-annotation"><a href="../../models_common_life_step/LifeStepModel-class.html">LifeStepModel</a></span> <span class="parameter-name">lifeStep</span></span></li>
+(<wbr><ol class="parameter-list"><li><span class="parameter" id="getPosition-param-lifeStep"><span class="type-annotation"><a href="../../entities_life_step_entity/LifeStepEntity-class.html">LifeStepEntity</a></span> <span class="parameter-name">lifeStep</span></span></li>
 </ol>)
       
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">Position getPosition(LifeStepModel lifeStep) {
+      <pre class="language-dart"><code class="language-dart">Position getPosition(LifeStepEntity lifeStep) {
   for (var y = 0; y &lt; lifeStepsOnBoard.length; ++y) {
     for (var x = 0; x &lt; lifeStepsOnBoard[y].length; ++x) {
       if (lifeStepsOnBoard[y][x] == lifeStep) return Position(y, x);
