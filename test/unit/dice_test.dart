@@ -1,6 +1,5 @@
 import 'package:HumanLifeGame/api/dice.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
 
 import '../mocks/dice.dart';
 
@@ -16,8 +15,7 @@ void main() {
   });
 
   test('mock roll()', () {
-    final dice = MockDice();
-    when(dice.roll()).thenReturn(3);
+    final dice = MockDice(3);
     expect(dice.roll(), 3);
   });
 }

@@ -1,6 +1,7 @@
 import 'package:HumanLifeGame/api/firestore/life_road.dart';
 import 'package:HumanLifeGame/api/firestore/play_room.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
+import 'package:HumanLifeGame/human_life_game_app.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/screens/lobby/human_life_tips.dart';
 import 'package:HumanLifeGame/screens/lobby/lobby.dart';
@@ -9,10 +10,9 @@ import 'package:HumanLifeGame/screens/play_room/play_room.dart';
 import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
 
+import '../helper/firestore/user_helper.dart';
 import '../mocks/auth.dart';
-import 'helper/firestore/user_helper.dart';
 import 'helper/testable_app.dart';
 
 Future<void> main() async {
@@ -22,14 +22,14 @@ Future<void> main() async {
     WidgetsBinding.instance.renderView.configuration = TestViewConfiguration(size: const Size(1440, 1024));
   });
 
-  final i18n = await I18n.load(const Locale('en', 'US'));
+  final i18n = await I18n.load(HumanLifeGameApp.defaultLocale);
   final user = MockFirebaseUser();
-  final auth = MockAuth();
-  when(auth.currentUser).thenAnswer((_) async => user);
+  final auth = MockAuth(user);
 
   testWidgets('create public play room', (tester) async {
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
+    await createUser(store, uid: user.uid);
     await tester.pumpWidget(
       testableApp(auth: auth, store: store, home: Lobby.inProviders()),
     );
@@ -43,15 +43,13 @@ Future<void> main() async {
     expect(createPublicPlayRoomButton, findsOneWidget);
 
     await tester.tap(createPublicPlayRoomButton); // room が作成される
-    await tester.pump();
-    await tester.pump();
+    await tester.pumpAndSettle(PlayRoomState.showDelay);
     expect(find.byType(PlayRoom), findsOneWidget); // playRoom に遷移する
   });
 
   testWidgets('join the public play rooms which myself hosts', (tester) async {
     final firestore = MockFirestoreInstance();
     final store = Store(firestore);
-
     final userDoc = await createUser(store, uid: user.uid);
     // playRoom を作成
     await store.collectionRef<PlayRoomEntity>().add(
@@ -75,8 +73,7 @@ Future<void> main() async {
 
     // playRoom に遷移
     await tester.tap(find.text(i18n.lobbyEnterTheRoomButtonText).first);
-    await tester.pump();
-    await tester.pump();
+    await tester.pumpAndSettle(PlayRoomState.showDelay);
     expect(find.byType(PlayRoom), findsOneWidget); // playRoom に遷移
 
     // TODO: 遷移後に humans の表示だけ test しておきたい
@@ -114,8 +111,7 @@ Future<void> main() async {
 
     // playRoom に遷移
     await tester.tap(find.text(i18n.lobbyEnterTheRoomButtonText).first);
-    await tester.pump();
-    await tester.pump();
+    await tester.pumpAndSettle(PlayRoomState.showDelay);
     expect(find.byType(PlayRoom), findsOneWidget); // playRoom に遷移
 
     // TODO: 遷移後に humans の表示だけ test しておきたい
@@ -143,8 +139,7 @@ Future<void> main() async {
     await tester.pumpWidget(
       testableApp(auth: auth, store: store, home: Lobby.inProviders()),
     );
-    await tester.pump();
-    await tester.pump();
+    await tester.pumpAndSettle(PlayRoomState.showDelay);
     expect(find.byType(LifeRoadTips), findsOneWidget);
     expect(find.byType(FloatingActionButton), findsOneWidget);
     expect(find.byType(RoomListItem), findsNWidgets(roomNum));

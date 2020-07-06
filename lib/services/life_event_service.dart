@@ -1,18 +1,18 @@
 import 'package:flutter/foundation.dart';
 
-import '../models/common/life_event.dart';
+import '../api/firestore/life_event.dart';
+import '../api/firestore/life_item.dart';
 import '../models/common/life_event_params/exchange_life_items_params.dart';
 import '../models/common/life_event_params/gain_life_items_params.dart';
 import '../models/common/life_event_params/life_event_params.dart';
 import '../models/common/life_event_params/lose_life_items_params.dart';
-import '../models/common/life_item.dart';
 import '../models/play_room/life_stage.dart';
 
 @immutable
 class LifeEventService {
   const LifeEventService();
 
-  LifeStageModel executeEvent(LifeEventModel lifeEvent, LifeStageModel lifeStage) {
+  LifeStageModel executeEvent(LifeEventEntity lifeEvent, LifeStageModel lifeStage) {
     switch (lifeEvent.type) {
       case LifeEventType.nothing:
         // TODO: Handle this case.
@@ -36,7 +36,7 @@ class LifeEventService {
         final params = lifeEvent.params as GainLifeItemsParams;
         final items = [
           ...lifeStage.lifeItems,
-          for (final item in params.targetItems) LifeItemModel(item.key, item.type, item.amount),
+          for (final item in params.targetItems) LifeItemEntity(key: item.key, type: item.type, amount: item.amount),
         ];
         return lifeStage.copyWith(lifeItems: items);
       case LifeEventType.gainLifeItemsPerOtherLifeItem:
@@ -65,7 +65,7 @@ class LifeEventService {
         final params = lifeEvent.params as LoseLifeItemsParams;
         final items = [
           ...lifeStage.lifeItems,
-          for (final item in params.targetItems) LifeItemModel(item.key, item.type, -item.amount),
+          for (final item in params.targetItems) LifeItemEntity(key: item.key, type: item.type, amount: -item.amount),
         ];
         return lifeStage.copyWith(lifeItems: items);
       case LifeEventType.loseLifeItemsPerDiceRoll:
@@ -84,8 +84,8 @@ class LifeEventService {
     return lifeStage.copyWith();
   }
 
-  List<LifeItemModel> _exchangeLifeItems(List<LifeItemModel> lifeItems, ExchangeLifeItemsParams params) {
-    final items = <LifeItemModel>[];
+  List<LifeItemEntity> _exchangeLifeItems(List<LifeItemEntity> lifeItems, ExchangeLifeItemsParams params) {
+    final items = <LifeItemEntity>[];
 
     for (final baseItem in params.baseItems) {
       final totalAmountOfBaseItem = lifeItems
@@ -95,11 +95,11 @@ class LifeEventService {
       if (totalAmountOfBaseItem < baseItem.amount) return items;
 
       // lifeItemsにbaseItemが必要量入っていれば減らす
-      items.add(LifeItemModel(baseItem.key, baseItem.type, -baseItem.amount));
+      items.add(LifeItemEntity(key: baseItem.key, type: baseItem.type, amount: -baseItem.amount));
     }
     // lifeItemsにtargetItemを追加する
     for (final targetItem in params.targetItems) {
-      items.add(LifeItemModel(targetItem.key, targetItem.type, targetItem.amount));
+      items.add(LifeItemEntity(key: targetItem.key, type: targetItem.type, amount: targetItem.amount));
     }
     return items;
   }

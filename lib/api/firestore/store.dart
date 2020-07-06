@@ -17,28 +17,31 @@ class Store {
 
   final Firestore firestore;
 
-  CollectionRef<T, Document<T>> collectionRef<T extends Entity>() => CollectionRef(
-        firestore.collection(getCollectionId<T>()),
+  CollectionRef<T, Doc<T>> collectionRef<T extends Entity>([String parent]) => CollectionRef(
+        firestore.collection(parent == null ? getCollectionId<T>() : '$parent/${getCollectionId<T>()}'),
         decoder: (snapshot) => _decode<T>(snapshot),
         encoder: (entity) => entity.encode(),
       );
 
-  CollectionGroup<T, Document<T>> collectionGroupRef<T extends Entity>(String path) => CollectionGroup(
+  CollectionGroup<T, Doc<T>> collectionGroupRef<T extends Entity>(String path) => CollectionGroup(
         path: path,
         decoder: (snapshot) => _decode<T>(snapshot),
         encoder: (entity) => entity.encode(),
       );
 
-  DocumentRef<T, Document<T>> docRef<T extends Entity>(String documentId) => DocumentRef(
+  DocumentRef<T, Doc<T>> docRef<T extends Entity>(String documentId) => DocumentRef(
         collectionRef: collectionRef<T>(),
         id: documentId,
       );
 
   // 関連: https://stackoverflow.com/a/55237197/10928938
-  Document<T> _decode<T extends Entity>(DocumentSnapshot snapshot) {
-    if (T == ServiceControlEntity) return ServiceControlEntity.decode(snapshot) as Document<T>;
-    if (T == PlayRoomEntity) return PlayRoomEntity.decode(snapshot) as Document<T>;
-    if (T == UserEntity) return UserEntity.decode(snapshot) as Document<T>;
+  Doc<T> _decode<T extends Entity>(DocumentSnapshot snapshot) {
+    if (T == ServiceControlEntity) return ServiceControlEntity.decode(this, snapshot) as Doc<T>;
+    if (T == PlayRoomEntity) return PlayRoomEntity.decode(this, snapshot) as Doc<T>;
+    if (T == UserEntity) return UserEntity.decode(this, snapshot) as Doc<T>;
+    if (T == LifeRoadEntity) return LifeRoadEntity.decode(this, snapshot) as Doc<T>;
+    if (T == LifeStageEntity) return LifeStageEntity.decode(this, snapshot) as Doc<T>;
+    if (T == LifeEventRecordEntity) return LifeEventRecordEntity.decode(this, snapshot) as Doc<T>;
     throw Exception('unexpected Entity Type: $T');
   }
 
@@ -54,4 +57,11 @@ class Store {
     if (T == UserEntity) return 'user';
     throw Exception('unexpected Entity Type: $T');
   }
+}
+
+@immutable
+class Doc<T> extends Document<T> {
+  const Doc(this.store, DocumentReference ref, T entity) : super(ref, entity);
+
+  final Store store;
 }

@@ -1,29 +1,34 @@
-import 'package:HumanLifeGame/models/common/human.dart';
-import 'package:HumanLifeGame/models/common/life_event.dart';
+import 'package:HumanLifeGame/api/firestore/life_event.dart';
+import 'package:HumanLifeGame/api/firestore/life_item.dart';
+import 'package:HumanLifeGame/api/firestore/store.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/exchange_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/life_event_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/lose_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/target_life_item_params.dart';
-import 'package:HumanLifeGame/models/common/life_item.dart';
 import 'package:HumanLifeGame/models/play_room/life_stage.dart';
 import 'package:HumanLifeGame/services/life_event_service.dart';
+import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../helper/firestore/user_helper.dart';
+
 void main() {
-  test('gainLifeItems', () {
-    final items = [
-      LifeItemModel('money', LifeItemType.money, 200),
-    ];
+  test('gainLifeItems', () async {
+    const items = [LifeItemEntity(key: 'money', type: LifeItemType.money, amount: 200)];
+    final firestore = MockFirestoreInstance();
+    final store = Store(firestore);
     final lifeStageModel = LifeStageModel(
-      human: const HumanModel(id: 'human_1', name: 'foo', order: 0),
+      human: await createUser(store),
       lifeItems: items,
     );
-    final gain = LifeEventModel(
-      LifeEventTarget.myself,
-      const GainLifeItemsParams(targetItems: [
+    const gain = LifeEventEntity<GainLifeItemsParams>(
+      target: LifeEventTarget.myself,
+      params: GainLifeItemsParams(targetItems: [
         TargetLifeItemParams(key: 'doctor', type: LifeItemType.job, amount: 1),
         TargetLifeItemParams(key: 'coffee', type: LifeItemType.coffee, amount: 1),
       ]),
+      type: LifeEventType.gainLifeItems,
     );
 
     final model = const LifeEventService().executeEvent(gain, lifeStageModel);
@@ -36,20 +41,21 @@ void main() {
     expect(model.lifeItems[2].key, 'coffee');
   });
 
-  test('loseLifeItems', () {
-    final items = [
-      LifeItemModel('money', LifeItemType.money, 200),
-    ];
+  test('loseLifeItems', () async {
+    const items = [LifeItemEntity(key: 'money', type: LifeItemType.money, amount: 200)];
+    final firestore = MockFirestoreInstance();
+    final store = Store(firestore);
     final lifeStageModel = LifeStageModel(
-      human: const HumanModel(id: 'human_1', name: 'foo', order: 0),
+      human: await createUser(store),
       lifeItems: items,
     );
-    final lose = LifeEventModel(
-      LifeEventTarget.myself,
-      const LoseLifeItemsParams(targetItems: [
+    const lose = LifeEventEntity<LoseLifeItemsParams>(
+      target: LifeEventTarget.myself,
+      params: LoseLifeItemsParams(targetItems: [
         TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
         TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 5000),
       ]),
+      type: LifeEventType.loseLifeItems,
     );
 
     final model = const LifeEventService().executeEvent(lose, lifeStageModel);
@@ -62,17 +68,17 @@ void main() {
     expect(model.lifeItems[2].key, 'money');
   });
 
-  test('exchangeLifeItems', () {
-    final items = [
-      LifeItemModel('car', LifeItemType.vehicle, 1),
-    ];
+  test('exchangeLifeItems', () async {
+    const items = [LifeItemEntity(key: 'car', type: LifeItemType.vehicle, amount: 1)];
+    final firestore = MockFirestoreInstance();
+    final store = Store(firestore);
     final lifeStageModel = LifeStageModel(
-      human: const HumanModel(id: 'human_1', name: 'foo', order: 0),
+      human: await createUser(store),
       lifeItems: items,
     );
-    final exchange = LifeEventModel(
-      LifeEventTarget.myself,
-      const ExchangeLifeItemsParams(
+    const exchange = LifeEventEntity<ExchangeLifeItemsParams>(
+      target: LifeEventTarget.myself,
+      params: ExchangeLifeItemsParams(
         targetItems: [
           TargetLifeItemParams(key: 'HumanLifeGames Inc.', type: LifeItemType.stock, amount: 1),
         ],
@@ -80,6 +86,7 @@ void main() {
           TargetLifeItemParams(key: 'car', type: LifeItemType.vehicle, amount: 1),
         ],
       ),
+      type: LifeEventType.exchangeLifeItems,
     );
     var model = const LifeEventService().executeEvent(exchange, lifeStageModel);
     expect(model.lifeItems[0].amount, 1);

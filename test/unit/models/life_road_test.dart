@@ -1,6 +1,7 @@
-import 'package:HumanLifeGame/models/common/life_event.dart';
+import 'package:HumanLifeGame/api/firestore/life_event.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/life_event_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/select_direction_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
@@ -9,11 +10,31 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final start = LifeEventModel(LifeEventTarget.myself, const StartParams());
-  final goals = LifeEventModel(LifeEventTarget.myself, const GoalParams());
-  final gains = LifeEventModel(LifeEventTarget.myself, const GainLifeItemsParams(targetItems: []));
-  final direc = LifeEventModel(LifeEventTarget.myself, const SelectDirectionParams());
-  final blank = LifeEventModel(LifeEventTarget.myself, const NothingParams());
+  const start = LifeEventEntity<StartParams>(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.start,
+    params: StartParams(),
+  );
+  const goals = LifeEventEntity<GoalParams>(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.goal,
+    params: GoalParams(),
+  );
+  const gains = LifeEventEntity<GainLifeItemsParams>(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.gainLifeItems,
+    params: GainLifeItemsParams(targetItems: []),
+  );
+  const direc = LifeEventEntity<SelectDirectionParams>(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.selectDirection,
+    params: SelectDirectionParams(),
+  );
+  const blank = LifeEventEntity<NothingParams>(
+    target: LifeEventTarget.myself,
+    type: LifeEventType.nothing,
+    params: NothingParams(),
+  );
 
   final epBlank = _Pointer(up: false, down: false, right: false, left: false);
   final epUp = _Pointer(up: true, down: false, right: false, left: false);
@@ -24,7 +45,7 @@ void main() {
   final epBrDL = _Pointer(up: false, down: true, right: false, left: true);
   final epBrUDR = _Pointer(up: true, down: true, right: true, left: false);
 
-  test('ditect a single direction ', () {
+  test('detect a single direction ', () {
     final lifeEvents = [
       [start, gains, gains, gains, gains, gains, gains],
       [blank, blank, blank, blank, blank, blank, gains],
@@ -176,7 +197,7 @@ lt:null  lt:null  lt:exist lt:exist lt:exist lt:exist lt:exist \n''';
 
 class _DirectionChecker {
   _DirectionChecker({
-    @required List<List<LifeEventModel>> lifeEvents,
+    @required List<List<LifeEventEntity>> lifeEvents,
     @required List<List<_Pointer>> expectedPointers,
   })  : _expectedPointers = expectedPointers,
         _model = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));

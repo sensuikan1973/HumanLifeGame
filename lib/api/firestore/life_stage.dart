@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'entity.dart';
+import 'store.dart';
 
 part 'life_stage.freezed.dart';
 part 'life_stage.g.dart';
@@ -22,6 +23,12 @@ abstract class LifeStageEntity implements _$LifeStageEntity, Entity {
 
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
+
+  static Doc<LifeStageEntity> decode(Store store, DocumentSnapshot snapshot) => Doc<LifeStageEntity>(
+        store,
+        snapshot.reference,
+        LifeStageEntity.fromJson(snapshot.data),
+      );
 }
 
 class LifeStageEntityField {

@@ -1,9 +1,10 @@
-import 'package:HumanLifeGame/models/common/life_event.dart';
+import 'package:HumanLifeGame/api/firestore/life_event.dart';
+import 'package:HumanLifeGame/entities/life_step_entity.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
+import 'package:HumanLifeGame/models/common/life_event_params/life_event_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/select_direction_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
-import 'package:HumanLifeGame/models/common/life_step.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -18,9 +19,13 @@ void main() {
       ];
       final lifeStepsOnBoard = [
         for (var i = 0; i < lifeEventParams.length; ++i)
-          LifeStepModel(
-            id: i,
-            lifeEvent: LifeEventModel(LifeEventTarget.myself, lifeEventParams[i]),
+          LifeStepEntity(
+            id: i.toString(),
+            lifeEvent: LifeEventEntity(
+              target: LifeEventTarget.myself,
+              params: lifeEventParams[i],
+              type: LifeEventType.nothing,
+            ),
           )
       ];
       // 全て up 方向に進めるものとする
@@ -30,19 +35,19 @@ void main() {
       }
 
       test('move up straight', () {
-        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(0).destination.id, 0);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(0).destination.id, '0');
         expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(0).movedCount, 0);
 
-        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(3).destination.id, 3);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(3).destination.id, '3');
         expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(3).movedCount, 3);
 
-        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(4).destination.id, 4);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(4).destination.id, '4');
         expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(4).movedCount, 4);
 
-        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(5).destination.id, 4);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(5).destination.id, '4');
         expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(5).movedCount, 4);
 
-        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(100).destination.id, 4);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(100).destination.id, '4');
         expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(100).movedCount, 4);
       });
     });
@@ -57,9 +62,13 @@ void main() {
       ];
       final lifeStepsOnBoard = [
         for (var i = 0; i < lifeEventParams.length; ++i)
-          LifeStepModel(
-            id: i,
-            lifeEvent: LifeEventModel(LifeEventTarget.myself, lifeEventParams[i]),
+          LifeStepEntity(
+            id: i.toString(),
+            lifeEvent: LifeEventEntity(
+              target: LifeEventTarget.myself,
+              params: lifeEventParams[i],
+              type: LifeEventType.nothing,
+            ),
           )
       ];
       // 全て up 方向に進めるものとする
@@ -70,15 +79,15 @@ void main() {
       }
 
       test('move until direction', () {
-        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(3).destination.id, 3);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(3).destination.id, '3');
         expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(3).movedCount, 3);
 
         // 途中に SelectDirection があるから、強制ストップ
-        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(4).destination.id, 3);
+        expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(4).destination.id, '3');
         expect(lifeStepsOnBoard.first.getNextUntilMustStopStep(4).movedCount, 3);
 
         // SelectDirection から進もうとしても、そこ自体が強制ストップ Event だから先に進めない
-        expect(lifeStepsOnBoard[3].getNextUntilMustStopStep(4).destination.id, 3);
+        expect(lifeStepsOnBoard[3].getNextUntilMustStopStep(4).destination.id, '3');
         expect(lifeStepsOnBoard[3].getNextUntilMustStopStep(4).movedCount, 0);
       });
     });

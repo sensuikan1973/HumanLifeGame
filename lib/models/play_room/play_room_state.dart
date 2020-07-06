@@ -1,17 +1,20 @@
-import '../common/human.dart';
+import '../../api/firestore/life_event_record.dart';
+import '../../api/firestore/store.dart';
+import '../../api/firestore/user.dart';
+import '../../entities/life_step_entity.dart';
 import '../common/life_road.dart';
-import '../common/life_step.dart';
-import 'life_event_record.dart';
 import 'life_stage.dart';
 
 class PlayRoomState {
-  PlayRoomState(
-    this.lifeRoad,
-    this.orderedHumans,
-  );
+  PlayRoomState();
 
-  final LifeRoadModel lifeRoad;
-  final List<HumanModel> orderedHumans;
+  /// FIXME: 今はダミーで固定してる
+  final LifeRoadModel lifeRoad = LifeRoadModel(
+    title: 'dummy HumanLife',
+    lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
+      LifeRoadModel.dummyLifeEvents(),
+    ),
+  );
 
   /// 現在手番の人に方向選択を求めているかどうか
   bool requireSelectDirection = false;
@@ -19,14 +22,17 @@ class PlayRoomState {
   /// サイコロの出目
   int roll = 0;
 
+  /// 参加者
+  List<Doc<UserEntity>> humans;
+
   /// 現在手番の Human
-  HumanModel currentTurnHuman;
+  Doc<UserEntity> currentTurnHuman;
 
   /// 全 Human の人生の進捗
   List<LifeStageModel> lifeStages = [];
 
   /// 全 Human の LifeEvent 履歴
-  List<LifeEventRecordModel> everyLifeEventRecords = [];
+  List<LifeEventRecordEntity> everyLifeEventRecords = [];
 
   /// お知らせ
   String announcement = 'announcement';
@@ -35,14 +41,15 @@ class PlayRoomState {
   String roomTitle = 'Room Title';
 
   /// 参加者全員がゴールに到着したかどうか
-  bool get allHumansReachedTheGoal => lifeStages.every((lifeStage) => lifeStage.lifeStepModel.isGoal);
+  bool get allHumansReachedTheGoal =>
+      lifeStages.isNotEmpty && lifeStages.every((lifeStage) => lifeStage.lifeStepEntity.isGoal);
 
   /// 参加者全員の Position
   Map<String, Position> get positionsByHumanId => {
-        for (final lifeStage in lifeStages) lifeStage.human.id: lifeRoad.getPosition(lifeStage.lifeStepModel),
+        for (final lifeStage in lifeStages) lifeStage.human.entity.uid: lifeRoad.getPosition(lifeStage.lifeStepEntity),
       };
 
   /// 現在手番の Human が位置する LifeStep
-  LifeStepModel get currentHumanLifeStep =>
-      lifeStages.firstWhere((lifeStage) => lifeStage.human == currentTurnHuman).lifeStepModel;
+  LifeStepEntity get currentHumanLifeStep =>
+      lifeStages.firstWhere((lifeStage) => lifeStage.human == currentTurnHuman).lifeStepEntity;
 }

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'entity.dart';
+import 'store.dart';
 
 part 'service_control.freezed.dart';
 part 'service_control.g.dart';
@@ -23,7 +24,8 @@ abstract class ServiceControlEntity implements _$ServiceControlEntity, Entity {
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 
-  static Document<ServiceControlEntity> decode(DocumentSnapshot snapshot) => Document<ServiceControlEntity>(
+  static Doc<ServiceControlEntity> decode(Store store, DocumentSnapshot snapshot) => Doc<ServiceControlEntity>(
+        store,
         snapshot.reference,
         ServiceControlEntity.fromJson(snapshot.data),
       );

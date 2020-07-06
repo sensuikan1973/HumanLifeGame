@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../models/common/human.dart';
+import '../../api/firestore/store.dart';
+import '../../api/firestore/user.dart';
 
 class Human extends StatelessWidget {
-  const Human(
-    this._humanModel, {
-    Key key,
-  }) : super(key: key);
+  const Human(this._user, {Key key}) : super(key: key);
 
-  final HumanModel _humanModel;
+  final Doc<UserEntity> _user;
 
-  String get humanId => _humanModel.id;
+  String get humanId => _user.entity.uid;
 
   @visibleForTesting
   static const orderedIcon = [
@@ -20,7 +18,7 @@ class Human extends StatelessWidget {
     Icon(Icons.atm, color: Colors.yellow, size: 25),
   ];
 
-  static const orderedIconShadow = [
+  static const _orderedIconShadow = [
     Icon(Icons.directions_run, color: Colors.black12, size: 25),
     Icon(Icons.directions_bike, color: Colors.black12, size: 25),
     Icon(Icons.directions_car, color: Colors.black12, size: 25),
@@ -28,7 +26,7 @@ class Human extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) => Stack(children: <Widget>[
-        Positioned(top: 2, left: 2, child: orderedIconShadow[_humanModel.order]),
-        orderedIcon[_humanModel.order],
+        Positioned(top: 2, left: 2, child: _orderedIconShadow.first),
+        orderedIcon.first,
       ]);
 }

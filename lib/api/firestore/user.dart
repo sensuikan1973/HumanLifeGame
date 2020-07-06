@@ -3,11 +3,13 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'entity.dart';
+import 'store.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';
 
 /// Document on Firestore
+@immutable
 @freezed
 abstract class UserEntity implements _$UserEntity, Entity {
   const factory UserEntity({
@@ -24,10 +26,17 @@ abstract class UserEntity implements _$UserEntity, Entity {
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 
-  static Document<UserEntity> decode(DocumentSnapshot snapshot) => Document<UserEntity>(
+  static Doc<UserEntity> decode(Store store, DocumentSnapshot snapshot) => Doc<UserEntity>(
+        store,
         snapshot.reference,
         UserEntity.fromJson(snapshot.data),
       );
+
+  @override
+  int get hashCode => uid.hashCode;
+
+  @override
+  bool operator ==(Object other) => other is UserEntity && other.uid == uid;
 }
 
 class UserEntityField {

@@ -1,18 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../common/human.dart';
-import '../common/life_item.dart';
-import '../common/life_step.dart';
+import '../../api/firestore/life_item.dart';
+import '../../api/firestore/store.dart';
+import '../../api/firestore/user.dart';
+import '../../entities/life_step_entity.dart';
 
 part 'life_stage.freezed.dart';
 
 @freezed
 abstract class LifeStageModel with _$LifeStageModel {
   factory LifeStageModel({
-    HumanModel human,
-    List<LifeItemModel> lifeItems,
-    LifeStepModel lifeStepModel,
+    Doc<UserEntity> human,
+    List<LifeItemEntity> lifeItems,
+    LifeStepEntity lifeStepEntity,
   }) = _LifeStageModel;
 
   @late

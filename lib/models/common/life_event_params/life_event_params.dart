@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import '../life_item.dart';
+import '../../../api/firestore/life_item.dart';
 import 'gain_life_items_params.dart';
 import 'lose_life_items_params.dart';
 
@@ -9,6 +9,7 @@ abstract class LifeEventParams {
   const LifeEventParams();
 
   LifeEventType get type;
+  Map<String, dynamic> toJson();
 
   /// 分岐かどうか
   bool get isBranch => [

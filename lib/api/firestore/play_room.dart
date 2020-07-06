@@ -3,6 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'entity.dart';
+import 'life_road.dart';
+import 'store.dart';
+import 'user.dart';
 
 part 'play_room.freezed.dart';
 part 'play_room.g.dart';
@@ -14,30 +17,41 @@ part 'play_room.g.dart';
 /// TODO: finishedAt は削除ロジックに使う想定だが、不要だったら削除. まだロジックを考え中.
 @freezed
 abstract class PlayRoomEntity implements _$PlayRoomEntity, Entity {
-  const factory PlayRoomEntity({
+  factory PlayRoomEntity({
     @required @DocumentReferenceConverter() DocumentReference host,
-    @required String title,
     @required @DocumentReferenceListConverter() List<DocumentReference> humans,
     @required @DocumentReferenceConverter() DocumentReference lifeRoad,
     @required String currentTurnHumanId,
     @TimestampConverter() DateTime createdAt,
     @TimestampConverter() DateTime updatedAt,
+    @Default('') String title,
 //    @TimestampConverter() DateTime finishedAt,
   }) = _PlayRoomEntity;
-  const PlayRoomEntity._();
+  PlayRoomEntity._();
 
   factory PlayRoomEntity.fromJson(Map<String, dynamic> json) => _$PlayRoomEntityFromJson(json);
 
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 
-  static Document<PlayRoomEntity> decode(DocumentSnapshot snapshot) => Document<PlayRoomEntity>(
+  static Doc<PlayRoomEntity> decode(Store store, DocumentSnapshot snapshot) => Doc<PlayRoomEntity>(
+        store,
         snapshot.reference,
         PlayRoomEntity.fromJson(snapshot.data),
       );
 
   /// humans の document ID List
   List<String> get humanIds => humans.map((human) => human.documentID).toList();
+
+  /// host の UserEntity を取得する
+  Future<Doc<UserEntity>> fetchHost(Store store) async => UserEntity.decode(store, await host.get());
+
+  Future<List<Doc<UserEntity>>> fetchHumans(Store store) async => Future.wait(
+        humans.map((human) async => UserEntity.decode(store, await human.get())).toList(),
+      );
+
+  @late
+  Future<Doc<LifeRoadEntity>> fetchLifeRoad(Store store) async => LifeRoadEntity.decode(store, await lifeRoad.get());
 }
 
 class PlayRoomEntityField {

@@ -2,8 +2,10 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../models/common/life_event_params/life_event_params.dart';
 import 'entity.dart';
 import 'life_event.dart';
+import 'store.dart';
 
 part 'life_road.freezed.dart';
 part 'life_road.g.dart';
@@ -13,10 +15,10 @@ part 'life_road.g.dart';
 abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
   const factory LifeRoadEntity({
     @required @DocumentReferenceConverter() DocumentReference author,
-    @required String title,
-    @required List<LifeEventEntity> lifeEvents,
+    @required List<LifeEventEntity<LifeEventParams>> lifeEvents,
     @required @TimestampConverter() DateTime createdAt,
     @required @TimestampConverter() DateTime updatedAt,
+    @Default('') String title,
   }) = _LifeRoadEntity;
   const LifeRoadEntity._();
 
@@ -24,6 +26,12 @@ abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
 
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
+
+  static Doc<LifeRoadEntity> decode(Store store, DocumentSnapshot snapshot) => Doc<LifeRoadEntity>(
+        store,
+        snapshot.reference,
+        LifeRoadEntity.fromJson(snapshot.data),
+      );
 }
 
 class LifeRoadEntityField {

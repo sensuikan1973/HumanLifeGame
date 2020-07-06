@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../entities/life_step_entity.dart';
 import '../../i18n/i18n.dart';
-import '../../models/common/life_step.dart';
 import '../../models/play_room/play_room_notifier.dart';
 
 class PlayerAction extends StatelessWidget {
@@ -35,7 +35,7 @@ class PlayerAction extends StatelessWidget {
 
   Column _directionSelectButton(BuildContext context) {
     final currentHumanLifeStep =
-        context.select<PlayRoomNotifier, LifeStepModel>((notifier) => notifier.value.currentHumanLifeStep);
+        context.select<PlayRoomNotifier, LifeStepEntity>((notifier) => notifier.value.currentHumanLifeStep);
     return Column(
       children: <Widget>[
         Center(

@@ -37,9 +37,10 @@ dev_dependencies:
       url: https://github.com/sensuikan1973/dartman_sensuikan1973
       ref: 1.1.0
   freezed: ^0.10.9
-  json_serializable: ^3.3.0
   intl_translation: ^0.17.10
+  json_serializable: ^3.3.0
   mockito: ^4.1.1
+  uuid: ^2.1.0
 
 flutter:
   uses-material-design: true
