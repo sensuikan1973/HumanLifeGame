@@ -24,12 +24,13 @@ Future<Doc<PlayRoomEntity>> createPlayRoom(
   }
   final docRef = await collectionRef.add(PlayRoomEntity(
     host: hostRef,
-    humans: [hostRef],
+    humans: host == null ? [hostRef] : humans,
     lifeRoad: lifeRoad ?? store.docRef<LifeRoadEntity>(Uuid().v4()).ref,
     title: Uuid().v4(),
     currentTurnHumanId: hostRef.documentID,
     createdAt: createdAt ?? DateTime.now(),
     updatedAt: updatedAt ?? DateTime.now(),
   ));
+  // TODO: user の joinPlayRoom を batch write で更新
   return docRef.get();
 }
