@@ -21,7 +21,6 @@ class LifeRoadModel {
     this.author,
   }) : assert(lifeStepsOnBoard.every((row) => row.length == lifeStepsOnBoard.first.length)) {
     _initDirections(start);
-    print(debugMessage());
   }
 
   final String title;
