@@ -15,7 +15,7 @@ part 'life_road.g.dart';
 abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
   factory LifeRoadEntity({
     @required @DocumentReferenceConverter() DocumentReference author,
-    @required List<LifeEventEntity> lifeEvents,
+    @required List<List<LifeEventEntity>> lifeEvents,
     @required @TimestampConverter() DateTime createdAt,
     @required @TimestampConverter() DateTime updatedAt,
     @Default('') String title,
