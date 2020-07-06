@@ -34,6 +34,18 @@ abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
         LifeRoadEntity.fromJson(snapshot.data),
       );
 
+  /// LifeEvent の二次元配列から LifeStep の二次元配列を作るヘルパー
+  static List<List<LifeStepEntity>> createLifeStepsOnBoard(List<List<LifeEventEntity>> lifeEvents) => List.generate(
+        lifeEvents.length,
+        (y) => List.generate(
+          lifeEvents[y].length,
+          (x) => LifeStepEntity(
+            id: (x + (y * lifeEvents[y].length)).toString(),
+            lifeEvent: lifeEvents[y][x],
+          ),
+        ),
+      );
+
   /// lifeEvents を二次元配列として展開かつ LifeStepEntity として解釈済みのもの
   @late
   List<List<LifeStepEntity>> get lifeStepsOnBoard => _lifeStepsOnBoard;
