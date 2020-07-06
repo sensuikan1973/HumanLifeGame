@@ -21,6 +21,7 @@ class LifeRoadModel {
     this.author,
   }) : assert(lifeStepsOnBoard.every((row) => row.length == lifeStepsOnBoard.first.length)) {
     _initDirections(start);
+    print(debugMessage());
   }
 
   final String title;
@@ -74,7 +75,7 @@ class LifeRoadModel {
     );
     const exchg = LifeEventEntity<ExchangeLifeItemsParams>(
       target: LifeEventTarget.myself,
-      type: LifeEventType.goal,
+      type: LifeEventType.exchangeLifeItems,
       params: ExchangeLifeItemsParams(
         targetItems: [
           TargetLifeItemParams(key: 'HumanLifeGames Inc.', type: LifeItemType.stock, amount: 1),
@@ -87,13 +88,13 @@ class LifeRoadModel {
     );
     const direc = LifeEventEntity<SelectDirectionParams>(
       target: LifeEventTarget.myself,
-      type: LifeEventType.loseLifeItems,
+      type: LifeEventType.selectDirection,
       params: SelectDirectionParams(),
       description: '分岐だよー',
     );
     const blank = LifeEventEntity<NothingParams>(
       target: LifeEventTarget.myself,
-      type: LifeEventType.loseLifeItems,
+      type: LifeEventType.nothing,
       params: NothingParams(),
     );
     return [
