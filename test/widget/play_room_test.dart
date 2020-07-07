@@ -19,20 +19,20 @@ import '../mocks/auth.dart';
 import '../mocks/dice.dart';
 import 'helper/testable_app.dart';
 
-final lifeEvents = [
-  [startEvent, gainEvent, gainEvent, gainEvent, gainEvent, gainEvent, goalEvent],
-  [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
-  [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
-  [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
-  [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
-  [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
-  [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
-];
-
 Future<void> main() async {
   final i18n = await I18n.load(HumanLifeGameApp.defaultLocale);
   final user = MockFirebaseUser();
   final auth = MockAuth(user);
+
+  final lifeEvents = [
+    [startEvent, gainEvent, gainEvent, gainEvent, gainEvent, gainEvent, goalEvent],
+    [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
+    [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
+    [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
+    [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
+    [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
+    [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
+  ];
 
   setUp(() {
     // See: https://github.com/flutter/flutter/issues/12994#issuecomment-397321431
