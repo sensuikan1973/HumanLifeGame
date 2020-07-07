@@ -20,7 +20,7 @@ Future<Doc<PlayRoomEntity>> createPlayRoom(
 
   final collectionRef = store.collectionRef<PlayRoomEntity>();
   final hostRef = host ?? (await createUser(store)).ref;
-  final docRef = await collectionRef.add(PlayRoomEntity(
+  final entity = PlayRoomEntity(
     host: hostRef,
     humans: host == null ? [hostRef] : humans,
     lifeRoad: lifeRoad ?? store.docRef<LifeRoadEntity>(Uuid().v4()).ref,
@@ -28,7 +28,8 @@ Future<Doc<PlayRoomEntity>> createPlayRoom(
     currentTurnHumanId: hostRef.documentID,
     createdAt: createdAt ?? DateTime.now(),
     updatedAt: updatedAt ?? DateTime.now(),
-  ));
+  );
+  final docRef = await collectionRef.add(entity);
   // TODO: user の joinPlayRoom を batch write で更新
-  return docRef.get();
+  return Doc<PlayRoomEntity>(store, docRef.ref, entity);
 }
