@@ -8,6 +8,9 @@ import '../../models/play_room/play_room_notifier.dart';
 class PlayerAction extends StatelessWidget {
   const PlayerAction({Key key}) : super(key: key);
 
+  @visibleForTesting
+  static const rollButtonKey = Key('playerActionDiceRollButton');
+
   @override
   Widget build(BuildContext context) => Card(
         child: Center(
@@ -21,7 +24,7 @@ class PlayerAction extends StatelessWidget {
       );
 
   FlatButton _rollDiceButton(BuildContext context) => FlatButton(
-        key: const Key('playerActionDiceRollButton'),
+        key: rollButtonKey,
         color: Colors.blue,
         textColor: Colors.white,
         onPressed: context.select<PlayRoomNotifier, bool>((model) => model.value.allHumansReachedTheGoal)

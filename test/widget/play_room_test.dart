@@ -143,7 +143,7 @@ Future<void> main() async {
     ));
     await tester.pumpAndSettle(PlayRoomState.showDelay);
 
-    await tester.tap(find.byKey(const Key('playerActionDiceRollButton')));
+    await tester.tap(find.byKey(PlayerAction.rollButtonKey));
     await tester.pump();
     expect(find.text(roll.toString()), findsOneWidget);
   });
@@ -172,7 +172,7 @@ Future<void> main() async {
     ));
     await tester.pumpAndSettle(PlayRoomState.showDelay);
 
-    final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
+    final rollDiceButton = find.byKey(PlayerAction.rollButtonKey);
     await tester.tap(rollDiceButton);
     await tester.pump();
     expect(find.text(i18n.rollAnnouncement(humans.first.entity.displayName, roll)), findsOneWidget);
@@ -207,7 +207,7 @@ Future<void> main() async {
     ));
     await tester.pumpAndSettle(PlayRoomState.showDelay);
 
-    final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
+    final rollDiceButton = find.byKey(PlayerAction.rollButtonKey);
 
     await tester.tap(rollDiceButton);
     await tester.pump();
@@ -239,7 +239,7 @@ Future<void> main() async {
     ));
     await tester.pumpAndSettle(PlayRoomState.showDelay);
 
-    final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
+    final rollDiceButton = find.byKey(PlayerAction.rollButtonKey);
     await tester.tap(rollDiceButton);
     await tester.pump();
 
