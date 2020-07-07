@@ -1,6 +1,5 @@
 import 'package:HumanLifeGame/api/firestore/life_event.dart';
 import 'package:HumanLifeGame/api/firestore/life_item.dart';
-import 'package:HumanLifeGame/api/firestore/life_road.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
 import 'package:HumanLifeGame/human_life_game_app.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
@@ -23,74 +22,69 @@ import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../helper/firestore/life_road_helper.dart';
 import '../helper/firestore/play_room_helper.dart';
 import '../helper/firestore/user_helper.dart';
 import '../mocks/auth.dart';
 import '../mocks/dice.dart';
 import 'helper/testable_app.dart';
 
-// ignore: unused_element
-LifeRoadEntity _dummyLifeRoad() {
-  const start = LifeEventEntity<StartParams>(
-    target: LifeEventTarget.myself,
-    type: LifeEventType.start,
-    params: StartParams(),
-  );
-  const goals = LifeEventEntity<GoalParams>(
-    target: LifeEventTarget.myself,
-    type: LifeEventType.goal,
-    params: GoalParams(),
-  );
-  const gains = LifeEventEntity<GainLifeItemsParams>(
-    target: LifeEventTarget.myself,
-    type: LifeEventType.gainLifeItems,
-    params: GainLifeItemsParams(targetItems: [
+const start = LifeEventEntity<StartParams>(
+  target: LifeEventTarget.myself,
+  type: LifeEventType.start,
+  params: StartParams(),
+);
+const goals = LifeEventEntity<GoalParams>(
+  target: LifeEventTarget.myself,
+  type: LifeEventType.goal,
+  params: GoalParams(),
+);
+const gains = LifeEventEntity<GainLifeItemsParams>(
+  target: LifeEventTarget.myself,
+  type: LifeEventType.gainLifeItems,
+  params: GainLifeItemsParams(targetItems: [
+    TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
+  ]),
+);
+const loses = LifeEventEntity<LoseLifeItemsParams>(
+  target: LifeEventTarget.myself,
+  type: LifeEventType.loseLifeItems,
+  params: LoseLifeItemsParams(targetItems: [
+    TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
+  ]),
+);
+const exchg = LifeEventEntity<ExchangeLifeItemsParams>(
+  target: LifeEventTarget.myself,
+  type: LifeEventType.exchangeLifeItems,
+  params: ExchangeLifeItemsParams(
+    targetItems: [
+      TargetLifeItemParams(key: 'HumanLifeGames Inc.', type: LifeItemType.stock, amount: 1),
+    ],
+    baseItems: [
       TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
-    ]),
-  );
-  const loses = LifeEventEntity<LoseLifeItemsParams>(
-    target: LifeEventTarget.myself,
-    type: LifeEventType.loseLifeItems,
-    params: LoseLifeItemsParams(targetItems: [
-      TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
-    ]),
-  );
-  const exchg = LifeEventEntity<ExchangeLifeItemsParams>(
-    target: LifeEventTarget.myself,
-    type: LifeEventType.exchangeLifeItems,
-    params: ExchangeLifeItemsParams(
-      targetItems: [
-        TargetLifeItemParams(key: 'HumanLifeGames Inc.', type: LifeItemType.stock, amount: 1),
-      ],
-      baseItems: [
-        TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
-      ],
-    ),
-  );
-  const direc = LifeEventEntity<SelectDirectionParams>(
-    target: LifeEventTarget.myself,
-    type: LifeEventType.selectDirection,
-    params: SelectDirectionParams(),
-  );
-  const blank = LifeEventEntity<NothingParams>(
-    target: LifeEventTarget.myself,
-    type: LifeEventType.nothing,
-    params: NothingParams(),
-  );
-  final lifeEvents = [
-    [start, direc, gains, gains, exchg, loses, blank, blank, blank, blank],
-    [blank, gains, blank, blank, blank, gains, blank, blank, blank, blank],
-    [blank, gains, gains, loses, gains, gains, gains, blank, blank, blank],
-    [blank, blank, blank, blank, blank, blank, exchg, blank, blank, blank],
-    [goals, exchg, loses, gains, exchg, loses, direc, blank, blank, blank],
-    [blank, gains, blank, blank, blank, blank, gains, blank, blank, blank],
-    [blank, gains, exchg, loses, gains, gains, gains, blank, blank, blank],
-    [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
-    [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
-    [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
-  ];
-  return LifeRoadModel(lifeStepsOnBoard: LifeRoadEntity.createLifeStepsOnBoard(lifeEvents));
-}
+    ],
+  ),
+);
+const direc = LifeEventEntity<SelectDirectionParams>(
+  target: LifeEventTarget.myself,
+  type: LifeEventType.selectDirection,
+  params: SelectDirectionParams(),
+);
+const blank = LifeEventEntity<NothingParams>(
+  target: LifeEventTarget.myself,
+  type: LifeEventType.nothing,
+  params: NothingParams(),
+);
+
+final lifeEvents = [
+  [start, gains, gains, gains, gains, gains, goals],
+  [blank, blank, blank, blank, blank, blank, blank],
+  [blank, blank, blank, blank, blank, blank, blank],
+  [blank, blank, blank, blank, blank, blank, blank],
+  [blank, blank, blank, blank, blank, blank, blank],
+  [blank, blank, blank, blank, blank, blank, blank],
+  [blank, blank, blank, blank, blank, blank, blank],
+];
 
 Future<void> main() async {
   final i18n = await I18n.load(HumanLifeGameApp.defaultLocale);
@@ -112,6 +106,7 @@ Future<void> main() async {
       home: PlayRoom.inProviders(
         playRoomDoc: await createPlayRoom(
           store,
+          lifeRoad: (await createLifeRoad(store, lifeEvents: lifeEvents)).ref,
           humans: humans.map((el) => el.ref).toList(),
         ),
       ),
@@ -139,6 +134,7 @@ Future<void> main() async {
         child: PlayRoom.inProviders(
           playRoomDoc: await createPlayRoom(
             store,
+            lifeRoad: (await createLifeRoad(store, lifeEvents: lifeEvents)).ref,
             host: humans.first.ref,
             humans: humans.map((el) => el.ref).toList(),
           ),
@@ -150,7 +146,7 @@ Future<void> main() async {
     await tester.tap(find.byKey(const Key('playerActionDiceRollButton')));
     await tester.pump();
     expect(find.text(roll.toString()), findsOneWidget);
-  }, skip: true);
+  });
 
   testWidgets('show Announcement message when dice is rolled', (tester) async {
     const roll = 5;
@@ -167,6 +163,7 @@ Future<void> main() async {
         child: PlayRoom.inProviders(
           playRoomDoc: await createPlayRoom(
             store,
+            lifeRoad: (await createLifeRoad(store, lifeEvents: lifeEvents)).ref,
             host: humans.first.ref,
             humans: humans.map((el) => el.ref).toList(),
           ),
@@ -187,7 +184,7 @@ Future<void> main() async {
     await tester.tap(rollDiceButton);
     await tester.pump();
     expect(find.text(i18n.rollAnnouncement(humans.first.entity.displayName, roll)), findsOneWidget);
-  }, skip: true);
+  });
 
   testWidgets('roll-the-dice button should be disabled when all Humans reached the goal', (tester) async {
     final firestore = MockFirestoreInstance();
@@ -201,6 +198,7 @@ Future<void> main() async {
         child: PlayRoom.inProviders(
           playRoomDoc: await createPlayRoom(
             store,
+            lifeRoad: (await createLifeRoad(store, lifeEvents: lifeEvents)).ref,
             host: humans.first.ref,
             humans: humans.map((el) => el.ref).toList(),
           ),
@@ -232,6 +230,7 @@ Future<void> main() async {
         child: PlayRoom.inProviders(
           playRoomDoc: await createPlayRoom(
             store,
+            lifeRoad: (await createLifeRoad(store, lifeEvents: lifeEvents)).ref,
             host: humans.first.ref,
             humans: humans.map((el) => el.ref).toList(),
           ),
@@ -262,6 +261,7 @@ Future<void> main() async {
         child: PlayRoom.inProviders(
           playRoomDoc: await createPlayRoom(
             store,
+            lifeRoad: (await createLifeRoad(store, lifeEvents: lifeEvents)).ref,
             host: humans.first.ref,
             humans: humans.map((el) => el.ref).toList(),
           ),
@@ -309,6 +309,7 @@ Future<void> main() async {
         child: PlayRoom.inProviders(
           playRoomDoc: await createPlayRoom(
             store,
+            lifeRoad: (await createLifeRoad(store, lifeEvents: lifeEvents)).ref,
             humans: humans.map((el) => el.ref).toList(),
           ),
         ),
@@ -333,6 +334,7 @@ Future<void> main() async {
         child: PlayRoom.inProviders(
           playRoomDoc: await createPlayRoom(
             store,
+            lifeRoad: (await createLifeRoad(store, lifeEvents: lifeEvents)).ref,
             humans: humans.map((el) => el.ref).toList(),
           ),
         ),
@@ -351,5 +353,5 @@ Future<void> main() async {
     playerAction = tester.element(find.byType(PlayerAction));
     playerActionAncestor = playerAction.findAncestorWidgetOfExactType<Stack>();
     expect(find.byWidget(playerActionAncestor), findsOneWidget);
-  }, skip: true);
+  });
 }
