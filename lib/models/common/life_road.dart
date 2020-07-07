@@ -30,19 +30,6 @@ class LifeRoadModel {
   int get height => lifeStepsOnBoard.length;
   int get width => lifeStepsOnBoard.first.length;
 
-  /// TODO: これ本当にいいんか?
-  /// LifeStepsOnBoard の生成ヘルパー
-  static List<List<LifeStepEntity>> createLifeStepsOnBoard(List<List<LifeEventEntity>> lifeEvents) => List.generate(
-        lifeEvents.length,
-        (y) => List.generate(
-          lifeEvents[y].length,
-          (x) => LifeStepEntity(
-            id: (x + (y * lifeEvents[y].length)).toString(),
-            lifeEvent: lifeEvents[y][x],
-          ),
-        ),
-      );
-
   /// FIXME: いつか消す
   static List<List<LifeEventEntity>> dummyLifeEvents() {
     const start = LifeEventEntity<StartParams>(

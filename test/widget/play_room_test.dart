@@ -1,5 +1,6 @@
 import 'package:HumanLifeGame/api/firestore/life_event.dart';
 import 'package:HumanLifeGame/api/firestore/life_item.dart';
+import 'package:HumanLifeGame/api/firestore/life_road.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
 import 'package:HumanLifeGame/human_life_game_app.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
@@ -89,7 +90,7 @@ LifeRoadModel _dummyLifeRoad() {
     [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
     [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
   ];
-  return LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
+  return LifeRoadModel(lifeStepsOnBoard: LifeRoadEntity.createLifeStepsOnBoard(lifeEvents));
 }
 
 Future<void> main() async {

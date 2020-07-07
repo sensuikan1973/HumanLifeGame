@@ -12,7 +12,7 @@ class PlayRoomState {
   /// FIXME: 今はダミーで固定してる
   final LifeRoadModel lifeRoad = LifeRoadModel(
     title: 'dummy HumanLife',
-    lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
+    lifeStepsOnBoard: LifeRoadEntity.createLifeStepsOnBoard(
       LifeRoadModel.dummyLifeEvents(),
     ),
   );

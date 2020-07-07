@@ -1,4 +1,5 @@
 import 'package:HumanLifeGame/api/firestore/life_event.dart';
+import 'package:HumanLifeGame/api/firestore/life_road.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
 import 'package:HumanLifeGame/human_life_game_app.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
@@ -52,7 +53,7 @@ Future<void> main() async {
     [blank, blank, blank, blank, blank, blank, blank],
     [blank, blank, blank, blank, blank, blank, blank],
   ];
-  final lifeRoad = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
+  final lifeRoad = LifeRoadModel(lifeStepsOnBoard: LifeRoadEntity.createLifeStepsOnBoard(lifeEvents));
   final lifeRoadSize = Size(150.0 * lifeRoad.width, 100.0 * lifeRoad.height);
 
   testWidgets('show LifeSteps', (tester) async {

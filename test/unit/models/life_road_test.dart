@@ -1,4 +1,5 @@
 import 'package:HumanLifeGame/api/firestore/life_event.dart';
+import 'package:HumanLifeGame/api/firestore/life_road.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/life_event_params.dart';
@@ -150,11 +151,7 @@ void main() {
       [blank, gains, gains, gains, gains, gains, gains],
     ];
 
-    final model = LifeRoadModel(
-      lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
-        lifeEvents,
-      ),
-    );
+    final model = LifeRoadModel(lifeStepsOnBoard: LifeRoadEntity.createLifeStepsOnBoard(lifeEvents));
     const expectedMessage = '''
 type:1   type:3   type:6   type:6   type:6   type:6   type:0   
 up:null  up:null  up:null  up:null  up:null  up:null  up:null  
@@ -200,7 +197,7 @@ class _DirectionChecker {
     @required List<List<LifeEventEntity>> lifeEvents,
     @required List<List<_Pointer>> expectedPointers,
   })  : _expectedPointers = expectedPointers,
-        _model = LifeRoadModel(lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(lifeEvents));
+        _model = LifeRoadModel(lifeStepsOnBoard: LifeRoadEntity.createLifeStepsOnBoard(lifeEvents));
 
   final List<List<_Pointer>> _expectedPointers;
   final LifeRoadModel _model;
