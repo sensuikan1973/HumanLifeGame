@@ -224,9 +224,8 @@ abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
           lifeStepsOnBoard[pos.y][pos.x].left = leftLifeStep;
           _initDirections(leftLifeStep);
         }
-      } else {
-        // TODO: エラー（もしくは離小島にジャンプ）
       }
+      // TODO: エラー（もしくは離小島にジャンプ）
     } else {
       if (numOfUncheckedLifeStep == 1) {
         // 次のLifeStepと紐付けし、次のLifeStepから探索を開始
