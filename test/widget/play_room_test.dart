@@ -199,7 +199,7 @@ Future<void> main() async {
     ));
     await tester.pumpAndSettle(PlayRoomState.showDelay);
 
-    final rollDiceButton = find.byKey(const Key('playerActionDiceRollButton'));
+    final rollDiceButton = find.byKey(PlayerAction.rollButtonKey);
     await tester.tap(rollDiceButton);
     await tester.pump();
 
