@@ -124,6 +124,7 @@ Future<void> main() async {
     final store = Store(MockFirestoreInstance());
     final humans = [await createUser(store), await createUser(store, uid: user.uid)];
     await tester.pumpWidget(testableApp(
+      dice: MockDice(6),
       auth: auth,
       store: store,
       home: MediaQuery(
@@ -149,7 +150,7 @@ Future<void> main() async {
     await tester.tap(rollDiceButton);
     await tester.pump();
     expect(tester.widget<FlatButton>(rollDiceButton).enabled, false);
-  }, skip: true);
+  });
 
   testWidgets('show result dialog', (tester) async {
     final store = Store(MockFirestoreInstance());
