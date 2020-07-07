@@ -44,14 +44,15 @@ class ParamsConverter<T extends LifeEventParams> implements JsonConverter<T, Map
 
   @override
   T fromJson(Map<String, dynamic> json) {
-    if (T == ExchangeLifeItemsParams) return ExchangeLifeItemsParams.fromJson(json) as T;
-    if (T == GainLifeItemsParams) return GainLifeItemsParams.fromJson(json) as T;
-    if (T == GoalParams) return GoalParams.fromJson(json) as T;
-    if (T == LoseLifeItemsParams) return LoseLifeItemsParams.fromJson(json) as T;
-    if (T == NothingParams) return NothingParams.fromJson(json) as T;
-    if (T == SelectDirectionParams) return SelectDirectionParams.fromJson(json) as T;
-    if (T == StartParams) return StartParams.fromJson(json) as T;
-    throw Exception('unexpected Entity Type: $T');
+    final type = json['type'] as String;
+    if (type == describeEnum(LifeEventType.exchangeLifeItems)) return ExchangeLifeItemsParams.fromJson(json) as T;
+    if (type == describeEnum(LifeEventType.gainLifeItems)) return GainLifeItemsParams.fromJson(json) as T;
+    if (type == describeEnum(LifeEventType.goal)) return GoalParams.fromJson(json) as T;
+    if (type == describeEnum(LifeEventType.loseLifeItems)) return LoseLifeItemsParams.fromJson(json) as T;
+    if (type == describeEnum(LifeEventType.nothing)) return NothingParams.fromJson(json) as T;
+    if (type == describeEnum(LifeEventType.selectDirection)) return SelectDirectionParams.fromJson(json) as T;
+    if (type == describeEnum(LifeEventType.start)) return StartParams.fromJson(json) as T;
+    throw Exception('unexpected Params Type: $T');
   }
 
   @override

@@ -7,11 +7,8 @@ part 'start_params.g.dart';
 
 @freezed
 abstract class StartParams extends LifeEventParams implements _$StartParams {
-  const factory StartParams() = _StartParams;
+  const factory StartParams({@Default(LifeEventType.start) LifeEventType type}) = _StartParams;
   const StartParams._();
 
   factory StartParams.fromJson(Map<String, dynamic> json) => _$StartParamsFromJson(json);
-
-  @override
-  LifeEventType get type => LifeEventType.start;
 }

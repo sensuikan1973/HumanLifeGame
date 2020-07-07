@@ -45,6 +45,20 @@ abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
         LifeRoadEntity.fromJson(snapshot.data),
       );
 
+  /// FIXME: 消す
+  static Future<Doc<LifeRoadEntity>> dummy(Store store, DocumentReference userDocRef) async {
+    final collectionRef = store.collectionRef<LifeRoadEntity>();
+    final entity = LifeRoadEntity(
+      author: userDocRef,
+      lifeEvents: LifeRoadEntity.dummyLifeEvents(),
+      title: 'dummy',
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    );
+    final docRef = await collectionRef.add(entity);
+    return Doc<LifeRoadEntity>(store, docRef.ref, entity);
+  }
+
   /// LifeEvent の二次元配列から LifeStep の二次元配列を作るヘルパー
   // TODO: @visibleForTesting
   static List<List<LifeStepEntity>> createLifeStepsOnBoard(List<List<LifeEventEntity>> lifeEvents) => List.generate(
@@ -128,7 +142,9 @@ abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
 
   /// lifeEvents を二次元配列として展開かつ LifeStepEntity として解釈済みのもの
   @late
-  List<List<LifeStepEntity>> get lifeStepsOnBoard => LifeRoadEntity.createLifeStepsOnBoard(lifeEvents);
+  List<List<LifeStepEntity>> get lifeStepsOnBoard => lifeEvents != null
+      ? LifeRoadEntity.createLifeStepsOnBoard(lifeEvents)
+      : LifeRoadEntity.createLifeStepsOnBoard(LifeRoadEntity.dummyLifeEvents());
 
   /// Y 方向の長さ
   @late

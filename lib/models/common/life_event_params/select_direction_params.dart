@@ -7,11 +7,9 @@ part 'select_direction_params.g.dart';
 
 @freezed
 abstract class SelectDirectionParams extends LifeEventParams implements _$SelectDirectionParams {
-  const factory SelectDirectionParams() = _SelectDirectionParams;
+  const factory SelectDirectionParams({@Default(LifeEventType.selectDirection) LifeEventType type}) =
+      _SelectDirectionParams;
   const SelectDirectionParams._();
 
   factory SelectDirectionParams.fromJson(Map<String, dynamic> json) => _$SelectDirectionParamsFromJson(json);
-
-  @override
-  LifeEventType get type => LifeEventType.selectDirection;
 }

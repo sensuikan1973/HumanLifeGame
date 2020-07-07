@@ -38,7 +38,7 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
       title: 'はじめての人生',
       humans: [userDocRef.ref],
       // FIXME: 本当に存在する lifeRoad を参照するように
-      lifeRoad: _store.docRef<LifeRoadEntity>('FIXME').ref,
+      lifeRoad: (await LifeRoadEntity.dummy(_store, userDocRef.ref)).ref,
       currentTurnHumanId: user.uid,
     );
     final roomDocRef = _store.collectionRef<PlayRoomEntity>().docRef();
