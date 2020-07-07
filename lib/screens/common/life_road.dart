@@ -9,8 +9,7 @@ import 'life_step.dart';
 class LifeRoad extends StatelessWidget {
   LifeRoad(
     this._entity,
-    this._width,
-    this._height, {
+    this._size, {
     List<Human> humans,
     Map<String, Position> positionsByHumanId,
     Key key,
@@ -23,8 +22,7 @@ class LifeRoad extends StatelessWidget {
   final List<Human> _humans;
   final Map<String, Position> _positionsByHumanId;
 
-  final double _width;
-  final double _height;
+  final Size _size;
 
   // LifeStep の上に載せる対象の Human を取得する
   List<Human> _putTargetHumans(int x, int y) {
@@ -45,8 +43,8 @@ class LifeRoad extends StatelessWidget {
               _entity.width,
               (x) => TableCell(
                 child: SizedBox(
-                  width: _width / _entity.width,
-                  height: _height / _entity.height,
+                  width: _size.width / _entity.width,
+                  height: _size.height / _entity.height,
                   child: _lifeStep(_entity.lifeStepsOnBoard[y][x], _putTargetHumans(x, y)),
                 ),
               ),

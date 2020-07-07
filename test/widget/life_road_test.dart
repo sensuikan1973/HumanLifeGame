@@ -11,6 +11,7 @@ import 'package:HumanLifeGame/models/play_room/play_room_notifier.dart';
 import 'package:HumanLifeGame/screens/common/life_road.dart';
 import 'package:HumanLifeGame/screens/common/life_step.dart';
 import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
@@ -59,7 +60,7 @@ Future<void> main() async {
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(
         create: (_) => playRoomNotifier,
-        child: LifeRoad(lifeRoad.entity, 150.0 * lifeRoad.entity.width, 100.0 * lifeRoad.entity.height),
+        child: LifeRoad(lifeRoad.entity, Size(150.0 * lifeRoad.entity.width, 100.0 * lifeRoad.entity.height)),
       ),
     ));
     await tester.pump();

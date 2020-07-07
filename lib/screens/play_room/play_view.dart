@@ -71,11 +71,8 @@ class PlayView extends StatelessWidget {
 
   LifeRoad _lifeRoad(PlayRoomState playRoomState, Size size) => LifeRoad(
         playRoomState.lifeRoad.entity,
-        size.width,
-        size.height,
-        humans: [
-          for (final human in playRoomState.humans) Human(human),
-        ],
+        size,
+        humans: [for (final human in playRoomState.humans) Human(human)],
         positionsByHumanId: playRoomState.positionsByHumanId,
       );
 }
