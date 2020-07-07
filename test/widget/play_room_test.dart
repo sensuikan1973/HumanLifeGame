@@ -214,7 +214,6 @@ Future<void> main() async {
     expect(find.text(i18n.resultAnnouncementDialogMessage), findsNothing);
 
     // 画面サイズを変更しリビルドされても、タイアログが再表示されない
-    // FIXME: ^ これほんとです? pumpWidget の説明見る限り怪しそう
     await tester.pumpWidget(testableApp(
       home: MediaQuery(
           data: const MediaQueryData(size: Size(1000, 1024)),
