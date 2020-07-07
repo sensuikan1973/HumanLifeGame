@@ -26,8 +26,7 @@ Future<void> main() async {
   );
 
   testWidgets("show 'lifeEventRecords'Text", (tester) async {
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     final humans = [await createUser(store), await createUser(store)];
     final playRoomNotifier = PlayRoomNotifier(i18n, MockDice(), store, await createPlayRoom(store));
     for (final human in humans) {

@@ -15,9 +15,8 @@ void main() {
       TimestampField.createdAt: DateTime.now(),
       TimestampField.updatedAt: DateTime.now(),
     };
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
-    await firestore
+    final store = Store(MockFirestoreInstance());
+    await store.firestore
         .collection(store.getCollectionId<ServiceControlEntity>())
         .document(ServiceControlDocId.web)
         .setData(serviceControlData);
@@ -40,9 +39,8 @@ void main() {
       TimestampField.createdAt: DateTime.now(),
       TimestampField.updatedAt: DateTime.now(),
     };
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
-    await firestore
+    final store = Store(MockFirestoreInstance());
+    await store.firestore
         .collection(store.getCollectionId<ServiceControlEntity>())
         .document(ServiceControlDocId.web)
         .setData(serviceControlData);

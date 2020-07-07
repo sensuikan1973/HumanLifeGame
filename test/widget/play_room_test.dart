@@ -97,8 +97,7 @@ Future<void> main() async {
   });
 
   testWidgets('show some widgets', (tester) async {
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     final humans = [await createUser(store), await createUser(store, uid: user.uid)];
     await tester.pumpWidget(testableApp(
       store: store,
@@ -122,8 +121,7 @@ Future<void> main() async {
   testWidgets('random value(1 <= value <= 6) should be displayed when dice is rolled', (tester) async {
     const roll = 5;
     final dice = MockDice(roll);
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     final humans = [await createUser(store), await createUser(store, uid: user.uid)];
     await tester.pumpWidget(testableApp(
       dice: dice,
@@ -151,8 +149,7 @@ Future<void> main() async {
   testWidgets('show Announcement message when dice is rolled', (tester) async {
     const roll = 5;
     final dice = MockDice(roll);
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     final humans = [await createUser(store), await createUser(store, uid: user.uid)];
     await tester.pumpWidget(testableApp(
       dice: dice,
@@ -187,8 +184,7 @@ Future<void> main() async {
   });
 
   testWidgets('roll-the-dice button should be disabled when all Humans reached the goal', (tester) async {
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     final humans = [await createUser(store), await createUser(store, uid: user.uid)];
     await tester.pumpWidget(testableApp(
       auth: auth,
@@ -219,8 +215,7 @@ Future<void> main() async {
   }, skip: true);
 
   testWidgets('show result dialog', (tester) async {
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     final humans = [await createUser(store), await createUser(store, uid: user.uid)];
     await tester.pumpWidget(testableApp(
       auth: auth,
@@ -250,8 +245,7 @@ Future<void> main() async {
   }, skip: true);
 
   testWidgets('not show dialog after rebuilt', (tester) async {
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     final humans = [await createUser(store), await createUser(store, uid: user.uid)];
     await tester.pumpWidget(testableApp(
       auth: auth,
@@ -296,8 +290,7 @@ Future<void> main() async {
   }, skip: true);
 
   testWidgets('stack widgets when screen size is middle', (tester) async {
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     final humans = [await createUser(store), await createUser(store, uid: user.uid)];
 
     // デスクトップサイズのスクリーンの場合は、stackされない

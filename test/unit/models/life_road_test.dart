@@ -49,8 +49,7 @@ void main() {
   final epBrDL = _Pointer(up: false, down: true, right: false, left: true);
   final epBrUDR = _Pointer(up: true, down: true, right: true, left: false);
 
-  final firestore = MockFirestoreInstance();
-  final store = Store(firestore);
+  final store = Store(MockFirestoreInstance());
 
   test('detect a single direction ', () {
     final lifeEvents = [

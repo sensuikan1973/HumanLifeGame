@@ -20,8 +20,7 @@ Future<void> main() async {
   final dice = MockDice();
 
   testWidgets('show initial total moneys', (tester) async {
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     final playRoomNotifier = PlayRoomNotifier(i18n, dice, store, await createPlayRoom(store));
     await playRoomNotifier.init();
     await tester.pumpWidget(testableApp(
@@ -32,8 +31,7 @@ Future<void> main() async {
   });
 
   testWidgets('show variable total moneys', (tester) async {
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     final playRoomNotifier = PlayRoomNotifier(i18n, dice, store, await createPlayRoom(store));
     await playRoomNotifier.init();
     for (final lifeStage in playRoomNotifier.value.lifeStages) {
@@ -47,8 +45,7 @@ Future<void> main() async {
   });
 
   testWidgets('show current human', (tester) async {
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     final playRoomNotifier = PlayRoomNotifier(i18n, dice, store, await createPlayRoom(store));
     await playRoomNotifier.init();
     await tester.pumpWidget(testableApp(
@@ -62,8 +59,7 @@ Future<void> main() async {
   });
 
   testWidgets('show user name', (tester) async {
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     final playRoom = await createPlayRoom(store);
     final playRoomNotifier = PlayRoomNotifier(i18n, dice, store, playRoom);
     await playRoomNotifier.init();
@@ -78,8 +74,7 @@ Future<void> main() async {
   });
 
   testWidgets('show human icons', (tester) async {
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     final playRoom = await createPlayRoom(store);
     final playRoomNotifier = PlayRoomNotifier(i18n, dice, store, playRoom);
     await playRoomNotifier.init();

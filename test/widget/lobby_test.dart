@@ -27,8 +27,7 @@ Future<void> main() async {
   final auth = MockAuth(user);
 
   testWidgets('create public play room', (tester) async {
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     await createUser(store, uid: user.uid);
     await tester.pumpWidget(
       testableApp(auth: auth, store: store, home: Lobby.inProviders()),
@@ -48,8 +47,7 @@ Future<void> main() async {
   });
 
   testWidgets('join the public play rooms which myself hosts', (tester) async {
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     final userDoc = await createUser(store, uid: user.uid);
     // playRoom を作成
     await store.collectionRef<PlayRoomEntity>().add(
@@ -81,8 +79,7 @@ Future<void> main() async {
   });
 
   testWidgets('join the public play rooms which other hosts', (tester) async {
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
 
 //    final userDoc = await createUser(store, uid: user.uid);
 
@@ -118,9 +115,7 @@ Future<void> main() async {
   });
 
   testWidgets('list play rooms', (tester) async {
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
-
+    final store = Store(MockFirestoreInstance());
     const roomNum = 3;
     for (var i = 0; i < roomNum; ++i) {
       final userDoc = await createUser(store);
