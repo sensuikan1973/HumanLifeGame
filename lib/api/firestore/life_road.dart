@@ -60,7 +60,7 @@ abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
   }
 
   /// LifeEvent の二次元配列から LifeStep の二次元配列を作るヘルパー
-  // TODO: @visibleForTesting
+  @visibleForTesting
   static List<List<LifeStepEntity>> createLifeStepsOnBoard(List<List<LifeEventEntity>> lifeEvents) => List.generate(
         lifeEvents.length,
         (y) => List.generate(
