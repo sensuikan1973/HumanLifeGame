@@ -24,6 +24,7 @@ Future<void> main() async {
   final user = MockFirebaseUser();
   final auth = MockAuth(user);
 
+  /// 6つ進んだらゴール
   final lifeEvents = [
     [startEvent, gainEvent, gainEvent, gainEvent, gainEvent, gainEvent, goalEvent],
     [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
