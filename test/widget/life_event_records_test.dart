@@ -21,7 +21,7 @@ Future<void> main() async {
     final humans = [await createUser(store), await createUser(store)];
     final playRoomNotifier = PlayRoomNotifier(i18n, MockDice(), store, await createPlayRoom(store));
     for (final human in humans) {
-      playRoomNotifier.value.everyLifeEventRecords = [LifeEventRecordEntity(human: human.ref, lifeEvent: start)];
+      playRoomNotifier.value.everyLifeEventRecords = [LifeEventRecordEntity(human: human.ref, lifeEvent: startEvent)];
     }
     await tester.pumpWidget(testableApp(
       store: store,

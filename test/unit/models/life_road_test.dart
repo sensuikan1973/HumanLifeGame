@@ -22,13 +22,13 @@ void main() {
 
   test('detect a single direction ', () {
     final lifeEvents = [
-      [start, gains, gains, gains, gains, gains, gains],
-      [blank, blank, blank, blank, blank, blank, gains],
-      [goals, blank, blank, blank, blank, blank, gains],
-      [gains, blank, blank, blank, blank, blank, gains],
-      [gains, blank, blank, blank, blank, blank, gains],
-      [gains, blank, blank, blank, blank, blank, gains],
-      [gains, gains, gains, gains, gains, gains, gains],
+      [startEvent, gainEvent, gainEvent, gainEvent, gainEvent, gainEvent, gainEvent],
+      [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, gainEvent],
+      [goalEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, gainEvent],
+      [gainEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, gainEvent],
+      [gainEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, gainEvent],
+      [gainEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, gainEvent],
+      [gainEvent, gainEvent, gainEvent, gainEvent, gainEvent, gainEvent, gainEvent],
     ];
     final expectedPointers = [
       [epRight, epRight, epRight, epRight, epRight, epRight, epDown],
@@ -44,13 +44,13 @@ void main() {
 
   test('detect a branch direction', () {
     final lifeEvents = [
-      [start, direc, gains, gains, gains, gains, blank],
-      [blank, gains, blank, blank, blank, gains, blank],
-      [blank, gains, gains, gains, gains, gains, gains],
-      [blank, blank, blank, blank, blank, blank, gains],
-      [goals, gains, gains, gains, gains, gains, direc],
-      [blank, gains, blank, blank, blank, blank, gains],
-      [blank, gains, gains, gains, gains, gains, gains],
+      [startEvent, directionEvent, gainEvent, gainEvent, gainEvent, gainEvent, blankEvent],
+      [blankEvent, gainEvent, blankEvent, blankEvent, blankEvent, gainEvent, blankEvent],
+      [blankEvent, gainEvent, gainEvent, gainEvent, gainEvent, gainEvent, gainEvent],
+      [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, gainEvent],
+      [goalEvent, gainEvent, gainEvent, gainEvent, gainEvent, gainEvent, directionEvent],
+      [blankEvent, gainEvent, blankEvent, blankEvent, blankEvent, blankEvent, gainEvent],
+      [blankEvent, gainEvent, gainEvent, gainEvent, gainEvent, gainEvent, gainEvent],
     ];
 
     final expectedPointers = [
@@ -68,13 +68,13 @@ void main() {
 
   test('detect two branch direction', () {
     final lifeEvents = [
-      [start, direc, gains, gains, gains, gains, goals],
-      [blank, gains, blank, blank, blank, gains, blank],
-      [blank, gains, direc, gains, gains, gains, blank],
-      [blank, blank, gains, blank, gains, blank, blank],
-      [blank, blank, gains, gains, gains, blank, blank],
-      [blank, blank, blank, blank, blank, blank, blank],
-      [blank, blank, blank, blank, blank, blank, blank],
+      [startEvent, directionEvent, gainEvent, gainEvent, gainEvent, gainEvent, goalEvent],
+      [blankEvent, gainEvent, blankEvent, blankEvent, blankEvent, gainEvent, blankEvent],
+      [blankEvent, gainEvent, directionEvent, gainEvent, gainEvent, gainEvent, blankEvent],
+      [blankEvent, blankEvent, gainEvent, blankEvent, gainEvent, blankEvent, blankEvent],
+      [blankEvent, blankEvent, gainEvent, gainEvent, gainEvent, blankEvent, blankEvent],
+      [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
+      [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
     ];
 
     final expectedPointers = [
@@ -92,13 +92,13 @@ void main() {
 
   test('detect three branch direction', () {
     final lifeEvents = [
-      [blank, gains, gains, gains, gains, gains, blank],
-      [blank, gains, blank, blank, blank, gains, blank],
-      [blank, gains, blank, blank, blank, gains, blank],
-      [start, direc, gains, gains, gains, gains, goals],
-      [blank, gains, blank, blank, blank, gains, blank],
-      [blank, gains, blank, blank, blank, gains, blank],
-      [blank, gains, gains, gains, gains, gains, blank],
+      [blankEvent, gainEvent, gainEvent, gainEvent, gainEvent, gainEvent, blankEvent],
+      [blankEvent, gainEvent, blankEvent, blankEvent, blankEvent, gainEvent, blankEvent],
+      [blankEvent, gainEvent, blankEvent, blankEvent, blankEvent, gainEvent, blankEvent],
+      [startEvent, directionEvent, gainEvent, gainEvent, gainEvent, gainEvent, goalEvent],
+      [blankEvent, gainEvent, blankEvent, blankEvent, blankEvent, gainEvent, blankEvent],
+      [blankEvent, gainEvent, blankEvent, blankEvent, blankEvent, gainEvent, blankEvent],
+      [blankEvent, gainEvent, gainEvent, gainEvent, gainEvent, gainEvent, blankEvent],
     ];
 
     final expectedPointers = [

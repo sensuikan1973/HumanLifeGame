@@ -18,13 +18,13 @@ import 'helper/testable_app.dart';
 Future<void> main() async {
   final i18n = await I18n.load(HumanLifeGameApp.defaultLocale);
   final lifeEvents = [
-    [start, gains, gains, gains, gains, gains, goals],
-    [blank, blank, blank, blank, blank, blank, blank],
-    [blank, blank, blank, blank, blank, blank, blank],
-    [blank, blank, blank, blank, blank, blank, blank],
-    [blank, blank, blank, blank, blank, blank, blank],
-    [blank, blank, blank, blank, blank, blank, blank],
-    [blank, blank, blank, blank, blank, blank, blank],
+    [startEvent, gainEvent, gainEvent, gainEvent, gainEvent, gainEvent, goalEvent],
+    [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
+    [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
+    [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
+    [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
+    [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
+    [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
   ];
 
   testWidgets('show LifeSteps', (tester) async {
@@ -39,6 +39,6 @@ Future<void> main() async {
     ));
     await tester.pump();
 
-    expect(find.byType(LifeStep), findsNWidgets(lifeEvents.expand((el) => el).where((el) => el != blank).length));
+    expect(find.byType(LifeStep), findsNWidgets(lifeEvents.expand((el) => el).where((el) => el != blankEvent).length));
   });
 }

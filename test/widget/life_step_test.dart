@@ -8,7 +8,7 @@ import 'helper/testable_app.dart';
 
 Future<void> main() async {
   testWidgets('show Card with positive Color', (tester) async {
-    final model = LifeStepEntity(id: '0', lifeEvent: gains);
+    final model = LifeStepEntity(id: '0', lifeEvent: gainEvent);
     await tester.pumpWidget(testableApp(home: LifeStep(model)));
     await tester.pump();
     expect(
@@ -18,7 +18,7 @@ Future<void> main() async {
   });
 
   testWidgets('show Card with negative Color', (tester) async {
-    final model = LifeStepEntity(id: '0', lifeEvent: loses);
+    final model = LifeStepEntity(id: '0', lifeEvent: loseEvent);
     await tester.pumpWidget(testableApp(home: LifeStep(model)));
     await tester.pump();
     expect(
@@ -28,7 +28,7 @@ Future<void> main() async {
   });
 
   testWidgets('show Card with normal Color', (tester) async {
-    final model = LifeStepEntity(id: '0', lifeEvent: start);
+    final model = LifeStepEntity(id: '0', lifeEvent: startEvent);
     await tester.pumpWidget(testableApp(home: LifeStep(model)));
     await tester.pump();
     expect(
@@ -38,9 +38,9 @@ Future<void> main() async {
   });
 
   testWidgets('show description', (tester) async {
-    final model = LifeStepEntity(id: '0', lifeEvent: gains);
+    final model = LifeStepEntity(id: '0', lifeEvent: gainEvent);
     await tester.pumpWidget(testableApp(home: LifeStep(model)));
     await tester.pump();
-    expect(find.text(gains.description), findsOneWidget);
+    expect(find.text(gainEvent.description), findsOneWidget);
   });
 }

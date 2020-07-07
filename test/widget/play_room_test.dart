@@ -20,13 +20,13 @@ import '../mocks/dice.dart';
 import 'helper/testable_app.dart';
 
 final lifeEvents = [
-  [start, gains, gains, gains, gains, gains, goals],
-  [blank, blank, blank, blank, blank, blank, blank],
-  [blank, blank, blank, blank, blank, blank, blank],
-  [blank, blank, blank, blank, blank, blank, blank],
-  [blank, blank, blank, blank, blank, blank, blank],
-  [blank, blank, blank, blank, blank, blank, blank],
-  [blank, blank, blank, blank, blank, blank, blank],
+  [startEvent, gainEvent, gainEvent, gainEvent, gainEvent, gainEvent, goalEvent],
+  [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
+  [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
+  [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
+  [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
+  [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
+  [blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent, blankEvent],
 ];
 
 Future<void> main() async {
