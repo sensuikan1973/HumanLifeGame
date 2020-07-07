@@ -52,7 +52,7 @@ class ParamsConverter<T extends LifeEventParams> implements JsonConverter<T, Map
     if (type == describeEnum(LifeEventType.nothing)) return NothingParams.fromJson(json) as T;
     if (type == describeEnum(LifeEventType.selectDirection)) return SelectDirectionParams.fromJson(json) as T;
     if (type == describeEnum(LifeEventType.start)) return StartParams.fromJson(json) as T;
-    throw Exception('unexpected Params Type: $T');
+    throw Exception('unexpected Params type: $type');
   }
 
   @override
