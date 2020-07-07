@@ -73,7 +73,7 @@ void main() {
     _DirectionChecker(store, lifeEvents: lifeEvents, expectedPointers: expectedPointers).execute();
   });
 
-  test('ditect a branch direction', () {
+  test('detect a branch direction', () {
     final lifeEvents = [
       [start, direc, gains, gains, gains, gains, blank],
       [blank, gains, blank, blank, blank, gains, blank],
@@ -97,7 +97,7 @@ void main() {
     _DirectionChecker(store, lifeEvents: lifeEvents, expectedPointers: expectedPointers).execute();
   });
 
-  test('ditect two branch direction', () {
+  test('detect two branch direction', () {
     final lifeEvents = [
       [start, direc, gains, gains, gains, gains, goals],
       [blank, gains, blank, blank, blank, gains, blank],
@@ -121,7 +121,7 @@ void main() {
     _DirectionChecker(store, lifeEvents: lifeEvents, expectedPointers: expectedPointers).execute();
   });
 
-  test('ditect three branch direction', () {
+  test('detect three branch direction', () {
     final lifeEvents = [
       [blank, gains, gains, gains, gains, gains, blank],
       [blank, gains, blank, blank, blank, gains, blank],
