@@ -1,19 +1,8 @@
 import 'package:flutter/foundation.dart';
 
-import '../../api/firestore/life_event.dart';
-import '../../api/firestore/life_item.dart';
 import '../../api/firestore/life_road.dart';
 import '../../api/firestore/user.dart';
 import '../../entities/life_step_entity.dart';
-import 'life_event_params/exchange_life_items_params.dart';
-import 'life_event_params/gain_life_items_params.dart';
-import 'life_event_params/goal_params.dart';
-import 'life_event_params/life_event_params.dart';
-import 'life_event_params/lose_life_items_params.dart';
-import 'life_event_params/nothing_params.dart';
-import 'life_event_params/select_direction_params.dart';
-import 'life_event_params/start_params.dart';
-import 'life_event_params/target_life_item_params.dart';
 
 class LifeRoadModel {
   LifeRoadModel({
@@ -29,74 +18,6 @@ class LifeRoadModel {
   final List<List<LifeStepEntity>> lifeStepsOnBoard;
   int get height => lifeStepsOnBoard.length;
   int get width => lifeStepsOnBoard.first.length;
-
-  /// FIXME: いつか消す
-  static List<List<LifeEventEntity>> dummyLifeEvents() {
-    const start = LifeEventEntity<StartParams>(
-      target: LifeEventTarget.myself,
-      type: LifeEventType.start,
-      params: StartParams(),
-      description: 'Start だよ',
-    );
-    const goals = LifeEventEntity<GoalParams>(
-      target: LifeEventTarget.myself,
-      type: LifeEventType.goal,
-      params: GoalParams(),
-      description: 'Goal だよ',
-    );
-    const gains = LifeEventEntity<GainLifeItemsParams>(
-      target: LifeEventTarget.myself,
-      type: LifeEventType.gainLifeItems,
-      params: GainLifeItemsParams(targetItems: [
-        TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
-      ]),
-      description: 'お金ゲット〜',
-    );
-    const loses = LifeEventEntity<LoseLifeItemsParams>(
-      target: LifeEventTarget.myself,
-      type: LifeEventType.loseLifeItems,
-      params: LoseLifeItemsParams(targetItems: [
-        TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
-      ]),
-      description: 'お金なくした...',
-    );
-    const exchg = LifeEventEntity<ExchangeLifeItemsParams>(
-      target: LifeEventTarget.myself,
-      type: LifeEventType.exchangeLifeItems,
-      params: ExchangeLifeItemsParams(
-        targetItems: [
-          TargetLifeItemParams(key: 'HumanLifeGames Inc.', type: LifeItemType.stock, amount: 1),
-        ],
-        baseItems: [
-          TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
-        ],
-      ),
-      description: '株を購入する',
-    );
-    const direc = LifeEventEntity<SelectDirectionParams>(
-      target: LifeEventTarget.myself,
-      type: LifeEventType.selectDirection,
-      params: SelectDirectionParams(),
-      description: '分岐だよー',
-    );
-    const blank = LifeEventEntity<NothingParams>(
-      target: LifeEventTarget.myself,
-      type: LifeEventType.nothing,
-      params: NothingParams(),
-    );
-    return [
-      [start, direc, gains, gains, exchg, loses, blank, blank, blank, blank],
-      [blank, gains, blank, blank, blank, gains, blank, blank, blank, blank],
-      [blank, gains, gains, loses, gains, gains, gains, blank, blank, blank],
-      [blank, blank, blank, blank, blank, blank, exchg, blank, blank, blank],
-      [goals, exchg, loses, gains, exchg, loses, direc, blank, blank, blank],
-      [blank, gains, blank, blank, blank, blank, gains, blank, blank, blank],
-      [blank, gains, exchg, loses, gains, gains, gains, blank, blank, blank],
-      [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
-      [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
-      [blank, blank, blank, blank, blank, blank, blank, blank, blank, blank],
-    ];
-  }
 
   LifeStepEntity get start {
     final lifeSteps = lifeStepsOnBoard.expand((el) => el);

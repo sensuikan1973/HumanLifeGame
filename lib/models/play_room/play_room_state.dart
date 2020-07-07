@@ -12,9 +12,7 @@ class PlayRoomState {
   /// FIXME: 今はダミーで固定してる
   final LifeRoadModel lifeRoad = LifeRoadModel(
     title: 'dummy HumanLife',
-    lifeStepsOnBoard: LifeRoadEntity.createLifeStepsOnBoard(
-      LifeRoadModel.dummyLifeEvents(),
-    ),
+    lifeStepsOnBoard: LifeRoadEntity.createLifeStepsOnBoard(LifeRoadEntity.dummyLifeEvents()),
   );
 
   /// 現在手番の人に方向選択を求めているかどうか
