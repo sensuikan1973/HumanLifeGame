@@ -16,12 +16,10 @@ Future<Doc<PlayRoomEntity>> createPlayRoom(
   DateTime createdAt,
   DateTime updatedAt,
 }) async {
+  assert(host == null || humans.contains(host));
+
   final collectionRef = store.collectionRef<PlayRoomEntity>();
-  var hostRef = host;
-  if (hostRef == null) {
-    final user = await createUser(store);
-    hostRef = host ?? user.ref;
-  }
+  final hostRef = host ?? (await createUser(store)).ref;
   final docRef = await collectionRef.add(PlayRoomEntity(
     host: hostRef,
     humans: host == null ? [hostRef] : humans,
