@@ -1,45 +1,14 @@
 import 'package:HumanLifeGame/api/firestore/life_event.dart';
 import 'package:HumanLifeGame/api/firestore/life_road.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
-import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
-import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
-import 'package:HumanLifeGame/models/common/life_event_params/life_event_params.dart';
-import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dart';
-import 'package:HumanLifeGame/models/common/life_event_params/select_direction_params.dart';
-import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
 import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helper/firestore/life_event_helper.dart';
 import '../../helper/firestore/user_helper.dart';
 
 void main() {
-  const start = LifeEventEntity<StartParams>(
-    target: LifeEventTarget.myself,
-    type: LifeEventType.start,
-    params: StartParams(),
-  );
-  const goals = LifeEventEntity<GoalParams>(
-    target: LifeEventTarget.myself,
-    type: LifeEventType.goal,
-    params: GoalParams(),
-  );
-  const gains = LifeEventEntity<GainLifeItemsParams>(
-    target: LifeEventTarget.myself,
-    type: LifeEventType.gainLifeItems,
-    params: GainLifeItemsParams(targetItems: []),
-  );
-  const direc = LifeEventEntity<SelectDirectionParams>(
-    target: LifeEventTarget.myself,
-    type: LifeEventType.selectDirection,
-    params: SelectDirectionParams(),
-  );
-  const blank = LifeEventEntity<NothingParams>(
-    target: LifeEventTarget.myself,
-    type: LifeEventType.nothing,
-    params: NothingParams(),
-  );
-
   final epBlank = _Pointer(up: false, down: false, right: false, left: false);
   final epUp = _Pointer(up: true, down: false, right: false, left: false);
   final epDown = _Pointer(up: false, down: true, right: false, left: false);
