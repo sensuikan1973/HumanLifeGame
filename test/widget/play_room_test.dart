@@ -156,6 +156,7 @@ Future<void> main() async {
     final store = Store(MockFirestoreInstance());
     final humans = [await createUser(store), await createUser(store, uid: user.uid)];
     await tester.pumpWidget(testableApp(
+      dice: MockDice(6),
       auth: auth,
       store: store,
       home: MediaQuery(
@@ -180,12 +181,13 @@ Future<void> main() async {
     await tester.pumpAndSettle();
     await tester.pump();
     expect(find.text(i18n.resultAnnouncementDialogMessage), findsOneWidget);
-  }, skip: true);
+  });
 
   testWidgets('not show dialog after rebuilt', (tester) async {
     final store = Store(MockFirestoreInstance());
     final humans = [await createUser(store), await createUser(store, uid: user.uid)];
     await tester.pumpWidget(testableApp(
+      dice: MockDice(6),
       auth: auth,
       store: store,
       home: MediaQuery(
@@ -225,7 +227,7 @@ Future<void> main() async {
     ));
     await tester.pumpAndSettle();
     expect(find.text(i18n.resultAnnouncementDialogMessage), findsNothing);
-  }, skip: true);
+  });
 
   testWidgets('stack widgets when screen size is middle', (tester) async {
     final store = Store(MockFirestoreInstance());
