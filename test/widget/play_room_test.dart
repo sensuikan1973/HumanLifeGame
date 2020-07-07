@@ -13,7 +13,6 @@ import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dar
 import 'package:HumanLifeGame/models/common/life_event_params/select_direction_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/target_life_item_params.dart';
-import 'package:HumanLifeGame/models/common/life_road.dart';
 import 'package:HumanLifeGame/screens/play_room/announcement.dart';
 import 'package:HumanLifeGame/screens/play_room/dice_result.dart';
 import 'package:HumanLifeGame/screens/play_room/life_stages.dart';
@@ -31,7 +30,7 @@ import '../mocks/dice.dart';
 import 'helper/testable_app.dart';
 
 // ignore: unused_element
-LifeRoadModel _dummyLifeRoad() {
+LifeRoadEntity _dummyLifeRoad() {
   const start = LifeEventEntity<StartParams>(
     target: LifeEventTarget.myself,
     type: LifeEventType.start,

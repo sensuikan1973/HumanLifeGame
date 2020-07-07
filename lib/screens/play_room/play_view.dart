@@ -21,8 +21,8 @@ class PlayView extends StatelessWidget {
       100,
     );
     final lifeRoadSize = Size(
-      lifeStepSize.width * playRoomState.lifeRoad.width,
-      lifeStepSize.height * playRoomState.lifeRoad.height,
+      lifeStepSize.width * playRoomState.lifeRoad.entity.width,
+      lifeStepSize.height * playRoomState.lifeRoad.entity.height,
     );
 
     return Card(
@@ -70,7 +70,7 @@ class PlayView extends StatelessWidget {
       );
 
   LifeRoad _lifeRoad(PlayRoomState playRoomState, Size size) => LifeRoad(
-        playRoomState.lifeRoad,
+        playRoomState.lifeRoad.entity,
         size.width,
         size.height,
         humans: [

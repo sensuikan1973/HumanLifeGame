@@ -25,12 +25,14 @@ abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
   factory LifeRoadEntity({
     @required @DocumentReferenceConverter() DocumentReference author,
     @required List<List<LifeEventEntity>> lifeEvents,
-    @required @TimestampConverter() DateTime createdAt,
-    @required @TimestampConverter() DateTime updatedAt,
+    @TimestampConverter() DateTime createdAt,
+    @TimestampConverter() DateTime updatedAt,
     @Default('') String title,
   }) = _LifeRoadEntity;
   // Road は正方形とする。実際には必須というわけではないが、仕様単純化のため。将来的には拡張してもいい。
-  LifeRoadEntity._() : assert(lifeEvents.every((row) => row.length == lifeEvents.first.length));
+  LifeRoadEntity._() : assert(lifeEvents.every((row) => row.length == lifeEvents.first.length)) {
+    _initDirections(start);
+  }
 
   factory LifeRoadEntity.fromJson(Map<String, dynamic> json) => _$LifeRoadEntityFromJson(json);
 
@@ -126,32 +128,21 @@ abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
 
   /// lifeEvents を二次元配列として展開かつ LifeStepEntity として解釈済みのもの
   @late
-  List<List<LifeStepEntity>> get lifeStepsOnBoard => _lifeStepsOnBoard;
-  List<List<LifeStepEntity>> get _lifeStepsOnBoard {
-    final board = createLifeStepsOnBoard(lifeEvents);
-    final start = board.expand((el) => el).firstWhere((el) => el.isStart);
-    _initDirections(start);
-    return board;
-  }
+  List<List<LifeStepEntity>> get lifeStepsOnBoard => LifeRoadEntity.createLifeStepsOnBoard(lifeEvents);
 
   /// Y 方向の長さ
   @late
-  int get height => lifeStepsOnBoard.length;
+  int get height => lifeEvents.length;
 
   /// X 方向の長さ
   @late
-  int get width => lifeStepsOnBoard.first.length;
+  int get width => lifeEvents.first.length;
 
   /// Start
   @late
-  LifeStepEntity get start => _start;
-  LifeStepEntity get _start {
-    final startSteps = lifeStepsOnBoard.expand((el) => el).where((step) => step.isStart);
-    if (startSteps.isEmpty || startSteps.length > 1) {
-      throw Exception('start step should be just one. found start ${startSteps.length} steps.');
-    }
-    return startSteps.first;
-  }
+  LifeStepEntity get start => lifeStepsOnBoard
+      .expand((el) => el)
+      .firstWhere((step) => step.isStart, orElse: () => throw Exception('LifeRoad should have Start'));
 
   /// LifeStep の座標を取得する
   Position getPosition(LifeStepEntity lifeStep) {

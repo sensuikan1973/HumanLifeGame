@@ -26,19 +26,19 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   PlayRoomNotifier(this._i18n, this._dice, this._store, this._playRoom) : super(PlayRoomState());
 
   Future<void> init() async {
-    value.humans = await _playRoom.entity.fetchHumans(_store);
+    value
+      ..lifeRoad = await _playRoom.entity.fetchLifeRoad(_store)
+      ..humans = await _playRoom.entity.fetchHumans(_store)
+      ..currentTurnHuman = value.humans.first; // TODO: 順序付けのあり方検討
     // 参加者全員の位置を Start に
     for (final human in value.humans) {
       final lifeStage = LifeStageModel(
         human: human,
-        lifeStepEntity: value.lifeRoad.start,
+        lifeStepEntity: value.lifeRoad.entity.start,
         lifeItems: [],
       );
       value.lifeStages.add(lifeStage);
     }
-    // 一番手をセット
-    value.currentTurnHuman = value.humans.first;
-//    notifyListeners();
   }
 
   final I18n _i18n;

@@ -3,17 +3,12 @@ import '../../api/firestore/life_road.dart';
 import '../../api/firestore/store.dart';
 import '../../api/firestore/user.dart';
 import '../../entities/life_step_entity.dart';
-import '../common/life_road.dart';
 import 'life_stage.dart';
 
 class PlayRoomState {
   PlayRoomState();
 
-  /// FIXME: 今はダミーで固定してる
-  final LifeRoadModel lifeRoad = LifeRoadModel(
-    title: 'dummy HumanLife',
-    lifeStepsOnBoard: LifeRoadEntity.createLifeStepsOnBoard(LifeRoadEntity.dummyLifeEvents()),
-  );
+  Doc<LifeRoadEntity> lifeRoad;
 
   /// 現在手番の人に方向選択を求めているかどうか
   bool requireSelectDirection = false;
@@ -45,7 +40,8 @@ class PlayRoomState {
 
   /// 参加者全員の Position
   Map<String, Position> get positionsByHumanId => {
-        for (final lifeStage in lifeStages) lifeStage.human.entity.uid: lifeRoad.getPosition(lifeStage.lifeStepEntity),
+        for (final lifeStage in lifeStages)
+          lifeStage.human.entity.uid: lifeRoad.entity.getPosition(lifeStage.lifeStepEntity),
       };
 
   /// 現在手番の Human が位置する LifeStep

@@ -1,14 +1,17 @@
 import 'package:HumanLifeGame/api/firestore/life_event.dart';
 import 'package:HumanLifeGame/api/firestore/life_road.dart';
+import 'package:HumanLifeGame/api/firestore/store.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/life_event_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/select_direction_params.dart';
 import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
-import 'package:HumanLifeGame/models/common/life_road.dart';
+import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import '../../helper/firestore/user_helper.dart';
 
 void main() {
   const start = LifeEventEntity<StartParams>(
@@ -46,6 +49,9 @@ void main() {
   final epBrDL = _Pointer(up: false, down: true, right: false, left: true);
   final epBrUDR = _Pointer(up: true, down: true, right: true, left: false);
 
+  final firestore = MockFirestoreInstance();
+  final store = Store(firestore);
+
   test('detect a single direction ', () {
     final lifeEvents = [
       [start, gains, gains, gains, gains, gains, gains],
@@ -65,7 +71,7 @@ void main() {
       [epUp, epBlank, epBlank, epBlank, epBlank, epBlank, epDown],
       [epUp, epLeft, epLeft, epLeft, epLeft, epLeft, epLeft],
     ];
-    _DirectionChecker(lifeEvents: lifeEvents, expectedPointers: expectedPointers).execute();
+    _DirectionChecker(store, lifeEvents: lifeEvents, expectedPointers: expectedPointers).execute();
   });
 
   test('ditect a branch direction', () {
@@ -89,7 +95,7 @@ void main() {
       [epBlank, epUp, epLeft, epLeft, epLeft, epLeft, epLeft],
     ];
 
-    _DirectionChecker(lifeEvents: lifeEvents, expectedPointers: expectedPointers).execute();
+    _DirectionChecker(store, lifeEvents: lifeEvents, expectedPointers: expectedPointers).execute();
   });
 
   test('ditect two branch direction', () {
@@ -113,7 +119,7 @@ void main() {
       [epBlank, epBlank, epBlank, epBlank, epBlank, epBlank, epBlank],
     ];
 
-    _DirectionChecker(lifeEvents: lifeEvents, expectedPointers: expectedPointers).execute();
+    _DirectionChecker(store, lifeEvents: lifeEvents, expectedPointers: expectedPointers).execute();
   });
 
   test('ditect three branch direction', () {
@@ -137,78 +143,33 @@ void main() {
       [epBlank, epRight, epRight, epRight, epRight, epUp, epBlank],
     ];
 
-    _DirectionChecker(lifeEvents: lifeEvents, expectedPointers: expectedPointers).execute();
-  });
-
-  test('debugMessage', () {
-    final lifeEvents = [
-      [start, direc, gains, gains, gains, gains, blank],
-      [blank, gains, blank, blank, blank, gains, blank],
-      [blank, gains, gains, gains, gains, gains, gains],
-      [blank, blank, blank, blank, blank, blank, gains],
-      [goals, gains, gains, gains, gains, gains, direc],
-      [blank, gains, blank, blank, blank, blank, gains],
-      [blank, gains, gains, gains, gains, gains, gains],
-    ];
-
-    final model = LifeRoadModel(lifeStepsOnBoard: LifeRoadEntity.createLifeStepsOnBoard(lifeEvents));
-    const expectedMessage = '''
-type:1   type:3   type:6   type:6   type:6   type:6   type:0   
-up:null  up:null  up:null  up:null  up:null  up:null  up:null  
-dn:null  dn:exist dn:null  dn:null  dn:null  dn:exist dn:null  
-rl:exist rl:exist rl:exist rl:exist rl:exist rl:null  rl:null  
-lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
-type:0   type:6   type:0   type:0   type:0   type:6   type:0   
-up:null  up:null  up:null  up:null  up:null  up:null  up:null  
-dn:null  dn:exist dn:null  dn:null  dn:null  dn:exist dn:null  
-rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
-lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
-type:0   type:6   type:6   type:6   type:6   type:6   type:6   
-up:null  up:null  up:null  up:null  up:null  up:null  up:null  
-dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:exist 
-rl:null  rl:exist rl:exist rl:exist rl:exist rl:exist rl:null  
-lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
-type:0   type:0   type:0   type:0   type:0   type:0   type:6   
-up:null  up:null  up:null  up:null  up:null  up:null  up:null  
-dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:exist 
-rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
-lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
-type:2   type:6   type:6   type:6   type:6   type:6   type:3   
-up:null  up:null  up:null  up:null  up:null  up:null  up:null  
-dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:exist 
-rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
-lt:null  lt:exist lt:exist lt:exist lt:exist lt:exist lt:exist 
-type:0   type:6   type:0   type:0   type:0   type:0   type:6   
-up:null  up:exist up:null  up:null  up:null  up:null  up:null  
-dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:exist 
-rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
-lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  lt:null  
-type:0   type:6   type:6   type:6   type:6   type:6   type:6   
-up:null  up:exist up:null  up:null  up:null  up:null  up:null  
-dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  dn:null  
-rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  rl:null  
-lt:null  lt:null  lt:exist lt:exist lt:exist lt:exist lt:exist \n''';
-    expect(model.debugMessage(), expectedMessage);
+    _DirectionChecker(store, lifeEvents: lifeEvents, expectedPointers: expectedPointers).execute();
   });
 }
 
 class _DirectionChecker {
-  _DirectionChecker({
+  _DirectionChecker(
+    this._store, {
     @required List<List<LifeEventEntity>> lifeEvents,
     @required List<List<_Pointer>> expectedPointers,
   })  : _expectedPointers = expectedPointers,
-        _model = LifeRoadModel(lifeStepsOnBoard: LifeRoadEntity.createLifeStepsOnBoard(lifeEvents));
+        _lifeEvents = lifeEvents;
 
+  final Store _store;
   final List<List<_Pointer>> _expectedPointers;
-  final LifeRoadModel _model;
+  final List<List<LifeEventEntity>> _lifeEvents;
 
-  void execute() {
-    for (var y = 0; y < _model.height; ++y) {
-      for (var x = 0; x < _model.width; ++x) {
-        expect(_model.lifeStepsOnBoard[y][x].hasUp, _expectedPointers[y][x].up);
-        expect(_model.lifeStepsOnBoard[y][x].hasDown, _expectedPointers[y][x].down);
-        expect(_model.lifeStepsOnBoard[y][x].hasRight, _expectedPointers[y][x].right);
-        expect(_model.lifeStepsOnBoard[y][x].hasLeft, _expectedPointers[y][x].left);
+  Future<void> execute() async {
+    final entity = LifeRoadEntity(
+      lifeEvents: _lifeEvents ?? LifeRoadEntity.dummyLifeEvents(),
+      author: (await createUser(_store)).ref,
+    );
+    for (var y = 0; y < entity.height; ++y) {
+      for (var x = 0; x < entity.width; ++x) {
+        expect(entity.lifeStepsOnBoard[y][x].hasUp, _expectedPointers[y][x].up);
+        expect(entity.lifeStepsOnBoard[y][x].hasDown, _expectedPointers[y][x].down);
+        expect(entity.lifeStepsOnBoard[y][x].hasRight, _expectedPointers[y][x].right);
+        expect(entity.lifeStepsOnBoard[y][x].hasLeft, _expectedPointers[y][x].left);
       }
     }
   }
