@@ -1,4 +1,3 @@
-import 'package:HumanLifeGame/api/firestore/life_road.dart';
 import 'package:HumanLifeGame/api/firestore/play_room.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
 import 'package:HumanLifeGame/human_life_game_app.dart';
