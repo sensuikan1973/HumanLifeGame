@@ -26,7 +26,7 @@ Future<Doc<PlayRoomEntity>> createPlayRoom(
     host: hostRef,
     humans: host == null ? [hostRef] : humans,
     lifeRoad: lifeRoad ?? store.docRef<LifeRoadEntity>(Uuid().v4()).ref,
-    title: Uuid().v4(),
+    title: title ?? Uuid().v4(),
     currentTurnHumanId: hostRef.documentID,
     createdAt: createdAt ?? DateTime.now(),
     updatedAt: updatedAt ?? DateTime.now(),
