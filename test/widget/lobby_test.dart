@@ -11,6 +11,7 @@ import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../helper/firestore/life_road_helper.dart';
 import '../helper/firestore/user_helper.dart';
 import '../mocks/auth.dart';
 import 'helper/testable_app.dart';
@@ -56,8 +57,7 @@ Future<void> main() async {
           PlayRoomEntity(
               host: userDoc.ref,
               humans: [userDoc.ref],
-              title: 'THE Life',
-              lifeRoad: store.docRef<LifeRoadEntity>('FIXME').ref,
+              lifeRoad: (await createLifeRoad(store)).ref,
               currentTurnHumanId: user.uid),
         );
 
@@ -94,8 +94,7 @@ Future<void> main() async {
           PlayRoomEntity(
               host: otherUserDoc.ref,
               humans: [otherUserDoc.ref],
-              title: 'THE Life',
-              lifeRoad: store.docRef<LifeRoadEntity>('FIXME').ref,
+              lifeRoad: (await createLifeRoad(store)).ref,
               currentTurnHumanId: otherUserDoc.entity.uid),
         );
 
@@ -131,7 +130,7 @@ Future<void> main() async {
                 host: userDoc.ref,
                 humans: [userDoc.ref],
                 title: 'life_$i',
-                lifeRoad: store.docRef<LifeRoadEntity>('FIXME').ref,
+                lifeRoad: (await createLifeRoad(store)).ref,
                 currentTurnHumanId: userDoc.entity.uid),
           );
     }
