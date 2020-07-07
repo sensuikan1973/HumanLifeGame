@@ -70,15 +70,12 @@ Future<void> main() async {
       dice: dice,
       auth: auth,
       store: store,
-      home: MediaQuery(
-        data: const MediaQueryData(size: Size(1440, 1024)),
-        child: PlayRoom.inProviders(
-          playRoomDoc: await createPlayRoom(
-            store,
-            lifeRoad: (await createLifeRoad(store, lifeEvents: lifeEvents)).ref,
-            host: humans.first.ref,
-            humans: humans.map((el) => el.ref).toList(),
-          ),
+      home: PlayRoom.inProviders(
+        playRoomDoc: await createPlayRoom(
+          store,
+          lifeRoad: (await createLifeRoad(store, lifeEvents: lifeEvents)).ref,
+          host: humans.first.ref,
+          humans: humans.map((el) => el.ref).toList(),
         ),
       ),
     ));
@@ -98,15 +95,12 @@ Future<void> main() async {
       dice: dice,
       auth: auth,
       store: store,
-      home: MediaQuery(
-        data: const MediaQueryData(size: Size(1440, 1024)),
-        child: PlayRoom.inProviders(
-          playRoomDoc: await createPlayRoom(
-            store,
-            lifeRoad: (await createLifeRoad(store, lifeEvents: lifeEvents)).ref,
-            host: humans.first.ref,
-            humans: humans.map((el) => el.ref).toList(),
-          ),
+      home: PlayRoom.inProviders(
+        playRoomDoc: await createPlayRoom(
+          store,
+          lifeRoad: (await createLifeRoad(store, lifeEvents: lifeEvents)).ref,
+          host: humans.first.ref,
+          humans: humans.map((el) => el.ref).toList(),
         ),
       ),
     ));
