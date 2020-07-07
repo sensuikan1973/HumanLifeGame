@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 
 import '../../api/firestore/life_event.dart';
 import '../../api/firestore/life_item.dart';
+import '../../api/firestore/life_road.dart';
 import '../../api/firestore/user.dart';
 import '../../entities/life_step_entity.dart';
 import 'life_event_params/exchange_life_items_params.dart';
@@ -261,11 +262,4 @@ class LifeRoadModel {
     }
     return messageBuffer.toString();
   }
-}
-
-@immutable
-class Position {
-  const Position(this.y, this.x);
-  final int y;
-  final int x;
 }
