@@ -169,7 +169,7 @@ Future<void> main() async {
       expect(playRoomNotifier.value.currentHumanLifeStep.hasRight, true);
       // 右を選ぶ
       await playRoomNotifier.chooseDirection(Direction.right);
-      expect(playRoomNotifier.value.positionsByHumanId[humans.first.id].x, 3);
+      expect(playRoomNotifier.value.positionsByHumanId[humans.first.id].x, roll);
       expect(playRoomNotifier.value.positionsByHumanId[humans.first.id].y, 0);
 
       // human 二人目 がサイコロを振って進む
