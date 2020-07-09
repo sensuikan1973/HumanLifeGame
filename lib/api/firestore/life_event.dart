@@ -20,7 +20,7 @@ abstract class LifeEventEntity<T extends LifeEventParams> implements _$LifeEvent
   const factory LifeEventEntity({
     @required LifeEventType type,
     @required LifeEventTarget target,
-    @required @ParamsConverter() T params,
+    @required @_ParamsConverter() T params,
     @Default('') String description,
   }) = _LifeEventEntity<T>;
   const LifeEventEntity._();
@@ -39,8 +39,8 @@ abstract class LifeEventEntity<T extends LifeEventParams> implements _$LifeEvent
   bool get requireToSelectDirectionManually => params.requireToSelectDirectionManually;
 }
 
-class ParamsConverter<T extends LifeEventParams> implements JsonConverter<T, Map<String, dynamic>> {
-  const ParamsConverter();
+class _ParamsConverter<T extends LifeEventParams> implements JsonConverter<T, Map<String, dynamic>> {
+  const _ParamsConverter();
 
   @override
   T fromJson(Map<String, dynamic> json) {

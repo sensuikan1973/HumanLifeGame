@@ -24,7 +24,7 @@ part 'life_road.g.dart';
 abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
   factory LifeRoadEntity({
     @required @DocumentReferenceConverter() DocumentReference author,
-    @required @LifeEventsConverter() List<List<LifeEventEntity>> lifeEvents,
+    @required @_LifeEventsConverter() List<List<LifeEventEntity>> lifeEvents,
     @TimestampConverter() DateTime createdAt,
     @TimestampConverter() DateTime updatedAt,
     @Default('') String title,
@@ -314,8 +314,8 @@ class Position {
 
 /// NOTE: 2020/07/09 時点で、Firestore は "直接ネストされた配列" をサポートしてない
 /// lifeEvents は実際には二次元配列として扱いたいところだが、その制約があるため、Firestore 上では異なる形式で保存する
-class LifeEventsConverter implements JsonConverter<List<List<LifeEventEntity>>, Map<String, dynamic>> {
-  const LifeEventsConverter();
+class _LifeEventsConverter implements JsonConverter<List<List<LifeEventEntity>>, Map<String, dynamic>> {
+  const _LifeEventsConverter();
 
   @override
   List<List<LifeEventEntity>> fromJson(Map<String, dynamic> json) {
