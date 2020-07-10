@@ -314,16 +314,16 @@ class Position {
 
 /// NOTE: 2020/07/09 時点で、Firestore は "直接ネストされた配列" をサポートしてない
 /// lifeEvents は実際には二次元配列として扱いたいところだが、その制約があるため、Firestore 上では異なる形式で保存する
-class _LifeEventsConverter implements JsonConverter<List<List<LifeEventEntity>>, Map<String, dynamic>> {
+class _LifeEventsConverter implements JsonConverter<List<List<LifeEventEntity>>, List> {
   const _LifeEventsConverter();
 
   @override
-  List<List<LifeEventEntity>> fromJson(Map<String, dynamic> json) {
+  List<List<LifeEventEntity>> fromJson(List json) {
     return []; // TODO: 実装
   }
 
   @override
-  Map<String, dynamic> toJson(List<List<LifeEventEntity>> lifeEvents) {
-    return null; // TODO: 実装
+  List toJson(List<List<LifeEventEntity>> lifeEvents) {
+    return []; // TODO: 実装
   }
 }
