@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import '../../../entities/life_item_type.dart';
+import '../life_item_type.dart';
 import 'gain_life_items_params.dart';
 import 'lose_life_items_params.dart';
 

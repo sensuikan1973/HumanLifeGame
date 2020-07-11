@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../entities/life_item_type.dart';
+import '../life_item_type.dart';
 
 part 'target_life_item_params.freezed.dart';
 part 'target_life_item_params.g.dart';
