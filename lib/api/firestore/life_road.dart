@@ -44,20 +44,6 @@ abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
         LifeRoadEntity.fromJson(snapshot.data),
       );
 
-  /// FIXME: 消す
-  static Future<Doc<LifeRoadEntity>> dummy(Store store, DocumentReference userDocRef) async {
-    final collectionRef = store.collectionRef<LifeRoadEntity>();
-    final entity = LifeRoadEntity(
-      author: userDocRef,
-      lifeEvents: LifeRoadEntity.dummyLifeEvents(),
-      title: 'dummy',
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-    );
-    final docRef = await collectionRef.add(entity);
-    return Doc<LifeRoadEntity>(store, docRef.ref, entity);
-  }
-
   /// LifeEvent の二次元配列から LifeStep の二次元配列を作るヘルパー
   @visibleForTesting
   static List<List<LifeStepEntity>> createLifeStepsOnBoard(List<List<LifeEventEntity>> lifeEvents) => List.generate(
