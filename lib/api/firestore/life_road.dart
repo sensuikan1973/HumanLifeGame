@@ -2,19 +2,21 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../entities/life_step_entity.dart';
-import '../../models/common/life_event_params/exchange_life_items_params.dart';
-import '../../models/common/life_event_params/gain_life_items_params.dart';
-import '../../models/common/life_event_params/goal_params.dart';
-import '../../models/common/life_event_params/life_event_params.dart';
-import '../../models/common/life_event_params/lose_life_items_params.dart';
-import '../../models/common/life_event_params/nothing_params.dart';
-import '../../models/common/life_event_params/select_direction_params.dart';
-import '../../models/common/life_event_params/start_params.dart';
-import '../../models/common/life_event_params/target_life_item_params.dart';
+import '../../entities/life_event_params/exchange_life_items_params.dart';
+import '../../entities/life_event_params/gain_life_items_params.dart';
+import '../../entities/life_event_params/goal_params.dart';
+import '../../entities/life_event_params/life_event_params.dart';
+import '../../entities/life_event_params/lose_life_items_params.dart';
+import '../../entities/life_event_params/nothing_params.dart';
+import '../../entities/life_event_params/select_direction_params.dart';
+import '../../entities/life_event_params/start_params.dart';
+import '../../entities/life_event_params/target_life_item_params.dart';
+import '../../entities/life_event_target.dart';
+import '../../entities/life_item_type.dart';
+import '../../entities/position.dart';
+import '../life_step_entity.dart';
 import 'entity.dart';
 import 'life_event.dart';
-import 'life_item.dart';
 import 'store.dart';
 
 part 'life_road.freezed.dart';
@@ -286,13 +288,6 @@ class LifeRoadEntityField {
   ///
   /// クライアントサイドで二次元に展開 + 連結リスト化 するのが必要
   static const lifeEvents = 'lifeEvents';
-}
-
-@immutable
-class Position {
-  const Position(this.y, this.x);
-  final int y;
-  final int x;
 }
 
 /// NOTE: 2020/07/11 時点で、Firestore は "直接ネストされた配列" をサポートしてない

@@ -1,10 +1,11 @@
 import 'package:HumanLifeGame/api/firestore/life_event.dart';
-import 'package:HumanLifeGame/entities/life_step_entity.dart';
-import 'package:HumanLifeGame/models/common/life_event_params/goal_params.dart';
-import 'package:HumanLifeGame/models/common/life_event_params/life_event_params.dart';
-import 'package:HumanLifeGame/models/common/life_event_params/nothing_params.dart';
-import 'package:HumanLifeGame/models/common/life_event_params/select_direction_params.dart';
-import 'package:HumanLifeGame/models/common/life_event_params/start_params.dart';
+import 'package:HumanLifeGame/api/life_step_entity.dart';
+import 'package:HumanLifeGame/entities/life_event_params/goal_params.dart';
+import 'package:HumanLifeGame/entities/life_event_params/life_event_params.dart';
+import 'package:HumanLifeGame/entities/life_event_params/nothing_params.dart';
+import 'package:HumanLifeGame/entities/life_event_params/select_direction_params.dart';
+import 'package:HumanLifeGame/entities/life_event_params/start_params.dart';
+import 'package:HumanLifeGame/entities/life_event_target.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

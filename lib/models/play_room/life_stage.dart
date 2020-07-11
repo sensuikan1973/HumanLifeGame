@@ -4,7 +4,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../api/firestore/life_item.dart';
 import '../../api/firestore/store.dart';
 import '../../api/firestore/user.dart';
-import '../../entities/life_step_entity.dart';
+import '../../api/life_step_entity.dart';
+import '../../entities/life_item_type.dart';
 
 part 'life_stage.freezed.dart';
 

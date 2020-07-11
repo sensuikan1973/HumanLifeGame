@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../entities/life_step_entity.dart';
+import '../../api/life_step_entity.dart';
 import '../../i18n/i18n.dart';
 import '../../models/play_room/play_room_notifier.dart';
 

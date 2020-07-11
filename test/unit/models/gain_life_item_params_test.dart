@@ -1,6 +1,6 @@
-import 'package:HumanLifeGame/api/firestore/life_item.dart';
-import 'package:HumanLifeGame/models/common/life_event_params/gain_life_items_params.dart';
-import 'package:HumanLifeGame/models/common/life_event_params/target_life_item_params.dart';
+import 'package:HumanLifeGame/entities/life_event_params/gain_life_items_params.dart';
+import 'package:HumanLifeGame/entities/life_event_params/target_life_item_params.dart';
+import 'package:HumanLifeGame/entities/life_item_type.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 

@@ -1,5 +1,5 @@
 import 'package:HumanLifeGame/api/firestore/store.dart';
-import 'package:HumanLifeGame/entities/life_step_entity.dart';
+import 'package:HumanLifeGame/api/life_step_entity.dart';
 import 'package:HumanLifeGame/i18n/i18n.dart';
 import 'package:HumanLifeGame/models/play_room/play_room_notifier.dart';
 import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';

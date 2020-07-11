@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
-import '../api/firestore/life_event.dart';
-import '../models/common/life_event_params/life_event_params.dart';
+import '../entities/life_event_params/life_event_params.dart';
+import 'firestore/life_event.dart';
 
 class LifeStepEntity {
   LifeStepEntity({
