@@ -30,6 +30,20 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
     return _auth.signInAnonymously();
   }
 
+  /// FIXME: 消す。当然 LifeRoad がここで作られることなんてないからね。
+  Future<Doc<LifeRoadEntity>> _createLifeRoad() async {
+    final user = await _auth.currentUser;
+    final userDoc = _store.docRef<UserEntity>(user.uid);
+    final lifeRoadCollectionRef = _store.collectionRef<LifeRoadEntity>(userDoc.ref.path);
+    final entity = LifeRoadEntity(
+      author: userDoc.ref,
+      lifeEvents: LifeRoadEntity.dummyLifeEvents(),
+      title: 'dummy',
+    );
+    final docRef = await lifeRoadCollectionRef.add(entity);
+    return Doc<LifeRoadEntity>(_store, docRef.ref, entity);
+  }
+
   Future<void> createPublicPlayRoom() async {
     final user = await _auth.currentUser;
     final userDocRef = _store.docRef<UserEntity>(user.uid);
@@ -37,8 +51,7 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
       host: userDocRef.ref,
       title: 'はじめての人生',
       humans: [userDocRef.ref],
-      // FIXME: 本当に存在する lifeRoad を参照するように
-      lifeRoad: _store.docRef<LifeRoadEntity>('FIXME').ref,
+      lifeRoad: (await _createLifeRoad()).ref,
       currentTurnHumanId: user.uid,
     );
     final roomDocRef = _store.collectionRef<PlayRoomEntity>().docRef();

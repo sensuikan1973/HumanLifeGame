@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../../api/firestore/life_road.dart';
 import '../../entities/life_step_entity.dart';
 import '../../models/common/life_event_params/life_event_params.dart';
-import '../../models/common/life_road.dart';
 import 'human.dart';
 import 'life_step.dart';
 
-/// FIXME: ちゃんと DB から取ってきて表示
 class LifeRoad extends StatelessWidget {
   LifeRoad(
-    this._model,
-    this._width,
-    this._height, {
+    this._entity,
+    this._size, {
     List<Human> humans,
     Map<String, Position> positionsByHumanId,
     Key key,
@@ -19,13 +17,12 @@ class LifeRoad extends StatelessWidget {
         _positionsByHumanId = positionsByHumanId ?? {},
         super(key: key);
 
-  final LifeRoadModel _model;
+  final LifeRoadEntity _entity;
 
   final List<Human> _humans;
   final Map<String, Position> _positionsByHumanId;
 
-  final double _width;
-  final double _height;
+  final Size _size;
 
   // LifeStep の上に載せる対象の Human を取得する
   List<Human> _putTargetHumans(int x, int y) {
@@ -40,15 +37,15 @@ class LifeRoad extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Table(
         children: List.generate(
-          _model.height,
+          _entity.height,
           (y) => TableRow(
             children: List.generate(
-              _model.width,
+              _entity.width,
               (x) => TableCell(
                 child: SizedBox(
-                  width: _width / _model.width,
-                  height: _height / _model.height,
-                  child: _lifeStep(_model.lifeStepsOnBoard[y][x], _putTargetHumans(x, y)),
+                  width: _size.width / _entity.width,
+                  height: _size.height / _entity.height,
+                  child: _lifeStep(_entity.lifeStepsOnBoard[y][x], _putTargetHumans(x, y)),
                 ),
               ),
             ),

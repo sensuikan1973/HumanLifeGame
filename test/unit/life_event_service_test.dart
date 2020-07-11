@@ -16,8 +16,7 @@ import '../helper/firestore/user_helper.dart';
 void main() {
   test('gainLifeItems', () async {
     const items = [LifeItemEntity(key: 'money', type: LifeItemType.money, amount: 200)];
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     final lifeStageModel = LifeStageModel(
       human: await createUser(store),
       lifeItems: items,
@@ -43,8 +42,7 @@ void main() {
 
   test('loseLifeItems', () async {
     const items = [LifeItemEntity(key: 'money', type: LifeItemType.money, amount: 200)];
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     final lifeStageModel = LifeStageModel(
       human: await createUser(store),
       lifeItems: items,
@@ -70,8 +68,7 @@ void main() {
 
   test('exchangeLifeItems', () async {
     const items = [LifeItemEntity(key: 'car', type: LifeItemType.vehicle, amount: 1)];
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     final lifeStageModel = LifeStageModel(
       human: await createUser(store),
       lifeItems: items,

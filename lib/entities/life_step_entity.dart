@@ -13,7 +13,9 @@ class LifeStepEntity {
     this.down,
   });
 
+  /// LifeRoad における識別子
   final String id;
+
   final LifeEventEntity lifeEvent;
 
   LifeStepEntity up;

@@ -1,9 +1,9 @@
-import 'package:HumanLifeGame/api/firestore/life_road.dart';
 import 'package:HumanLifeGame/api/firestore/play_room.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:uuid/uuid.dart';
 
+import 'life_road_helper.dart';
 import 'user_helper.dart';
 
 Future<Doc<PlayRoomEntity>> createPlayRoom(
@@ -16,21 +16,20 @@ Future<Doc<PlayRoomEntity>> createPlayRoom(
   DateTime createdAt,
   DateTime updatedAt,
 }) async {
+  assert(host == null || humans.contains(host));
+
   final collectionRef = store.collectionRef<PlayRoomEntity>();
-  var hostRef = host;
-  if (hostRef == null) {
-    final user = await createUser(store);
-    hostRef = host ?? user.ref;
-  }
-  final docRef = await collectionRef.add(PlayRoomEntity(
+  final hostRef = host ?? (await createUser(store)).ref;
+  final entity = PlayRoomEntity(
     host: hostRef,
     humans: host == null ? [hostRef] : humans,
-    lifeRoad: lifeRoad ?? store.docRef<LifeRoadEntity>(Uuid().v4()).ref,
-    title: Uuid().v4(),
+    lifeRoad: lifeRoad ?? (await createLifeRoad(store)).ref,
+    title: title ?? Uuid().v4(),
     currentTurnHumanId: hostRef.documentID,
     createdAt: createdAt ?? DateTime.now(),
     updatedAt: updatedAt ?? DateTime.now(),
-  ));
+  );
+  final docRef = await collectionRef.add(entity);
   // TODO: user の joinPlayRoom を batch write で更新
-  return docRef.get();
+  return Doc<PlayRoomEntity>(store, docRef.ref, entity);
 }

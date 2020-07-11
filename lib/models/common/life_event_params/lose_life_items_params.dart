@@ -9,11 +9,11 @@ part 'lose_life_items_params.g.dart';
 
 @freezed
 abstract class LoseLifeItemsParams extends LifeEventParams implements _$LoseLifeItemsParams {
-  const factory LoseLifeItemsParams({@required List<TargetLifeItemParams> targetItems}) = _LoseLifeItemsParams;
+  const factory LoseLifeItemsParams({
+    @required List<TargetLifeItemParams> targetItems,
+    @Default(LifeEventType.loseLifeItems) LifeEventType type,
+  }) = _LoseLifeItemsParams;
   const LoseLifeItemsParams._();
 
   factory LoseLifeItemsParams.fromJson(Map<String, dynamic> json) => _$LoseLifeItemsParamsFromJson(json);
-
-  @override
-  LifeEventType get type => LifeEventType.loseLifeItems;
 }

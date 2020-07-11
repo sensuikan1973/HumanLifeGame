@@ -7,11 +7,8 @@ part 'nothing_params.g.dart';
 
 @freezed
 abstract class NothingParams extends LifeEventParams implements _$NothingParams {
-  const factory NothingParams() = _NothingParams;
+  const factory NothingParams({@Default(LifeEventType.nothing) LifeEventType type}) = _NothingParams;
   const NothingParams._();
 
   factory NothingParams.fromJson(Map<String, dynamic> json) => _$NothingParamsFromJson(json);
-
-  @override
-  LifeEventType get type => LifeEventType.nothing;
 }

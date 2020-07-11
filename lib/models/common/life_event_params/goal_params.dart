@@ -7,11 +7,8 @@ part 'goal_params.g.dart';
 
 @freezed
 abstract class GoalParams extends LifeEventParams implements _$GoalParams {
-  const factory GoalParams() = _GoalParams;
+  const factory GoalParams({@Default(LifeEventType.goal) LifeEventType type}) = _GoalParams;
   const GoalParams._();
 
   factory GoalParams.fromJson(Map<String, dynamic> json) => _$GoalParamsFromJson(json);
-
-  @override
-  LifeEventType get type => LifeEventType.goal;
 }

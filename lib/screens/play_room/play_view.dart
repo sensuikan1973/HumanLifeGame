@@ -9,73 +9,72 @@ import '../common/life_road.dart';
 class PlayView extends StatelessWidget {
   const PlayView({Key key}) : super(key: key);
 
+  String get _backgroundImage => 'images/play_view_background.jpg';
   Size get _desktopSize => const Size(1440, 1024);
-
-  @override
-  Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
+  Size _lifeStepSize(BuildContext context) => Size(
+        MediaQuery.of(context).size.width >= _desktopSize.width ? 150 : 130,
+        100,
+      );
+  Size _lifeRoadSize(BuildContext context) {
     final playRoomState = context.watch<PlayRoomNotifier>().value;
-
-    final lifeStepSize = Size(
-      screenSize.width >= _desktopSize.width ? 150 : 130,
-      100,
-    );
-    final lifeRoadSize = Size(
-      lifeStepSize.width * playRoomState.lifeRoad.width,
-      lifeStepSize.height * playRoomState.lifeRoad.height,
-    );
-
-    return Card(
-      child: ColoredBox(
-        color: Colors.blue[50],
-        child: LayoutBuilder(
-          builder: (context, constraints) => Stack(
-            children: <Widget>[
-              Positioned(
-                left: 0,
-                child: Image.asset(
-                  'images/play_view_background.jpg',
-                  height: constraints.maxHeight,
-                  fit: BoxFit.fitHeight,
-                ),
-              ),
-              _playView(playRoomState, lifeRoadSize),
-            ],
-          ),
-        ),
-      ),
+    return Size(
+      _lifeStepSize(context).width * playRoomState.lifeRoad.entity.width,
+      _lifeStepSize(context).height * playRoomState.lifeRoad.entity.height,
     );
   }
 
-  CustomScrollView _playView(PlayRoomState playRoomState, Size lifeRoadSize) => CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: lifeRoadSize.height,
-              child: CustomScrollView(
-                scrollDirection: Axis.horizontal,
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: SizedBox(
-                      width: lifeRoadSize.width,
-                      height: lifeRoadSize.height,
-                      child: _lifeRoad(playRoomState, lifeRoadSize),
-                    ),
+  @override
+  Widget build(BuildContext context) => Card(
+        child: ColoredBox(
+          color: Colors.blue[50],
+          child: LayoutBuilder(
+            builder: (context, constraints) => Stack(
+              children: <Widget>[
+                Positioned(
+                  left: 0,
+                  child: Image.asset(
+                    _backgroundImage,
+                    height: constraints.maxHeight,
+                    fit: BoxFit.fitHeight,
                   ),
-                ],
-              ),
+                ),
+                _playView(context),
+              ],
             ),
           ),
-        ],
+        ),
       );
 
+  CustomScrollView _playView(BuildContext context) {
+    final playRoomState = context.watch<PlayRoomNotifier>().value;
+    final lifeRoadSize = _lifeRoadSize(context);
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: SizedBox(
+            height: lifeRoadSize.height,
+            child: CustomScrollView(
+              scrollDirection: Axis.horizontal,
+              slivers: [
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    width: lifeRoadSize.width,
+                    height: lifeRoadSize.height,
+                    child: _lifeRoad(playRoomState, lifeRoadSize),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   LifeRoad _lifeRoad(PlayRoomState playRoomState, Size size) => LifeRoad(
-        playRoomState.lifeRoad,
-        size.width,
-        size.height,
-        humans: [
-          for (final human in playRoomState.humans) Human(human),
-        ],
+        playRoomState.lifeRoad.entity,
+        size,
+        humans: [for (final human in playRoomState.humans) Human(human)],
         positionsByHumanId: playRoomState.positionsByHumanId,
       );
 }

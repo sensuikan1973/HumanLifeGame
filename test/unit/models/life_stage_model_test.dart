@@ -15,8 +15,7 @@ void main() {
       LifeItemEntity(key: 'money', type: LifeItemType.money, amount: 100),
       LifeItemEntity(key: 'coffee', type: LifeItemType.coffee, amount: 1),
     ];
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     final lifeStageModel = LifeStageModel(
       human: await createUser(store),
       lifeItems: items,

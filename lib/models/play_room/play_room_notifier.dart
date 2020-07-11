@@ -26,19 +26,19 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   PlayRoomNotifier(this._i18n, this._dice, this._store, this._playRoom) : super(PlayRoomState());
 
   Future<void> init() async {
-    value.humans = await _playRoom.entity.fetchHumans(_store);
+    value
+      ..lifeRoad = await _playRoom.entity.fetchLifeRoad(_store)
+      ..humans = await _playRoom.entity.fetchHumans(_store)
+      ..currentTurnHuman = value.humans.first; // TODO: 順序付けのあり方検討
     // 参加者全員の位置を Start に
     for (final human in value.humans) {
       final lifeStage = LifeStageModel(
         human: human,
-        lifeStepEntity: value.lifeRoad.start,
+        lifeStepEntity: value.lifeRoad.entity.start,
         lifeItems: [],
       );
       value.lifeStages.add(lifeStage);
     }
-    // 一番手をセット
-    value.currentTurnHuman = value.humans.first;
-//    notifyListeners();
   }
 
   final I18n _i18n;
@@ -59,7 +59,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     value
       ..roll = _dice.roll()
       ..announcement =
-          _i18n.rollAnnouncement(value.currentTurnHuman.entity.displayName, value.roll); // FIXME: 状態に応じた適切なメッセージを流すように
+          _i18n.rollAnnouncement(value.currentTurnHuman.entity.displayName, value.roll); // TODO: 状態に応じた適切なメッセージを流すように
 
     // サイコロ振る出発地点が分岐なら、サイコロ振るのを求めて notify でお終い
     if (value.currentHumanLifeStep.requireToSelectDirectionManually) {
@@ -79,15 +79,15 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     notifyListeners();
   }
 
-  void chooseDirection(Direction direction) {
+  Future<void> chooseDirection(Direction direction) async {
     if (value.allHumansReachedTheGoal || !value.requireSelectDirection) return;
     final dest = _moveLifeStepUntilMustStop(_remainCount, firstDirection: direction);
     _updateRequireSelectDirectionAndRemainCount(dest);
 
     // TODO: 今は requireSelectDirection だけだけど、今後は requireDiceRoll とかも考慮しなきゃいけなくなる
     if (!value.requireSelectDirection) {
-      _executeEventToCurrentHuman();
-      _changeToNextTurn();
+      await _executeEventToCurrentHuman();
+      await _changeToNextTurn();
     }
     notifyListeners();
   }

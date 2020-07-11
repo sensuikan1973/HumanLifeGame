@@ -1,4 +1,3 @@
-import 'package:HumanLifeGame/api/firestore/life_road.dart';
 import 'package:HumanLifeGame/api/firestore/play_room.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
 import 'package:HumanLifeGame/human_life_game_app.dart';
@@ -11,6 +10,7 @@ import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../helper/firestore/life_road_helper.dart';
 import '../helper/firestore/user_helper.dart';
 import '../mocks/auth.dart';
 import 'helper/testable_app.dart';
@@ -27,8 +27,7 @@ Future<void> main() async {
   final auth = MockAuth(user);
 
   testWidgets('create public play room', (tester) async {
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     await createUser(store, uid: user.uid);
     await tester.pumpWidget(
       testableApp(auth: auth, store: store, home: Lobby.inProviders()),
@@ -48,16 +47,14 @@ Future<void> main() async {
   });
 
   testWidgets('join the public play rooms which myself hosts', (tester) async {
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
     final userDoc = await createUser(store, uid: user.uid);
     // playRoom を作成
     await store.collectionRef<PlayRoomEntity>().add(
           PlayRoomEntity(
               host: userDoc.ref,
               humans: [userDoc.ref],
-              title: 'THE Life',
-              lifeRoad: store.docRef<LifeRoadEntity>('FIXME').ref,
+              lifeRoad: (await createLifeRoad(store)).ref,
               currentTurnHumanId: user.uid),
         );
 
@@ -82,8 +79,7 @@ Future<void> main() async {
   });
 
   testWidgets('join the public play rooms which other hosts', (tester) async {
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
+    final store = Store(MockFirestoreInstance());
 
 //    final userDoc = await createUser(store, uid: user.uid);
 
@@ -94,8 +90,7 @@ Future<void> main() async {
           PlayRoomEntity(
               host: otherUserDoc.ref,
               humans: [otherUserDoc.ref],
-              title: 'THE Life',
-              lifeRoad: store.docRef<LifeRoadEntity>('FIXME').ref,
+              lifeRoad: (await createLifeRoad(store)).ref,
               currentTurnHumanId: otherUserDoc.entity.uid),
         );
 
@@ -120,9 +115,7 @@ Future<void> main() async {
   });
 
   testWidgets('list play rooms', (tester) async {
-    final firestore = MockFirestoreInstance();
-    final store = Store(firestore);
-
+    final store = Store(MockFirestoreInstance());
     const roomNum = 3;
     for (var i = 0; i < roomNum; ++i) {
       final userDoc = await createUser(store);
@@ -131,7 +124,7 @@ Future<void> main() async {
                 host: userDoc.ref,
                 humans: [userDoc.ref],
                 title: 'life_$i',
-                lifeRoad: store.docRef<LifeRoadEntity>('FIXME').ref,
+                lifeRoad: (await createLifeRoad(store)).ref,
                 currentTurnHumanId: userDoc.entity.uid),
           );
     }
