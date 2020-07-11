@@ -2,6 +2,7 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../entities/life_event_target.dart';
 import '../../models/common/life_event_params/exchange_life_items_params.dart';
 import '../../models/common/life_event_params/gain_life_items_params.dart';
 import '../../models/common/life_event_params/goal_params.dart';
@@ -73,14 +74,4 @@ class LifeEventEntityField {
   ///
   /// type によって中身は異なる
   static const params = 'params';
-}
-
-enum LifeEventTarget {
-  /// LifeEvent を引き起こした張本人の Human のみ
-  myself,
-
-  /// 全ての Human
-  all,
-
-  // 特定の他の human を対象に取る LifeEvent は当分サポートしない
 }

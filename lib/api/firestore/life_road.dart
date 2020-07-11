@@ -2,6 +2,7 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../entities/life_event_target.dart';
 import '../../entities/life_item_type.dart';
 import '../../entities/life_step_entity.dart';
 import '../../models/common/life_event_params/exchange_life_items_params.dart';
