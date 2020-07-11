@@ -14,8 +14,8 @@ abstract class LifeStageEntity implements _$LifeStageEntity, Entity {
   const factory LifeStageEntity({
     @required @DocumentReferenceConverter() DocumentReference human,
     @required String currentLifeStepId,
-    @required @TimestampConverter() DateTime createdAt,
-    @required @TimestampConverter() DateTime updatedAt,
+    @TimestampConverter() DateTime createdAt,
+    @TimestampConverter() DateTime updatedAt,
   }) = _LifeStageEntity;
   const LifeStageEntity._();
 
