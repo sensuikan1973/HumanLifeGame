@@ -140,15 +140,15 @@ and</li>
       <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) =&gt; Table(
       children: List.generate(
-        _model.height,
+        _entity.height,
         (y) =&gt; TableRow(
           children: List.generate(
-            _model.width,
+            _entity.width,
             (x) =&gt; TableCell(
               child: SizedBox(
-                width: _width &#47; _model.width,
-                height: _height &#47; _model.height,
-                child: _lifeStep(_model.lifeStepsOnBoard[y][x], _putTargetHumans(x, y)),
+                width: _size.width &#47; _entity.width,
+                height: _size.height &#47; _entity.height,
+                child: _lifeStep(_entity.lifeStepsOnBoard[y][x], _putTargetHumans(x, y)),
               ),
             ),
           ),

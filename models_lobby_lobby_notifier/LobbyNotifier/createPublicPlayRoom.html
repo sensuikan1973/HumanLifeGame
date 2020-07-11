@@ -105,8 +105,7 @@
     host: userDocRef.ref,
     title: &#39;はじめての人生&#39;,
     humans: [userDocRef.ref],
-    &#47;&#47; FIXME: 本当に存在する lifeRoad を参照するように
-    lifeRoad: _store.docRef&lt;LifeRoadEntity&gt;(&#39;FIXME&#39;).ref,
+    lifeRoad: (await _createLifeRoad()).ref,
     currentTurnHumanId: user.uid,
   );
   final roomDocRef = _store.collectionRef&lt;PlayRoomEntity&gt;().docRef();

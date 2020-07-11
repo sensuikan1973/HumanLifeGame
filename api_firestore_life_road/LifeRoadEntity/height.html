@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the decode method from the LifeRoadEntity class, for the Dart programming language.">
-  <title>decode method - LifeRoadEntity class - life_road library - Dart API</title>
+  <meta name="description" content="API docs for the height property from the LifeRoadEntity class, for the Dart programming language.">
+  <title>height property - LifeRoadEntity class - life_road library - Dart API</title>
 
   
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
@@ -27,9 +27,9 @@
     <li><a href="../../index.html">HumanLifeGame</a></li>
     <li><a href="../../api_firestore_life_road/api_firestore_life_road-library.html">life_road</a></li>
     <li><a href="../../api_firestore_life_road/LifeRoadEntity-class.html">LifeRoadEntity</a></li>
-    <li class="self-crumb">decode method</li>
+    <li class="self-crumb">height property</li>
   </ol>
-  <div class="self-name">decode</div>
+  <div class="self-name">height</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -48,7 +48,7 @@
       <li><a href="../../index.html">HumanLifeGame</a></li>
       <li><a href="../../api_firestore_life_road/api_firestore_life_road-library.html">life_road</a></li>
       <li><a href="../../api_firestore_life_road/LifeRoadEntity-class.html">LifeRoadEntity</a></li>
-      <li class="self-crumb">decode method</li>
+      <li class="self-crumb">height property</li>
     </ol>
     
     <h5>LifeRoadEntity class</h5>
@@ -97,26 +97,27 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
-      <div><h1><span class="kind-method">decode</span> method </h1></div>
+      <div><h1><span class="kind-property">height</span> property </h1></div>
 
-    <section class="multi-line-signature">
-      <span class="returntype"><a href="../../api_firestore_store/Doc-class.html">Doc</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../api_firestore_life_road/LifeRoadEntity-class.html">LifeRoadEntity</a></span>&gt;</span></span>
-            <span class="name ">decode</span>
-(<wbr><ol class="parameter-list"><li><span class="parameter" id="decode-param-store"><span class="type-annotation"><a href="../../api_firestore_store/Store-class.html">Store</a></span> <span class="parameter-name">store</span>, </span></li>
-<li><span class="parameter" id="decode-param-snapshot"><span class="type-annotation"><a href="https://pub.dev/documentation/cloud_firestore/0.13.7/cloud_firestore/DocumentSnapshot-class.html">DocumentSnapshot</a></span> <span class="parameter-name">snapshot</span></span></li>
-</ol>)
-      
-    </section>
-    
-    <section class="summary source-code" id="source">
-      <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">static Doc&lt;LifeRoadEntity&gt; decode(Store store, DocumentSnapshot snapshot) =&gt; Doc&lt;LifeRoadEntity&gt;(
-      store,
-      snapshot.reference,
-      LifeRoadEntity.fromJson(snapshot.data),
-    );</code></pre>
-    </section>
 
+        <section id="getter">
+        
+        <section class="multi-line-signature">
+          <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span>
+                  <span class="name ">height</span>
+          <div class="features">@late</div>
+</section>
+        
+                <section class="desc markdown">
+          <p>Y 方向の長さ</p>
+        </section>
+                <section class="summary source-code" id="source">
+          <h2><span>Implementation</span></h2>
+          <pre class="language-dart"><code class="language-dart">@late
+int get height =&gt; lifeEvents.length;</code></pre>
+        </section>
+</section>
+        
   </div> <!-- /.main-content -->
 
   <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">

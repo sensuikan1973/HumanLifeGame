@@ -99,19 +99,19 @@
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">Future&lt;void&gt; init() async {
-  value.humans = await _playRoom.entity.fetchHumans(_store);
+  value
+    ..lifeRoad = await _playRoom.entity.fetchLifeRoad(_store)
+    ..humans = await _playRoom.entity.fetchHumans(_store)
+    ..currentTurnHuman = value.humans.first; &#47;&#47; TODO: 順序付けのあり方検討
   &#47;&#47; 参加者全員の位置を Start に
   for (final human in value.humans) {
     final lifeStage = LifeStageModel(
       human: human,
-      lifeStepEntity: value.lifeRoad.start,
+      lifeStepEntity: value.lifeRoad.entity.start,
       lifeItems: [],
     );
     value.lifeStages.add(lifeStage);
   }
-  &#47;&#47; 一番手をセット
-  value.currentTurnHuman = value.humans.first;
-&#47;&#47;    notifyListeners();
 }</code></pre>
     </section>
 

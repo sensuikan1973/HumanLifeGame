@@ -93,21 +93,13 @@
       <div><h1><span class="kind-property">lifeRoad</span> property </h1></div>
 
         <section class="multi-line-signature">
-          <span class="returntype"><a href="../../models_common_life_road/LifeRoadModel-class.html">LifeRoadModel</a></span>
+          <span class="returntype"><a href="../../api_firestore_store/Doc-class.html">Doc</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../api_firestore_life_road/LifeRoadEntity-class.html">LifeRoadEntity</a></span>&gt;</span></span>
           <span class="name ">lifeRoad</span>
-          <div class="features">final</div>
-        </section>
-        <section class="desc markdown">
-          <p>FIXME: 今はダミーで固定してる</p>
+          <div class="features">read / write</div>
         </section>
                 <section class="summary source-code" id="source">
           <h2><span>Implementation</span></h2>
-          <pre class="language-dart"><code class="language-dart">final LifeRoadModel lifeRoad = LifeRoadModel(
-  title: &#39;dummy HumanLife&#39;,
-  lifeStepsOnBoard: LifeRoadModel.createLifeStepsOnBoard(
-    LifeRoadModel.dummyLifeEvents(),
-  ),
-)
+          <pre class="language-dart"><code class="language-dart">Doc&lt;LifeRoadEntity&gt; lifeRoad
 
 </code></pre>
         </section>

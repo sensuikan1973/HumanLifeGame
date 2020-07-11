@@ -138,40 +138,26 @@ and</li>
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">@override
-Widget build(BuildContext context) {
-  final screenSize = MediaQuery.of(context).size;
-  final playRoomState = context.watch&lt;PlayRoomNotifier&gt;().value;
-
-  final lifeStepSize = Size(
-    screenSize.width &gt;= _desktopSize.width ? 150 : 130,
-    100,
-  );
-  final lifeRoadSize = Size(
-    lifeStepSize.width * playRoomState.lifeRoad.width,
-    lifeStepSize.height * playRoomState.lifeRoad.height,
-  );
-
-  return Card(
-    child: ColoredBox(
-      color: Colors.blue[50],
-      child: LayoutBuilder(
-        builder: (context, constraints) =&gt; Stack(
-          children: &lt;Widget&gt;[
-            Positioned(
-              left: 0,
-              child: Image.asset(
-                &#39;images&#47;play_view_background.jpg&#39;,
-                height: constraints.maxHeight,
-                fit: BoxFit.fitHeight,
+Widget build(BuildContext context) =&gt; Card(
+      child: ColoredBox(
+        color: Colors.blue[50],
+        child: LayoutBuilder(
+          builder: (context, constraints) =&gt; Stack(
+            children: &lt;Widget&gt;[
+              Positioned(
+                left: 0,
+                child: Image.asset(
+                  _backgroundImage,
+                  height: constraints.maxHeight,
+                  fit: BoxFit.fitHeight,
+                ),
               ),
-            ),
-            _playView(playRoomState, lifeRoadSize),
-          ],
+              _playView(context),
+            ],
+          ),
         ),
       ),
-    ),
-  );
-}</code></pre>
+    );</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
