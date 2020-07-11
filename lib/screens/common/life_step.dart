@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../api/life_step_entity.dart';
 import '../../entities/life_event_params/life_event_params.dart';
-import '../../entities/life_step_entity.dart';
 import 'human.dart';
 
 class LifeStep extends StatelessWidget {

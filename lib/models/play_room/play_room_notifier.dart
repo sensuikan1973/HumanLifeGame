@@ -4,7 +4,7 @@ import '../../api/dice.dart';
 import '../../api/firestore/life_event_record.dart';
 import '../../api/firestore/play_room.dart';
 import '../../api/firestore/store.dart';
-import '../../entities/life_step_entity.dart';
+import '../../api/life_step_entity.dart';
 import '../../i18n/i18n.dart';
 import '../../services/life_event_service.dart';
 import 'life_stage.dart';
