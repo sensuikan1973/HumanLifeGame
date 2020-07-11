@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../entities/life_event_target.dart';
 import '../../entities/life_item_type.dart';
 import '../../entities/life_step_entity.dart';
+import '../../entities/position.dart';
 import '../../models/common/life_event_params/exchange_life_items_params.dart';
 import '../../models/common/life_event_params/gain_life_items_params.dart';
 import '../../models/common/life_event_params/goal_params.dart';
@@ -287,13 +288,6 @@ class LifeRoadEntityField {
   ///
   /// クライアントサイドで二次元に展開 + 連結リスト化 するのが必要
   static const lifeEvents = 'lifeEvents';
-}
-
-@immutable
-class Position {
-  const Position(this.y, this.x);
-  final int y;
-  final int x;
 }
 
 /// NOTE: 2020/07/11 時点で、Firestore は "直接ネストされた配列" をサポートしてない

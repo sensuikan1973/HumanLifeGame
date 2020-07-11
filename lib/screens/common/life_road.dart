@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../api/firestore/life_road.dart';
 import '../../entities/life_step_entity.dart';
+import '../../entities/position.dart';
 import '../../models/common/life_event_params/life_event_params.dart';
 import 'human.dart';
 import 'life_step.dart';
