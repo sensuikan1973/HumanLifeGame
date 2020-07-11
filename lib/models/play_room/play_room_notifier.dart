@@ -59,7 +59,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     value
       ..roll = _dice.roll()
       ..announcement =
-          _i18n.rollAnnouncement(value.currentTurnHuman.entity.displayName, value.roll); // FIXME: 状態に応じた適切なメッセージを流すように
+          _i18n.rollAnnouncement(value.currentTurnHuman.entity.displayName, value.roll); // TODO: 状態に応じた適切なメッセージを流すように
 
     // サイコロ振る出発地点が分岐なら、サイコロ振るのを求めて notify でお終い
     if (value.currentHumanLifeStep.requireToSelectDirectionManually) {

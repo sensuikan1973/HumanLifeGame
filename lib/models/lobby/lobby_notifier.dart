@@ -51,7 +51,6 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
       host: userDocRef.ref,
       title: 'はじめての人生',
       humans: [userDocRef.ref],
-      // FIXME: 本当に存在する lifeRoad を参照するように
       lifeRoad: (await _createLifeRoad()).ref,
       currentTurnHumanId: user.uid,
     );
