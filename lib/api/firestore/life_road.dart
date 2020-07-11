@@ -2,6 +2,7 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../entities/life_item_type.dart';
 import '../../entities/life_step_entity.dart';
 import '../../models/common/life_event_params/exchange_life_items_params.dart';
 import '../../models/common/life_event_params/gain_life_items_params.dart';
@@ -14,7 +15,6 @@ import '../../models/common/life_event_params/start_params.dart';
 import '../../models/common/life_event_params/target_life_item_params.dart';
 import 'entity.dart';
 import 'life_event.dart';
-import 'life_item.dart';
 import 'store.dart';
 
 part 'life_road.freezed.dart';
