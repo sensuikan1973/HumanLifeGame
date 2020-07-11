@@ -312,8 +312,15 @@ class Position {
   final int x;
 }
 
-/// NOTE: 2020/07/09 時点で、Firestore は "直接ネストされた配列" をサポートしてない
-/// lifeEvents は実際には二次元配列として扱いたいところだが、その制約があるため、Firestore 上では異なる形式で保存する
+/// NOTE: 2020/07/11 時点で、Firestore は "直接ネストされた配列" をサポートしてない
+/// lifeEvents は実際には二次元配列として扱いたいところだが、その制約があるため、Firestore 上では異なる形式(map)で保存する
+/// ```dart
+/// {
+///   height: 100,
+///   width: 100,
+///   events: [], // 一次元配列
+/// }
+/// ```
 class _LifeEventsConverter implements JsonConverter<List<List<LifeEventEntity>>, List> {
   const _LifeEventsConverter();
 
