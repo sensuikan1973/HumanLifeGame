@@ -12,6 +12,7 @@ import '../../entities/life_event_params/nothing_params.dart';
 import '../../entities/life_event_params/select_direction_params.dart';
 import '../../entities/life_event_params/start_params.dart';
 import '../../entities/life_event_target.dart';
+import '../../entities/life_event_type.dart';
 import 'entity.dart';
 
 part 'life_event.freezed.dart';

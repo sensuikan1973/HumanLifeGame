@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../life_event_type.dart';
 import 'life_event_params.dart';
 import 'target_life_item_params.dart';
 

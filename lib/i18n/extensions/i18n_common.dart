@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-import '../../entities/life_event_params/life_event_params.dart';
+import '../../entities/life_event_type.dart';
 import '../i18n.dart';
 
 /// Common Locale Text
