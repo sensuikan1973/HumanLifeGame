@@ -2,6 +2,7 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../entities/life_event_emotion_category.dart';
 import '../../entities/life_event_params/exchange_life_items_params.dart';
 import '../../entities/life_event_params/gain_life_items_params.dart';
 import '../../entities/life_event_params/goal_params.dart';

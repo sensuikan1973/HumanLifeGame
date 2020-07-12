@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import '../life_event_emotion_category.dart';
 import '../life_item_type.dart';
 import 'gain_life_items_params.dart';
 import 'lose_life_items_params.dart';
@@ -215,20 +216,6 @@ enum LifeEventType {
 
   /// LifeItemA が存在しなければ、LifeItemB を失う
   loseLifeItemsIfNotExistOtherLifeItem,
-}
-
-enum EmotionCategory {
-  /// 恩恵を受ける種類の Event を指す
-  positive,
-
-  /// 損害を受ける種類の Event を指す
-  negative,
-
-  /// 特に何の恩恵も損害も受けない種類の Event を指す
-  normal,
-
-  /// 恩恵を受けるか損害を受けるかが不定な種類の Event を指す
-  challenge,
 }
 
 enum InfoCategory {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../api/life_step_entity.dart';
+import '../../entities/life_event_emotion_category.dart';
 import '../../entities/life_event_params/life_event_params.dart';
 import 'human.dart';
 
