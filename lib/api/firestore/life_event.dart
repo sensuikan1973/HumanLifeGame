@@ -36,7 +36,7 @@ abstract class LifeEventEntity<T extends LifeEventParams> implements _$LifeEvent
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 
   LifeEventEmotionCategory get emotionCategory => params.emotionCategory;
-  List<LifeEventNoticeCategory> get infoCategories => params.infoCategories;
+  List<LifeEventNoticeCategory> get infoCategories => params.noticeCategories;
   bool get isBranch => params.isBranch;
   bool get mustStop => params.mustStop;
   bool get selectableForExecution => params.selectableForExecution;

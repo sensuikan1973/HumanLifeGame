@@ -82,7 +82,7 @@ abstract class LifeEventParams {
     return LifeEventEmotionCategory.normal;
   }
 
-  List<LifeEventNoticeCategory> get infoCategories {
+  List<LifeEventNoticeCategory> get noticeCategories {
     switch (type) {
       case LifeEventType.nothing:
       case LifeEventType.start:
