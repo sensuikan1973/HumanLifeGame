@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../api/life_step_entity.dart';
-import '../../entities/life_event_params/life_event_params.dart';
+import '../../entities/life_event_emotion_category.dart';
+import '../../entities/life_event_notice_category.dart';
 import 'human.dart';
 
 class LifeStep extends StatelessWidget {
@@ -56,45 +57,45 @@ class LifeStep extends StatelessWidget {
         ),
       );
 
-  Icon _infoCategoryIcon(InfoCategory category) {
+  Icon _infoCategoryIcon(LifeEventNoticeCategory category) {
     switch (category) {
-      case InfoCategory.job:
+      case LifeEventNoticeCategory.job:
         return const Icon(Icons.work, color: Colors.black38, size: 20);
-      case InfoCategory.stock:
+      case LifeEventNoticeCategory.stock:
         return const Icon(Icons.trending_up, color: Colors.black38, size: 20);
-      case InfoCategory.spouse:
+      case LifeEventNoticeCategory.spouse:
         return const Icon(Icons.person, color: Colors.black38, size: 20);
-      case InfoCategory.house:
+      case LifeEventNoticeCategory.house:
         return const Icon(Icons.home, color: Colors.black38, size: 20);
-      case InfoCategory.money:
+      case LifeEventNoticeCategory.money:
         return const Icon(Icons.attach_money, color: Colors.black38, size: 20);
-      case InfoCategory.vehicle:
+      case LifeEventNoticeCategory.vehicle:
         return const Icon(Icons.directions_car, color: Colors.black38, size: 20);
-      case InfoCategory.child:
+      case LifeEventNoticeCategory.child:
         return const Icon(Icons.child_care, color: Colors.black38, size: 20);
-      case InfoCategory.insurance:
+      case LifeEventNoticeCategory.insurance:
         return const Icon(Icons.security, color: Colors.black38, size: 20);
-      case InfoCategory.coffee:
+      case LifeEventNoticeCategory.coffee:
         return const Icon(Icons.free_breakfast, color: Colors.black38, size: 20);
-      case InfoCategory.exchange:
+      case LifeEventNoticeCategory.exchange:
         return const Icon(Icons.swap_horiz, color: Colors.black38, size: 20);
-      case InfoCategory.selectDirection:
+      case LifeEventNoticeCategory.selectDirection:
         return const Icon(Icons.directions, color: Colors.black38, size: 20);
-      case InfoCategory.nothing:
+      case LifeEventNoticeCategory.nothing:
         return const Icon(null, color: Colors.black38, size: 20);
     }
     return const Icon(null, color: Colors.black38, size: 20);
   }
 
-  Color _emotionCategoryColor(EmotionCategory category) {
+  Color _emotionCategoryColor(LifeEventEmotionCategory category) {
     switch (category) {
-      case EmotionCategory.positive:
+      case LifeEventEmotionCategory.positive:
         return positive;
-      case EmotionCategory.negative:
+      case LifeEventEmotionCategory.negative:
         return negative;
-      case EmotionCategory.normal:
+      case LifeEventEmotionCategory.normal:
         return normal;
-      case EmotionCategory.challenge:
+      case LifeEventEmotionCategory.challenge:
         return challenge;
     }
     return null;

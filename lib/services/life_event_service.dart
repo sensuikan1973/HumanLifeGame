@@ -4,8 +4,8 @@ import '../api/firestore/life_event.dart';
 import '../api/firestore/life_item.dart';
 import '../entities/life_event_params/exchange_life_items_params.dart';
 import '../entities/life_event_params/gain_life_items_params.dart';
-import '../entities/life_event_params/life_event_params.dart';
 import '../entities/life_event_params/lose_life_items_params.dart';
+import '../entities/life_event_type.dart';
 import '../models/play_room/life_stage.dart';
 
 @immutable

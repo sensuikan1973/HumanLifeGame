@@ -8,6 +8,7 @@ import 'entity.dart';
 part 'life_item.freezed.dart';
 part 'life_item.g.dart';
 
+@immutable
 @freezed
 abstract class LifeItemEntity implements _$LifeItemEntity, Entity {
   const factory LifeItemEntity({

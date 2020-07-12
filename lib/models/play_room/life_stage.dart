@@ -10,14 +10,14 @@ import '../../entities/life_item_type.dart';
 part 'life_stage.freezed.dart';
 
 @freezed
-abstract class LifeStageModel with _$LifeStageModel {
-  factory LifeStageModel({
+abstract class LifeStageModel implements _$LifeStageModel {
+  const factory LifeStageModel({
     Doc<UserEntity> human,
     List<LifeItemEntity> lifeItems,
     LifeStepEntity lifeStepEntity,
   }) = _LifeStageModel;
+  const LifeStageModel._();
 
-  @late
   int get totalMoney => lifeItems.isEmpty
       ? 0
       : lifeItems

@@ -1,5 +1,8 @@
 import 'package:flutter/foundation.dart';
 
+import '../life_event_emotion_category.dart';
+import '../life_event_notice_category.dart';
+import '../life_event_type.dart';
 import '../life_item_type.dart';
 import 'gain_life_items_params.dart';
 import 'lose_life_items_params.dart';
@@ -44,7 +47,7 @@ abstract class LifeEventParams {
       ].contains(type);
 
   /// 感情の Category を取得する
-  EmotionCategory get emotionCategory {
+  LifeEventEmotionCategory get emotionCategory {
     switch (type) {
       case LifeEventType.nothing:
       case LifeEventType.start:
@@ -52,7 +55,7 @@ abstract class LifeEventParams {
       case LifeEventType.selectDirection:
       case LifeEventType.selectDirectionPerDiceRoll:
       case LifeEventType.selectDirectionPerLifeItem:
-        return EmotionCategory.normal;
+        return LifeEventEmotionCategory.normal;
         break;
 
       case LifeEventType.gainLifeItems:
@@ -61,7 +64,7 @@ abstract class LifeEventParams {
       case LifeEventType.gainLifeItemsIfExistOtherLifeItem:
       case LifeEventType.gainLifeItemsIfNotExistOtherLifeItem:
       case LifeEventType.exchangeLifeItems:
-        return EmotionCategory.positive;
+        return LifeEventEmotionCategory.positive;
         break;
 
       case LifeEventType.loseLifeItems:
@@ -69,30 +72,30 @@ abstract class LifeEventParams {
       case LifeEventType.loseLifeItemsPerOtherLifeItem:
       case LifeEventType.loseLifeItemsIfExistOtherLifeItem:
       case LifeEventType.loseLifeItemsIfNotExistOtherLifeItem:
-        return EmotionCategory.negative;
+        return LifeEventEmotionCategory.negative;
         break;
 
       case LifeEventType.exchangeLifeItemsWithDiceRoll:
-        return EmotionCategory.challenge;
+        return LifeEventEmotionCategory.challenge;
         break;
     }
-    return EmotionCategory.normal;
+    return LifeEventEmotionCategory.normal;
   }
 
-  List<InfoCategory> get infoCategories {
+  List<LifeEventNoticeCategory> get noticeCategories {
     switch (type) {
       case LifeEventType.nothing:
       case LifeEventType.start:
       case LifeEventType.goal:
-        return [InfoCategory.nothing];
+        return [LifeEventNoticeCategory.nothing];
       case LifeEventType.selectDirection:
       case LifeEventType.selectDirectionPerDiceRoll:
       case LifeEventType.selectDirectionPerLifeItem:
-        return [InfoCategory.selectDirection];
+        return [LifeEventNoticeCategory.selectDirection];
       case LifeEventType.gainLifeItems:
         final params = this as GainLifeItemsParams;
         return [
-          for (final item in params.targetItems) fromLifeItemType(item.type),
+          for (final item in params.targetItems) itemType2NoticeCategory(item.type),
         ];
       case LifeEventType.gainLifeItemsPerOtherLifeItem:
         // TODO: Handle this case.
@@ -108,11 +111,11 @@ abstract class LifeEventParams {
         break;
       case LifeEventType.exchangeLifeItems:
       case LifeEventType.exchangeLifeItemsWithDiceRoll:
-        return [InfoCategory.exchange];
+        return [LifeEventNoticeCategory.exchange];
       case LifeEventType.loseLifeItems:
         final params = this as LoseLifeItemsParams;
         return [
-          for (final item in params.targetItems) fromLifeItemType(item.type),
+          for (final item in params.targetItems) itemType2NoticeCategory(item.type),
         ];
       case LifeEventType.loseLifeItemsPerDiceRoll:
         // TODO: Handle this case.
@@ -127,144 +130,35 @@ abstract class LifeEventParams {
         // TODO: Handle this case.
         break;
     }
-    return [InfoCategory.nothing];
+    return [LifeEventNoticeCategory.nothing];
   }
 
-  InfoCategory fromLifeItemType(LifeItemType type) {
+  @visibleForTesting
+  LifeEventNoticeCategory itemType2NoticeCategory(LifeItemType type) {
     switch (type) {
       case LifeItemType.job:
-        return InfoCategory.job;
+        return LifeEventNoticeCategory.job;
       case LifeItemType.stock:
-        return InfoCategory.stock;
+        return LifeEventNoticeCategory.stock;
       case LifeItemType.spouse:
-        return InfoCategory.spouse;
+        return LifeEventNoticeCategory.spouse;
       case LifeItemType.house:
-        return InfoCategory.house;
+        return LifeEventNoticeCategory.house;
       case LifeItemType.money:
-        return InfoCategory.money;
+        return LifeEventNoticeCategory.money;
       case LifeItemType.vehicle:
-        return InfoCategory.vehicle;
+        return LifeEventNoticeCategory.vehicle;
       case LifeItemType.childGirl:
       case LifeItemType.childBoy:
-        return InfoCategory.child;
+        return LifeEventNoticeCategory.child;
       case LifeItemType.fireInsurance:
       case LifeItemType.lifeInsurance:
       case LifeItemType.earthquakeInsurance:
       case LifeItemType.carInsurance:
-        return InfoCategory.insurance;
+        return LifeEventNoticeCategory.insurance;
       case LifeItemType.coffee:
-        return InfoCategory.coffee;
+        return LifeEventNoticeCategory.coffee;
     }
-    return InfoCategory.nothing;
+    return LifeEventNoticeCategory.nothing;
   }
-}
-
-enum LifeEventType {
-  // NOTE: LifeItem の amount の「以上,以下,未満,超過」を条件とする Event はサポートしてない
-
-  /// 何も起きない
-  nothing,
-
-  /// 人生の始まり
-  start,
-
-  /// 人生のゴール
-  goal,
-
-  /// 進行方向を選択する
-  selectDirection,
-
-  /// サイコロの出目に基づいて、進行方向を決定する
-  selectDirectionPerDiceRoll,
-
-  /// 特定の LifeItem の数に基づいて、進行方向を決定する
-  selectDirectionPerLifeItem,
-
-  /// 単に LifeItem を獲得する
-  gainLifeItems,
-
-  /// LifeItemA の数に基づいて、LifeItemB を獲得する
-  gainLifeItemsPerOtherLifeItem,
-
-  /// サイコロの出目に基づいて、LifeItem を獲得する
-  gainLifeItemsPerDiceRoll,
-
-  /// LifeItemA が存在すれば、LifeItemB を獲得する
-  gainLifeItemsIfExistOtherLifeItem,
-
-  /// LifeItemA が存在しなければ、LifeItemB を獲得する
-  gainLifeItemsIfNotExistOtherLifeItem,
-
-  /// LifeItemA と LifeItemB を交換する
-  exchangeLifeItems,
-
-  /// サイコロの出目に基づいて、LifeItemA と LifeItemB を交換する
-  exchangeLifeItemsWithDiceRoll,
-
-  /// 単に LifeItem を失う
-  loseLifeItems,
-
-  /// サイコロの出目に基づいて、LifeItem を失う
-  loseLifeItemsPerDiceRoll,
-
-  /// LifeItemA の数に基づいて、LifeItemB を失う
-  loseLifeItemsPerOtherLifeItem,
-
-  /// LifeItemA が存在すれば、LifeItemB を失う
-  loseLifeItemsIfExistOtherLifeItem,
-
-  /// LifeItemA が存在しなければ、LifeItemB を失う
-  loseLifeItemsIfNotExistOtherLifeItem,
-}
-
-enum EmotionCategory {
-  /// 恩恵を受ける種類の Event を指す
-  positive,
-
-  /// 損害を受ける種類の Event を指す
-  negative,
-
-  /// 特に何の恩恵も損害も受けない種類の Event を指す
-  normal,
-
-  /// 恩恵を受けるか損害を受けるかが不定な種類の Event を指す
-  challenge,
-}
-
-enum InfoCategory {
-  /// 職業
-  job,
-
-  /// 株
-  stock,
-
-  /// 配偶者
-  spouse,
-
-  /// 家
-  house,
-
-  /// 金
-  money,
-
-  /// 乗り物
-  vehicle,
-
-  /// 子供
-  child,
-
-  /// 保険
-  insurance,
-
-  /// 1回休み
-  coffee,
-
-  /// アイテムの交換
-  exchange,
-
-  /// 方向選択
-  selectDirection,
-
-  /// 案内なし
-  nothing,
 }

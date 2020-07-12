@@ -12,6 +12,7 @@ import '../../entities/life_event_params/select_direction_params.dart';
 import '../../entities/life_event_params/start_params.dart';
 import '../../entities/life_event_params/target_life_item_params.dart';
 import '../../entities/life_event_target.dart';
+import '../../entities/life_event_type.dart';
 import '../../entities/life_item_type.dart';
 import '../../entities/position.dart';
 import '../life_step_entity.dart';
@@ -22,6 +23,7 @@ import 'store.dart';
 part 'life_road.freezed.dart';
 part 'life_road.g.dart';
 
+@immutable
 @freezed
 abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
   factory LifeRoadEntity({

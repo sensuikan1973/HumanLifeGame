@@ -8,7 +8,7 @@ import 'store.dart';
 part 'service_control.freezed.dart';
 part 'service_control.g.dart';
 
-/// Document on Firestore
+@immutable
 @freezed
 abstract class ServiceControlEntity implements _$ServiceControlEntity, Entity {
   const factory ServiceControlEntity({

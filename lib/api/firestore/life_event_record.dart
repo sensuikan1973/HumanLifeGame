@@ -10,6 +10,7 @@ import 'store.dart';
 part 'life_event_record.freezed.dart';
 part 'life_event_record.g.dart';
 
+@immutable
 @freezed
 abstract class LifeEventRecordEntity implements _$LifeEventRecordEntity, Entity {
   const factory LifeEventRecordEntity({
