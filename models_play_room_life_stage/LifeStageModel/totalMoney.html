@@ -91,13 +91,12 @@
         <section class="multi-line-signature">
           <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span>
                   <span class="name ">totalMoney</span>
-          <div class="features">@late</div>
+          
 </section>
         
                         <section class="summary source-code" id="source">
           <h2><span>Implementation</span></h2>
-          <pre class="language-dart"><code class="language-dart">@late
-int get totalMoney =&gt; lifeItems.isEmpty
+          <pre class="language-dart"><code class="language-dart">int get totalMoney =&gt; lifeItems.isEmpty
     ? 0
     : lifeItems
         .where((item) =&gt; item.type == LifeItemType.money)
