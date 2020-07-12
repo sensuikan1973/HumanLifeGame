@@ -95,7 +95,7 @@ abstract class LifeEventParams {
       case LifeEventType.gainLifeItems:
         final params = this as GainLifeItemsParams;
         return [
-          for (final item in params.targetItems) fromLifeItemType(item.type),
+          for (final item in params.targetItems) itemType2NoticeCategory(item.type),
         ];
       case LifeEventType.gainLifeItemsPerOtherLifeItem:
         // TODO: Handle this case.
@@ -115,7 +115,7 @@ abstract class LifeEventParams {
       case LifeEventType.loseLifeItems:
         final params = this as LoseLifeItemsParams;
         return [
-          for (final item in params.targetItems) fromLifeItemType(item.type),
+          for (final item in params.targetItems) itemType2NoticeCategory(item.type),
         ];
       case LifeEventType.loseLifeItemsPerDiceRoll:
         // TODO: Handle this case.
@@ -133,7 +133,8 @@ abstract class LifeEventParams {
     return [LifeEventNoticeCategory.nothing];
   }
 
-  LifeEventNoticeCategory fromLifeItemType(LifeItemType type) {
+  @visibleForTesting
+  LifeEventNoticeCategory itemType2NoticeCategory(LifeItemType type) {
     switch (type) {
       case LifeItemType.job:
         return LifeEventNoticeCategory.job;
