@@ -8,6 +8,7 @@ import 'store.dart';
 part 'life_stage.freezed.dart';
 part 'life_stage.g.dart';
 
+@immutable
 @freezed
 abstract class LifeStageEntity implements _$LifeStageEntity, Entity {
   const factory LifeStageEntity({

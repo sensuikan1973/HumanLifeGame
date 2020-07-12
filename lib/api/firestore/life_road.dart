@@ -22,6 +22,7 @@ import 'store.dart';
 part 'life_road.freezed.dart';
 part 'life_road.g.dart';
 
+@immutable
 @freezed
 abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
   factory LifeRoadEntity({

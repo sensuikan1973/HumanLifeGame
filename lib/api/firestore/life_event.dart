@@ -16,6 +16,7 @@ import 'entity.dart';
 part 'life_event.freezed.dart';
 part 'life_event.g.dart';
 
+@immutable
 @freezed
 abstract class LifeEventEntity<T extends LifeEventParams> implements _$LifeEventEntity<T>, Entity {
   const factory LifeEventEntity({
