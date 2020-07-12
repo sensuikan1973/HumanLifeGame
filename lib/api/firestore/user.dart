@@ -8,7 +8,6 @@ import 'store.dart';
 part 'user.freezed.dart';
 part 'user.g.dart';
 
-/// Document on Firestore
 @immutable
 @freezed
 abstract class UserEntity implements _$UserEntity, Entity {
