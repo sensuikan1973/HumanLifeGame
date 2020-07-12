@@ -1,4 +1,5 @@
-enum EmotionCategory {
+/// Event が対象者にもたらす感情カテゴリ
+enum LifeEventEmotionCategory {
   /// 恩恵を受ける種類の Event を指す
   positive,
 

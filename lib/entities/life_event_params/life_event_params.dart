@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import '../life_event_emotion_category.dart';
+import '../life_event_notice_category.dart';
 import '../life_event_type.dart';
 import '../life_item_type.dart';
 import 'gain_life_items_params.dart';
@@ -46,7 +47,7 @@ abstract class LifeEventParams {
       ].contains(type);
 
   /// 感情の Category を取得する
-  EmotionCategory get emotionCategory {
+  LifeEventEmotionCategory get emotionCategory {
     switch (type) {
       case LifeEventType.nothing:
       case LifeEventType.start:
@@ -54,7 +55,7 @@ abstract class LifeEventParams {
       case LifeEventType.selectDirection:
       case LifeEventType.selectDirectionPerDiceRoll:
       case LifeEventType.selectDirectionPerLifeItem:
-        return EmotionCategory.normal;
+        return LifeEventEmotionCategory.normal;
         break;
 
       case LifeEventType.gainLifeItems:
@@ -63,7 +64,7 @@ abstract class LifeEventParams {
       case LifeEventType.gainLifeItemsIfExistOtherLifeItem:
       case LifeEventType.gainLifeItemsIfNotExistOtherLifeItem:
       case LifeEventType.exchangeLifeItems:
-        return EmotionCategory.positive;
+        return LifeEventEmotionCategory.positive;
         break;
 
       case LifeEventType.loseLifeItems:
@@ -71,26 +72,26 @@ abstract class LifeEventParams {
       case LifeEventType.loseLifeItemsPerOtherLifeItem:
       case LifeEventType.loseLifeItemsIfExistOtherLifeItem:
       case LifeEventType.loseLifeItemsIfNotExistOtherLifeItem:
-        return EmotionCategory.negative;
+        return LifeEventEmotionCategory.negative;
         break;
 
       case LifeEventType.exchangeLifeItemsWithDiceRoll:
-        return EmotionCategory.challenge;
+        return LifeEventEmotionCategory.challenge;
         break;
     }
-    return EmotionCategory.normal;
+    return LifeEventEmotionCategory.normal;
   }
 
-  List<InfoCategory> get infoCategories {
+  List<LifeEventNoticeCategory> get infoCategories {
     switch (type) {
       case LifeEventType.nothing:
       case LifeEventType.start:
       case LifeEventType.goal:
-        return [InfoCategory.nothing];
+        return [LifeEventNoticeCategory.nothing];
       case LifeEventType.selectDirection:
       case LifeEventType.selectDirectionPerDiceRoll:
       case LifeEventType.selectDirectionPerLifeItem:
-        return [InfoCategory.selectDirection];
+        return [LifeEventNoticeCategory.selectDirection];
       case LifeEventType.gainLifeItems:
         final params = this as GainLifeItemsParams;
         return [
@@ -110,7 +111,7 @@ abstract class LifeEventParams {
         break;
       case LifeEventType.exchangeLifeItems:
       case LifeEventType.exchangeLifeItemsWithDiceRoll:
-        return [InfoCategory.exchange];
+        return [LifeEventNoticeCategory.exchange];
       case LifeEventType.loseLifeItems:
         final params = this as LoseLifeItemsParams;
         return [
@@ -129,72 +130,34 @@ abstract class LifeEventParams {
         // TODO: Handle this case.
         break;
     }
-    return [InfoCategory.nothing];
+    return [LifeEventNoticeCategory.nothing];
   }
 
-  InfoCategory fromLifeItemType(LifeItemType type) {
+  LifeEventNoticeCategory fromLifeItemType(LifeItemType type) {
     switch (type) {
       case LifeItemType.job:
-        return InfoCategory.job;
+        return LifeEventNoticeCategory.job;
       case LifeItemType.stock:
-        return InfoCategory.stock;
+        return LifeEventNoticeCategory.stock;
       case LifeItemType.spouse:
-        return InfoCategory.spouse;
+        return LifeEventNoticeCategory.spouse;
       case LifeItemType.house:
-        return InfoCategory.house;
+        return LifeEventNoticeCategory.house;
       case LifeItemType.money:
-        return InfoCategory.money;
+        return LifeEventNoticeCategory.money;
       case LifeItemType.vehicle:
-        return InfoCategory.vehicle;
+        return LifeEventNoticeCategory.vehicle;
       case LifeItemType.childGirl:
       case LifeItemType.childBoy:
-        return InfoCategory.child;
+        return LifeEventNoticeCategory.child;
       case LifeItemType.fireInsurance:
       case LifeItemType.lifeInsurance:
       case LifeItemType.earthquakeInsurance:
       case LifeItemType.carInsurance:
-        return InfoCategory.insurance;
+        return LifeEventNoticeCategory.insurance;
       case LifeItemType.coffee:
-        return InfoCategory.coffee;
+        return LifeEventNoticeCategory.coffee;
     }
-    return InfoCategory.nothing;
+    return LifeEventNoticeCategory.nothing;
   }
-}
-
-enum InfoCategory {
-  /// 職業
-  job,
-
-  /// 株
-  stock,
-
-  /// 配偶者
-  spouse,
-
-  /// 家
-  house,
-
-  /// 金
-  money,
-
-  /// 乗り物
-  vehicle,
-
-  /// 子供
-  child,
-
-  /// 保険
-  insurance,
-
-  /// 1回休み
-  coffee,
-
-  /// アイテムの交換
-  exchange,
-
-  /// 方向選択
-  selectDirection,
-
-  /// 案内なし
-  nothing,
 }

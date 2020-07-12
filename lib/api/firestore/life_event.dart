@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../entities/life_event_emotion_category.dart';
+import '../../entities/life_event_notice_category.dart';
 import '../../entities/life_event_params/exchange_life_items_params.dart';
 import '../../entities/life_event_params/gain_life_items_params.dart';
 import '../../entities/life_event_params/goal_params.dart';
@@ -34,8 +35,8 @@ abstract class LifeEventEntity<T extends LifeEventParams> implements _$LifeEvent
   @override
   Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 
-  EmotionCategory get emotionCategory => params.emotionCategory;
-  List<InfoCategory> get infoCategories => params.infoCategories;
+  LifeEventEmotionCategory get emotionCategory => params.emotionCategory;
+  List<LifeEventNoticeCategory> get infoCategories => params.infoCategories;
   bool get isBranch => params.isBranch;
   bool get mustStop => params.mustStop;
   bool get selectableForExecution => params.selectableForExecution;
