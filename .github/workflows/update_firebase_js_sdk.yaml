@@ -29,6 +29,7 @@ jobs:
             -> See: https://github.com/peter-evans/create-pull-request/blob/master/docs/concepts-guidelines.md#triggering-further-workflow-runs
 
             [1]: https://github.com/peter-evans/create-pull-request
+          labels: Cron
           branch: cron_update_firebase_js_sdk_in_html
           base: master
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
