@@ -31,6 +31,7 @@ jobs:
             -> See: https://github.com/peter-evans/create-pull-request/blob/master/docs/concepts-guidelines.md#triggering-further-workflow-runs
 
             [1]: https://github.com/peter-evans/create-pull-request
+          labels: cron
           branch: cron_update_flutter_dependencies
           base: master
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
