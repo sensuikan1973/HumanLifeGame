@@ -1,3 +1,4 @@
+import 'package:HumanLifeGame/entities/life_item_type.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -35,6 +36,14 @@ abstract class LifeStageEntity implements _$LifeStageEntity, Entity {
 
   /// この人生の進捗を歩んでる human を取得する
   Future<Doc<UserEntity>> fetchHuman(Store store) async => UserEntity.decode(store, await human.get());
+
+  /// 所持金
+  int get totalMoney => items.isEmpty
+      ? 0
+      : items
+          .where((item) => item.type == LifeItemType.money)
+          .map((money) => money.amount)
+          .reduce((val, el) => val + el);
 }
 
 class LifeStageEntityField {
