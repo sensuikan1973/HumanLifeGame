@@ -18,6 +18,7 @@ import '../../entities/position.dart';
 import '../life_step_entity.dart';
 import 'entity.dart';
 import 'life_event.dart';
+import 'life_stage.dart';
 import 'store.dart';
 
 part 'life_road.freezed.dart';
@@ -156,6 +157,11 @@ abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
     }
     throw Exception('lifeStep should be in lifeStepsOnBoard');
   }
+
+  /// id を元に取得
+  @late
+  LifeStepEntity getStepEntity(LifeStageEntity lifeStage) =>
+      lifeStepsOnBoard.expand((el) => el).firstWhere((el) => el.id == lifeStage.currentLifeStepId);
 
   // LifeSte の上下左右を再帰的にチェックし、連結リスト構造を構築する
   void _initDirections(LifeStepEntity currentLifeStep) {
