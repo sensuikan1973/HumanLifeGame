@@ -27,7 +27,7 @@
     <li><a href="../../index.html">HumanLifeGame</a></li>
     <li><a href="../../api_firestore_store/api_firestore_store-library.html">store</a></li>
     <li><a href="../../api_firestore_store/Store-class.html">Store</a></li>
-    <li class="self-crumb">docRef&lt;<wbr><span class="type-parameter">T extends Entity</span>&gt; method</li>
+    <li class="self-crumb">docRef&lt;<wbr><span class="type-parameter">T extends StoreEntity</span>&gt; method</li>
   </ol>
   <div class="self-name">docRef</div>
   <form class="search navbar-right" role="search">
@@ -48,7 +48,7 @@
       <li><a href="../../index.html">HumanLifeGame</a></li>
       <li><a href="../../api_firestore_store/api_firestore_store-library.html">store</a></li>
       <li><a href="../../api_firestore_store/Store-class.html">Store</a></li>
-      <li class="self-crumb">docRef&lt;<wbr><span class="type-parameter">T extends Entity</span>&gt; method</li>
+      <li class="self-crumb">docRef&lt;<wbr><span class="type-parameter">T extends StoreEntity</span>&gt; method</li>
     </ol>
     
     <h5>Store class</h5>
@@ -83,19 +83,19 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
-      <div><h1><span class="kind-method">docRef&lt;<wbr><span class="type-parameter">T extends Entity</span>&gt;</span> method </h1></div>
+      <div><h1><span class="kind-method">docRef&lt;<wbr><span class="type-parameter">T extends StoreEntity</span>&gt;</span> method </h1></div>
 
     <section class="multi-line-signature">
       <span class="returntype"><a href="https://pub.dev/documentation/firestore_ref/0.8.18/firestore_ref/DocumentRef-class.html">DocumentRef</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter"><a href="../../api_firestore_store/Doc-class.html">Doc</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>&gt;</span></span>
             <span class="name ">docRef</span>
-&lt;<wbr><span class="type-parameter">T extends Entity</span>&gt;(<wbr><ol class="parameter-list"><li><span class="parameter" id="docRef-param-documentId"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">documentId</span></span></li>
+&lt;<wbr><span class="type-parameter">T extends StoreEntity</span>&gt;(<wbr><ol class="parameter-list"><li><span class="parameter" id="docRef-param-documentId"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">documentId</span></span></li>
 </ol>)
       
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">DocumentRef&lt;T, Doc&lt;T&gt;&gt; docRef&lt;T extends Entity&gt;(String documentId) =&gt; DocumentRef(
+      <pre class="language-dart"><code class="language-dart">DocumentRef&lt;T, Doc&lt;T&gt;&gt; docRef&lt;T extends StoreEntity&gt;(String documentId) =&gt; DocumentRef(
       collectionRef: collectionRef&lt;T&gt;(),
       id: documentId,
     );</code></pre>
