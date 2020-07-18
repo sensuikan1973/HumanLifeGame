@@ -1,3 +1,4 @@
+import 'package:HumanLifeGame/api/firestore/life_stage.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -159,7 +160,8 @@ abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
 
   /// id を元に取得
   @late
-  LifeStepEntity getStepEntity(String id) => lifeStepsOnBoard.expand((el) => el).firstWhere((el) => el.id == id);
+  LifeStepEntity getStepEntity(LifeStageEntity lifeStage) =>
+      lifeStepsOnBoard.expand((el) => el).firstWhere((el) => el.id == lifeStage.currentLifeStepId);
 
   // LifeSte の上下左右を再帰的にチェックし、連結リスト構造を構築する
   void _initDirections(LifeStepEntity currentLifeStep) {

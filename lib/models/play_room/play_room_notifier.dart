@@ -97,13 +97,13 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     // LifeEvent 処理
     value.lifeStages = [...value.lifeStages];
     value.lifeStages[_currentHumanLifeStageIndex] = _lifeEventService.executeEvent(
-      value.lifeRoad.entity.getStepEntity(_currentHumanLifeStage.currentLifeStepId).lifeEvent,
+      value.lifeRoad.entity.getStepEntity(_currentHumanLifeStage).lifeEvent,
       _currentHumanLifeStage,
     );
     // LifeEvent の履歴を追加
     final record = LifeEventRecordEntity(
       human: _currentHumanLifeStage.human,
-      lifeEvent: value.lifeRoad.entity.getStepEntity(_currentHumanLifeStage.currentLifeStepId).lifeEvent,
+      lifeEvent: value.lifeRoad.entity.getStepEntity(_currentHumanLifeStage).lifeEvent,
     );
     await _store.collectionRef<LifeEventRecordEntity>(_playRoom.ref.path).add(record);
     value.everyLifeEventRecords = [...value.everyLifeEventRecords, record]; // FIXME: query でひっぱてきて上位数件のみ表示する
@@ -133,7 +133,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   DestinationWithMovedStepCount _moveLifeStepUntilMustStop(int roll, {Direction firstDirection}) {
     // 現在の LifeStep から指定の数だけ進んだ LifeStep を取得する
     final destinationWithMovedStepCount = value.lifeRoad.entity
-        .getStepEntity(_currentHumanLifeStage.currentLifeStepId)
+        .getStepEntity(_currentHumanLifeStage)
         .getNextUntilMustStopStep(roll, firstDirection: firstDirection);
     // 進み先の LifeStep を LifeStage に代入する
     value.lifeStages[_currentHumanLifeStageIndex] = value.lifeStages[_currentHumanLifeStageIndex]

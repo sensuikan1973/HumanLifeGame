@@ -37,19 +37,18 @@ class PlayRoomState {
 
   /// 参加者全員がゴールに到着したかどうか
   bool get allHumansReachedTheGoal =>
-      lifeStages.isNotEmpty &&
-      lifeStages.every((lifeStage) => lifeRoad.entity.getStepEntity(lifeStage.currentLifeStepId).isGoal);
+      lifeStages.isNotEmpty && lifeStages.every((lifeStage) => lifeRoad.entity.getStepEntity(lifeStage).isGoal);
 
   /// 参加者全員の Position
   Map<String, Position> get positionsByHumanId => {
         for (final lifeStage in lifeStages)
           lifeStage.human.documentID: lifeRoad.entity.getPosition(
-            lifeRoad.entity.getStepEntity(lifeStage.currentLifeStepId),
+            lifeRoad.entity.getStepEntity(lifeStage),
           ),
       };
 
   /// 現在手番の Human が位置する LifeStep
   LifeStepEntity get currentHumanLifeStep => lifeRoad.entity.getStepEntity(
-        lifeStages.firstWhere((lifeStage) => lifeStage.human.documentID == currentTurnHuman.id).currentLifeStepId,
+        lifeStages.firstWhere((lifeStage) => lifeStage.human.documentID == currentTurnHuman.id),
       );
 }
