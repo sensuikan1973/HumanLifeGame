@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../api/firestore/life_road.dart';
-import '../../api/life_step_entity.dart';
 import '../../entities/life_event_type.dart';
+import '../../entities/life_step_entity.dart';
 import '../../entities/position.dart';
 import 'human.dart';
 import 'life_step.dart';

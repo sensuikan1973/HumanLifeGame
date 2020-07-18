@@ -1,18 +1,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../entities/life_event_emotion_category.dart';
-import '../../entities/life_event_notice_category.dart';
-import '../../entities/life_event_params/exchange_life_items_params.dart';
-import '../../entities/life_event_params/gain_life_items_params.dart';
-import '../../entities/life_event_params/goal_params.dart';
-import '../../entities/life_event_params/life_event_params.dart';
-import '../../entities/life_event_params/lose_life_items_params.dart';
-import '../../entities/life_event_params/nothing_params.dart';
-import '../../entities/life_event_params/select_direction_params.dart';
-import '../../entities/life_event_params/start_params.dart';
-import '../../entities/life_event_target.dart';
-import '../../entities/life_event_type.dart';
+import 'life_event_emotion_category.dart';
+import 'life_event_notice_category.dart';
+import 'life_event_params/exchange_life_items_params.dart';
+import 'life_event_params/gain_life_items_params.dart';
+import 'life_event_params/goal_params.dart';
+import 'life_event_params/life_event_params.dart';
+import 'life_event_params/lose_life_items_params.dart';
+import 'life_event_params/nothing_params.dart';
+import 'life_event_params/select_direction_params.dart';
+import 'life_event_params/start_params.dart';
+import 'life_event_target.dart';
+import 'life_event_type.dart';
 
 part 'life_event.freezed.dart';
 part 'life_event.g.dart';

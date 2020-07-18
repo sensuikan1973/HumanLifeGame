@@ -1,9 +1,9 @@
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 
-import 'life_event.dart';
+import '../../entities/life_event.dart';
+import '../../entities/life_item.dart';
 import 'life_event_record.dart';
-import 'life_item.dart';
 import 'life_road.dart';
 import 'life_stage.dart';
 import 'play_room.dart';

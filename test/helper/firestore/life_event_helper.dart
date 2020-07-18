@@ -1,4 +1,4 @@
-import 'package:HumanLifeGame/api/firestore/life_event.dart';
+import 'package:HumanLifeGame/entities/life_event.dart';
 import 'package:HumanLifeGame/entities/life_event_params/gain_life_items_params.dart';
 import 'package:HumanLifeGame/entities/life_event_params/goal_params.dart';
 import 'package:HumanLifeGame/entities/life_event_params/lose_life_items_params.dart';
