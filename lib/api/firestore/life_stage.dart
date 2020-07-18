@@ -3,9 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../entities/life_item_type.dart';
-import 'entity.dart';
 import 'life_item.dart';
 import 'store.dart';
+import 'store_entity.dart';
 import 'user.dart';
 
 part 'life_stage.freezed.dart';

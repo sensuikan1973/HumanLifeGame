@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../entities/life_item_type.dart';
-import 'entity.dart';
+import 'store_entity.dart';
 
 part 'life_item.freezed.dart';
 part 'life_item.g.dart';

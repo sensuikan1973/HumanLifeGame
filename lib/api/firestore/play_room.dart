@@ -2,9 +2,9 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'entity.dart';
 import 'life_road.dart';
 import 'store.dart';
+import 'store_entity.dart';
 import 'user.dart';
 
 part 'play_room.freezed.dart';

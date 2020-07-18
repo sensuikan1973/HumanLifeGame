@@ -3,9 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../entities/life_event_params/life_event_params.dart';
-import 'entity.dart';
 import 'life_event.dart';
 import 'store.dart';
+import 'store_entity.dart';
 
 part 'life_event_record.freezed.dart';
 part 'life_event_record.g.dart';

@@ -16,10 +16,10 @@ import '../../entities/life_event_type.dart';
 import '../../entities/life_item_type.dart';
 import '../../entities/position.dart';
 import '../life_step_entity.dart';
-import 'entity.dart';
 import 'life_event.dart';
 import 'life_stage.dart';
 import 'store.dart';
+import 'store_entity.dart';
 
 part 'life_road.freezed.dart';
 part 'life_road.g.dart';

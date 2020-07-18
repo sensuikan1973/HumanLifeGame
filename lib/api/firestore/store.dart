@@ -1,7 +1,6 @@
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 
-import 'entity.dart';
 import 'life_event.dart';
 import 'life_event_record.dart';
 import 'life_item.dart';
@@ -9,6 +8,7 @@ import 'life_road.dart';
 import 'life_stage.dart';
 import 'play_room.dart';
 import 'service_control.dart';
+import 'store_entity.dart';
 import 'user.dart';
 
 @immutable
