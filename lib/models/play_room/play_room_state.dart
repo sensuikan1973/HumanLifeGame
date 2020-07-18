@@ -3,7 +3,7 @@ import '../../api/firestore/life_road.dart';
 import '../../api/firestore/life_stage.dart';
 import '../../api/firestore/store.dart';
 import '../../api/firestore/user.dart';
-import '../../api/life_step_entity.dart';
+import '../../entities/life_step_entity.dart';
 import '../../entities/position.dart';
 
 class PlayRoomState {

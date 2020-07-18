@@ -2,17 +2,17 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../entities/life_event.dart';
 import '../../entities/life_event_params/life_event_params.dart';
-import 'entity.dart';
-import 'life_event.dart';
 import 'store.dart';
+import 'store_entity.dart';
 
 part 'life_event_record.freezed.dart';
 part 'life_event_record.g.dart';
 
 @immutable
 @freezed
-abstract class LifeEventRecordEntity implements _$LifeEventRecordEntity, Entity {
+abstract class LifeEventRecordEntity implements _$LifeEventRecordEntity, StoreEntity {
   const factory LifeEventRecordEntity({
     @required @DocumentReferenceConverter() DocumentReference human,
     @required LifeEventEntity lifeEvent,

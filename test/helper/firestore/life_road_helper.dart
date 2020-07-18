@@ -1,6 +1,6 @@
-import 'package:HumanLifeGame/api/firestore/life_event.dart';
 import 'package:HumanLifeGame/api/firestore/life_road.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
+import 'package:HumanLifeGame/entities/life_event.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:uuid/uuid.dart';
 

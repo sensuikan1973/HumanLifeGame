@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 
-import '../api/firestore/life_event.dart';
-import '../api/firestore/life_item.dart';
 import '../api/firestore/life_stage.dart';
+import '../entities/life_event.dart';
 import '../entities/life_event_params/exchange_life_items_params.dart';
 import '../entities/life_event_params/gain_life_items_params.dart';
 import '../entities/life_event_params/lose_life_items_params.dart';
 import '../entities/life_event_type.dart';
+import '../entities/life_item.dart';
 
 @immutable
 class LifeEventService {

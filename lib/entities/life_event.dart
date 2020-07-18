@@ -1,27 +1,25 @@
-import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../entities/life_event_emotion_category.dart';
-import '../../entities/life_event_notice_category.dart';
-import '../../entities/life_event_params/exchange_life_items_params.dart';
-import '../../entities/life_event_params/gain_life_items_params.dart';
-import '../../entities/life_event_params/goal_params.dart';
-import '../../entities/life_event_params/life_event_params.dart';
-import '../../entities/life_event_params/lose_life_items_params.dart';
-import '../../entities/life_event_params/nothing_params.dart';
-import '../../entities/life_event_params/select_direction_params.dart';
-import '../../entities/life_event_params/start_params.dart';
-import '../../entities/life_event_target.dart';
-import '../../entities/life_event_type.dart';
-import 'entity.dart';
+import 'life_event_emotion_category.dart';
+import 'life_event_notice_category.dart';
+import 'life_event_params/exchange_life_items_params.dart';
+import 'life_event_params/gain_life_items_params.dart';
+import 'life_event_params/goal_params.dart';
+import 'life_event_params/life_event_params.dart';
+import 'life_event_params/lose_life_items_params.dart';
+import 'life_event_params/nothing_params.dart';
+import 'life_event_params/select_direction_params.dart';
+import 'life_event_params/start_params.dart';
+import 'life_event_target.dart';
+import 'life_event_type.dart';
 
 part 'life_event.freezed.dart';
 part 'life_event.g.dart';
 
 @immutable
 @freezed
-abstract class LifeEventEntity<T extends LifeEventParams> implements _$LifeEventEntity<T>, Entity {
+abstract class LifeEventEntity<T extends LifeEventParams> implements _$LifeEventEntity<T> {
   const factory LifeEventEntity({
     @required LifeEventType type,
     @required LifeEventTarget target,
@@ -31,9 +29,6 @@ abstract class LifeEventEntity<T extends LifeEventParams> implements _$LifeEvent
   const LifeEventEntity._();
 
   factory LifeEventEntity.fromJson(Map<String, dynamic> json) => _$LifeEventEntityFromJson<T>(json);
-
-  @override
-  Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 
   LifeEventEmotionCategory get emotionCategory => params.emotionCategory;
   List<LifeEventNoticeCategory> get infoCategories => params.noticeCategories;

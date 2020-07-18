@@ -2,15 +2,15 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'entity.dart';
 import 'store.dart';
+import 'store_entity.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';
 
 @immutable
 @freezed
-abstract class UserEntity implements _$UserEntity, Entity {
+abstract class UserEntity implements _$UserEntity, StoreEntity {
   const factory UserEntity({
     @required String uid,
     @required String displayName,

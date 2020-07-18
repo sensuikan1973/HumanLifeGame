@@ -1,14 +1,14 @@
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 
-import 'entity.dart';
-import 'life_event.dart';
+import '../../entities/life_event.dart';
+import '../../entities/life_item.dart';
 import 'life_event_record.dart';
-import 'life_item.dart';
 import 'life_road.dart';
 import 'life_stage.dart';
 import 'play_room.dart';
 import 'service_control.dart';
+import 'store_entity.dart';
 import 'user.dart';
 
 @immutable
@@ -17,25 +17,25 @@ class Store {
 
   final Firestore firestore;
 
-  CollectionRef<T, Doc<T>> collectionRef<T extends Entity>([String parent]) => CollectionRef(
+  CollectionRef<T, Doc<T>> collectionRef<T extends StoreEntity>([String parent]) => CollectionRef(
         firestore.collection(parent == null ? getCollectionId<T>() : '$parent/${getCollectionId<T>()}'),
         decoder: (snapshot) => _decode<T>(snapshot),
         encoder: (entity) => entity.encode(),
       );
 
-  CollectionGroup<T, Doc<T>> collectionGroupRef<T extends Entity>(String path) => CollectionGroup(
+  CollectionGroup<T, Doc<T>> collectionGroupRef<T extends StoreEntity>(String path) => CollectionGroup(
         path: path,
         decoder: (snapshot) => _decode<T>(snapshot),
         encoder: (entity) => entity.encode(),
       );
 
-  DocumentRef<T, Doc<T>> docRef<T extends Entity>(String documentId) => DocumentRef(
+  DocumentRef<T, Doc<T>> docRef<T extends StoreEntity>(String documentId) => DocumentRef(
         collectionRef: collectionRef<T>(),
         id: documentId,
       );
 
   // 関連: https://stackoverflow.com/a/55237197/10928938
-  Doc<T> _decode<T extends Entity>(DocumentSnapshot snapshot) {
+  Doc<T> _decode<T extends StoreEntity>(DocumentSnapshot snapshot) {
     if (T == ServiceControlEntity) return ServiceControlEntity.decode(this, snapshot) as Doc<T>;
     if (T == PlayRoomEntity) return PlayRoomEntity.decode(this, snapshot) as Doc<T>;
     if (T == UserEntity) return UserEntity.decode(this, snapshot) as Doc<T>;

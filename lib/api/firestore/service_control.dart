@@ -2,15 +2,15 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'entity.dart';
 import 'store.dart';
+import 'store_entity.dart';
 
 part 'service_control.freezed.dart';
 part 'service_control.g.dart';
 
 @immutable
 @freezed
-abstract class ServiceControlEntity implements _$ServiceControlEntity, Entity {
+abstract class ServiceControlEntity implements _$ServiceControlEntity, StoreEntity {
   const factory ServiceControlEntity({
     @required bool isMaintenance,
     @required String requiredMinVersion,

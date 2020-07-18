@@ -2,9 +2,9 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'entity.dart';
 import 'life_road.dart';
 import 'store.dart';
+import 'store_entity.dart';
 import 'user.dart';
 
 part 'play_room.freezed.dart';
@@ -14,7 +14,7 @@ part 'play_room.g.dart';
 /// TODO: announcement はクライアントサイド完結想定だが、必要になったら追加.
 /// TODO: finishedAt は削除ロジックに使う想定だが、不要だったら削除. まだロジックを考え中.
 @freezed
-abstract class PlayRoomEntity implements _$PlayRoomEntity, Entity {
+abstract class PlayRoomEntity implements _$PlayRoomEntity, StoreEntity {
   factory PlayRoomEntity({
     @required @DocumentReferenceConverter() DocumentReference host,
     @required @DocumentReferenceListConverter() List<DocumentReference> humans,

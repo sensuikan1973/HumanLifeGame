@@ -2,10 +2,10 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../entities/life_item.dart';
 import '../../entities/life_item_type.dart';
-import 'entity.dart';
-import 'life_item.dart';
 import 'store.dart';
+import 'store_entity.dart';
 import 'user.dart';
 
 part 'life_stage.freezed.dart';
@@ -13,7 +13,7 @@ part 'life_stage.g.dart';
 
 @immutable
 @freezed
-abstract class LifeStageEntity implements _$LifeStageEntity, Entity {
+abstract class LifeStageEntity implements _$LifeStageEntity, StoreEntity {
   const factory LifeStageEntity({
     @required @DocumentReferenceConverter() DocumentReference human,
     @required @_LifeItemsConverter() List<LifeItemEntity> items,
