@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../api/firestore/life_stage.dart';
 import '../../api/firestore/store.dart';
 import '../../api/firestore/user.dart';
-import '../../models/play_room/life_stage.dart';
 import '../../models/play_room/play_room_notifier.dart';
 import '../common/human.dart';
 
@@ -17,7 +17,7 @@ class LifeStages extends StatelessWidget {
   Widget build(BuildContext context) => Card(child: _lifeStages(context));
 
   Column _lifeStages(BuildContext context) {
-    final lifeStages = context.select<PlayRoomNotifier, List<LifeStageModel>>((notifier) => notifier.value.lifeStages);
+    final lifeStages = context.select<PlayRoomNotifier, List<LifeStageEntity>>((notifier) => notifier.value.lifeStages);
     final currentTurnHuman =
         context.select<PlayRoomNotifier, Doc<UserEntity>>((notifier) => notifier.value.currentTurnHuman);
     return Column(
@@ -29,10 +29,22 @@ class LifeStages extends StatelessWidget {
               SizedBox(
                 width: 25,
                 height: 25,
-                child: (currentTurnHuman == lifeStage.human) ? _turnSelector() : null,
+                child: (currentTurnHuman.id == lifeStage.human.documentID) ? _turnSelector() : null,
               ),
-              Human(lifeStage.human),
-              Text(lifeStage.human.entity.displayName),
+              FutureBuilder<Doc<UserEntity>>(
+                future: lifeStage.fetchHuman(context.watch<Store>()),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) return const SizedBox();
+                  return Human(snapshot.data);
+                },
+              ),
+              FutureBuilder<Doc<UserEntity>>(
+                future: lifeStage.fetchHuman(context.watch<Store>()),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) return const SizedBox();
+                  return Text(snapshot.data.entity.displayName);
+                },
+              ),
               const Text(', 💵: '), // FIXME: 仮テキスト
               Text(lifeStage.totalMoney.toString()),
             ],

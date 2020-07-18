@@ -2,17 +2,17 @@ import 'package:flutter/foundation.dart';
 
 import '../api/firestore/life_event.dart';
 import '../api/firestore/life_item.dart';
+import '../api/firestore/life_stage.dart';
 import '../entities/life_event_params/exchange_life_items_params.dart';
 import '../entities/life_event_params/gain_life_items_params.dart';
 import '../entities/life_event_params/lose_life_items_params.dart';
 import '../entities/life_event_type.dart';
-import '../models/play_room/life_stage.dart';
 
 @immutable
 class LifeEventService {
   const LifeEventService();
 
-  LifeStageModel executeEvent(LifeEventEntity lifeEvent, LifeStageModel lifeStage) {
+  LifeStageEntity executeEvent(LifeEventEntity lifeEvent, LifeStageEntity lifeStage) {
     switch (lifeEvent.type) {
       case LifeEventType.nothing:
         // TODO: Handle this case.
@@ -35,10 +35,10 @@ class LifeEventService {
       case LifeEventType.gainLifeItems:
         final params = lifeEvent.params as GainLifeItemsParams;
         final items = [
-          ...lifeStage.lifeItems,
+          ...lifeStage.items,
           for (final item in params.targetItems) LifeItemEntity(key: item.key, type: item.type, amount: item.amount),
         ];
-        return lifeStage.copyWith(lifeItems: items);
+        return lifeStage.copyWith(items: items);
       case LifeEventType.gainLifeItemsPerOtherLifeItem:
         // TODO: Handle this case.
         break;
@@ -54,20 +54,20 @@ class LifeEventService {
       case LifeEventType.exchangeLifeItems:
         final params = lifeEvent.params as ExchangeLifeItemsParams;
         final items = [
-          ...lifeStage.lifeItems,
-          ..._exchangeLifeItems(lifeStage.lifeItems, params),
+          ...lifeStage.items,
+          ..._exchangeLifeItems(lifeStage.items, params),
         ];
-        return lifeStage.copyWith(lifeItems: items);
+        return lifeStage.copyWith(items: items);
       case LifeEventType.exchangeLifeItemsWithDiceRoll:
         // TODO: Handle this case.
         break;
       case LifeEventType.loseLifeItems:
         final params = lifeEvent.params as LoseLifeItemsParams;
         final items = [
-          ...lifeStage.lifeItems,
+          ...lifeStage.items,
           for (final item in params.targetItems) LifeItemEntity(key: item.key, type: item.type, amount: -item.amount),
         ];
-        return lifeStage.copyWith(lifeItems: items);
+        return lifeStage.copyWith(items: items);
       case LifeEventType.loseLifeItemsPerDiceRoll:
         // TODO: Handle this case.
         break;
