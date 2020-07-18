@@ -35,6 +35,7 @@ abstract class LifeStageEntity implements _$LifeStageEntity, Entity {
       );
 
   /// この人生の進捗を歩んでる human を取得する
+  @late
   Future<Doc<UserEntity>> fetchHuman(Store store) async => UserEntity.decode(store, await human.get());
 
   /// 所持金
