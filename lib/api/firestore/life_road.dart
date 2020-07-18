@@ -1,4 +1,3 @@
-import 'package:HumanLifeGame/api/firestore/life_stage.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -19,6 +18,7 @@ import '../../entities/position.dart';
 import '../life_step_entity.dart';
 import 'entity.dart';
 import 'life_event.dart';
+import 'life_stage.dart';
 import 'store.dart';
 
 part 'life_road.freezed.dart';
