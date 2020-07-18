@@ -1,16 +1,14 @@
-import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../entities/life_item_type.dart';
-import 'store_entity.dart';
 
 part 'life_item.freezed.dart';
 part 'life_item.g.dart';
 
 @immutable
 @freezed
-abstract class LifeItemEntity implements _$LifeItemEntity, StoreEntity {
+abstract class LifeItemEntity implements _$LifeItemEntity {
   const factory LifeItemEntity({
     @required LifeItemType type,
     @required String key,
@@ -19,9 +17,6 @@ abstract class LifeItemEntity implements _$LifeItemEntity, StoreEntity {
   const LifeItemEntity._();
 
   factory LifeItemEntity.fromJson(Map<String, dynamic> json) => _$LifeItemEntityFromJson(json);
-
-  @override
-  Map<String, dynamic> encode() => replacingTimestamp(json: toJson());
 }
 
 class LifeItemFieldEntity {
