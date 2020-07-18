@@ -14,7 +14,7 @@ packages:
       name: analyzer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.39.12"
+    version: "0.39.13"
   args:
     dependency: transitive
     description:
@@ -282,7 +282,7 @@ packages:
       name: firestore_ref
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.17"
+    version: "0.8.18"
   fixnum:
     dependency: transitive
     description:
@@ -358,7 +358,7 @@ packages:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.1"
+    version: "0.12.2"
   http_multi_server:
     dependency: transitive
     description:
