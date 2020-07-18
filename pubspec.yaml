@@ -2,7 +2,8 @@
 
 name: HumanLifeGame
 description: HumanLife Game
-
+documentation: https://sensuikan1973.github.io/HumanLifeGame/
+repository: https://github.com/sensuikan1973/HumanLifeGame
 publish_to: "none"
 
 version: 1.0.0+1

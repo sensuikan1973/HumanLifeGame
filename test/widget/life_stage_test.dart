@@ -36,7 +36,7 @@ Future<void> main() async {
     final playRoomNotifier = PlayRoomNotifier(i18n, dice, store, await createPlayRoom(store));
     await playRoomNotifier.init();
     for (final lifeStage in playRoomNotifier.value.lifeStages) {
-      lifeStage.lifeItems.add(const LifeItemEntity(key: 'key', type: LifeItemType.money, amount: 200));
+      lifeStage.items.add(const LifeItemEntity(key: 'key', type: LifeItemType.money, amount: 200));
     }
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(create: (_) => playRoomNotifier, child: const LifeStages()),
@@ -53,10 +53,16 @@ Future<void> main() async {
       home: ChangeNotifierProvider(create: (_) => playRoomNotifier, child: const LifeStages()),
     ));
     await tester.pump();
+    await tester.pump();
     final currentHumanSelector = find.byIcon(Icons.chevron_right);
     final row = tester.element(currentHumanSelector).findAncestorWidgetOfExactType<Row>();
     final currentHumanNameText = find.text(playRoomNotifier.value.currentTurnHuman.entity.displayName);
-    expect(row.children, contains(currentHumanNameText.evaluate().first.widget));
+    expect(
+      row.children,
+      contains(
+        tester.firstElement(currentHumanNameText).findAncestorWidgetOfExactType<FutureBuilder<Doc<UserEntity>>>(),
+      ),
+    );
   });
 
   testWidgets('show user name', (tester) async {
@@ -67,6 +73,7 @@ Future<void> main() async {
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(create: (_) => playRoomNotifier, child: const LifeStages()),
     ));
+    await tester.pump();
     await tester.pump();
     for (final ref in playRoom.entity.humans) {
       final human = await store.docRef<UserEntity>(ref.documentID).get();
@@ -82,6 +89,7 @@ Future<void> main() async {
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(create: (_) => playRoomNotifier, child: const LifeStages()),
     ));
+    await tester.pump();
     await tester.pump();
 
     for (var i = 0; i < playRoom.entity.humans.length; ++i) {

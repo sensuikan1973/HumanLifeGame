@@ -15,8 +15,6 @@ abstract class LifeItemEntity implements _$LifeItemEntity, Entity {
     @required LifeItemType type,
     @required String key,
     @required int amount,
-    @TimestampConverter() DateTime createdAt,
-    @TimestampConverter() DateTime updatedAt,
   }) = _LifeItemEntity;
   const LifeItemEntity._();
 
