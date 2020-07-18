@@ -19,7 +19,7 @@ abstract class LifeItemEntity implements _$LifeItemEntity {
   factory LifeItemEntity.fromJson(Map<String, dynamic> json) => _$LifeItemEntityFromJson(json);
 }
 
-class LifeItemFieldEntity {
+class LifeItemEntityField {
   /// Item の種別
   static const type = 'type';
 
