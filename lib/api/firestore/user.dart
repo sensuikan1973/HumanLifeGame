@@ -10,7 +10,7 @@ part 'user.g.dart';
 
 @immutable
 @freezed
-abstract class UserEntity implements _$UserEntity, Entity {
+abstract class UserEntity implements _$UserEntity, StoreEntity {
   const factory UserEntity({
     @required String uid,
     @required String displayName,

@@ -21,7 +21,7 @@ part 'life_event.g.dart';
 
 @immutable
 @freezed
-abstract class LifeEventEntity<T extends LifeEventParams> implements _$LifeEventEntity<T>, Entity {
+abstract class LifeEventEntity<T extends LifeEventParams> implements _$LifeEventEntity<T>, StoreEntity {
   const factory LifeEventEntity({
     @required LifeEventType type,
     @required LifeEventTarget target,

@@ -10,7 +10,7 @@ part 'life_item.g.dart';
 
 @immutable
 @freezed
-abstract class LifeItemEntity implements _$LifeItemEntity, Entity {
+abstract class LifeItemEntity implements _$LifeItemEntity, StoreEntity {
   const factory LifeItemEntity({
     @required LifeItemType type,
     @required String key,

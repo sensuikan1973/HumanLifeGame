@@ -13,7 +13,7 @@ part 'life_stage.g.dart';
 
 @immutable
 @freezed
-abstract class LifeStageEntity implements _$LifeStageEntity, Entity {
+abstract class LifeStageEntity implements _$LifeStageEntity, StoreEntity {
   const factory LifeStageEntity({
     @required @DocumentReferenceConverter() DocumentReference human,
     @required @_LifeItemsConverter() List<LifeItemEntity> items,

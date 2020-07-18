@@ -26,7 +26,7 @@ part 'life_road.g.dart';
 
 @immutable
 @freezed
-abstract class LifeRoadEntity implements _$LifeRoadEntity, Entity {
+abstract class LifeRoadEntity implements _$LifeRoadEntity, StoreEntity {
   factory LifeRoadEntity({
     @required @DocumentReferenceConverter() DocumentReference author,
     @required @_LifeEventsConverter() List<List<LifeEventEntity>> lifeEvents,

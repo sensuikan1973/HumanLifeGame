@@ -12,7 +12,7 @@ part 'life_event_record.g.dart';
 
 @immutable
 @freezed
-abstract class LifeEventRecordEntity implements _$LifeEventRecordEntity, Entity {
+abstract class LifeEventRecordEntity implements _$LifeEventRecordEntity, StoreEntity {
   const factory LifeEventRecordEntity({
     @required @DocumentReferenceConverter() DocumentReference human,
     @required LifeEventEntity lifeEvent,

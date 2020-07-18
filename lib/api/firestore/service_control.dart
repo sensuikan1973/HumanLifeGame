@@ -10,7 +10,7 @@ part 'service_control.g.dart';
 
 @immutable
 @freezed
-abstract class ServiceControlEntity implements _$ServiceControlEntity, Entity {
+abstract class ServiceControlEntity implements _$ServiceControlEntity, StoreEntity {
   const factory ServiceControlEntity({
     @required bool isMaintenance,
     @required String requiredMinVersion,
