@@ -107,7 +107,7 @@
                 <section class="summary source-code" id="source">
           <h2><span>Implementation</span></h2>
           <pre class="language-dart"><code class="language-dart">bool get allHumansReachedTheGoal =&gt;
-    lifeStages.isNotEmpty &amp;&amp; lifeStages.every((lifeStage) =&gt; lifeStage.lifeStepEntity.isGoal);</code></pre>
+    lifeStages.isNotEmpty &amp;&amp; lifeStages.every((lifeStage) =&gt; lifeRoad.entity.getStepEntity(lifeStage).isGoal);</code></pre>
         </section>
 </section>
         

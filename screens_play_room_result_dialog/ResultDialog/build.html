@@ -144,7 +144,13 @@ Widget build(BuildContext context) =&gt; SimpleDialog(
         for (final lifeStage in _lifeStages)
           Row(
             children: [
-              Text(lifeStage.human.entity.displayName),
+              FutureBuilder&lt;Doc&lt;UserEntity&gt;&gt;(
+                future: lifeStage.fetchHuman(context.watch&lt;Store&gt;()),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) return const SizedBox();
+                  return Text(snapshot.data.entity.displayName);
+                },
+              ),
               const Text(&#39;, 💵: &#39;), &#47;&#47; FIXME: 仮テキスト
               Text(lifeStage.totalMoney.toString()),
             ],

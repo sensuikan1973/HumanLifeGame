@@ -106,8 +106,9 @@
         </section>
                 <section class="summary source-code" id="source">
           <h2><span>Implementation</span></h2>
-          <pre class="language-dart"><code class="language-dart">LifeStepEntity get currentHumanLifeStep =&gt;
-    lifeStages.firstWhere((lifeStage) =&gt; lifeStage.human == currentTurnHuman).lifeStepEntity;</code></pre>
+          <pre class="language-dart"><code class="language-dart">LifeStepEntity get currentHumanLifeStep =&gt; lifeRoad.entity.getStepEntity(
+      lifeStages.firstWhere((lifeStage) =&gt; lifeStage.human.documentID == currentTurnHuman.id),
+    );</code></pre>
         </section>
 </section>
         

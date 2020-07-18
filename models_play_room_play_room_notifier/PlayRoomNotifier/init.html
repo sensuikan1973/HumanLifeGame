@@ -105,10 +105,11 @@
     ..currentTurnHuman = value.humans.first; &#47;&#47; TODO: 順序付けのあり方検討
   &#47;&#47; 参加者全員の位置を Start に
   for (final human in value.humans) {
-    final lifeStage = LifeStageModel(
-      human: human,
-      lifeStepEntity: value.lifeRoad.entity.start,
-      lifeItems: [],
+    final lifeStage = LifeStageEntity(
+      human: human.ref,
+      &#47;&#47; ignore: prefer_const_literals_to_create_immutables
+      items: [], &#47;&#47; FIXME: 本来は firestore へ add してそれを取ってくる
+      currentLifeStepId: value.lifeRoad.entity.start.id,
     );
     value.lifeStages.add(lifeStage);
   }

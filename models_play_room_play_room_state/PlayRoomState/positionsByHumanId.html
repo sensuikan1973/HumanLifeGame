@@ -108,7 +108,9 @@
           <h2><span>Implementation</span></h2>
           <pre class="language-dart"><code class="language-dart">Map&lt;String, Position&gt; get positionsByHumanId =&gt; {
       for (final lifeStage in lifeStages)
-        lifeStage.human.entity.uid: lifeRoad.entity.getPosition(lifeStage.lifeStepEntity),
+        lifeStage.human.documentID: lifeRoad.entity.getPosition(
+          lifeRoad.entity.getStepEntity(lifeStage),
+        ),
     };</code></pre>
         </section>
 </section>
