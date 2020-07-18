@@ -2,12 +2,12 @@ import 'package:flutter/foundation.dart';
 
 import '../../api/dice.dart';
 import '../../api/firestore/life_event_record.dart';
+import '../../api/firestore/life_stage.dart';
 import '../../api/firestore/play_room.dart';
 import '../../api/firestore/store.dart';
 import '../../api/life_step_entity.dart';
 import '../../i18n/i18n.dart';
 import '../../services/life_event_service.dart';
-import 'life_stage.dart';
 import 'play_room_state.dart';
 
 /// NOTE: 以下の点を把握した上で状態管理を実装すること.
@@ -32,10 +32,10 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
       ..currentTurnHuman = value.humans.first; // TODO: 順序付けのあり方検討
     // 参加者全員の位置を Start に
     for (final human in value.humans) {
-      final lifeStage = LifeStageModel(
-        human: human,
-        lifeStepEntity: value.lifeRoad.entity.start,
-        lifeItems: [],
+      final lifeStage = LifeStageEntity(
+        human: human.ref,
+        items: [],
+        currentLifeStepId: value.lifeRoad.entity.start.id,
       );
       value.lifeStages.add(lifeStage);
     }
@@ -48,8 +48,8 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   final _lifeEventService = const LifeEventService();
 
   int get _currentHumanLifeStageIndex =>
-      value.lifeStages.indexWhere((lifeStage) => lifeStage.human == value.currentTurnHuman);
-  LifeStageModel get _currentHumanLifeStage => value.lifeStages[_currentHumanLifeStageIndex];
+      value.lifeStages.indexWhere((lifeStage) => lifeStage.human.documentID == value.currentTurnHuman.id);
+  LifeStageEntity get _currentHumanLifeStage => value.lifeStages[_currentHumanLifeStageIndex];
 
   // 進む数の残り
   int _remainCount = 0;
@@ -96,13 +96,13 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     // LifeEvent 処理
     value.lifeStages = [...value.lifeStages];
     value.lifeStages[_currentHumanLifeStageIndex] = _lifeEventService.executeEvent(
-      _currentHumanLifeStage.lifeStepEntity.lifeEvent,
+      value.lifeRoad.entity.getStepEntity(_currentHumanLifeStage.currentLifeStepId).lifeEvent,
       _currentHumanLifeStage,
     );
     // LifeEvent の履歴を追加
     final record = LifeEventRecordEntity(
-      human: _currentHumanLifeStage.human.ref,
-      lifeEvent: _currentHumanLifeStage.lifeStepEntity.lifeEvent,
+      human: _currentHumanLifeStage.human,
+      lifeEvent: value.lifeRoad.entity.getStepEntity(_currentHumanLifeStage.currentLifeStepId).lifeEvent,
     );
     await _store.collectionRef<LifeEventRecordEntity>(_playRoom.ref.path).add(record);
     value.everyLifeEventRecords = [...value.everyLifeEventRecords, record]; // FIXME: query でひっぱてきて上位数件のみ表示する
@@ -131,11 +131,12 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
   DestinationWithMovedStepCount _moveLifeStepUntilMustStop(int roll, {Direction firstDirection}) {
     // 現在の LifeStep から指定の数だけ進んだ LifeStep を取得する
-    final destinationWithMovedStepCount =
-        _currentHumanLifeStage.lifeStepEntity.getNextUntilMustStopStep(roll, firstDirection: firstDirection);
+    final destinationWithMovedStepCount = value.lifeRoad.entity
+        .getStepEntity(_currentHumanLifeStage.currentLifeStepId)
+        .getNextUntilMustStopStep(roll, firstDirection: firstDirection);
     // 進み先の LifeStep を LifeStage に代入する
     value.lifeStages[_currentHumanLifeStageIndex] = value.lifeStages[_currentHumanLifeStageIndex]
-        .copyWith(lifeStepEntity: destinationWithMovedStepCount.destination);
+        .copyWith(currentLifeStepId: destinationWithMovedStepCount.destination.id);
     return destinationWithMovedStepCount;
   }
 }

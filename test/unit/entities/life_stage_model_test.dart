@@ -1,7 +1,7 @@
 import 'package:HumanLifeGame/api/firestore/life_item.dart';
+import 'package:HumanLifeGame/api/firestore/life_stage.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
 import 'package:HumanLifeGame/entities/life_item_type.dart';
-import 'package:HumanLifeGame/models/play_room/life_stage.dart';
 import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -17,10 +17,11 @@ void main() {
       LifeItemEntity(key: 'coffee', type: LifeItemType.coffee, amount: 1),
     ];
     final store = Store(MockFirestoreInstance());
-    final lifeStageModel = LifeStageModel(
-      human: await createUser(store),
-      lifeItems: items,
+    final lifeStage = LifeStageEntity(
+      human: (await createUser(store)).ref,
+      items: items,
+      currentLifeStepId: '12345',
     );
-    expect(lifeStageModel.totalMoney, 600);
+    expect(lifeStage.totalMoney, 600);
   });
 }

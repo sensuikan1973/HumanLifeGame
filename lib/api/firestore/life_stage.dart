@@ -1,8 +1,8 @@
-import 'package:HumanLifeGame/entities/life_item_type.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../entities/life_item_type.dart';
 import 'entity.dart';
 import 'life_item.dart';
 import 'store.dart';

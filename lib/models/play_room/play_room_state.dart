@@ -1,10 +1,10 @@
 import '../../api/firestore/life_event_record.dart';
 import '../../api/firestore/life_road.dart';
+import '../../api/firestore/life_stage.dart';
 import '../../api/firestore/store.dart';
 import '../../api/firestore/user.dart';
 import '../../api/life_step_entity.dart';
 import '../../entities/position.dart';
-import 'life_stage.dart';
 
 class PlayRoomState {
   PlayRoomState();
@@ -24,7 +24,7 @@ class PlayRoomState {
   Doc<UserEntity> currentTurnHuman;
 
   /// 全 Human の人生の進捗
-  List<LifeStageModel> lifeStages = [];
+  List<LifeStageEntity> lifeStages = [];
 
   /// 全 Human の LifeEvent 履歴
   List<LifeEventRecordEntity> everyLifeEventRecords = [];
@@ -37,15 +37,19 @@ class PlayRoomState {
 
   /// 参加者全員がゴールに到着したかどうか
   bool get allHumansReachedTheGoal =>
-      lifeStages.isNotEmpty && lifeStages.every((lifeStage) => lifeStage.lifeStepEntity.isGoal);
+      lifeStages.isNotEmpty &&
+      lifeStages.every((lifeStage) => lifeRoad.entity.getStepEntity(lifeStage.currentLifeStepId).isGoal);
 
   /// 参加者全員の Position
   Map<String, Position> get positionsByHumanId => {
         for (final lifeStage in lifeStages)
-          lifeStage.human.entity.uid: lifeRoad.entity.getPosition(lifeStage.lifeStepEntity),
+          lifeStage.human.documentID: lifeRoad.entity.getPosition(
+            lifeRoad.entity.getStepEntity(lifeStage.currentLifeStepId),
+          ),
       };
 
   /// 現在手番の Human が位置する LifeStep
-  LifeStepEntity get currentHumanLifeStep =>
-      lifeStages.firstWhere((lifeStage) => lifeStage.human == currentTurnHuman).lifeStepEntity;
+  LifeStepEntity get currentHumanLifeStep => lifeRoad.entity.getStepEntity(
+        lifeStages.firstWhere((lifeStage) => lifeStage.human.documentID == currentTurnHuman.id).currentLifeStepId,
+      );
 }
