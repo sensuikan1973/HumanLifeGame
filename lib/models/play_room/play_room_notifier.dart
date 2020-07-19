@@ -55,7 +55,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
       value.lifeStages.indexWhere((lifeStage) => lifeStage.human.documentID == value.currentTurnHuman.id);
   LifeStageEntity get _currentHumanLifeStage => value.lifeStages[_currentHumanLifeStageIndex];
 
-  // 進む数の残り
+  /// 進む数の残り
   int _remainCount = 0;
 
   Future<void> rollDice() async {
