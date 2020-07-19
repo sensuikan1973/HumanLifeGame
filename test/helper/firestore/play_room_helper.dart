@@ -1,5 +1,6 @@
 import 'package:HumanLifeGame/api/firestore/play_room.dart';
 import 'package:HumanLifeGame/api/firestore/store.dart';
+import 'package:HumanLifeGame/api/firestore/user.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:uuid/uuid.dart';
 
@@ -19,8 +20,9 @@ Future<Doc<PlayRoomEntity>> createPlayRoom(
   assert(host == null || humans.contains(host));
 
   final collectionRef = store.collectionRef<PlayRoomEntity>();
-  final hostRef = host ?? (await createUser(store)).ref;
-  final entity = PlayRoomEntity(
+  final userDoc = await createUser(store);
+  final hostRef = host ?? userDoc.ref;
+  final room = PlayRoomEntity(
     host: hostRef,
     humans: host == null ? [hostRef] : humans,
     lifeRoad: lifeRoad ?? (await createLifeRoad(store)).ref,
@@ -29,7 +31,15 @@ Future<Doc<PlayRoomEntity>> createPlayRoom(
     createdAt: createdAt ?? DateTime.now(),
     updatedAt: updatedAt ?? DateTime.now(),
   );
-  final docRef = await collectionRef.add(entity);
-  // TODO: user の joinPlayRoom を batch write で更新
-  return Doc<PlayRoomEntity>(store, docRef.ref, entity);
+
+  final batch = store.firestore.batch();
+  final roomDocRef = collectionRef.docRef();
+  await roomDocRef.setData(room.encode(), batch: batch);
+  final userDocRef = store.docRef<UserEntity>(userDoc.id);
+  await userDocRef.updateData(<String, dynamic>{
+    UserEntityField.joinPlayRoom: roomDocRef.ref,
+    TimestampField.updatedAt: FieldValue.serverTimestamp(),
+  }, batch: batch);
+  await batch.commit();
+  return Doc<PlayRoomEntity>(store, roomDocRef.ref, room);
 }
