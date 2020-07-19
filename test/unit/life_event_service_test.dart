@@ -106,9 +106,5 @@ void main() {
       lifeStageAfterEvent2.items,
       contains(const LifeItemEntity(type: LifeItemType.stock, amount: 1, key: 'HumanLifeGames Inc.')),
     );
-    expect(
-      lifeStageAfterEvent2.items,
-      contains(const LifeItemEntity(type: LifeItemType.vehicle, amount: 0, key: 'car')),
-    );
   });
 }
