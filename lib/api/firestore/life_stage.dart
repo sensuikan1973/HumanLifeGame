@@ -71,8 +71,8 @@ class _LifeItemsConverter implements JsonConverter<List<LifeItemEntity>, Map<Str
   @override
   List<LifeItemEntity> fromJson(Map<String, dynamic> json) {
     final entities = <LifeItemEntity>[];
-    for (final value in json.entries) {
-      entities.add(LifeItemEntity.fromJson(value as Map<String, dynamic>));
+    for (final entry in json.entries) {
+      entities.add(LifeItemEntity.fromJson(entry.value as Map<String, dynamic>));
     }
     return entities;
   }
