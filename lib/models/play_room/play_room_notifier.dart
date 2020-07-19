@@ -58,6 +58,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   /// 進む数の残り
   int _remainCount = 0;
 
+  /// Dice を振って進む
   Future<void> rollDice() async {
     if (value.allHumansReachedTheGoal || value.requireSelectDirection) return;
     value
@@ -83,6 +84,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     notifyListeners();
   }
 
+  /// 分岐路において、進行方向を選択して進む
   Future<void> chooseDirection(Direction direction) async {
     if (value.allHumansReachedTheGoal || !value.requireSelectDirection) return;
     final dest = _moveLifeStepUntilMustStop(_remainCount, firstDirection: direction);
