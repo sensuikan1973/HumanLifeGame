@@ -23,7 +23,6 @@ abstract class PlayRoomEntity implements _$PlayRoomEntity, StoreEntity {
     @TimestampConverter() DateTime createdAt,
     @TimestampConverter() DateTime updatedAt,
     @Default('') String title,
-//    @TimestampConverter() DateTime finishedAt,
   }) = _PlayRoomEntity;
   PlayRoomEntity._();
 
@@ -73,7 +72,4 @@ class PlayRoomEntityField {
 
   /// 現在手番の human id
   static const currentTurnHumanId = 'currentTurnHumanId';
-
-  /// ゲーム終了時刻
-//  static const finishedAt = 'finishedAt'; // FIXME: 現状不要なのでコメントアウト. 今後要検討.
 }
