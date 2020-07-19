@@ -11,18 +11,20 @@ part 'life_item.g.dart';
 abstract class LifeItemEntity implements _$LifeItemEntity {
   const factory LifeItemEntity({
     @required LifeItemType type,
-    @required String key,
     @required int amount,
+    @Default('') String key, // type だけで一意に識別できない時に使う
   }) = _LifeItemEntity;
   const LifeItemEntity._();
 
   factory LifeItemEntity.fromJson(Map<String, dynamic> json) => _$LifeItemEntityFromJson(json);
 
-  @override
-  bool operator ==(Object other) => other is LifeItemEntity && other.type == type && other.key == key;
-
-  @override
-  int get hashCode => type.hashCode ^ key.hashCode;
+  /// FIXME: == の override は現状機能してない。↓の issue が対応されたら使う。
+  /// See: https://github.com/rrousselGit/freezed/issues/221
+  //  @override
+  //  bool operator ==(Object other) => other is LifeItemEntity && other.type == type && other.key == key;
+  //
+  //  @override
+  //  int get hashCode => type.hashCode ^ key.hashCode;
 }
 
 class LifeItemEntityField {
@@ -30,7 +32,7 @@ class LifeItemEntityField {
   static const type = 'type';
 
   /// Item の具体的な内容を一意に識別する文字列
-  ///
+  /// 任意で使う
   /// 例) type "money" の key "nihon ginko".
   static const key = 'key';
 

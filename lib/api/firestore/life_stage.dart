@@ -16,7 +16,7 @@ part 'life_stage.g.dart';
 abstract class LifeStageEntity implements _$LifeStageEntity, StoreEntity {
   const factory LifeStageEntity({
     @required @DocumentReferenceConverter() DocumentReference human,
-    @required List<LifeItemEntity> items,
+    @required Set<LifeItemEntity> items,
     @required String currentLifeStepId,
     @TimestampConverter() DateTime createdAt,
     @TimestampConverter() DateTime updatedAt,
@@ -39,12 +39,7 @@ abstract class LifeStageEntity implements _$LifeStageEntity, StoreEntity {
   Future<Doc<UserEntity>> fetchHuman(Store store) async => UserEntity.decode(store, await human.get());
 
   /// 所持金
-  int get totalMoney => items.isEmpty
-      ? 0
-      : items
-          .where((item) => item.type == LifeItemType.money)
-          .map((money) => money.amount)
-          .reduce((val, el) => val + el);
+  int get possession => items.isEmpty ? 0 : items.firstWhere((item) => item.type == LifeItemType.money).amount;
 }
 
 class LifeStageEntityField {

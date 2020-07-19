@@ -18,7 +18,7 @@ import '../helper/firestore/user_helper.dart';
 
 void main() {
   test('gainLifeItems', () async {
-    const items = [LifeItemEntity(key: 'money', type: LifeItemType.money, amount: 200)];
+    final items = <LifeItemEntity>{const LifeItemEntity(type: LifeItemType.money, amount: 200)};
     final store = Store(MockFirestoreInstance());
     final lifeStage = LifeStageEntity(
       human: (await createUser(store)).ref,
@@ -29,23 +29,20 @@ void main() {
       target: LifeEventTarget.myself,
       params: GainLifeItemsParams(targetItems: [
         TargetLifeItemParams(key: 'doctor', type: LifeItemType.job, amount: 1),
-        TargetLifeItemParams(key: 'coffee', type: LifeItemType.coffee, amount: 1),
+        TargetLifeItemParams(type: LifeItemType.coffee, amount: 1),
       ]),
       type: LifeEventType.gainLifeItems,
     );
 
     final lifeStageAfterEvent = const LifeEventService().executeEvent(gain, lifeStage);
-
-    expect(lifeStageAfterEvent.items[0].amount, 200);
-    expect(lifeStageAfterEvent.items[0].key, 'money');
-    expect(lifeStageAfterEvent.items[1].amount, 1);
-    expect(lifeStageAfterEvent.items[1].key, 'doctor');
-    expect(lifeStageAfterEvent.items[2].amount, 1);
-    expect(lifeStageAfterEvent.items[2].key, 'coffee');
+    expect(lifeStageAfterEvent.items.length, 3);
+    expect(lifeStageAfterEvent.items, contains(const LifeItemEntity(type: LifeItemType.money, amount: 200)));
+    expect(lifeStageAfterEvent.items, contains(const LifeItemEntity(key: 'doctor', type: LifeItemType.job, amount: 1)));
+    expect(lifeStageAfterEvent.items, contains(const LifeItemEntity(type: LifeItemType.coffee, amount: 1)));
   });
 
   test('loseLifeItems', () async {
-    const items = [LifeItemEntity(key: 'money', type: LifeItemType.money, amount: 200)];
+    final items = <LifeItemEntity>{const LifeItemEntity(type: LifeItemType.money, amount: 200)};
     final store = Store(MockFirestoreInstance());
     final lifeStage = LifeStageEntity(
       human: (await createUser(store)).ref,
@@ -55,24 +52,19 @@ void main() {
     const lose = LifeEventEntity<LoseLifeItemsParams>(
       target: LifeEventTarget.myself,
       params: LoseLifeItemsParams(targetItems: [
-        TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 1000),
-        TargetLifeItemParams(key: 'money', type: LifeItemType.money, amount: 5000),
+        TargetLifeItemParams(type: LifeItemType.money, amount: 1000),
+        TargetLifeItemParams(type: LifeItemType.money, amount: 5000),
       ]),
       type: LifeEventType.loseLifeItems,
     );
 
     final lifeStageAfterEvent = const LifeEventService().executeEvent(lose, lifeStage);
-
-    expect(lifeStageAfterEvent.items[0].amount, 200);
-    expect(lifeStageAfterEvent.items[0].key, 'money');
-    expect(lifeStageAfterEvent.items[1].amount, -1000);
-    expect(lifeStageAfterEvent.items[1].key, 'money');
-    expect(lifeStageAfterEvent.items[2].amount, -5000);
-    expect(lifeStageAfterEvent.items[2].key, 'money');
+    expect(lifeStageAfterEvent.items.length, 1);
+    expect(lifeStageAfterEvent.items, contains(const LifeItemEntity(type: LifeItemType.money, amount: -5800)));
   });
 
   test('exchangeLifeItems', () async {
-    const items = [LifeItemEntity(key: 'car', type: LifeItemType.vehicle, amount: 1)];
+    final items = <LifeItemEntity>{const LifeItemEntity(key: 'car', type: LifeItemType.vehicle, amount: 1)};
     final store = Store(MockFirestoreInstance());
     final lifeStage = LifeStageEntity(
       human: (await createUser(store)).ref,
@@ -91,22 +83,32 @@ void main() {
       ),
       type: LifeEventType.exchangeLifeItems,
     );
+
     final lifeStageAfterEvent1 = const LifeEventService().executeEvent(exchange, lifeStage);
-    expect(lifeStageAfterEvent1.items[0].amount, 1);
-    expect(lifeStageAfterEvent1.items[0].key, 'car');
-    expect(lifeStageAfterEvent1.items[1].amount, -1);
-    expect(lifeStageAfterEvent1.items[1].key, 'car');
-    expect(lifeStageAfterEvent1.items[2].amount, 1);
-    expect(lifeStageAfterEvent1.items[2].key, 'HumanLifeGames Inc.');
+    expect(lifeStageAfterEvent1.items.length, 2);
+    expect(
+      lifeStageAfterEvent1.items,
+      contains(const LifeItemEntity(type: LifeItemType.stock, amount: 1, key: 'HumanLifeGames Inc.')),
+    );
+    expect(
+      lifeStageAfterEvent1.items,
+      contains(const LifeItemEntity(type: LifeItemType.vehicle, amount: 0, key: 'car')),
+    );
 
     // ２回目の交換では、交換の条件を満たしていないため交換できない
-    final lifeStageAfterEvent2 = const LifeEventService().executeEvent(exchange, lifeStage);
-    expect(lifeStageAfterEvent2.items.length, 3);
-    expect(lifeStageAfterEvent2.items[0].amount, 1);
-    expect(lifeStageAfterEvent2.items[0].key, 'car');
-    expect(lifeStageAfterEvent2.items[1].amount, -1);
-    expect(lifeStageAfterEvent2.items[1].key, 'car');
-    expect(lifeStageAfterEvent2.items[2].amount, 1);
-    expect(lifeStageAfterEvent2.items[2].key, 'HumanLifeGames Inc.');
+    final lifeStageAfterEvent2 = const LifeEventService().executeEvent(exchange, lifeStageAfterEvent1);
+    expect(lifeStageAfterEvent2.items.length, 2);
+    expect(
+      lifeStageAfterEvent2.items,
+      contains(const LifeItemEntity(type: LifeItemType.vehicle, amount: 0, key: 'car')),
+    );
+    expect(
+      lifeStageAfterEvent2.items,
+      contains(const LifeItemEntity(type: LifeItemType.stock, amount: 1, key: 'HumanLifeGames Inc.')),
+    );
+    expect(
+      lifeStageAfterEvent2.items,
+      contains(const LifeItemEntity(type: LifeItemType.vehicle, amount: 0, key: 'car')),
+    );
   });
 }

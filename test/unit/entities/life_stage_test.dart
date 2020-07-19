@@ -9,19 +9,17 @@ import '../../helper/firestore/user_helper.dart';
 
 void main() {
   test('totalMoney', () async {
-    const items = [
-      LifeItemEntity(key: 'doctor', type: LifeItemType.job, amount: 1),
-      LifeItemEntity(key: 'money', type: LifeItemType.money, amount: 200),
-      LifeItemEntity(key: 'money', type: LifeItemType.money, amount: 300),
-      LifeItemEntity(key: 'money', type: LifeItemType.money, amount: 100),
-      LifeItemEntity(key: 'coffee', type: LifeItemType.coffee, amount: 1),
-    ];
+    final items = <LifeItemEntity>{
+      const LifeItemEntity(key: 'doctor', type: LifeItemType.job, amount: 1),
+      const LifeItemEntity(type: LifeItemType.money, amount: 600),
+      const LifeItemEntity(type: LifeItemType.coffee, amount: 1),
+    };
     final store = Store(MockFirestoreInstance());
     final lifeStage = LifeStageEntity(
       human: (await createUser(store)).ref,
       items: items,
       currentLifeStepId: '12345',
     );
-    expect(lifeStage.totalMoney, 600);
+    expect(lifeStage.possession, 600);
   });
 }

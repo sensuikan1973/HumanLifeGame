@@ -46,7 +46,7 @@ class LifeStages extends StatelessWidget {
                 },
               ),
               const Text(', 💵: '), // FIXME: 仮テキスト
-              Text(lifeStage.totalMoney.toString()),
+              Text(lifeStage.possession.toString()),
             ],
           ),
       ],
