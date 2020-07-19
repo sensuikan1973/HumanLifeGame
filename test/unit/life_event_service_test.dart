@@ -100,11 +100,11 @@ void main() {
     expect(lifeStageAfterEvent2.items.length, 2);
     expect(
       lifeStageAfterEvent2.items,
-      contains(const LifeItemEntity(type: LifeItemType.vehicle, amount: 0, key: 'car')),
+      contains(const LifeItemEntity(type: LifeItemType.stock, amount: 1, key: 'HumanLifeGames Inc.')),
     );
     expect(
       lifeStageAfterEvent2.items,
-      contains(const LifeItemEntity(type: LifeItemType.stock, amount: 1, key: 'HumanLifeGames Inc.')),
+      contains(const LifeItemEntity(type: LifeItemType.vehicle, amount: 0, key: 'car')),
     );
   });
 }

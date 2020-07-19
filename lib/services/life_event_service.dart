@@ -108,33 +108,30 @@ class LifeEventService {
     final items = <LifeItemEntity>{...lifeItems};
 
     for (final baseItem in params.baseItems) {
-      final totalAmountOfBaseItem = lifeItems
-          .where((item) => item.key == baseItem.key)
+      final totalAmountOfBaseItem = items
+          .where((item) => item.equalToTarget(baseItem))
           .map((item) => item.amount)
           .reduce((value, element) => value + element);
       if (totalAmountOfBaseItem < baseItem.amount) return items;
 
-      // lifeItemsにbaseItemが必要量入っていれば減らす
-      // ここに同一判定ロジックがある理由は See: lib/entities/life_item.dart
-      final existingItem =
-          items.firstWhere((el) => el.type == baseItem.type && el.key == baseItem.key, orElse: () => null);
+      // 交換の条件として item を失う
+      final existingItem = items.firstWhere((el) => el.equalToTarget(baseItem), orElse: () => null);
       if (existingItem != null) {
         // 同一のものがある場合は削除しつつ減算
         // TODO: 0 を下回る時どうするか?
         items
-          ..removeWhere((el) => el.type == baseItem.type && el.key == baseItem.key)
+          ..removeWhere((el) => el.equalToTarget(baseItem))
           ..add(existingItem.copyWith(amount: existingItem.amount - baseItem.amount)); // 減算
       }
     }
-    // lifeItemsにtargetItemを追加する
+
+    // 失った代償として item を獲得する
     for (final targetItem in params.targetItems) {
-      // ここに同一判定ロジックがある理由は See: lib/entities/life_item.dart
-      final existingItem =
-          items.firstWhere((el) => el.type == targetItem.type && el.key == targetItem.key, orElse: () => null);
+      final existingItem = items.firstWhere((el) => el.equalToTarget(targetItem), orElse: () => null);
       if (existingItem != null) {
         // 同一のものがある場合は削除しつつ加算
         items
-          ..removeWhere((el) => el.type == targetItem.type && el.key == targetItem.key)
+          ..removeWhere((el) => el.equalToTarget(targetItem))
           ..add(existingItem.copyWith(amount: existingItem.amount + targetItem.amount)); // 減算
       } else {
         items.add(LifeItemEntity(type: targetItem.type, amount: targetItem.amount, key: targetItem.key));
