@@ -26,6 +26,8 @@ import 'play_room_state.dart';
 class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   PlayRoomNotifier(this._i18n, this._dice, this._store, this._playRoom) : super(PlayRoomState());
 
+  /// 初期化する
+  /// LifeRoad や User の取得、LifeStage の初期値追加
   Future<void> init() async {
     value
       ..lifeRoad = await _playRoom.entity.fetchLifeRoad(_store)
