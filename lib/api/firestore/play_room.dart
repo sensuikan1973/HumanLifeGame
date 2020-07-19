@@ -12,7 +12,6 @@ part 'play_room.g.dart';
 
 /// TODO: プレイ終了後に削除してもいいモノなので、DocRef で持ってるやつは Value で十分じゃないかを検討.
 /// TODO: announcement はクライアントサイド完結想定だが、必要になったら追加.
-/// TODO: finishedAt は削除ロジックに使う想定だが、不要だったら削除. まだロジックを考え中.
 @freezed
 abstract class PlayRoomEntity implements _$PlayRoomEntity, StoreEntity {
   factory PlayRoomEntity({
