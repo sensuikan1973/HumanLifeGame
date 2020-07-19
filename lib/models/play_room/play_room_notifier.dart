@@ -5,6 +5,7 @@ import '../../api/firestore/life_event_record.dart';
 import '../../api/firestore/life_stage.dart';
 import '../../api/firestore/play_room.dart';
 import '../../api/firestore/store.dart';
+import '../../entities/life_item.dart';
 import '../../entities/life_step_entity.dart';
 import '../../i18n/i18n.dart';
 import '../../services/life_event_service.dart';
@@ -35,7 +36,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
       final lifeStage = LifeStageEntity(
         human: human.ref,
         // ignore: prefer_const_literals_to_create_immutables
-        items: [], // FIXME: 本来は firestore へ add してそれを取ってくる
+        items: <LifeItemEntity>{}, // FIXME: 本来は firestore へ add してそれを取ってくる
         currentLifeStepId: value.lifeRoad.entity.start.id,
       );
       value.lifeStages.add(lifeStage);

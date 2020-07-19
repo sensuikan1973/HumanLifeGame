@@ -34,10 +34,22 @@ class LifeEventService {
         break;
       case LifeEventType.gainLifeItems:
         final params = lifeEvent.params as GainLifeItemsParams;
-        final items = [
-          ...lifeStage.items,
-          for (final item in params.targetItems) LifeItemEntity(key: item.key, type: item.type, amount: item.amount),
-        ];
+        final items = {...lifeStage.items};
+        for (final target in params.targetItems) {
+          final targetItem = LifeItemEntity(key: target.key, type: target.type, amount: target.amount);
+
+          /// ここに同一判定ロジックがある理由は See: lib/entities/life_item.dart
+          final existingItem =
+              items.firstWhere((el) => el.type == target.type && el.key == target.key, orElse: () => null);
+          if (existingItem != null) {
+            /// 同一のものがある場合は削除しつつ加算
+            items
+              ..removeWhere((el) => el.type == target.type && el.key == target.key)
+              ..add(existingItem.copyWith(amount: existingItem.amount + targetItem.amount)); // 加算
+          } else {
+            items.add(targetItem);
+          }
+        }
         return lifeStage.copyWith(items: items);
       case LifeEventType.gainLifeItemsPerOtherLifeItem:
         // TODO: Handle this case.
@@ -53,20 +65,28 @@ class LifeEventService {
         break;
       case LifeEventType.exchangeLifeItems:
         final params = lifeEvent.params as ExchangeLifeItemsParams;
-        final items = [
-          ...lifeStage.items,
-          ..._exchangeLifeItems(lifeStage.items, params),
-        ];
-        return lifeStage.copyWith(items: items);
+        return lifeStage.copyWith(items: _exchangeLifeItems(lifeStage.items, params));
       case LifeEventType.exchangeLifeItemsWithDiceRoll:
         // TODO: Handle this case.
         break;
       case LifeEventType.loseLifeItems:
         final params = lifeEvent.params as LoseLifeItemsParams;
-        final items = [
-          ...lifeStage.items,
-          for (final item in params.targetItems) LifeItemEntity(key: item.key, type: item.type, amount: -item.amount),
-        ];
+        final items = {...lifeStage.items};
+        for (final target in params.targetItems) {
+          final targetItem = LifeItemEntity(key: target.key, type: target.type, amount: target.amount);
+
+          /// ここに同一判定ロジックがある理由は See: lib/entities/life_item.dart
+          final existingItem =
+              items.firstWhere((el) => el.type == target.type && el.key == target.key, orElse: () => null);
+          if (existingItem != null) {
+            /// 同一のものがある場合は削除しつつ減算
+            items
+              ..removeWhere((el) => el.type == target.type && el.key == target.key)
+              ..add(existingItem.copyWith(amount: existingItem.amount - targetItem.amount)); // 減算
+          } else {
+            items.add(targetItem);
+          }
+        }
         return lifeStage.copyWith(items: items);
       case LifeEventType.loseLifeItemsPerDiceRoll:
         // TODO: Handle this case.
@@ -84,22 +104,38 @@ class LifeEventService {
     return lifeStage.copyWith();
   }
 
-  List<LifeItemEntity> _exchangeLifeItems(List<LifeItemEntity> lifeItems, ExchangeLifeItemsParams params) {
-    final items = <LifeItemEntity>[];
+  Set<LifeItemEntity> _exchangeLifeItems(Set<LifeItemEntity> lifeItems, ExchangeLifeItemsParams params) {
+    final items = <LifeItemEntity>{...lifeItems};
 
     for (final baseItem in params.baseItems) {
-      final totalAmountOfBaseItem = lifeItems
-          .where((item) => item.key == baseItem.key)
+      final totalAmountOfBaseItem = items
+          .where((item) => item.equalToTarget(baseItem))
           .map((item) => item.amount)
           .reduce((value, element) => value + element);
       if (totalAmountOfBaseItem < baseItem.amount) return items;
 
-      // lifeItemsにbaseItemが必要量入っていれば減らす
-      items.add(LifeItemEntity(key: baseItem.key, type: baseItem.type, amount: -baseItem.amount));
+      // 交換の条件として item を失う
+      final existingItem = items.firstWhere((el) => el.equalToTarget(baseItem), orElse: () => null);
+      if (existingItem != null) {
+        // 同一のものがある場合は削除しつつ減算
+        // TODO: 0 を下回る時どうするか?
+        items
+          ..removeWhere((el) => el.equalToTarget(baseItem))
+          ..add(existingItem.copyWith(amount: existingItem.amount - baseItem.amount)); // 減算
+      }
     }
-    // lifeItemsにtargetItemを追加する
+
+    // 失った代償として item を獲得する
     for (final targetItem in params.targetItems) {
-      items.add(LifeItemEntity(key: targetItem.key, type: targetItem.type, amount: targetItem.amount));
+      final existingItem = items.firstWhere((el) => el.equalToTarget(targetItem), orElse: () => null);
+      if (existingItem != null) {
+        // 同一のものがある場合は削除しつつ加算
+        items
+          ..removeWhere((el) => el.equalToTarget(targetItem))
+          ..add(existingItem.copyWith(amount: existingItem.amount + targetItem.amount)); // 減算
+      } else {
+        items.add(LifeItemEntity(type: targetItem.type, amount: targetItem.amount, key: targetItem.key));
+      }
     }
     return items;
   }
