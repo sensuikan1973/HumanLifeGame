@@ -1,7 +1,7 @@
-import 'package:HumanLifeGame/entities/life_event_params/target_life_item_params.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'life_event_params/target_life_item_params.dart';
 import 'life_item_type.dart';
 
 part 'life_item.freezed.dart';
