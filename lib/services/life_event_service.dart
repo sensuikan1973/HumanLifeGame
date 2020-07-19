@@ -38,14 +38,11 @@ class LifeEventService {
         final items = {...lifeStage.items};
         for (final target in params.targetItems) {
           final targetItem = LifeItemEntity(key: target.key, type: target.type, amount: target.amount);
-
-          /// ここに同一判定ロジックがある理由は See: lib/entities/life_item.dart
-          final existingItem =
-              items.firstWhere((el) => el.type == target.type && el.key == target.key, orElse: () => null);
+          final existingItem = items.firstWhere((el) => el.equalToTarget(target), orElse: () => null);
           if (existingItem != null) {
             /// 同一のものがある場合は削除しつつ加算
             items
-              ..removeWhere((el) => el.type == target.type && el.key == target.key)
+              ..removeWhere((el) => el.equalToTarget(target))
               ..add(existingItem.copyWith(amount: existingItem.amount + targetItem.amount)); // 加算
           } else {
             items.add(targetItem);
@@ -77,14 +74,11 @@ class LifeEventService {
         final items = {...lifeStage.items};
         for (final target in params.targetItems) {
           final targetItem = LifeItemEntity(key: target.key, type: target.type, amount: target.amount);
-
-          /// ここに同一判定ロジックがある理由は See: lib/entities/life_item.dart
-          final existingItem =
-              items.firstWhere((el) => el.type == target.type && el.key == target.key, orElse: () => null);
+          final existingItem = items.firstWhere((el) => el.equalToTarget(target), orElse: () => null);
           if (existingItem != null) {
             /// 同一のものがある場合は削除しつつ減算
             items
-              ..removeWhere((el) => el.type == target.type && el.key == target.key)
+              ..removeWhere((el) => el.equalToTarget(target))
               ..add(existingItem.copyWith(amount: existingItem.amount - targetItem.amount)); // 減算
           } else {
             items.add(targetItem);
