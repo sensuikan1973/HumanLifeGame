@@ -8,6 +8,7 @@ import 'package:HumanLifeGame/models/play_room/play_room_notifier.dart';
 import 'package:HumanLifeGame/screens/common/human.dart';
 import 'package:HumanLifeGame/screens/play_room/life_stages.dart';
 import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,7 @@ Future<void> main() async {
   final i18n = await I18n.load(HumanLifeGameApp.defaultLocale);
   final dice = MockDice();
 
-  testWidgets('show initial total moneys', (tester) async {
+  testWidgets('show initial possessions "0"', (tester) async {
     final store = Store(MockFirestoreInstance());
     final playRoomNotifier = PlayRoomNotifier(i18n, dice, store, await createPlayRoom(store));
     await playRoomNotifier.init();
@@ -31,18 +32,26 @@ Future<void> main() async {
     expect(find.text('0'), findsNWidgets(playRoomNotifier.value.lifeStages.length));
   });
 
-  testWidgets('show variable total moneys', (tester) async {
+  testWidgets('show possessions', (tester) async {
     final store = Store(MockFirestoreInstance());
     final playRoomNotifier = PlayRoomNotifier(i18n, dice, store, await createPlayRoom(store));
     await playRoomNotifier.init();
-    for (final lifeStage in playRoomNotifier.value.lifeStages) {
-      lifeStage.items.add(const LifeItemEntity(key: 'key', type: LifeItemType.money, amount: 200));
+    const possession = 200;
+    // LifeStage を強引に書き換え、その結果 Widget の表示がどうなるかを見たい
+    for (var i = 0; i < playRoomNotifier.value.lifeStages.length; ++i) {
+      final newItems = {
+        ...playRoomNotifier.value.lifeStages[i].items,
+        const LifeItemEntity(type: LifeItemType.money, amount: possession),
+      };
+      playRoomNotifier.value.lifeStages[i] = playRoomNotifier.value.lifeStages[i].copyWith(
+        items: UnmodifiableSetView<LifeItemEntity>(newItems),
+      );
     }
     await tester.pumpWidget(testableApp(
       home: ChangeNotifierProvider(create: (_) => playRoomNotifier, child: const LifeStages()),
     ));
     await tester.pump();
-    expect(find.text('200'), findsNWidgets(playRoomNotifier.value.lifeStages.length));
+    expect(find.text(possession.toString()), findsNWidgets(playRoomNotifier.value.lifeStages.length));
   });
 
   testWidgets('show current human', (tester) async {

@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 
 import '../api/firestore/life_stage.dart';
@@ -50,7 +51,7 @@ class LifeEventService {
             items.add(targetItem);
           }
         }
-        return lifeStage.copyWith(items: items);
+        return lifeStage.copyWith(items: UnmodifiableSetView<LifeItemEntity>(items));
       case LifeEventType.gainLifeItemsPerOtherLifeItem:
         // TODO: Handle this case.
         break;
@@ -65,7 +66,9 @@ class LifeEventService {
         break;
       case LifeEventType.exchangeLifeItems:
         final params = lifeEvent.params as ExchangeLifeItemsParams;
-        return lifeStage.copyWith(items: _exchangeLifeItems(lifeStage.items, params));
+        return lifeStage.copyWith(
+          items: UnmodifiableSetView<LifeItemEntity>(_exchangeLifeItems(lifeStage.items, params)),
+        );
       case LifeEventType.exchangeLifeItemsWithDiceRoll:
         // TODO: Handle this case.
         break;
@@ -87,7 +90,7 @@ class LifeEventService {
             items.add(targetItem);
           }
         }
-        return lifeStage.copyWith(items: items);
+        return lifeStage.copyWith(items: UnmodifiableSetView<LifeItemEntity>(items));
       case LifeEventType.loseLifeItemsPerDiceRoll:
         // TODO: Handle this case.
         break;

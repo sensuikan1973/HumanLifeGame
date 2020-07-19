@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../api/dice.dart';
@@ -37,9 +38,8 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     for (final human in value.humans) {
       final lifeStage = LifeStageEntity(
         human: human.ref,
-        // ignore: prefer_const_literals_to_create_immutables
-        items: <LifeItemEntity>{}, // FIXME: 本来は firestore へ add してそれを取ってくる
         currentLifeStepId: value.lifeRoad.entity.start.id,
+        items: const UnmodifiableSetView<LifeItemEntity>.empty(),
       );
       value.lifeStages.add(lifeStage);
     }
