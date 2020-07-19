@@ -106,7 +106,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
       human: _currentHumanLifeStage.human,
       lifeEvent: value.lifeRoad.entity.getStepEntity(_currentHumanLifeStage).lifeEvent,
     );
-    await _store.collectionRef<LifeEventRecordEntity>(_playRoom.ref.path).add(record);
+    await _store.collectionRef<LifeEventRecordEntity>(parent: _playRoom.ref.path).add(record);
     value.everyLifeEventRecords = [...value.everyLifeEventRecords, record]; // FIXME: query でひっぱてきて上位数件のみ表示する
   }
 

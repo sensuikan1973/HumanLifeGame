@@ -34,7 +34,7 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
   Future<Doc<LifeRoadEntity>> _createLifeRoad() async {
     final user = await _auth.currentUser;
     final userDoc = _store.docRef<UserEntity>(user.uid);
-    final lifeRoadCollectionRef = _store.collectionRef<LifeRoadEntity>(userDoc.ref.path);
+    final lifeRoadCollectionRef = _store.collectionRef<LifeRoadEntity>(parent: userDoc.ref.path);
     final entity = LifeRoadEntity(
       author: userDoc.ref,
       lifeEvents: LifeRoadEntity.dummyLifeEvents(),
