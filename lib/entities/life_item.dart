@@ -17,6 +17,12 @@ abstract class LifeItemEntity implements _$LifeItemEntity {
   const LifeItemEntity._();
 
   factory LifeItemEntity.fromJson(Map<String, dynamic> json) => _$LifeItemEntityFromJson(json);
+
+  @override
+  bool operator ==(Object other) => other is LifeItemEntity && other.type == type && other.key == key;
+
+  @override
+  int get hashCode => type.hashCode ^ key.hashCode;
 }
 
 class LifeItemEntityField {
