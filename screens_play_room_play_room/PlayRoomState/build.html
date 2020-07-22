@@ -112,7 +112,8 @@
     </section>
     <section class="desc markdown">
       <p>Describes the part of the user interface represented by this widget.</p>
-<p>The framework calls this method in a number of different situations:</p>
+<p>The framework calls this method in a number of different situations. For
+example:</p>
 <ul>
 <li>After calling <a href="../../screens_play_room_play_room/PlayRoomState/initState.html">initState</a>.</li>
 <li>After calling <a href="https://api.flutter.dev/flutter/widgets/State/didUpdateWidget.html">didUpdateWidget</a>.</li>
@@ -122,6 +123,8 @@
 <li>After calling <a href="https://api.flutter.dev/flutter/widgets/State/deactivate.html">deactivate</a> and then reinserting the <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a> object into
 the tree at another location.</li>
 </ul>
+<p>This method can potentially be called in every frame and should not have
+any side effects beyond building a widget.</p>
 <p>The framework replaces the subtree below this widget with the widget
 returned by this method, either by updating the existing subtree or by
 removing the subtree and inflating a new subtree, depending on whether the
