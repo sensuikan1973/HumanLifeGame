@@ -36,7 +36,6 @@ class LifeItemEntityField {
 
   /// Item の具体的な内容を一意に識別する文字列
   /// 任意で使う
-  /// 例) type "money" の key "nihon ginko".
   static const key = 'key';
 
   /// 数量
