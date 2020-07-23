@@ -142,9 +142,9 @@ and</li>
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) =&gt; AppBar(
-      title: const Text(
-        &#39;Human Life Game&#39;, &#47;&#47; TODO: i18n
-        style: TextStyle(
+      title: Text(
+        I18n.of(context).appTitle,
+        style: const TextStyle(
           fontFamily: &#39;varela&#39;,
           fontSize: 30,
           fontWeight: FontWeight.bold,

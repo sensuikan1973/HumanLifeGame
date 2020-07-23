@@ -117,20 +117,17 @@
       final items = {...lifeStage.items};
       for (final target in params.targetItems) {
         final targetItem = LifeItemEntity(key: target.key, type: target.type, amount: target.amount);
-
-        &#47;&#47;&#47; ここに同一判定ロジックがある理由は See: lib&#47;entities&#47;life_item.dart
-        final existingItem =
-            items.firstWhere((el) =&gt; el.type == target.type &amp;&amp; el.key == target.key, orElse: () =&gt; null);
+        final existingItem = items.firstWhere((el) =&gt; el.equalToTarget(target), orElse: () =&gt; null);
         if (existingItem != null) {
           &#47;&#47;&#47; 同一のものがある場合は削除しつつ加算
           items
-            ..removeWhere((el) =&gt; el.type == target.type &amp;&amp; el.key == target.key)
+            ..removeWhere((el) =&gt; el.equalToTarget(target))
             ..add(existingItem.copyWith(amount: existingItem.amount + targetItem.amount)); &#47;&#47; 加算
         } else {
           items.add(targetItem);
         }
       }
-      return lifeStage.copyWith(items: items);
+      return lifeStage.copyWith(items: UnmodifiableSetView&lt;LifeItemEntity&gt;(items));
     case LifeEventType.gainLifeItemsPerOtherLifeItem:
       &#47;&#47; TODO: Handle this case.
       break;
@@ -145,7 +142,9 @@
       break;
     case LifeEventType.exchangeLifeItems:
       final params = lifeEvent.params as ExchangeLifeItemsParams;
-      return lifeStage.copyWith(items: _exchangeLifeItems(lifeStage.items, params));
+      return lifeStage.copyWith(
+        items: UnmodifiableSetView&lt;LifeItemEntity&gt;(_exchangeLifeItems(lifeStage.items, params)),
+      );
     case LifeEventType.exchangeLifeItemsWithDiceRoll:
       &#47;&#47; TODO: Handle this case.
       break;
@@ -154,20 +153,17 @@
       final items = {...lifeStage.items};
       for (final target in params.targetItems) {
         final targetItem = LifeItemEntity(key: target.key, type: target.type, amount: target.amount);
-
-        &#47;&#47;&#47; ここに同一判定ロジックがある理由は See: lib&#47;entities&#47;life_item.dart
-        final existingItem =
-            items.firstWhere((el) =&gt; el.type == target.type &amp;&amp; el.key == target.key, orElse: () =&gt; null);
+        final existingItem = items.firstWhere((el) =&gt; el.equalToTarget(target), orElse: () =&gt; null);
         if (existingItem != null) {
           &#47;&#47;&#47; 同一のものがある場合は削除しつつ減算
           items
-            ..removeWhere((el) =&gt; el.type == target.type &amp;&amp; el.key == target.key)
+            ..removeWhere((el) =&gt; el.equalToTarget(target))
             ..add(existingItem.copyWith(amount: existingItem.amount - targetItem.amount)); &#47;&#47; 減算
         } else {
           items.add(targetItem);
         }
       }
-      return lifeStage.copyWith(items: items);
+      return lifeStage.copyWith(items: UnmodifiableSetView&lt;LifeItemEntity&gt;(items));
     case LifeEventType.loseLifeItemsPerDiceRoll:
       &#47;&#47; TODO: Handle this case.
       break;

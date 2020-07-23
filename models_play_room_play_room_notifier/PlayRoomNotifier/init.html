@@ -95,6 +95,10 @@
 (<wbr>)
       
     </section>
+    <section class="desc markdown">
+      <p>初期化する
+LifeRoad や User の取得、LifeStage の初期値追加</p>
+    </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
@@ -107,10 +111,10 @@
   for (final human in value.humans) {
     final lifeStage = LifeStageEntity(
       human: human.ref,
-      &#47;&#47; ignore: prefer_const_literals_to_create_immutables
-      items: &lt;LifeItemEntity&gt;{}, &#47;&#47; FIXME: 本来は firestore へ add してそれを取ってくる
       currentLifeStepId: value.lifeRoad.entity.start.id,
+      items: const UnmodifiableSetView&lt;LifeItemEntity&gt;.empty(),
     );
+    await _store.collectionRef&lt;LifeStageEntity&gt;(parent: _playRoom.ref.path).docRef(human.id).set(lifeStage);
     value.lifeStages.add(lifeStage);
   }
 }</code></pre>

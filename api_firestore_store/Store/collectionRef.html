@@ -88,14 +88,14 @@
     <section class="multi-line-signature">
       <span class="returntype"><a href="https://pub.dev/documentation/firestore_ref/0.8.19+1/firestore_ref/CollectionRef-class.html">CollectionRef</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter"><a href="../../api_firestore_store/Doc-class.html">Doc</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>&gt;</span></span>
             <span class="name ">collectionRef</span>
-&lt;<wbr><span class="type-parameter">T extends StoreEntity</span>&gt;(<wbr><ol class="parameter-list"><li><span class="parameter" id="collectionRef-param-parent">[<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">parent</span>]</span></li>
+&lt;<wbr><span class="type-parameter">T extends StoreEntity</span>&gt;(<wbr><ol class="parameter-list"><li><span class="parameter" id="collectionRef-param-parent">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">parent</span>}</span></li>
 </ol>)
       
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">CollectionRef&lt;T, Doc&lt;T&gt;&gt; collectionRef&lt;T extends StoreEntity&gt;([String parent]) =&gt; CollectionRef(
+      <pre class="language-dart"><code class="language-dart">CollectionRef&lt;T, Doc&lt;T&gt;&gt; collectionRef&lt;T extends StoreEntity&gt;({String parent}) =&gt; CollectionRef(
       firestore.collection(parent == null ? getCollectionId&lt;T&gt;() : &#39;$parent&#47;${getCollectionId&lt;T&gt;()}&#39;),
       decoder: (snapshot) =&gt; _decode&lt;T&gt;(snapshot),
       encoder: (entity) =&gt; entity.encode(),
