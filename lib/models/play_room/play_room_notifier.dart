@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../api/dice.dart';
@@ -26,6 +27,8 @@ import 'play_room_state.dart';
 class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   PlayRoomNotifier(this._i18n, this._dice, this._store, this._playRoom) : super(PlayRoomState());
 
+  /// 初期化する
+  /// LifeRoad や User の取得、LifeStage の初期値追加
   Future<void> init() async {
     value
       ..lifeRoad = await _playRoom.entity.fetchLifeRoad(_store)
@@ -35,10 +38,10 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     for (final human in value.humans) {
       final lifeStage = LifeStageEntity(
         human: human.ref,
-        // ignore: prefer_const_literals_to_create_immutables
-        items: <LifeItemEntity>{}, // FIXME: 本来は firestore へ add してそれを取ってくる
         currentLifeStepId: value.lifeRoad.entity.start.id,
+        items: const UnmodifiableSetView<LifeItemEntity>.empty(),
       );
+      await _store.collectionRef<LifeStageEntity>(parent: _playRoom.ref.path).docRef(human.id).set(lifeStage);
       value.lifeStages.add(lifeStage);
     }
   }
@@ -53,9 +56,10 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
       value.lifeStages.indexWhere((lifeStage) => lifeStage.human.documentID == value.currentTurnHuman.id);
   LifeStageEntity get _currentHumanLifeStage => value.lifeStages[_currentHumanLifeStageIndex];
 
-  // 進む数の残り
+  /// 進む数の残り
   int _remainCount = 0;
 
+  /// Dice を振って進む
   Future<void> rollDice() async {
     if (value.allHumansReachedTheGoal || value.requireSelectDirection) return;
     value
@@ -81,6 +85,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     notifyListeners();
   }
 
+  /// 分岐路において、進行方向を選択して進む
   Future<void> chooseDirection(Direction direction) async {
     if (value.allHumansReachedTheGoal || !value.requireSelectDirection) return;
     final dest = _moveLifeStepUntilMustStop(_remainCount, firstDirection: direction);
@@ -106,7 +111,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
       human: _currentHumanLifeStage.human,
       lifeEvent: value.lifeRoad.entity.getStepEntity(_currentHumanLifeStage).lifeEvent,
     );
-    await _store.collectionRef<LifeEventRecordEntity>(_playRoom.ref.path).add(record);
+    await _store.collectionRef<LifeEventRecordEntity>(parent: _playRoom.ref.path).add(record);
     value.everyLifeEventRecords = [...value.everyLifeEventRecords, record]; // FIXME: query でひっぱてきて上位数件のみ表示する
   }
 

@@ -60,7 +60,6 @@ flutter packages pub run build_runner build
 6. you can call `I18n.of(context).hoge`
 
 ### [DartDoc](https://pub.dev/packages/dartdoc)
-手元で確認する方法
 ```sh
 FLUTTER_HOME=~/development/flutter/ \
 && FLUTTER_ROOT=$FLUTTER_HOME dartdoc --output docs/ \

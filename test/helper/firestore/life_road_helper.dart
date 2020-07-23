@@ -17,7 +17,7 @@ Future<Doc<LifeRoadEntity>> createLifeRoad(
   final collectionRef = store.collectionRef<LifeRoadEntity>();
   final entity = LifeRoadEntity(
     author: author ?? (await createUser(store)).ref,
-    lifeEvents: lifeEvents ?? LifeRoadEntity.dummyLifeEvents(), // FIXME: dummy は test 固有で定義すべき
+    lifeEvents: lifeEvents ?? LifeRoadEntity.dummyLifeEvents(),
     title: title ?? Uuid().v4(),
     createdAt: createdAt ?? DateTime.now(),
     updatedAt: updatedAt ?? DateTime.now(),

@@ -11,6 +11,7 @@ import 'package:HumanLifeGame/entities/life_item.dart';
 import 'package:HumanLifeGame/entities/life_item_type.dart';
 import 'package:HumanLifeGame/services/life_event_service.dart';
 import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:uuid/uuid.dart';
 
@@ -22,7 +23,7 @@ void main() {
     final store = Store(MockFirestoreInstance());
     final lifeStage = LifeStageEntity(
       human: (await createUser(store)).ref,
-      items: items,
+      items: UnmodifiableSetView<LifeItemEntity>(items),
       currentLifeStepId: Uuid().v4(),
     );
     const gain = LifeEventEntity<GainLifeItemsParams>(
@@ -46,7 +47,7 @@ void main() {
     final store = Store(MockFirestoreInstance());
     final lifeStage = LifeStageEntity(
       human: (await createUser(store)).ref,
-      items: items,
+      items: UnmodifiableSetView<LifeItemEntity>(items),
       currentLifeStepId: Uuid().v4(),
     );
     const lose = LifeEventEntity<LoseLifeItemsParams>(
@@ -68,7 +69,7 @@ void main() {
     final store = Store(MockFirestoreInstance());
     final lifeStage = LifeStageEntity(
       human: (await createUser(store)).ref,
-      items: items,
+      items: UnmodifiableSetView<LifeItemEntity>(items),
       currentLifeStepId: Uuid().v4(),
     );
     const exchange = LifeEventEntity<ExchangeLifeItemsParams>(

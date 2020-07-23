@@ -12,7 +12,6 @@ part 'play_room.g.dart';
 
 /// TODO: プレイ終了後に削除してもいいモノなので、DocRef で持ってるやつは Value で十分じゃないかを検討.
 /// TODO: announcement はクライアントサイド完結想定だが、必要になったら追加.
-/// TODO: finishedAt は削除ロジックに使う想定だが、不要だったら削除. まだロジックを考え中.
 @freezed
 abstract class PlayRoomEntity implements _$PlayRoomEntity, StoreEntity {
   factory PlayRoomEntity({
@@ -23,7 +22,6 @@ abstract class PlayRoomEntity implements _$PlayRoomEntity, StoreEntity {
     @TimestampConverter() DateTime createdAt,
     @TimestampConverter() DateTime updatedAt,
     @Default('') String title,
-//    @TimestampConverter() DateTime finishedAt,
   }) = _PlayRoomEntity;
   PlayRoomEntity._();
 
@@ -73,7 +71,4 @@ class PlayRoomEntityField {
 
   /// 現在手番の human id
   static const currentTurnHumanId = 'currentTurnHumanId';
-
-  /// ゲーム終了時刻
-//  static const finishedAt = 'finishedAt'; // FIXME: 現状不要なのでコメントアウト. 今後要検討.
 }

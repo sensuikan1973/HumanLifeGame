@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 
 import '../api/firestore/life_stage.dart';
@@ -37,20 +38,17 @@ class LifeEventService {
         final items = {...lifeStage.items};
         for (final target in params.targetItems) {
           final targetItem = LifeItemEntity(key: target.key, type: target.type, amount: target.amount);
-
-          /// ここに同一判定ロジックがある理由は See: lib/entities/life_item.dart
-          final existingItem =
-              items.firstWhere((el) => el.type == target.type && el.key == target.key, orElse: () => null);
+          final existingItem = items.firstWhere((el) => el.equalToTarget(target), orElse: () => null);
           if (existingItem != null) {
             /// 同一のものがある場合は削除しつつ加算
             items
-              ..removeWhere((el) => el.type == target.type && el.key == target.key)
+              ..removeWhere((el) => el.equalToTarget(target))
               ..add(existingItem.copyWith(amount: existingItem.amount + targetItem.amount)); // 加算
           } else {
             items.add(targetItem);
           }
         }
-        return lifeStage.copyWith(items: items);
+        return lifeStage.copyWith(items: UnmodifiableSetView<LifeItemEntity>(items));
       case LifeEventType.gainLifeItemsPerOtherLifeItem:
         // TODO: Handle this case.
         break;
@@ -65,7 +63,9 @@ class LifeEventService {
         break;
       case LifeEventType.exchangeLifeItems:
         final params = lifeEvent.params as ExchangeLifeItemsParams;
-        return lifeStage.copyWith(items: _exchangeLifeItems(lifeStage.items, params));
+        return lifeStage.copyWith(
+          items: UnmodifiableSetView<LifeItemEntity>(_exchangeLifeItems(lifeStage.items, params)),
+        );
       case LifeEventType.exchangeLifeItemsWithDiceRoll:
         // TODO: Handle this case.
         break;
@@ -74,20 +74,17 @@ class LifeEventService {
         final items = {...lifeStage.items};
         for (final target in params.targetItems) {
           final targetItem = LifeItemEntity(key: target.key, type: target.type, amount: target.amount);
-
-          /// ここに同一判定ロジックがある理由は See: lib/entities/life_item.dart
-          final existingItem =
-              items.firstWhere((el) => el.type == target.type && el.key == target.key, orElse: () => null);
+          final existingItem = items.firstWhere((el) => el.equalToTarget(target), orElse: () => null);
           if (existingItem != null) {
             /// 同一のものがある場合は削除しつつ減算
             items
-              ..removeWhere((el) => el.type == target.type && el.key == target.key)
+              ..removeWhere((el) => el.equalToTarget(target))
               ..add(existingItem.copyWith(amount: existingItem.amount - targetItem.amount)); // 減算
           } else {
             items.add(targetItem);
           }
         }
-        return lifeStage.copyWith(items: items);
+        return lifeStage.copyWith(items: UnmodifiableSetView<LifeItemEntity>(items));
       case LifeEventType.loseLifeItemsPerDiceRoll:
         // TODO: Handle this case.
         break;

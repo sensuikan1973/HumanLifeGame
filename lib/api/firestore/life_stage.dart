@@ -16,7 +16,7 @@ part 'life_stage.g.dart';
 abstract class LifeStageEntity implements _$LifeStageEntity, StoreEntity {
   const factory LifeStageEntity({
     @required @DocumentReferenceConverter() DocumentReference human,
-    @required Set<LifeItemEntity> items,
+    @required @_UnmodifiableSetViewConverter() UnmodifiableSetView<LifeItemEntity> items,
     @required String currentLifeStepId,
     @TimestampConverter() DateTime createdAt,
     @TimestampConverter() DateTime updatedAt,
@@ -48,4 +48,19 @@ class LifeStageEntityField {
 
   /// 現在位置する LifeStep の識別子
   static const currentLifeStepId = 'currentLifeStepId';
+}
+
+class _UnmodifiableSetViewConverter
+    implements JsonConverter<UnmodifiableSetView<LifeItemEntity>, List<Map<String, dynamic>>> {
+  const _UnmodifiableSetViewConverter();
+
+  @override
+  UnmodifiableSetView<LifeItemEntity> fromJson(List<Map<String, dynamic>> json) {
+    final jsonSet = json.map((map) => LifeItemEntity.fromJson(map)).toSet();
+    return UnmodifiableSetView<LifeItemEntity>(jsonSet);
+  }
+
+  @override
+  List<Map<String, dynamic>> toJson(UnmodifiableSetView<LifeItemEntity> setView) =>
+      setView.toList().map((entity) => entity.toJson()).toList();
 }
