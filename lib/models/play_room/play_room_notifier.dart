@@ -41,6 +41,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
         currentLifeStepId: value.lifeRoad.entity.start.id,
         items: const UnmodifiableSetView<LifeItemEntity>.empty(),
       );
+      await _store.collectionRef<LifeStageEntity>(parent: _playRoom.ref.path).docRef(human.id).set(lifeStage);
       value.lifeStages.add(lifeStage);
     }
   }
