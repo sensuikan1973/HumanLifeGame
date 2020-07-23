@@ -52,7 +52,7 @@ class Store {
     if (T == LifeEventRecordEntity) return 'lifeEventRecord';
     if (T == LifeItemEntity) return 'lifeItem';
     if (T == LifeRoadEntity) return 'lifeRoad';
-    if (T == LifeStageEntity) return 'LifeStage';
+    if (T == LifeStageEntity) return 'lifeStage';
     if (T == PlayRoomEntity) return 'playRoom';
     if (T == UserEntity) return 'user';
     throw Exception('unexpected Entity Type: $T');
