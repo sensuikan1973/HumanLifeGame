@@ -56,7 +56,7 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
     );
     final roomDocRef = _store.collectionRef<PlayRoomEntity>().docRef();
     final batch = _store.firestore.batch();
-    await roomDocRef.setData(room.encode(), batch: batch);
+    await roomDocRef.set(room, batch: batch);
     await userDocRef.updateData(<String, dynamic>{
       UserEntityField.joinPlayRoom: roomDocRef.ref,
       TimestampField.updatedAt: FieldValue.serverTimestamp(),
