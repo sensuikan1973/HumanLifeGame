@@ -128,12 +128,12 @@ packages:
     source: hosted
     version: "1.0.1"
   cloud_firestore:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: cloud_firestore
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.7"
+    version: "0.13.6"
   cloud_firestore_mocks:
     dependency: "direct dev"
     description:
