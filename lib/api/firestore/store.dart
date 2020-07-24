@@ -17,19 +17,19 @@ class Store {
 
   final Firestore firestore;
 
-  CollectionRef<T, Doc<T>> collectionRef<T extends StoreEntity>({String parent}) => CollectionRef(
+  CollectionRef<T, Doc<T>> collectionRef<T extends StoreEntity>({String parent}) => CollectionRef<T, Doc<T>>(
         firestore.collection(parent == null ? getCollectionId<T>() : '$parent/${getCollectionId<T>()}'),
         decoder: (snapshot) => _decode<T>(snapshot),
         encoder: (entity) => entity.encode(),
       );
 
-  CollectionGroup<T, Doc<T>> collectionGroupRef<T extends StoreEntity>(String path) => CollectionGroup(
+  CollectionGroup<T, Doc<T>> collectionGroupRef<T extends StoreEntity>(String path) => CollectionGroup<T, Doc<T>>(
         path: path,
         decoder: (snapshot) => _decode<T>(snapshot),
         encoder: (entity) => entity.encode(),
       );
 
-  DocumentRef<T, Doc<T>> docRef<T extends StoreEntity>(String documentId) => DocumentRef(
+  DocumentRef<T, Doc<T>> docRef<T extends StoreEntity>(String documentId) => DocumentRef<T, Doc<T>>(
         collectionRef: collectionRef<T>(),
         id: documentId,
       );
