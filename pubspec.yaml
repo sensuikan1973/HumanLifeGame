@@ -23,7 +23,7 @@ dependencies:
   firebase_auth: ^0.16.1
   firestore_ref: ^0.8.19+1
   flutter_dotenv: ^2.1.0
-  freezed_annotation: ^0.7.1
+  freezed_annotation: ^0.11.0
   provider: ^4.3.1
   shared_preferences: ^0.5.8
 
@@ -37,7 +37,7 @@ dev_dependencies:
     git:
       url: https://github.com/sensuikan1973/dartman_sensuikan1973
       ref: 1.2.0
-  freezed: ^0.10.9
+  freezed: ^0.11.4
   intl_translation: ^0.17.10
   json_serializable: ^3.3.0
   mockito: ^4.1.1
