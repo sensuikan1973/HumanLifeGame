@@ -42,7 +42,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
         items: const UnmodifiableSetView<LifeItemEntity>.empty(),
       );
       await _store.collectionRef<LifeStageEntity>(parent: _playRoom.ref.path).docRef(human.id).set(lifeStage);
-      value.lifeStages.add(lifeStage); // FIXME: fetch してくる
+      value.lifeStages.add(lifeStage); // FIXME: listen する
     }
   }
 
@@ -112,7 +112,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
       lifeEvent: value.lifeRoad.entity.getStepEntity(_currentHumanLifeStage).lifeEvent,
     );
     await _store.collectionRef<LifeEventRecordEntity>(parent: _playRoom.ref.path).add(record);
-    value.everyLifeEventRecords = [...value.everyLifeEventRecords, record]; // FIXME: 上位数件だけ fetch してくる
+    value.everyLifeEventRecords = [...value.everyLifeEventRecords, record]; // FIXME: listen する
   }
 
   void _updateRequireSelectDirectionAndRemainCount(DestinationWithMovedStepCount dest) {
@@ -132,7 +132,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     await _playRoom.ref.updateData(
       <String, dynamic>{PlayRoomEntityField.currentTurnHumanId: humans[currentHumanIndex].id},
     );
-    value.currentTurnHuman = humans[(currentHumanIndex + 1) % humans.length]; // FIXME: fetch してくる
+    value.currentTurnHuman = humans[(currentHumanIndex + 1) % humans.length]; // FIXME: listen する
 
     if (value.allHumansReachedTheGoal) return;
     // 現在手番の Human がゴールしていたら次の Human にターンを変える
