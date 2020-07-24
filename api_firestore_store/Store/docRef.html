@@ -95,7 +95,7 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">DocumentRef&lt;T, Doc&lt;T&gt;&gt; docRef&lt;T extends StoreEntity&gt;(String documentId) =&gt; DocumentRef(
+      <pre class="language-dart"><code class="language-dart">DocumentRef&lt;T, Doc&lt;T&gt;&gt; docRef&lt;T extends StoreEntity&gt;(String documentId) =&gt; DocumentRef&lt;T, Doc&lt;T&gt;&gt;(
       collectionRef: collectionRef&lt;T&gt;(),
       id: documentId,
     );</code></pre>

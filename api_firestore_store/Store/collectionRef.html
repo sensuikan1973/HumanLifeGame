@@ -95,7 +95,7 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">CollectionRef&lt;T, Doc&lt;T&gt;&gt; collectionRef&lt;T extends StoreEntity&gt;({String parent}) =&gt; CollectionRef(
+      <pre class="language-dart"><code class="language-dart">CollectionRef&lt;T, Doc&lt;T&gt;&gt; collectionRef&lt;T extends StoreEntity&gt;({String parent}) =&gt; CollectionRef&lt;T, Doc&lt;T&gt;&gt;(
       firestore.collection(parent == null ? getCollectionId&lt;T&gt;() : &#39;$parent&#47;${getCollectionId&lt;T&gt;()}&#39;),
       decoder: (snapshot) =&gt; _decode&lt;T&gt;(snapshot),
       encoder: (entity) =&gt; entity.encode(),

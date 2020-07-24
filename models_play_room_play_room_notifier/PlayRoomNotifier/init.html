@@ -115,7 +115,7 @@ LifeRoad や User の取得、LifeStage の初期値追加</p>
       items: const UnmodifiableSetView&lt;LifeItemEntity&gt;.empty(),
     );
     await _store.collectionRef&lt;LifeStageEntity&gt;(parent: _playRoom.ref.path).docRef(human.id).set(lifeStage);
-    value.lifeStages.add(lifeStage);
+    value.lifeStages.add(lifeStage); &#47;&#47; FIXME: listen する
   }
 }</code></pre>
     </section>

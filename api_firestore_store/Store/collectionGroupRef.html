@@ -95,7 +95,7 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">CollectionGroup&lt;T, Doc&lt;T&gt;&gt; collectionGroupRef&lt;T extends StoreEntity&gt;(String path) =&gt; CollectionGroup(
+      <pre class="language-dart"><code class="language-dart">CollectionGroup&lt;T, Doc&lt;T&gt;&gt; collectionGroupRef&lt;T extends StoreEntity&gt;(String path) =&gt; CollectionGroup&lt;T, Doc&lt;T&gt;&gt;(
       path: path,
       decoder: (snapshot) =&gt; _decode&lt;T&gt;(snapshot),
       encoder: (entity) =&gt; entity.encode(),
