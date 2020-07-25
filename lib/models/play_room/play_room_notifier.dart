@@ -28,6 +28,19 @@ import 'play_room_state.dart';
 class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   PlayRoomNotifier(this._i18n, this._dice, this._store, this._playRoom) : super(PlayRoomState());
 
+  final I18n _i18n;
+  final Dice _dice;
+  final Store _store;
+  final Doc<PlayRoomEntity> _playRoom;
+  final _lifeEventService = const LifeEventService();
+
+  int get _currentHumanLifeStageIndex =>
+      value.lifeStages.indexWhere((lifeStage) => lifeStage.human.documentID == value.currentTurnHuman.id);
+  LifeStageEntity get _currentHumanLifeStage => value.lifeStages[_currentHumanLifeStageIndex];
+
+  /// 進む数の残り
+  int _remainCount = 0;
+
   /// 初期化する
   /// LifeRoad や User の取得、LifeStage の初期値追加
   /// TODO: コンストラクタ内でやればいい。そして、UI 側は listen するように改修する。んで、非同期処理の完了について無知でいられる。
@@ -48,19 +61,6 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
       value.lifeStages.add(lifeStage); // FIXME: listen する
     }
   }
-
-  final I18n _i18n;
-  final Dice _dice;
-  final Store _store;
-  final Doc<PlayRoomEntity> _playRoom;
-  final _lifeEventService = const LifeEventService();
-
-  int get _currentHumanLifeStageIndex =>
-      value.lifeStages.indexWhere((lifeStage) => lifeStage.human.documentID == value.currentTurnHuman.id);
-  LifeStageEntity get _currentHumanLifeStage => value.lifeStages[_currentHumanLifeStageIndex];
-
-  /// 進む数の残り
-  int _remainCount = 0;
 
   /// Dice を振って進む
   Future<void> rollDice() async {
