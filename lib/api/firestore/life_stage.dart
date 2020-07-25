@@ -50,6 +50,7 @@ class LifeStageEntityField {
   static const currentLifeStepId = 'currentLifeStepId';
 }
 
+@immutable
 class _UnmodifiableSetViewConverter
     implements JsonConverter<UnmodifiableSetView<LifeItemEntity>, List<Map<String, dynamic>>> {
   const _UnmodifiableSetViewConverter();
