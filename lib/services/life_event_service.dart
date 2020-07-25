@@ -18,23 +18,16 @@ class LifeEventService {
   LifeStageEntity executeEvent(LifeEventEntity lifeEvent, LifeStageEntity lifeStage) {
     switch (lifeEvent.type) {
       case LifeEventType.nothing:
-        // TODO: Handle this case.
-        break;
       case LifeEventType.start:
-        // TODO: Handle this case.
-        break;
+        break; // 何もすることない
       case LifeEventType.goal:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.selectDirection:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.selectDirectionPerDiceRoll:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.selectDirectionPerLifeItem:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.gainLifeItems:
         final params = lifeEvent.params as GainLifeItemsParams;
         final items = {...lifeStage.items};
@@ -52,25 +45,20 @@ class LifeEventService {
         }
         return lifeStage.copyWith(items: UnmodifiableSetView<LifeItemEntity>(items));
       case LifeEventType.gainLifeItemsPerOtherLifeItem:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.gainLifeItemsPerDiceRoll:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.gainLifeItemsIfExistOtherLifeItem:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.gainLifeItemsIfNotExistOtherLifeItem:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.exchangeLifeItems:
         final params = lifeEvent.params as ExchangeLifeItemsParams;
         return lifeStage.copyWith(
           items: UnmodifiableSetView<LifeItemEntity>(_exchangeLifeItems(lifeStage.items, params)),
         );
       case LifeEventType.exchangeLifeItemsWithDiceRoll:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.loseLifeItems:
         final params = lifeEvent.params as LoseLifeItemsParams;
         final items = {...lifeStage.items};
@@ -88,17 +76,13 @@ class LifeEventService {
         }
         return lifeStage.copyWith(items: UnmodifiableSetView<LifeItemEntity>(items));
       case LifeEventType.loseLifeItemsPerDiceRoll:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.loseLifeItemsPerOtherLifeItem:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.loseLifeItemsIfExistOtherLifeItem:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.loseLifeItemsIfNotExistOtherLifeItem:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
     }
     return lifeStage.copyWith();
   }
