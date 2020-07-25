@@ -111,11 +111,11 @@
   final roomDocRef = _store.collectionRef&lt;PlayRoomEntity&gt;().docRef(playRoomDoc.id);
   final batch = _store.firestore.batch();
   await userDocRef.updateData(&lt;String, dynamic&gt;{
-    UserEntityField.joinPlayRoom: playRoomDoc.ref,
+    UserEntityField.joinPlayRoom.name: playRoomDoc.ref,
     TimestampField.updatedAt: FieldValue.serverTimestamp(),
   }, batch: batch);
   await roomDocRef.updateData(&lt;String, dynamic&gt;{
-    PlayRoomEntityField.humans: FieldValue.arrayUnion(&lt;DocumentReference&gt;[userDocRef.ref]),
+    PlayRoomEntityField.humans.name: FieldValue.arrayUnion(&lt;DocumentReference&gt;[userDocRef.ref]),
     TimestampField.updatedAt: FieldValue.serverTimestamp(),
   }, batch: batch);
   await batch.commit();

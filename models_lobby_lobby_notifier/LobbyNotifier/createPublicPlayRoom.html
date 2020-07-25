@@ -112,7 +112,7 @@
   final batch = _store.firestore.batch();
   await roomDocRef.set(room, batch: batch);
   await userDocRef.updateData(&lt;String, dynamic&gt;{
-    UserEntityField.joinPlayRoom: roomDocRef.ref,
+    UserEntityField.joinPlayRoom.name: roomDocRef.ref,
     TimestampField.updatedAt: FieldValue.serverTimestamp(),
   }, batch: batch);
   await batch.commit(); &#47;&#47; FIXME: エラーハンドリング. 特に既に join 済みの場合のハンドリング.

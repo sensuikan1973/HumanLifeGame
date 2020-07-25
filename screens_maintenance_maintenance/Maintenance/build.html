@@ -143,7 +143,7 @@ and</li>
 Widget build(BuildContext context) =&gt; Scaffold(
       body: Center(
         child: StreamBuilder&lt;Doc&lt;ServiceControlEntity&gt;&gt;(
-          stream: context.watch&lt;Store&gt;().docRef&lt;ServiceControlEntity&gt;(ServiceControlDocId.web).document(),
+          stream: context.watch&lt;Store&gt;().docRef&lt;ServiceControlEntity&gt;(ServiceControlDocId.web.name).document(),
           builder: (context, snap) {
             if (!snap.hasData) return const Text(&#39;no data&#39;);
             return snap.data.entity.isMaintenance
