@@ -49,8 +49,12 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
       ..lifeRoad = await _playRoom.entity.fetchLifeRoad(_store)
       ..humans = await _playRoom.entity.fetchHumans(_store)
       ..currentTurnHuman = value.humans.first; // TODO: 順序付けのあり方検討
+    await _startGame(); // TODO: これは host がゲーム開始ボタン押した時にやること
+  }
+
+  /// ゲームを開始する
+  Future<void> _startGame() async {
     // 参加者全員の位置を Start に
-    // TODO: これは host がゲーム開始ボタン押した時にやること
     for (final human in value.humans) {
       final lifeStage = LifeStageEntity(
         human: human.ref,
