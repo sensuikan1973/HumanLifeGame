@@ -29,6 +29,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
   /// 初期化する
   /// LifeRoad や User の取得、LifeStage の初期値追加
+  /// TODO: コンストラクタ内でやればいい。そして、UI 側は listen するように改修する。んで、非同期処理の完了について無知でいられる。
   Future<void> init() async {
     value
       ..lifeRoad = await _playRoom.entity.fetchLifeRoad(_store)
