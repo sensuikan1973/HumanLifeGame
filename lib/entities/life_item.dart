@@ -30,14 +30,18 @@ abstract class LifeItemEntity implements _$LifeItemEntity {
   bool equalToTarget(Object object) => object is TargetLifeItemParams && object.type == type && object.key == key;
 }
 
-class LifeItemEntityField {
+enum LifeItemEntityField {
   /// Item の種別
-  static const type = 'type';
+  type,
 
   /// Item の具体的な内容を一意に識別する文字列
   /// 任意で使う
-  static const key = 'key';
+  key,
 
   /// 数量
-  static const int = 'amount';
+  int,
+}
+
+extension LifeItemEntityFieldExtension on LifeItemEntityField {
+  String get name => describeEnum(this);
 }

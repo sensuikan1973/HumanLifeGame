@@ -50,25 +50,29 @@ abstract class PlayRoomEntity implements _$PlayRoomEntity, StoreEntity {
   Future<Doc<LifeRoadEntity>> fetchLifeRoad(Store store) async => LifeRoadEntity.decode(store, await lifeRoad.get());
 }
 
-class PlayRoomEntityField {
+enum PlayRoomEntityField {
   /// 主催者(user)
-  static const host = 'host';
+  host,
 
   /// 部屋のタイトル
-  static const title = 'title';
+  title,
 
   /// 人生を歩む参加者(human)
-  static const humans = 'humans';
+  humans,
 
   /// 歩む対象となる人生
-  static const lifeRoad = 'lifeRoad';
+  lifeRoad,
 
   /// 参加者全員の LifeEvent 履歴
-  static const everyLifeEventRecords = 'everyLifeEventRecords';
+  everyLifeEventRecords,
 
   /// 参加者それぞれの人生の進捗
-  static const lifeStages = 'lifeStages';
+  lifeStages,
 
   /// 現在手番の human id
-  static const currentTurnHumanId = 'currentTurnHumanId';
+  currentTurnHumanId,
+}
+
+extension PlayRoomEntityFieldExtension on PlayRoomEntityField {
+  String get name => describeEnum(this);
 }

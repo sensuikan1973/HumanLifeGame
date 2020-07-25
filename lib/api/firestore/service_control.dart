@@ -31,16 +31,24 @@ abstract class ServiceControlEntity implements _$ServiceControlEntity, StoreEnti
       );
 }
 
-class ServiceControlEntityField {
+enum ServiceControlEntityField {
   /// メンテナス中かどうか
-  static const isMaintenance = 'isMaintenance';
+  isMaintenance,
 
   /// 求める最低バージョン
-  static const requiredMinVersion = 'requiredMinVersion';
+  requiredMinVersion,
+}
+
+extension ServiceControlEntityFieldExtension on ServiceControlEntityField {
+  String get name => describeEnum(this);
 }
 
 /// 特定の Document を Id で参照する用
-class ServiceControlDocId {
+enum ServiceControlDocId {
   /// Web application
-  static const web = 'web';
+  web,
+}
+
+extension ServiceControlDocIdExtension on ServiceControlDocId {
+  String get name => describeEnum(this);
 }

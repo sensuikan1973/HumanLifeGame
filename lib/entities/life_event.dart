@@ -59,18 +59,22 @@ class _ParamsConverter<T extends LifeEventParams> implements JsonConverter<T, Ma
   Map<String, dynamic> toJson(T object) => object.toJson();
 }
 
-class LifeEventEntityField {
+enum LifeEventEntityField {
   /// Event の種別
-  static const type = 'type';
+  type,
 
   /// Event の対象
-  static const target = 'target';
+  target,
 
   /// Event の自由説明文
-  static const description = 'description';
+  description,
 
   /// Event 実行時のパラメータ
   ///
   /// type によって中身は異なる
-  static const params = 'params';
+  params,
+}
+
+extension LifeEventEntityFieldExtension on LifeEventEntityField {
+  String get name => describeEnum(this);
 }

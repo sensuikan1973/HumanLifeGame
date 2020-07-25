@@ -42,12 +42,16 @@ abstract class LifeStageEntity implements _$LifeStageEntity, StoreEntity {
   int get possession => items.isEmpty ? 0 : items.firstWhere((item) => item.type == LifeItemType.money).amount;
 }
 
-class LifeStageEntityField {
+enum LifeStageEntityField {
   /// 対象の human
-  static const human = 'human';
+  human,
 
   /// 現在位置する LifeStep の識別子
-  static const currentLifeStepId = 'currentLifeStepId';
+  currentLifeStepId,
+}
+
+extension LifeStageEntityFieldExtension on LifeStageEntityField {
+  String get name => describeEnum(this);
 }
 
 @immutable

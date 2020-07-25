@@ -58,7 +58,7 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
     final batch = _store.firestore.batch();
     await roomDocRef.set(room, batch: batch);
     await userDocRef.updateData(<String, dynamic>{
-      UserEntityField.joinPlayRoom: roomDocRef.ref,
+      UserEntityField.joinPlayRoom.name: roomDocRef.ref,
       TimestampField.updatedAt: FieldValue.serverTimestamp(),
     }, batch: batch);
     await batch.commit(); // FIXME: エラーハンドリング. 特に既に join 済みの場合のハンドリング.
@@ -78,11 +78,11 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
     final roomDocRef = _store.collectionRef<PlayRoomEntity>().docRef(playRoomDoc.id);
     final batch = _store.firestore.batch();
     await userDocRef.updateData(<String, dynamic>{
-      UserEntityField.joinPlayRoom: playRoomDoc.ref,
+      UserEntityField.joinPlayRoom.name: playRoomDoc.ref,
       TimestampField.updatedAt: FieldValue.serverTimestamp(),
     }, batch: batch);
     await roomDocRef.updateData(<String, dynamic>{
-      PlayRoomEntityField.humans: FieldValue.arrayUnion(<DocumentReference>[userDocRef.ref]),
+      PlayRoomEntityField.humans.name: FieldValue.arrayUnion(<DocumentReference>[userDocRef.ref]),
       TimestampField.updatedAt: FieldValue.serverTimestamp(),
     }, batch: batch);
     await batch.commit();
