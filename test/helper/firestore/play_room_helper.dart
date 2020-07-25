@@ -34,12 +34,12 @@ Future<Doc<PlayRoomEntity>> createPlayRoom(
 
   final batch = store.firestore.batch();
   final roomDocRef = collectionRef.docRef();
-  await roomDocRef.setData(room.encode(), batch: batch);
+  await roomDocRef.set(room, batch: batch);
   final userDocRef = store.docRef<UserEntity>(userDoc.id);
-  await userDocRef.updateData(<String, dynamic>{
-    UserEntityField.joinPlayRoom.name: roomDocRef.ref,
-    TimestampField.updatedAt: FieldValue.serverTimestamp(),
-  }, batch: batch);
+  await userDocRef.update(
+    userDoc.entity.copyWith(joinPlayRoom: roomDocRef.ref),
+    batch: batch,
+  );
   await batch.commit();
   return Doc<PlayRoomEntity>(store, roomDocRef.ref, room);
 }
