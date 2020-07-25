@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../api/dice.dart';
@@ -131,7 +132,10 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     final humans = await _playRoom.entity.fetchHumans(_store);
     final currentHumanIndex = humans.indexOf(value.currentTurnHuman);
     await _playRoom.ref.updateData(
-      <String, dynamic>{PlayRoomEntityField.currentTurnHumanId.name: humans[currentHumanIndex].id},
+      <String, dynamic>{
+        PlayRoomEntityField.currentTurnHumanId.name: humans[currentHumanIndex].id,
+        TimestampField.updatedAt: FieldValue.serverTimestamp(),
+      },
     );
     value.currentTurnHuman = humans[(currentHumanIndex + 1) % humans.length]; // FIXME: listen する
 
