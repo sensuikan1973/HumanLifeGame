@@ -307,6 +307,7 @@ class LifeRoadEntityField {
 ///   events: [], // 一次元配列
 /// }
 /// ```
+@immutable
 class _LifeEventsConverter implements JsonConverter<List<List<LifeEventEntity>>, Map<String, dynamic>> {
   const _LifeEventsConverter();
 
