@@ -13,6 +13,8 @@ import '../entities/life_item.dart';
 class LifeEventService {
   const LifeEventService();
 
+  /// 指定の lifeStage を対象に LifeVent の処理を適用する
+  /// FIXME: 現状、target type が myself の場合しか考慮されてない
   LifeStageEntity executeEvent(LifeEventEntity lifeEvent, LifeStageEntity lifeStage) {
     switch (lifeEvent.type) {
       case LifeEventType.nothing:
