@@ -32,7 +32,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  analyzer: 0.39.14 # 0.39.15 にすると build_runner によるコード生成が終わらなくなって詰む
   build_runner: ^1.10.0
   cloud_firestore_mocks: ^0.4.5
   dartman_sensuikan1973:
