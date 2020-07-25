@@ -80,7 +80,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
     // TODO: 今は requireSelectDirection だけだけど、今後は requireDiceRoll とかも考慮しなきゃいけなくなる
     if (!value.requireSelectDirection) {
-      await _executeEventToCurrentHuman();
+      await _executeEvent();
       await _changeToNextTurn();
     }
     notifyListeners();
@@ -94,13 +94,13 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
     // TODO: 今は requireSelectDirection だけだけど、今後は requireDiceRoll とかも考慮しなきゃいけなくなる
     if (!value.requireSelectDirection) {
-      await _executeEventToCurrentHuman();
+      await _executeEvent();
       await _changeToNextTurn();
     }
     notifyListeners();
   }
 
-  Future<void> _executeEventToCurrentHuman() async {
+  Future<void> _executeEvent() async {
     // LifeEvent 処理
     value.lifeStages = [...value.lifeStages];
     value.lifeStages[_currentHumanLifeStageIndex] = _lifeEventService.executeEvent(
