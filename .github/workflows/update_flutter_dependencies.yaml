@@ -19,6 +19,7 @@ jobs:
         # Ref: https://github.com/flutter/flutter/issues/12627
       - run: pub global activate pubspec_update
       - run: pub global run pubspec_update:pubspec-update --force  # See: https://dart.dev/tools/pub/cmd/pub-global#running-a-script-using-pub-global-run
+      - run: flutter pub upgrade
       - name: create PR
         uses: peter-evans/create-pull-request@v2
         with:
