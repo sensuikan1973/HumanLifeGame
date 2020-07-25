@@ -38,13 +38,17 @@ abstract class UserEntity implements _$UserEntity, StoreEntity {
   bool operator ==(Object other) => other is UserEntity && other.uid == uid;
 }
 
-class UserEntityField {
+enum UserEntityField {
   /// uid (by Auth)
-  static const uid = 'uid';
+  uid,
 
   /// displayName (by Auth)
-  static const displayName = 'displayName';
+  displayName,
 
   /// 参加中の playRoom
-  static const joinPlayRoom = 'joinPlayRoom';
+  joinPlayRoom,
+}
+
+extension UserEntityFieldExtension on UserEntityField {
+  String get name => describeEnum(this);
 }

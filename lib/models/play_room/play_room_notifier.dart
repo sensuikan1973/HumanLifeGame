@@ -130,7 +130,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     final humans = await _playRoom.entity.fetchHumans(_store);
     final currentHumanIndex = humans.indexOf(value.currentTurnHuman);
     await _playRoom.ref.updateData(
-      <String, dynamic>{PlayRoomEntityField.currentTurnHumanId: humans[currentHumanIndex].id},
+      <String, dynamic>{PlayRoomEntityField.currentTurnHumanId.name: humans[currentHumanIndex].id},
     );
     value.currentTurnHuman = humans[(currentHumanIndex + 1) % humans.length]; // FIXME: listen する
 

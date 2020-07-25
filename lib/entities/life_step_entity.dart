@@ -76,6 +76,7 @@ class LifeStepEntity {
   }
 }
 
+@immutable
 class DestinationWithMovedStepCount {
   const DestinationWithMovedStepCount({
     this.wantToMoveCount,

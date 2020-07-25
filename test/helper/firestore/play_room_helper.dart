@@ -37,7 +37,7 @@ Future<Doc<PlayRoomEntity>> createPlayRoom(
   await roomDocRef.setData(room.encode(), batch: batch);
   final userDocRef = store.docRef<UserEntity>(userDoc.id);
   await userDocRef.updateData(<String, dynamic>{
-    UserEntityField.joinPlayRoom: roomDocRef.ref,
+    UserEntityField.joinPlayRoom.name: roomDocRef.ref,
     TimestampField.updatedAt: FieldValue.serverTimestamp(),
   }, batch: batch);
   await batch.commit();

@@ -33,10 +33,14 @@ abstract class LifeEventRecordEntity implements _$LifeEventRecordEntity, StoreEn
       );
 }
 
-class LifeEventRecordEntityField {
+enum LifeEventRecordEntityField {
   /// Event を経験した human (user)
-  static const human = 'human';
+  human,
 
   /// LifeEvent
-  static const lifeEvent = 'lifeEvent';
+  lifeEvent,
+}
+
+extension LifeEventRecordEntityFieldExtension on LifeEventRecordEntityField {
+  String get name => describeEnum(this);
 }

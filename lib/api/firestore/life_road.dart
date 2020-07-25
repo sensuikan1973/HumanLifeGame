@@ -313,9 +313,9 @@ class _LifeEventsConverter implements JsonConverter<List<List<LifeEventEntity>>,
 
   @override
   List<List<LifeEventEntity>> fromJson(Map<String, dynamic> json) {
-    final height = json[_LifeEventsField.height] as int;
-    final width = json[_LifeEventsField.width] as int;
-    final events = json[_LifeEventsField.events] as List;
+    final height = json[_LifeEventsField.height.name] as int;
+    final width = json[_LifeEventsField.width.name] as int;
+    final events = json[_LifeEventsField.events.name] as List;
     final result = <List<LifeEventEntity>>[];
     for (var h = 0; h < height; ++h) {
       final row = <LifeEventEntity>[];
@@ -331,20 +331,24 @@ class _LifeEventsConverter implements JsonConverter<List<List<LifeEventEntity>>,
 
   @override
   Map<String, dynamic> toJson(List<List<LifeEventEntity>> entities) => <String, dynamic>{
-        _LifeEventsField.height: entities.length,
-        _LifeEventsField.width: entities.first.length,
-        _LifeEventsField.events: entities.expand((el) => el).map((entity) => entity.toJson()).toList(),
+        _LifeEventsField.height.name: entities.length,
+        _LifeEventsField.width.name: entities.first.length,
+        _LifeEventsField.events.name: entities.expand((el) => el).map((entity) => entity.toJson()).toList(),
       };
 }
 
 // NOTE: これは Firestore の世界とクライアント解釈を繋ぐための存在に過ぎないので、private でいい
-class _LifeEventsField {
+enum _LifeEventsField {
   /// Y 方向の長さ
-  static const height = 'height';
+  height,
 
   /// X 方向の長さ
-  static const width = 'width';
+  width,
 
   /// LifeEvent が一次元に展開された配列
-  static const events = 'events';
+  events,
+}
+
+extension _LifeEventsFieldExtension on _LifeEventsField {
+  String get name => describeEnum(this);
 }
