@@ -6,13 +6,13 @@ targets:
       freezed:
         generate_for:
           include:
-            - lib/entities/**/*.dart
-            - lib/api/firestore/**/*.dart
+            - lib/entities/**.dart
+            - lib/api/firestore/**.dart
       json_serializable:
         generate_for:
           include:
-            - lib/entities/**/*.dart
-            - lib/api/firestore/**/*.dart
+            - lib/entities/**.dart
+            - lib/api/firestore/**.dart
         options:
           # JsonSerializable なクラスをネストした状態で、子 class にも toJson() を明示的に呼ばせたい場合、これをオンにしておく必要がある
           # [例 (前後略)]
