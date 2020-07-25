@@ -20,7 +20,7 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
 
   Future<void> _init() async {
     await _signIn();
-    await fetchPlayRooms();
+    await _fetchPlayRooms();
   }
 
   Future<FirebaseUser> _signIn() async {
@@ -90,7 +90,7 @@ class LobbyNotifier extends ValueNotifier<LobbyState> {
     notifyListeners();
   }
 
-  Future<void> fetchPlayRooms() async {
+  Future<void> _fetchPlayRooms() async {
     final collectionRef = _store.collectionRef<PlayRoomEntity>();
     value.publicPlayRooms = await collectionRef.getDocuments(
       (query) => query.limit(_roomListLimit).orderBy(TimestampField.createdAt),
