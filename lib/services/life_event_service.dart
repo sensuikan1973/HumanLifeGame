@@ -14,8 +14,7 @@ class LifeEventService {
   const LifeEventService();
 
   /// 指定の lifeStage を対象に LifeVent の処理を適用する
-  /// FIXME: 現状、target type が myself の場合しか考慮されてない
-  LifeStageEntity executeEvent(LifeEventEntity lifeEvent, LifeStageEntity lifeStage) {
+  List<LifeStageEntity> executeEvent(LifeEventEntity lifeEvent, List<LifeStageEntity> lifeStages) {
     switch (lifeEvent.type) {
       case LifeEventType.nothing:
       case LifeEventType.start:
@@ -30,20 +29,22 @@ class LifeEventService {
         break; // TODO: 実装
       case LifeEventType.gainLifeItems:
         final params = lifeEvent.params as GainLifeItemsParams;
-        final items = {...lifeStage.items};
-        for (final target in params.targetItems) {
-          final targetItem = LifeItemEntity(key: target.key, type: target.type, amount: target.amount);
-          final existingItem = items.firstWhere((el) => el.equalToTarget(target), orElse: () => null);
-          if (existingItem != null) {
-            /// 同一のものがある場合は削除しつつ加算
-            items
-              ..removeWhere((el) => el.equalToTarget(target))
-              ..add(existingItem.copyWith(amount: existingItem.amount + targetItem.amount)); // 加算
-          } else {
-            items.add(targetItem);
+        return lifeStages.map<LifeStageEntity>((lifeStage) {
+          final items = {...lifeStage.items};
+          for (final target in params.targetItems) {
+            final targetItem = LifeItemEntity(key: target.key, type: target.type, amount: target.amount);
+            final existingItem = items.firstWhere((el) => el.equalToTarget(target), orElse: () => null);
+            if (existingItem != null) {
+              /// 同一のものがある場合は削除しつつ加算
+              items
+                ..removeWhere((el) => el.equalToTarget(target))
+                ..add(existingItem.copyWith(amount: existingItem.amount + targetItem.amount)); // 加算
+            } else {
+              items.add(targetItem);
+            }
           }
-        }
-        return lifeStage.copyWith(items: UnmodifiableSetView<LifeItemEntity>(items));
+          return lifeStage.copyWith(items: UnmodifiableSetView<LifeItemEntity>(items));
+        }).toList();
       case LifeEventType.gainLifeItemsPerOtherLifeItem:
         break; // TODO: 実装
       case LifeEventType.gainLifeItemsPerDiceRoll:
@@ -54,27 +55,31 @@ class LifeEventService {
         break; // TODO: 実装
       case LifeEventType.exchangeLifeItems:
         final params = lifeEvent.params as ExchangeLifeItemsParams;
-        return lifeStage.copyWith(
-          items: UnmodifiableSetView<LifeItemEntity>(_exchangeLifeItems(lifeStage.items, params)),
-        );
+        return lifeStages
+            .map<LifeStageEntity>((lifeStage) => lifeStage.copyWith(
+                  items: UnmodifiableSetView<LifeItemEntity>(_exchangeLifeItems(lifeStage.items, params)),
+                ))
+            .toList();
       case LifeEventType.exchangeLifeItemsWithDiceRoll:
         break; // TODO: 実装
       case LifeEventType.loseLifeItems:
         final params = lifeEvent.params as LoseLifeItemsParams;
-        final items = {...lifeStage.items};
-        for (final target in params.targetItems) {
-          final targetItem = LifeItemEntity(key: target.key, type: target.type, amount: target.amount);
-          final existingItem = items.firstWhere((el) => el.equalToTarget(target), orElse: () => null);
-          if (existingItem != null) {
-            /// 同一のものがある場合は削除しつつ減算
-            items
-              ..removeWhere((el) => el.equalToTarget(target))
-              ..add(existingItem.copyWith(amount: existingItem.amount - targetItem.amount)); // 減算
-          } else {
-            items.add(targetItem);
+        return lifeStages.map<LifeStageEntity>((lifeStage) {
+          final items = {...lifeStage.items};
+          for (final target in params.targetItems) {
+            final targetItem = LifeItemEntity(key: target.key, type: target.type, amount: target.amount);
+            final existingItem = items.firstWhere((el) => el.equalToTarget(target), orElse: () => null);
+            if (existingItem != null) {
+              /// 同一のものがある場合は削除しつつ減算
+              items
+                ..removeWhere((el) => el.equalToTarget(target))
+                ..add(existingItem.copyWith(amount: existingItem.amount - targetItem.amount)); // 減算
+            } else {
+              items.add(targetItem);
+            }
           }
-        }
-        return lifeStage.copyWith(items: UnmodifiableSetView<LifeItemEntity>(items));
+          return lifeStage.copyWith(items: UnmodifiableSetView<LifeItemEntity>(items));
+        }).toList();
       case LifeEventType.loseLifeItemsPerDiceRoll:
         break; // TODO: 実装
       case LifeEventType.loseLifeItemsPerOtherLifeItem:
@@ -84,7 +89,7 @@ class LifeEventService {
       case LifeEventType.loseLifeItemsIfNotExistOtherLifeItem:
         break; // TODO: 実装
     }
-    return lifeStage.copyWith();
+    return lifeStages.map<LifeStageEntity>((lifeStage) => lifeStage.copyWith()).toList();
   }
 
   Set<LifeItemEntity> _exchangeLifeItems(Set<LifeItemEntity> lifeItems, ExchangeLifeItemsParams params) {

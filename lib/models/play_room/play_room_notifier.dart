@@ -1,3 +1,4 @@
+import 'package:HumanLifeGame/entities/life_event_target.dart';
 import 'package:collection/collection.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
@@ -107,13 +108,20 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   }
 
   Future<void> _executeEvent() async {
-    // LifeEvent 処理
+    final lifeEvent = value.lifeRoad.entity.getStepEntity(_currentHumanLifeStage).lifeEvent;
+
+    // LifeStage を更新
     value.lifeStages = [...value.lifeStages];
-    value.lifeStages[_currentHumanLifeStageIndex] = _lifeEventService.executeEvent(
-      value.lifeRoad.entity.getStepEntity(_currentHumanLifeStage).lifeEvent,
-      _currentHumanLifeStage,
-    );
-    // LifeEvent の履歴を追加
+    if (lifeEvent.target == LifeEventTarget.myself) {
+      value.lifeStages[_currentHumanLifeStageIndex] = _lifeEventService.executeEvent(
+        lifeEvent,
+        [value.lifeStages[_currentHumanLifeStageIndex]],
+      ).first;
+    } else if (lifeEvent.target == LifeEventTarget.all) {
+      value.lifeStages = _lifeEventService.executeEvent(lifeEvent, value.lifeStages);
+    }
+
+    // LifeEventRecord を更新
     final record = LifeEventRecordEntity(
       human: _currentHumanLifeStage.human,
       lifeEvent: value.lifeRoad.entity.getStepEntity(_currentHumanLifeStage).lifeEvent,
