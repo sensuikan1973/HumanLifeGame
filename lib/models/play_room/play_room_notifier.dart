@@ -1,4 +1,3 @@
-import 'package:HumanLifeGame/entities/life_event_target.dart';
 import 'package:collection/collection.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
@@ -8,6 +7,7 @@ import '../../api/firestore/life_event_record.dart';
 import '../../api/firestore/life_stage.dart';
 import '../../api/firestore/play_room.dart';
 import '../../api/firestore/store.dart';
+import '../../entities/life_event_target.dart';
 import '../../entities/life_item.dart';
 import '../../entities/life_step_entity.dart';
 import '../../i18n/i18n.dart';
