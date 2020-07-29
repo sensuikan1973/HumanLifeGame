@@ -17,4 +17,4 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: 'beta'
-      - run: dart format ./ -l 120 --set-exit-if-changed
+      - run: dartfmt ./ -l 120 --set-exit-if-changed
