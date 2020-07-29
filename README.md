@@ -4,7 +4,7 @@
 [![Figma](https://img.shields.io/badge/Figma-grey.svg?logo=figma)](https://www.figma.com/file/nXa9iPmXYOHOA77GvjBLdj/HumanLifeGame)
 [![GoogleDrive](https://img.shields.io/badge/GoogleDrive-grey.svg?logo=google%20drive)](https://drive.google.com/drive/u/0/folders/1yxBm-ArcEtR_Tfe949nEzk5b6jnjjFV7)
 [![API_Document](https://img.shields.io/badge/API_Document-025697.svg?logo=dart)](https://sensuikan1973.github.io/HumanLifeGame/)  
-![Flutter Format](https://github.com/sensuikan1973/HumanLifeGame/workflows/Flutter_Format/badge.svg)
+![Dart_Format](https://github.com/sensuikan1973/HumanLifeGame/workflows/Dart_Format/badge.svg)
 ![Flutter_Analyzer](https://github.com/sensuikan1973/HumanLifeGame/workflows/Flutter_Analyzer/badge.svg)
 [![Flutter_Web_Deploy](https://github.com/sensuikan1973/HumanLifeGame/workflows/Flutter_Web_Deploy/badge.svg)](https://human-life-game-dev.web.app/)
 ![Flutter Test](https://github.com/sensuikan1973/HumanLifeGame/workflows/Flutter_Test/badge.svg)  
