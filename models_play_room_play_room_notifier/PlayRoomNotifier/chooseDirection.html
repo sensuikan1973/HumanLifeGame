@@ -109,7 +109,7 @@
 
   &#47;&#47; TODO: 今は requireSelectDirection だけだけど、今後は requireDiceRoll とかも考慮しなきゃいけなくなる
   if (!value.requireSelectDirection) {
-    await _executeEventToCurrentHuman();
+    await _executeEvent();
     await _changeToNextTurn();
   }
   notifyListeners();

@@ -97,7 +97,8 @@
     </section>
     <section class="desc markdown">
       <p>初期化する
-LifeRoad や User の取得、LifeStage の初期値追加</p>
+LifeRoad や User の取得、LifeStage の初期値追加
+TODO: コンストラクタ内でやればいい。そして、UI 側は listen するように改修する。んで、非同期処理の完了について無知でいられる。</p>
     </section>
     
     <section class="summary source-code" id="source">
@@ -107,16 +108,7 @@ LifeRoad や User の取得、LifeStage の初期値追加</p>
     ..lifeRoad = await _playRoom.entity.fetchLifeRoad(_store)
     ..humans = await _playRoom.entity.fetchHumans(_store)
     ..currentTurnHuman = value.humans.first; &#47;&#47; TODO: 順序付けのあり方検討
-  &#47;&#47; 参加者全員の位置を Start に
-  for (final human in value.humans) {
-    final lifeStage = LifeStageEntity(
-      human: human.ref,
-      currentLifeStepId: value.lifeRoad.entity.start.id,
-      items: const UnmodifiableSetView&lt;LifeItemEntity&gt;.empty(),
-    );
-    await _store.collectionRef&lt;LifeStageEntity&gt;(parent: _playRoom.ref.path).docRef(human.id).set(lifeStage);
-    value.lifeStages.add(lifeStage); &#47;&#47; FIXME: listen する
-  }
+  await _startGame(); &#47;&#47; TODO: これは host がゲーム開始ボタン押した時にやること
 }</code></pre>
     </section>
 
