@@ -34,7 +34,10 @@ dev_dependencies:
 
   analyzer: ^0.39.14
   build_runner: ^1.10.1
-  cloud_firestore_mocks: ^0.4.5
+  cloud_firestore_mocks:
+    git:
+      url: https://github.com/atn832/cloud_firestore_mocks
+      ref: master
   dartman_sensuikan1973:
     git:
       url: https://github.com/sensuikan1973/dartman_sensuikan1973
