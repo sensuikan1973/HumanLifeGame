@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../api/dice.dart';
@@ -6,6 +7,7 @@ import '../../api/firestore/life_event_record.dart';
 import '../../api/firestore/life_stage.dart';
 import '../../api/firestore/play_room.dart';
 import '../../api/firestore/store.dart';
+import '../../entities/life_event_target.dart';
 import '../../entities/life_item.dart';
 import '../../entities/life_step_entity.dart';
 import '../../i18n/i18n.dart';
@@ -27,25 +29,6 @@ import 'play_room_state.dart';
 class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
   PlayRoomNotifier(this._i18n, this._dice, this._store, this._playRoom) : super(PlayRoomState());
 
-  /// 初期化する
-  /// LifeRoad や User の取得、LifeStage の初期値追加
-  Future<void> init() async {
-    value
-      ..lifeRoad = await _playRoom.entity.fetchLifeRoad(_store)
-      ..humans = await _playRoom.entity.fetchHumans(_store)
-      ..currentTurnHuman = value.humans.first; // TODO: 順序付けのあり方検討
-    // 参加者全員の位置を Start に
-    for (final human in value.humans) {
-      final lifeStage = LifeStageEntity(
-        human: human.ref,
-        currentLifeStepId: value.lifeRoad.entity.start.id,
-        items: const UnmodifiableSetView<LifeItemEntity>.empty(),
-      );
-      await _store.collectionRef<LifeStageEntity>(parent: _playRoom.ref.path).docRef(human.id).set(lifeStage);
-      value.lifeStages.add(lifeStage); // FIXME: listen する
-    }
-  }
-
   final I18n _i18n;
   final Dice _dice;
   final Store _store;
@@ -58,6 +41,31 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
   /// 進む数の残り
   int _remainCount = 0;
+
+  /// 初期化する
+  /// LifeRoad や User の取得、LifeStage の初期値追加
+  /// TODO: コンストラクタ内でやればいい。そして、UI 側は listen するように改修する。んで、非同期処理の完了について無知でいられる。
+  Future<void> init() async {
+    value
+      ..lifeRoad = await _playRoom.entity.fetchLifeRoad(_store)
+      ..humans = await _playRoom.entity.fetchHumans(_store)
+      ..currentTurnHuman = value.humans.first; // TODO: 順序付けのあり方検討
+    await _startGame(); // TODO: これは host がゲーム開始ボタン押した時にやること
+  }
+
+  /// ゲームを開始する
+  Future<void> _startGame() async {
+    // 参加者全員の位置を Start に
+    for (final human in value.humans) {
+      final lifeStage = LifeStageEntity(
+        human: human.ref,
+        currentLifeStepId: value.lifeRoad.entity.start.id,
+        items: const UnmodifiableSetView<LifeItemEntity>.empty(),
+      );
+      await _store.collectionRef<LifeStageEntity>(parent: _playRoom.ref.path).docRef(human.id).set(lifeStage);
+      value.lifeStages.add(lifeStage); // FIXME: listen する
+    }
+  }
 
   /// Dice を振って進む
   Future<void> rollDice() async {
@@ -79,7 +87,7 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
     // TODO: 今は requireSelectDirection だけだけど、今後は requireDiceRoll とかも考慮しなきゃいけなくなる
     if (!value.requireSelectDirection) {
-      await _executeEventToCurrentHuman();
+      await _executeEvent();
       await _changeToNextTurn();
     }
     notifyListeners();
@@ -93,20 +101,27 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
 
     // TODO: 今は requireSelectDirection だけだけど、今後は requireDiceRoll とかも考慮しなきゃいけなくなる
     if (!value.requireSelectDirection) {
-      await _executeEventToCurrentHuman();
+      await _executeEvent();
       await _changeToNextTurn();
     }
     notifyListeners();
   }
 
-  Future<void> _executeEventToCurrentHuman() async {
-    // LifeEvent 処理
+  Future<void> _executeEvent() async {
+    final lifeEvent = value.lifeRoad.entity.getStepEntity(_currentHumanLifeStage).lifeEvent;
+
+    // LifeStage を更新
     value.lifeStages = [...value.lifeStages];
-    value.lifeStages[_currentHumanLifeStageIndex] = _lifeEventService.executeEvent(
-      value.lifeRoad.entity.getStepEntity(_currentHumanLifeStage).lifeEvent,
-      _currentHumanLifeStage,
-    );
-    // LifeEvent の履歴を追加
+    if (lifeEvent.target == LifeEventTarget.myself) {
+      value.lifeStages[_currentHumanLifeStageIndex] = _lifeEventService.executeEvent(
+        lifeEvent,
+        [value.lifeStages[_currentHumanLifeStageIndex]],
+      ).first;
+    } else if (lifeEvent.target == LifeEventTarget.all) {
+      value.lifeStages = _lifeEventService.executeEvent(lifeEvent, value.lifeStages);
+    }
+
+    // LifeEventRecord を更新
     final record = LifeEventRecordEntity(
       human: _currentHumanLifeStage.human,
       lifeEvent: value.lifeRoad.entity.getStepEntity(_currentHumanLifeStage).lifeEvent,
@@ -130,7 +145,10 @@ class PlayRoomNotifier extends ValueNotifier<PlayRoomState> {
     final humans = await _playRoom.entity.fetchHumans(_store);
     final currentHumanIndex = humans.indexOf(value.currentTurnHuman);
     await _playRoom.ref.updateData(
-      <String, dynamic>{PlayRoomEntityField.currentTurnHumanId.name: humans[currentHumanIndex].id},
+      <String, dynamic>{
+        PlayRoomEntityField.currentTurnHumanId.name: humans[currentHumanIndex].id,
+        TimestampField.updatedAt: FieldValue.serverTimestamp(),
+      },
     );
     value.currentTurnHuman = humans[(currentHumanIndex + 1) % humans.length]; // FIXME: listen する
 

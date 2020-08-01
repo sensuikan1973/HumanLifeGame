@@ -13,92 +13,83 @@ import '../entities/life_item.dart';
 class LifeEventService {
   const LifeEventService();
 
-  LifeStageEntity executeEvent(LifeEventEntity lifeEvent, LifeStageEntity lifeStage) {
+  /// 指定の lifeStage を対象に LifeVent の処理を適用する
+  List<LifeStageEntity> executeEvent(LifeEventEntity lifeEvent, List<LifeStageEntity> lifeStages) {
     switch (lifeEvent.type) {
       case LifeEventType.nothing:
-        // TODO: Handle this case.
-        break;
       case LifeEventType.start:
-        // TODO: Handle this case.
-        break;
+        break; // 何もすることない
       case LifeEventType.goal:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.selectDirection:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.selectDirectionPerDiceRoll:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.selectDirectionPerLifeItem:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.gainLifeItems:
         final params = lifeEvent.params as GainLifeItemsParams;
-        final items = {...lifeStage.items};
-        for (final target in params.targetItems) {
-          final targetItem = LifeItemEntity(key: target.key, type: target.type, amount: target.amount);
-          final existingItem = items.firstWhere((el) => el.equalToTarget(target), orElse: () => null);
-          if (existingItem != null) {
-            /// 同一のものがある場合は削除しつつ加算
-            items
-              ..removeWhere((el) => el.equalToTarget(target))
-              ..add(existingItem.copyWith(amount: existingItem.amount + targetItem.amount)); // 加算
-          } else {
-            items.add(targetItem);
+        return lifeStages.map<LifeStageEntity>((lifeStage) {
+          final items = {...lifeStage.items};
+          for (final target in params.targetItems) {
+            final targetItem = LifeItemEntity(key: target.key, type: target.type, amount: target.amount);
+            final existingItem = items.firstWhere((el) => el.equalToTarget(target), orElse: () => null);
+            if (existingItem != null) {
+              /// 同一のものがある場合は削除しつつ加算
+              items
+                ..removeWhere((el) => el.equalToTarget(target))
+                ..add(existingItem.copyWith(amount: existingItem.amount + targetItem.amount)); // 加算
+            } else {
+              items.add(targetItem);
+            }
           }
-        }
-        return lifeStage.copyWith(items: UnmodifiableSetView<LifeItemEntity>(items));
+          return lifeStage.copyWith(items: UnmodifiableSetView<LifeItemEntity>(items));
+        }).toList();
       case LifeEventType.gainLifeItemsPerOtherLifeItem:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.gainLifeItemsPerDiceRoll:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.gainLifeItemsIfExistOtherLifeItem:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.gainLifeItemsIfNotExistOtherLifeItem:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.exchangeLifeItems:
         final params = lifeEvent.params as ExchangeLifeItemsParams;
-        return lifeStage.copyWith(
-          items: UnmodifiableSetView<LifeItemEntity>(_exchangeLifeItems(lifeStage.items, params)),
-        );
+        return lifeStages
+            .map<LifeStageEntity>((lifeStage) => lifeStage.copyWith(
+                  items: UnmodifiableSetView<LifeItemEntity>(_exchangeLifeItems(lifeStage.items, params)),
+                ))
+            .toList();
       case LifeEventType.exchangeLifeItemsWithDiceRoll:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.loseLifeItems:
         final params = lifeEvent.params as LoseLifeItemsParams;
-        final items = {...lifeStage.items};
-        for (final target in params.targetItems) {
-          final targetItem = LifeItemEntity(key: target.key, type: target.type, amount: target.amount);
-          final existingItem = items.firstWhere((el) => el.equalToTarget(target), orElse: () => null);
-          if (existingItem != null) {
-            /// 同一のものがある場合は削除しつつ減算
-            items
-              ..removeWhere((el) => el.equalToTarget(target))
-              ..add(existingItem.copyWith(amount: existingItem.amount - targetItem.amount)); // 減算
-          } else {
-            items.add(targetItem);
+        return lifeStages.map<LifeStageEntity>((lifeStage) {
+          final items = {...lifeStage.items};
+          for (final target in params.targetItems) {
+            final targetItem = LifeItemEntity(key: target.key, type: target.type, amount: target.amount);
+            final existingItem = items.firstWhere((el) => el.equalToTarget(target), orElse: () => null);
+            if (existingItem != null) {
+              /// 同一のものがある場合は削除しつつ減算
+              items
+                ..removeWhere((el) => el.equalToTarget(target))
+                ..add(existingItem.copyWith(amount: existingItem.amount - targetItem.amount)); // 減算
+            } else {
+              items.add(targetItem);
+            }
           }
-        }
-        return lifeStage.copyWith(items: UnmodifiableSetView<LifeItemEntity>(items));
+          return lifeStage.copyWith(items: UnmodifiableSetView<LifeItemEntity>(items));
+        }).toList();
       case LifeEventType.loseLifeItemsPerDiceRoll:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.loseLifeItemsPerOtherLifeItem:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.loseLifeItemsIfExistOtherLifeItem:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
       case LifeEventType.loseLifeItemsIfNotExistOtherLifeItem:
-        // TODO: Handle this case.
-        break;
+        break; // TODO: 実装
     }
-    return lifeStage.copyWith();
+    return lifeStages.map<LifeStageEntity>((lifeStage) => lifeStage.copyWith()).toList();
   }
 
   Set<LifeItemEntity> _exchangeLifeItems(Set<LifeItemEntity> lifeItems, ExchangeLifeItemsParams params) {

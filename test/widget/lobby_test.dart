@@ -111,6 +111,7 @@ Future<void> main() async {
 
     // TODO: 遷移後に humans の表示だけ test しておきたい
     // ただし、cloud_firestore_mocks で DocumentReference の arrayUnion が機能しないのが辛い
+    // というかここは id で保存しても別にいい
     // See: https://github.com/atn832/cloud_firestore_mocks/issues/106
   });
 
