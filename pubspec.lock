@@ -138,11 +138,11 @@ packages:
     dependency: "direct dev"
     description:
       path: "."
-      ref: support_MockDocumentChange_index
-      resolved-ref: "107e0cc552753f53617e034fe3d97d2d1e0c17ae"
-      url: "https://github.com/sensuikan1973/cloud_firestore_mocks.git"
+      ref: master
+      resolved-ref: "83984bb85f661d73477a0bf16adc898677cebcae"
+      url: "https://github.com/atn832/cloud_firestore_mocks"
     source: git
-    version: "0.4.4"
+    version: "0.4.5"
   cloud_firestore_platform_interface:
     dependency: transitive
     description:
