@@ -10,13 +10,14 @@ if(window.location.hostname === 'localhost'){
      measurementId: "G-P10ZHWT57Q"
   };
   firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
 } else {
   fetch("/__/firebase/init.json").then( res => res.json() ).then( json => {
    firebase.initializeApp(json);
+   firebase.analytics();
   });
 }
 
-firebase.analytics();
 // See: https://firebase.google.com/docs/auth/web/auth-state-persistence
 // See: https://github.com/FirebaseExtended/flutterfire/issues/1714
 // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
