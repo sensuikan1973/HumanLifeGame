@@ -9,8 +9,7 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.9.0-21.10.beta <3.0.0"
-  flutter: ">= 1.20.0 <2.0.0" # See: https://flutter.dev/docs/development/tools/sdk/releases
+  flutter: ">= 1.20.2 <2.0.0" # See: https://flutter.dev/docs/development/tools/sdk/releases
 
 dependencies:
   flutter:
