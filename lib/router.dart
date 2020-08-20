@@ -6,8 +6,8 @@ import 'screens/play_room/play_room.dart';
 import 'screens/sign_in/sign_in.dart';
 
 @immutable
-class Router {
-  const Router();
+class AppRouter {
+  const AppRouter();
 
   String get lobby => '/lobby';
   String get signIn => '/sign_in';

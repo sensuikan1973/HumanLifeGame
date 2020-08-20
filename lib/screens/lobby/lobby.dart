@@ -50,7 +50,7 @@ class Lobby extends StatelessWidget {
           final notifier = context.read<LobbyNotifier>();
           await notifier.createPublicPlayRoom();
           await Navigator.of(context).pushNamed(
-            context.read<Router>().playRoom,
+            context.read<AppRouter>().playRoom,
             arguments: PlayRoomNavigateArguments(notifier.value.haveCreatedPlayRoom),
           );
         },

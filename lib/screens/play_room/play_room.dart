@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -201,4 +202,12 @@ class PlayRoomState extends State<PlayRoom> {
           ),
         ],
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<bool>('isDisplayedResult', isDisplayedResult))
+      ..add(DiagnosticsProperty<ValueNotifier<bool>>('hasInitialized', hasInitialized));
+  }
 }

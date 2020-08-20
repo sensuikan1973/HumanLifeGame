@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../api/firestore/store.dart';
@@ -29,4 +30,10 @@ class Human extends StatelessWidget {
         Positioned(top: 2, left: 2, child: _orderedIconShadow.first),
         orderedIcon.first,
       ]);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('humanId', humanId));
+  }
 }
