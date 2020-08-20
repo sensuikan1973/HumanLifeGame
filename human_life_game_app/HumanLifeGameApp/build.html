@@ -154,7 +154,7 @@ Widget build(BuildContext context) =&gt; MaterialApp(
       locale: defaultLocale,
       theme: theme,
       home: Lobby.inProviders(),
-      onGenerateRoute: context.watch&lt;Router&gt;().generateRoutes,
+      onGenerateRoute: context.watch&lt;AppRouter&gt;().generateRoutes,
     );</code></pre>
     </section>
 
