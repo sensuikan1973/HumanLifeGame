@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 Widget testableApp({
   @required Widget home,
   Store store,
-  Router router = const Router(),
+  AppRouter router = const AppRouter(),
   Auth auth = const Auth(),
   Dice dice = const Dice(),
   Locale locale = HumanLifeGameApp.defaultLocale,
