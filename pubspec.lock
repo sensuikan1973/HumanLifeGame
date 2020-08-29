@@ -140,7 +140,7 @@ packages:
       name: cloud_firestore_mocks
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.6+1"
+    version: "0.4.7"
   cloud_firestore_platform_interface:
     dependency: transitive
     description:
@@ -391,7 +391,7 @@ packages:
       name: intl_translation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.17.10"
+    version: "0.17.10+1"
   io:
     dependency: transitive
     description:
@@ -419,7 +419,7 @@ packages:
       name: json_serializable
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.4.0"
+    version: "3.4.1"
   logging:
     dependency: transitive
     description:
@@ -454,7 +454,7 @@ packages:
       name: mockito
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.1.1"
+    version: "4.1.2"
   nested:
     dependency: transitive
     description:
@@ -725,7 +725,7 @@ packages:
       name: uuid
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.0"
+    version: "2.2.2"
   vector_math:
     dependency: transitive
     description:
