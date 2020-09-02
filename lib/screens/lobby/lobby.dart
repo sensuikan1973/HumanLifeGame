@@ -30,6 +30,7 @@ class Lobby extends StatelessWidget {
         appBar: const LobbyAppBar(),
         body: Center(
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               SizedBox(
                 width: 450,
