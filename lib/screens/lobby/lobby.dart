@@ -4,13 +4,10 @@ import 'package:provider/provider.dart';
 
 import '../../api/auth.dart';
 import '../../api/firestore/store.dart';
-import '../../i18n/i18n.dart';
 import '../../models/lobby/lobby_notifier.dart';
 import '../../router.dart';
 import '../play_room/play_room.dart';
 import 'app_bar.dart';
-import 'human_life_tips.dart';
-import 'room_list_item.dart';
 
 class Lobby extends StatelessWidget {
   const Lobby._();
@@ -35,7 +32,7 @@ class Lobby extends StatelessWidget {
               SizedBox(
                 width: 450,
                 height: 90,
-                child: _makeRoomButton(),
+                child: _makeRoomButton(context),
               ),
               SizedBox(
                 width: 450,
@@ -44,23 +41,12 @@ class Lobby extends StatelessWidget {
               ),
             ],
           ),
-          /*Row(
-            children: [
-              Stack(
-                children: [
-                  _roomList(context),
-                  Positioned(bottom: 0, right: 0, child: _createRoomButton(context)),
-                ],
-              ),
-              const LifeRoadTips(),
-            ],
-          ),*/
         ),
       );
 
-  FloatingActionButton _createRoomButton(BuildContext context) => FloatingActionButton(
-        tooltip: I18n.of(context).lobbyCreatePublicRoomButtonTooltip,
-        backgroundColor: Colors.indigo,
+  RaisedButton _makeRoomButton(BuildContext context) => RaisedButton(
+        color: Colors.blue[200],
+        shape: const StadiumBorder(),
         onPressed: () async {
           final notifier = context.read<LobbyNotifier>();
           await notifier.createPublicPlayRoom();
@@ -69,13 +55,6 @@ class Lobby extends StatelessWidget {
             arguments: PlayRoomNavigateArguments(notifier.value.haveCreatedPlayRoom),
           );
         },
-        child: const Icon(Icons.add),
-      );
-
-  RaisedButton _makeRoomButton() => RaisedButton(
-        color: Colors.blue[200],
-        shape: const StadiumBorder(),
-        onPressed: () {},
         child: const Text('Make a Room'),
       );
 
@@ -85,16 +64,4 @@ class Lobby extends StatelessWidget {
         onPressed: () {},
         child: const Text('Join a Room'),
       );
-
-  SizedBox _roomList(BuildContext context) {
-    final rooms = context.watch<LobbyNotifier>().value.publicPlayRooms;
-    return SizedBox(
-      width: 720,
-      height: 970,
-      child: ListView.builder(
-        itemCount: rooms.length,
-        itemBuilder: (context, index) => RoomListItem(rooms[index]),
-      ),
-    );
-  }
 }
