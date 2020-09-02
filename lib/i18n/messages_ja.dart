@@ -34,10 +34,10 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function>{
         "appTitle": MessageLookupByLibrary.simpleMessage("人生すごろく"),
+        "joinRoomButtonText": MessageLookupByLibrary.simpleMessage("部屋に入る"),
         "lifeEventRecordsText": MessageLookupByLibrary.simpleMessage("予約領域:lifeEventRecords"),
         "lifeStepEventType": m0,
-        "lobbyCreatePublicRoomButtonTooltip": MessageLookupByLibrary.simpleMessage("部屋を作る"),
-        "lobbyEnterTheRoomButtonText": MessageLookupByLibrary.simpleMessage("部屋に入る"),
+        "makeRoomButtonText": MessageLookupByLibrary.simpleMessage("部屋を作る"),
         "playerActionNo": MessageLookupByLibrary.simpleMessage("いいえ"),
         "playerActionYes": MessageLookupByLibrary.simpleMessage("はい"),
         "resultAnnouncementDialogMessage": MessageLookupByLibrary.simpleMessage("結果発表 ！！"),

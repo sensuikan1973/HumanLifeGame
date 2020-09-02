@@ -12,13 +12,13 @@
       "type": {}
     }
   },
-  "lobbyCreatePublicRoomButtonTooltip": "部屋を作る",
-  "@lobbyCreatePublicRoomButtonTooltip": {
+  "makeRoomButtonText": "部屋を作る",
+  "@makeRoomButtonText": {
     "type": "text",
     "placeholders": {}
   },
-  "lobbyEnterTheRoomButtonText": "部屋に入る",
-  "@lobbyEnterTheRoomButtonText": {
+  "joinRoomButtonText": "部屋に入る",
+  "@joinRoomButtonText": {
     "type": "text",
     "placeholders": {}
   },

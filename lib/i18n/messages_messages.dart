@@ -34,10 +34,10 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function>{
         "appTitle": MessageLookupByLibrary.simpleMessage("Human Life Game"),
+        "joinRoomButtonText": MessageLookupByLibrary.simpleMessage("Join a Room"),
         "lifeEventRecordsText": MessageLookupByLibrary.simpleMessage("Reserved area:lifeEventRecords"),
         "lifeStepEventType": m0,
-        "lobbyCreatePublicRoomButtonTooltip": MessageLookupByLibrary.simpleMessage("create public room"),
-        "lobbyEnterTheRoomButtonText": MessageLookupByLibrary.simpleMessage("enter the room"),
+        "makeRoomButtonText": MessageLookupByLibrary.simpleMessage("Make a Room"),
         "playerActionNo": MessageLookupByLibrary.simpleMessage("NO"),
         "playerActionYes": MessageLookupByLibrary.simpleMessage("YES"),
         "resultAnnouncementDialogMessage": MessageLookupByLibrary.simpleMessage("Result Announcement !!"),
