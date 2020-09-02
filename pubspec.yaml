@@ -33,13 +33,13 @@ dev_dependencies:
 
   analyzer: ^0.39.17
   build_runner: ^1.10.2
-  cloud_firestore_mocks: ^0.4.6+1
+  cloud_firestore_mocks: ^0.4.7
   freezed: ^0.11.6
-  intl_translation: ^0.17.10
-  json_serializable: ^3.4.0
-  mockito: ^4.1.1
+  intl_translation: ^0.17.10+1
+  json_serializable: ^3.4.1
+  mockito: ^4.1.2
   pedantic_sensuikan1973: ^1.7.0
-  uuid: ^2.2.0
+  uuid: ^2.2.2
 
 flutter:
   uses-material-design: true
