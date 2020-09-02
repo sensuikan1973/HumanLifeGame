@@ -31,6 +31,20 @@ class Lobby extends StatelessWidget {
         body: Center(
           child: Row(
             children: [
+              SizedBox(
+                width: 450,
+                height: 90,
+                child: _makeRoomButton(),
+              ),
+              SizedBox(
+                width: 450,
+                height: 90,
+                child: _joinRoomButton(),
+              ),
+            ],
+          ),
+          /*Row(
+            children: [
               Stack(
                 children: [
                   _roomList(context),
@@ -39,7 +53,7 @@ class Lobby extends StatelessWidget {
               ),
               const LifeRoadTips(),
             ],
-          ),
+          ),*/
         ),
       );
 
@@ -55,6 +69,20 @@ class Lobby extends StatelessWidget {
           );
         },
         child: const Icon(Icons.add),
+      );
+
+  RaisedButton _makeRoomButton() => RaisedButton(
+        color: Colors.blue[200],
+        shape: const StadiumBorder(),
+        onPressed: () {},
+        child: const Text('Make a Room'),
+      );
+
+  RaisedButton _joinRoomButton() => RaisedButton(
+        color: Colors.blue[200],
+        shape: const StadiumBorder(),
+        onPressed: () {},
+        child: const Text('Join a Room'),
       );
 
   SizedBox _roomList(BuildContext context) {
