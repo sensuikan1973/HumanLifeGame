@@ -12,13 +12,13 @@
       "type": {}
     }
   },
-  "lobbyCreatePublicRoomButtonTooltip": "create public room",
-  "@lobbyCreatePublicRoomButtonTooltip": {
+  "makeRoomButtonText": "Make a Room",
+  "@makeRoomButtonText": {
     "type": "text",
     "placeholders": {}
   },
-  "lobbyEnterTheRoomButtonText": "enter the room",
-  "@lobbyEnterTheRoomButtonText": {
+  "joinRoomButtonText": "Join a Room",
+  "@joinRoomButtonText": {
     "type": "text",
     "placeholders": {}
   },

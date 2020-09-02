@@ -34,7 +34,7 @@ Future<void> main() async {
     await tester.pump();
 
     expect(find.byType(RaisedButton), findsNWidgets(2));
-    final makeRoomButton = find.text('Make a Room');
+    final makeRoomButton = find.text(i18n.makeRoomButtonText);
     expect(makeRoomButton, findsOneWidget);
 
     await tester.tap(makeRoomButton); // room が作成される
@@ -60,7 +60,7 @@ Future<void> main() async {
     await tester.pump();
     await tester.pump();
 
-    final joinRoomButton = find.text('Join a Room');
+    final joinRoomButton = find.text(i18n.joinRoomButtonText);
     expect(joinRoomButton, findsOneWidget);
   });
 }

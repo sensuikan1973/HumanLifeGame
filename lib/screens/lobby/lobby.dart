@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../api/auth.dart';
 import '../../api/firestore/store.dart';
+import '../../i18n/i18n.dart';
 import '../../models/lobby/lobby_notifier.dart';
 import '../../router.dart';
 import '../play_room/play_room.dart';
@@ -37,7 +38,7 @@ class Lobby extends StatelessWidget {
               SizedBox(
                 width: 450,
                 height: 90,
-                child: _joinRoomButton(),
+                child: _joinRoomButton(context),
               ),
             ],
           ),
@@ -55,13 +56,13 @@ class Lobby extends StatelessWidget {
             arguments: PlayRoomNavigateArguments(notifier.value.haveCreatedPlayRoom),
           );
         },
-        child: const Text('Make a Room'),
+        child: Text(I18n.of(context).makeRoomButtonText),
       );
 
-  RaisedButton _joinRoomButton() => RaisedButton(
+  RaisedButton _joinRoomButton(BuildContext context) => RaisedButton(
         color: Colors.blue[200],
         shape: const StadiumBorder(),
         onPressed: () {},
-        child: const Text('Join a Room'),
+        child: Text(I18n.of(context).joinRoomButtonText),
       );
 }
