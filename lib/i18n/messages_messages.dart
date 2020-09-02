@@ -19,21 +19,29 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'messages';
 
-  static m0(type) => "${Intl.select(type, {'nothing': '', 'start': 'Start', 'goal': 'Goal', 'selectDirection': 'Select Direction', 'gainLifeItems': 'Gain Item :', 'exchangeLifeItems': 'Exchange Item :', 'loseLifeItems': 'Lose Item :', })}";
+  static m0(type) => "${Intl.select(type, {
+        'nothing': '',
+        'start': 'Start',
+        'goal': 'Goal',
+        'selectDirection': 'Select Direction',
+        'gainLifeItems': 'Gain Item :',
+        'exchangeLifeItems': 'Exchange Item :',
+        'loseLifeItems': 'Lose Item :',
+      })}";
 
   static m1(name, roll) => "${name} rolled the dice. result: ${roll}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static _notInlinedMessages(_) => <String, Function> {
-    "appTitle" : MessageLookupByLibrary.simpleMessage("Human Life Game"),
-    "joinRoomButtonText" : MessageLookupByLibrary.simpleMessage("Join a Room"),
-    "lifeEventRecordsText" : MessageLookupByLibrary.simpleMessage("Reserved area:lifeEventRecords"),
-    "lifeStepEventType" : m0,
-    "makeRoomButtonText" : MessageLookupByLibrary.simpleMessage("Make a Room"),
-    "playerActionNo" : MessageLookupByLibrary.simpleMessage("NO"),
-    "playerActionYes" : MessageLookupByLibrary.simpleMessage("YES"),
-    "resultAnnouncementDialogMessage" : MessageLookupByLibrary.simpleMessage("Result Announcement !!"),
-    "rollAnnouncement" : m1,
-    "rollDice" : MessageLookupByLibrary.simpleMessage("Roll the dice")
-  };
+  static _notInlinedMessages(_) => <String, Function>{
+        "appTitle": MessageLookupByLibrary.simpleMessage("Human Life Game"),
+        "joinRoomButtonText": MessageLookupByLibrary.simpleMessage("Join a Room"),
+        "lifeEventRecordsText": MessageLookupByLibrary.simpleMessage("Reserved area:lifeEventRecords"),
+        "lifeStepEventType": m0,
+        "makeRoomButtonText": MessageLookupByLibrary.simpleMessage("Make a Room"),
+        "playerActionNo": MessageLookupByLibrary.simpleMessage("NO"),
+        "playerActionYes": MessageLookupByLibrary.simpleMessage("YES"),
+        "resultAnnouncementDialogMessage": MessageLookupByLibrary.simpleMessage("Result Announcement !!"),
+        "rollAnnouncement": m1,
+        "rollDice": MessageLookupByLibrary.simpleMessage("Roll the dice")
+      };
 }

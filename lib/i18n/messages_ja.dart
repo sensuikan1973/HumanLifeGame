@@ -19,21 +19,29 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ja';
 
-  static m0(type) => "${Intl.select(type, {'nothing': '', 'start': 'スタート', 'goal': 'ゴール', 'selectDirection': '方向を選択', 'gainLifeItems': 'アイテムを獲得 :', 'exchangeLifeItems': 'アイテムを交換 :', 'loseLifeItems': 'アイテムを損失 :', })}";
+  static m0(type) => "${Intl.select(type, {
+        'nothing': '',
+        'start': 'スタート',
+        'goal': 'ゴール',
+        'selectDirection': '方向を選択',
+        'gainLifeItems': 'アイテムを獲得 :',
+        'exchangeLifeItems': 'アイテムを交換 :',
+        'loseLifeItems': 'アイテムを損失 :',
+      })}";
 
   static m1(name, roll) => "${name} がサイコロを振りました. 結果: ${roll}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static _notInlinedMessages(_) => <String, Function> {
-    "appTitle" : MessageLookupByLibrary.simpleMessage("人生すごろく"),
-    "joinRoomButtonText" : MessageLookupByLibrary.simpleMessage("部屋に入る"),
-    "lifeEventRecordsText" : MessageLookupByLibrary.simpleMessage("予約領域:lifeEventRecords"),
-    "lifeStepEventType" : m0,
-    "makeRoomButtonText" : MessageLookupByLibrary.simpleMessage("部屋を作る"),
-    "playerActionNo" : MessageLookupByLibrary.simpleMessage("いいえ"),
-    "playerActionYes" : MessageLookupByLibrary.simpleMessage("はい"),
-    "resultAnnouncementDialogMessage" : MessageLookupByLibrary.simpleMessage("結果発表 ！！"),
-    "rollAnnouncement" : m1,
-    "rollDice" : MessageLookupByLibrary.simpleMessage("サイコロを振る")
-  };
+  static _notInlinedMessages(_) => <String, Function>{
+        "appTitle": MessageLookupByLibrary.simpleMessage("人生すごろく"),
+        "joinRoomButtonText": MessageLookupByLibrary.simpleMessage("部屋に入る"),
+        "lifeEventRecordsText": MessageLookupByLibrary.simpleMessage("予約領域:lifeEventRecords"),
+        "lifeStepEventType": m0,
+        "makeRoomButtonText": MessageLookupByLibrary.simpleMessage("部屋を作る"),
+        "playerActionNo": MessageLookupByLibrary.simpleMessage("いいえ"),
+        "playerActionYes": MessageLookupByLibrary.simpleMessage("はい"),
+        "resultAnnouncementDialogMessage": MessageLookupByLibrary.simpleMessage("結果発表 ！！"),
+        "rollAnnouncement": m1,
+        "rollDice": MessageLookupByLibrary.simpleMessage("サイコロを振る")
+      };
 }
