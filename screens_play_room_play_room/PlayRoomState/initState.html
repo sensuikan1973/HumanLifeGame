@@ -101,7 +101,7 @@
     <section class="multi-line-signature">
       <div>
         <ol class="annotation-list">
-          <li>@override</li>
+          <li>@<a href="https://api.flutter.dev/flutter/dart-core/override-constant.html">override</a></li>
         </ol>
       </div>
       <span class="returntype">void</span>
@@ -126,12 +126,12 @@ be sure to subscribe and unsubscribe properly in <a href="../../screens_play_roo
 <li>In <a href="https://api.flutter.dev/flutter/widgets/State/didUpdateWidget.html">didUpdateWidget</a> unsubscribe from the old object and subscribe
 to the new one if the updated widget configuration requires
 replacing the object.</li>
-<li>In <a href="https://api.flutter.dev/flutter/widgets/State/dispose.html">dispose</a>, unsubscribe from the object.
-You cannot use <a href="https://api.flutter.dev/flutter/widgets/BuildContext/dependOnInheritedWidgetOfExactType.html">BuildContext.dependOnInheritedWidgetOfExactType</a> from this
+<li>In <a href="https://api.flutter.dev/flutter/widgets/State/dispose.html">dispose</a>, unsubscribe from the object.</li>
+</ul>
+<p>You cannot use <a href="https://api.flutter.dev/flutter/widgets/BuildContext/dependOnInheritedWidgetOfExactType.html">BuildContext.dependOnInheritedWidgetOfExactType</a> from this
 method. However, <a href="https://api.flutter.dev/flutter/widgets/State/didChangeDependencies.html">didChangeDependencies</a> will be called immediately
 following this method, and <a href="https://api.flutter.dev/flutter/widgets/BuildContext/dependOnInheritedWidgetOfExactType.html">BuildContext.dependOnInheritedWidgetOfExactType</a> can
-be used there.</li>
-</ul>
+be used there.</p>
 <p>If you override this, make sure your method starts with a call to
 super.initState().</p>
     </section>
